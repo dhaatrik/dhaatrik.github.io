@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import TechMarquee from '../components/TechMarquee.astro';
 import { SITE_TITLE } from '../consts';
 
 const techGroups = {
@@ -37,7 +38,7 @@ const techGroups = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 	<head>
 		<BaseHead title={`About | ${SITE_TITLE}`} description="Learn more about Dhaatrik's journey and tech stack." />
 	</head>
@@ -46,18 +47,18 @@ const techGroups = {
 		<main class="layout-container flex-grow space-y-20 py-8">
 			
 			<section class="max-w-3xl">
-				<h1 class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">About Me</h1>
-				<div class="space-y-6 text-lg text-[var(--text-secondary)] leading-relaxed">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white leading-tight">About Me</h1>
+				<div class="space-y-6 text-lg text-slate-600 dark:text-[var(--text-secondary)] leading-relaxed">
 					<p>
                         Think of me as your friendly neighborhood dev-brother—always down to help, learn, or just talk shop. I'm deeply curious about the "how" and "why" of the universe.
                     </p>
                     
-                    <h2 class="text-2xl font-bold text-white mt-8 mb-4">What I'm Building</h2>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-4">What I'm Building</h2>
                     <p>
-                        I’m currently focused on the agriculture domain, working to integrate AI into the core fundamentals of farming to solve real-world problems. I also love building tools for the community, like <strong>Vellor</strong>, an offline-first tool for independent educators.
+                        I'm currently focused on the agriculture domain, working to integrate AI into the core fundamentals of farming to solve real-world problems. I also love building tools for the community, like <strong>Vellor</strong>, an offline-first tool for independent educators.
                     </p>
 
-                    <h2 class="text-2xl font-bold text-white mt-8 mb-4">What I'm Learning</h2>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-4">What I'm Learning</h2>
                     <p>
                         My curiosity pulls me toward the intricacies of reality. Right now, that means diving deep into the math of rocket engineering, the weirdness of quantum mechanics, and the fascinating depths of human psychology.
                     </p>
@@ -67,36 +68,18 @@ const techGroups = {
 			<section class="bento-card relative overflow-hidden max-w-4xl">
                 <div class="relative z-10">
                     <h2 class="text-2xl font-bold text-[var(--accent)] mb-4">A Note on the Journey: Q1 2025 & Beyond</h2>
-                    <p class="text-[var(--text-secondary)] mb-4 leading-relaxed">
-                        FuelDrop was more than just a codebase; it was my primary startup focus during the first quarter of 2025. I’ll soon be sharing a comprehensive deep-dive article detailing the entire lifecycle of this venture.
+                    <p class="text-slate-600 dark:text-[var(--text-secondary)] mb-4 leading-relaxed">
+                        FuelDrop was more than just a codebase; it was my primary startup focus during the first quarter of 2025. I'll soon be sharing a comprehensive deep-dive article detailing the entire lifecycle of this venture.
                     </p>
-                    <p class="text-[var(--text-secondary)] leading-relaxed">
-                        I’m a firm believer that <strong>"knowledge kept secret is knowledge wasted"</strong>. I’ll be pulling back the curtain on the raw reality of building an on-demand logistics startup, the "hard-knock" lessons learned, and the technical breakdowns. Stay tuned.
+                    <p class="text-slate-600 dark:text-[var(--text-secondary)] leading-relaxed">
+                        I'm a firm believer that <strong>"knowledge kept secret is knowledge wasted"</strong>. I'll be pulling back the curtain on the raw reality of building an on-demand logistics startup, the "hard-knock" lessons learned, and the technical breakdowns. Stay tuned.
                     </p>
                 </div>
             </section>
 
             <section class="max-w-5xl">
-                <h2 class="text-3xl font-bold text-white mb-8">My Tech Stack</h2>
-                
-                <div class="space-y-8">
-                    {Object.entries(techGroups).map(([groupName, icons]) => (
-                        <div class="space-y-3">
-                            <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--text-secondary)]">{groupName.replace('_', ' & ')}</h3>
-                            <div class="relative flex overflow-x-hidden group rounded-[var(--bento-radius-inner)] bg-[var(--bg-card)] border border-white/5 py-4">
-                                <div class="animate-marquee flex whitespace-nowrap gap-6 px-6">
-                                    {icons.map(icon => (
-                                        <img src={icon.src} alt={icon.name} class="h-8 md:h-10 rounded shadow-md" />
-                                    ))}
-                                    {/* Duplicate for seamless looping */}
-                                    {icons.map(icon => (
-                                        <img src={icon.src} alt={icon.name} class="h-8 md:h-10 rounded shadow-md" />
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-8">My Tech Stack</h2>
+                <TechMarquee techGroups={techGroups} />
             </section>
 
 		</main>
