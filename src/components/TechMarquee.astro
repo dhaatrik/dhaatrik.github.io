@@ -1,0 +1,46 @@
+---
+interface TechIcon {
+    name: string;
+    src: string;
+}
+
+interface Props {
+    techGroups: Record<string, TechIcon[]>;
+}
+
+const { techGroups } = Astro.props;
+---
+
+<div class="space-y-8">
+    {Object.entries(techGroups).map(([groupName, icons]) => (
+        <div class="space-y-3">
+            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-[var(--text-secondary)]">
+                {groupName.replace('_', ' & ')}
+            </h3>
+            <div class="relative flex overflow-x-hidden group rounded-[var(--bento-radius-inner)] bg-slate-100 dark:bg-[var(--bg-card)] border border-slate-200 dark:border-white/5 py-4">
+                <div class="animate-marquee flex whitespace-nowrap gap-6 px-6">
+                    {icons.map(icon => (
+                        <img
+                            src={icon.src}
+                            alt={icon.name}
+                            width="120"
+                            height="40"
+                            class="h-8 md:h-10 rounded shadow-md"
+                        />
+                    ))}
+                    {/* Duplicate set for seamless infinite looping */}
+                    {icons.map(icon => (
+                        <img
+                            src={icon.src}
+                            alt={icon.name}
+                            loading="lazy"
+                            width="120"
+                            height="40"
+                            class="h-8 md:h-10 rounded shadow-md"
+                        />
+                    ))}
+                </div>
+            </div>
+        </div>
+    ))}
+</div>
