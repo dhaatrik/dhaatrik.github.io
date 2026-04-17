@@ -1,0 +1,17 @@
+---
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header class="fixed top-0 w-full z-50 bg-[var(--bg-main)]/80 backdrop-blur-md border-b border-white/5">
+	<nav class="layout-container flex items-center justify-between py-4">
+		<a href="/" class="text-xl font-heading font-bold text-[var(--text-primary)] hover:text-white transition-colors">
+			{ "Dhaatrik." }
+		</a>
+		<div class="flex items-center gap-6">
+			<HeaderLink href="/" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Home</HeaderLink>
+			<HeaderLink href="/about" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">About</HeaderLink>
+			<HeaderLink href="/blog" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Blog</HeaderLink>
+		</div>
+	</nav>
+</header>
+

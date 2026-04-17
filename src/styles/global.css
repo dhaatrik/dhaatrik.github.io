@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito", "sans-serif";
+  --font-heading: "Poppins", "sans-serif";
+}
+
+@layer base {
+  :root {
+    --bg-main: #0B0E14;        /* Deep, rich dark base */
+    --bg-card: #151A22;        /* Card background */
+    --bg-card-hover: #1E2530;  /* Card hover state */
+    
+    --text-primary: #F3F4F6;   /* Off-white for high contrast */
+    --text-secondary: #9CA3AF; /* Muted text */
+    
+    --accent: #3B82F6;         /* Clean blue accent */
+    --accent-glow: rgba(59, 130, 246, 0.5);
+
+    /* Bento Grid Constants */
+    --bento-gap: 1.5rem;
+    --bento-radius: 1.5rem;
+    --bento-radius-inner: 1rem;
+    --bento-padding: 2rem;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    font-family: var(--font-sans);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  ::selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
+}
+
+@layer components {
+  /* Layout constraints */
+  .layout-container {
+    width: 100%;
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Bento Grid Utility Classes */
+  .bento-grid {
+    display: grid;
+    gap: var(--bento-gap);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .bento-card {
+    background-color: var(--bg-card);
+    border-radius: var(--bento-radius);
+    padding: var(--bento-padding);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  .bento-card:hover {
+    box-shadow: 0 0 20px var(--accent-glow);
+    transform: translateY(-0.25rem);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .bento-card-inner {
+    border-radius: var(--bento-radius-inner);
+    overflow: hidden;
+  }
+}
+
+/* Infinite Marquee Animation for Tech Stack */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
