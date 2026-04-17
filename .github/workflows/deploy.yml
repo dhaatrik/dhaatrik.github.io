@@ -22,10 +22,8 @@ jobs:
       
       - name: Install, build, and upload your site
         uses: withastro/action@v3
-        # Optional inputs you can uncomment if needed:
-        # with:
-        #   path: . # The root location of your Astro project inside the repository.
-        #   node-version: 20 # The specific version of Node that should be used.
+        with:
+          node-version: 22
 
   deploy:
     needs: build
