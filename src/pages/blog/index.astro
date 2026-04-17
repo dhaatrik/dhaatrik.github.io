@@ -8,74 +8,82 @@ import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
 // Compute reading time for each post via the remark plugin
 const postsWithReadingTime = await Promise.all(
-	posts.map(async (post) => {
-		const { remarkPluginFrontmatter } = await render(post);
-		return {
-			...post,
-			readingTime: remarkPluginFrontmatter.readingTime as string | undefined,
-		};
-	})
+    posts.map(async (post) => {
+        const { remarkPluginFrontmatter } = await render(post);
+        return {
+            ...post,
+            readingTime: remarkPluginFrontmatter.readingTime as string | undefined,
+        };
+    })
 );
 ---
 
 <!doctype html>
 <html lang="en" class="dark">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body class="pt-24 min-h-screen flex flex-col">
-		<Header />
-		<main class="layout-container flex-grow py-8">
-			<section class="max-w-4xl mx-auto">
-				<h1 class="text-4xl md:text-5xl font-bold mb-10 text-slate-900 dark:text-white leading-tight">Blog</h1>
-				<div class="grid gap-8 md:grid-cols-2">
-					{postsWithReadingTime.map((post, i) => (
-						<a
-							href={`/blog/${post.id}/`}
-							class:list={[
-								"bento-card group block overflow-hidden",
-								{ "md:col-span-2": i === 0 }
-							]}
-						>
-							{post.data.heroImage && (
-								<div class="bento-card-inner mb-4">
-									<Image
-										width={720}
-										height={360}
-										src={post.data.heroImage}
-										alt={post.data.title}
-										class="w-full object-cover transition-transform duration-300 group-hover:scale-105"
-									/>
-								</div>
-							)}
-							<div class="flex items-center gap-3 text-sm text-slate-500 dark:text-[var(--text-secondary)] mb-2">
-								<FormattedDate date={post.data.pubDate} />
-								{post.readingTime && (
-									<>
-										<span aria-hidden="true">·</span>
-										<span>{post.readingTime}</span>
-									</>
-								)}
-							</div>
-							<h2 class:list={[
-								"font-bold text-slate-900 dark:text-white group-hover:text-[var(--accent)] transition-colors",
-								i === 0 ? "text-2xl" : "text-xl"
-							]}>
-								{post.data.title}
-							</h2>
-							<p class="text-sm text-slate-600 dark:text-[var(--text-secondary)] mt-2 leading-relaxed line-clamp-3">
-								{post.data.description}
-							</p>
-						</a>
-					))}
-				</div>
-			</section>
-		</main>
-		<Footer />
-	</body>
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body class="flex min-h-screen flex-col pt-24">
+        <Header />
+        <main class="layout-container flex-grow py-8">
+            <section class="mx-auto max-w-4xl">
+                <h1
+                    class="mb-10 text-4xl leading-tight font-bold text-slate-900 md:text-5xl dark:text-white"
+                >
+                    Blog
+                </h1>
+                <div class="grid gap-8 md:grid-cols-2">
+                    {
+                        postsWithReadingTime.map((post, i) => (
+                            <a
+                                href={`/blog/${post.id}/`}
+                                class:list={[
+                                    'bento-card group block overflow-hidden',
+                                    { 'md:col-span-2': i === 0 },
+                                ]}
+                            >
+                                {post.data.heroImage && (
+                                    <div class="bento-card-inner mb-4">
+                                        <Image
+                                            width={720}
+                                            height={360}
+                                            src={post.data.heroImage}
+                                            alt={post.data.title}
+                                            class="w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                        />
+                                    </div>
+                                )}
+                                <div class="mb-2 flex items-center gap-3 text-sm text-slate-500 dark:text-[var(--text-secondary)]">
+                                    <FormattedDate date={post.data.pubDate} />
+                                    {post.readingTime && (
+                                        <>
+                                            <span aria-hidden="true">·</span>
+                                            <span>{post.readingTime}</span>
+                                        </>
+                                    )}
+                                </div>
+                                <h2
+                                    class:list={[
+                                        'font-bold text-slate-900 transition-colors group-hover:text-[var(--accent)] dark:text-white',
+                                        i === 0 ? 'text-2xl' : 'text-xl',
+                                    ]}
+                                >
+                                    {post.data.title}
+                                </h2>
+                                <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
+                                    {post.data.description}
+                                </p>
+                            </a>
+                        ))
+                    }
+                </div>
+            </section>
+        </main>
+        <Footer />
+    </body>
 </html>

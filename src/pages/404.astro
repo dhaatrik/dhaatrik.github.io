@@ -1,0 +1,39 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+    <head>
+        <BaseHead title={`404 - Not Found | ${SITE_TITLE}`} description="Page not found." />
+    </head>
+    <body class="flex min-h-screen flex-col pt-24">
+        <Header />
+        <main class="layout-container flex flex-grow items-center justify-center py-20">
+            <section class="bento-card relative max-w-2xl overflow-hidden text-center">
+                <div class="relative z-10 p-8">
+                    <h1 class="mb-6 text-6xl font-bold text-slate-900 md:text-8xl dark:text-white">
+                        404
+                    </h1>
+                    <h2 class="mb-4 text-3xl font-bold text-[var(--accent)]">Lost in space?</h2>
+                    <p
+                        class="mb-8 text-lg leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]"
+                    >
+                        It looks like this page has drifted off into the cosmos. Even DeltaV Lab's
+                        radar can't find it.
+                    </p>
+                    <a
+                        href="/"
+                        class="inline-block rounded-lg bg-[var(--accent)] px-8 py-4 font-semibold text-white transition-all hover:shadow-[0_0_20px_var(--accent-glow)]"
+                    >
+                        Take Me Home
+                    </a>
+                </div>
+            </section>
+        </main>
+        <Footer />
+    </body>
+</html>
