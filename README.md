@@ -43,5 +43,4 @@ I’m always up for a deep dive into tech, psychology, or just a good chat.
 - [X / Twitter](https://x.com/dhaatrik)
 - [LinkedIn](https://linkedin.com/in/dhaatrik)
 - [GitHub](https://github.com/dhaatrik)
-- [Medium](https://medium.com/@dhaatrik) 
-
+- [Medium](https://medium.com/@dhaatrik)

@@ -12,35 +12,39 @@ const { techGroups } = Astro.props;
 ---
 
 <div class="space-y-8">
-    {Object.entries(techGroups).map(([groupName, icons]) => (
-        <div class="space-y-3">
-            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-[var(--text-secondary)]">
-                {groupName.replace('_', ' & ')}
-            </h3>
-            <div class="relative flex overflow-x-hidden group rounded-[var(--bento-radius-inner)] bg-slate-100 dark:bg-[var(--bg-card)] border border-slate-200 dark:border-white/5 py-4">
-                <div class="animate-marquee flex whitespace-nowrap gap-6 px-6">
-                    {icons.map(icon => (
-                        <img
-                            src={icon.src}
-                            alt={icon.name}
-                            width="120"
-                            height="40"
-                            class="h-8 md:h-10 rounded shadow-md"
-                        />
-                    ))}
-                    {/* Duplicate set for seamless infinite looping */}
-                    {icons.map(icon => (
-                        <img
-                            src={icon.src}
-                            alt={icon.name}
-                            loading="lazy"
-                            width="120"
-                            height="40"
-                            class="h-8 md:h-10 rounded shadow-md"
-                        />
-                    ))}
+    {
+        Object.entries(techGroups).map(([groupName, icons]) => (
+            <div class="space-y-3">
+                <h3 class="text-sm font-semibold tracking-wider text-slate-500 uppercase dark:text-[var(--text-secondary)]">
+                    {groupName.replace('_', ' & ')}
+                </h3>
+                <div class="group relative flex overflow-x-hidden rounded-[var(--bento-radius-inner)] border border-slate-200 bg-slate-100 py-4 dark:border-white/5 dark:bg-[var(--bg-card)]">
+                    <div class="animate-marquee flex gap-6 px-6 whitespace-nowrap">
+                        {icons.map((icon) => (
+                            <img
+                                src={icon.src}
+                                alt={icon.name}
+                                width="120"
+                                height="40"
+                                class="h-8 rounded shadow-md md:h-10"
+                            />
+                        ))}
+                        {/* Duplicate set for seamless infinite looping */}
+                        <div aria-hidden="true" class="flex gap-6">
+                            {icons.map((icon) => (
+                                <img
+                                    src={icon.src}
+                                    alt=""
+                                    loading="lazy"
+                                    width="120"
+                                    height="40"
+                                    class="h-8 rounded shadow-md md:h-10"
+                                />
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    ))}
+        ))
+    }
 </div>

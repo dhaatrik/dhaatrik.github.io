@@ -5,84 +5,85 @@ import Header from '../components/Header.astro';
 import TechMarquee from '../components/TechMarquee.astro';
 import { SITE_TITLE } from '../consts';
 
-const techGroups = {
-    Frontend: [
-        { name: "React", src: "https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" },
-        { name: "TypeScript", src: "https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" },
-        { name: "TailwindCSS", src: "https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" },
-        { name: "Astro", src: "https://img.shields.io/badge/astro-%232C2052.svg?style=for-the-badge&logo=astro&logoColor=white" },
-        { name: "Next JS", src: "https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" },
-    ],
-    Backend: [
-        { name: "NodeJS", src: "https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" },
-        { name: "Express.js", src: "https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB" },
-        { name: "Python", src: "https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" },
-        { name: "FastAPI", src: "https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi&logoColor=white" },
-        { name: "Django", src: "https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white" },
-    ],
-    Cloud_Db: [
-        { name: "AWS", src: "https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white" },
-        { name: "Google Cloud", src: "https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white" },
-        { name: "Supabase", src: "https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" },
-        { name: "Postgres", src: "https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" },
-        { name: "MongoDB", src: "https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" },
-    ],
-    AI_Math: [
-        { name: "TensorFlow", src: "https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white" },
-        { name: "PyTorch", src: "https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white" },
-        { name: "Pandas", src: "https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white" },
-        { name: "Scikit-Learn", src: "https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white" },
-    ]
-};
-
+import { techGroups } from '../data/techStack';
 ---
 
 <!doctype html>
 <html lang="en" class="dark">
-	<head>
-		<BaseHead title={`About | ${SITE_TITLE}`} description="Learn more about Dhaatrik's journey and tech stack." />
-	</head>
-	<body class="pt-24 min-h-screen flex flex-col">
-		<Header />
-		<main class="layout-container flex-grow space-y-20 py-8">
-			
-			<section class="max-w-3xl">
-				<h1 class="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white leading-tight">About Me</h1>
-				<div class="space-y-6 text-lg text-slate-600 dark:text-[var(--text-secondary)] leading-relaxed">
-					<p>
-                        Think of me as your friendly neighborhood dev-brother—always down to help, learn, or just talk shop. I'm deeply curious about the "how" and "why" of the universe.
-                    </p>
-                    
-                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-4">What I'm Building</h2>
+    <head>
+        <BaseHead
+            title={`About | ${SITE_TITLE}`}
+            description="Learn more about Dhaatrik's journey and tech stack."
+        />
+    </head>
+    <body class="flex min-h-screen flex-col pt-24">
+        <Header />
+        <main class="layout-container flex-grow space-y-20 py-8">
+            <section class="max-w-3xl">
+                <h1
+                    class="mb-6 text-4xl leading-tight font-bold text-slate-900 md:text-5xl dark:text-white"
+                >
+                    About Me
+                </h1>
+                <div
+                    class="space-y-6 text-lg leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]"
+                >
                     <p>
-                        I'm currently focused on the agriculture domain, working to integrate AI into the core fundamentals of farming to solve real-world problems. I also love building tools for the community, like <strong>Vellor</strong>, an offline-first tool for independent educators.
+                        Think of me as your friendly neighborhood dev-brother—always down to help,
+                        learn, or just talk shop. I'm deeply curious about the "how" and "why" of
+                        the universe.
                     </p>
 
-                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-4">What I'm Learning</h2>
+                    <h2 class="mt-8 mb-4 text-2xl font-bold text-slate-900 dark:text-white">
+                        What I'm Building
+                    </h2>
                     <p>
-                        My curiosity pulls me toward the intricacies of reality. Right now, that means diving deep into the math of rocket engineering, the weirdness of quantum mechanics, and the fascinating depths of human psychology.
+                        I'm currently focused on the agriculture domain, working to integrate AI
+                        into the core fundamentals of farming to solve real-world problems. I also
+                        love building tools for the community, like <strong>Vellor</strong>, an
+                        offline-first tool for independent educators.
                     </p>
-				</div>
-			</section>
 
-			<section class="bento-card relative overflow-hidden max-w-4xl">
+                    <h2 class="mt-8 mb-4 text-2xl font-bold text-slate-900 dark:text-white">
+                        What I'm Learning
+                    </h2>
+                    <p>
+                        My curiosity pulls me toward the intricacies of reality. Right now, that
+                        means diving deep into the math of rocket engineering, the weirdness of
+                        quantum mechanics, and the fascinating depths of human psychology.
+                    </p>
+                </div>
+            </section>
+
+            <section class="bento-card relative max-w-4xl overflow-hidden">
                 <div class="relative z-10">
-                    <h2 class="text-2xl font-bold text-[var(--accent)] mb-4">A Note on the Journey: Q1 2025 & Beyond</h2>
-                    <p class="text-slate-600 dark:text-[var(--text-secondary)] mb-4 leading-relaxed">
-                        FuelDrop was more than just a codebase; it was my primary startup focus during the first quarter of 2025. I'll soon be sharing a comprehensive deep-dive article detailing the entire lifecycle of this venture.
+                    <h2 class="mb-4 text-2xl font-bold text-[var(--accent)]">
+                        A Note on the Journey: Q1 2025 & Beyond
+                    </h2>
+                    <p
+                        class="mb-4 leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]"
+                    >
+                        FuelDrop was more than just a codebase; it was my primary startup focus
+                        during the first quarter of 2025. I'll soon be sharing a comprehensive
+                        deep-dive article detailing the entire lifecycle of this venture.
                     </p>
-                    <p class="text-slate-600 dark:text-[var(--text-secondary)] leading-relaxed">
-                        I'm a firm believer that <strong>"knowledge kept secret is knowledge wasted"</strong>. I'll be pulling back the curtain on the raw reality of building an on-demand logistics startup, the "hard-knock" lessons learned, and the technical breakdowns. Stay tuned.
+                    <p class="leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
+                        I'm a firm believer that <strong
+                            >"knowledge kept secret is knowledge wasted"</strong
+                        >. I'll be pulling back the curtain on the raw reality of building an
+                        on-demand logistics startup, the "hard-knock" lessons learned, and the
+                        technical breakdowns. Stay tuned.
                     </p>
                 </div>
             </section>
 
             <section class="max-w-5xl">
-                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-8">My Tech Stack</h2>
+                <h2 class="mb-8 text-3xl font-bold text-slate-900 dark:text-white">
+                    My Tech Stack
+                </h2>
                 <TechMarquee techGroups={techGroups} />
             </section>
-
-		</main>
-		<Footer />
-	</body>
+        </main>
+        <Footer />
+    </body>
 </html>
