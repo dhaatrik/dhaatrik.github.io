@@ -12,7 +12,8 @@
         "build": "astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "test": "node --test src/plugins/*.test.mjs"
     },
     "dependencies": {
         "@astrojs/mdx": "^5.0.3",
