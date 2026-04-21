@@ -26,7 +26,13 @@ const projects = defineCollection({
             title: z.string(),
             description: z.string(),
             logo: z.string().optional(),
-            githubUrl: z.string().url().optional(),
+            githubUrl: z
+                .string()
+                .url()
+                .refine((url) => url.startsWith('http://') || url.startsWith('https://'), {
+                    message: 'URL must use http or https protocol for security',
+                })
+                .optional(),
             progress: z.string().optional(),
             order: z.number().default(0),
         }),

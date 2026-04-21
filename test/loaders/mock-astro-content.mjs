@@ -6,9 +6,9 @@ export const getCollection = async (collection) => {
                 data: {
                     title: 'First Post',
                     description: 'This is my first post',
-                    pubDate: new Date('2024-01-01')
-                }
-            }
+                    pubDate: new Date('2024-01-01'),
+                },
+            },
         ];
     }
     if (collection === 'projects') {
@@ -16,9 +16,9 @@ export const getCollection = async (collection) => {
             {
                 data: {
                     title: 'My Project',
-                    description: 'This is a test project'
-                }
-            }
+                    description: 'This is a test project',
+                },
+            },
         ];
     }
     return [];
