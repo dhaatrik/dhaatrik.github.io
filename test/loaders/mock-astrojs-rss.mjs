@@ -1,1 +1,3 @@
-export default function rss(opts) { return opts; }
+export default function rss(opts) {
+    return opts;
+}
