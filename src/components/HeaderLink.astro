@@ -13,9 +13,10 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
     href={href}
     class:list={[
         className,
-        'group relative py-1',
+        'group relative rounded py-1 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-[var(--bg-main)]',
         { 'font-semibold text-[var(--accent)]': isActive },
     ]}
+    aria-current={isActive ? 'page' : undefined}
     {...props}
 >
     <slot />
