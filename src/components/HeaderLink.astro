@@ -13,15 +13,18 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
     href={href}
     class:list={[
         className,
-        'group relative py-1',
+        'group relative rounded py-1 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-[var(--bg-main)]',
         { 'font-semibold text-[var(--accent)]': isActive },
     ]}
+    aria-current={isActive ? 'page' : undefined}
     {...props}
 >
     <slot />
     <span
         class:list={[
             'absolute bottom-0 left-0 h-0.5 w-full origin-left rounded-full bg-[var(--accent)] transition-transform duration-300',
-            isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
+            isActive
+                ? 'scale-x-100'
+                : 'scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100',
         ]}></span>
 </a>
