@@ -62,6 +62,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
                 <div class="hero-image">
                     {
                         heroImage && (
+                            /* ⚡ Bolt: Optimize LCP by eager loading the hero image with high priority */
                             <Image
                                 width={1020}
                                 height={510}

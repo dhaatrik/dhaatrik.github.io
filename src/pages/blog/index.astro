@@ -49,6 +49,7 @@ const postsWithReadingTime = await Promise.all(
                             >
                                 {post.data.heroImage && (
                                     <div class="bento-card-inner mb-4">
+                                        {/* ⚡ Bolt: Optimize LCP by eager loading the first image (above the fold) with high priority */}
                                         <Image
                                             width={720}
                                             height={360}
