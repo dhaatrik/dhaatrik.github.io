@@ -49,12 +49,15 @@ const postsWithReadingTime = await Promise.all(
                             >
                                 {post.data.heroImage && (
                                     <div class="bento-card-inner mb-4">
+                                        {/* ⚡ Bolt: Optimize LCP by eager loading the first image (above the fold) with high priority */}
                                         <Image
                                             width={720}
                                             height={360}
                                             src={post.data.heroImage}
                                             alt={post.data.title}
                                             class="w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                            loading={i === 0 ? 'eager' : 'lazy'}
+                                            fetchpriority={i === 0 ? 'high' : 'auto'}
                                         />
                                     </div>
                                 )}
