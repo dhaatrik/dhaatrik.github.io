@@ -24,6 +24,8 @@ const { techGroups } = Astro.props;
                             <img
                                 src={icon.src}
                                 alt={icon.name}
+                                loading="lazy"
+                                decoding="async"
                                 width="120"
                                 height="40"
                                 class="h-8 rounded shadow-md md:h-10"
@@ -36,6 +38,7 @@ const { techGroups } = Astro.props;
                                     src={icon.src}
                                     alt=""
                                     loading="lazy"
+                                    decoding="async"
                                     width="120"
                                     height="40"
                                     class="h-8 rounded shadow-md md:h-10"
