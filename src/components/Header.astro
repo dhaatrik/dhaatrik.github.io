@@ -8,24 +8,24 @@ import HeaderLink from './HeaderLink.astro';
     <nav class="layout-container flex items-center justify-between py-4">
         <a
             href="/"
-            class="font-heading text-xl font-bold text-slate-900 transition-colors hover:text-slate-700 dark:text-[var(--text-primary)] dark:hover:text-white"
+            class="font-heading text-xl font-bold text-slate-900 transition-colors hover:text-slate-700 focus-visible:text-slate-700 dark:text-[var(--text-primary)] dark:hover:text-white dark:focus-visible:text-white"
         >
             {'Dhaatrik.'}
         </a>
         <div class="flex items-center gap-6">
             <HeaderLink
                 href="/"
-                class="text-slate-500 transition-colors hover:text-[var(--accent)] dark:text-[var(--text-secondary)]"
+                class="text-slate-500 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)]"
                 >Home</HeaderLink
             >
             <HeaderLink
                 href="/about"
-                class="text-slate-500 transition-colors hover:text-[var(--accent)] dark:text-[var(--text-secondary)]"
+                class="text-slate-500 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)]"
                 >About</HeaderLink
             >
             <HeaderLink
                 href="/blog"
-                class="text-slate-500 transition-colors hover:text-[var(--accent)] dark:text-[var(--text-secondary)]"
+                class="text-slate-500 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)]"
                 >Blog</HeaderLink
             >
         </div>

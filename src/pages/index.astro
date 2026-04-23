@@ -37,13 +37,13 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                 <div class="flex gap-4">
                     <a
                         href="/about"
-                        class="rounded-lg bg-[var(--accent)] px-6 py-3 font-medium text-white transition-all hover:shadow-[0_0_20px_var(--accent-glow)]"
+                        class="rounded-lg bg-[var(--accent)] px-6 py-3 font-medium text-white transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)]"
                     >
                         Read My Journey
                     </a>
                     <a
                         href="mailto:dhaatrikchowdhury@gmail.com"
-                        class="rounded-lg border border-slate-200 bg-slate-100 px-6 py-3 font-medium text-slate-900 transition-all hover:bg-slate-200 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+                        class="rounded-lg border border-slate-200 bg-slate-100 px-6 py-3 font-medium text-slate-900 transition-all hover:bg-slate-200 focus-visible:bg-slate-200 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 dark:focus-visible:bg-white/10"
                     >
                         Let's Chat
                     </a>
@@ -67,7 +67,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                             <article class="bento-card group flex flex-col justify-between">
                                 <div>
                                     <div class="mb-4 flex items-start justify-between">
-                                        <h3 class="text-2xl font-bold text-slate-900 transition-colors group-hover:text-[var(--accent)] dark:text-white">
+                                        <h3 class="text-2xl font-bold text-slate-900 transition-colors group-hover:text-[var(--accent)] group-focus-visible:text-[var(--accent)] dark:text-white">
                                             {project.data.title}
                                         </h3>
                                         {project.data.githubUrl && (
@@ -76,7 +76,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 aria-label="View Project on GitHub"
-                                                class="text-slate-400 transition-colors hover:text-slate-900 dark:text-[var(--text-secondary)] dark:hover:text-white"
+                                                class="text-slate-400 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-[var(--text-secondary)] dark:hover:text-white dark:focus-visible:text-white"
                                             >
                                                 <span class="sr-only">GitHub</span>
                                                 <svg

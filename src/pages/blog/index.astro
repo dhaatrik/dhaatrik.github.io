@@ -55,7 +55,7 @@ const postsWithReadingTime = await Promise.all(
                                             height={360}
                                             src={post.data.heroImage}
                                             alt={post.data.title}
-                                            class="w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                            class="w-full object-cover transition-transform duration-300 group-hover:scale-105 group-focus-visible:scale-105"
                                             loading={i === 0 ? 'eager' : 'lazy'}
                                             fetchpriority={i === 0 ? 'high' : 'auto'}
                                         />
@@ -72,7 +72,7 @@ const postsWithReadingTime = await Promise.all(
                                 </div>
                                 <h2
                                     class:list={[
-                                        'font-bold text-slate-900 transition-colors group-hover:text-[var(--accent)] dark:text-white',
+                                        'font-bold text-slate-900 transition-colors group-hover:text-[var(--accent)] group-focus-visible:text-[var(--accent)] dark:text-white',
                                         i === 0 ? 'text-2xl' : 'text-xl',
                                     ]}
                                 >
