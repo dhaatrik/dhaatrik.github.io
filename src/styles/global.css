@@ -102,11 +102,13 @@
         transform: translateY(-0.25rem);
     }
 
-    :root .bento-card:hover {
+    :root .bento-card:hover,
+    :root .bento-card:focus-visible {
         border-color: #cbd5e1;
     }
 
-    .dark .bento-card:hover {
+    .dark .bento-card:hover,
+    .dark .bento-card:focus-visible {
         border-color: rgba(255, 255, 255, 0.1);
     }
 
@@ -133,6 +135,12 @@
 
 .animate-marquee:hover {
     animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+        animation-play-state: paused;
+    }
 }
 
 /* Global Focus Styles */
