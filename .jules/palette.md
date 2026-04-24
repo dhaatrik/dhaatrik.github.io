@@ -7,3 +7,7 @@
 
 **Learning:** Infinite CSS animations (like `.animate-marquee` for tech stacks or auto-scrolling logos) can trigger nausea and dizziness for users with vestibular disorders. While hovering to pause is a good start, it relies on an active interaction and doesn't solve the immediate visual impact upon loading.
 **Action:** Always wrap infinite or significant non-essential animations with a `@media (prefers-reduced-motion: reduce)` query to default to a `paused` state (or static alternative) for users who have requested reduced motion at the OS level.
+
+## 2025-05-18 - Missing Skip-to-Content link in Astro site without unified layout
+**Learning:** Found that this app is missing a skip-to-content link, which is a critical accessibility feature for keyboard users to bypass repetitive header navigation. In Astro projects where there is no single top-level `Layout.astro` (instead pages like `index.astro`, `about.astro`, etc., individually include `<Header />` and `<main>`), the `<main>` element needs an `id` across all files to act as the target for the skip link.
+**Action:** Next time I encounter a site without a skip-to-content link, I will ensure that the link is placed as early as possible in the DOM (e.g., inside the `<Header />` component) and that all corresponding `<main>` elements have the matching `id`.
