@@ -9,5 +9,6 @@
 **Action:** Always wrap infinite or significant non-essential animations with a `@media (prefers-reduced-motion: reduce)` query to default to a `paused` state (or static alternative) for users who have requested reduced motion at the OS level.
 
 ## 2026-04-24 - Missing Skip-to-Content link in Astro site without unified layout
+
 **Learning:** Found that this app is missing a skip-to-content link, which is a critical accessibility feature for keyboard users to bypass repetitive header navigation. In Astro projects where there is no single top-level `Layout.astro` (instead pages like `index.astro`, `about.astro`, etc., individually include `<Header />` and `<main>`), the `<main>` element needs an `id` across all files to act as the target for the skip link.
 **Action:** Next time I encounter a site without a skip-to-content link, I will ensure that the link is placed as early as possible in the DOM (e.g., inside the `<Header />` component) and that all corresponding `<main>` elements have the matching `id`.
