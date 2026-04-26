@@ -14,5 +14,11 @@
 **Action:** Next time I encounter a site without a skip-to-content link, I will ensure that the link is placed as early as possible in the DOM (e.g., inside the `<Header />` component) and that all corresponding `<main>` elements have the matching `id`.
 
 ## 2026-04-25 - [Accessible Icon Links & Tooltips]
+
 **Learning:** Combining `aria-label` with a visually-hidden `<span class="sr-only">` text block on icon-only links is redundant, and can cause some screen readers to announce the label twice. Native `title` attributes on icon-only links provide helpful browser tooltips for sighted users without conflicting with `aria-label`.
 **Action:** When adding `title` tooltips to icon-only links that already have an `aria-label`, remove any visually-hidden (`sr-only`) fallback text to ensure a pristine accessible name calculation.
+
+## 2026-04-26 - Container Focus Parity for Interactive Cards
+
+**Learning:** When using container components (like `.bento-card`) that have interactive inner elements (like links), adding `:hover` states to the container provides good visual feedback for mouse users, but keyboard users navigating to those inner links don't get the same container-level feedback.
+**Action:** Use `:focus-within` on container components (and equivalent utilities like `group-focus-within` for inner elements) in conjunction with `:hover` to ensure keyboard navigation triggers the same container-level lift and highlight effects, providing parity in the interactive experience.
