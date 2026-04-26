@@ -97,18 +97,21 @@
         border-color: rgba(255, 255, 255, 0.05);
     }
 
-    .bento-card:hover {
+    .bento-card:hover,
+    .bento-card:focus-within {
         box-shadow: 0 0 20px var(--accent-glow);
         transform: translateY(-0.25rem);
     }
 
     :root .bento-card:hover,
-    :root .bento-card:focus-visible {
+    :root .bento-card:focus-visible,
+    :root .bento-card:focus-within {
         border-color: #cbd5e1;
     }
 
     .dark .bento-card:hover,
-    .dark .bento-card:focus-visible {
+    .dark .bento-card:focus-visible,
+    .dark .bento-card:focus-within {
         border-color: rgba(255, 255, 255, 0.1);
     }
 
