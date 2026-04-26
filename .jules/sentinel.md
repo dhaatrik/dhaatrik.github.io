@@ -17,6 +17,7 @@
 **Prevention:** [Ensure all CSP configurations do not include unsafe-eval unless absolutely necessary for specific dependencies]
 
 ## 2026-04-25 - [CSP Hardening]
+
 **Vulnerability:** [Content-Security-Policy meta tag was missing object-src, base-uri, and upgrade-insecure-requests directives]
 **Learning:** [Even if the application is currently secure, defense in depth principles dictate that CSP should be as restrictive as possible to mitigate future vulnerabilities]
 **Prevention:** [Always include object-src 'none', base-uri 'self', and upgrade-insecure-requests in the CSP configuration to restrict plugin embedding, base URL manipulation, and enforce HTTPS]

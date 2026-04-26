@@ -14,5 +14,6 @@
 **Action:** Next time I encounter a site without a skip-to-content link, I will ensure that the link is placed as early as possible in the DOM (e.g., inside the `<Header />` component) and that all corresponding `<main>` elements have the matching `id`.
 
 ## 2026-04-25 - [Accessible Icon Links & Tooltips]
+
 **Learning:** Combining `aria-label` with a visually-hidden `<span class="sr-only">` text block on icon-only links is redundant, and can cause some screen readers to announce the label twice. Native `title` attributes on icon-only links provide helpful browser tooltips for sighted users without conflicting with `aria-label`.
 **Action:** When adding `title` tooltips to icon-only links that already have an `aria-label`, remove any visually-hidden (`sr-only`) fallback text to ensure a pristine accessible name calculation.
