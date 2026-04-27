@@ -9,5 +9,8 @@ const { date } = Astro.props;
 ---
 
 <time datetime={date.toISOString()}>
-    {dateFormatter.format(date)}
+    {
+        /* ⚡ Bolt: Cache Intl.DateTimeFormat to avoid repeated object creation during SSG */
+        dateFormatter.format(date)
+    }
 </time>
