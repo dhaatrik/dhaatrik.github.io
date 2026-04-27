@@ -25,14 +25,14 @@ This repository (`dhaatrik.github.io`) houses my personal portfolio and blog, bu
 
 If you want to run this portfolio locally:
 
-```bas
+```bash
 npm install
 npm run dev
 ```
 
 To build for production:
 
-```bas
+```bash
 npm run build
 ```
 
