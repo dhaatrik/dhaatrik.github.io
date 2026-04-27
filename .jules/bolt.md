@@ -20,5 +20,5 @@
 
 ## 2026-04-27 - [Date Formatting in SSG]
 
-**Learning:** Using `date.toLocaleDateString()` inside an Astro component that is rendered in a loop (like a blog index) incurs significant performance overhead during the SSG build. In Node.js, `toLocaleDateString` re-initializes the `Intl.DateTimeFormat` object on every call. Our benchmarks showed a ~50x difference (1.2s vs 21ms for 10k dates).
+**Learning:** Using `date.toLocaleDateString()` inside an Astro component that is rendered in a loop (like a blog index) incurs significant performance overhead during the SSG build. In Node.js, `toLocaleDateString` re-initializes the `Intl.DateTimeFormat` object on every call. Our benchmarks in this environment showed a ~94x difference (1.422s vs 15.142ms for 10k dates).
 **Action:** When repeatedly formatting dates with the same locale and options, instantiate an `Intl.DateTimeFormat` object once outside the component/loop (or in a shared utility file) and reuse its `.format(date)` method.
