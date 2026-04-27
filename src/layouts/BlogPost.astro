@@ -11,7 +11,8 @@ type Props = CollectionEntry<'blog'>['data'];
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<html lang="en">
+<!doctype html>
+<html lang="en" class="dark">
     <head>
         <BaseHead title={title} description={description} />
         <style>
@@ -55,9 +56,31 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         </style>
     </head>
 
-    <body>
+    <body class="flex min-h-screen flex-col pt-24">
         <Header />
         <main id="main-content">
+            <div class="layout-container mb-8">
+                <a
+                    href="/blog"
+                    class="group inline-flex items-center gap-2 rounded-lg text-sm font-medium text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:text-[var(--text-secondary)] dark:hover:text-white dark:focus-visible:text-white dark:focus-visible:ring-offset-[var(--bg-main)]"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="transition-transform group-hover:-translate-x-1 group-focus-visible:-translate-x-1"
+                    >
+                        <path d="m15 18-6-6 6-6"></path>
+                    </svg>
+                    Back to Blog
+                </a>
+            </div>
             <article>
                 <div class="hero-image">
                     {
