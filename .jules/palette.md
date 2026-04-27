@@ -22,3 +22,8 @@
 
 **Learning:** When using container components (like `.bento-card`) that have interactive inner elements (like links), adding `:hover` states to the container provides good visual feedback for mouse users, but keyboard users navigating to those inner links don't get the same container-level feedback.
 **Action:** Use `:focus-within` on container components (and equivalent utilities like `group-focus-within` for inner elements) in conjunction with `:hover` to ensure keyboard navigation triggers the same container-level lift and highlight effects, providing parity in the interactive experience.
+
+## 2026-04-27 - [Contextual Detail Page Navigation]
+
+**Learning:** Missing spatial navigation tools (like breadcrumbs or explicit "Back to [List]" links) on detail pages (like individual blog posts) forces users to rely exclusively on the browser's back button or the global header navigation. This degrades the spatial orientation of users relying on screen readers or keyboard navigation, as well as breaking flow when navigating from external referrers without browsing history.
+**Action:** Always include an explicit, accessible contextual return link (e.g., "Back to Blog") with appropriate focus states and semantic iconography near the top of detail pages to provide clear spatial orientation and an immediate path backward in the hierarchy.
