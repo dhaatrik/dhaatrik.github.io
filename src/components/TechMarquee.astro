@@ -1,11 +1,8 @@
 ---
-interface TechIcon {
-    name: string;
-    src: string;
-}
+import type { TechGroupsType } from '../data/techStack';
 
 interface Props {
-    techGroups: Record<string, TechIcon[]>;
+    techGroups: TechGroupsType;
 }
 
 const { techGroups } = Astro.props;
