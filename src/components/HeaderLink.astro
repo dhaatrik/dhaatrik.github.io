@@ -5,8 +5,13 @@ type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+
+/* ⚡ Bolt: Replaced regex `pathname.match(/[^\/]+/g)` with faster string operations
+   for determining the active link state, reducing overhead during Astro SSG rendering. */
+const p1 = pathname.startsWith('/') ? pathname.substring(1) : pathname;
+const s = p1.indexOf('/');
+const firstSegment = s === -1 ? p1 : p1.substring(0, s);
+const isActive = href === pathname || href === '/' + firstSegment;
 ---
 
 <a
