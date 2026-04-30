@@ -19,7 +19,7 @@ const { techGroups } = Astro.props;
                     {groupName.replace('_', ' & ')}
                 </h3>
                 <div
-                    class="group relative flex overflow-x-hidden rounded-[var(--bento-radius-inner)] border border-slate-200 bg-slate-100 py-4 focus-visible:ring-2 focus-visible:ring-[var(--accent)] dark:border-white/5 dark:bg-[var(--bg-card)]"
+                    class="group relative flex overflow-x-hidden rounded-[var(--bento-radius-inner)] border border-slate-200 bg-slate-100 py-4 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:outline-none dark:border-white/5 dark:bg-[var(--bg-card)]"
                     tabindex="0"
                     role="region"
                     aria-label={`${groupName.replace('_', ' & ')} technologies`}
