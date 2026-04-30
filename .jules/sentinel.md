@@ -1,4 +1,4 @@
-## 2024-05-24 - HTML Meta Tag Security Constraints and form-action CSP
+## 2026-04-30 - HTML Meta Tag Security Constraints and form-action CSP
 
 **Vulnerability:** X-Frame-Options and X-Content-Type-Options were defined using HTML <meta> tags, but browsers ignore these headers when specified this way. They only work when sent as HTTP headers. Also, a static site lacking forms is slightly vulnerable to form injection.
 **Learning:** For a statically hosted site (like GitHub Pages without a custom server), we can only configure security headers via <meta> tags if the browser supports them (like CSP and Referrer-Policy). Trying to set X-Frame-Options or X-Content-Type-Options in HTML provides a false sense of security. The CSP `frame-ancestors` directive would be the modern alternative to X-Frame-Options, but unfortunately, CSP `frame-ancestors` is also ignored in `<meta>` tags. The `form-action 'none'` CSP directive safely mitigates malicious form injection for formless applications.
