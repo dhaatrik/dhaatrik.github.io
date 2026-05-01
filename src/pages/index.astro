@@ -75,9 +75,9 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                                                 href={project.data.githubUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                aria-label={`View ${project.data.title} on GitHub`}
+                                                aria-label={`View ${project.data.title} on GitHub (opens in a new tab)`}
                                                 title={`View ${project.data.title} on GitHub`}
-                                                class="text-slate-400 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-[var(--text-secondary)] dark:hover:text-white dark:focus-visible:text-white"
+                                                class="text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-[var(--text-secondary)] dark:hover:text-white dark:focus-visible:text-white"
                                             >
                                                 <svg
                                                     viewBox="0 0 16 16"
