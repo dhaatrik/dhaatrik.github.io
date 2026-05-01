@@ -15,6 +15,7 @@ const isActive = href === pathname || href === '/' + firstSegment;
 
 <a
     href={href}
+    data-astro-prefetch="hover"
     class:list={[
         className,
         'group relative rounded py-1 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-[var(--bg-main)]',
