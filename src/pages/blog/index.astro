@@ -42,6 +42,7 @@ const postsWithReadingTime = posts.map((post) => {
                         postsWithReadingTime.map((post, i) => (
                             <a
                                 href={`/blog/${post.id}/`}
+                                data-astro-prefetch="hover"
                                 class:list={[
                                     'bento-card group block overflow-hidden',
                                     { 'md:col-span-2': i === 0 },
