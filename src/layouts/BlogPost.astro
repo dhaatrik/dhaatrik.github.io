@@ -60,6 +60,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         <Header />
         <main id="main-content">
             <div class="layout-container mb-8">
+                {
+                    /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */
+                }
                 <a
                     href="/blog"
                     data-astro-prefetch="hover"
