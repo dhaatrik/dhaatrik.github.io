@@ -60,8 +60,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         <Header />
         <main id="main-content">
             <div class="layout-container mb-8">
+                {
+                    /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */
+                }
                 <a
                     href="/blog"
+                    data-astro-prefetch="hover"
                     class="group inline-flex items-center gap-2 rounded-lg text-sm font-medium text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:text-[var(--text-secondary)] dark:hover:text-white dark:focus-visible:text-white dark:focus-visible:ring-offset-[var(--bg-main)]"
                 >
                     <svg

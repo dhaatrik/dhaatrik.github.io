@@ -35,8 +35,12 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                     understanding the absolute fundamentals.
                 </p>
                 <div class="flex gap-4">
+                    {
+                        /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */
+                    }
                     <a
                         href="/about"
+                        data-astro-prefetch="hover"
                         class="rounded-lg bg-[var(--accent)] px-6 py-3 font-medium text-white transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)]"
                     >
                         Read My Journey
