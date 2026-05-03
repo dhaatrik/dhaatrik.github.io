@@ -136,7 +136,8 @@
     will-change: transform;
 }
 
-.animate-marquee:hover {
+.animate-marquee:hover,
+.group:focus-within .animate-marquee {
     animation-play-state: paused;
 }
 

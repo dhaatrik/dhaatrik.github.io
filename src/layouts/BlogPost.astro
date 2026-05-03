@@ -60,6 +60,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         <Header />
         <main id="main-content">
             <div class="layout-container mb-8">
+                {
+                    /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */
+                }
                 <a
                     href="/blog"
                     class="group inline-flex items-center gap-2 rounded-lg text-sm font-medium text-slate-500 transition-all hover:text-slate-900 focus-visible:text-slate-900 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:text-[var(--text-secondary)] dark:hover:text-white dark:focus-visible:text-white dark:focus-visible:ring-offset-[var(--bg-main)]"
@@ -75,6 +78,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         class="transition-transform group-hover:-translate-x-1 group-focus-visible:-translate-x-1"
+                        aria-hidden="true"
                     >
                         <path d="m15 18-6-6 6-6"></path>
                     </svg>
@@ -90,7 +94,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
                                 width={1020}
                                 height={510}
                                 src={heroImage}
-                                alt={title}
+                                alt=""
                                 loading="eager"
                                 fetchpriority="high"
                             />
