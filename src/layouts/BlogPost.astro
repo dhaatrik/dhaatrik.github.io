@@ -76,6 +76,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         class="transition-transform group-hover:-translate-x-1 group-focus-visible:-translate-x-1"
+                        aria-hidden="true"
                     >
                         <path d="m15 18-6-6 6-6"></path>
                     </svg>
@@ -91,7 +92,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
                                 width={1020}
                                 height={510}
                                 src={heroImage}
-                                alt={title}
+                                alt=""
                                 loading="eager"
                                 fetchpriority="high"
                             />

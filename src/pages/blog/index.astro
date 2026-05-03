@@ -44,7 +44,7 @@ const postsWithReadingTime = posts.map((post) => {
                                 href={`/blog/${post.id}/`}
                                 data-astro-prefetch="hover"
                                 class:list={[
-                                    'bento-card group block overflow-hidden',
+                                    'bento-card group block overflow-hidden transition-all active:scale-[0.99]',
                                     { 'md:col-span-2': i === 0 },
                                 ]}
                             >
@@ -55,7 +55,7 @@ const postsWithReadingTime = posts.map((post) => {
                                             width={720}
                                             height={360}
                                             src={post.data.heroImage}
-                                            alt={post.data.title}
+                                            alt=""
                                             class="w-full object-cover transition-transform duration-300 group-hover:scale-105 group-focus-visible:scale-105"
                                             loading={i === 0 ? 'eager' : 'lazy'}
                                             fetchpriority={i === 0 ? 'high' : 'auto'}
