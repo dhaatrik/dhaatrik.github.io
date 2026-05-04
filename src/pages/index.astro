@@ -71,7 +71,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                             <article class="bento-card group flex flex-col justify-between">
                                 <div>
                                     <div class="mb-4 flex items-start justify-between">
-                                        <h3 class="text-2xl font-bold text-slate-900 transition-colors group-focus-within:text-[var(--accent)] group-hover:text-[var(--accent)] group-focus-visible:text-[var(--accent)] dark:text-white">
+                                        <h3 class="text-2xl font-bold text-slate-900 transition-colors dark:text-white">
                                             {project.data.title}
                                         </h3>
                                         {project.data.githubUrl && (
