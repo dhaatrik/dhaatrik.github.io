@@ -12,3 +12,8 @@
 
 **Learning:** When enabling link prefetching in Astro, applying `data-astro-prefetch` to main navigation components (like `<HeaderLink>`) is not enough. You must also proactively check for isolated internal link anchors (`<a href="...">`) throughout pages, headers, footers, and layouts, otherwise users will experience inconsistent perceived performance on site traversal.
 **Action:** Always do a codebase-wide search for internal `<a>` tags and add `data-astro-prefetch` explicitly to ensure SPA-like instant transitions are applied universally.
+
+## 2026-05-03 - The Danger of Phantom Optimizations
+
+**Learning:** When making manual performance optimizations like enabling Astro link prefetching via attributes, it is extremely easy to accidentally document the _intent_ (e.g., adding a comment) but forget to implement the actual _execution_ (e.g., the `data-astro-prefetch` attribute itself), resulting in a "phantom optimization" that provides no actual performance benefit.
+**Action:** Always verify that the physical HTML attributes or corresponding code changes are present in the final commit, rather than just relying on the presence of explanatory comments.
