@@ -17,3 +17,7 @@
 
 **Learning:** When making manual performance optimizations like enabling Astro link prefetching via attributes, it is extremely easy to accidentally document the _intent_ (e.g., adding a comment) but forget to implement the actual _execution_ (e.g., the `data-astro-prefetch` attribute itself), resulting in a "phantom optimization" that provides no actual performance benefit.
 **Action:** Always verify that the physical HTML attributes or corresponding code changes are present in the final commit, rather than just relying on the presence of explanatory comments.
+
+## 2025-05-04 - Eliminate Redundant Array Mapping in Loops
+**Learning:** Mapping a dataset to JSX/Astro elements multiple times (e.g., for marquee clones) is inefficient as it recreates identical virtual nodes and props objects repeatedly during the build process.
+**Action:** Store the result of the map operation in a variable and reuse it when the same set of elements needs to be rendered multiple times in the template.
