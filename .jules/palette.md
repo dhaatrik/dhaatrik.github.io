@@ -22,3 +22,8 @@
 
 **Learning:** Applying generic hover styles (like `group-hover:text-[var(--accent)]` mimicking a link color shift) to text within a card wrapper creates a false visual affordance if the text or card itself isn't interactive/clickable. This can lead to dead clicks and user frustration.
 **Action:** Reserve distinct interactive hover styles (like link colors or `active:scale` transformations) only for actionable elements (like explicit anchor tags or buttons) to ensure visual feedback accurately represents interactivity.
+
+## 2025-05-05 - Skip-to-Content and Fixed Headers
+
+**Learning:** When navigating via a "Skip to content" link (or any anchor link) to a target beneath a fixed header, the browser scrolls the element to the very top, obscuring it. Furthermore, for focus to jump reliably to non-interactive elements like `<main>` across all browsers, the target must have `tabindex="-1"`.
+**Action:** When implementing skip links with fixed headers, set `scroll-padding-top` on the `html` element equal to the header height, ensure the target has `tabindex="-1"`, and add `[tabindex="-1"]:focus { outline: none; }` to hide the focus ring.

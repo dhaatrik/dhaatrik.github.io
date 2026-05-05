@@ -35,6 +35,16 @@
         --accent-glow: rgba(59, 130, 246, 0.5);
     }
 
+    html {
+        scroll-padding-top: 6rem; /* Offset for fixed header */
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        html {
+            scroll-behavior: smooth;
+        }
+    }
+
     body {
         background-color: var(--bg-main);
         color: var(--text-primary);
@@ -166,5 +176,10 @@
         outline-offset: 4px;
         box-shadow: 0 0 20px var(--accent-glow);
         transform: translateY(-0.25rem);
+    }
+
+    /* Prevent unsightly outline when focus is moved to tabindex="-1" elements programmatically */
+    [tabindex='-1']:focus {
+        outline: none;
     }
 }
