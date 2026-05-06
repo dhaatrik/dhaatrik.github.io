@@ -2,8 +2,14 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
-import '@fontsource/nunito';
-import '@fontsource/poppins';
+
+// ⚡ Bolt: Explicitly import the font weights used to prevent faux-bold synthesis
+// and to ensure preloaded font files are actually utilized.
+import '@fontsource/nunito/400.css';
+import '@fontsource/nunito/500.css';
+import '@fontsource/nunito/600.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/700.css';
 
 // Import font files for preloading
 import nunitoUrl from '@fontsource/nunito/files/nunito-latin-400-normal.woff2?url';
