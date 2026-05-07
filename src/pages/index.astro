@@ -41,9 +41,24 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                     <a
                         href="/about"
                         data-astro-prefetch="hover"
-                        class="rounded-lg bg-[var(--accent)] px-6 py-3 font-medium text-white transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-[var(--bg-main)]"
+                        class="group inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3 font-medium text-white transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-[var(--bg-main)]"
                     >
                         Read My Journey
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="transition-transform group-hover:translate-x-1 group-focus-visible:translate-x-1"
+                            aria-hidden="true"
+                        >
+                            <path d="m9 18 6-6-6-6"></path>
+                        </svg>
                     </a>
                     <a
                         href="mailto:dhaatrikchowdhury@gmail.com"

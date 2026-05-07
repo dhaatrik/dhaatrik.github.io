@@ -17,6 +17,7 @@
 
 **Learning:** When making manual performance optimizations like enabling Astro link prefetching via attributes, it is extremely easy to accidentally document the _intent_ (e.g., adding a comment) but forget to implement the actual _execution_ (e.g., the `data-astro-prefetch` attribute itself), resulting in a "phantom optimization" that provides no actual performance benefit.
 **Action:** Always verify that the physical HTML attributes or corresponding code changes are present in the final commit, rather than just relying on the presence of explanatory comments.
+
 ## 2026-05-05 - Array mapping cache optimization for redundant Astro components
 
 **Learning:** Reusing a pre-mapped array of elements within Astro templates (e.g., for duplicated components like seamless marquees) is significantly more efficient than redundantly running `array.map()` multiple times for identical component output, improving generation speed during Astro SSG builds.
