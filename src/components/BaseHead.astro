@@ -3,7 +3,8 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import '@fontsource/nunito';
-import '@fontsource/poppins';
+// ⚡ Bolt: Explicitly import 700 weight to prevent faux-bold synthesis and ensure preloaded asset is used
+import '@fontsource/poppins/700.css';
 
 // Import font files for preloading
 import nunitoUrl from '@fontsource/nunito/files/nunito-latin-400-normal.woff2?url';

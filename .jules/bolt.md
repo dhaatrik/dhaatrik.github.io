@@ -17,7 +17,13 @@
 
 **Learning:** When making manual performance optimizations like enabling Astro link prefetching via attributes, it is extremely easy to accidentally document the _intent_ (e.g., adding a comment) but forget to implement the actual _execution_ (e.g., the `data-astro-prefetch` attribute itself), resulting in a "phantom optimization" that provides no actual performance benefit.
 **Action:** Always verify that the physical HTML attributes or corresponding code changes are present in the final commit, rather than just relying on the presence of explanatory comments.
+
 ## 2026-05-05 - Array mapping cache optimization for redundant Astro components
 
 **Learning:** Reusing a pre-mapped array of elements within Astro templates (e.g., for duplicated components like seamless marquees) is significantly more efficient than redundantly running `array.map()` multiple times for identical component output, improving generation speed during Astro SSG builds.
 **Action:** When a template requires rendering duplicate items (like an infinite looping marquee that duplicates content), map the item to JSX components once and store it in a local variable, then interpolate that variable multiple times to eliminate redundant AST processing.
+
+## 2026-05-08 - Fix faux-bold synthesis from mismatched font preloads
+
+**Learning:** When preloading specific font weights (like 700 bold), using a bare import like `import '@fontsource/poppins'` typically only provides the 400 normal weight CSS. This causes the preloaded 700 weight file to download as dead weight, while the browser expensively synthesizes faux-bold from the 400 weight font.
+**Action:** Always explicitly import the corresponding CSS `@font-face` rule for the weight you are preloading (e.g., `import '@fontsource/poppins/700.css'`) instead of relying on default bare imports.

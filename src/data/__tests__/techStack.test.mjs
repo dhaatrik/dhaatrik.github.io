@@ -22,10 +22,24 @@ describe('Tech Stack Data', () => {
             assert.ok(icons.length > 0, `${groupName} should not be empty`);
 
             icons.forEach((icon, index) => {
-                assert.strictEqual(typeof icon.name, 'string', `Icon at ${groupName}[${index}] should have a string name`);
-                assert.ok(icon.name.length > 0, `Icon at ${groupName}[${index}] should have a non-empty name`);
-                assert.strictEqual(typeof icon.src, 'string', `Icon at ${groupName}[${index}] should have a string src`);
-                assert.ok(icon.src.startsWith('https://'), `Icon at ${groupName}[${index}] should have a valid HTTPS src URL`);
+                assert.strictEqual(
+                    typeof icon.name,
+                    'string',
+                    `Icon at ${groupName}[${index}] should have a string name`
+                );
+                assert.ok(
+                    icon.name.length > 0,
+                    `Icon at ${groupName}[${index}] should have a non-empty name`
+                );
+                assert.strictEqual(
+                    typeof icon.src,
+                    'string',
+                    `Icon at ${groupName}[${index}] should have a string src`
+                );
+                assert.ok(
+                    icon.src.startsWith('https://'),
+                    `Icon at ${groupName}[${index}] should have a valid HTTPS src URL`
+                );
             });
         }
     });
