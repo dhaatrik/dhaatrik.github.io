@@ -32,3 +32,7 @@
 
 **Learning:** Adding standard `focus-visible` classes to call-to-action buttons (like `<a>` tags with background colors) is necessary because default browser focus rings may not contrast sufficiently with the button's background. Explicit rings (`focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[var(--bg-main)]`) ensure keyboard accessibility without affecting mouse users.
 **Action:** Always check interactive elements, especially primary CTAs, for visible focus styles. Use the pattern `focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-[var(--bg-main)]` for standard elements.
+## 2026-05-08 - False Affordances in Hover States
+
+**Learning:** Applying generic hover styles (like `transform: translateY` lifts) to text or structural elements within a card wrapper creates a false visual affordance if the text or card itself isn't interactive/clickable. This can lead to dead clicks and user frustration.
+**Action:** Reserve distinct interactive hover styles (like `transform` lifting transformations) only for actionable elements (like explicit anchor tags `a.bento-card` or buttons) to ensure visual feedback accurately represents interactivity. Use standard box-shadow highlights for visual tracking of non-interactive containers during keyboard focus (`:focus-within`).
