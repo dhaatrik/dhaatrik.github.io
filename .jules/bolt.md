@@ -21,3 +21,8 @@
 
 **Learning:** Reusing a pre-mapped array of elements within Astro templates (e.g., for duplicated components like seamless marquees) is significantly more efficient than redundantly running `array.map()` multiple times for identical component output, improving generation speed during Astro SSG builds.
 **Action:** When a template requires rendering duplicate items (like an infinite looping marquee that duplicates content), map the item to JSX components once and store it in a local variable, then interpolate that variable multiple times to eliminate redundant AST processing.
+
+## 2026-05-08 - Font preloading optimization
+
+**Learning:** When preloading specific font weights (like 700 bold), always explicitly import the corresponding CSS `@font-face` rule for that weight (e.g., `import '@fontsource/poppins/700.css'`) instead of relying on default bare imports (like `import '@fontsource/poppins'`), which typically only provide the 400 normal weight. Failing to do so causes the browser to download the preloaded font as dead weight and rely on expensive faux-bold synthesis.
+**Action:** When preloading fonts, verify the imported font weight matches the preloaded font file weight exactly.
