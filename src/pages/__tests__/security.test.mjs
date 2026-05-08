@@ -61,9 +61,9 @@ test('Security: all target="_blank" links must have rel="noopener noreferrer"', 
     });
 
     if (failures.length > 0) {
-        const failureMessage = failures.map((f) => `  - ${f.file}: ${f.tag}`).join('\n');
-        assert.fail(
-            `Found target="_blank" links missing or having incomplete rel="noopener noreferrer":\n${failureMessage}`
-        );
+        const failureMessage = failures
+            .map((f) => `  - ${f.file}: ${f.tag}`)
+            .join('\n');
+        assert.fail(`Found target="_blank" links missing or having incomplete rel="noopener noreferrer":\n${failureMessage}`);
     }
 });

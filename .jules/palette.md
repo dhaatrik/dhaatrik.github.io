@@ -27,8 +27,6 @@
 
 **Learning:** When navigating via a "Skip to content" link (or any anchor link) to a target beneath a fixed header, the browser scrolls the element to the very top, obscuring it. Furthermore, for focus to jump reliably to non-interactive elements like `<main>` across all browsers, the target must have `tabindex="-1"`.
 **Action:** When implementing skip links with fixed headers, set `scroll-padding-top` on the `html` element equal to the header height, ensure the target has `tabindex="-1"`, and add `[tabindex="-1"]:focus { outline: none; }` to hide the focus ring.
-
 ## 2026-05-06 - Explicit Focus Rings on CTAs
-
 **Learning:** Adding standard `focus-visible` classes to call-to-action buttons (like `<a>` tags with background colors) is necessary because default browser focus rings may not contrast sufficiently with the button's background. Explicit rings (`focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[var(--bg-main)]`) ensure keyboard accessibility without affecting mouse users.
 **Action:** Always check interactive elements, especially primary CTAs, for visible focus styles. Use the pattern `focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-[var(--bg-main)]` for standard elements.
