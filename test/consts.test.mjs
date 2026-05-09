@@ -1,6 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
-import * as consts from '../consts.ts';
+import * as consts from '../src/consts.ts';
 
 describe('Constants', () => {
     test('SITE_TITLE is a non-empty string', () => {

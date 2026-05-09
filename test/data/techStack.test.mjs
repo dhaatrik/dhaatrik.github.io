@@ -1,6 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
-import { techGroups } from '../techStack.ts';
+import { techGroups } from '../../src/data/techStack.ts';
 
 describe('Tech Stack Data', () => {
     test('techGroups is a non-empty object', () => {
