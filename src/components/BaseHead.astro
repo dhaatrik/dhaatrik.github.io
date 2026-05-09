@@ -42,8 +42,24 @@ const imageUrl = new URL(image.src, Astro.site);
 />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" href="/favicon.ico" />
+<link id="favicon" rel="icon" type="image/svg+xml" href="/logo_dark.svg" />
+<script is:inline>
+    // Theme initializer — runs before paint to prevent FOUC.
+    // Default to 'dark' if no stored preference.
+    (function() {
+        function applyTheme() {
+            var stored = localStorage.getItem('theme');
+            var isDark = stored ? stored === 'dark' : true;
+            document.documentElement.classList.toggle('dark', isDark);
+            // Sync favicon
+            var link = document.getElementById('favicon');
+            if (link) link.href = isDark ? '/logo_light.svg' : '/logo_dark.svg';
+        }
+        applyTheme();
+        // Re-apply after Astro View Transitions swap
+        document.addEventListener('astro:after-swap', applyTheme);
+    })();
+</script>
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <!-- Font Preloading -->
