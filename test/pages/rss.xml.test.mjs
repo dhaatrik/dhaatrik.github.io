@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { GET } from '../rss.xml.js';
+import { GET } from '../../src/pages/rss.xml.js';
 
 test('rss GET endpoint returns correctly formatted rss data', async () => {
     const context = {
