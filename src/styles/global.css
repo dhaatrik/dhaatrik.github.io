@@ -107,20 +107,25 @@
         border-color: rgba(255, 255, 255, 0.05);
     }
 
-    .bento-card:hover,
+    a.bento-card:hover,
+    button.bento-card:hover,
     .bento-card:focus-within {
         box-shadow: 0 0 20px var(--accent-glow);
         transform: translateY(-0.25rem);
     }
 
-    :root .bento-card:hover,
-    :root .bento-card:focus-visible,
+    :root a.bento-card:hover,
+    :root button.bento-card:hover,
+    :root a.bento-card:focus-visible,
+    :root button.bento-card:focus-visible,
     :root .bento-card:focus-within {
         border-color: #cbd5e1;
     }
 
-    .dark .bento-card:hover,
-    .dark .bento-card:focus-visible,
+    .dark a.bento-card:hover,
+    .dark button.bento-card:hover,
+    .dark a.bento-card:focus-visible,
+    .dark button.bento-card:focus-visible,
     .dark .bento-card:focus-within {
         border-color: rgba(255, 255, 255, 0.1);
     }
@@ -171,7 +176,8 @@
         border-radius: 0.25rem;
     }
 
-    .bento-card:focus-visible {
+    a.bento-card:focus-visible,
+    button.bento-card:focus-visible {
         outline: 2px solid var(--accent);
         outline-offset: 4px;
         box-shadow: 0 0 20px var(--accent-glow);
