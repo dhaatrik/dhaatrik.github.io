@@ -3,7 +3,7 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import '@fontsource/nunito';
-// ⚡ Bolt: Explicitly import 700 weight to prevent faux-bold synthesis and ensure preloaded asset is used
+// ⚡ Bolt: Explicitly import 700 weight CSS to utilize the preloaded font and avoid faux-bold synthesis
 import '@fontsource/poppins/700.css';
 
 // Import font files for preloading
@@ -24,6 +24,9 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage } = Astro.props;
+
+// ⚡ Bolt: Cache image URL instantiation to avoid redundant parsing during SSG
+const imageUrl = new URL(image.src, Astro.site);
 ---
 
 <!-- Global Metadata -->
@@ -71,14 +74,14 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image.src, Astro.site)} />
+<meta property="og:image" content={imageUrl} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image.src, Astro.site)} />
+<meta property="twitter:image" content={imageUrl} />
 
 <!-- SPA-like Client Router for instant page transitions -->
 <ClientRouter />
