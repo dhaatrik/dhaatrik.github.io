@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+/* Override Tailwind v4 default: use class-based dark mode instead of prefers-color-scheme */
+@custom-variant dark (&:where(.dark, .dark *));
 @theme {
     --font-sans: 'Nunito', 'sans-serif';
     --font-heading: 'Poppins', 'sans-serif';

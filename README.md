@@ -1,3 +1,11 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/logo_light.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="public/logo_dark.svg" />
+    <img alt="Dhaatrik Logo" src="public/logo_dark.svg" width="200" />
+  </picture>
+</p>
+
 # Dhaatrik.
 
 Hey! I’m Dhaatrik, a 26-year-old entrepreneur and developer from India, building the next generation of tech-driven solutions. I’m a first-principles thinker who believes that the best products come from understanding the absolute fundamentals.

@@ -1,5 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
 ---
 
 <a
@@ -19,9 +20,23 @@ import HeaderLink from './HeaderLink.astro';
         <a
             href="/"
             data-astro-prefetch="hover"
-            class="font-heading text-xl font-bold text-slate-900 transition-colors hover:text-slate-700 focus-visible:text-slate-700 dark:text-[var(--text-primary)] dark:hover:text-white dark:focus-visible:text-white"
+            class="flex items-center transition-opacity hover:opacity-80 focus-visible:opacity-80"
+            aria-label="Dhaatrik — Home"
         >
-            {'Dhaatrik.'}
+            <img
+                src="/logo_dark.svg"
+                alt="Dhaatrik Logo"
+                class="h-12 w-auto dark:hidden"
+                width="48"
+                height="48"
+            />
+            <img
+                src="/logo_light.svg"
+                alt="Dhaatrik Logo"
+                class="hidden h-12 w-auto dark:block"
+                width="48"
+                height="48"
+            />
         </a>
         <div class="flex items-center gap-6">
             <HeaderLink
@@ -39,6 +54,8 @@ import HeaderLink from './HeaderLink.astro';
                 class="text-slate-500 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)]"
                 >Blog</HeaderLink
             >
+            <div class="h-5 w-px bg-slate-200 dark:bg-white/10"></div>
+            <ThemeToggle />
         </div>
     </nav>
 </header>
