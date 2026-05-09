@@ -37,3 +37,8 @@
 
 **Learning:** Adding directional icons (like an arrow pointing right or a mail icon shifting up/right) to adjacent but fundamentally different Call-To-Action (CTA) buttons provides users with clearer mental models and immediate tactile feedback. This small visual cue sets expectations for what type of action will occur before the user clicks, reducing cognitive load.
 **Action:** When placing primary and secondary CTAs side-by-side, consider adding relevant semantic icons with subtle transform animations on hover/focus to visually distinguish their purposes and provide tactile affordance.
+
+## 2026-05-09 - Restricting Bento Card Hover Effects
+
+**Learning:** The `.bento-card` class applies interactive hover and focus styles (transform and box-shadow) indiscriminately. Applying this class to non-interactive elements creates false visual affordances, confusing users.
+**Action:** Restrict interactive hover and focus styles in CSS to explicitly actionable elements (like `a.bento-card` or `button.bento-card`) to ensure visual feedback accurately represents interactivity, while keeping `.bento-card:focus-within` intact for accessibility highlights when focusing interactive children.
