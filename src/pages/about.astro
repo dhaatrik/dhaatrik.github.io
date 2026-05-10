@@ -202,13 +202,24 @@ import { techGroups } from '../data/techStack';
                     </button>
                 </div>
                 <div class="p-6 max-h-[60vh] overflow-y-auto space-y-4">
-                    {Array.from({ length: 10 }).map((_, i) => (
+                    {[
+                        { title: "As a Man Thinketh", author: "James Allen", link: "https://www.amazon.in/As-Man-Thinketh-James-Allen/dp/9386538172" },
+                        { title: "How to Win Friends and Influence People", author: "Dale Carnegie", link: "https://www.amazon.in/How-Win-Friends-Influence-People/dp/0671027034?s=bazaar" },
+                        { title: "Marketing Management", author: "Philip Kotler", link: "https://www.amazon.in/Marketing-Management-17th-Philip-Kotler/dp/9367138199/ref=sr_1_1_sspa?crid=3LXWM7OV5BGZC&dib=eyJ2IjoiMSJ9.sLFz-n94M3czJDqJ9PP_32HJu72s7iE60M-ItoJp6vdG_i_luKRHC5qjtvFvbwdbhaDQcAcqREZdFZ0Ed0tq4MvMlFxqTsTgReZYC_jjnP86oxfOhad4BxPUlGEJKdmeDfCW7VZbG3SKTxzuPh-YvA4b-NlscmOi4It-IP8RT0okW55U_hkkSUZ4gnB6BNKsQFpR4PmxOjdhLWS8dOlLIbyIG8aAQeS7EB0glkLcZRw.TSj1dE0pcTX9PnG4fTof_JbQM04mjr9Rv2TPs-ne3zg&dib_tag=se&keywords=marketing+management+by+philip+kotler&qid=1778389155&sprefix=Marketing%2Caps%2C567&sr=8-1-spons&aref=WM64g7r717&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1" },
+                        { title: "Book Title 4", author: "Author Name", link: "#" },
+                        { title: "Book Title 5", author: "Author Name", link: "#" },
+                        { title: "Book Title 6", author: "Author Name", link: "#" },
+                        { title: "Book Title 7", author: "Author Name", link: "#" },
+                        { title: "Book Title 8", author: "Author Name", link: "#" },
+                        { title: "Book Title 9", author: "Author Name", link: "#" },
+                        { title: "Book Title 10", author: "Author Name", link: "#" },
+                    ].map((book) => (
                         <div class="flex justify-between items-center p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-100 dark:border-white/5 transition-colors hover:border-slate-300 dark:hover:border-white/20">
                             <div>
-                                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Book Title {i+1}</h4>
-                                <p class="text-xs text-slate-500 mt-0.5">Author Name</p>
+                                <h4 class="font-bold text-sm text-slate-900 dark:text-white">{book.title}</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">{book.author}</p>
                             </div>
-                            <a href="#" target="_blank" class="px-4 py-1.5 bg-[var(--accent)] text-white text-xs font-bold rounded-md hover:bg-blue-600 transition-colors shadow-sm">Buy</a>
+                            <a href={book.link} target="_blank" class="px-4 py-1.5 bg-[var(--accent)] text-white text-xs font-bold rounded-md hover:bg-blue-600 transition-colors shadow-sm">Buy</a>
                         </div>
                     ))}
                 </div>
