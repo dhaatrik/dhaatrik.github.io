@@ -13,7 +13,8 @@
         "preview": "astro preview",
         "astro": "astro",
         "format": "prettier --write .",
-        "test": "node --experimental-strip-types --import \"data:text/javascript,import { register } from 'node:module'; register(new URL('./test/loaders/loader.mjs', 'file://' + process.cwd() + '/'));\" --test test/**/*.test.mjs"
+        "test": "node --experimental-strip-types --import \"data:text/javascript,import { register } from 'node:module'; register(new URL('./test/loaders/loader.mjs', 'file://' + process.cwd() + '/'));\" --test test/**/*.test.mjs",
+        "test:e2e": "playwright test"
     },
     "dependencies": {
         "@astrojs/mdx": "^5.0.3",
@@ -30,6 +31,7 @@
         "tailwindcss": "^4.2.2"
     },
     "devDependencies": {
+        "@playwright/test": "^1.59.1",
         "prettier": "^3.8.3",
         "prettier-plugin-astro": "^0.14.1",
         "prettier-plugin-tailwindcss": "^0.7.2"
