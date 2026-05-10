@@ -169,7 +169,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                 <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">Currently Reading</span>
                                 <div class="flex justify-between items-center gap-4">
                                     <span class="text-sm font-medium text-slate-900 dark:text-white truncate">Elon Musk - Ashlee Vance</span>
-                                    <a href="https://www.amazon.in/Elon-Musk-Billionaire-SpaceX-Shaping-ebook/dp/B00SIDCSWY" target="_blank" class="shrink-0 px-3 py-1 bg-[var(--accent)] text-white text-[10px] uppercase font-bold rounded hover:bg-blue-600 transition-colors shadow-sm">Buy</a>
+                                    <a href="https://www.amazon.in/Elon-Musk-Billionaire-SpaceX-Shaping-ebook/dp/B00SIDCSWY" target="_blank" rel="noopener noreferrer" class="shrink-0 px-3 py-1 bg-[var(--accent)] text-white text-[10px] uppercase font-bold rounded hover:bg-blue-600 transition-colors shadow-sm">Buy</a>
                                 </div>
                             </div>
                             <button onclick="document.getElementById('books-modal').showModal()" class="w-full py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold transition-all hover:bg-slate-800 dark:hover:bg-slate-200 shadow-sm hover:shadow-[0_0_15px_var(--accent-glow)]">
@@ -259,7 +259,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                 <h4 class="font-bold text-sm text-slate-900 dark:text-white">{book.title}</h4>
                                 <p class="text-xs text-slate-500 mt-0.5">{book.author}</p>
                             </div>
-                            <a href={book.link} target="_blank" class="px-4 py-1.5 bg-[var(--accent)] text-white text-xs font-bold rounded-md hover:bg-blue-600 transition-colors shadow-sm">Buy</a>
+                            <a href={book.link} target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-[var(--accent)] text-white text-xs font-bold rounded-md hover:bg-blue-600 transition-colors shadow-sm">Buy</a>
                         </div>
                     ))}
                 </div>
