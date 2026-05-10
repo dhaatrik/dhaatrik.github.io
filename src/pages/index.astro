@@ -4,9 +4,20 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
+import { techGroups } from '../data/techStack';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
+
+// Premium Founder Lineup
+const lineupNames = ['Astro', 'React', 'TypeScript', 'Rust', 'Python', 'TensorFlow'];
+const premiumLineup = lineupNames.map(name => {
+    for (const group of Object.values(techGroups)) {
+        const found = group.find(tech => tech.name === name);
+        if (found) return found;
+    }
+    return null;
+}).filter((t) => t !== null);
 ---
 
 <!doctype html>
@@ -14,7 +25,12 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
-    <body class="bg-grid-motif pt-24">
+    <body class="bg-grid-motif pt-24 relative">
+        <!-- Subtle Noise Texture -->
+        <div class="pointer-events-none fixed inset-0 z-[100] h-full w-full opacity-[0.03] mix-blend-overlay" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC42NScgbnVtT2N0YXZlcz0nMycgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0ndXJsKCNuKScvPjwvc3ZnPg==');"></div>
+        <!-- Ambient Background Glows -->
+        <div class="pointer-events-none fixed -top-[20%] -left-[10%] -z-10 h-[50vw] w-[50vw] rounded-full bg-[var(--accent)]/20 mix-blend-screen blur-[120px] dark:bg-[var(--accent)]/10"></div>
+        <div class="pointer-events-none fixed -bottom-[20%] -right-[10%] -z-10 h-[50vw] w-[50vw] rounded-full bg-purple-500/20 mix-blend-screen blur-[120px] dark:bg-purple-500/10"></div>
         <Header />
         <main id="main-content" class="layout-container space-y-24">
             <!-- Hero Section: The Boring Section -->
@@ -29,12 +45,20 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
                 <h1
                     class="animate-fade-in-up delay-100 mb-6 text-4xl leading-tight font-bold text-slate-900 md:text-5xl lg:text-6xl dark:text-white"
                 >
-                    Hey! I'm Dhaatrik. <br />
+                    <span id="dynamic-greeting">Hey!</span> I'm Dhaatrik. <br />
                     <span
-                        class="mt-2 block text-2xl font-medium text-slate-500 md:text-3xl dark:text-[var(--text-secondary)]"
+                        class="mt-2 block text-2xl font-medium bg-gradient-to-r from-[var(--accent)] to-purple-500 bg-clip-text text-transparent md:text-3xl dark:from-blue-400 dark:to-purple-400"
                         >First-Principles Thinker.</span
                     >
                 </h1>
+                <script is:inline>
+                    const hour = new Date().getHours();
+                    let greeting = 'Good evening,';
+                    if (hour < 12) greeting = 'Good morning,';
+                    else if (hour < 18) greeting = 'Good afternoon,';
+                    const el = document.getElementById('dynamic-greeting');
+                    if (el) el.innerText = greeting;
+                </script>
                 <p
                     class="animate-fade-in-up delay-200 mb-8 text-lg leading-relaxed text-slate-600 md:text-xl dark:text-[var(--text-secondary)]"
                 >
@@ -106,6 +130,18 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
                         </svg>
                     </a>
                 </div>
+                
+                <!-- Built With Badges -->
+                <div class="animate-fade-in-up delay-400 mt-8 flex flex-col items-start gap-3 opacity-80">
+                    <span class="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
+                        Building primarily with:
+                    </span>
+                    <div class="flex flex-wrap items-center gap-3">
+                        {premiumLineup.map(tech => (
+                            <img src={tech.src} alt={tech.name} title={tech.name} class="h-6 rounded-sm opacity-80 transition-opacity hover:opacity-100 dark:opacity-70 dark:hover:opacity-100" loading="lazy" />
+                        ))}
+                    </div>
+                </div>
             </section>
 
             <!-- Projects Section: Featured Engineering -->
@@ -120,6 +156,20 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
                 </div>
 
                 <div class="bento-grid">
+                    <!-- Current Focus Mini-Bento -->
+                    <article class="bento-card group relative flex flex-col justify-between overflow-hidden">
+                        <div class="relative z-10">
+                            <div class="mb-4 flex items-start justify-between">
+                                <h3 class="text-2xl font-bold text-slate-900 transition-colors dark:text-white">
+                                    Currently Exploring
+                                </h3>
+                            </div>
+                            <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
+                                Transitioning to Rust/WASM for deterministic aerospace simulations and deep-diving into quantum mechanics fundamentals.
+                            </p>
+                        </div>
+                    </article>
+                    
                     {
                         projects.map((project) => (
                             <article class="bento-card group relative flex flex-col justify-between overflow-hidden">
@@ -248,6 +298,8 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
                                                 day: 'numeric',
                                             })}
                                         </time>
+                                        <span class="mx-2">•</span>
+                                        <span>{Math.ceil((post.body || '').trim().split(/\s+/).length / 200)} min read</span>
                                     </div>
                                 </article>
                             </a>
@@ -280,5 +332,16 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
             </section>
         </main>
         <Footer />
+        <script is:inline>
+            document.addEventListener('mousemove', (e) => {
+                for (const card of document.querySelectorAll('.bento-card')) {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                }
+            });
+        </script>
     </body>
 </html>

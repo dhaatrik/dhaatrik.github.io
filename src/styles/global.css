@@ -92,21 +92,57 @@
     }
 
     .bento-card {
+        position: relative;
         background-color: var(--bg-card);
         border-radius: var(--bento-radius);
         padding: var(--bento-padding);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid transparent;
         transition-property: all;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 300ms;
     }
 
-    :root .bento-card {
-        border-color: #e2e8f0;
+    /* Gradient Border Pseudo-element */
+    .bento-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: var(--bento-radius);
+        padding: 1px;
+        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
     }
 
-    .dark .bento-card {
-        border-color: rgba(255, 255, 255, 0.05);
+    .dark .bento-card::after {
+        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05), transparent);
+    }
+
+    :root .bento-card::after {
+        background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.1), transparent);
+    }
+
+    /* Mouse Spotlight Pseudo-element */
+    .bento-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+            600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+            var(--accent-glow),
+            transparent 40%
+        );
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .bento-card:hover::before {
+        opacity: 1;
     }
 
     a.bento-card:hover,
