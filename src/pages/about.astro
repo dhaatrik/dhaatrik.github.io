@@ -48,7 +48,7 @@ import { techGroups } from '../data/techStack';
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 relative z-10">
-                    <div class="bg-slate-100 dark:bg-white/5 p-6 rounded-2xl border border-slate-200 dark:border-white/5">
+                    <div class="bento-card p-6 flex flex-col">
                         <h2 class="flex items-center gap-2 mb-4 text-2xl font-bold text-slate-900 dark:text-white">
                             <svg class="w-6 h-6 text-slate-500 dark:text-[var(--text-secondary)]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
                             <span class="cypher-text" data-original="What I'm Building">What I'm Building</span>
@@ -61,7 +61,7 @@ import { techGroups } from '../data/techStack';
                         </p>
                     </div>
 
-                    <div class="bg-slate-100 dark:bg-white/5 p-6 rounded-2xl border border-slate-200 dark:border-white/5 relative overflow-hidden group">
+                    <div class="bento-card p-6 relative overflow-hidden group flex flex-col">
                         <div class="absolute right-0 bottom-4 opacity-5 pointer-events-none select-none text-4xl sm:text-5xl font-serif text-slate-900 dark:text-white whitespace-nowrap blur-[1px] group-hover:opacity-10 transition-opacity duration-500">
                             Δv = v<sub>e</sub> ln(m<sub>0</sub> / m<sub>f</sub>)
                         </div>
@@ -124,68 +124,20 @@ import { techGroups } from '../data/techStack';
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-4 p-3 bg-slate-50 dark:bg-black/20 rounded-lg border border-slate-100 dark:border-white/5 relative z-10 transition-colors group-hover:border-[var(--accent)]/30">
-                            <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">Currently Reading</span>
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm font-medium text-slate-900 dark:text-white">Zero to One - Peter Thiel</span>
-                                <a href="#" class="text-[var(--accent)] hover:text-opacity-80 transition-opacity">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                </a>
+                        <div class="relative z-10 mt-4 space-y-3">
+                            <div class="p-3 bg-slate-50 dark:bg-black/20 rounded-lg border border-slate-100 dark:border-white/5 transition-colors group-hover:border-[var(--accent)]/30">
+                                <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">Currently Reading</span>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium text-slate-900 dark:text-white">Zero to One - Peter Thiel</span>
+                                </div>
                             </div>
+                            <button onclick="document.getElementById('books-modal').showModal()" class="w-full py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold transition-all hover:bg-slate-800 dark:hover:bg-slate-200 shadow-sm hover:shadow-[0_0_15px_var(--accent-glow)]">
+                                Recommended Books
+                            </button>
                         </div>
                     </div>
 
-                    {/* 2. "Signal-to-Noise" Activity Tracker */}
-                    <div class="bento-card p-6">
-                        <div class="flex justify-between items-start mb-6">
-                            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent)]"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-                                Signal-to-Noise
-                            </h3>
-                            <span class="text-xs font-mono text-[var(--text-secondary)]">Deep Work</span>
-                        </div>
-                        <div class="grid grid-cols-7 gap-2">
-                            {Array.from({ length: 28 }).map((_, i) => {
-                                const opacities = ['opacity-20', 'opacity-40', 'opacity-60', 'opacity-80', 'opacity-100'];
-                                const rand = Math.random();
-                                const opacity = rand > 0.3 ? (rand > 0.7 ? opacities[4] : opacities[3]) : opacities[1];
-                                return (
-                                    <div class={`aspect-square rounded-[4px] bg-[var(--accent)] ${opacity} hover:scale-110 transition-transform cursor-pointer`} title="Deep Work Hours"></div>
-                                );
-                            })}
-                        </div>
-                    </div>
 
-                    {/* 3. The "Base of Operations" Radar Map */}
-                    <div class="bento-card p-6 relative overflow-hidden min-h-[220px]">
-                        <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 relative z-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent)]"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
-                            Base of Operations
-                        </h3>
-                        <div class="mt-2 text-sm text-slate-600 dark:text-slate-400 relative z-10">Kolkata, IN</div>
-                        
-                        {/* Map SVG abstract */}
-                        <div class="absolute -bottom-8 -right-8 w-64 h-64 opacity-20 pointer-events-none text-slate-500 dark:text-white">
-                            <svg viewBox="0 0 100 100" class="w-full h-full fill-current">
-                                <path d="M30,10 L70,10 L80,50 L50,90 L20,60 Z" opacity="0.5"/>
-                                <line x1="0" y1="20" x2="100" y2="20" stroke="currentColor" stroke-width="0.5"/>
-                                <line x1="0" y1="40" x2="100" y2="40" stroke="currentColor" stroke-width="0.5"/>
-                                <line x1="0" y1="60" x2="100" y2="60" stroke="currentColor" stroke-width="0.5"/>
-                                <line x1="0" y1="80" x2="100" y2="80" stroke="currentColor" stroke-width="0.5"/>
-                                <line x1="20" y1="0" x2="20" y2="100" stroke="currentColor" stroke-width="0.5"/>
-                                <line x1="40" y1="0" x2="40" y2="100" stroke="currentColor" stroke-width="0.5"/>
-                                <line x1="60" y1="0" x2="60" y2="100" stroke="currentColor" stroke-width="0.5"/>
-                                <line x1="80" y1="0" x2="80" y2="100" stroke="currentColor" stroke-width="0.5"/>
-                            </svg>
-                        </div>
-                        {/* Radar Dot (Kolkata approx relative position) */}
-                        <div class="absolute bottom-[35%] right-[40%]">
-                            <div class="relative flex h-3 w-3">
-                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                              <span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.8)]"></span>
-                            </div>
-                        </div>
-                    </div>
 
                     {/* 6. Monthly Insights Terminal Snippet */}
                     <div class="bento-card bg-[#1e1e1e] border-[#333] dark:bg-[#1e1e1e] dark:border-[#333] p-0 flex flex-col overflow-hidden text-left h-full">
@@ -208,16 +160,7 @@ import { techGroups } from '../data/techStack';
                 </div>
             </section>
 
-            {/* 7. GitHub "Always Building" Heatmap Integration */}
-            <section class="max-w-5xl mb-20">
-                <h2 class="mb-4 text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent)]"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
-                    Always Building
-                </h2>
-                <div class="bento-card p-4 md:p-6 overflow-x-auto bg-slate-50 dark:bg-[var(--bg-card)]">
-                    <img src="https://ghchart.rshah.org/3b82f6/dhaatrik" alt="Dhaatrik's Github Chart" class="w-full min-w-[700px] select-none pointer-events-none opacity-80 hover:opacity-100 transition-opacity" />
-                </div>
-            </section>
+
 
             {/* 8. Interactive Terminal Contact CTA */}
             <section class="max-w-5xl mb-12">
@@ -229,11 +172,12 @@ import { techGroups } from '../data/techStack';
                             Want to discuss multi-agent orchestration, rocket kinematics, or the future of ag-tech?
                         </p>
                         
-                        <form id="terminal-contact" class="flex flex-col sm:flex-row gap-2 items-center bg-black/50 border border-[#30363d] rounded-lg p-2 focus-within:border-[var(--accent)] transition-colors w-full shadow-inner">
-                            <span class="text-[var(--accent)] font-mono pl-3 font-bold select-none shrink-0">~ $</span>
-                            <input type="text" id="terminal-input" placeholder="Type your message here and hit Enter..." class="bg-transparent border-none outline-none text-green-400 font-mono flex-grow p-2 w-full placeholder-slate-600 text-sm md:text-base" autocomplete="off" />
-                        </form>
-                        <div id="terminal-status" class="h-6 mt-4 text-center font-mono text-xs md:text-sm text-slate-400 opacity-0 transition-opacity duration-300"></div>
+                        <div class="flex justify-center mt-4">
+                            <a href={SOCIAL_LINKS.twitter} target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-8 py-3 font-mono font-bold text-white transition-all hover:bg-blue-600 hover:-translate-y-1 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:outline-none">
+                                ~ $ connect --x
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -244,6 +188,27 @@ import { techGroups } from '../data/techStack';
                 </h2>
                 <TechMarquee techGroups={techGroups} />
             </section>
+
+            {/* Recommended Books Modal */}
+            <dialog id="books-modal" class="backdrop:bg-black/50 backdrop:backdrop-blur-sm bg-white dark:bg-[#0b0e14] border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl p-0 w-full max-w-lg">
+                <div class="p-6 border-b border-slate-100 dark:border-white/5 flex justify-between items-center">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Recommended Books</h3>
+                    <button onclick="document.getElementById('books-modal').close()" class="text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer p-1">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <div class="p-6 max-h-[60vh] overflow-y-auto space-y-4">
+                    {Array.from({ length: 10 }).map((_, i) => (
+                        <div class="flex justify-between items-center p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-100 dark:border-white/5 transition-colors hover:border-slate-300 dark:hover:border-white/20">
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Book Title {i+1}</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Author Name</p>
+                            </div>
+                            <a href="#" target="_blank" class="px-4 py-1.5 bg-[var(--accent)] text-white text-xs font-bold rounded-md hover:bg-blue-600 transition-colors shadow-sm">Buy</a>
+                        </div>
+                    ))}
+                </div>
+            </dialog>
         </main>
         <Footer />
         <script>
@@ -273,32 +238,16 @@ import { techGroups } from '../data/techStack';
                 });
             });
 
-            // Interactive Terminal Contact CTA
-            const terminalForm = document.getElementById('terminal-contact');
-            const terminalInput = document.getElementById('terminal-input');
-            const terminalStatus = document.getElementById('terminal-status');
-
-            if(terminalForm && terminalInput && terminalStatus) {
-                terminalForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const message = terminalInput.value.trim();
-                    if(!message) return;
-                    
-                    terminalStatus.innerText = "Initiating secure channel to Dhaatrik...";
-                    terminalStatus.style.opacity = "1";
-                    terminalInput.disabled = true;
-                    
-                    setTimeout(() => {
-                        window.location.href = `mailto:hello@dhaatrik.com?subject=Incoming Transmission&body=${encodeURIComponent(message)}`;
-                        terminalStatus.innerText = "Transmission sent.";
-                        setTimeout(() => {
-                            terminalInput.disabled = false;
-                            terminalInput.value = "";
-                            terminalStatus.style.opacity = "0";
-                        }, 3000);
-                    }, 1200);
-                });
-            }
+            // Bento Grid Mouse Spotlight Tracking
+            document.addEventListener('mousemove', (e) => {
+                for (const card of document.querySelectorAll('.bento-card')) {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                }
+            });
 
             // The "Offline-First" Easter Egg
             window.addEventListener('offline', () => {

@@ -37,10 +37,17 @@ const { techGroups } = Astro.props;
                         role="region"
                         aria-label={`${groupName.replace('_', ' & ')} technologies`}
                     >
-                        <div class="animate-marquee flex gap-6 px-6 whitespace-nowrap">
-                            {mappedIcons}
-                            {/* Duplicate set for seamless infinite looping */}
-                            <div aria-hidden="true" class="flex gap-6">
+                        <div class="animate-marquee flex whitespace-nowrap w-max">
+                            <div class="flex gap-6 px-3">
+                                {mappedIcons}
+                            </div>
+                            <div aria-hidden="true" class="flex gap-6 px-3">
+                                {mappedIcons}
+                            </div>
+                            <div aria-hidden="true" class="flex gap-6 px-3">
+                                {mappedIcons}
+                            </div>
+                            <div aria-hidden="true" class="flex gap-6 px-3">
                                 {mappedIcons}
                             </div>
                         </div>
