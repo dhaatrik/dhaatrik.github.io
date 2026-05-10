@@ -5,6 +5,7 @@ logo: '/deltav_logo.png'
 githubUrl: 'https://github.com/dhaatrik/professional-rocket-launch-simulation'
 progress: '50Hz deterministic RK4 integration, VAB'
 order: 2
+tags: ['TypeScript', 'Vanilla DOM', 'Web Workers', 'esbuild', 'Vitest']
 ---
 
 #### The "Why"

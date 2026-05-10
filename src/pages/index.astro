@@ -6,6 +6,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 ---
 
 <!doctype html>
@@ -13,13 +14,20 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
-    <body class="pt-24">
+    <body class="bg-grid-motif pt-24">
         <Header />
         <main id="main-content" class="layout-container space-y-24">
             <!-- Hero Section: The Boring Section -->
             <section class="mt-12 max-w-3xl">
+                <div class="animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-3 py-1 text-sm font-medium text-[var(--accent)] dark:border-white/10 dark:bg-white/5 dark:text-white">
+                    <span class="relative flex h-2 w-2">
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-75 dark:bg-white"></span>
+                        <span class="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent)] dark:bg-white"></span>
+                    </span>
+                    Researching and Developing AI driven Agriculture Solutions
+                </div>
                 <h1
-                    class="mb-6 text-4xl leading-tight font-bold text-slate-900 md:text-5xl lg:text-6xl dark:text-white"
+                    class="animate-fade-in-up delay-100 mb-6 text-4xl leading-tight font-bold text-slate-900 md:text-5xl lg:text-6xl dark:text-white"
                 >
                     Hey! I'm Dhaatrik. <br />
                     <span
@@ -28,13 +36,13 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                     >
                 </h1>
                 <p
-                    class="mb-8 text-lg leading-relaxed text-slate-600 md:text-xl dark:text-[var(--text-secondary)]"
+                    class="animate-fade-in-up delay-200 mb-8 text-lg leading-relaxed text-slate-600 md:text-xl dark:text-[var(--text-secondary)]"
                 >
                     I'm a 26-year-old entrepreneur and developer from India, building the next
                     generation of tech-driven solutions. I believe that best products come from
                     understanding the absolute fundamentals.
                 </p>
-                <div class="flex gap-4">
+                <div class="animate-fade-in-up delay-300 flex gap-4">
                     {
                         /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */
                     }
@@ -67,27 +75,44 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                         rel="noopener noreferrer"
                         class="group inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-100 px-6 py-3 font-medium text-slate-900 transition-all hover:bg-slate-200 focus-visible:bg-slate-200 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 dark:focus-visible:bg-white/10 dark:focus-visible:ring-offset-[var(--bg-main)]"
                     >
-                        Let's Chat
+                        <span class="flex items-center gap-2">
+                            Let's Chat
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                            </svg>
+                        </span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
                             height="16"
                             viewBox="0 0 24 24"
-                            fill="currentColor"
-                            class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-focus-visible:translate-x-0.5 group-focus-visible:-translate-y-0.5"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="transition-transform group-hover:translate-x-1 group-focus-visible:translate-x-1"
                             aria-hidden="true"
                         >
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
                         </svg>
                     </a>
                 </div>
             </section>
 
-            <!-- Projects Section: The Pretty-Good Stuffs -->
-            <section class="mb-16">
+            <!-- Projects Section: Featured Engineering -->
+            <section class="animate-fade-in-up delay-400 mb-16">
                 <div class="mb-10">
                     <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
-                        The Pretty-Good (Cool) Stuffs
+                        Featured Engineering
                     </h2>
                     <p class="text-slate-600 dark:text-[var(--text-secondary)]">
                         Things I'm building, hacking on, and turning into reality.
@@ -97,8 +122,17 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                 <div class="bento-grid">
                     {
                         projects.map((project) => (
-                            <article class="bento-card group flex flex-col justify-between">
-                                <div>
+                            <article class="bento-card group relative flex flex-col justify-between overflow-hidden">
+                                {project.data.logo && (
+                                    <img
+                                        src={project.data.logo}
+                                        alt=""
+                                        class="absolute -top-4 -right-4 h-24 w-24 opacity-10 transition-transform duration-500 group-hover:scale-110 dark:opacity-5"
+                                        aria-hidden="true"
+                                        loading="lazy"
+                                    />
+                                )}
+                                <div class="relative z-10">
                                     <div class="mb-4 flex items-start justify-between">
                                         <h3 class="text-2xl font-bold text-slate-900 transition-colors dark:text-white">
                                             {project.data.title}
@@ -132,7 +166,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                                 </div>
 
                                 {project.data.progress && (
-                                    <div class="mt-4 border-t border-slate-200 pt-4 dark:border-white/5">
+                                    <div class="relative z-10 mt-4 border-t border-slate-200 pt-4 dark:border-white/5">
                                         <span class="text-xs font-semibold tracking-wider text-[var(--accent)] uppercase">
                                             Current Progress
                                         </span>
@@ -141,9 +175,107 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
                                         </p>
                                     </div>
                                 )}
+                                {project.data.tags && project.data.tags.length > 0 && (
+                                    <div class="relative z-10 mt-4 flex flex-wrap gap-2">
+                                        {project.data.tags.map((tag) => (
+                                            <span class="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-500 dark:bg-white/5 dark:text-slate-400">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
                             </article>
                         ))
                     }
+                </div>
+            </section>
+
+            <!-- Latest Thinking Section -->
+            <section class="animate-fade-in-up delay-500 mb-16">
+                <div class="mb-10 flex items-end justify-between">
+                    <div>
+                        <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
+                            Latest Thinking
+                        </h2>
+                        <p class="text-slate-600 dark:text-[var(--text-secondary)]">
+                            0-to-1 startup insights, architecture deep-dives, and engineering logs.
+                        </p>
+                    </div>
+                    <a
+                        href="/blog"
+                        class="group hidden items-center gap-1 text-sm font-medium text-[var(--accent)] transition-colors hover:text-slate-900 sm:flex dark:hover:text-white"
+                    >
+                        View All Posts
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="transition-transform group-hover:translate-x-1"
+                        >
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {
+                        posts.map((post) => (
+                            <a
+                                href={`/blog/${post.id}/`}
+                                class="bento-card group block transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-[var(--bg-main)]"
+                            >
+                                <article class="flex h-full flex-col justify-between p-2">
+                                    <div>
+                                        <h3 class="mb-2 text-xl font-bold leading-tight text-slate-900 transition-colors group-hover:text-[var(--accent)] dark:text-white">
+                                            {post.data.title}
+                                        </h3>
+                                        <p class="mb-4 text-sm leading-relaxed text-slate-600 line-clamp-3 dark:text-[var(--text-secondary)]">
+                                            {post.data.description}
+                                        </p>
+                                    </div>
+                                    <div class="flex mt-4 items-center text-xs text-slate-500 dark:text-[var(--text-secondary)]">
+                                        <time datetime={post.data.pubDate.toISOString()}>
+                                            {post.data.pubDate.toLocaleDateString('en-us', {
+                                                year: 'numeric',
+                                                month: 'short',
+                                                day: 'numeric',
+                                            })}
+                                        </time>
+                                    </div>
+                                </article>
+                            </a>
+                        ))
+                    }
+                </div>
+                <div class="mt-6 flex sm:hidden">
+                    <a
+                        href="/blog"
+                        class="group inline-flex items-center gap-1 text-sm font-medium text-[var(--accent)] transition-colors hover:text-slate-900 dark:hover:text-white"
+                    >
+                        View All Posts
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="transition-transform group-hover:translate-x-1"
+                        >
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </a>
                 </div>
             </section>
         </main>
