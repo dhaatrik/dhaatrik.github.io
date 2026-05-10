@@ -22,9 +22,7 @@ const { techGroups } = Astro.props;
                     title={icon.name}
                     loading="lazy"
                     decoding="async"
-                    width="120"
-                    height="40"
-                    class="h-8 rounded shadow-md md:h-10"
+                    class="h-8 w-auto md:h-10 shadow-sm transition-all duration-300 hover:scale-110 shrink-0"
                 />
             ));
 
@@ -39,10 +37,17 @@ const { techGroups } = Astro.props;
                         role="region"
                         aria-label={`${groupName.replace('_', ' & ')} technologies`}
                     >
-                        <div class="animate-marquee flex gap-6 px-6 whitespace-nowrap">
-                            {mappedIcons}
-                            {/* Duplicate set for seamless infinite looping */}
-                            <div aria-hidden="true" class="flex gap-6">
+                        <div class="animate-marquee flex whitespace-nowrap w-max">
+                            <div class="flex gap-6 px-3 shrink-0">
+                                {mappedIcons}
+                            </div>
+                            <div aria-hidden="true" class="flex gap-6 px-3 shrink-0">
+                                {mappedIcons}
+                            </div>
+                            <div aria-hidden="true" class="flex gap-6 px-3 shrink-0">
+                                {mappedIcons}
+                            </div>
+                            <div aria-hidden="true" class="flex gap-6 px-3 shrink-0">
                                 {mappedIcons}
                             </div>
                         </div>

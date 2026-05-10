@@ -27,7 +27,7 @@ describe('Constants', () => {
     });
 
     test('SOCIAL_LINKS contains expected platforms', () => {
-        const expectedPlatforms = ['github', 'linkedin'];
+        const expectedPlatforms = ['github', 'linkedin', 'twitter', 'medium'];
         expectedPlatforms.forEach((platform) => {
             assert.ok(platform in consts.SOCIAL_LINKS, `Missing expected platform: ${platform}`);
         });
