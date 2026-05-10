@@ -22,7 +22,7 @@ const { techGroups } = Astro.props;
                     title={icon.name}
                     loading="lazy"
                     decoding="async"
-                    class="h-8 w-auto md:h-10 shadow-sm transition-all duration-300 hover:scale-110"
+                    class="h-8 w-auto md:h-10 shadow-sm transition-all duration-300 hover:scale-110 shrink-0"
                 />
             ));
 
@@ -38,16 +38,16 @@ const { techGroups } = Astro.props;
                         aria-label={`${groupName.replace('_', ' & ')} technologies`}
                     >
                         <div class="animate-marquee flex whitespace-nowrap w-max">
-                            <div class="flex gap-6 px-3">
+                            <div class="flex gap-6 px-3 shrink-0">
                                 {mappedIcons}
                             </div>
-                            <div aria-hidden="true" class="flex gap-6 px-3">
+                            <div aria-hidden="true" class="flex gap-6 px-3 shrink-0">
                                 {mappedIcons}
                             </div>
-                            <div aria-hidden="true" class="flex gap-6 px-3">
+                            <div aria-hidden="true" class="flex gap-6 px-3 shrink-0">
                                 {mappedIcons}
                             </div>
-                            <div aria-hidden="true" class="flex gap-6 px-3">
+                            <div aria-hidden="true" class="flex gap-6 px-3 shrink-0">
                                 {mappedIcons}
                             </div>
                         </div>
