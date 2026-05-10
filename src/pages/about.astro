@@ -6,6 +6,11 @@ import TechMarquee from '../components/TechMarquee.astro';
 import { SITE_TITLE, SOCIAL_LINKS } from '../consts';
 
 import { techGroups } from '../data/techStack';
+
+// Library Tracking Data
+const booksRead = 7
+const booksGoal = 52;
+const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100);
 ---
 
 <!doctype html>
@@ -117,10 +122,10 @@ import { techGroups } from '../data/techStack';
                             <div class="mb-4">
                                 <div class="flex justify-between text-sm mb-1">
                                     <span class="text-slate-600 dark:text-slate-400">Books Read</span>
-                                    <span class="font-mono text-[var(--accent)]">14 / 52</span>
+                                    <span class="font-mono text-[var(--accent)]">{booksRead} / {booksGoal}</span>
                                 </div>
                                 <div class="h-2 w-full bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden">
-                                    <div class="h-full bg-[var(--accent)] rounded-full" style="width: 27%"></div>
+                                    <div class="h-full bg-[var(--accent)] rounded-full" style={`width: ${readingProgress}%`}></div>
                                 </div>
                             </div>
                         </div>
