@@ -52,33 +52,40 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 relative z-10">
-                    <div class="bento-card p-6 flex flex-col">
-                        <h2 class="flex items-center gap-2 mb-4 text-2xl font-bold text-slate-900 dark:text-white">
-                            <svg class="w-6 h-6 text-slate-500 dark:text-[var(--text-secondary)]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                            <span class="cypher-text" data-original="What I'm Building">What I'm Building</span>
-                        </h2>
-                        <p class="leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
-                            I'm currently focused on the agriculture domain, working to integrate AI
-                            into the core fundamentals of farming to solve real-world problems. I also
-                            love building tools for the community, like <a href="https://github.com/dhaatrik" target="_blank" rel="noopener noreferrer" class="text-[var(--accent)] hover:underline decoration-dashed underline-offset-4">Vellor</a>, an
-                            offline-first tool for independent educators.
-                        </p>
+            </section>
+
+            <section class="max-w-5xl mb-20 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bento-card p-6 flex flex-col justify-between group relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h2 class="flex items-center gap-2 mb-4 text-2xl font-bold text-slate-900 dark:text-white">
+                                <svg class="w-6 h-6 text-slate-500 dark:text-[var(--text-secondary)]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                                <span class="cypher-text" data-original="What I'm Building">What I'm Building</span>
+                            </h2>
+                            <p class="leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
+                                I'm currently focused on the agriculture domain, working to integrate AI
+                                into the core fundamentals of farming to solve real-world problems. I also
+                                love building tools for the community, like <a href="https://github.com/dhaatrik" target="_blank" rel="noopener noreferrer" class="text-[var(--accent)] hover:underline decoration-dashed underline-offset-4">Vellor</a>, an
+                                offline-first tool for independent educators.
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="bento-card p-6 relative overflow-hidden group flex flex-col">
+                    <div class="bento-card p-6 flex flex-col justify-between group relative overflow-hidden">
                         <div class="absolute right-0 bottom-4 opacity-5 pointer-events-none select-none text-4xl sm:text-5xl font-serif text-slate-900 dark:text-white whitespace-nowrap blur-[1px] group-hover:opacity-10 transition-opacity duration-500">
                             Δv = v<sub>e</sub> ln(m<sub>0</sub> / m<sub>f</sub>)
                         </div>
-                        <h2 class="flex items-center gap-2 mb-4 text-2xl font-bold text-slate-900 dark:text-white relative z-10">
-                            <svg class="w-6 h-6 text-slate-500 dark:text-[var(--text-secondary)]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
-                            <span class="cypher-text" data-original="What I'm Learning">What I'm Learning</span>
-                        </h2>
-                        <p class="leading-relaxed text-slate-600 dark:text-[var(--text-secondary)] relative z-10">
-                            My curiosity pulls me toward the intricacies of reality. Right now, that
-                            means diving deep into the math of rocket engineering, the weirdness of
-                            quantum mechanics, and the fascinating depths of human psychology.
-                        </p>
+                        <div class="relative z-10">
+                            <h2 class="flex items-center gap-2 mb-4 text-2xl font-bold text-slate-900 dark:text-white">
+                                <svg class="w-6 h-6 text-slate-500 dark:text-[var(--text-secondary)]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
+                                <span class="cypher-text" data-original="What I'm Learning">What I'm Learning</span>
+                            </h2>
+                            <p class="leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
+                                My curiosity pulls me toward the intricacies of reality. Right now, that
+                                means diving deep into the math of rocket engineering, the weirdness of
+                                quantum mechanics, and the fascinating depths of human psychology.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
