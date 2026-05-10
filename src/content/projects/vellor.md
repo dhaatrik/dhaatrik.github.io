@@ -5,6 +5,7 @@ logo: '/vellor_logo.png'
 githubUrl: 'https://github.com/dhaatrik/vellor'
 progress: "v4.0.0 'Power-Tutor' Update"
 order: 1
+tags: ['React 19', 'TypeScript 5.7', 'Zustand 5', 'Tailwind CSS 3']
 ---
 
 #### The "Why"

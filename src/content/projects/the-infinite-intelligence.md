@@ -5,6 +5,7 @@ logo: ''
 githubUrl: 'https://github.com/dhaatrik/the-infinite-intelligence'
 progress: 'Parallel Collaboration, Sequential Workflows, and Round-Robin Debate'
 order: 4
+tags: ['React 19', 'TypeScript 5.8', 'Google Gemini AI', 'Vite 6']
 ---
 
 #### The "Why"

@@ -3,6 +3,12 @@ import HeaderLink from './HeaderLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
 ---
 
+<!-- Subtle Noise Texture -->
+<div class="pointer-events-none fixed inset-0 z-[100] h-full w-full opacity-[0.03] mix-blend-overlay" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC42NScgbnVtT2N0YXZlcz0nMycgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0ndXJsKCNuKScvPjwvc3ZnPg==');"></div>
+<!-- Ambient Background Glows -->
+<div class="pointer-events-none fixed -top-[20%] -left-[10%] -z-10 h-[50vw] w-[50vw] rounded-full bg-[var(--accent)]/20 mix-blend-multiply blur-[120px] dark:bg-[var(--accent)]/10 dark:mix-blend-screen"></div>
+<div class="pointer-events-none fixed -bottom-[20%] -right-[10%] -z-10 h-[50vw] w-[50vw] rounded-full bg-purple-500/20 mix-blend-multiply blur-[120px] dark:bg-purple-500/10 dark:mix-blend-screen"></div>
+
 <a
     href="#main-content"
     class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-[100] focus:bg-[var(--accent)] focus:px-4 focus:py-2 focus:font-bold focus:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[var(--bg-main)]"
@@ -11,9 +17,10 @@ import ThemeToggle from './ThemeToggle.astro';
 </a>
 
 <header
-    class="fixed top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-white/5 dark:bg-[var(--bg-main)]/80"
+    id="main-header"
+    class="fixed top-0 z-50 w-full backdrop-blur-lg bg-white/70 dark:bg-[#0b0e14]/70 border-b border-slate-200/50 dark:border-white/10 transition-transform duration-300 ease-in-out"
 >
-    <nav class="layout-container flex items-center justify-between py-4">
+    <nav id="main-nav" class="layout-container flex items-center justify-between py-4 transition-all duration-300 ease-in-out">
         {
             /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */
         }
@@ -59,3 +66,39 @@ import ThemeToggle from './ThemeToggle.astro';
         </div>
     </nav>
 </header>
+
+<script is:inline>
+    (function() {
+        let lastScroll = window.pageYOffset || document.documentElement.scrollTop;
+        const header = document.getElementById('main-header');
+        const nav = document.getElementById('main-nav');
+        
+        if (!header || !nav) return;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Shrink header and add subtle shadow on scroll
+            if (currentScroll > 50) {
+                nav.classList.remove('py-4');
+                nav.classList.add('py-2');
+                header.classList.add('shadow-sm');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+                header.classList.remove('shadow-sm');
+            }
+
+            // Hide on scroll down, show on scroll up
+            if (currentScroll <= 0) {
+                header.style.transform = 'translateY(0)';
+            } else if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else if (currentScroll < lastScroll) {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+        }, { passive: true });
+    })();
+</script>
