@@ -83,24 +83,59 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                 </div>
             </section>
 
-            <section class="max-w-4xl relative overflow-hidden mb-20">
-                <h2 class="mb-6 text-2xl font-bold text-slate-900 dark:text-white">Current Trajectory</h2>
-                <div class="border-l-2 border-[var(--accent)] pl-6 ml-2 space-y-8">
-                    <div class="relative">
-                        <div class="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full bg-[var(--accent)] ring-4 ring-[var(--bg-body)] dark:ring-[#111111]"></div>
-                        <h3 class="mb-2 text-xl font-bold text-[var(--accent)]">
-                            A Note on the Journey: Q1 2025 & Beyond
-                        </h3>
-                        <p class="mb-4 leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
-                            <a href="#" class="text-[var(--accent)] hover:underline decoration-dashed underline-offset-4">FuelDrop</a> was more than just a codebase; it was my primary startup focus
-                            during the first quarter of 2025. I'll soon be sharing a comprehensive
-                            deep-dive article detailing the entire lifecycle of this venture.
-                        </p>
-                        <p class="leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
-                            I'm a firm believer that <strong>"knowledge kept secret is knowledge wasted"</strong>. I'll be pulling back the curtain on the raw reality of building an
-                            on-demand logistics startup, the "hard-knock" lessons learned, and the
-                            technical breakdowns. Stay tuned.
-                        </p>
+            <section class="max-w-5xl mb-20 relative">
+                <h2 class="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
+                    Current Trajectory
+                </h2>
+                
+                <div class="bento-card p-0 overflow-hidden relative group">
+                    {/* Background abstract radar pattern */}
+                    <div class="absolute inset-0 opacity-20 pointer-events-none transition-opacity duration-500 group-hover:opacity-40" style="background-image: radial-gradient(circle at 100% 0%, var(--accent-glow) 0%, transparent 50%);"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_2.5fr] relative z-10">
+                        {/* Left sidebar - Telemetry/Status */}
+                        <div class="p-6 md:p-8 bg-slate-50/50 dark:bg-black/20 border-b md:border-b-0 md:border-r border-slate-100 dark:border-white/5 flex flex-col justify-between">
+                            <div>
+                                <div class="inline-flex items-center gap-2 px-3 py-1 bg-[var(--accent)]/10 text-[var(--accent)] rounded-full text-[10px] font-mono font-bold tracking-widest mb-6 uppercase border border-[var(--accent)]/20 shadow-sm">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
+                                    Telemetry Active
+                                </div>
+                                <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">Q1 2025</h3>
+                                <p class="text-xs font-mono text-slate-500 dark:text-slate-400">STATUS: Post-Flight Analysis</p>
+                            </div>
+                            
+                            <div class="hidden md:block mt-12">
+                                <div class="text-[10px] text-slate-400 uppercase tracking-widest mb-2 font-bold">Focus Node</div>
+                                <div class="font-mono text-[var(--accent)] font-bold text-lg">FuelDrop</div>
+                                <div class="text-xs text-slate-500 mt-1">Logistics / Ag-Tech</div>
+                            </div>
+                        </div>
+
+                        {/* Right content - Mission Log */}
+                        <div class="p-6 md:p-8 flex flex-col justify-center">
+                            <div class="flex justify-between items-start mb-6">
+                                <h4 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                    A Note on the Journey
+                                </h4>
+                                <span class="text-[10px] font-mono text-[var(--accent)] bg-[var(--accent)]/10 border border-[var(--accent)]/20 px-2 py-1 rounded shadow-sm">LOG_ENTRY: 402</span>
+                            </div>
+
+                            <div class="space-y-5 text-slate-600 dark:text-[var(--text-secondary)] leading-relaxed text-sm md:text-base">
+                                <p>
+                                    <strong class="text-slate-900 dark:text-white font-medium">FuelDrop</strong> was more than just a codebase; it was my primary startup focus during the first quarter of 2025. I'll soon be sharing a comprehensive deep-dive article detailing the entire lifecycle of this venture.
+                                </p>
+                                <div class="border-l-2 border-[var(--accent)] pl-4 py-1 my-4">
+                                    <p class="italic text-slate-700 dark:text-slate-300 font-medium">
+                                        "Knowledge kept secret is knowledge wasted."
+                                    </p>
+                                </div>
+                                <p>
+                                    I'll be pulling back the curtain on the raw reality of building an on-demand logistics startup, the "hard-knock" lessons learned, and the technical breakdowns. 
+                                    <span class="cypher-text text-[var(--accent)] font-bold ml-1 cursor-crosshair underline decoration-dashed underline-offset-4" data-original="Stay tuned.">Stay tuned.</span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
