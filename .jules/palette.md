@@ -42,3 +42,8 @@
 
 **Learning:** The `.bento-card` class applies interactive hover and focus styles (transform and box-shadow) indiscriminately. Applying this class to non-interactive elements creates false visual affordances, confusing users.
 **Action:** Restrict interactive hover and focus styles in CSS to explicitly actionable elements (like `a.bento-card` or `button.bento-card`) to ensure visual feedback accurately represents interactivity, while keeping `.bento-card:focus-within` intact for accessibility highlights when focusing interactive children.
+
+## 2026-05-10 - Dynamic ARIA Labels for Theme Toggles
+
+**Learning:** When building interactive state toggle buttons (like a theme toggle), static `aria-label`s (e.g., "Toggle theme") don't inform screen reader users about the _current_ state or the _outcome_ of the action. This can be confusing.
+**Action:** Use JavaScript to dynamically update the `aria-label` (and `title`) of state toggle buttons to describe the _next state_ it will transition to (e.g., "Switch to light mode" or "Switch to dark mode"), providing immediate context and clarity.
