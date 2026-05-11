@@ -3,6 +3,32 @@ import HeaderLink from './HeaderLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
 ---
 
+<style>
+    @keyframes sonar {
+        0% { transform: scale(1); opacity: 0.6; }
+        100% { transform: scale(2.5); opacity: 0; }
+    }
+    .sonar-icon { position: relative; }
+    .sonar-icon::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        border-radius: 50%;
+        background-color: var(--accent);
+        opacity: 0;
+        z-index: -1;
+        pointer-events: none;
+    }
+    .sonar-trigger:hover .sonar-icon::after {
+        animation: sonar 1s cubic-bezier(0, 0.2, 0.8, 1) forwards;
+    }
+    
+    /* Ensure the header transition is smooth for the hide/show effect */
+    #main-header {
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+</style>
+
 <!-- Subtle Noise Texture -->
 <div class="pointer-events-none fixed inset-0 z-[100] h-full w-full opacity-[0.03] mix-blend-overlay" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC42NScgbnVtT2N0YXZlcz0nMycgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0ndXJsKCNuKScvPjwvc3ZnPg==');"></div>
 <!-- Ambient Background Glows -->
@@ -18,7 +44,7 @@ import ThemeToggle from './ThemeToggle.astro';
 
 <header
     id="main-header"
-    class="fixed top-0 z-50 w-full backdrop-blur-lg bg-white/70 dark:bg-[#0b0e14]/70 border-b border-slate-200/50 dark:border-white/10 transition-transform duration-300 ease-in-out"
+    class="fixed top-0 z-50 w-full backdrop-blur-lg bg-white/70 dark:bg-[#0b0e14]/70 border-b border-slate-200/50 dark:border-white/10"
 >
     <nav id="main-nav" class="layout-container flex items-center justify-between py-4 transition-all duration-300 ease-in-out">
         {
@@ -27,78 +53,99 @@ import ThemeToggle from './ThemeToggle.astro';
         <a
             href="/"
             data-astro-prefetch="hover"
-            class="flex items-center transition-opacity hover:opacity-80 focus-visible:opacity-80"
+            class="flex items-center transition-opacity hover:opacity-80 focus-visible:opacity-80 sonar-trigger group"
             aria-label="Dhaatrik — Home"
         >
-            <img
-                src="/logo_dark.svg"
-                alt="Dhaatrik Logo"
-                class="h-12 w-auto dark:hidden"
-                width="48"
-                height="48"
-            />
-            <img
-                src="/logo_light.svg"
-                alt="Dhaatrik Logo"
-                class="hidden h-12 w-auto dark:block"
-                width="48"
-                height="48"
-            />
+            <div class="sonar-icon rounded-full">
+                <img
+                    src="/logo_dark.svg"
+                    alt="Dhaatrik Logo"
+                    class="h-10 w-10 sm:h-12 sm:w-12 dark:hidden relative z-10"
+                    width="48"
+                    height="48"
+                />
+                <img
+                    src="/logo_light.svg"
+                    alt="Dhaatrik Logo"
+                    class="hidden h-10 w-10 sm:h-12 sm:w-12 dark:block relative z-10"
+                    width="48"
+                    height="48"
+                />
+            </div>
+            
+            <div class="hidden sm:flex items-center">
+                <div class="border-l border-slate-300 dark:border-white/20 h-6 mx-3 transition-colors group-hover:border-[var(--accent)]/50"></div>
+                <div class="flex flex-col justify-center">
+                    <span class="font-bold text-slate-900 dark:text-white leading-none tracking-tight">DHAATRIK</span>
+                    <span class="font-mono text-[10px] text-[var(--accent)] opacity-80 tracking-widest leading-none mt-1">// MISSION_CONTROL</span>
+                </div>
+            </div>
         </a>
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-4 sm:gap-6">
             <HeaderLink
                 href="/"
-                class="text-slate-500 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)]"
-                >Home</HeaderLink
+                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)] flex items-center group/link"
             >
+                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-[var(--accent)] transition-colors">[ 01 ]</span>Home
+            </HeaderLink>
             <HeaderLink
                 href="/about"
-                class="text-slate-500 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)]"
-                >About</HeaderLink
+                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)] flex items-center group/link"
             >
+                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-[var(--accent)] transition-colors">[ 02 ]</span>Personnel
+            </HeaderLink>
             <HeaderLink
                 href="/blog"
-                class="text-slate-500 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)]"
-                >Blog</HeaderLink
+                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)] flex items-center group/link"
             >
-            <div class="h-5 w-px bg-slate-200 dark:bg-white/10"></div>
+                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-[var(--accent)] transition-colors">[ 03 ]</span>Transmissions
+            </HeaderLink>
+            <div class="h-5 w-px bg-slate-200 dark:bg-white/10 mx-1"></div>
             <ThemeToggle />
         </div>
     </nav>
 </header>
 
 <script is:inline>
-    (function() {
-        let lastScroll = window.pageYOffset || document.documentElement.scrollTop;
+    document.addEventListener('astro:page-load', () => {
+        let lastScroll = window.scrollY;
         const header = document.getElementById('main-header');
         const nav = document.getElementById('main-nav');
         
         if (!header || !nav) return;
 
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        const updateHeader = () => {
+            const currentScroll = window.scrollY;
             
             // Shrink header and add subtle shadow on scroll
             if (currentScroll > 50) {
                 nav.classList.remove('py-4');
                 nav.classList.add('py-2');
-                header.classList.add('shadow-sm');
+                header.classList.add('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
+                header.classList.remove('bg-white/70', 'dark:bg-[#0b0e14]/70');
             } else {
                 nav.classList.add('py-4');
                 nav.classList.remove('py-2');
-                header.classList.remove('shadow-sm');
+                header.classList.remove('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
+                header.classList.add('bg-white/70', 'dark:bg-[#0b0e14]/70');
             }
 
-            // Hide on scroll down, show on scroll up
+            // Hide on scroll down, show on scroll up - more deliberate threshold
             if (currentScroll <= 0) {
                 header.style.transform = 'translateY(0)';
-            } else if (currentScroll > lastScroll && currentScroll > 100) {
+            } else if (currentScroll > lastScroll && currentScroll > 150) {
+                // Scrolling down past threshold
                 header.style.transform = 'translateY(-100%)';
-            } else if (currentScroll < lastScroll) {
+            } else if (currentScroll < lastScroll && (lastScroll - currentScroll > 10 || currentScroll < 50)) {
+                // Scrolling up (with a small buffer to prevent jitter)
                 header.style.transform = 'translateY(0)';
             }
             
-            lastScroll = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
-        }, { passive: true });
-    })();
+            lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+        };
+
+        window.addEventListener('scroll', updateHeader, { passive: true });
+        // Initial check
+        updateHeader();
+    });
 </script>
