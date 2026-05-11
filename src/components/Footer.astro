@@ -1,58 +1,188 @@
 ---
+import { getCollection } from 'astro:content';
 import { SOCIAL_LINKS } from '../consts';
+import FormattedDate from './FormattedDate.astro';
+
+// Fetch the 3 most recent blog posts for "Transmissions"
+const posts = (await getCollection('blog'))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3);
+
 const today = new Date();
+const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
 ---
 
-<footer class="mt-12 mb-8 w-full py-8 text-center text-slate-500 dark:text-[var(--text-secondary)]">
-    <div class="layout-container flex flex-col items-center gap-4">
-        <p>&copy; {today.getFullYear()} Dhaatrik Chowdhury. All rights reserved.</p>
+<footer class="mt-20 w-full border-t border-slate-200 dark:border-white/5 bg-slate-50/50 dark:bg-[#0b0e14] py-12 text-slate-500 dark:text-slate-400 relative overflow-hidden">
+    <!-- Subtle Grid Background -->
+    <div class="absolute inset-0 bg-grid-motif opacity-5 pointer-events-none"></div>
 
-        <div class="flex items-center justify-center gap-6">
+    <div class="layout-container relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+        
+        <!-- Column 1: Base Ops -->
+        <div class="flex flex-col space-y-4">
+            <h3 class="font-mono text-[10px] tracking-widest text-slate-900 dark:text-white uppercase flex items-center gap-2 mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+                Base Ops
+            </h3>
+            <ul class="flex flex-col space-y-3 text-sm">
+                <li><a href="/" class="hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2 group"><span class="font-mono text-[10px] opacity-50 group-hover:opacity-100 transition-opacity">/</span>Home</a></li>
+                <li><a href="/about" class="hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2 group"><span class="font-mono text-[10px] opacity-50 group-hover:opacity-100 transition-opacity">/</span>Personnel</a></li>
+                <li><a href="/blog" class="hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2 group"><span class="font-mono text-[10px] opacity-50 group-hover:opacity-100 transition-opacity">/</span>Transmissions</a></li>
+                <li><a href="/rss.xml" class="hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2 group"><span class="font-mono text-[10px] opacity-50 group-hover:opacity-100 transition-opacity">/</span>RSS Feed</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 2: Transmissions -->
+        <div class="flex flex-col space-y-4">
+            <h3 class="font-mono text-[10px] tracking-widest text-slate-900 dark:text-white uppercase flex items-center gap-2 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent)]"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m3 15 2 2 4-4"/></svg>
+                Recent Transmissions
+            </h3>
+            <ul class="flex flex-col space-y-4">
+                {posts.map(post => (
+                    <li>
+                        <a href={`/blog/${post.id}/`} class="group block">
+                            <div class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mb-1">
+                                <FormattedDate date={post.data.pubDate} format="technical" />
+                            </div>
+                            <div class="text-sm text-slate-600 dark:text-slate-300 group-hover:text-[var(--accent)] transition-colors leading-tight line-clamp-2">
+                                {post.data.title}
+                            </div>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </div>
+
+        <!-- Column 3: Technical Status -->
+        <div class="flex flex-col space-y-6">
+            <div class="p-4 rounded-lg bg-white dark:bg-[#151a22] border border-slate-200 dark:border-white/5 shadow-sm">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <div class="font-mono text-[10px] text-slate-400 mb-1 uppercase tracking-widest">Local Time (IST)</div>
+                        <div id="ist-clock" class="font-mono font-bold text-slate-900 dark:text-white text-lg tracking-tight bg-slate-100 dark:bg-black/30 px-2 py-0.5 rounded">--:--:--</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-mono text-[10px] text-slate-400 mb-1 uppercase tracking-widest">Build ID</div>
+                        <div class="font-mono font-bold text-[var(--accent)] text-xs bg-[var(--accent)]/10 px-2 py-1 rounded">{buildHash}</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 font-mono text-[10px] text-green-600 dark:text-green-400 uppercase tracking-widest">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    STATUS: OPERATIONAL
+                </div>
+            </div>
+
+            <!-- Support CTA -->
+            <a href="https://ko-fi.com/dhaatrik" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-center gap-2 w-full py-3 rounded border border-[var(--accent)]/30 bg-[var(--accent)]/10 text-[var(--accent)] font-mono text-xs tracking-widest hover:bg-[var(--accent)]/20 hover:shadow-[0_0_15px_var(--accent-glow)] transition-all uppercase cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition-transform"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                [ TRANSMIT SUPPORT ]
+            </a>
+        </div>
+
+    </div>
+
+    <div class="layout-container mt-12 pt-8 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-xs font-mono">&copy; {today.getFullYear()} Dhaatrik Chowdhury. All rights reserved.</p>
+
+        <!-- Social Icons with Cyber Micro-interaction -->
+        <div class="flex items-center gap-4">
             <a
                 href={SOCIAL_LINKS.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Follow on X (formerly Twitter) (opens in a new tab)"
-                title="Follow on X (formerly Twitter)"
-                class="transition-all hover:text-slate-900 focus-visible:text-slate-900 active:scale-95 dark:hover:text-[var(--text-primary)] dark:focus-visible:text-[var(--text-primary)]"
+                class="cyber-icon w-8 h-8 rounded bg-white dark:bg-[#151a22] border border-slate-200 dark:border-white/5 flex items-center justify-center text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group"
+                data-icon="x"
+                aria-label="X (Twitter)"
             >
-                <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24">
-                    <path
-                        fill="currentColor"
-                        d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
-                    ></path>
-                </svg>
+                <div class="icon-container">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg>
+                </div>
             </a>
             <a
                 href={SOCIAL_LINKS.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="View GitHub Profile (opens in a new tab)"
-                title="View GitHub Profile"
-                class="transition-all hover:text-slate-900 focus-visible:text-slate-900 active:scale-95 dark:hover:text-[var(--text-primary)] dark:focus-visible:text-[var(--text-primary)]"
+                class="cyber-icon w-8 h-8 rounded bg-white dark:bg-[#151a22] border border-slate-200 dark:border-white/5 flex items-center justify-center text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group"
+                data-icon="github"
+                aria-label="GitHub"
             >
-                <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24">
-                    <path
-                        fill="currentColor"
-                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                    ></path>
-                </svg>
+                <div class="icon-container">
+                    <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                </div>
             </a>
             <a
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Connect on LinkedIn (opens in a new tab)"
-                title="Connect on LinkedIn"
-                class="transition-all hover:text-slate-900 focus-visible:text-slate-900 active:scale-95 dark:hover:text-[var(--text-primary)] dark:focus-visible:text-[var(--text-primary)]"
+                class="cyber-icon w-8 h-8 rounded bg-white dark:bg-[#151a22] border border-slate-200 dark:border-white/5 flex items-center justify-center text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group"
+                data-icon="linkedin"
+                aria-label="LinkedIn"
             >
-                <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24">
-                    <path
-                        fill="currentColor"
-                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                    ></path>
-                </svg>
+                <div class="icon-container">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14"><path fill="currentColor" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                </div>
             </a>
         </div>
     </div>
 </footer>
+
+<script is:inline>
+    document.addEventListener('astro:page-load', () => {
+        // 1. Dynamic IST Clock
+        const clockEl = document.getElementById('ist-clock');
+        let clockInterval;
+        
+        if (clockEl) {
+            const updateTime = () => {
+                const now = new Date();
+                const istTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+                const hours = String(istTime.getHours()).padStart(2, '0');
+                const minutes = String(istTime.getMinutes()).padStart(2, '0');
+                const seconds = String(istTime.getSeconds()).padStart(2, '0');
+                clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+            };
+            updateTime();
+            clockInterval = setInterval(updateTime, 1000);
+        }
+
+        // 2. Cyber Scramble Micro-interactions
+        const cyberIcons = document.querySelectorAll('.cyber-icon');
+        const hexChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+        
+        cyberIcons.forEach(icon => {
+            const container = icon.querySelector('.icon-container');
+            if (!container) return;
+            
+            const originalHTML = container.innerHTML;
+            let scrambleInterval;
+            
+            icon.addEventListener('mouseenter', () => {
+                clearInterval(scrambleInterval);
+                let iterations = 0;
+                
+                scrambleInterval = setInterval(() => {
+                    const char1 = hexChars[Math.floor(Math.random() * hexChars.length)];
+                    const char2 = hexChars[Math.floor(Math.random() * hexChars.length)];
+                    container.innerHTML = `<span class="font-mono text-[10px] font-bold text-[var(--accent)] opacity-80">0x${char1}${char2}</span>`;
+                    
+                    iterations++;
+                    if (iterations > 5) { // Run for ~150ms (5 * 30ms)
+                        clearInterval(scrambleInterval);
+                        container.innerHTML = originalHTML;
+                    }
+                }, 30);
+            });
+            
+            icon.addEventListener('mouseleave', () => {
+                clearInterval(scrambleInterval);
+                container.innerHTML = originalHTML;
+            });
+        });
+
+        // Cleanup intervals on page transition
+        document.addEventListener('astro:before-preparation', () => {
+            if (clockInterval) clearInterval(clockInterval);
+        }, { once: true });
+    });
+</script>
