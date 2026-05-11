@@ -16,6 +16,8 @@ const blog = defineCollection({
             heroImage: z.optional(image()),
             readingTime: z.string().optional(),
             tags: z.array(z.string()).optional(),
+            series: z.string().optional(),
+            entropy: z.enum(['low', 'medium', 'high', 'deep-dive']).optional(),
         }),
 });
 
