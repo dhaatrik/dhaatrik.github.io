@@ -3,14 +3,24 @@ import { dateFormatter } from '../utils/dateFormatter';
 
 interface Props {
     date: Date;
+    format?: 'standard' | 'technical';
 }
 
-const { date } = Astro.props;
+const { date, format = 'standard' } = Astro.props;
+
+const getTechnicalDate = (d: Date) => {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `[ ${y} / ${m} / ${day} ]`;
+};
 ---
 
 <time datetime={date.toISOString()}>
     {
-        /* ⚡ Bolt: Cache Intl.DateTimeFormat to avoid repeated object creation during SSG */
-        dateFormatter.format(date)
+        format === 'technical'
+            ? getTechnicalDate(date)
+            : /* ⚡ Bolt: Cache Intl.DateTimeFormat to avoid repeated object creation during SSG */
+              dateFormatter.format(date)
     }
 </time>
