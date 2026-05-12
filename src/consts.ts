@@ -11,3 +11,9 @@ export const SOCIAL_LINKS = {
     twitter: 'https://x.com/dhaatrik',
     medium: 'https://medium.com/@dhaatrik',
 };
+
+export const NAV_ITEMS = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'Personnel' },
+    { href: '/blog', label: 'Transmissions' },
+];

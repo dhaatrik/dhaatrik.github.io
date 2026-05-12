@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { SOCIAL_LINKS } from '../consts';
+import { SOCIAL_LINKS, NAV_ITEMS } from '../consts';
 import FormattedDate from './FormattedDate.astro';
 
 // Fetch the 3 most recent blog posts for "Transmissions"
@@ -25,9 +25,21 @@ const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
                 Base Ops
             </h3>
             <ul class="flex flex-col space-y-3 text-sm">
-                <li><a href="/" class="hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2 group"><span class="font-mono text-[10px] opacity-50 group-hover:opacity-100 transition-opacity">/</span>Home</a></li>
-                <li><a href="/about" class="hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2 group"><span class="font-mono text-[10px] opacity-50 group-hover:opacity-100 transition-opacity">/</span>Personnel</a></li>
-                <li><a href="/blog" class="hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2 group"><span class="font-mono text-[10px] opacity-50 group-hover:opacity-100 transition-opacity">/</span>Transmissions</a></li>
+                {
+                    NAV_ITEMS.map((item) => (
+                        <li>
+                            <a
+                                href={item.href}
+                                class="hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2 group"
+                            >
+                                <span class="font-mono text-[10px] opacity-50 group-hover:opacity-100 transition-opacity">
+                                    /
+                                </span>
+                                {item.label}
+                            </a>
+                        </li>
+                    ))
+                }
                 <li><a href="/rss.xml" class="hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2 group"><span class="font-mono text-[10px] opacity-50 group-hover:opacity-100 transition-opacity">/</span>RSS Feed</a></li>
             </ul>
         </div>

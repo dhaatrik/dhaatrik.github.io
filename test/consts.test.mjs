@@ -32,4 +32,20 @@ describe('Constants', () => {
             assert.ok(platform in consts.SOCIAL_LINKS, `Missing expected platform: ${platform}`);
         });
     });
+
+    test('NAV_ITEMS is a non-empty array with expected structure', () => {
+        assert.ok(Array.isArray(consts.NAV_ITEMS), 'NAV_ITEMS should be an array');
+        assert.ok(consts.NAV_ITEMS.length > 0, 'NAV_ITEMS should not be empty');
+
+        consts.NAV_ITEMS.forEach((item) => {
+            assert.strictEqual(typeof item.href, 'string', 'Each nav item should have a string href');
+            assert.strictEqual(
+                typeof item.label,
+                'string',
+                'Each nav item should have a string label'
+            );
+            assert.ok(item.href.length > 0, 'Nav item href should not be empty');
+            assert.ok(item.label.length > 0, 'Nav item label should not be empty');
+        });
+    });
 });

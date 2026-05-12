@@ -1,6 +1,7 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import { NAV_ITEMS } from '../consts';
 ---
 
 <style>
@@ -82,24 +83,22 @@ import ThemeToggle from './ThemeToggle.astro';
             </div>
         </a>
         <div class="flex items-center gap-4 sm:gap-6">
-            <HeaderLink
-                href="/"
-                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)] flex items-center group/link"
-            >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-[var(--accent)] transition-colors">[ 01 ]</span>Home
-            </HeaderLink>
-            <HeaderLink
-                href="/about"
-                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)] flex items-center group/link"
-            >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-[var(--accent)] transition-colors">[ 02 ]</span>Personnel
-            </HeaderLink>
-            <HeaderLink
-                href="/blog"
-                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)] flex items-center group/link"
-            >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-[var(--accent)] transition-colors">[ 03 ]</span>Transmissions
-            </HeaderLink>
+            {
+                NAV_ITEMS.map((item, index) => (
+                    <HeaderLink
+                        href={item.href}
+                        class="text-sm sm:text-base text-slate-600 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)] flex items-center group/link"
+                    >
+                        <span
+                            aria-hidden="true"
+                            class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-[var(--accent)] transition-colors"
+                        >
+                            [ {(index + 1).toString().padStart(2, '0')} ]
+                        </span>
+                        {item.label}
+                    </HeaderLink>
+                ))
+            }
             <div class="h-5 w-px bg-slate-200 dark:bg-white/10 mx-1"></div>
             <ThemeToggle />
         </div>
