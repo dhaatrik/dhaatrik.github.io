@@ -28,36 +28,48 @@ const postsWithReadingTime = posts.map((post) => {
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
-    <body class="flex min-h-screen flex-col bg-grid-motif pt-24 relative">
+    <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <Header />
-        <main id="main-content" class="layout-container flex-grow py-8">
+        <main id="main-content" tabindex="-1" class="layout-container flex-grow py-8">
             <section class="mx-auto max-w-4xl">
-                <div class="flex items-start md:items-center justify-between mb-2 flex-col md:flex-row gap-4">
-                    <h1 class="text-4xl leading-tight font-bold text-slate-900 md:text-5xl dark:text-white tracking-tight">
+                <div
+                    class="mb-2 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center"
+                >
+                    <h1
+                        class="text-4xl leading-tight font-bold tracking-tight text-slate-900 md:text-5xl dark:text-white"
+                    >
                         Mission <span class="text-slate-400 dark:text-slate-600">Logs</span>
                     </h1>
                     <a
                         href="/rss.xml"
-                        class="text-xs font-mono tracking-widest text-[var(--accent)] bg-[var(--accent)]/10 px-3 py-1.5 rounded border border-[var(--accent)]/20 hover:bg-[var(--accent)]/20 transition-colors flex items-center gap-2"
+                        class="flex items-center gap-2 rounded border border-[var(--accent)]/20 bg-[var(--accent)]/10 px-3 py-1.5 font-mono text-xs tracking-widest text-[var(--accent)] transition-colors hover:bg-[var(--accent)]/20"
                     >
-                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse shadow-[0_0_8px_var(--accent)]"></span>
+                        <span
+                            class="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--accent)] shadow-[0_0_8px_var(--accent)]"
+                        ></span>
                         [ RAW FEED // RSS ]
                     </a>
                 </div>
-                <p class="font-mono text-sm text-slate-500 dark:text-slate-400 mb-10 max-w-2xl leading-relaxed">
-                    Deep-dives into First-Principles engineering, startup architecture, and the pursuit of Delta-v.
+                <p
+                    class="mb-10 max-w-2xl font-mono text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+                >
+                    Deep-dives into First-Principles engineering, startup architecture, and the
+                    pursuit of Delta-v.
                 </p>
 
                 <!-- Terminal-Style Search Bar -->
                 <div class="mb-10 font-mono">
                     <label for="search-logs" class="sr-only">Search Mission Logs</label>
-                    <div class="relative flex items-center group">
-                        <span class="absolute left-4 text-slate-400 dark:text-slate-500 pointer-events-none select-none transition-colors group-focus-within:text-[var(--accent)]">~ $ grep -i</span>
+                    <div class="group relative flex items-center">
+                        <span
+                            class="pointer-events-none absolute left-4 text-slate-400 transition-colors select-none group-focus-within:text-[var(--accent)] dark:text-slate-500"
+                            >~ $ grep -i</span
+                        >
                         <input
                             type="text"
                             id="search-logs"
                             placeholder='"Search archives..."'
-                            class="w-full bg-slate-100 dark:bg-[#151a22] border border-slate-200 dark:border-slate-800 rounded-md py-3 pl-32 pr-4 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-[var(--accent)]/50 focus:ring-1 focus:ring-[var(--accent)]/50 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-600"
+                            class="w-full rounded-md border border-slate-200 bg-slate-100 py-3 pr-4 pl-32 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:border-[var(--accent)]/50 focus:ring-1 focus:ring-[var(--accent)]/50 focus:outline-none dark:border-slate-800 dark:bg-[#151a22] dark:text-white dark:placeholder:text-slate-600"
                         />
                     </div>
                 </div>
@@ -69,12 +81,20 @@ const postsWithReadingTime = posts.map((post) => {
                                 href={`/blog/${post.id}/`}
                                 data-astro-prefetch="hover"
                                 class:list={[
-                                    'bento-card blog-post-card group block overflow-hidden transition-all active:scale-[0.99] relative',
-                                    { 'md:col-span-2 md:grid md:grid-cols-2 md:gap-8 md:items-center': i === 0 },
+                                    'bento-card blog-post-card group relative block overflow-hidden transition-all active:scale-[0.99]',
+                                    {
+                                        'md:col-span-2 md:grid md:grid-cols-2 md:items-center md:gap-8':
+                                            i === 0,
+                                    },
                                 ]}
                             >
                                 {post.data.heroImage ? (
-                                    <div class:list={["bento-card-inner", i !== 0 ? "mb-4" : "h-full"]}>
+                                    <div
+                                        class:list={[
+                                            'bento-card-inner',
+                                            i !== 0 ? 'mb-4' : 'h-full',
+                                        ]}
+                                    >
                                         {/* ⚡ Bolt: Optimize LCP by eager loading the first image (above the fold) with high priority */}
                                         <Image
                                             width={720}
@@ -82,40 +102,65 @@ const postsWithReadingTime = posts.map((post) => {
                                             src={post.data.heroImage}
                                             alt=""
                                             class:list={[
-                                                "w-full object-cover transition-transform duration-300 group-hover:scale-105 group-focus-visible:scale-105",
-                                                i === 0 ? "h-full min-h-[300px]" : "h-48"
+                                                'w-full object-cover transition-transform duration-300 group-hover:scale-105 group-focus-visible:scale-105',
+                                                i === 0 ? 'h-full min-h-[300px]' : 'h-48',
                                             ]}
                                             loading={i === 0 ? 'eager' : 'lazy'}
                                             fetchpriority={i === 0 ? 'high' : 'auto'}
                                         />
                                     </div>
                                 ) : (
-                                    <div class:list={[
-                                        "bento-card-inner flex items-center justify-center bg-slate-100 dark:bg-slate-900 overflow-hidden relative",
-                                        i !== 0 ? "mb-4 h-48" : "h-full min-h-[300px]"
-                                    ]}>
-                                        <div class="absolute inset-0 bg-grid-motif opacity-20 dark:opacity-50"></div>
-                                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--accent-glow)_0%,transparent_70%)] opacity-50 dark:opacity-100"></div>
-                                        <div class="absolute inset-0 border border-[var(--accent)]/20 m-4 rounded-lg"></div>
-                                        <span class="text-7xl font-bold font-mono text-[var(--accent)]/80 drop-shadow-lg z-10">{post.data.title.charAt(0).toUpperCase()}</span>
+                                    <div
+                                        class:list={[
+                                            'bento-card-inner relative flex items-center justify-center overflow-hidden bg-slate-100 dark:bg-slate-900',
+                                            i !== 0 ? 'mb-4 h-48' : 'h-full min-h-[300px]',
+                                        ]}
+                                    >
+                                        <div class="bg-grid-motif absolute inset-0 opacity-20 dark:opacity-50" />
+                                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--accent-glow)_0%,transparent_70%)] opacity-50 dark:opacity-100" />
+                                        <div class="absolute inset-0 m-4 rounded-lg border border-[var(--accent)]/20" />
+                                        <span class="z-10 font-mono text-7xl font-bold text-[var(--accent)]/80 drop-shadow-lg">
+                                            {post.data.title.charAt(0).toUpperCase()}
+                                        </span>
                                     </div>
                                 )}
-                                <div class:list={["flex flex-col justify-center", i === 0 ? "md:p-2" : ""]}>
-                                    <div class="font-mono text-[10px] tracking-widest text-[var(--accent)] mb-3">
-                                        LOG_{String(postsWithReadingTime.length - i).padStart(3, '0')}
+                                <div
+                                    class:list={[
+                                        'flex flex-col justify-center',
+                                        i === 0 ? 'md:p-2' : '',
+                                    ]}
+                                >
+                                    <div class="mb-3 font-mono text-[10px] tracking-widest text-[var(--accent)]">
+                                        LOG_
+                                        {String(postsWithReadingTime.length - i).padStart(3, '0')}
                                     </div>
-                                    <div class="mb-3 flex items-center flex-wrap gap-2 text-sm text-slate-500 dark:text-[var(--text-secondary)]">
-                                        <FormattedDate date={post.data.pubDate} format="technical" />
+                                    <div class="mb-3 flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-[var(--text-secondary)]">
+                                        <FormattedDate
+                                            date={post.data.pubDate}
+                                            format="technical"
+                                        />
                                         {post.readingTime && (
                                             <>
-                                                <span aria-hidden="true" class="text-slate-300 dark:text-slate-700">|</span>
-                                                <span class="font-mono text-xs">{post.readingTime}</span>
+                                                <span
+                                                    aria-hidden="true"
+                                                    class="text-slate-300 dark:text-slate-700"
+                                                >
+                                                    |
+                                                </span>
+                                                <span class="font-mono text-xs">
+                                                    {post.readingTime}
+                                                </span>
                                             </>
                                         )}
                                         {post.data.tags && post.data.tags.length > 0 && (
                                             <>
-                                                <span aria-hidden="true" class="text-slate-300 dark:text-slate-700">|</span>
-                                                <span class="bg-[var(--accent)]/10 text-[var(--accent)] text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded">
+                                                <span
+                                                    aria-hidden="true"
+                                                    class="text-slate-300 dark:text-slate-700"
+                                                >
+                                                    |
+                                                </span>
+                                                <span class="rounded bg-[var(--accent)]/10 px-2 py-0.5 text-[10px] font-bold tracking-widest text-[var(--accent)] uppercase">
                                                     {post.data.tags[0]}
                                                 </span>
                                             </>
@@ -123,7 +168,7 @@ const postsWithReadingTime = posts.map((post) => {
                                     </div>
                                     <h2
                                         class:list={[
-                                            'font-bold text-balance tracking-tight text-slate-900 transition-colors group-hover:text-[var(--accent)] group-focus-visible:text-[var(--accent)] dark:text-white',
+                                            'font-bold tracking-tight text-balance text-slate-900 transition-colors group-hover:text-[var(--accent)] group-focus-visible:text-[var(--accent)] dark:text-white',
                                             i === 0 ? 'text-3xl' : 'text-xl',
                                         ]}
                                     >
@@ -132,8 +177,8 @@ const postsWithReadingTime = posts.map((post) => {
                                     <p class="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
                                         {post.data.description}
                                     </p>
-                                    <div class="mt-4 overflow-hidden h-6">
-                                        <span class="inline-block text-sm font-bold text-[var(--accent)] opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                                    <div class="mt-4 h-6 overflow-hidden">
+                                        <span class="inline-block -translate-x-4 text-sm font-bold text-[var(--accent)] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
                                             Read Transmission &rarr;
                                         </span>
                                     </div>
@@ -151,7 +196,7 @@ const postsWithReadingTime = posts.map((post) => {
             const setupSearch = () => {
                 const searchInput = document.getElementById('search-logs') as HTMLInputElement;
                 const cards = document.querySelectorAll('.blog-post-card');
-                
+
                 if (searchInput) {
                     searchInput.addEventListener('input', (e) => {
                         const term = (e.target as HTMLInputElement).value.toLowerCase();
@@ -170,7 +215,7 @@ const postsWithReadingTime = posts.map((post) => {
 
             // Run on initial load
             setupSearch();
-            
+
             // Run on Astro page navigation if view transitions are used
             document.addEventListener('astro:page-load', setupSearch);
         </script>
