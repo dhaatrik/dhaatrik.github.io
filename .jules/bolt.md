@@ -27,6 +27,7 @@
 
 **Learning:** When preloading specific font weights (like 700 bold), always explicitly import the corresponding CSS `@font-face` rule for that weight (e.g., `import '@fontsource/poppins/700.css'`) instead of relying on default bare imports (like `import '@fontsource/poppins'`), which typically only provide the 400 normal weight. Failing to do so causes the browser to download the preloaded font as dead weight and rely on expensive faux-bold synthesis.
 **Action:** When preloading fonts, verify the imported font weight matches the preloaded font file weight exactly.
+
 ## 2026-05-09 - Caching URL objects for multiple meta tags
 
 **Learning:** When multiple meta tags (e.g., `og:image`, `twitter:image`) share the exact same `URL` instantiated from a string (e.g., `new URL(image.src, Astro.site)`), doing so inline results in redundant parsing and object creation during each SSG render cycle.
@@ -35,3 +36,7 @@
 ## 2026-05-12 - Date Formatter Optimization
 **Learning:** Using `toLocaleDateString` in Astro components rendered in loops during SSG is ~94x slower than using a cached `Intl.DateTimeFormat`.
 **Action:** Replaced `toLocaleDateString` with the existing `<FormattedDate />` component which encapsulates the cached formatter.
+
+## 2026-05-14 - Replace toLocaleDateString with cached Intl.DateTimeFormat in components
+**Learning:** Using `toLocaleDateString` inside a loop or mapped array forces the browser/Node to instantiate a new `Intl.DateTimeFormat` object each time, which is extremely slow. Benchmarks show that reusing a single cached `Intl.DateTimeFormat` instance is ~94x faster during Astro SSG builds.
+**Action:** Whenever formatting dates in repeated components or lists, always use the `FormattedDate` component (or the cached `dateFormatter` utility) instead of calling `toLocaleDateString` directly.
