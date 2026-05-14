@@ -49,5 +49,11 @@
 **Action:** Use JavaScript to dynamically update the `aria-label` (and `title`) of state toggle buttons to describe the _next state_ it will transition to (e.g., "Switch to light mode" or "Switch to dark mode"), providing immediate context and clarity.
 
 ## 2026-05-12 - Repetitive 'Buy' links accessibility
+
 **Learning:** Repetitive mapped call-to-action links (like "Buy" or "Read More") in list items are terrible for screen readers, as they just hear the generic action text multiple times without context.
 **Action:** When mapping over items with identical CTA text, always use a dynamic `aria-label` (e.g., `Buy ${item.title}`) and ensure `target="_blank"` links append `(opens in a new tab)` for full context. Also, ensure modals have accessible close buttons and all interactive elements maintain clear `focus-visible` styling.
+
+## 2026-05-13 - Focusable skip link targets
+
+**Learning:** When using skip links (like "Skip to content"), the target elements (e.g. `<main id="main-content">`) must have `tabindex="-1"`. Without this, some browsers won't programmatically focus the container when navigating via the skip link, breaking the keyboard navigation flow.
+**Action:** Always ensure that elements targeted by skip links have `tabindex="-1"` so that focus is reliably moved to the main content area for keyboard and screen reader users.
