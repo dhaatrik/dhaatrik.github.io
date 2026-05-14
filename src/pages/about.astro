@@ -8,7 +8,7 @@ import { SITE_TITLE, SOCIAL_LINKS } from '../consts';
 import { techGroups } from '../data/techStack';
 
 // Library Tracking Data
-const booksRead = 7
+const booksRead = 7;
 const booksGoal = 52;
 const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100);
 ---
@@ -24,206 +24,433 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
         <link rel="preconnect" href="https://img.shields.io" crossorigin />
         <link rel="dns-prefetch" href="https://img.shields.io" />
     </head>
-    <body class="flex min-h-screen flex-col bg-grid-motif pt-24 relative">
+    <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <Header />
-        <main id="main-content" class="layout-container flex-grow space-y-20 py-8 relative">
-             <div class="absolute right-0 top-32 -z-10 opacity-5 pointer-events-none text-slate-900 dark:text-white">
-                <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="none" stroke="currentColor" stroke-width="1" d="M100 100 m-80,0 a80,80 0 1,0 160,0 a80,80 0 1,0 -160,0 M100 100 m-60,0 a60,60 0 1,0 120,0 a60,60 0 1,0 -120,0 M100 100 m-40,0 a40,40 0 1,0 80,0 a40,40 0 1,0 -80,0 M20 100 h160 M100 20 v160" />
+        <main id="main-content" class="layout-container relative flex-grow space-y-20 py-8">
+            <div
+                class="pointer-events-none absolute top-32 right-0 -z-10 text-slate-900 opacity-5 dark:text-white"
+            >
+                <svg
+                    width="400"
+                    height="400"
+                    viewBox="0 0 200 200"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        d="M100 100 m-80,0 a80,80 0 1,0 160,0 a80,80 0 1,0 -160,0 M100 100 m-60,0 a60,60 0 1,0 120,0 a60,60 0 1,0 -120,0 M100 100 m-40,0 a40,40 0 1,0 80,0 a40,40 0 1,0 -80,0 M20 100 h160 M100 20 v160"
+                    ></path>
                 </svg>
-             </div>
+            </div>
 
             <section class="max-w-4xl">
                 <div class="mb-16 flex flex-col items-center gap-8 md:flex-row md:items-start">
                     <div class="w-full shrink-0 md:w-1/3">
-                        <img src="/me.jpeg" alt="Dhaatrik" class="aspect-square w-full rounded-2xl border border-slate-200 object-cover shadow-xl transition-all duration-500 hover:grayscale-0 dark:border-white/10 grayscale" />
+                        <img
+                            src="/me.jpeg"
+                            alt="Dhaatrik"
+                            class="aspect-square w-full rounded-2xl border border-slate-200 object-cover shadow-xl grayscale transition-all duration-500 hover:grayscale-0 dark:border-white/10"
+                        />
                     </div>
                     <div class="w-full md:w-2/3">
-                        <h1 class="mb-2 text-4xl leading-tight font-bold text-slate-900 md:text-5xl dark:text-white">
+                        <h1
+                            class="mb-2 text-4xl leading-tight font-bold text-slate-900 md:text-5xl dark:text-white"
+                        >
                             About Me
                         </h1>
-                        <span class="mb-6 block text-sm font-mono text-[var(--accent)]">Current Status: Q2 2026</span>
-                        
-                        <div class="space-y-6 text-lg leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
+                        <span class="mb-6 block font-mono text-sm text-[var(--accent)]"
+                            >Current Status: Q2 2026</span
+                        >
+
+                        <div
+                            class="space-y-6 text-lg leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]"
+                        >
                             <p>
-                                I’m Dhaatrik, an engineer and entrepreneur driven by a relentless curiosity for how the universe operates. I build robust, data-sovereign systems by stripping complex problems down to their fundamental truths.
+                                I’m Dhaatrik, an engineer and entrepreneur driven by a relentless
+                                curiosity for how the universe operates. I build robust,
+                                data-sovereign systems by stripping complex problems down to their
+                                fundamental truths.
                             </p>
                         </div>
                     </div>
                 </div>
-
             </section>
 
-            <section class="max-w-5xl mb-20 relative z-10">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bento-card p-6 flex flex-col justify-between group relative overflow-hidden">
+            <section class="relative z-10 mb-20 max-w-5xl">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div
+                        class="bento-card group relative flex flex-col justify-between overflow-hidden p-6"
+                    >
                         <div class="relative z-10">
-                            <h2 class="flex items-center gap-2 mb-4 text-2xl font-bold text-slate-900 dark:text-white">
-                                <svg class="w-6 h-6 text-slate-500 dark:text-[var(--text-secondary)]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                                <span class="cypher-text" data-original="What I'm Building">What I'm Building</span>
+                            <h2
+                                class="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white"
+                            >
+                                <svg
+                                    class="h-6 w-6 text-slate-500 dark:text-[var(--text-secondary)]"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><rect x="4" y="4" width="16" height="16" rx="2" ry="2"
+                                    ></rect><rect x="9" y="9" width="6" height="6"></rect><line
+                                        x1="9"
+                                        y1="1"
+                                        x2="9"
+                                        y2="4"></line><line x1="15" y1="1" x2="15" y2="4"
+                                    ></line><line x1="9" y1="20" x2="9" y2="23"></line><line
+                                        x1="15"
+                                        y1="20"
+                                        x2="15"
+                                        y2="23"></line><line x1="20" y1="9" x2="23" y2="9"
+                                    ></line><line x1="20" y1="14" x2="23" y2="14"></line><line
+                                        x1="1"
+                                        y1="9"
+                                        x2="4"
+                                        y2="9"></line><line x1="1" y1="14" x2="4" y2="14"
+                                    ></line></svg
+                                >
+                                <span class="cypher-text" data-original="What I'm Building"
+                                    >What I'm Building</span
+                                >
                             </h2>
-                            <p class="leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
-                                I'm currently focused on the agriculture domain, working to integrate AI
-                                into the core fundamentals of farming to solve real-world problems. I also
-                                love building tools for the community, like <a href="https://github.com/dhaatrik" target="_blank" rel="noopener noreferrer" class="text-[var(--accent)] hover:underline decoration-dashed underline-offset-4">Vellor</a>, an
-                                offline-first tool for independent educators.
+                            <p
+                                class="leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]"
+                            >
+                                I'm currently focused on the agriculture domain, working to
+                                integrate AI into the core fundamentals of farming to solve
+                                real-world problems. I also love building tools for the community,
+                                like <a
+                                    href="https://github.com/dhaatrik"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-[var(--accent)] decoration-dashed underline-offset-4 hover:underline"
+                                    >Vellor</a
+                                >, an offline-first tool for independent educators.
                             </p>
                         </div>
                     </div>
 
-                    <div class="bento-card p-6 flex flex-col justify-between group relative overflow-hidden">
-                        <div class="absolute left-1/2 -translate-x-1/2 bottom-4 opacity-5 pointer-events-none select-none text-4xl sm:text-5xl font-serif text-slate-900 dark:text-white whitespace-nowrap blur-[1px] group-hover:opacity-10 transition-opacity duration-500">
+                    <div
+                        class="bento-card group relative flex flex-col justify-between overflow-hidden p-6"
+                    >
+                        <div
+                            class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 font-serif text-4xl whitespace-nowrap text-slate-900 opacity-5 blur-[1px] transition-opacity duration-500 select-none group-hover:opacity-10 sm:text-5xl dark:text-white"
+                        >
                             Δv = v<sub>e</sub> ln(m<sub>0</sub> / m<sub>f</sub>)
                         </div>
                         <div class="relative z-10">
-                            <h2 class="flex items-center gap-2 mb-4 text-2xl font-bold text-slate-900 dark:text-white">
-                                <svg class="w-6 h-6 text-slate-500 dark:text-[var(--text-secondary)]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
-                                <span class="cypher-text" data-original="What I'm Learning">What I'm Learning</span>
+                            <h2
+                                class="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white"
+                            >
+                                <svg
+                                    class="h-6 w-6 text-slate-500 dark:text-[var(--text-secondary)]"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><path
+                                        d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+                                    ></path><path
+                                        d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+                                    ></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"
+                                    ></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"
+                                    ></path></svg
+                                >
+                                <span class="cypher-text" data-original="What I'm Learning"
+                                    >What I'm Learning</span
+                                >
                             </h2>
-                            <p class="leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]">
-                                My curiosity pulls me toward the intricacies of reality. Right now, that
-                                means diving deep into the math of rocket engineering, the weirdness of
-                                quantum mechanics, and the fascinating depths of human psychology.
+                            <p
+                                class="leading-relaxed text-slate-600 dark:text-[var(--text-secondary)]"
+                            >
+                                My curiosity pulls me toward the intricacies of reality. Right now,
+                                that means diving deep into the math of rocket engineering, the
+                                weirdness of quantum mechanics, and the fascinating depths of human
+                                psychology.
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="max-w-5xl mb-20 relative">
+            <section class="relative mb-20 max-w-5xl">
                 <h2 class="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
                     Current Trajectory
                 </h2>
-                
-                <div class="bento-card p-0 overflow-hidden relative group">
+
+                <div class="bento-card group relative overflow-hidden p-0">
                     {/* Background abstract radar pattern */}
-                    <div class="absolute inset-0 opacity-20 pointer-events-none transition-opacity duration-500 group-hover:opacity-40" style="background-image: radial-gradient(circle at 100% 0%, var(--accent-glow) 0%, transparent 50%);"></div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-[1fr_2.5fr] relative z-10">
+                    <div
+                        class="pointer-events-none absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40"
+                        style="background-image: radial-gradient(circle at 100% 0%, var(--accent-glow) 0%, transparent 50%);"
+                    >
+                    </div>
+
+                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-[1fr_2.5fr]">
                         {/* Left sidebar - Telemetry/Status */}
-                        <div class="p-6 md:p-8 bg-slate-50/50 dark:bg-black/20 border-b md:border-b-0 md:border-r border-slate-100 dark:border-white/5 flex flex-col justify-between">
+                        <div
+                            class="flex flex-col justify-between border-b border-slate-100 bg-slate-50/50 p-6 md:border-r md:border-b-0 md:p-8 dark:border-white/5 dark:bg-black/20"
+                        >
                             <div>
-                                <div class="inline-flex items-center gap-2 px-3 py-1 bg-[var(--accent)]/10 text-[var(--accent)] rounded-full text-[10px] font-mono font-bold tracking-widest mb-6 uppercase border border-[var(--accent)]/20 shadow-sm">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
+                                <div
+                                    class="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/20 bg-[var(--accent)]/10 px-3 py-1 font-mono text-[10px] font-bold tracking-widest text-[var(--accent)] uppercase shadow-sm"
+                                >
+                                    <span
+                                        class="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--accent)]"
+                                    ></span>
                                     Telemetry Active
                                 </div>
-                                <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">Q1 2025</h3>
-                                <p class="text-xs font-mono text-slate-500 dark:text-slate-400">STATUS: Post-Flight Analysis</p>
+                                <h3
+                                    class="mb-2 text-3xl font-bold tracking-tight text-slate-900 dark:text-white"
+                                >
+                                    Q1 2025
+                                </h3>
+                                <p class="font-mono text-xs text-slate-500 dark:text-slate-400">
+                                    STATUS: Post-Flight Analysis
+                                </p>
                             </div>
-                            
-                            <div class="hidden md:block mt-12">
-                                <div class="text-[10px] text-slate-400 uppercase tracking-widest mb-2 font-bold">Focus Node</div>
-                                <div class="font-mono text-[var(--accent)] font-bold text-lg">FuelDrop</div>
-                                <div class="text-xs text-slate-500 mt-1">Logistics / Ag-Tech</div>
+
+                            <div class="mt-12 hidden md:block">
+                                <div
+                                    class="mb-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase"
+                                >
+                                    Focus Node
+                                </div>
+                                <div class="font-mono text-lg font-bold text-[var(--accent)]">
+                                    FuelDrop
+                                </div>
+                                <div class="mt-1 text-xs text-slate-500">Logistics / Ag-Tech</div>
                             </div>
                         </div>
 
                         {/* Right content - Mission Log */}
-                        <div class="p-6 md:p-8 flex flex-col justify-center">
-                            <div class="flex justify-between items-start mb-6">
-                                <h4 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        <div class="flex flex-col justify-center p-6 md:p-8">
+                            <div class="mb-6 flex items-start justify-between">
+                                <h4
+                                    class="flex items-center gap-2 text-xl font-bold text-slate-900 dark:text-white"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="text-slate-400"
+                                        ><path
+                                            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                                        ></path></svg
+                                    >
                                     A Note on the Journey
                                 </h4>
-                                <span class="text-[10px] font-mono text-[var(--accent)] bg-[var(--accent)]/10 border border-[var(--accent)]/20 px-2 py-1 rounded shadow-sm">LOG_ENTRY: 402</span>
+                                <span
+                                    class="rounded border border-[var(--accent)]/20 bg-[var(--accent)]/10 px-2 py-1 font-mono text-[10px] text-[var(--accent)] shadow-sm"
+                                    >LOG_ENTRY: 402</span
+                                >
                             </div>
 
-                            <div class="space-y-5 text-slate-600 dark:text-[var(--text-secondary)] leading-relaxed text-sm md:text-base">
+                            <div
+                                class="space-y-5 text-sm leading-relaxed text-slate-600 md:text-base dark:text-[var(--text-secondary)]"
+                            >
                                 <p>
-                                    <strong class="text-slate-900 dark:text-white font-medium">FuelDrop</strong> was more than just a codebase; it was my primary startup focus during the first quarter of 2025. I'll soon be sharing a comprehensive deep-dive article detailing the entire lifecycle of this venture.
+                                    <strong class="font-medium text-slate-900 dark:text-white"
+                                        >FuelDrop</strong
+                                    > was more than just a codebase; it was my primary startup focus during
+                                    the first quarter of 2025. I'll soon be sharing a comprehensive deep-dive
+                                    article detailing the entire lifecycle of this venture.
                                 </p>
-                                <div class="border-l-2 border-[var(--accent)] pl-4 py-1 my-4">
-                                    <p class="italic text-slate-700 dark:text-slate-300 font-medium">
+                                <div class="my-4 border-l-2 border-[var(--accent)] py-1 pl-4">
+                                    <p
+                                        class="font-medium text-slate-700 italic dark:text-slate-300"
+                                    >
                                         "Knowledge kept secret is knowledge wasted."
                                     </p>
                                 </div>
                                 <p>
-                                    I'll be pulling back the curtain on the raw reality of building an on-demand logistics startup, the "hard-knock" lessons learned, and the technical breakdowns. 
-                                    <span class="cypher-text text-[var(--accent)] font-bold ml-1 cursor-crosshair underline decoration-dashed underline-offset-4" data-original="Stay tuned.">Stay tuned.</span>
+                                    I'll be pulling back the curtain on the raw reality of building
+                                    an on-demand logistics startup, the "hard-knock" lessons
+                                    learned, and the technical breakdowns.
+                                    <span
+                                        class="cypher-text ml-1 cursor-crosshair font-bold text-[var(--accent)] underline decoration-dashed underline-offset-4"
+                                        data-original="Stay tuned.">Stay tuned.</span
+                                    >
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            
-            <section class="max-w-5xl mb-20">
-                <h2 class="mb-6 text-2xl font-bold text-slate-900 dark:text-white">Signal & Metrics</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
+
+            <section class="mb-20 max-w-5xl">
+                <h2 class="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
+                    Signal & Metrics
+                </h2>
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     {/* 1. The "52-Book Trajectory" Library Card */}
-                    <div class="bento-card p-6 flex flex-col justify-between group relative overflow-hidden">
+                    <div
+                        class="bento-card group relative flex flex-col justify-between overflow-hidden p-6"
+                    >
                         <div class="relative z-10">
-                            <div class="flex justify-between items-start mb-4">
-                                <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent)]"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>
+                            <div class="mb-4 flex items-start justify-between">
+                                <h3
+                                    class="flex items-center gap-2 font-bold text-slate-900 dark:text-white"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="18"
+                                        height="18"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="text-[var(--accent)]"
+                                        ><path
+                                            d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"
+                                        ></path></svg
+                                    >
                                     Library Trajectory
                                 </h3>
-                                <span class="text-xs font-mono text-[var(--text-secondary)]">2026 Goal</span>
+                                <span class="font-mono text-xs text-[var(--text-secondary)]"
+                                    >2026 Goal</span
+                                >
                             </div>
                             <div class="mb-4">
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-600 dark:text-slate-400">Books Read</span>
-                                    <span class="font-mono text-[var(--accent)]">{booksRead} / {booksGoal}</span>
+                                <div class="mb-1 flex justify-between text-sm">
+                                    <span class="text-slate-600 dark:text-slate-400"
+                                        >Books Read</span
+                                    >
+                                    <span class="font-mono text-[var(--accent)]"
+                                        >{booksRead} / {booksGoal}</span
+                                    >
                                 </div>
-                                <div class="h-2 w-full bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden">
-                                    <div class="h-full bg-[var(--accent)] rounded-full" style={`width: ${readingProgress}%`}></div>
+                                <div
+                                    class="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-white/5"
+                                >
+                                    <div
+                                        class="h-full rounded-full bg-[var(--accent)]"
+                                        style={`width: ${readingProgress}%`}
+                                    >
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="relative z-10 mt-4 space-y-3">
-                            <div class="p-3 bg-slate-50 dark:bg-black/20 rounded-lg border border-slate-100 dark:border-white/5 transition-colors group-hover:border-[var(--accent)]/30">
-                                <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">Currently Reading</span>
-                                <div class="flex justify-between items-center gap-4">
-                                    <span class="text-sm font-medium text-slate-900 dark:text-white truncate">Elon Musk - Ashlee Vance</span>
-                                    <a href="https://www.amazon.in/Elon-Musk-Billionaire-SpaceX-Shaping-ebook/dp/B00SIDCSWY" target="_blank" rel="noopener noreferrer" class="shrink-0 px-3 py-1 bg-[var(--accent)] text-white text-[10px] uppercase font-bold rounded hover:bg-blue-600 transition-colors shadow-sm">Buy</a>
+                            <div
+                                class="rounded-lg border border-slate-100 bg-slate-50 p-3 transition-colors group-hover:border-[var(--accent)]/30 dark:border-white/5 dark:bg-black/20"
+                            >
+                                <span
+                                    class="mb-1 block text-xs tracking-wider text-slate-500 uppercase dark:text-slate-400"
+                                    >Currently Reading</span
+                                >
+                                <div class="flex items-center justify-between gap-4">
+                                    <span
+                                        class="truncate text-sm font-medium text-slate-900 dark:text-white"
+                                        >Elon Musk - Ashlee Vance</span
+                                    >
+                                    <a
+                                        href="https://www.amazon.in/Elon-Musk-Billionaire-SpaceX-Shaping-ebook/dp/B00SIDCSWY"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="shrink-0 rounded bg-[var(--accent)] px-3 py-1 text-[10px] font-bold text-white uppercase shadow-sm transition-colors hover:bg-blue-600"
+                                        >Buy</a
+                                    >
                                 </div>
                             </div>
-                            <button onclick="document.getElementById('books-modal').showModal()" class="w-full py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold transition-all hover:bg-slate-800 dark:hover:bg-slate-200 shadow-sm hover:shadow-[0_0_15px_var(--accent-glow)]">
+                            <button
+                                onclick="document.getElementById('books-modal').showModal()"
+                                class="w-full rounded-lg bg-slate-900 py-2 text-sm font-bold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-[0_0_15px_var(--accent-glow)] dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+                            >
                                 Recommended Books
                             </button>
                         </div>
                     </div>
 
-
-
                     {/* 6. Monthly Insights Terminal Snippet */}
-                    <div class="bento-card bg-[#1e1e1e] border-[#333] dark:bg-[#1e1e1e] dark:border-[#333] p-0 flex flex-col overflow-hidden text-left h-full">
-                        <div class="bg-[#2d2d2d] px-4 py-2 flex items-center gap-2 border-b border-[#111]">
+                    <div
+                        class="bento-card flex h-full flex-col overflow-hidden border-[#333] bg-[#1e1e1e] p-0 text-left dark:border-[#333] dark:bg-[#1e1e1e]"
+                    >
+                        <div
+                            class="flex items-center gap-2 border-b border-[#111] bg-[#2d2d2d] px-4 py-2"
+                        >
                             <div class="flex gap-1.5">
-                                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                                <div class="h-3 w-3 rounded-full bg-[#ff5f56]"></div>
+                                <div class="h-3 w-3 rounded-full bg-[#ffbd2e]"></div>
+                                <div class="h-3 w-3 rounded-full bg-[#27c93f]"></div>
                             </div>
-                            <span class="text-[#888] text-xs font-mono ml-2">bash</span>
+                            <span class="ml-2 font-mono text-xs text-[#888]">bash</span>
                         </div>
-                        <div class="p-4 font-mono text-sm flex-grow">
-                            <div class="text-[#50fa7b] mb-2">$ cat /logs/may-reflection.txt</div>
-                            <div class="text-[#f8f8f2] leading-relaxed">
-                                <span class="text-[#bd93f9]">"</span>Optimization is a trap if you haven't nailed the fundamentals first. Build robust, scale later.<span class="text-[#bd93f9]">"</span>
+                        <div class="flex-grow p-4 font-mono text-sm">
+                            <div class="mb-2 text-[#50fa7b]">$ cat /logs/may-reflection.txt</div>
+                            <div class="leading-relaxed text-[#f8f8f2]">
+                                <span class="text-[#bd93f9]">"</span>Optimization is a trap if you
+                                haven't nailed the fundamentals first. Build robust, scale later.<span
+                                    class="text-[#bd93f9]">"</span
+                                >
                             </div>
-                            <div class="text-[#50fa7b] mt-2 animate-pulse">_</div>
+                            <div class="mt-2 animate-pulse text-[#50fa7b]">_</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-
-
             {/* 8. Interactive Terminal Contact CTA */}
-            <section class="max-w-5xl mb-12">
-                <div class="bento-card bg-slate-50 border-slate-200 dark:bg-[#0d1117] dark:border-[#30363d] overflow-hidden p-8 md:p-12 flex flex-col items-center text-center relative group">
-                    <div class="absolute inset-0 bg-grid-motif opacity-10 pointer-events-none"></div>
+            <section class="mb-12 max-w-5xl">
+                <div
+                    class="bento-card group relative flex flex-col items-center overflow-hidden border-slate-200 bg-slate-50 p-8 text-center md:p-12 dark:border-[#30363d] dark:bg-[#0d1117]"
+                >
+                    <div class="bg-grid-motif pointer-events-none absolute inset-0 opacity-10">
+                    </div>
                     <div class="relative z-10 w-full max-w-2xl">
-                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 font-mono">> Let's Connect</h2>
-                        <p class="text-slate-600 dark:text-slate-400 mb-8 font-mono text-sm md:text-base leading-relaxed">
-                            Want to discuss multi-agent orchestration, rocket kinematics, or the future of ag-tech?
+                        <h2
+                            class="mb-4 font-mono text-3xl font-bold text-slate-900 md:text-4xl dark:text-white"
+                        >
+                            > Let's Connect
+                        </h2>
+                        <p
+                            class="mb-8 font-mono text-sm leading-relaxed text-slate-600 md:text-base dark:text-slate-400"
+                        >
+                            Want to discuss multi-agent orchestration, rocket kinematics, or the
+                            future of ag-tech?
                         </p>
-                        
-                        <div class="flex justify-center mt-4">
-                            <a href={SOCIAL_LINKS.twitter} target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-8 py-3 font-mono font-bold text-white transition-all hover:bg-blue-600 hover:-translate-y-1 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:outline-none">
+
+                        <div class="mt-4 flex justify-center">
+                            <a
+                                href={SOCIAL_LINKS.twitter}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="group relative inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-8 py-3 font-mono font-bold text-white transition-all hover:-translate-y-1 hover:bg-blue-600 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:outline-none"
+                            >
                                 ~ $ connect --x
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="transition-transform group-hover:translate-x-1"
+                                    ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
+                                >
                             </a>
                         </div>
                     </div>
@@ -238,63 +465,108 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             </section>
 
             {/* Recommended Books Modal */}
-            <dialog id="books-modal" class="m-auto backdrop:bg-black/50 backdrop:backdrop-blur-sm bg-white dark:bg-[#0b0e14] border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl p-0 w-full max-w-lg">
-                <div class="p-6 border-b border-slate-100 dark:border-white/5 flex justify-between items-center">
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+            <dialog
+                id="books-modal"
+                class="m-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm dark:border-white/10 dark:bg-[#0b0e14]"
+            >
+                <div
+                    class="flex items-center justify-between border-b border-slate-100 p-6 dark:border-white/5"
+                >
+                    <h3
+                        class="flex items-center gap-3 text-xl font-bold text-slate-900 dark:text-white"
+                    >
                         Recommended Books
-                        <span class="text-[10px] px-2 py-0.5 rounded-full border border-[var(--accent)] text-[var(--accent)] font-bold tracking-wider opacity-80 uppercase">Not Sponsored</span>
+                        <span
+                            class="rounded-full border border-[var(--accent)] px-2 py-0.5 text-[10px] font-bold tracking-wider text-[var(--accent)] uppercase opacity-80"
+                            >Not Sponsored</span
+                        >
                     </h3>
-                    <button aria-label="Close recommended books modal" onclick="document.getElementById('books-modal').close()" class="text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer p-1 rounded-sm focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-[var(--bg-main)]">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                    <button
+                        aria-label="Close recommended books modal"
+                        onclick="document.getElementById('books-modal').close()"
+                        class="cursor-pointer rounded-sm p-1 text-slate-500 transition-colors hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white dark:focus-visible:ring-offset-[var(--bg-main)]"
+                    >
+                        <svg
+                            width="24"
+                            height="24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg
+                        >
                     </button>
                 </div>
-                <div class="p-6 max-h-[60vh] overflow-y-auto space-y-4">
-                    {[
-                        { title: "As a Man Thinketh", author: "James Allen", link: "https://www.amazon.in/As-Man-Thinketh-James-Allen/dp/9386538172" },
-                        { title: "How to Win Friends and Influence People", author: "Dale Carnegie", link: "https://www.amazon.in/How-Win-Friends-Influence-People/dp/0671027034?s=bazaar" },
-                        { title: "Marketing Management", author: "Philip Kotler", link: "https://www.amazon.in/Marketing-Management-17th-Philip-Kotler/dp/9367138199/ref=sr_1_1_sspa?crid=3LXWM7OV5BGZC&dib=eyJ2IjoiMSJ9.sLFz-n94M3czJDqJ9PP_32HJu72s7iE60M-ItoJp6vdG_i_luKRHC5qjtvFvbwdbhaDQcAcqREZdFZ0Ed0tq4MvMlFxqTsTgReZYC_jjnP86oxfOhad4BxPUlGEJKdmeDfCW7VZbG3SKTxzuPh-YvA4b-NlscmOi4It-IP8RT0okW55U_hkkSUZ4gnB6BNKsQFpR4PmxOjdhLWS8dOlLIbyIG8aAQeS7EB0glkLcZRw.TSj1dE0pcTX9PnG4fTof_JbQM04mjr9Rv2TPs-ne3zg&dib_tag=se&keywords=marketing+management+by+philip+kotler&qid=1778389155&sprefix=Marketing%2Caps%2C567&sr=8-1-spons&aref=WM64g7r717&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1" },
-                        { title: "Book Title 4", author: "Author Name", link: "#" },
-                        { title: "Book Title 5", author: "Author Name", link: "#" },
-                        { title: "Book Title 6", author: "Author Name", link: "#" },
-                        { title: "Book Title 7", author: "Author Name", link: "#" },
-                        { title: "Book Title 8", author: "Author Name", link: "#" },
-                        { title: "Book Title 9", author: "Author Name", link: "#" },
-                        { title: "Book Title 10", author: "Author Name", link: "#" },
-                    ].map((book) => (
-                        <div class="flex justify-between items-center p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-100 dark:border-white/5 transition-colors hover:border-slate-300 dark:hover:border-white/20">
-                            <div>
-                                <h4 class="font-bold text-sm text-slate-900 dark:text-white">{book.title}</h4>
-                                <p class="text-xs text-slate-500 mt-0.5">{book.author}</p>
+                <div class="max-h-[60vh] space-y-4 overflow-y-auto p-6">
+                    {
+                        [
+                            {
+                                title: 'As a Man Thinketh',
+                                author: 'James Allen',
+                                link: 'https://www.amazon.in/As-Man-Thinketh-James-Allen/dp/9386538172',
+                            },
+                            {
+                                title: 'How to Win Friends and Influence People',
+                                author: 'Dale Carnegie',
+                                link: 'https://www.amazon.in/How-Win-Friends-Influence-People/dp/0671027034?s=bazaar',
+                            },
+                            {
+                                title: 'Marketing Management',
+                                author: 'Philip Kotler',
+                                link: 'https://www.amazon.in/Marketing-Management-17th-Philip-Kotler/dp/9367138199/ref=sr_1_1_sspa?crid=3LXWM7OV5BGZC&dib=eyJ2IjoiMSJ9.sLFz-n94M3czJDqJ9PP_32HJu72s7iE60M-ItoJp6vdG_i_luKRHC5qjtvFvbwdbhaDQcAcqREZdFZ0Ed0tq4MvMlFxqTsTgReZYC_jjnP86oxfOhad4BxPUlGEJKdmeDfCW7VZbG3SKTxzuPh-YvA4b-NlscmOi4It-IP8RT0okW55U_hkkSUZ4gnB6BNKsQFpR4PmxOjdhLWS8dOlLIbyIG8aAQeS7EB0glkLcZRw.TSj1dE0pcTX9PnG4fTof_JbQM04mjr9Rv2TPs-ne3zg&dib_tag=se&keywords=marketing+management+by+philip+kotler&qid=1778389155&sprefix=Marketing%2Caps%2C567&sr=8-1-spons&aref=WM64g7r717&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',
+                            },
+                            { title: 'Book Title 4', author: 'Author Name', link: '#' },
+                            { title: 'Book Title 5', author: 'Author Name', link: '#' },
+                            { title: 'Book Title 6', author: 'Author Name', link: '#' },
+                            { title: 'Book Title 7', author: 'Author Name', link: '#' },
+                            { title: 'Book Title 8', author: 'Author Name', link: '#' },
+                            { title: 'Book Title 9', author: 'Author Name', link: '#' },
+                            { title: 'Book Title 10', author: 'Author Name', link: '#' },
+                        ].map((book) => (
+                            <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-3 transition-colors hover:border-slate-300 dark:border-white/5 dark:bg-white/5 dark:hover:border-white/20">
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-900 dark:text-white">
+                                        {book.title}
+                                    </h4>
+                                    <p class="mt-0.5 text-xs text-slate-500">{book.author}</p>
+                                </div>
+                                <a
+                                    aria-label={`Buy ${book.title} (opens in a new tab)`}
+                                    href={book.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="rounded-md bg-[var(--accent)] px-4 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-[var(--bg-main)]"
+                                >
+                                    Buy
+                                </a>
                             </div>
-                            <a aria-label={`Buy ${book.title} (opens in a new tab)`} href={book.link} target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-[var(--accent)] text-white text-xs font-bold rounded-md hover:bg-blue-600 transition-all active:scale-95 shadow-sm focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-[var(--bg-main)]">Buy</a>
-                        </div>
-                    ))}
+                        ))
+                    }
                 </div>
             </dialog>
         </main>
         <Footer />
         <script>
             // Scramble / Cypher Text Hover Effects
-            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
             const cypherElements = document.querySelectorAll('.cypher-text');
-            
-            cypherElements.forEach(element => {
-                element.addEventListener('mouseenter', event => {
+
+            cypherElements.forEach((element) => {
+                element.addEventListener('mouseenter', (event) => {
                     let iterations = 0;
                     const originalText = event.target.dataset.original;
                     const length = originalText.length;
-                    
+
                     clearInterval(event.target.cypherInterval);
-                    
+
                     event.target.cypherInterval = setInterval(() => {
-                        event.target.innerText = originalText.split("")
+                        event.target.innerText = originalText
+                            .split('')
                             .map((letter, index) => {
-                                if(index < iterations) return originalText[index];
+                                if (index < iterations) return originalText[index];
                                 return letters[Math.floor(Math.random() * 42)];
                             })
-                            .join("");
-                        
-                        if(iterations >= length) clearInterval(event.target.cypherInterval);
+                            .join('');
+
+                        if (iterations >= length) clearInterval(event.target.cypherInterval);
                         iterations += 1 / 3;
                     }, 30);
                 });
@@ -314,15 +586,16 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             // The "Offline-First" Easter Egg
             window.addEventListener('offline', () => {
                 const toast = document.createElement('div');
-                toast.className = "fixed bottom-6 right-6 bg-slate-900 border border-[var(--accent)] text-white p-4 rounded-lg shadow-2xl z-50 font-mono text-sm max-w-sm translate-y-10 opacity-0 transition-all duration-300";
+                toast.className =
+                    'fixed bottom-6 right-6 bg-slate-900 border border-[var(--accent)] text-white p-4 rounded-lg shadow-2xl z-50 font-mono text-sm max-w-sm translate-y-10 opacity-0 transition-all duration-300';
                 toast.innerHTML = `<span class="text-[var(--accent)] font-bold">Vellor Protocol Engaged:</span> You are offline, but this data remains accessible.`;
                 document.body.appendChild(toast);
-                
+
                 // Animate in
                 setTimeout(() => {
                     toast.classList.remove('translate-y-10', 'opacity-0');
                 }, 100);
-                
+
                 // Remove after 6 seconds
                 setTimeout(() => {
                     toast.classList.add('translate-y-10', 'opacity-0');
