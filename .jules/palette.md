@@ -57,3 +57,8 @@
 
 **Learning:** When using skip links (like "Skip to content"), the target elements (e.g. `<main id="main-content">`) must have `tabindex="-1"`. Without this, some browsers won't programmatically focus the container when navigating via the skip link, breaking the keyboard navigation flow.
 **Action:** Always ensure that elements targeted by skip links have `tabindex="-1"` so that focus is reliably moved to the main content area for keyboard and screen reader users.
+
+## 2026-05-14 - False Affordances in Bento Card Spotlight
+
+**Learning:** The glowing spotlight effect (implemented via `::before` pseudo-element opacity change on hover) was indiscriminately applied to all `.bento-card` elements, creating false visual affordances on non-interactive containers.
+**Action:** Always restrict interactive hover effects, including decorative pseudo-elements like spotlights, to explicitly actionable elements (e.g., `a.bento-card:hover::before`, `button.bento-card:hover::before`) while preserving `focus-within` states for accessibility.

@@ -46,7 +46,7 @@ const imageUrl = new URL(image.src, Astro.site);
 <script is:inline>
     // Theme initializer — runs before paint to prevent FOUC.
     // Default to 'dark' if no stored preference.
-    (function() {
+    (function () {
         function applyTheme() {
             var stored = localStorage.getItem('theme');
             var isDark = stored ? stored === 'dark' : true;

@@ -104,20 +104,27 @@
 
     /* Gradient Border Pseudo-element */
     .bento-card::after {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
         border-radius: var(--bento-radius);
         padding: 1px;
         background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
         pointer-events: none;
     }
 
     .dark .bento-card::after {
-        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05), transparent);
+        background: linear-gradient(
+            to bottom right,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.05),
+            transparent
+        );
     }
 
     :root .bento-card::after {
@@ -126,7 +133,7 @@
 
     /* Mouse Spotlight Pseudo-element */
     .bento-card::before {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
         border-radius: inherit;
@@ -141,7 +148,9 @@
         z-index: 0;
     }
 
-    .bento-card:hover::before {
+    a.bento-card:hover::before,
+    button.bento-card:hover::before,
+    .bento-card:focus-within::before {
         opacity: 1;
     }
 
@@ -234,7 +243,7 @@
         background-image: radial-gradient(circle, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
         background-size: 32px 32px;
     }
-    
+
     .dark .bg-grid-motif {
         background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     }
@@ -265,9 +274,18 @@
     }
 }
 
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
-
+.delay-100 {
+    animation-delay: 100ms;
+}
+.delay-200 {
+    animation-delay: 200ms;
+}
+.delay-300 {
+    animation-delay: 300ms;
+}
+.delay-400 {
+    animation-delay: 400ms;
+}
+.delay-500 {
+    animation-delay: 500ms;
+}
