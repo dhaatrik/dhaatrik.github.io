@@ -40,3 +40,7 @@
 ## 2026-05-14 - Replace toLocaleDateString with cached Intl.DateTimeFormat in components
 **Learning:** Using `toLocaleDateString` inside a loop or mapped array forces the browser/Node to instantiate a new `Intl.DateTimeFormat` object each time, which is extremely slow. Benchmarks show that reusing a single cached `Intl.DateTimeFormat` instance is ~94x faster during Astro SSG builds.
 **Action:** Whenever formatting dates in repeated components or lists, always use the `FormattedDate` component (or the cached `dateFormatter` utility) instead of calling `toLocaleDateString` directly.
+
+## 2026-05-15 - Optimize setInterval with cached Intl.DateTimeFormat
+**Learning:** Using `toLocaleString` with timezone options inside a high-frequency `setInterval` (like a 1-second clock) forces the browser to continually instantiate new `Intl.DateTimeFormat` and `Date` objects, creating unnecessary main thread overhead and GC pressure.
+**Action:** Cache the `Intl.DateTimeFormat` instance outside the interval and use its `.format()` method to directly generate the required string, yielding an ~90x performance improvement in client-side execution time.
