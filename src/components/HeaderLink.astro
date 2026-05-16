@@ -4,7 +4,7 @@ import type { HTMLAttributes } from 'astro/types';
 type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+const pathname = Astro.url.pathname.replace((import.meta.env as any).BASE_URL, '');
 
 // ⚡ Bolt: Replace regex match with native string manipulation for ~3x faster execution during SSG
 const str = pathname.startsWith('/') ? pathname.substring(1) : pathname;
