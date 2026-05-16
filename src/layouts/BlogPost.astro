@@ -195,7 +195,7 @@ const commitHash = id
                     <div class="mt-16 border-t border-slate-200 pt-8 dark:border-slate-800">
                         <button
                             id="export-btn"
-                            class="group flex w-full cursor-pointer items-center justify-center gap-3 rounded border border-[var(--accent)]/20 bg-[var(--accent)]/10 px-6 py-3 font-mono text-sm tracking-widest text-[var(--accent)] transition-all hover:bg-[var(--accent)]/20"
+                            class="group flex w-full cursor-pointer items-center justify-center gap-3 rounded border border-[var(--accent)]/20 bg-[var(--accent)]/10 px-6 py-3 font-mono text-sm tracking-widest text-[var(--accent)] transition-all hover:bg-[var(--accent)]/20 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:focus-visible:ring-offset-[var(--bg-main)]"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -263,9 +263,10 @@ const commitHash = id
                             </a>
                             <button
                                 id="copy-link-btn"
-                                class="flex w-full cursor-pointer items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-colors hover:bg-slate-200 dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800"
+                                aria-label="Copy post link"
+                                class="flex w-full cursor-pointer items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-[var(--bg-main)]"
                             >
-                                <span>~ $ copy --link</span>
+                                <span aria-hidden="true">~ $ copy --link</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="14"
