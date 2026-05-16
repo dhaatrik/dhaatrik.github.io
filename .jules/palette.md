@@ -57,3 +57,8 @@
 
 **Learning:** When using skip links (like "Skip to content"), the target elements (e.g. `<main id="main-content">`) must have `tabindex="-1"`. Without this, some browsers won't programmatically focus the container when navigating via the skip link, breaking the keyboard navigation flow.
 **Action:** Always ensure that elements targeted by skip links have `tabindex="-1"` so that focus is reliably moved to the main content area for keyboard and screen reader users.
+
+## 2026-05-15 - Terminal-Style CTAs Need Explicit Context
+
+**Learning:** Stylized "terminal command" buttons (e.g., `~ $ connect --x` or `~ $ copy --link`) read poorly or confusingly to screen readers if the raw text is left exposed. Furthermore, setting `focus-visible:outline-none` without an explicit focus ring makes them completely inaccessible for keyboard users.
+**Action:** When creating stylized terminal CTAs, always wrap the stylized text in `aria-hidden="true"`, provide a clear, descriptive `aria-label` on the parent button/link, and ensure an explicit `focus-visible:ring-2` class is applied to replace the default outline.

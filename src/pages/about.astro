@@ -369,17 +369,18 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                         >Elon Musk - Ashlee Vance</span
                                     >
                                     <a
+                                        aria-label="Buy Elon Musk - Ashlee Vance (opens in a new tab)"
                                         href="https://www.amazon.in/Elon-Musk-Billionaire-SpaceX-Shaping-ebook/dp/B00SIDCSWY"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        class="shrink-0 rounded bg-[var(--accent)] px-3 py-1 text-[10px] font-bold text-white uppercase shadow-sm transition-colors hover:bg-blue-600"
+                                        class="shrink-0 rounded bg-[var(--accent)] px-3 py-1 text-[10px] font-bold text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-[var(--bg-main)]"
                                         >Buy</a
                                     >
                                 </div>
                             </div>
                             <button
                                 onclick="document.getElementById('books-modal').showModal()"
-                                class="w-full rounded-lg bg-slate-900 py-2 text-sm font-bold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-[0_0_15px_var(--accent-glow)] dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+                                class="w-full rounded-lg bg-slate-900 py-2 text-sm font-bold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-[0_0_15px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-[var(--bg-main)]"
                             >
                                 Recommended Books
                             </button>
@@ -439,9 +440,10 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                 href={SOCIAL_LINKS.twitter}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="group relative inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-8 py-3 font-mono font-bold text-white transition-all hover:-translate-y-1 hover:bg-blue-600 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:outline-none"
+                                aria-label="Connect on X (opens in a new tab)"
+                                class="group relative inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-8 py-3 font-mono font-bold text-white transition-all hover:-translate-y-1 hover:bg-blue-600 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-[var(--bg-main)]"
                             >
-                                ~ $ connect --x
+                                <span aria-hidden="true">~ $ connect --x</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="16"
