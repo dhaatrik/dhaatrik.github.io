@@ -7,6 +7,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
 import { techGroups } from '../data/techStack';
+import { getReadingTime } from '../utils/readingTime';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const posts = (await getCollection('blog'))
@@ -318,14 +319,12 @@ const premiumLineup = lineupNames
                                             {post.data.description}
                                         </p>
                                     </div>
-                                    <div class="flex mt-4 items-center text-xs text-slate-500 dark:text-[var(--text-secondary)]">
+                                    <div class="mt-4 flex items-center text-xs text-slate-500 dark:text-[var(--text-secondary)]">
                                         <FormattedDate date={post.data.pubDate} />
                                         <span class="mx-2">•</span>
                                         <span>
-                                            {Math.ceil(
-                                                (post.body || '').trim().split(/\s+/).length / 200
-                                            )}{' '}
-                                            min read
+                                            {/* ⚡ Bolt: Use single-pass scanner to avoid massive array allocations during SSG */}
+                                            {getReadingTime(post.body || '')} min read
                                         </span>
                                     </div>
                                 </article>
