@@ -32,12 +32,12 @@ import ThemeToggle from './ThemeToggle.astro';
 <!-- Subtle Noise Texture -->
 <div class="pointer-events-none fixed inset-0 z-[100] h-full w-full opacity-[0.03] mix-blend-overlay" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC42NScgbnVtT2N0YXZlcz0nMycgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0ndXJsKCNuKScvPjwvc3ZnPg==');"></div>
 <!-- Ambient Background Glows -->
-<div class="pointer-events-none fixed -top-[20%] -left-[10%] -z-10 h-[50vw] w-[50vw] rounded-full bg-[var(--accent)]/20 mix-blend-multiply blur-[120px] dark:bg-[var(--accent)]/10 dark:mix-blend-screen"></div>
+<div class="pointer-events-none fixed -top-[20%] -left-[10%] -z-10 h-[50vw] w-[50vw] rounded-full bg-(--)/20 mix-blend-multiply blur-[120px] dark:bg-(--)/10 dark:mix-blend-screen"></div>
 <div class="pointer-events-none fixed -bottom-[20%] -right-[10%] -z-10 h-[50vw] w-[50vw] rounded-full bg-purple-500/20 mix-blend-multiply blur-[120px] dark:bg-purple-500/10 dark:mix-blend-screen"></div>
 
 <a
     href="#main-content"
-    class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-[100] focus:bg-[var(--accent)] focus:px-4 focus:py-2 focus:font-bold focus:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[var(--bg-main)]"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-[100] focus:bg-(--) focus:px-4 focus:py-2 focus:font-bold focus:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-(--) focus-visible:ring-offset-2 dark:focus-visible:ring-offset-(--)"
 >
     Skip to content
 </a>
@@ -74,31 +74,31 @@ import ThemeToggle from './ThemeToggle.astro';
             </div>
             
             <div class="hidden sm:flex items-center">
-                <div class="border-l border-slate-300 dark:border-white/20 h-6 mx-3 transition-colors group-hover:border-[var(--accent)]/50"></div>
+                <div class="border-l border-slate-300 dark:border-white/20 h-6 mx-3 transition-colors group-hover:border-(--)/50"></div>
                 <div class="flex flex-col justify-center">
                     <span class="font-bold text-slate-900 dark:text-white leading-none tracking-tight">DHAATRIK</span>
-                    <span class="font-mono text-[10px] text-[var(--accent)] opacity-80 tracking-widest leading-none mt-1">// MISSION_CONTROL</span>
+                    <span class="font-mono text-[10px] text-(--) opacity-80 tracking-widest leading-none mt-1">// MISSION_CONTROL</span>
                 </div>
             </div>
         </a>
         <div class="flex items-center gap-4 sm:gap-6">
             <HeaderLink
                 href="/"
-                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)] flex items-center group/link"
+                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-(--) focus-visible:text-(--) dark:text-(--) flex items-center group/link"
             >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-[var(--accent)] transition-colors">[ 01 ]</span>Home
+                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--) transition-colors">[ 01 ]</span>Home
             </HeaderLink>
             <HeaderLink
                 href="/about"
-                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)] flex items-center group/link"
+                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-(--) focus-visible:text-(--) dark:text-(--) flex items-center group/link"
             >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-[var(--accent)] transition-colors">[ 02 ]</span>Personnel
+                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--) transition-colors">[ 02 ]</span>Personnel
             </HeaderLink>
             <HeaderLink
                 href="/blog"
-                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] dark:text-[var(--text-secondary)] flex items-center group/link"
+                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-(--) focus-visible:text-(--) dark:text-(--) flex items-center group/link"
             >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-[var(--accent)] transition-colors">[ 03 ]</span>Transmissions
+                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--) transition-colors">[ 03 ]</span>Transmissions
             </HeaderLink>
             <div class="h-5 w-px bg-slate-200 dark:bg-white/10 mx-1"></div>
             <ThemeToggle />

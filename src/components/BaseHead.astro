@@ -124,5 +124,5 @@ const imageUrl = new URL(image.src, Astro.site);
             addressRegion: 'West Bengal',
             addressCountry: 'IN',
         },
-    }).replace(/</g, '\\u003c')}
+    }).replace(new RegExp('<', 'g'), '\\u003c')}
 />
