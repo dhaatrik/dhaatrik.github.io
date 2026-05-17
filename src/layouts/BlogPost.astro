@@ -222,9 +222,10 @@ const commitHash = id
                                 href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url.href)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="flex items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-colors hover:bg-slate-200 dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800"
+                                aria-label="Share to X (opens in a new tab)"
+                                class="flex items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-slate-900"
                             >
-                                <span>~ $ share --to-x</span>
+                                <span aria-hidden="true">~ $ share --to-x</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="14"
@@ -240,9 +241,10 @@ const commitHash = id
                                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url.href)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="flex items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-colors hover:bg-slate-200 dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800"
+                                aria-label="Share to LinkedIn (opens in a new tab)"
+                                class="flex items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-slate-900"
                             >
-                                <span>~ $ share --to-linkedin</span>
+                                <span aria-hidden="true">~ $ share --to-linkedin</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="14"
@@ -491,22 +493,14 @@ const commitHash = id
                     tocLinks.forEach((link) => {
                         const htmlLink = link as HTMLElement;
                         if (htmlLink.dataset.slug === currentSectionId) {
-                            htmlLink.classList.add(
-                                '!text-(--accent)',
-                                '!border-(--accent)',
-                                'font-medium'
-                            );
+                            htmlLink.classList.add('!text-(--)', '!border-(--)', 'font-medium');
                             htmlLink.classList.remove(
                                 'text-slate-600',
                                 'dark:text-slate-400',
                                 'border-transparent'
                             );
                         } else {
-                            htmlLink.classList.remove(
-                                '!text-(--accent)',
-                                '!border-(--accent)',
-                                'font-medium'
-                            );
+                            htmlLink.classList.remove('!text-(--)', '!border-(--)', 'font-medium');
                             htmlLink.classList.add(
                                 'text-slate-600',
                                 'dark:text-slate-400',
