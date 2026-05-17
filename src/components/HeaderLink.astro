@@ -18,8 +18,8 @@ const isActive = href === pathname || href === '/' + firstSegment;
     data-astro-prefetch="hover"
     class:list={[
         className,
-        'group relative rounded py-1 focus-visible:ring-2 focus-visible:ring-(--) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--)',
-        { 'font-semibold text-(--)': isActive },
+        'group relative rounded py-1 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)',
+        { 'font-semibold text-(--accent)': isActive },
     ]}
     aria-current={isActive ? 'page' : undefined}
     {...props}
@@ -27,7 +27,7 @@ const isActive = href === pathname || href === '/' + firstSegment;
     <slot />
     <span
         class:list={[
-            'absolute bottom-0 left-0 h-0.5 w-full origin-left rounded-full bg-(--) transition-transform duration-300',
+            'absolute bottom-0 left-0 h-0.5 w-full origin-left rounded-full bg-(--accent) transition-transform duration-300',
             isActive
                 ? 'scale-x-100'
                 : 'scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100',

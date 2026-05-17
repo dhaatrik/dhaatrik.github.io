@@ -55,7 +55,7 @@ const premiumLineup = lineupNames
                 >
                     <span id="dynamic-greeting">Hey!</span> I'm Dhaatrik. <br />
                     <span
-                        class="mt-2 block bg-linear-to- from-(--) to-purple-500 bg-clip-text text-2xl font-medium text-transparent md:text-3xl dark:from-blue-400 dark:to-purple-400"
+                        class="mt-2 block bg-linear-to- from-(--accent) to-purple-500 bg-clip-text text-2xl font-medium text-transparent md:text-3xl dark:from-blue-400 dark:to-purple-400"
                         >First-Principles Thinker.</span
                     >
                 </h1>
@@ -68,7 +68,7 @@ const premiumLineup = lineupNames
                     if (el) el.innerText = greeting;
                 </script>
                 <p
-                    class="animate-fade-in-up mb-8 text-lg leading-relaxed text-slate-600 delay-200 md:text-xl dark:text-(--)"
+                    class="animate-fade-in-up mb-8 text-lg leading-relaxed text-slate-600 delay-200 md:text-xl dark:text-(--text-secondary)"
                 >
                     I'm a 26-year-old entrepreneur and developer from India, building the next
                     generation of tech-driven solutions. I believe that best products come from
@@ -81,7 +81,7 @@ const premiumLineup = lineupNames
                     <a
                         href="/about"
                         data-astro-prefetch="hover"
-                        class="group inline-flex items-center gap-2 rounded-lg bg-(--) px-6 py-3 font-medium text-white transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:-translate-y-1 focus-visible:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--)"
+                        class="group inline-flex items-center gap-2 rounded-lg bg-(--accent) px-6 py-3 font-medium text-white transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:-translate-y-1 focus-visible:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                     >
                         Read My Journey
                         <svg
@@ -105,7 +105,7 @@ const premiumLineup = lineupNames
                         href="https://x.com/dhaatrik"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="group inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-100 px-6 py-3 font-medium text-slate-900 transition-all hover:-translate-y-1 hover:bg-slate-200 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:-translate-y-1 focus-visible:bg-slate-200 focus-visible:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 dark:focus-visible:bg-white/10 dark:focus-visible:ring-offset-(--)"
+                        class="group inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-100 px-6 py-3 font-medium text-slate-900 transition-all hover:-translate-y-1 hover:bg-slate-200 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:-translate-y-1 focus-visible:bg-slate-200 focus-visible:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 dark:focus-visible:bg-white/10 dark:focus-visible:ring-offset-(--bg-main)"
                     >
                         <span class="flex items-center gap-2">
                             Let's Chat
@@ -172,7 +172,7 @@ const premiumLineup = lineupNames
                     <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                         Featured Engineering
                     </h2>
-                    <p class="text-slate-600 dark:text-(--)">
+                    <p class="text-slate-600 dark:text-(--text-secondary)">
                         Things I'm building, hacking on, and turning into reality.
                     </p>
                 </div>
@@ -191,7 +191,7 @@ const premiumLineup = lineupNames
                                 </h3>
                             </div>
                             <p
-                                class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--)"
+                                class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                             >
                                 Transitioning to Rust/WASM for deterministic aerospace simulations
                                 and deep-diving into quantum mechanics fundamentals.
@@ -223,7 +223,7 @@ const premiumLineup = lineupNames
                                                 rel="noopener noreferrer"
                                                 aria-label={`View ${project.data.title} on GitHub (opens in a new tab)`}
                                                 title={`View ${project.data.title} on GitHub`}
-                                                class="text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-(--) dark:hover:text-white dark:focus-visible:text-white"
+                                                class="text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-(--text-secondary) dark:hover:text-white dark:focus-visible:text-white"
                                             >
                                                 <svg
                                                     viewBox="0 0 16 16"
@@ -239,17 +239,17 @@ const premiumLineup = lineupNames
                                             </a>
                                         )}
                                     </div>
-                                    <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--)">
+                                    <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
                                         {project.data.description}
                                     </p>
                                 </div>
 
                                 {project.data.progress && (
                                     <div class="relative z-10 mt-4 border-t border-slate-200 pt-4 dark:border-white/5">
-                                        <span class="text-xs font-semibold tracking-wider text-(--) uppercase">
+                                        <span class="text-xs font-semibold tracking-wider text-(--accent) uppercase">
                                             Current Progress
                                         </span>
-                                        <p class="mt-1 text-sm font-medium text-slate-600 dark:text-(--)">
+                                        <p class="mt-1 text-sm font-medium text-slate-600 dark:text-(--text-secondary)">
                                             {project.data.progress}
                                         </p>
                                     </div>
@@ -276,13 +276,13 @@ const premiumLineup = lineupNames
                         <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                             Latest Thinking
                         </h2>
-                        <p class="text-slate-600 dark:text-(--)">
+                        <p class="text-slate-600 dark:text-(--text-secondary)">
                             0-to-1 startup insights, architecture deep-dives, and engineering logs.
                         </p>
                     </div>
                     <a
                         href="/blog"
-                        class="group hidden items-center gap-1 text-sm font-medium text-(--) transition-colors hover:text-slate-900 sm:flex dark:hover:text-white"
+                        class="group hidden items-center gap-1 text-sm font-medium text-(--accent) transition-colors hover:text-slate-900 sm:flex dark:hover:text-white"
                     >
                         View All Posts
                         <svg
@@ -308,18 +308,18 @@ const premiumLineup = lineupNames
                         posts.map((post) => (
                             <a
                                 href={`/blog/${post.id}/`}
-                                class="bento-card group block transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--)"
+                                class="bento-card group block transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
                             >
                                 <article class="flex h-full flex-col justify-between p-2">
                                     <div>
-                                        <h3 class="mb-2 text-xl leading-tight font-bold text-slate-900 transition-colors group-hover:text-(--) dark:text-white">
+                                        <h3 class="mb-2 text-xl leading-tight font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
                                             {post.data.title}
                                         </h3>
-                                        <p class="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-(--)">
+                                        <p class="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
                                             {post.data.description}
                                         </p>
                                     </div>
-                                    <div class="mt-4 flex items-center text-xs text-slate-500 dark:text-(--)">
+                                    <div class="mt-4 flex items-center text-xs text-slate-500 dark:text-(--text-secondary)">
                                         <FormattedDate date={post.data.pubDate} />
                                         <span class="mx-2">•</span>
                                         <span>
@@ -335,7 +335,7 @@ const premiumLineup = lineupNames
                 <div class="mt-6 flex sm:hidden">
                     <a
                         href="/blog"
-                        class="group inline-flex items-center gap-1 text-sm font-medium text-(--) transition-colors hover:text-slate-900 dark:hover:text-white"
+                        class="group inline-flex items-center gap-1 text-sm font-medium text-(--accent) transition-colors hover:text-slate-900 dark:hover:text-white"
                     >
                         View All Posts
                         <svg
