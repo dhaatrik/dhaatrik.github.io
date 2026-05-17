@@ -1,28 +1,29 @@
-name: Deploy to GitHub Pages
+name: CI/CD Pipeline
 
 on:
-    # Trigger the workflow every time you push to the `main` branch
+    # Trigger tests on push to main AND any pull request targeting main
     push:
         branches: [main]
-    # Allows you to run this workflow manually from the Actions tab on GitHub.
+    pull_request:
+        branches: [main]
+    # Allows manual runs from the Actions tab
     workflow_dispatch:
 
-# Allow this job to clone the repo and create a page deployment
 permissions:
     contents: read
     pages: write
     id-token: write
 
-# Allow one concurrent deployment
 concurrency:
     group: 'pages'
     cancel-in-progress: true
 
 jobs:
     test:
+        name: Run Engineering Verification
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout your repository using git
+            - name: Checkout code
               uses: actions/checkout@v4
 
             - name: Setup Node.js
@@ -40,24 +41,28 @@ jobs:
             - name: Install Playwright Browsers
               run: npx playwright install --with-deps chromium
 
-            - name: Run E2E tests
+            - name: Run E2E verification
               run: npm run test:e2e
 
     build:
+        name: Build Static Artifacts
         needs: test
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout your repository using git
+            - name: Checkout code
               uses: actions/checkout@v4
 
-            - name: Install, build, and upload your site
+            - name: Compile and upload production build
               uses: withastro/action@v3
               with:
                   node-version: 22
                   package-manager: npm
 
     deploy:
+        name: Launch to Production
         needs: build
+        # ⚡ Bolt: Strict assurance that deployment only occurs from main
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
         runs-on: ubuntu-latest
         environment:
             name: github-pages
