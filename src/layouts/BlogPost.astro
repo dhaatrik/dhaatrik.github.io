@@ -50,7 +50,7 @@ const commitHash = id
         <div id="progress-container" class="fixed top-0 left-0 z-50 h-[2px] w-full bg-transparent">
             <div
                 id="progress-bar"
-                class="h-full w-0 bg-(--) shadow-[0_0_10px_var(--accent)] transition-all duration-150 ease-out"
+                class="h-full w-0 bg-(--accent) shadow-[0_0_10px_var(--accent)] transition-all duration-150 ease-out"
             >
             </div>
         </div>
@@ -61,7 +61,7 @@ const commitHash = id
                 <a
                     href="/blog"
                     data-astro-prefetch="hover"
-                    class="group inline-flex items-center gap-2 rounded-lg text-sm font-medium text-slate-500 transition-all hover:text-(--) focus-visible:text-(--) active:scale-95 dark:text-(--)"
+                    class="group inline-flex items-center gap-2 rounded-lg text-sm font-medium text-slate-500 transition-all hover:text-(--accent) focus-visible:text-(--accent) active:scale-95 dark:text-(--text-secondary)"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@ const commitHash = id
                             </div>
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">AUTHOR</div>
-                                <div class="font-bold text-(--)">DHAATRIK</div>
+                                <div class="font-bold text-(--accent)">DHAATRIK</div>
                             </div>
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">
@@ -115,16 +115,16 @@ const commitHash = id
                                 <div class="flex items-center gap-2">
                                     <span class="flex gap-0.5">
                                         <span
-                                            class={`w-1 h-2 rounded-sm ${entropy === 'low' || entropy === 'medium' || entropy === 'high' || entropy === 'deep-dive' ? 'bg-(--)' : 'bg-slate-300 dark:bg-slate-700'}`}
+                                            class={`w-1 h-2 rounded-sm ${entropy === 'low' || entropy === 'medium' || entropy === 'high' || entropy === 'deep-dive' ? 'bg-(--accent)' : 'bg-slate-300 dark:bg-slate-700'}`}
                                         ></span>
                                         <span
-                                            class={`w-1 h-3 rounded-sm ${entropy === 'medium' || entropy === 'high' || entropy === 'deep-dive' ? 'bg-(--)' : 'bg-slate-300 dark:bg-slate-700'}`}
+                                            class={`w-1 h-3 rounded-sm ${entropy === 'medium' || entropy === 'high' || entropy === 'deep-dive' ? 'bg-(--accent)' : 'bg-slate-300 dark:bg-slate-700'}`}
                                         ></span>
                                         <span
-                                            class={`w-1 h-4 rounded-sm ${entropy === 'high' || entropy === 'deep-dive' ? 'bg-(--)' : 'bg-slate-300 dark:bg-slate-700'}`}
+                                            class={`w-1 h-4 rounded-sm ${entropy === 'high' || entropy === 'deep-dive' ? 'bg-(--accent)' : 'bg-slate-300 dark:bg-slate-700'}`}
                                         ></span>
                                         <span
-                                            class={`w-1 h-5 rounded-sm ${entropy === 'deep-dive' ? 'bg-(--) shadow-[0_0_5px_var(--accent)]' : 'bg-slate-300 dark:bg-slate-700'}`}
+                                            class={`w-1 h-5 rounded-sm ${entropy === 'deep-dive' ? 'bg-(--accent) shadow-[0_0_5px_var(--accent)]' : 'bg-slate-300 dark:bg-slate-700'}`}
                                         ></span>
                                     </span>
                                     <span class="text-[10px] font-bold tracking-widest uppercase"
@@ -143,7 +143,7 @@ const commitHash = id
 
                     {
                         series && (
-                            <div class="mb-10 flex items-center gap-3 rounded border border-(--)/30 bg-(--)/5 px-4 py-3 text-sm">
+                            <div class="mb-10 flex items-center gap-3 rounded border border-(--accent)/30 bg-(--accent)/5 px-4 py-3 text-sm">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="18"
@@ -154,7 +154,7 @@ const commitHash = id
                                     stroke-width="2"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    class="text-(--)"
+                                    class="text-(--accent)"
                                 >
                                     <>
                                         <path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4" />
@@ -186,7 +186,7 @@ const commitHash = id
                     }
 
                     <div
-                        class="prose prose-slate dark:prose-invert prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--) hover:prose-a:text-(--)/80 max-w-none marker:text-(--)"
+                        class="prose prose-slate dark:prose-invert prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 max-w-none marker:text-(--accent)"
                     >
                         <slot />
                     </div>
@@ -195,7 +195,7 @@ const commitHash = id
                     <div class="mt-16 border-t border-slate-200 pt-8 dark:border-slate-800">
                         <button
                             id="export-btn"
-                            class="group flex w-full cursor-pointer items-center justify-center gap-3 rounded border border-(--)/20 bg-(--)/10 px-6 py-3 font-mono text-sm tracking-widest text-(--) transition-all hover:bg-(--)/20 focus-visible:ring-2 focus-visible:ring-(--) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:focus-visible:ring-offset-(--)"
+                            class="group flex w-full cursor-pointer items-center justify-center gap-3 rounded border border-(--accent)/20 bg-(--accent)/10 px-6 py-3 font-mono text-sm tracking-widest text-(--accent) transition-all hover:bg-(--accent)/20 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:focus-visible:ring-offset-(--bg-main)"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -266,7 +266,7 @@ const commitHash = id
                             <button
                                 id="copy-link-btn"
                                 aria-label="Copy post link"
-                                class="flex w-full cursor-pointer items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-(--) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-(--)"
+                                class="flex w-full cursor-pointer items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-(--bg-main)"
                             >
                                 <span aria-hidden="true">~ $ copy --link</span>
                                 <svg
@@ -295,14 +295,14 @@ const commitHash = id
                                 {prevPost ? (
                                     <a
                                         href={`/blog/${prevPost.id}/`}
-                                        class="group relative block overflow-hidden rounded-lg border border-slate-200 bg-white p-6 transition-all hover:border-(--)/50 focus-visible:ring-2 focus-visible:ring-(--) focus-visible:outline-none dark:border-slate-800 dark:bg-[#151a22]"
+                                        class="group relative block overflow-hidden rounded-lg border border-slate-200 bg-white p-6 transition-all hover:border-(--accent)/50 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-slate-800 dark:bg-[#151a22]"
                                     >
                                         <div class="bg-grid-motif absolute inset-0 opacity-10 dark:opacity-30" />
                                         <div class="relative z-10 flex h-full flex-col justify-between gap-4">
                                             <span class="font-mono text-[10px] tracking-widest text-slate-400">
                                                 &larr; PREVIOUS TRANSMISSION
                                             </span>
-                                            <span class="font-bold text-balance text-slate-900 transition-colors group-hover:text-(--) dark:text-white">
+                                            <span class="font-bold text-balance text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
                                                 {prevPost.data.title}
                                             </span>
                                         </div>
@@ -329,14 +329,14 @@ const commitHash = id
                                 {nextPost ? (
                                     <a
                                         href={`/blog/${nextPost.id}/`}
-                                        class="group relative block overflow-hidden rounded-lg border border-slate-200 bg-white p-6 text-right transition-all hover:border-(--)/50 focus-visible:ring-2 focus-visible:ring-(--) focus-visible:outline-none dark:border-slate-800 dark:bg-[#151a22]"
+                                        class="group relative block overflow-hidden rounded-lg border border-slate-200 bg-white p-6 text-right transition-all hover:border-(--accent)/50 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-slate-800 dark:bg-[#151a22]"
                                     >
                                         <div class="bg-grid-motif absolute inset-0 opacity-10 dark:opacity-30" />
                                         <div class="relative z-10 flex h-full flex-col items-end justify-between gap-4">
                                             <span class="font-mono text-[10px] tracking-widest text-slate-400">
                                                 NEXT TRANSMISSION &rarr;
                                             </span>
-                                            <span class="font-bold text-balance text-slate-900 transition-colors group-hover:text-(--) dark:text-white">
+                                            <span class="font-bold text-balance text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
                                                 {nextPost.data.title}
                                             </span>
                                         </div>
@@ -401,7 +401,7 @@ const commitHash = id
                                             <li class="toc-item">
                                                 <a
                                                     href={`#${heading.slug}`}
-                                                    class="block border-l-2 border-transparent py-1 text-slate-600 transition-colors hover:text-(--) dark:text-slate-400"
+                                                    class="block border-l-2 border-transparent py-1 text-slate-600 transition-colors hover:text-(--accent) dark:text-slate-400"
                                                     data-slug={heading.slug}
                                                     style={`padding-left: ${(heading.depth - 1) * 0.75}rem;`}
                                                 >
@@ -457,10 +457,10 @@ const commitHash = id
                             if (textSpan) {
                                 const originalText = textSpan.innerText;
                                 textSpan.innerText = '~ $ copied_to_clipboard';
-                                textSpan.classList.add('text-(--)');
+                                textSpan.classList.add('text-(--accent)');
                                 setTimeout(() => {
                                     textSpan.innerText = originalText;
-                                    textSpan.classList.remove('text-(--)');
+                                    textSpan.classList.remove('text-(--accent)');
                                 }, 2000);
                             }
                         } catch (err) {
@@ -548,7 +548,7 @@ const commitHash = id
                             <div class="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
                         </div>
                         <div class="font-mono text-[10px] tracking-widest text-slate-400">${lang}</div>
-                        <button class="copy-btn opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-(--) cursor-pointer" aria-label="Copy code">
+                        <button class="copy-btn opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-(--accent) cursor-pointer" aria-label="Copy code">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                             COPY
                         </button>
@@ -638,7 +638,7 @@ const commitHash = id
 
                                 const span = document.createElement('span');
                                 span.className =
-                                    'relative group inline-block border-b border-dashed border-(--)/50 text-slate-800 dark:text-slate-200 cursor-help transition-colors hover:text-(--) hover:border-(--)';
+                                    'relative group inline-block border-b border-dashed border-(--accent)/50 text-slate-800 dark:text-slate-200 cursor-help transition-colors hover:text-(--accent) hover:border-(--accent)';
                                 span.textContent = term;
 
                                 // Popover element
