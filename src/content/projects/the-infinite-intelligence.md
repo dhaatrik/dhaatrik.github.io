@@ -1,7 +1,7 @@
 ---
 title: 'The Infinite Intelligence'
 description: "Transcend the limitations of single-model AI by simulating a collaborative 'council of experts' that debates, critiques, and synthesizes complex problems."
-logo: ''
+logo: '/the-infinite_intelligence_logo.png'
 githubUrl: 'https://github.com/dhaatrik/the-infinite-intelligence'
 progress: 'Parallel Collaboration, Sequential Workflows, and Round-Robin Debate'
 order: 4
