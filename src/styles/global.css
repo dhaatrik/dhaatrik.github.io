@@ -231,12 +231,12 @@
 @layer components {
     /* Subtle background grid motif */
     .bg-grid-motif {
-        background-image: radial-gradient(circle, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+        background-image: radial-gradient(circle, rgba(15, 23, 42, 0.1) 1px, transparent 1px);
         background-size: 32px 32px;
     }
     
     .dark .bg-grid-motif {
-        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
     }
 }
 
