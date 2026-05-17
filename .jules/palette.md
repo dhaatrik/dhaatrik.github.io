@@ -62,3 +62,8 @@
 
 **Learning:** Stylized "terminal command" buttons (e.g., `~ $ connect --x` or `~ $ copy --link`) read poorly or confusingly to screen readers if the raw text is left exposed. Furthermore, setting `focus-visible:outline-none` without an explicit focus ring makes them completely inaccessible for keyboard users.
 **Action:** When creating stylized terminal CTAs, always wrap the stylized text in `aria-hidden="true"`, provide a clear, descriptive `aria-label` on the parent button/link, and ensure an explicit `focus-visible:ring-2` class is applied to replace the default outline.
+
+## 2026-05-17 - Avoid Hallucinating Tailwind Variables in Focus Rings
+
+**Learning:** When adding focus rings to interactive elements, attempting to use CSS variables within Tailwind's focus-visible utilities (like `focus-visible:ring-(--)` or `dark:focus-visible:ring-offset-(--)`) results in invalid, non-compiling CSS. Tailwind `v4` handles custom properties differently, and using `(--)` as an arbitrary value is malformed.
+**Action:** When applying focus styles, stick to standard, explicit Tailwind color tokens (e.g., `focus-visible:ring-slate-500 dark:focus-visible:ring-offset-slate-900`) or ensure any custom variable is defined correctly in the CSS theme rather than guessing placeholder syntax.
