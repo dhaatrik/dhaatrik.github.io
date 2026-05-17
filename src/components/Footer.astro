@@ -74,10 +74,10 @@ const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
             </div>
 
             <!-- Support CTA -->
-            <a href="https://ko-fi.com/dhaatrik" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-center gap-2 w-full py-3 rounded border border-(--accent)/30 bg-(--accent)/10 text-(--accent) font-mono text-xs tracking-widest hover:bg-(--accent)/20 hover:shadow-[0_0_15px_var(--accent-glow)] transition-all uppercase cursor-pointer">
+            <button onclick="document.getElementById('support-modal').showModal()" class="group flex items-center justify-center gap-2 w-full py-3 rounded border border-(--accent)/30 bg-(--accent)/10 text-(--accent) font-mono text-xs tracking-widest hover:bg-(--accent)/20 hover:shadow-[0_0_15px_var(--accent-glow)] transition-all uppercase cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition-transform"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                 [ TRANSMIT SUPPORT ]
-            </a>
+            </button>
         </div>
 
     </div>
@@ -125,6 +125,58 @@ const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
             </a>
         </div>
     </div>
+
+    <!-- Support Modal -->
+    <dialog
+        id="support-modal"
+        class="m-auto w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm dark:border-white/10 dark:bg-[#0b0e14]"
+    >
+        <div class="flex items-center justify-between border-b border-slate-100 p-6 dark:border-white/5">
+            <h3 class="flex items-center gap-3 text-lg font-bold text-slate-900 dark:text-white">
+                Transmit Support
+            </h3>
+            <button
+                aria-label="Close support modal"
+                onclick="document.getElementById('support-modal').close()"
+                class="cursor-pointer rounded-sm p-1 text-slate-500 transition-colors hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
+            >
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="space-y-4 p-6">
+            <a
+                href="https://ko-fi.com/dhaatrik"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 transition-all hover:-translate-y-1 hover:border-(--accent)/50 hover:bg-white hover:shadow-[0_8px_20px_var(--accent-glow)] dark:border-white/5 dark:bg-black/20 dark:hover:border-(--accent)/50 dark:hover:bg-white/10"
+            >
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#FF5E5B]/10 text-[#FF5E5B]">
+                    <!-- Simple Ko-fi SVG -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="scale-125"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white">Ko-fi</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Buy me a coffee</p>
+                </div>
+            </a>
+            
+            <a
+                href="https://paypal.me/dhaatrik"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 transition-all hover:-translate-y-1 hover:border-[#00457C]/50 hover:bg-white hover:shadow-[0_8px_20px_rgba(0,69,124,0.3)] dark:border-white/5 dark:bg-black/20 dark:hover:border-[#0079C1]/50 dark:hover:bg-white/10 dark:hover:shadow-[0_8px_20px_rgba(0,121,193,0.3)]"
+            >
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#00457C]/10 text-[#00457C] dark:bg-[#0079C1]/10 dark:text-[#0079C1]">
+                    <!-- Simple PayPal SVG -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.98 5.04-4.348 6.781-8.647 6.781h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106a.64.64 0 0 1-.632.541h4.606c.524 0 .968-.382 1.05-.9l.718-4.562c.082-.519.526-.901 1.05-.901h.63c3.784 0 6.725-1.543 7.595-5.918.156-.79.2-1.458.12-2.115a3.177 3.177 0 0 0-.482-1.645z"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white">PayPal</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Direct transmission</p>
+                </div>
+            </a>
+        </div>
+    </dialog>
 </footer>
 
 <script is:inline>
