@@ -47,7 +47,7 @@ const imageUrl = new URL(image.src, Astro.site);
 <script is:inline>
     // Theme initializer — runs before paint to prevent FOUC.
     // Default to 'dark' if no stored preference.
-    (function() {
+    (function () {
         function applyTheme() {
             var stored = localStorage.getItem('theme');
             var isDark = stored ? stored === 'dark' : true;
@@ -126,3 +126,49 @@ const imageUrl = new URL(image.src, Astro.site);
         },
     }).replace(/</g, '\\u003c')}
 />
+
+<script is:inline>
+    // ⚡ Bolt: Global mouse spotlight tracking for Bento cards
+    // Optimized using requestAnimationFrame and cached HTMLCollection to prevent layout thrashing
+    let spotlightRafId = null;
+    let mouseX = 0;
+    let mouseY = 0;
+    let cardsCollection = null;
+
+    const updateSpotlights = () => {
+        if (!cardsCollection) return;
+
+        for (let i = 0; i < cardsCollection.length; i++) {
+            const card = cardsCollection[i];
+            const rect = card.getBoundingClientRect();
+            const x = mouseX - rect.left;
+            const y = mouseY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        }
+        spotlightRafId = null;
+    };
+
+    const onMouseMove = (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!spotlightRafId) {
+            spotlightRafId = requestAnimationFrame(updateSpotlights);
+        }
+    };
+
+    document.addEventListener('astro:page-load', () => {
+        // Cache the live HTMLCollection to avoid expensive querySelectorAll calls on every tick
+        cardsCollection = document.getElementsByClassName('bento-card');
+        document.addEventListener('mousemove', onMouseMove, { passive: true });
+    });
+
+    document.addEventListener('astro:before-preparation', () => {
+        document.removeEventListener('mousemove', onMouseMove);
+        if (spotlightRafId) {
+            cancelAnimationFrame(spotlightRafId);
+            spotlightRafId = null;
+        }
+        cardsCollection = null;
+    });
+</script>
