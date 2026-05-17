@@ -52,3 +52,8 @@
 
 **Learning:** When calculating reading time for markdown documents directly from the `post.body` string during SSG, using `split(/\s+/)` causes massive memory allocations and garbage collection overhead because it creates an array containing every single word in the document.
 **Action:** Always use a single-pass string scanner which increments a counter while traversing the string, avoiding arrays altogether. This custom utility resulted in a speedup from ~4.2s to ~1s in benchmarks without relying on heavy external dependencies.
+
+## 2026-05-17 - Optimize mousemove tracking to prevent layout thrashing
+
+**Learning:** Calling `querySelectorAll` and `getBoundingClientRect` on every `mousemove` event without throttling causes significant layout thrashing and forces layout recalcs. Doing this in page-level scripts also causes issues with Astro View Transitions.
+**Action:** Always move high-frequency DOM event listeners to a global script (e.g. `BaseHead.astro`), use `getElementsByClassName` for a live HTMLCollection to avoid querying, and throttle layout reading using `requestAnimationFrame`. Remember to clean up event listeners using `astro:before-preparation`.
