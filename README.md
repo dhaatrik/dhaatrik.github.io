@@ -23,18 +23,20 @@
 
 ## 🛰️ Project Overview
 
-**Mission Control** is a bespoke, high-science personal portfolio and technical blog. It is designed to act as an "Engineering Journal" for deep-dives into startup architecture, zero-to-one product development, and complex aerospace/physics simulations. 
+**Mission Control** is a bespoke, high-science personal portfolio and technical blog. It is designed to act as an "Engineering Journal" for deep-dives into startup architecture, zero-to-one product development, and complex aerospace/physics simulations.
 
 It departs from standard blog templates by embracing a **Premium Founder Aesthetic**—featuring "Sonar Ping" micro-animations, deterministic build-hash metadata, mathematical LaTeX rendering, and the offline-first "Vellor Protocol."
 
 ### Why this stack?
-* **Astro:** Chosen for its zero-JS-by-default architecture, enabling instant load times and perfect SEO.
-* **Tailwind CSS v4:** Selected for maintaining a highly customized, glassmorphic dark-mode design system with minimal CSS footprint.
-* **Playwright:** Integrated to ensure end-to-end interactivity (theme toggling, client-side routing, and offline protocol) remains structurally sound across updates.
+
+- **Astro:** Chosen for its zero-JS-by-default architecture, enabling instant load times and perfect SEO.
+- **Tailwind CSS v4:** Selected for maintaining a highly customized, glassmorphic dark-mode design system with minimal CSS footprint.
+- **Playwright:** Integrated to ensure end-to-end interactivity (theme toggling, client-side routing, and offline protocol) remains structurally sound across updates.
 
 ---
 
 ## 📑 Table of Contents
+
 1. [Project Overview](#-project-overview)
 2. [Technologies Used](#-technologies-used)
 3. [Installation & Requirements](#-installation--requirements)
@@ -59,34 +61,39 @@ It departs from standard blog templates by embracing a **Premium Founder Aesthet
 ## 🚀 Installation & Requirements
 
 ### System Requirements
-* **Node.js**: `>= 22.12.0`
-* **Package Manager**: `npm`
+
+- **Node.js**: `>= 22.12.0`
+- **Package Manager**: `npm`
 
 ### Local Setup
+
 1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/dhaatrik/dhaatrik.github.io.git
-   cd dhaatrik.github.io
-   ```
+
+    ```bash
+    git clone https://github.com/dhaatrik/dhaatrik.github.io.git
+    cd dhaatrik.github.io
+    ```
 
 2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+
+    ```bash
+    npm install
+    ```
 
 3. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-   *The local server will be accessible at `http://localhost:4321/`.*
+    ```bash
+    npm run dev
+    ```
+    _The local server will be accessible at `http://localhost:4321/`._
 
 ---
 
 ## 📖 Usage & Architecture
 
-This repository uses Astro's Content Collections to manage data safely with type-checked frontmatter. 
+This repository uses Astro's Content Collections to manage data safely with type-checked frontmatter.
 
 ### Adding a new "Mission Log" (Blog Post)
+
 Create a new Markdown or MDX file inside `src/content/blog/`. You can utilize standard Markdown as well as LaTeX math blocks `$$ \Delta v $$`.
 
 ```markdown
@@ -104,6 +111,7 @@ Your technical research goes here...
 ```
 
 ### Adding a new Project
+
 Projects displayed on the homepage are driven by the `projects` collection. Create a file in `src/content/projects/`:
 
 ```markdown
@@ -123,17 +131,18 @@ progress: 'Phase 2: Orbital Mechanics'
 This project maintains an active suite of End-to-End tests to guarantee core functionality (Client-Side Routing, Offline-Mode Easter Eggs, and Theme Toggling).
 
 **Run the Playwright E2E Tests:**
+
 ```bash
 npm run test:e2e
 ```
 
-*Note: Playwright will automatically install the necessary browser binaries on its first run.*
+_Note: Playwright will automatically install the necessary browser binaries on its first run._
 
 ---
 
 ## 🤝 Contribution Guidelines
 
-While this is a personal portfolio, constructive feedback, bug reports, and architectural discussions are highly welcome! 
+While this is a personal portfolio, constructive feedback, bug reports, and architectural discussions are highly welcome!
 
 Please read our [Contributing Guide](CONTRIBUTING.md) for detailed instructions on how to set up the development environment, format your code, run tests, and submit Pull Requests. We also expect all contributors to adhere to industry-standard codes of conduct.
 
@@ -141,9 +150,10 @@ Please read our [Contributing Guide](CONTRIBUTING.md) for detailed instructions 
 
 ## 📄 License Information
 
-This project is licensed under the **MIT License**. 
+This project is licensed under the **MIT License**.
 
 You are free to use, modify, and distribute this codebase for your own projects, provided you include the original copyright notice and give attribution.
 
 ---
-*End of Transmission.*
+
+_End of Transmission._

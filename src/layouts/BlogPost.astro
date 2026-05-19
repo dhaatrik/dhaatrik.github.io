@@ -424,10 +424,15 @@ const commitHash = id
         <script>
             import { glossary } from '../data/glossary';
 
+            let tocRafId: number | null = null;
+            let progressRafId: number | null = null;
+            let updateTocFn: (() => void) | null = null;
+            let updateProgressFn: (() => void) | null = null;
+
             document.addEventListener('astro:page-load', () => {
                 // 1. Reading Progress Bar
                 const progressBar = document.getElementById('progress-bar');
-                const updateProgress = () => {
+                const performProgressUpdate = () => {
                     const scrollTotal =
                         document.documentElement.scrollHeight -
                         document.documentElement.clientHeight;
@@ -435,9 +440,15 @@ const commitHash = id
                         const progress = (window.scrollY / scrollTotal) * 100;
                         if (progressBar) progressBar.style.width = `${progress}%`;
                     }
+                    progressRafId = null;
                 };
-                window.addEventListener('scroll', updateProgress, { passive: true });
-                updateProgress();
+                updateProgressFn = () => {
+                    if (!progressRafId) {
+                        progressRafId = requestAnimationFrame(performProgressUpdate);
+                    }
+                };
+                window.addEventListener('scroll', updateProgressFn, { passive: true });
+                performProgressUpdate();
 
                 // 2. Export Button Toggle
                 const exportBtn = document.getElementById('export-btn');
@@ -475,7 +486,7 @@ const commitHash = id
                     document.querySelectorAll('.prose h2, .prose h3, .prose h4')
                 );
 
-                const updateActiveToc = () => {
+                const performTocUpdate = () => {
                     if (sections.length === 0) return;
                     let currentSectionId = '';
 
@@ -508,9 +519,15 @@ const commitHash = id
                             );
                         }
                     });
+                    tocRafId = null;
                 };
-                window.addEventListener('scroll', updateActiveToc, { passive: true });
-                updateActiveToc();
+                updateTocFn = () => {
+                    if (!tocRafId) {
+                        tocRafId = requestAnimationFrame(performTocUpdate);
+                    }
+                };
+                window.addEventListener('scroll', updateTocFn, { passive: true });
+                performTocUpdate();
 
                 // 4. Code Block Hacker Polish
                 const codeBlocks = document.querySelectorAll('pre');
@@ -670,6 +687,25 @@ const commitHash = id
                             textNode.parentNode?.replaceChild(fragment, textNode);
                         }
                     });
+                }
+            });
+
+            document.addEventListener('astro:before-preparation', () => {
+                if (updateProgressFn) {
+                    window.removeEventListener('scroll', updateProgressFn);
+                    updateProgressFn = null;
+                }
+                if (updateTocFn) {
+                    window.removeEventListener('scroll', updateTocFn);
+                    updateTocFn = null;
+                }
+                if (progressRafId) {
+                    cancelAnimationFrame(progressRafId);
+                    progressRafId = null;
+                }
+                if (tocRafId) {
+                    cancelAnimationFrame(tocRafId);
+                    tocRafId = null;
                 }
             });
         </script>
