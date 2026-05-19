@@ -66,12 +66,14 @@ const postsWithReadingTime = posts.map((post) => {
                             >~ $ grep -i</span
                         >
                         <input
-                            type="text"
+                            type="search"
                             id="search-logs"
                             placeholder='"Search archives..."'
+                            aria-controls="logs-grid"
                             class="w-full rounded-md border border-slate-200 bg-slate-100 py-3 pr-4 pl-32 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:border-(--accent)/50 focus:ring-1 focus:ring-(--accent)/50 focus:outline-none dark:border-slate-800 dark:bg-[#151a22] dark:text-white dark:placeholder:text-slate-600"
                         />
                     </div>
+                    <div id="search-announcer" class="sr-only" aria-live="polite"></div>
                 </div>
 
                 <div class="grid gap-8 md:grid-cols-2" id="logs-grid">
@@ -187,6 +189,33 @@ const postsWithReadingTime = posts.map((post) => {
                         ))
                     }
                 </div>
+
+                <!-- Empty State UI -->
+                <div id="search-empty-state" class="hidden py-20 text-center" aria-hidden="true">
+                    <div
+                        class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"
+                            ></path></svg
+                        >
+                    </div>
+                    <h3 class="mb-2 text-lg font-bold text-slate-900 dark:text-white">
+                        No transmissions found
+                    </h3>
+                    <p class="mx-auto max-w-sm text-sm text-slate-500 dark:text-slate-400">
+                        Try adjusting your search parameters to find what you're looking for.
+                    </p>
+                </div>
             </section>
         </main>
         <Footer />
@@ -196,19 +225,40 @@ const postsWithReadingTime = posts.map((post) => {
             const setupSearch = () => {
                 const searchInput = document.getElementById('search-logs') as HTMLInputElement;
                 const cards = document.querySelectorAll('.blog-post-card');
+                const emptyState = document.getElementById('search-empty-state');
+                const announcer = document.getElementById('search-announcer');
 
                 if (searchInput) {
                     searchInput.addEventListener('input', (e) => {
                         const term = (e.target as HTMLInputElement).value.toLowerCase();
+                        let visibleCount = 0;
+
                         cards.forEach((card) => {
                             const htmlCard = card as HTMLElement;
                             const text = htmlCard.textContent?.toLowerCase() || '';
                             if (text.includes(term)) {
                                 htmlCard.style.display = '';
+                                visibleCount++;
                             } else {
                                 htmlCard.style.display = 'none';
                             }
                         });
+
+                        if (emptyState) {
+                            if (visibleCount === 0) {
+                                emptyState.classList.remove('hidden');
+                                emptyState.setAttribute('aria-hidden', 'false');
+                            } else {
+                                emptyState.classList.add('hidden');
+                                emptyState.setAttribute('aria-hidden', 'true');
+                            }
+                        }
+
+                        if (announcer) {
+                            announcer.textContent = term
+                                ? `Found ${visibleCount} transmission${visibleCount === 1 ? '' : 's'}.`
+                                : '';
+                        }
                     });
                 }
             };
