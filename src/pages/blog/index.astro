@@ -74,6 +74,9 @@ const postsWithReadingTime = posts.map((post) => {
                     </div>
                 </div>
 
+                <!-- Accessibility: Screen reader announcer for search results -->
+                <div id="search-announcer" aria-live="polite" class="sr-only"></div>
+
                 <div class="grid gap-8 md:grid-cols-2" id="logs-grid">
                     {
                         postsWithReadingTime.map((post, i) => (
@@ -187,6 +190,20 @@ const postsWithReadingTime = posts.map((post) => {
                         ))
                     }
                 </div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="hidden py-16 text-center">
+                    <div class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400 dark:bg-white/5 dark:text-slate-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                            <path d="M11 8v2"></path>
+                            <path d="M11 14h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="mb-2 text-lg font-bold text-slate-900 dark:text-white">No logs found</h3>
+                    <p class="text-sm text-slate-500 dark:text-(--text-secondary)">Try adjusting your search parameters to find what you're looking for.</p>
+                </div>
             </section>
         </main>
         <Footer />
@@ -196,19 +213,42 @@ const postsWithReadingTime = posts.map((post) => {
             const setupSearch = () => {
                 const searchInput = document.getElementById('search-logs') as HTMLInputElement;
                 const cards = document.querySelectorAll('.blog-post-card');
+                const emptyState = document.getElementById('empty-state');
+                const announcer = document.getElementById('search-announcer');
 
                 if (searchInput) {
                     searchInput.addEventListener('input', (e) => {
                         const term = (e.target as HTMLInputElement).value.toLowerCase();
+                        let visibleCount = 0;
+
                         cards.forEach((card) => {
                             const htmlCard = card as HTMLElement;
                             const text = htmlCard.textContent?.toLowerCase() || '';
                             if (text.includes(term)) {
                                 htmlCard.style.display = '';
+                                visibleCount++;
                             } else {
                                 htmlCard.style.display = 'none';
                             }
                         });
+
+                        // Toggle empty state
+                        if (emptyState) {
+                            if (visibleCount === 0) {
+                                emptyState.classList.remove('hidden');
+                            } else {
+                                emptyState.classList.add('hidden');
+                            }
+                        }
+
+                        // Announce results to screen readers
+                        if (announcer) {
+                            if (term === '') {
+                                announcer.textContent = ''; // Clear when empty to reduce noise
+                            } else {
+                                announcer.textContent = `${visibleCount} ${visibleCount === 1 ? 'log' : 'logs'} found`;
+                            }
+                        }
                     });
                 }
             };
