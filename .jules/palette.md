@@ -67,3 +67,7 @@
 
 **Learning:** When adding focus rings to interactive elements, attempting to use CSS variables within Tailwind's focus-visible utilities (like `focus-visible:ring-(--)` or `dark:focus-visible:ring-offset-(--)`) results in invalid, non-compiling CSS. Tailwind `v4` handles custom properties differently, and using `(--)` as an arbitrary value is malformed.
 **Action:** When applying focus styles, stick to standard, explicit Tailwind color tokens (e.g., `focus-visible:ring-slate-500 dark:focus-visible:ring-offset-slate-900`) or ensure any custom variable is defined correctly in the CSS theme rather than guessing placeholder syntax.
+
+## 2026-05-19 - Client-Side Search UX
+**Learning:** Client-side filtering often leaves screen reader users completely unaware of changes and visually lacks feedback when no results are found.
+**Action:** Always pair client-side filtering with a visual empty state and an `aria-live` region to announce the resulting count.
