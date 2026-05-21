@@ -1,3 +1,8 @@
+## 2025-05-02 - Redundant Image Alt Text
+
+**Learning:** Using `alt={title}` for hero images that are immediately followed by an `<h1>` containing the exact same title causes screen readers to redundantly announce the title twice.
+**Action:** Use empty alt text (`alt=""`) for hero images that are visually decorative and whose context is fully captured by adjacent heading elements.
+
 ## 2026-04-29 - Accessible Auto-scrolling Marquees
 
 **Learning:** Auto-scrolling elements like marquees can create motion accessibility issues (WCAG 2.2.2). It's crucial not just to pause on hover, but also to ensure they are keyboard focusable (`tabindex="0"`, `role="region"`) and pause on `focus-within` so keyboard users can read the content comfortably.
@@ -12,11 +17,6 @@
 
 **Learning:** When adding active scaling effects (like `active:scale-95`) to interactive elements, the scaling effect will be instantaneous and lack smoothness if the element only has a `transition-colors` class.
 **Action:** Always ensure the base transition utility is `transition-all` or includes `transition-transform` when introducing transform-based active states (like `active:scale-*`) to ensure a polished, tactile feel.
-
-## 2025-05-02 - Redundant Image Alt Text
-
-**Learning:** Using `alt={title}` for hero images that are immediately followed by an `<h1>` containing the exact same title causes screen readers to redundantly announce the title twice.
-**Action:** Use empty alt text (`alt=""`) for hero images that are visually decorative and whose context is fully captured by adjacent heading elements.
 
 ## 2026-05-04 - False Affordances in Hover States
 
