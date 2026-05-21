@@ -271,3 +271,155 @@
 .delay-400 { animation-delay: 400ms; }
 .delay-500 { animation-delay: 500ms; }
 
+/* Premium UI Refresh Additions */
+
+/* Custom Cursor */
+.custom-cursor {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease;
+}
+
+.custom-cursor-ring {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9998;
+    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.custom-cursor-ring.cursor-hover {
+    width: 44px;
+    height: 44px;
+    background-color: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.dark .custom-cursor-ring.cursor-hover {
+    background-color: rgba(59, 130, 246, 0.25);
+    border-color: rgba(147, 197, 253, 0.5);
+}
+
+@media (pointer: fine) {
+    body.has-custom-cursor,
+    body.has-custom-cursor a,
+    body.has-custom-cursor button,
+    body.has-custom-cursor input,
+    body.has-custom-cursor select,
+    body.has-custom-cursor textarea,
+    body.has-custom-cursor [role="button"],
+    body.has-custom-cursor dialog button {
+        cursor: none !important;
+    }
+}
+
+/* Flashlight Spotlight Background */
+#flashlight-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.dark #flashlight-bg {
+    opacity: 1;
+    background: radial-gradient(
+        800px circle at var(--bg-mouse-x, 50%) var(--bg-mouse-y, 50%),
+        rgba(59, 130, 246, 0.06),
+        transparent 55%
+    );
+}
+
+/* 3D Tilt Setup */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.bento-card {
+    transform-style: preserve-3d;
+    transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hologram effect */
+.hologram-overlay {
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 6px 100%;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.dark .hologram-overlay {
+    opacity: 0.3;
+}
+
+.hologram-scanner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(59, 130, 246, 0.1) 40%,
+        rgba(59, 130, 246, 0.4) 50%,
+        rgba(59, 130, 246, 0.1) 60%,
+        transparent 100%
+    );
+    opacity: 0.8;
+    pointer-events: none;
+    animation: scan-vertical 5s linear infinite;
+}
+
+.dark .hologram-scanner {
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(96, 165, 250, 0.15) 45%,
+        rgba(96, 165, 250, 0.5) 50%,
+        rgba(96, 165, 250, 0.15) 55%,
+        transparent 100%
+    );
+}
+
+@keyframes scan-vertical {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+/* Magnetic Transition smooth reset */
+.magnetic-target {
+    display: inline-flex;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* Glow animation for scroll telemetry */
+@keyframes pulse-ring {
+    0% { transform: scale(0.95); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(0.95); opacity: 0.5; }
+}
+
+.telemetry-pulse {
+    animation: pulse-ring 2s infinite ease-in-out;
+}
+
+
