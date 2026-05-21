@@ -57,3 +57,8 @@
 
 **Learning:** Calling `querySelectorAll` and `getBoundingClientRect` on every `mousemove` event without throttling causes significant layout thrashing and forces layout recalcs. Doing this in page-level scripts also causes issues with Astro View Transitions.
 **Action:** Always move high-frequency DOM event listeners to a global script (e.g. `BaseHead.astro`), use `getElementsByClassName` for a live HTMLCollection to avoid querying, and throttle layout reading using `requestAnimationFrame`. Remember to clean up event listeners using `astro:before-preparation`.
+
+## 2026-05-18 - Astro Event Listener Cleanup
+
+**Learning:** When attaching event listeners to `window` or `document` inside `astro:page-load` for Astro View Transitions, they accumulate and cause memory leaks on subsequent navigations.
+**Action:** Always clean up global event listeners attached in `astro:page-load` by listening for `astro:before-preparation` and removing them. Use `{ once: true }` so the cleanup function runs only once per page transition.

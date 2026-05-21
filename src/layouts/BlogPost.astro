@@ -671,6 +671,16 @@ const commitHash = id
                         }
                     });
                 }
+
+                // ⚡ Bolt: Cleanup scroll event listeners on page transition to prevent memory leaks
+                document.addEventListener(
+                    'astro:before-preparation',
+                    () => {
+                        window.removeEventListener('scroll', updateProgress);
+                        window.removeEventListener('scroll', updateActiveToc);
+                    },
+                    { once: true }
+                );
             });
         </script>
     </body>
