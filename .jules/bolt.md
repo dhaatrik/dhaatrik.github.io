@@ -62,3 +62,8 @@
 
 **Learning:** When attaching event listeners to `window` or `document` inside `astro:page-load` for Astro View Transitions, they accumulate and cause memory leaks on subsequent navigations.
 **Action:** Always clean up global event listeners attached in `astro:page-load` by listening for `astro:before-preparation` and removing them. Use `{ once: true }` so the cleanup function runs only once per page transition.
+
+## 2026-05-21 - Concurrent Collection Fetching
+
+**Learning:** Using sequential `await getCollection()` calls on Astro pages during SSG blocks execution, resulting in linear file I/O wait times.
+**Action:** Always fetch multiple collections concurrently using `Promise.all()` to parallelize file reads and improve page build speed.
