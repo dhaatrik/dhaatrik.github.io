@@ -66,12 +66,14 @@ const postsWithReadingTime = posts.map((post) => {
                             >~ $ grep -i</span
                         >
                         <input
-                            type="text"
+                            type="search"
                             id="search-logs"
                             placeholder='"Search archives..."'
+                            aria-controls="logs-grid"
                             class="w-full rounded-md border border-slate-200 bg-slate-100 py-3 pr-4 pl-32 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:border-(--accent)/50 focus:ring-1 focus:ring-(--accent)/50 focus:outline-none dark:border-slate-800 dark:bg-[#151a22] dark:text-white dark:placeholder:text-slate-600"
                         />
                     </div>
+                    <div id="search-announcer" class="sr-only" aria-live="polite"></div>
                 </div>
 
                 <!-- Accessibility: Screen reader announcer for search results -->

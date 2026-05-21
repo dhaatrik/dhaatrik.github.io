@@ -57,3 +57,8 @@
 
 **Learning:** Calling `querySelectorAll` and `getBoundingClientRect` on every `mousemove` event without throttling causes significant layout thrashing and forces layout recalcs. Doing this in page-level scripts also causes issues with Astro View Transitions.
 **Action:** Always move high-frequency DOM event listeners to a global script (e.g. `BaseHead.astro`), use `getElementsByClassName` for a live HTMLCollection to avoid querying, and throttle layout reading using `requestAnimationFrame`. Remember to clean up event listeners using `astro:before-preparation`.
+
+## 2026-05-21 - Concurrent Collection Fetching
+
+**Learning:** Using sequential `await getCollection()` calls on Astro pages during SSG blocks execution, resulting in linear file I/O wait times.
+**Action:** Always fetch multiple collections concurrently using `Promise.all()` to parallelize file reads and improve page build speed.
