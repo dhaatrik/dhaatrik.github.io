@@ -69,5 +69,11 @@
 **Action:** When applying focus styles, stick to standard, explicit Tailwind color tokens (e.g., `focus-visible:ring-slate-500 dark:focus-visible:ring-offset-slate-900`) or ensure any custom variable is defined correctly in the CSS theme rather than guessing placeholder syntax.
 
 ## 2026-05-19 - Client-Side Search UX
+
 **Learning:** Client-side filtering often leaves screen reader users completely unaware of changes and visually lacks feedback when no results are found.
 **Action:** Always pair client-side filtering with a visual empty state and an `aria-live` region to announce the resulting count.
+
+## 2026-05-21 - [Native Dialog Backdrop Clicks and Accessibility]
+
+**Learning:** Native `<dialog>` elements do not automatically close when their backdrop is clicked, which is a common user expectation. Also, screen readers require explicit `aria-labelledby` on the dialog pointing to its title for proper context.
+**Action:** Always add `onclick="event.target === this && this.close()"` to native `<dialog>` elements to easily support backdrop clicks, and ensure `aria-labelledby` is linked to the modal's heading.
