@@ -424,7 +424,15 @@ const commitHash = id
         <script>
             import { glossary } from '../data/glossary';
 
+            let postAbortController: AbortController | null = null;
+
             document.addEventListener('astro:page-load', () => {
+                if (postAbortController) {
+                    postAbortController.abort();
+                }
+                postAbortController = new AbortController();
+                const { signal } = postAbortController;
+
                 // 1. Reading Progress Bar
                 const progressBar = document.getElementById('progress-bar');
                 const updateProgress = () => {
@@ -436,8 +444,6 @@ const commitHash = id
                         if (progressBar) progressBar.style.width = `${progress}%`;
                     }
                 };
-                window.addEventListener('scroll', updateProgress, { passive: true });
-                updateProgress();
 
                 // 2. Export Button Toggle
                 const exportBtn = document.getElementById('export-btn');
@@ -479,28 +485,27 @@ const commitHash = id
                     if (sections.length === 0) return;
                     let currentSectionId = '';
 
-                    // Add offset for the fixed header
-                    const scrollPosition = window.scrollY + 100;
-
-                    for (let i = sections.length - 1; i >= 0; i--) {
+                    // Find the last section that has scrolled past the top threshold (120px from top)
+                    const threshold = 120;
+                    for (let i = 0; i < sections.length; i++) {
                         const section = sections[i] as HTMLElement;
-                        if (section.offsetTop <= scrollPosition) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= threshold) {
                             currentSectionId = section.id;
-                            break;
                         }
                     }
 
                     tocLinks.forEach((link) => {
                         const htmlLink = link as HTMLElement;
                         if (htmlLink.dataset.slug === currentSectionId) {
-                            htmlLink.classList.add('!text-(--)', '!border-(--)', 'font-medium');
+                            htmlLink.classList.add('!text-(--accent)', '!border-(--accent)', 'font-medium');
                             htmlLink.classList.remove(
                                 'text-slate-600',
                                 'dark:text-slate-400',
                                 'border-transparent'
                             );
                         } else {
-                            htmlLink.classList.remove('!text-(--)', '!border-(--)', 'font-medium');
+                            htmlLink.classList.remove('!text-(--accent)', '!border-(--accent)', 'font-medium');
                             htmlLink.classList.add(
                                 'text-slate-600',
                                 'dark:text-slate-400',
@@ -509,7 +514,24 @@ const commitHash = id
                         }
                     });
                 };
-                window.addEventListener('scroll', updateActiveToc, { passive: true });
+
+                // Throttled Scroll Listener using requestAnimationFrame
+                let scrollTicking = false;
+                const handleScroll = () => {
+                    if (!scrollTicking) {
+                        window.requestAnimationFrame(() => {
+                            updateProgress();
+                            updateActiveToc();
+                            scrollTicking = false;
+                        });
+                        scrollTicking = true;
+                    }
+                };
+
+                window.addEventListener('scroll', handleScroll, { passive: true, signal });
+
+                // Initialize state immediately
+                updateProgress();
                 updateActiveToc();
 
                 // 4. Code Block Hacker Polish
@@ -670,6 +692,14 @@ const commitHash = id
                             textNode.parentNode?.replaceChild(fragment, textNode);
                         }
                     });
+                }
+            });
+
+            // Cleanup event listeners when navigating away
+            document.addEventListener('astro:before-preparation', () => {
+                if (postAbortController) {
+                    postAbortController.abort();
+                    postAbortController = null;
                 }
             });
         </script>

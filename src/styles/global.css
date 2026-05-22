@@ -438,3 +438,8 @@
     content-visibility: auto;
     contain-intrinsic-size: auto none auto 600px;
 }
+
+.content-visibility-auto-post-card {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 380px;
+}

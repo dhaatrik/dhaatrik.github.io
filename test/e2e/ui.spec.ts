@@ -61,4 +61,56 @@ test.describe('Portfolio UI Interactivity', () => {
     expect(hasMarker).toBe(true);
   });
 
+  test('Blog page search should retain queries and update URL/sessionStorage', async ({ page }) => {
+    // 1. Check URL query param filtering
+    await page.goto('/blog?q=second');
+    
+    // The second post should be visible, others should be hidden
+    const secondPostCard = page.locator('a[href*="/second-post/"]');
+    const firstPostCard = page.locator('a[href*="/first-post/"]');
+    
+    await expect(secondPostCard).toBeVisible();
+    await expect(firstPostCard).toBeHidden();
+
+    // 2. Test typing updates URL (debounced) and sessionStorage
+    const searchInput = page.locator('#search-logs');
+    await searchInput.fill('first');
+    
+    // Initially should not be updated yet (debouncing)
+    expect(page.url()).toContain('q=second');
+
+    // Wait for debounce timeout (300ms + buffer)
+    await page.waitForTimeout(400);
+    expect(page.url()).toContain('q=first');
+
+    // Check sessionStorage
+    const sessionStorageVal = await page.evaluate(() => sessionStorage.getItem('blog-search-term'));
+    expect(sessionStorageVal).toBe('first');
+
+    // 3. Test back navigation retention
+    await page.goto('/');
+    await page.goBack();
+    await expect(searchInput).toHaveValue('first');
+  });
+
+  test('BlogPost Table of Contents should highlight active sections on scroll', async ({ page }) => {
+    // Navigate to a post with headings
+    await page.goto('/blog/using-mdx/');
+    
+    const tocLink = page.locator('#toc a[href="#why-mdx"]');
+    
+    // Check initial state (should not have active classes if we are at the top)
+    await expect(tocLink).not.toHaveClass(/!text-\(--accent\)/);
+
+    // Scroll to the headings section
+    const headingsHeader = page.locator('#why-mdx');
+    await headingsHeader.evaluate(el => el.scrollIntoView({ block: 'start' }));
+    
+    // Allow animation frame and scroll listener to fire
+    await page.waitForTimeout(200);
+
+    // Now it should be highlighted
+    await expect(tocLink).toHaveClass(/!text-\(--accent\)/);
+  });
+
 });
