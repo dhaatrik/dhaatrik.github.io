@@ -4,6 +4,8 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import TechMarquee from '../components/TechMarquee.astro';
 import { SITE_TITLE, SOCIAL_LINKS } from '../consts';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 
 import { techGroups } from '../data/techStack';
 
@@ -11,6 +13,23 @@ import { techGroups } from '../data/techStack';
 const booksRead = 7;
 const booksGoal = 52;
 const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100);
+
+// Pre-render rocket equation using KaTeX
+const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0}{m_f}', {
+    displayMode: true,
+    throwOnError: false
+});
+
+// Get current time in IST (UTC+5:30) for pre-rendering
+const now = new Date();
+const options: Intl.DateTimeFormatOptions = {
+    timeZone: 'Asia/Kolkata',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+};
+const initialIST = now.toLocaleTimeString('en-US', options);
 ---
 
 <!doctype html>
@@ -29,7 +48,8 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             class="layout-container relative grow space-y-20 py-8"
         >
             <div
-                class="pointer-events-none absolute top-32 right-0 -z-10 text-slate-900 opacity-5 dark:text-white"
+                id="reticle-bg"
+                class="pointer-events-none absolute top-32 right-0 -z-10 text-slate-900 opacity-5 transition-transform duration-300 ease-out dark:text-white"
             >
                 <svg
                     width="400"
@@ -48,24 +68,44 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
 
             <section class="max-w-4xl">
                 <div class="mb-16 flex flex-col items-center gap-8 md:flex-row md:items-start">
-                    <div class="w-full shrink-0 md:w-1/3">
-                        <img
-                            src="/me.jpeg"
-                            alt="Dhaatrik"
-                            loading="eager"
-                            fetchpriority="high"
-                            class="aspect-square w-full rounded-2xl border border-slate-200 object-cover shadow-xl grayscale transition-all duration-500 hover:grayscale-0 dark:border-white/10"
-                        />
+                    <div class="relative w-full shrink-0 p-4 md:w-1/3">
+                        {/* Clinical blueprint borders and target marks */}
+                        <div class="absolute inset-0 border border-dashed border-slate-200 dark:border-white/10 pointer-events-none">
+                            {/* Corner target marks '+' */}
+                            <span class="absolute -top-1.5 -left-1.5 font-mono text-[10px] font-bold text-(--accent)">+</span>
+                            <span class="absolute -top-1.5 -right-1.5 font-mono text-[10px] font-bold text-(--accent)">+</span>
+                            <span class="absolute -bottom-1.5 -left-1.5 font-mono text-[10px] font-bold text-(--accent)">+</span>
+                            <span class="absolute -bottom-1.5 -right-1.5 font-mono text-[10px] font-bold text-(--accent)">+</span>
+                            
+                            {/* Absolute layout text arrays along borders */}
+                            <span class="absolute top-1 left-2 font-mono text-[9px] font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase">SPECIMEN_REF: 01</span>
+                            <span class="absolute bottom-1 right-2 font-mono text-[9px] font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase">DATA.CAP // 100%</span>
+                        </div>
+                        
+                        <div class="relative overflow-hidden rounded-lg bg-slate-100 dark:bg-black/40">
+                            {/* Technical grid overlay */}
+                            <div class="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(rgba(0,0,0,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.08)_1px,transparent_1px)] bg-[size:10px_10px] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] opacity-50"></div>
+                            
+                            <img
+                                src="/me.jpeg"
+                                alt="Dhaatrik"
+                                loading="eager"
+                                fetchpriority="high"
+                                class="aspect-square w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
+                            />
+                        </div>
                     </div>
                     <div class="w-full md:w-2/3">
                         <h1
-                            class="mb-2 text-4xl leading-tight font-bold text-slate-900 md:text-5xl dark:text-white"
+                            class="mb-2 text-4xl leading-tight font-bold text-slate-900 md:text-5xl text-balance tracking-tight dark:text-white"
                         >
                             About Me
                         </h1>
-                        <span class="mb-6 block font-mono text-sm text-(--accent)"
-                            >Current Status: Q2 2026</span
+                        <div
+                            class="mb-6 block font-mono text-xs tracking-tight text-(--accent) sm:text-sm"
                         >
+                            SYS.LOC: [22.5726° N, 88.3639° E] // TIME: [<span id="ist-clock">{initialIST}</span>] // STATUS: ACTIVE
+                        </div>
 
                         <div
                             class="space-y-6 text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)"
@@ -76,6 +116,15 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                 data-sovereign systems by stripping complex problems down to their
                                 fundamental truths.
                             </p>
+                            
+                            <div class="mt-8 border-l-2 border-(--accent) pl-4 font-mono text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                <div class="mb-2 text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">
+                                    // OPERATIONAL PHILOSOPHY
+                                </div>
+                                <p>
+                                    I choose not to reinvent the wheel or build foundation models from scratch, but act as an execution engine leveraging AI to build functional, data-sovereign systems.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,7 +137,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                     >
                         <div class="relative z-10">
                             <h2
-                                class="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white"
+                                class="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900 text-balance tracking-tight dark:text-white"
                             >
                                 <svg
                                     class="h-6 w-6 text-slate-500 dark:text-(--text-secondary)"
@@ -142,13 +191,12 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                         class="bento-card group relative flex flex-col justify-between overflow-hidden p-6"
                     >
                         <div
-                            class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 font-serif text-4xl whitespace-nowrap text-slate-900 opacity-5 blur-[1px] transition-opacity duration-500 select-none group-hover:opacity-10 sm:text-5xl dark:text-white"
-                        >
-                            Δv = v<sub>e</sub> ln(m<sub>0</sub> / m<sub>f</sub>)
-                        </div>
+                            class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 text-2xl whitespace-nowrap text-slate-900 opacity-5 blur-[0.5px] transition-opacity duration-500 select-none group-hover:opacity-15 sm:text-3xl dark:text-white"
+                            set:html={rocketEquationHtml}
+                        />
                         <div class="relative z-10">
                             <h2
-                                class="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white"
+                                class="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900 text-balance tracking-tight dark:text-white"
                             >
                                 <svg
                                     class="h-6 w-6 text-slate-500 dark:text-(--text-secondary)"
@@ -185,7 +233,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             </section>
 
             <section class="relative mb-20 max-w-5xl">
-                <h2 class="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
+                <h2 class="mb-6 text-2xl font-bold text-slate-900 text-balance tracking-tight dark:text-white">
                     Current Trajectory
                 </h2>
 
@@ -293,7 +341,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             </section>
 
             <section class="mb-20 max-w-5xl">
-                <h2 class="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
+                <h2 class="mb-6 text-2xl font-bold text-slate-900 text-balance tracking-tight dark:text-white">
                     Signal & Metrics
                 </h2>
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -325,8 +373,8 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                 </h3>
                                 <span class="font-mono text-xs text-(--text-secondary)">2026 Goal</span>
                             </div>
-                            <div class="mb-4">
-                                <div class="mb-1 flex justify-between text-sm">
+                            <div class="mb-6">
+                                <div class="mb-3 flex justify-between text-sm">
                                     <span class="text-slate-600 dark:text-slate-400"
                                         >Books Read</span
                                     >
@@ -334,14 +382,22 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                         >{booksRead} / {booksGoal}</span
                                     >
                                 </div>
-                                <div
-                                    class="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-white/5"
-                                >
-                                    <div
-                                        class="h-full rounded-full bg-(--accent)"
-                                        style={`width: ${readingProgress}%`}
-                                    >
-                                    </div>
+                                <div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1.5 w-full max-w-xs">
+                                    {
+                                        Array.from({ length: booksGoal }).map((_, index) => {
+                                            const isRead = index < booksRead;
+                                            return (
+                                                <div
+                                                    class={`aspect-square w-full rounded-[2px] transition-all duration-500 ${
+                                                        isRead
+                                                            ? 'bg-(--accent) shadow-[0_0_8px_var(--accent)] border border-(--accent)'
+                                                            : 'border border-slate-200 dark:border-white/5 bg-transparent'
+                                                    }`}
+                                                    title={`Book ${index + 1}: ${isRead ? 'Completed' : 'Pending'}`}
+                                                />
+                                            );
+                                        })
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -393,11 +449,12 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                         </div>
                         <div class="grow p-4 font-mono text-sm">
                             <div class="mb-2 text-[#50fa7b]">$ cat /logs/may-reflection.txt</div>
-                            <div class="leading-relaxed text-[#f8f8f2]">
-                                <span class="text-[#bd93f9]">"</span>Optimization is a trap if you
-                                haven't nailed the fundamentals first. Build robust, scale later.<span
-                                    class="text-[#bd93f9]">"</span
-                                >
+                            <div
+                                id="terminal-snippet"
+                                class="leading-relaxed text-[#f8f8f2]"
+                                data-text="Optimization is a trap if you haven't nailed the fundamentals first. Build robust, scale later."
+                            >
+                                <span class="text-[#bd93f9]">"</span><span class="animate-pulse">█</span>
                             </div>
                             <div class="mt-2 animate-pulse text-[#50fa7b]">_</div>
                         </div>
@@ -414,7 +471,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                     </div>
                     <div class="relative z-10 w-full max-w-2xl">
                         <h2
-                            class="mb-4 font-mono text-3xl font-bold text-slate-900 md:text-4xl dark:text-white"
+                            class="mb-4 font-mono text-3xl font-bold text-slate-900 md:text-4xl text-balance tracking-tight dark:text-white"
                         >
                             &gt; Let's Connect
                         </h2>
@@ -454,7 +511,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             </section>
 
             <section class="max-w-5xl content-visibility-auto-tech-stack">
-                <h2 class="mb-8 text-3xl font-bold text-slate-900 dark:text-white">
+                <h2 class="mb-8 text-3xl font-bold text-slate-900 text-balance tracking-tight dark:text-white">
                     My Tech Stack
                 </h2>
                 <TechMarquee techGroups={techGroups} />
@@ -465,7 +522,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                 id="books-modal"
                 aria-labelledby="books-modal-title"
                 onclick="event.target === this && this.close()"
-                class="m-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm dark:border-white/10 dark:bg-[#0b0e14]"
+                class="m-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl dark:border-white/10 dark:bg-[#0b0e14]"
             >
                 <div
                     class="flex items-center justify-between border-b border-slate-100 p-6 dark:border-white/5"
@@ -571,20 +628,83 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             </dialog>
         </main>
         <Footer />
+        <style is:global>
+            /* Dialog Animating Styles */
+            dialog#books-modal {
+                opacity: 0;
+                transform: scale(0.95);
+                transition:
+                    opacity 0.3s ease-out,
+                    transform 0.3s ease-out,
+                    display 0.3s ease-out allow-discrete,
+                    overlay 0.3s ease-out allow-discrete;
+            }
+
+            dialog#books-modal[open] {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            @starting-style {
+                dialog#books-modal[open] {
+                    opacity: 0;
+                    transform: scale(0.95);
+                }
+            }
+
+            /* Backdrop styling */
+            dialog#books-modal::backdrop {
+                background-color: rgba(0, 0, 0, 0);
+                backdrop-filter: blur(0px);
+                transition:
+                    display 0.3s allow-discrete,
+                    overlay 0.3s allow-discrete,
+                    background-color 0.3s ease-out,
+                    backdrop-filter 0.3s ease-out;
+            }
+
+            dialog#books-modal[open]::backdrop {
+                background-color: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(8px);
+            }
+
+            @starting-style {
+                dialog#books-modal[open]::backdrop {
+                    background-color: rgba(0, 0, 0, 0);
+                    backdrop-filter: blur(0px);
+                }
+            }
+
+            /* KaTeX margin reset */
+            .katex-display {
+                margin: 0 !important;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                dialog#books-modal {
+                    transform: none;
+                    transition-duration: 0.1s;
+                }
+                @starting-style {
+                    dialog#books-modal[open] {
+                        transform: none;
+                    }
+                }
+            }
+        </style>
         <script>
             document.addEventListener('astro:page-load', () => {
-                // Scramble / Cypher Text Hover Effects
+                // 1. Coordinated sequential decode animation on load
                 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
-                const cypherElements = document.querySelectorAll('.cypher-text');
+                const cypherElements = Array.from(document.querySelectorAll('.cypher-text')) as HTMLElement[];
                 const activeIntervals = new Map<HTMLElement, ReturnType<typeof setInterval>>();
 
-                cypherElements.forEach((el) => {
-                    const element = el as HTMLElement;
-                    const originalText = element.dataset.original || '';
-                    const length = originalText.length;
-
-                    const startScramble = () => {
+                const decodeElement = (element: HTMLElement): Promise<void> => {
+                    return new Promise((resolve) => {
+                        const originalText = element.dataset.original || '';
+                        const length = originalText.length;
                         let iterations = 0;
+
                         if (activeIntervals.has(element)) {
                             clearInterval(activeIntervals.get(element)!);
                         }
@@ -601,17 +721,95 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                             if (iterations >= length) {
                                 clearInterval(interval);
                                 activeIntervals.delete(element);
+                                resolve();
                             }
                             iterations += 1 / 3;
                         }, 30);
 
                         activeIntervals.set(element, interval);
+                    });
+                };
+
+                const runSequentialDecode = async () => {
+                    for (const el of cypherElements) {
+                        await decodeElement(el);
+                    }
+                };
+
+                runSequentialDecode();
+
+                // 2. Scroll-triggered IntersectionObserver Typewriter for Terminal
+                const terminalSnippet = document.getElementById('terminal-snippet');
+                let typewriterTimeout: ReturnType<typeof setTimeout> | null = null;
+                
+                if (terminalSnippet) {
+                    const rawText = terminalSnippet.dataset.text || '';
+                    let index = 0;
+                    let isTyping = false;
+
+                    const typeWriter = () => {
+                        if (index <= rawText.length) {
+                            let displayed = '<span class="text-[#bd93f9]">"</span>';
+                            displayed += rawText.substring(0, index);
+                            if (index < rawText.length) {
+                                displayed += '<span class="animate-pulse">█</span>';
+                            } else {
+                                displayed += '<span class="text-[#bd93f9]">"</span>';
+                            }
+                            terminalSnippet.innerHTML = displayed;
+                            index++;
+                            typewriterTimeout = setTimeout(typeWriter, 45);
+                        }
                     };
 
-                    element.addEventListener('mouseenter', startScramble);
-                });
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting && !isTyping) {
+                                isTyping = true;
+                                typeWriter();
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.1 });
 
-                // The "Offline-First" Easter Egg
+                    observer.observe(terminalSnippet);
+                }
+
+                // 3. Coordinate & Status Telemetry Cluster Live Clock (IST)
+                const clockEl = document.getElementById('ist-clock');
+                const updateClock = () => {
+                    const clockNow = new Date();
+                    const formatted = clockNow.toLocaleTimeString('en-US', {
+                        timeZone: 'Asia/Kolkata',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: true
+                    });
+                    if (clockEl) {
+                        clockEl.textContent = formatted;
+                    }
+                };
+                const clockInterval = setInterval(updateClock, 1000);
+
+                // 4. Kinetic Reticle Mouse Tracking Parallax
+                const reticle = document.getElementById('reticle-bg');
+                const handleReticleParallax = (e: MouseEvent) => {
+                    const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+                    const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+                    
+                    const moveX = x * 8; // max 8px
+                    const moveY = y * 8; // max 8px
+                    const rotate = x * 5; // max 5deg
+                    
+                    if (reticle) {
+                        reticle.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) rotate(${rotate}deg)`;
+                    }
+                };
+
+                window.addEventListener('mousemove', handleReticleParallax);
+
+                // 5. The "Offline-First" Easter Egg
                 const handleOffline = () => {
                     const toast = document.createElement('div');
                     toast.className =
@@ -635,9 +833,20 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
 
                 // Cleanup Event Listeners on Page Transition
                 document.addEventListener('astro:before-preparation', () => {
-                    // Clear all active cypher intervals
+                    // Clear cypher intervals
                     activeIntervals.forEach((interval) => clearInterval(interval));
                     activeIntervals.clear();
+
+                    // Clear clock interval
+                    clearInterval(clockInterval);
+
+                    // Clear typewriter timeout
+                    if (typewriterTimeout) {
+                        clearTimeout(typewriterTimeout);
+                    }
+
+                    // Remove mousemove listener
+                    window.removeEventListener('mousemove', handleReticleParallax);
 
                     // Remove offline event listener
                     window.removeEventListener('offline', handleOffline);
