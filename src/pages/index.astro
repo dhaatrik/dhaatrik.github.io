@@ -32,16 +32,39 @@ const premiumLineup = lineupNames
     .filter((t): t is TechIcon => t !== null);
 ---
 
+const getProjectTelemetry = (id: string) => {
+    const rawId = id.replace(/\.md$/, '');
+    switch(rawId) {
+        case 'vellor':
+            return 'STATUS: V4_IN_DEV // DB: OFF_LINE_FIRST // SYNC: LOCAL';
+        case 'deltav-lab':
+            return 'STATUS: RUNNING // SIM: RK4_50HZ_ACTIVE // ORBITS: OK';
+        case 'fueldrop':
+            return 'STATUS: SHIPPED // VERSION: V3.0.0 // CONCURRENCY: HIGH';
+        case 'the-infinite-intelligence':
+            return 'STATUS: OPERATIONAL // AGENTS: DEBATING // PARALLEL: TRUE';
+        default:
+            return 'STATUS: OPERATIONAL // SYSTEM: OK';
+    }
+};
+---
 <!doctype html>
 <html lang="en">
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
-    <body class="bg-grid-motif relative pt-24">
+    <body class="bg-grid-motif relative pt-24 has-custom-cursor">
+        <!-- Tactile Flashlight Background -->
+        <div id="flashlight-bg"></div>
+
+        <!-- Custom Cursor elements -->
+        <div id="custom-cursor" class="custom-cursor hidden md:block"></div>
+        <div id="custom-cursor-ring" class="custom-cursor-ring hidden md:block"></div>
+
         <Header />
         <main id="main-content" tabindex="-1" class="layout-container space-y-24">
             <!-- Hero Section: The Boring Section -->
-            <section class="mt-12 max-w-3xl">
+            <section class="relative flex flex-col justify-center min-h-[78vh] pt-12 pb-24 md:pb-28 max-w-3xl">
                 <div
                     class="animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-sm font-medium text-green-600 dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400"
                 >
@@ -60,9 +83,10 @@ const premiumLineup = lineupNames
                 >
                     <span id="dynamic-greeting">Hey!</span> I'm Dhaatrik. <br />
                     <span
-                        class="bg-linear-to- mt-2 block from-(--) to-purple-500 bg-clip-text text-2xl font-medium text-transparent md:text-3xl dark:from-blue-400 dark:to-purple-400"
-                        >First-Principles Thinker.</span
-                    >
+                        id="identity-rotator"
+                        class="font-mono mt-2 block bg-linear-to-r from-blue-600 to-purple-500 bg-clip-text text-2xl font-bold text-transparent md:text-3xl dark:from-blue-400 dark:to-purple-400 min-h-[1.5em]"
+                        data-identities='["First-Principles Thinker.", "AI Systems Architect.", "Aerospace Enthusiast.", "Open-Source Builder."]'
+                    >First-Principles Thinker.</span>
                 </h1>
                 <script is:inline>
                     const hour = new Date().getHours();
@@ -79,16 +103,15 @@ const premiumLineup = lineupNames
                     generation of tech-driven solutions. I believe that best products come from
                     understanding the absolute fundamentals.
                 </p>
-                <div class="animate-fade-in-up flex gap-4 delay-300">
-                    {
-                        /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */
-                    }
+
+                <!-- CTA Hierarchy -->
+                <div class="animate-fade-in-up flex flex-wrap items-center gap-6 delay-300">
                     <a
                         href="/about"
                         data-astro-prefetch="hover"
-                        class="group inline-flex items-center gap-2 rounded-lg bg-(--accent) px-6 py-3 font-medium text-white transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:-translate-y-1 focus-visible:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
+                        class="magnetic-target group inline-flex items-center gap-2 rounded-full bg-(--accent) px-6 py-2.5 font-medium text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] focus-visible:scale-105 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                     >
-                        Read My Journey
+                        View Mission Dossier
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -99,51 +122,64 @@ const premiumLineup = lineupNames
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="transition-transform group-hover:translate-x-1 group-focus-visible:translate-x-1"
+                            class="transition-transform group-hover:translate-x-1"
                             aria-hidden="true"
                         >
                             <path d="M5 12h14"></path>
                             <path d="m12 5 7 7-7 7"></path>
                         </svg>
                     </a>
-                    <a
-                        href="https://x.com/dhaatrik"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="group inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-100 px-6 py-3 font-medium text-slate-900 transition-all hover:-translate-y-1 hover:bg-slate-200 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:-translate-y-1 focus-visible:bg-slate-200 focus-visible:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 dark:focus-visible:bg-white/10 dark:focus-visible:ring-offset-(--bg-main)"
-                    >
-                        <span class="flex items-center gap-2">
-                            Let's Chat
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="14"
-                                height="14"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                aria-hidden="true"
+
+                    <div class="flex items-center gap-3">
+                        <!-- Email Link -->
+                        <a
+                            href="mailto:dhaatrik.c@gmail.com"
+                            class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
+                            aria-label="Send Email"
+                            title="Send Email"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </a>
+                        <!-- X/Twitter Link -->
+                        <a
+                            href="https://x.com/dhaatrik"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
+                            aria-label="Follow on X (Twitter)"
+                            title="Follow on X"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="currentColor"
+                                ><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg
                             >
-                                <path
-                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                                ></path>
-                            </svg>
-                        </span>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="transition-transform group-hover:translate-x-1 group-focus-visible:translate-x-1"
-                            aria-hidden="true"
+                        </a>
+                        <!-- GitHub Link -->
+                        <a
+                            href="https://github.com/dhaatrik"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
+                            aria-label="View GitHub"
+                            title="View GitHub"
                         >
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </a>
+                            <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16" fill="currentColor"
+                                ><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg
+                            >
+                        </a>
+                        <!-- LinkedIn Link -->
+                        <a
+                            href="https://linkedin.com/in/dhaatrik"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
+                            aria-label="View LinkedIn"
+                            title="View LinkedIn"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="currentColor"
+                                ><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg
+                            >
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Built With Badges -->
@@ -169,6 +205,14 @@ const premiumLineup = lineupNames
                         }
                     </div>
                 </div>
+
+                <!-- Scroll Telemetry Indicator -->
+                <div class="absolute bottom-4 left-0 right-0 flex flex-col items-center gap-1.5 text-slate-400 dark:text-slate-500 select-none pointer-events-none md:bottom-8">
+                    <span class="font-mono text-[9px] tracking-widest uppercase opacity-75">[ SCROLL TO INITIATE ]</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="telemetry-pulse">
+                        <path d="M12 5v14M19 12l-7 7-7-7"/>
+                    </svg>
+                </div>
             </section>
 
             <!-- Projects Section: Featured Engineering -->
@@ -182,12 +226,21 @@ const premiumLineup = lineupNames
                     </p>
                 </div>
 
-                <div class="bento-grid">
-                    <!-- Current Focus Mini-Bento -->
+                <div class="bento-grid perspective-1000">
+                    <!-- Current Focus Bento Card -->
                     <article
                         class="bento-card group relative flex flex-col justify-between overflow-hidden"
                     >
-                        <div class="relative z-10">
+                        <div class="hologram-overlay"></div>
+                        <div class="hologram-scanner"></div>
+                        <div class="relative z-10" data-tilt-z>
+                            <div class="flex items-center justify-between border-b border-slate-200/50 pb-2 mb-4 dark:border-white/5 font-mono text-[9px] text-slate-400 dark:text-slate-500">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                    <span>STATUS: RESEARCH_ACTIVE // CORE: RUST_WASM</span>
+                                </div>
+                                <span class="font-bold text-(--accent)">[ CORE ]</span>
+                            </div>
                             <div class="mb-4 flex items-start justify-between">
                                 <h3
                                     class="text-2xl font-bold text-slate-900 transition-colors dark:text-white"
@@ -195,7 +248,7 @@ const premiumLineup = lineupNames
                                     Currently Exploring
                                 </h3>
                             </div>
-                            <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--)">
+                            <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
                                 Transitioning to Rust/WASM for deterministic aerospace simulations
                                 and deep-diving into quantum mechanics fundamentals.
                             </p>
@@ -203,58 +256,101 @@ const premiumLineup = lineupNames
                     </article>
 
                     {
-                        projects.map((project) => (
-                            <article class="bento-card group relative flex flex-col justify-between overflow-hidden">
-                                {project.data.logo && (
-                                    <img
-                                        src={project.data.logo}
-                                        alt=""
-                                        class="absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 opacity-10 transition-transform duration-500 group-hover:scale-110 dark:opacity-5"
-                                        aria-hidden="true"
-                                        loading="lazy"
-                                    />
-                                )}
-                                <div class="relative z-10">
-                                    <div class="mb-4 flex items-start justify-between">
-                                        <h3 class="text-2xl font-bold text-slate-900 transition-colors dark:text-white">
-                                            {project.data.title}
-                                        </h3>
-                                        {project.data.githubUrl && (
-                                            <a
-                                                href={project.data.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label={`View ${project.data.title} on GitHub (opens in a new tab)`}
-                                                title={`View ${project.data.title} on GitHub`}
-                                                class="text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-(--text-secondary) dark:hover:text-white dark:focus-visible:text-white"
-                                            >
-                                                <svg
-                                                    viewBox="0 0 16 16"
-                                                    aria-hidden="true"
-                                                    width="24"
-                                                    height="24"
-                                                >
-                                                    <path
-                                                        fill="currentColor"
-                                                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                                                    />
-                                                </svg>
-                                            </a>
+                        projects.map((project) => {
+                            const telemetryStr = getProjectTelemetry(project.id);
+                            return (
+                                <article class="bento-card group relative flex flex-col justify-between overflow-hidden">
+                                    <div class="hologram-overlay"></div>
+                                    <div class="hologram-scanner"></div>
+                                    
+                                    <!-- Hologram WebM Video with Fallback to Static Logo -->
+                                    <div class="absolute inset-0 opacity-12 dark:opacity-8 mix-blend-screen dark:mix-blend-lighten overflow-hidden pointer-events-none rounded-2xl flex items-center justify-center">
+                                        <video
+                                            src={`/videos/${project.id.replace(/\.md$/, '')}.webm`}
+                                            autoplay
+                                            loop
+                                            muted
+                                            playsinline
+                                            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                            style="display: none;"
+                                            onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
+                                            onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden');"
+                                        ></video>
+                                        {project.data.logo && (
+                                            <img
+                                                src={project.data.logo}
+                                                alt=""
+                                                class="absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 group-hover:scale-110"
+                                                aria-hidden="true"
+                                                loading="lazy"
+                                            />
                                         )}
                                     </div>
-                                    <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                                        {project.data.description}
-                                    </p>
-                                </div>
-
-                                {project.data.progress && (
-                                    <div class="relative z-10 mt-4 border-t border-slate-200 pt-4 dark:border-white/5">
-                                        <span class="text-xs font-semibold tracking-wider text-(--accent) uppercase">
-                                            Current Progress
-                                        </span>
-                                        <p class="mt-1 text-sm font-medium text-slate-600 dark:text-(--text-secondary)">
-                                            {project.data.progress}
-                                        </p>
+                                    
+                                    <div class="relative z-10 flex flex-col justify-between h-full" data-tilt-z>
+                                        <div>
+                                            <!-- Live Telemetry Badge -->
+                                            <div class="flex items-center justify-between border-b border-slate-200/50 pb-2 mb-4 dark:border-white/5 font-mono text-[9px] text-slate-400 dark:text-slate-500">
+                                                <div class="flex items-center gap-1.5">
+                                                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                                    <span>{telemetryStr}</span>
+                                                </div>
+                                                <span class="font-bold text-(--accent)">[ OK ]</span>
+                                            </div>
+                                            
+                                            <div class="mb-4 flex items-start justify-between">
+                                                <h3 class="text-2xl font-bold text-slate-900 transition-colors dark:text-white">
+                                                    {project.data.title}
+                                                </h3>
+                                                {project.data.githubUrl && (
+                                                    <a
+                                                        href={project.data.githubUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        aria-label={`View ${project.data.title} on GitHub (opens in a new tab)`}
+                                                        title={`View ${project.data.title} on GitHub`}
+                                                        class="text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-(--text-secondary) dark:hover:text-white dark:focus-visible:text-white"
+                                                    >
+                                                        <svg
+                                                            viewBox="0 0 16 16"
+                                                            aria-hidden="true"
+                                                            width="24"
+                                                            height="24"
+                                                        >
+                                                            <path
+                                                                fill="currentColor"
+                                                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                                                            />
+                                                        </svg>
+                                                    </a>
+                                                )}
+                                            </div>
+                                            <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                                {project.data.description}
+                                            </p>
+                                        </div>
+                                        
+                                        <div>
+                                            {project.data.progress && (
+                                                <div class="border-t border-slate-200 pt-4 dark:border-white/5">
+                                                    <span class="text-xs font-semibold tracking-wider text-(--accent) uppercase">
+                                                        Current Progress
+                                                    </span>
+                                                    <p class="mt-1 text-sm font-medium text-slate-600 dark:text-(--text-secondary)">
+                                                        {project.data.progress}
+                                                    </p>
+                                                </div>
+                                            )}
+                                            {project.data.tags && project.data.tags.length > 0 && (
+                                                <div class="mt-4 flex flex-wrap gap-2">
+                                                    {project.data.tags.map((tag) => (
+                                                        <span class="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-500 dark:bg-white/5 dark:text-slate-400">
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 )}
                                 {project.data.tags && project.data.tags.length > 0 && (
@@ -272,7 +368,7 @@ const premiumLineup = lineupNames
                 </div>
             </section>
 
-            <!-- Latest Thinking Section -->
+            <!-- Latest Thinking Section (Abstract Layout) -->
             <section class="animate-fade-in-up mb-16 delay-500">
                 <div class="mb-10 flex items-end justify-between">
                     <div>
@@ -306,33 +402,75 @@ const premiumLineup = lineupNames
                     </a>
                 </div>
 
-                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="flex flex-col gap-6">
                     {
-                        posts.map((post) => (
-                            <a
-                                href={`/blog/${post.id}/`}
-                                class="bento-card group block transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
-                            >
-                                <article class="flex h-full flex-col justify-between p-2">
-                                    <div>
-                                        <h3 class="mb-2 text-xl leading-tight font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
-                                            {post.data.title}
-                                        </h3>
-                                        <p class="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                                            {post.data.description}
-                                        </p>
-                                    </div>
-                                    <div class="mt-4 flex items-center text-xs text-slate-500 dark:text-(--text-secondary)">
-                                        <FormattedDate date={post.data.pubDate} />
-                                        <span class="mx-2">•</span>
-                                        <span>
-                                            {/* ⚡ Bolt: Use single-pass scanner to avoid massive array allocations during SSG */}
-                                            {getReadingTime(post.body || '')} min read
-                                        </span>
-                                    </div>
-                                </article>
-                            </a>
-                        ))
+                        posts.map((post, index) => {
+                            const doiNum = `10.1012/DH.${post.id.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'POST'}`;
+                            return (
+                                <a
+                                    href={`/blog/${post.id}/`}
+                                    class="bento-card group block transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
+                                >
+                                    <article class="grid grid-cols-1 md:grid-cols-12 gap-6 p-2">
+                                        <!-- Left Side: Journal Metadata -->
+                                        <div class="md:col-span-4 border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/5 pb-4 md:pb-0 md:pr-6 flex flex-col justify-between">
+                                            <div>
+                                                <div class="font-mono text-[9px] tracking-widest text-slate-400 dark:text-slate-500 uppercase mb-1">
+                                                    [ TRANSMISSION 0{index + 1} ]
+                                                </div>
+                                                <div class="font-mono text-xs font-bold text-(--accent) mb-2">
+                                                    <FormattedDate date={post.data.pubDate} format="technical" />
+                                                </div>
+                                                <div class="inline-block rounded-xs border border-(--accent)/30 bg-(--accent)/5 px-2 py-0.5 font-mono text-[9px] font-semibold text-(--accent) uppercase mb-4">
+                                                    ABSTRACT
+                                                </div>
+                                            </div>
+                                            <!-- Tags -->
+                                            {post.data.tags && post.data.tags.length > 0 && (
+                                                <div class="flex flex-wrap gap-1.5 mt-2">
+                                                    {post.data.tags.slice(0, 3).map((tag) => (
+                                                        <span class="rounded-xs bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 font-mono text-[9px] px-1.5 py-0.5">
+                                                            #{tag.replace(/\s+/g, '').toLowerCase()}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <!-- Right Side: Content & DOI -->
+                                        <div class="md:col-span-8 flex flex-col justify-between">
+                                            <div>
+                                                <h3 class="mb-2 text-xl font-bold text-slate-900 group-hover:text-(--accent) dark:text-white transition-colors leading-tight">
+                                                    {post.data.title}
+                                                </h3>
+                                                <p class="mb-4 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary) line-clamp-2">
+                                                    {post.data.description}
+                                                </p>
+                                            </div>
+                                            <div class="flex items-center justify-between mt-4">
+                                                <div class="font-mono text-[9px] text-slate-400 dark:text-slate-500">
+                                                    DOI: <span class="text-slate-600 dark:text-slate-400">{doiNum}</span>
+                                                    <span class="mx-1.5">•</span>
+                                                    <span class="text-slate-600 dark:text-slate-400">{getReadingTime(post.body || '')} min read</span>
+                                                </div>
+                                                <!-- Simulated Barcode -->
+                                                <div class="hidden sm:flex items-center gap-0.5 h-6 opacity-40 group-hover:opacity-75 transition-opacity" aria-hidden="true">
+                                                    <div class="w-[1px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-[2px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-[1px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-[3px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-[1px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-[1px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-[2px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-[4px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-[1px] h-full bg-slate-800 dark:bg-white"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </a>
+                            );
+                        })
                     }
                 </div>
                 <div class="mt-6 flex sm:hidden">
@@ -361,5 +499,209 @@ const premiumLineup = lineupNames
             </section>
         </main>
         <Footer />
+
+        <!-- Interactive Script: Premium UX Handlers with Astro lifecycle support -->
+        <script is:inline>
+            document.addEventListener('astro:page-load', () => {
+                // --- 1. Dynamic "Identity" Typewriter ---
+                const typeTarget = document.getElementById('identity-rotator');
+                let typewriterTimeout;
+
+                if (typeTarget) {
+                    const identities = JSON.parse(typeTarget.dataset.identities || '[]');
+                    let currentIdx = 0;
+                    let charIdx = identities[0].length;
+                    let isDeleting = false;
+                    let currentText = identities[0];
+
+                    function typeEffect() {
+                        const fullTxt = identities[currentIdx];
+                        if (isDeleting) {
+                            currentText = fullTxt.substring(0, charIdx - 1);
+                            charIdx--;
+                        } else {
+                            currentText = fullTxt.substring(0, charIdx + 1);
+                            charIdx++;
+                        }
+
+                        typeTarget.textContent = currentText;
+
+                        let delay = isDeleting ? 30 : 65;
+
+                        if (!isDeleting && charIdx === fullTxt.length) {
+                            delay = 2200; // hold at end
+                            isDeleting = true;
+                        } else if (isDeleting && charIdx === 0) {
+                            isDeleting = false;
+                            currentIdx = (currentIdx + 1) % identities.length;
+                            delay = 400; // pause before typing next
+                        }
+
+                        typewriterTimeout = setTimeout(typeEffect, delay);
+                    }
+
+                    // Start typewriter
+                    typewriterTimeout = setTimeout(typeEffect, 1200);
+                }
+
+                // --- 2. Tactile Flashlight Background ---
+                const flashlightBg = document.getElementById('flashlight-bg');
+                let bgTicking = false;
+
+                const handleBgMove = (e) => {
+                    if (!bgTicking) {
+                        window.requestAnimationFrame(() => {
+                            if (flashlightBg) {
+                                flashlightBg.style.setProperty('--bg-mouse-x', `${e.clientX}px`);
+                                flashlightBg.style.setProperty('--bg-mouse-y', `${e.clientY}px`);
+                            }
+                            bgTicking = false;
+                        });
+                        bgTicking = true;
+                    }
+                };
+
+                if (flashlightBg) {
+                    document.addEventListener('mousemove', handleBgMove);
+                }
+
+                // --- 3. Custom Cursor with Lerp ---
+                const cursorDot = document.getElementById('custom-cursor');
+                const cursorRing = document.getElementById('custom-cursor-ring');
+                let mouseX = 0, mouseY = 0;
+                let ringX = 0, ringY = 0;
+                let isMoving = false;
+                let cursorFrameId;
+
+                const handleCursorMove = (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+
+                    cursorDot.style.left = mouseX + 'px';
+                    cursorDot.style.top = mouseY + 'px';
+
+                    if (!isMoving) {
+                        cursorDot.style.opacity = '1';
+                        cursorRing.style.opacity = '1';
+                        isMoving = true;
+                    }
+                };
+
+                const handleMouseLeaveWindow = () => {
+                    cursorDot.style.opacity = '0';
+                    cursorRing.style.opacity = '0';
+                    isMoving = false;
+                };
+
+                if (cursorDot && cursorRing) {
+                    document.addEventListener('mousemove', handleCursorMove);
+                    document.addEventListener('mouseleave', handleMouseLeaveWindow);
+                    document.addEventListener('mouseenter', () => {
+                        cursorDot.style.opacity = '1';
+                        cursorRing.style.opacity = '1';
+                    });
+
+                    function updateRing() {
+                        // Lerp equation
+                        ringX += (mouseX - ringX) * 0.15;
+                        ringY += (mouseY - ringY) * 0.15;
+
+                        cursorRing.style.left = ringX + 'px';
+                        cursorRing.style.top = ringY + 'px';
+
+                        cursorFrameId = requestAnimationFrame(updateRing);
+                    }
+                    updateRing();
+
+                    // Connect hovers
+                    const hoverElements = document.querySelectorAll('a, button, [role="button"], input, select, textarea, .bento-card');
+                    hoverElements.forEach(el => {
+                        el.addEventListener('mouseenter', () => {
+                            cursorRing.classList.add('cursor-hover');
+                            cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+                        });
+                        el.addEventListener('mouseleave', () => {
+                            cursorRing.classList.remove('cursor-hover');
+                            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                        });
+                    });
+                }
+
+                // --- 4. 3D Bento Card Parallax Tilt ---
+                const cards = document.querySelectorAll('.bento-card');
+                cards.forEach(card => {
+                    const handleCardMove = (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        const xc = rect.width / 2;
+                        const yc = rect.height / 2;
+
+                        const tiltX = (yc - y) / 12;
+                        const tiltY = (x - xc) / 12;
+
+                        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+                        card.style.setProperty('--mouse-x', `${x}px`);
+                        card.style.setProperty('--mouse-y', `${y}px`);
+
+                        // Push inner elements outwards
+                        const tilts = card.querySelectorAll('[data-tilt-z]');
+                        tilts.forEach(target => {
+                            target.style.transform = 'translateZ(25px)';
+                        });
+                    };
+
+                    const handleCardLeave = () => {
+                        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                        const tilts = card.querySelectorAll('[data-tilt-z]');
+                        tilts.forEach(target => {
+                            target.style.transform = 'translateZ(0px)';
+                        });
+                    };
+
+                    card.addEventListener('mousemove', handleCardMove);
+                    card.addEventListener('mouseleave', handleCardLeave);
+                });
+
+                // --- 5. Magnetic Physics on CTA & Social Icons ---
+                const magnetics = document.querySelectorAll('.magnetic-target');
+                magnetics.forEach(el => {
+                    const handleMagnetMove = (e) => {
+                        const rect = el.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+                        const dx = e.clientX - centerX;
+                        const dy = e.clientY - centerY;
+
+                        const px = dx * 0.35;
+                        const py = dy * 0.35;
+
+                        el.style.transform = `translate(${px}px, ${py}px) scale(1.06)`;
+                    };
+
+                    const handleMagnetLeave = () => {
+                        el.style.transform = 'translate(0px, 0px) scale(1)';
+                    };
+
+                    el.addEventListener('mouseenter', () => {
+                        el.style.transition = 'none';
+                    });
+                    el.addEventListener('mousemove', handleMagnetMove);
+                    el.addEventListener('mouseleave', () => {
+                        el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+                        handleMagnetLeave();
+                    });
+                });
+
+                // --- 6. Cleanup Event Listeners on Page Transition ---
+                document.addEventListener('astro:before-preparation', () => {
+                    if (typewriterTimeout) clearTimeout(typewriterTimeout);
+                    if (cursorFrameId) cancelAnimationFrame(cursorFrameId);
+                    document.removeEventListener('mousemove', handleBgMove);
+                    document.removeEventListener('mousemove', handleCursorMove);
+                }, { once: true });
+            });
+        </script>
     </body>
 </html>
