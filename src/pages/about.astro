@@ -2,7 +2,6 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import TechMarquee from '../components/TechMarquee.astro';
 import { SITE_TITLE, SOCIAL_LINKS } from '../consts';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
@@ -497,10 +496,139 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
             </section>
 
             <section class="max-w-5xl content-visibility-auto-tech-stack">
-                <h2 class="mb-8 text-3xl font-bold text-slate-900 text-balance tracking-tight dark:text-white">
+                <h2 class="mb-2 text-3xl font-bold text-slate-900 text-balance tracking-tight dark:text-white">
                     My Tech Stack
                 </h2>
-                <TechMarquee techGroups={techGroups} />
+                <p class="mb-8 font-mono text-[10px] tracking-tight text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed uppercase">
+                    // SYSTEM_INVENTORY: TECHNICAL ASSETS REGISTERED FOR TARGETED SYSTEM ARCHITECTURE AND HIGH-VELOCITY DEPLOYMENT. UTILITY PRIORITIZED OVER SYNTAX MEMORIZATION.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* MODULE 01: Frontend */}
+                    <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Labels -->
+                        <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_01 // FE_SYS</span>
+                        <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
+                        
+                        <div>
+                            <h3 class="cypher-text mb-4 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide" data-original="Frontend Subsystem">Frontend Subsystem</h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {techGroups.Frontend.map((tech) => (
+                                    <div class="group/tech relative flex items-center gap-2 border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-full text-[11px] font-medium text-slate-800 dark:text-slate-200 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] transition-all duration-300">
+                                        <span>{tech.name}</span>
+                                        {tech.deployment && (
+                                            <span class="font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">{tech.deployment}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Corner Labels -->
+                        <span class="absolute bottom-2 left-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">REF_ID: FE-01</span>
+                        <span class="absolute bottom-2 right-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">CAP: 100%</span>
+                    </div>
+
+                    {/* MODULE 02: Backend */}
+                    <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Labels -->
+                        <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_02 // BE_SYS</span>
+                        <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
+                        
+                        <div>
+                            <h3 class="cypher-text mb-4 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide" data-original="Backend Engine">Backend Engine</h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {techGroups.Backend.map((tech) => (
+                                    <div class="group/tech relative flex items-center gap-2 border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-full text-[11px] font-medium text-slate-800 dark:text-slate-200 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] transition-all duration-300">
+                                        <span>{tech.name}</span>
+                                        {tech.deployment && (
+                                            <span class="font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">{tech.deployment}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Corner Labels -->
+                        <span class="absolute bottom-2 left-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">REF_ID: BE-02</span>
+                        <span class="absolute bottom-2 right-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">CAP: 100%</span>
+                    </div>
+
+                    {/* MODULE 03: Data & Cloud */}
+                    <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Labels -->
+                        <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_03 // DB_SYS</span>
+                        <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
+                        
+                        <div>
+                            <h3 class="cypher-text mb-4 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide" data-original="Data & Cloud">Data & Cloud</h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {techGroups.Cloud_Db.map((tech) => (
+                                    <div class="group/tech relative flex items-center gap-2 border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-full text-[11px] font-medium text-slate-800 dark:text-slate-200 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] transition-all duration-300">
+                                        <span>{tech.name}</span>
+                                        {tech.deployment && (
+                                            <span class="font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">{tech.deployment}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Corner Labels -->
+                        <span class="absolute bottom-2 left-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">REF_ID: DB-03</span>
+                        <span class="absolute bottom-2 right-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">CAP: 100%</span>
+                    </div>
+
+                    {/* MODULE 04: AI & Learning */}
+                    <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Labels -->
+                        <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_04 // AI_SYS</span>
+                        <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
+                        
+                        <div>
+                            <h3 class="cypher-text mb-4 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide" data-original="AI & Learning">AI & Learning</h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {techGroups.AI_Math.map((tech) => (
+                                    <div class="group/tech relative flex items-center gap-2 border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-full text-[11px] font-medium text-slate-800 dark:text-slate-200 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] transition-all duration-300">
+                                        <span>{tech.name}</span>
+                                        {tech.deployment && (
+                                            <span class="font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">{tech.deployment}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Corner Labels -->
+                        <span class="absolute bottom-2 left-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">REF_ID: AI-04</span>
+                        <span class="absolute bottom-2 right-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">CAP: 100%</span>
+                    </div>
+
+                    {/* MODULE 05: Model Orchestration */}
+                    <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-4 min-h-[140px]">
+                        <!-- Corner Labels -->
+                        <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_05 // CORE_ORCHESTRATION</span>
+                        <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
+                        
+                        <div>
+                            <h3 class="cypher-text mb-4 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide" data-original="Model Orchestration">Model Orchestration</h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {techGroups.Model_Orchestration.map((tech) => (
+                                    <div class="group/tech relative flex items-center gap-2 border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-full text-[11px] font-medium text-slate-800 dark:text-slate-200 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] transition-all duration-300">
+                                        <span>{tech.name}</span>
+                                        {tech.deployment && (
+                                            <span class="font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">{tech.deployment}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Corner Labels -->
+                        <span class="absolute bottom-2 left-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">REF_ID: ORCH-05</span>
+                        <span class="absolute bottom-2 right-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">CAP: 100%</span>
+                    </div>
+                </div>
             </section>
 
             {/* Recommended Books Modal */}
