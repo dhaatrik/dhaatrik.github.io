@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { SOCIAL_LINKS } from '../consts';
 import FormattedDate from './FormattedDate.astro';
 
 // Fetch the 3 most recent blog posts for "Transmissions"
-const posts = (await getCollection('blog'))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+const posts: CollectionEntry<'blog'>[] = (await getCollection('blog'))
+    .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .slice(0, 3);
 
 const today = new Date();

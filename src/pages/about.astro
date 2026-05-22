@@ -417,7 +417,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                         <h2
                             class="mb-4 font-mono text-3xl font-bold text-slate-900 md:text-4xl dark:text-white"
                         >
-                            > Let's Connect
+                            &gt; Let's Connect
                         </h2>
                         <p
                             class="mb-8 font-mono text-sm leading-relaxed text-slate-600 md:text-base dark:text-slate-400"
@@ -549,24 +549,26 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
             const cypherElements = document.querySelectorAll('.cypher-text');
 
-            cypherElements.forEach((element) => {
-                element.addEventListener('mouseenter', (event) => {
+            cypherElements.forEach((el) => {
+                const element = el as HTMLElement;
+                const originalText = element.dataset.original || '';
+                const length = originalText.length;
+                let cypherInterval: ReturnType<typeof setInterval>;
+
+                element.addEventListener('mouseenter', () => {
                     let iterations = 0;
-                    const originalText = event.target.dataset.original;
-                    const length = originalText.length;
+                    clearInterval(cypherInterval);
 
-                    clearInterval(event.target.cypherInterval);
-
-                    event.target.cypherInterval = setInterval(() => {
-                        event.target.innerText = originalText
+                    cypherInterval = setInterval(() => {
+                        element.innerText = originalText
                             .split('')
-                            .map((letter, index) => {
+                            .map((letter: string, index: number) => {
                                 if (index < iterations) return originalText[index];
-                                return letters[Math.floor(Math.random() * 42)];
+                                return letters[Math.floor(Math.random() * letters.length)];
                             })
                             .join('');
 
-                        if (iterations >= length) clearInterval(event.target.cypherInterval);
+                        if (iterations >= length) clearInterval(cypherInterval);
                         iterations += 1 / 3;
                     }, 30);
                 });

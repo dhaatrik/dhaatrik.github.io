@@ -8,15 +8,15 @@
 **Learning:** Found that external links opening in a new tab (`target="_blank"`) in `Footer.astro` and `index.astro` lacked context in their `aria-label`s, which can be disorienting for screen reader users. Additionally, observed that `text-slate-400` used for the GitHub icon link on a light/white background did not meet the WCAG contrast ratio for accessibility.
 **Action:** Always append `(opens in a new tab)` to the `aria-label` of any `target="_blank"` link. Use `text-slate-500` or darker for interactive elements to ensure sufficient contrast ratios against light backgrounds.
 
+## 2026-05-02 - Redundant Image Alt Text
+
+**Learning:** Using `alt={title}` for hero images that are immediately followed by an `<h1>` containing the exact same title causes screen readers to redundantly announce the title twice.
+**Action:** Use empty alt text (`alt=""`) for hero images that are visually decorative and whose context is fully captured by adjacent heading elements.
+
 ## 2026-05-03 - Tactile Feedback with Transform Transitions
 
 **Learning:** When adding active scaling effects (like `active:scale-95`) to interactive elements, the scaling effect will be instantaneous and lack smoothness if the element only has a `transition-colors` class.
 **Action:** Always ensure the base transition utility is `transition-all` or includes `transition-transform` when introducing transform-based active states (like `active:scale-*`) to ensure a polished, tactile feel.
-
-## 2025-05-02 - Redundant Image Alt Text
-
-**Learning:** Using `alt={title}` for hero images that are immediately followed by an `<h1>` containing the exact same title causes screen readers to redundantly announce the title twice.
-**Action:** Use empty alt text (`alt=""`) for hero images that are visually decorative and whose context is fully captured by adjacent heading elements.
 
 ## 2026-05-04 - False Affordances in Hover States
 
@@ -69,5 +69,11 @@
 **Action:** When applying focus styles, stick to standard, explicit Tailwind color tokens (e.g., `focus-visible:ring-slate-500 dark:focus-visible:ring-offset-slate-900`) or ensure any custom variable is defined correctly in the CSS theme rather than guessing placeholder syntax.
 
 ## 2026-05-19 - Client-Side Search UX
+
 **Learning:** Client-side filtering often leaves screen reader users completely unaware of changes and visually lacks feedback when no results are found.
 **Action:** Always pair client-side filtering with a visual empty state and an `aria-live` region to announce the resulting count.
+
+## 2026-05-21 - [Native Dialog Backdrop Clicks and Accessibility]
+
+**Learning:** Native `<dialog>` elements do not automatically close when their backdrop is clicked, which is a common user expectation. Also, screen readers require explicit `aria-labelledby` on the dialog pointing to its title for proper context.
+**Action:** Always add `onclick="event.target === this && this.close()"` to native `<dialog>` elements to easily support backdrop clicks, and ensure `aria-labelledby` is linked to the modal's heading.
