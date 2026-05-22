@@ -20,16 +20,6 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
     throwOnError: false
 });
 
-// Get current time in IST (UTC+5:30) for pre-rendering
-const now = new Date();
-const options: Intl.DateTimeFormatOptions = {
-    timeZone: 'Asia/Kolkata',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true,
-};
-const initialIST = now.toLocaleTimeString('en-US', options);
 ---
 
 <!doctype html>
@@ -101,11 +91,7 @@ const initialIST = now.toLocaleTimeString('en-US', options);
                         >
                             About Me
                         </h1>
-                        <div
-                            class="mb-6 block font-mono text-xs tracking-tight text-(--accent) sm:text-sm"
-                        >
-                            SYS.LOC: [22.5726° N, 88.3639° E] // TIME: [<span id="ist-clock">{initialIST}</span>] // STATUS: ACTIVE
-                        </div>
+
 
                         <div
                             class="space-y-6 text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)"
@@ -775,22 +761,7 @@ const initialIST = now.toLocaleTimeString('en-US', options);
                     observer.observe(terminalSnippet);
                 }
 
-                // 3. Coordinate & Status Telemetry Cluster Live Clock (IST)
-                const clockEl = document.getElementById('ist-clock');
-                const updateClock = () => {
-                    const clockNow = new Date();
-                    const formatted = clockNow.toLocaleTimeString('en-US', {
-                        timeZone: 'Asia/Kolkata',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit',
-                        hour12: true
-                    });
-                    if (clockEl) {
-                        clockEl.textContent = formatted;
-                    }
-                };
-                const clockInterval = setInterval(updateClock, 1000);
+
 
                 // 4. Kinetic Reticle Mouse Tracking Parallax
                 const reticle = document.getElementById('reticle-bg');
@@ -837,8 +808,7 @@ const initialIST = now.toLocaleTimeString('en-US', options);
                     activeIntervals.forEach((interval) => clearInterval(interval));
                     activeIntervals.clear();
 
-                    // Clear clock interval
-                    clearInterval(clockInterval);
+
 
                     // Clear typewriter timeout
                     if (typewriterTimeout) {
