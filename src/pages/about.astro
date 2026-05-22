@@ -20,9 +20,6 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             title={`About | ${SITE_TITLE}`}
             description="Learn more about Dhaatrik's journey and tech stack."
         />
-        {/* ⚡ Bolt: Preconnect to external image origin for faster badge loading */}
-        <link rel="preconnect" href="https://img.shields.io" crossorigin />
-        <link rel="dns-prefetch" href="https://img.shields.io" />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <Header />
@@ -55,6 +52,8 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                         <img
                             src="/me.jpeg"
                             alt="Dhaatrik"
+                            loading="eager"
+                            fetchpriority="high"
                             class="aspect-square w-full rounded-2xl border border-slate-200 object-cover shadow-xl grayscale transition-all duration-500 hover:grayscale-0 dark:border-white/10"
                         />
                     </div>
@@ -124,7 +123,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                     >What I'm Building</span
                                 >
                             </h2>
-                            <p class="leading-relaxed text-slate-600 dark:text-(--)">
+                            <p class="leading-relaxed text-slate-600 dark:text-(--text-secondary)">
                                 I'm currently focused on the agriculture domain, working to
                                 integrate AI into the core fundamentals of farming to solve
                                 real-world problems. I also love building tools for the community,
@@ -174,7 +173,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                     >What I'm Learning</span
                                 >
                             </h2>
-                            <p class="leading-relaxed text-slate-600 dark:text-(--)">
+                            <p class="leading-relaxed text-slate-600 dark:text-(--text-secondary)">
                                 My curiosity pulls me toward the intricacies of reality. Right now,
                                 that means diving deep into the math of rocket engineering, the
                                 weirdness of quantum mechanics, and the fascinating depths of human
@@ -207,7 +206,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                 <div
                                     class="mb-6 inline-flex items-center gap-2 rounded-full border border-(--accent)/20 bg-(--accent)/10 px-3 py-1 font-mono text-[10px] font-bold tracking-widest text-(--accent) uppercase shadow-sm"
                                 >
-                                    <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--)"
+                                    <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)"
                                     ></span>
                                     Telemetry Active
                                 </div>
@@ -227,7 +226,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                 >
                                     Focus Node
                                 </div>
-                                <div class="font-mono text-lg font-bold text-(--)">FuelDrop</div>
+                                <div class="font-mono text-lg font-bold text-(--accent)">FuelDrop</div>
                                 <div class="mt-1 text-xs text-slate-500">Logistics / Ag-Tech</div>
                             </div>
                         </div>
@@ -324,7 +323,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                     >
                                     Library Trajectory
                                 </h3>
-                                <span class="font-mono text-xs text-(--)">2026 Goal</span>
+                                <span class="font-mono text-xs text-(--text-secondary)">2026 Goal</span>
                             </div>
                             <div class="mb-4">
                                 <div class="mb-1 flex justify-between text-sm">
@@ -454,7 +453,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                 </div>
             </section>
 
-            <section class="max-w-5xl">
+            <section class="max-w-5xl content-visibility-auto-tech-stack">
                 <h2 class="mb-8 text-3xl font-bold text-slate-900 dark:text-white">
                     My Tech Stack
                 </h2>
@@ -513,13 +512,41 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                 author: 'Philip Kotler',
                                 link: 'https://www.amazon.in/Marketing-Management-17th-Philip-Kotler/dp/9367138199/ref=sr_1_1_sspa?crid=3LXWM7OV5BGZC&dib=eyJ2IjoiMSJ9.sLFz-n94M3czJDqJ9PP_32HJu72s7iE60M-ItoJp6vdG_i_luKRHC5qjtvFvbwdbhaDQcAcqREZdFZ0Ed0tq4MvMlFxqTsTgReZYC_jjnP86oxfOhad4BxPUlGEJKdmeDfCW7VZbG3SKTxzuPh-YvA4b-NlscmOi4It-IP8RT0okW55U_hkkSUZ4gnB6BNKsQFpR4PmxOjdhLWS8dOlLIbyIG8aAQeS7EB0glkLcZRw.TSj1dE0pcTX9PnG4fTof_JbQM04mjr9Rv2TPs-ne3zg&dib_tag=se&keywords=marketing+management+by+philip+kotler&qid=1778389155&sprefix=Marketing%2Caps%2C567&sr=8-1-spons&aref=WM64g7r717&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',
                             },
-                            { title: 'Book Title 4', author: 'Author Name', link: '#' },
-                            { title: 'Book Title 5', author: 'Author Name', link: '#' },
-                            { title: 'Book Title 6', author: 'Author Name', link: '#' },
-                            { title: 'Book Title 7', author: 'Author Name', link: '#' },
-                            { title: 'Book Title 8', author: 'Author Name', link: '#' },
-                            { title: 'Book Title 9', author: 'Author Name', link: '#' },
-                            { title: 'Book Title 10', author: 'Author Name', link: '#' },
+                            {
+                                title: 'Zero to One',
+                                author: 'Peter Thiel',
+                                link: 'https://www.amazon.in/Zero-One-Notes-Startups-Future/dp/0804139296',
+                            },
+                            {
+                                title: 'The Pragmatic Programmer',
+                                author: 'Andrew Hunt & David Thomas',
+                                link: 'https://www.amazon.in/Pragmatic-Programmer-journey-mastery-20th/dp/0135957052',
+                            },
+                            {
+                                title: 'Deep Work',
+                                author: 'Cal Newport',
+                                link: 'https://www.amazon.in/Deep-Work-Rules-Focused-Success/dp/0349411905',
+                            },
+                            {
+                                title: 'Atomic Habits',
+                                author: 'James Clear',
+                                link: 'https://www.amazon.in/Atomic-Habits-James-Clear/dp/1847941834',
+                            },
+                            {
+                                title: 'Clean Code',
+                                author: 'Robert C. Martin',
+                                link: 'https://www.amazon.in/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882',
+                            },
+                            {
+                                title: 'The Lean Startup',
+                                author: 'Eric Ries',
+                                link: 'https://www.amazon.in/Lean-Startup-Eric-Ries/dp/0307887898',
+                            },
+                            {
+                                title: 'The Alchemist',
+                                author: 'Paulo Coelho',
+                                link: 'https://www.amazon.in/Alchemist-Paulo-Coelho/dp/8172234988',
+                            },
                         ].map((book) => (
                             <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-3 transition-colors hover:border-slate-300 dark:border-white/5 dark:bg-white/5 dark:hover:border-white/20">
                                 <div>
@@ -545,53 +572,76 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
         </main>
         <Footer />
         <script>
-            // Scramble / Cypher Text Hover Effects
-            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
-            const cypherElements = document.querySelectorAll('.cypher-text');
+            document.addEventListener('astro:page-load', () => {
+                // Scramble / Cypher Text Hover Effects
+                const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+                const cypherElements = document.querySelectorAll('.cypher-text');
+                const activeIntervals = new Map<HTMLElement, ReturnType<typeof setInterval>>();
 
-            cypherElements.forEach((el) => {
-                const element = el as HTMLElement;
-                const originalText = element.dataset.original || '';
-                const length = originalText.length;
-                let cypherInterval: ReturnType<typeof setInterval>;
+                cypherElements.forEach((el) => {
+                    const element = el as HTMLElement;
+                    const originalText = element.dataset.original || '';
+                    const length = originalText.length;
 
-                element.addEventListener('mouseenter', () => {
-                    let iterations = 0;
-                    clearInterval(cypherInterval);
+                    const startScramble = () => {
+                        let iterations = 0;
+                        if (activeIntervals.has(element)) {
+                            clearInterval(activeIntervals.get(element)!);
+                        }
 
-                    cypherInterval = setInterval(() => {
-                        element.innerText = originalText
-                            .split('')
-                            .map((letter: string, index: number) => {
-                                if (index < iterations) return originalText[index];
-                                return letters[Math.floor(Math.random() * letters.length)];
-                            })
-                            .join('');
+                        const interval = setInterval(() => {
+                            element.innerText = originalText
+                                .split('')
+                                .map((letter: string, index: number) => {
+                                    if (index < iterations) return originalText[index];
+                                    return letters[Math.floor(Math.random() * letters.length)];
+                                })
+                                .join('');
 
-                        if (iterations >= length) clearInterval(cypherInterval);
-                        iterations += 1 / 3;
-                    }, 30);
+                            if (iterations >= length) {
+                                clearInterval(interval);
+                                activeIntervals.delete(element);
+                            }
+                            iterations += 1 / 3;
+                        }, 30);
+
+                        activeIntervals.set(element, interval);
+                    };
+
+                    element.addEventListener('mouseenter', startScramble);
                 });
-            });
 
-            // The "Offline-First" Easter Egg
-            window.addEventListener('offline', () => {
-                const toast = document.createElement('div');
-                toast.className =
-                    'fixed bottom-6 right-6 bg-slate-900 border border-(--accent) text-white p-4 rounded-lg shadow-2xl z-50 font-mono text-sm max-w-sm translate-y-10 opacity-0 transition-all duration-300';
-                toast.innerHTML = `<span class="text-(--accent) font-bold">Vellor Protocol Engaged:</span> You are offline, but this data remains accessible.`;
-                document.body.appendChild(toast);
+                // The "Offline-First" Easter Egg
+                const handleOffline = () => {
+                    const toast = document.createElement('div');
+                    toast.className =
+                        'fixed bottom-6 right-6 bg-slate-900 border border-(--accent) text-white p-4 rounded-lg shadow-2xl z-50 font-mono text-sm max-w-sm translate-y-10 opacity-0 transition-all duration-300';
+                    toast.innerHTML = `<span class="text-(--accent) font-bold">Vellor Protocol Engaged:</span> You are offline, but this data remains accessible.`;
+                    document.body.appendChild(toast);
 
-                // Animate in
-                setTimeout(() => {
-                    toast.classList.remove('translate-y-10', 'opacity-0');
-                }, 100);
+                    // Animate in
+                    setTimeout(() => {
+                        toast.classList.remove('translate-y-10', 'opacity-0');
+                    }, 100);
 
-                // Remove after 6 seconds
-                setTimeout(() => {
-                    toast.classList.add('translate-y-10', 'opacity-0');
-                    setTimeout(() => toast.remove(), 300);
-                }, 6000);
+                    // Remove after 6 seconds
+                    setTimeout(() => {
+                        toast.classList.add('translate-y-10', 'opacity-0');
+                        setTimeout(() => toast.remove(), 300);
+                    }, 6000);
+                };
+
+                window.addEventListener('offline', handleOffline);
+
+                // Cleanup Event Listeners on Page Transition
+                document.addEventListener('astro:before-preparation', () => {
+                    // Clear all active cypher intervals
+                    activeIntervals.forEach((interval) => clearInterval(interval));
+                    activeIntervals.clear();
+
+                    // Remove offline event listener
+                    window.removeEventListener('offline', handleOffline);
+                }, { once: true });
             });
         </script>
     </body>

@@ -433,3 +433,8 @@
     content-visibility: auto;
     contain-intrinsic-size: auto none auto 500px;
 }
+
+.content-visibility-auto-tech-stack {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 600px;
+}
