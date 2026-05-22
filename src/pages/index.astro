@@ -30,7 +30,6 @@ const premiumLineup = lineupNames
         return null;
     })
     .filter((t): t is TechIcon => t !== null);
----
 
 const getProjectTelemetry = (id: string) => {
     const rawId = id.replace(/\.md$/, '');
@@ -343,7 +342,7 @@ const getProjectTelemetry = (id: string) => {
                                             )}
                                             {project.data.tags && project.data.tags.length > 0 && (
                                                 <div class="mt-4 flex flex-wrap gap-2">
-                                                    {project.data.tags.map((tag) => (
+                                                    {project.data.tags.map((tag: string) => (
                                                         <span class="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-500 dark:bg-white/5 dark:text-slate-400">
                                                             {tag}
                                                         </span>
@@ -352,18 +351,9 @@ const getProjectTelemetry = (id: string) => {
                                             )}
                                         </div>
                                     </div>
-                                )}
-                                {project.data.tags && project.data.tags.length > 0 && (
-                                    <div class="relative z-10 mt-4 flex flex-wrap gap-2">
-                                        {project.data.tags.map((tag: string) => (
-                                            <span class="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-500 dark:bg-white/5 dark:text-slate-400">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                )}
-                            </article>
-                        ))
+                                </article>
+                            );
+                        })
                     }
                 </div>
             </section>
