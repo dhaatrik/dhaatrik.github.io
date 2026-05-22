@@ -586,17 +586,17 @@ const getProjectTelemetry = (id: string) => {
                         const xc = rect.width / 2;
                         const yc = rect.height / 2;
 
-                        const tiltX = (yc - y) / 12;
-                        const tiltY = (x - xc) / 12;
+                        const tiltX = (yc - y) / 30;
+                        const tiltY = (x - xc) / 30;
 
-                        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+                        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.01, 1.01, 1.01)`;
                         card.style.setProperty('--mouse-x', `${x}px`);
                         card.style.setProperty('--mouse-y', `${y}px`);
 
                         // Push inner elements outwards
                         const tilts = card.querySelectorAll('[data-tilt-z]');
                         tilts.forEach(target => {
-                            target.style.transform = 'translateZ(25px)';
+                            target.style.transform = 'translateZ(10px)';
                         });
                     };
 
