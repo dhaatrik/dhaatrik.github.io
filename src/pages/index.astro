@@ -53,9 +53,6 @@ const getProjectTelemetry = (id: string) => {
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
     <body class="bg-grid-motif relative pt-24">
-        <!-- Tactile Flashlight Background -->
-        <div id="flashlight-bg"></div>
-
         <Header />
         <main id="main-content" tabindex="-1" class="layout-container space-y-24">
             <!-- Hero Section: The Boring Section -->
@@ -126,15 +123,6 @@ const getProjectTelemetry = (id: string) => {
                     </a>
 
                     <div class="flex items-center gap-3">
-                        <!-- Email Link -->
-                        <a
-                            href="mailto:dhaatrik.c@gmail.com"
-                            class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
-                            aria-label="Send Email"
-                            title="Send Email"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        </a>
                         <!-- X/Twitter Link -->
                         <a
                             href="https://x.com/dhaatrik"
@@ -554,27 +542,6 @@ const getProjectTelemetry = (id: string) => {
                     document.addEventListener('visibilitychange', handleVisibilityChange);
                 }
 
-                // --- 2. Tactile Flashlight Background ---
-                const flashlightBg = document.getElementById('flashlight-bg');
-                let bgTicking = false;
-
-                const handleBgMove = (e) => {
-                    if (!bgTicking) {
-                        window.requestAnimationFrame(() => {
-                            if (flashlightBg) {
-                                flashlightBg.style.setProperty('--bg-mouse-x', `${e.clientX}px`);
-                                flashlightBg.style.setProperty('--bg-mouse-y', `${e.clientY}px`);
-                            }
-                            bgTicking = false;
-                        });
-                        bgTicking = true;
-                    }
-                };
-
-                if (flashlightBg) {
-                    document.addEventListener('mousemove', handleBgMove);
-                }
-
                 // --- 4. 3D Bento Card Parallax Tilt ---
                 const cards = document.querySelectorAll('.bento-card');
                 cards.forEach(card => {
@@ -612,36 +579,6 @@ const getProjectTelemetry = (id: string) => {
                     card.addEventListener('mouseleave', handleCardLeave);
                 });
 
-                // --- 5. Magnetic Physics on CTA & Social Icons ---
-                const magnetics = document.querySelectorAll('.magnetic-target');
-                magnetics.forEach(el => {
-                    const handleMagnetMove = (e) => {
-                        const rect = el.getBoundingClientRect();
-                        const centerX = rect.left + rect.width / 2;
-                        const centerY = rect.top + rect.height / 2;
-                        const dx = e.clientX - centerX;
-                        const dy = e.clientY - centerY;
-
-                        const px = dx * 0.35;
-                        const py = dy * 0.35;
-
-                        el.style.transform = `translate(${px}px, ${py}px) scale(1.06)`;
-                    };
-
-                    const handleMagnetLeave = () => {
-                        el.style.transform = 'translate(0px, 0px) scale(1)';
-                    };
-
-                    el.addEventListener('mouseenter', () => {
-                        el.style.transition = 'none';
-                    });
-                    el.addEventListener('mousemove', handleMagnetMove);
-                    el.addEventListener('mouseleave', () => {
-                        el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
-                        handleMagnetLeave();
-                    });
-                });
-
                 // --- 6. Pause/Resume Videos based on content-visibility ---
                 const projectsSection = document.querySelector('.content-visibility-auto-projects');
                 if (projectsSection) {
@@ -662,7 +599,6 @@ const getProjectTelemetry = (id: string) => {
                 // --- 7. Cleanup Event Listeners on Page Transition ---
                 document.addEventListener('astro:before-preparation', () => {
                     if (typewriterTimeout) clearTimeout(typewriterTimeout);
-                    document.removeEventListener('mousemove', handleBgMove);
                     document.removeEventListener('visibilitychange', handleVisibilityChange);
                 }, { once: true });
             });

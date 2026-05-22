@@ -130,23 +130,28 @@ const personSchema = JSON.stringify({
 />
 
 <script is:inline>
-    // ⚡ Bolt: Global mouse spotlight tracking for Bento cards
-    // Optimized using requestAnimationFrame and cached HTMLCollection to prevent layout thrashing
+    // ⚡ Bolt: Global mouse spotlight and flashlight background tracking
+    // Optimized using requestAnimationFrame and cached collections to prevent layout thrashing
     let spotlightRafId = null;
     let mouseX = 0;
     let mouseY = 0;
     let cardsCollection = null;
+    let flashlightBg = null;
 
     const updateSpotlights = () => {
-        if (!cardsCollection) return;
-
-        for (let i = 0; i < cardsCollection.length; i++) {
-            const card = cardsCollection[i];
-            const rect = card.getBoundingClientRect();
-            const x = mouseX - rect.left;
-            const y = mouseY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
+        if (cardsCollection) {
+            for (let i = 0; i < cardsCollection.length; i++) {
+                const card = cardsCollection[i];
+                const rect = card.getBoundingClientRect();
+                const x = mouseX - rect.left;
+                const y = mouseY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            }
+        }
+        if (flashlightBg) {
+            flashlightBg.style.setProperty('--bg-mouse-x', `${mouseX}px`);
+            flashlightBg.style.setProperty('--bg-mouse-y', `${mouseY}px`);
         }
         spotlightRafId = null;
     };
@@ -160,9 +165,47 @@ const personSchema = JSON.stringify({
     };
 
     document.addEventListener('astro:page-load', () => {
+        // Ensure flashlight background exists on the page
+        flashlightBg = document.getElementById('flashlight-bg');
+        if (!flashlightBg) {
+            flashlightBg = document.createElement('div');
+            flashlightBg.id = 'flashlight-bg';
+            document.body.prepend(flashlightBg);
+        }
+
         // Cache the live HTMLCollection to avoid expensive querySelectorAll calls on every tick
         cardsCollection = document.getElementsByClassName('bento-card');
         document.addEventListener('mousemove', onMouseMove, { passive: true });
+
+        // Bind Magnetic Button Physics
+        const magnetics = document.querySelectorAll('.magnetic-target');
+        magnetics.forEach(el => {
+            const handleMagnetMove = (e) => {
+                const rect = el.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const dx = e.clientX - centerX;
+                const dy = e.clientY - centerY;
+
+                const px = dx * 0.35;
+                const py = dy * 0.35;
+
+                el.style.transform = `translate(${px}px, ${py}px) scale(1.06)`;
+            };
+
+            const handleMagnetLeave = () => {
+                el.style.transform = 'translate(0px, 0px) scale(1)';
+            };
+
+            el.addEventListener('mouseenter', () => {
+                el.style.transition = 'none';
+            });
+            el.addEventListener('mousemove', handleMagnetMove);
+            el.addEventListener('mouseleave', () => {
+                el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+                handleMagnetLeave();
+            });
+        });
     });
 
     document.addEventListener('astro:before-preparation', () => {
@@ -172,5 +215,6 @@ const personSchema = JSON.stringify({
             spotlightRafId = null;
         }
         cardsCollection = null;
+        flashlightBg = null;
     });
 </script>
