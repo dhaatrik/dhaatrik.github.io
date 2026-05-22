@@ -198,7 +198,8 @@ const getProjectTelemetry = (id: string) => {
                                     alt={tech.name}
                                     title={tech.name}
                                     class="h-6 rounded-sm opacity-80 transition-opacity hover:opacity-100 dark:opacity-70 dark:hover:opacity-100"
-                                    loading="lazy"
+                                    loading="eager"
+                                    fetchpriority="high"
                                 />
                             ))
                         }
@@ -215,7 +216,7 @@ const getProjectTelemetry = (id: string) => {
             </section>
 
             <!-- Projects Section: Featured Engineering -->
-            <section class="animate-fade-in-up mb-16 delay-400">
+            <section class="animate-fade-in-up mb-16 delay-400 content-visibility-auto-projects">
                 <div class="mb-10">
                     <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                         Featured Engineering
@@ -264,22 +265,24 @@ const getProjectTelemetry = (id: string) => {
                                     
                                     <!-- Hologram WebM Video with Fallback to Static Logo -->
                                     <div class="absolute inset-0 opacity-12 dark:opacity-8 mix-blend-screen dark:mix-blend-lighten overflow-hidden pointer-events-none rounded-2xl flex items-center justify-center">
-                                        <video
-                                            src={`/videos/${project.id.replace(/\.md$/, '')}.webm`}
-                                            autoplay
-                                            loop
-                                            muted
-                                            playsinline
-                                            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                            style="display: none;"
-                                            onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
-                                            onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden');"
-                                        ></video>
+                                        {project.data.video && (
+                                            <video
+                                                src={project.data.video}
+                                                autoplay
+                                                loop
+                                                muted
+                                                playsinline
+                                                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                style="display: none;"
+                                                onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
+                                                onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden');"
+                                            ></video>
+                                        )}
                                         {project.data.logo && (
                                             <img
                                                 src={project.data.logo}
                                                 alt=""
-                                                class="absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 group-hover:scale-110"
+                                                class={`absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 group-hover:scale-110 ${project.data.video ? 'hidden' : ''}`}
                                                 aria-hidden="true"
                                                 loading="lazy"
                                             />
@@ -359,7 +362,7 @@ const getProjectTelemetry = (id: string) => {
             </section>
 
             <!-- Latest Thinking Section (Abstract Layout) -->
-            <section class="animate-fade-in-up mb-16 delay-500">
+            <section class="animate-fade-in-up mb-16 delay-500 content-visibility-auto-blog">
                 <div class="mb-10 flex items-end justify-between">
                     <div>
                         <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
@@ -371,6 +374,7 @@ const getProjectTelemetry = (id: string) => {
                     </div>
                     <a
                         href="/blog"
+                        data-astro-prefetch="hover"
                         class="group hidden items-center gap-1 text-sm font-medium text-(--accent) transition-colors hover:text-slate-900 sm:flex dark:hover:text-white"
                     >
                         View All Posts
@@ -399,6 +403,7 @@ const getProjectTelemetry = (id: string) => {
                             return (
                                 <a
                                     href={`/blog/${post.id}/`}
+                                    data-astro-prefetch="hover"
                                     class="bento-card group block transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
                                 >
                                     <article class="grid grid-cols-1 md:grid-cols-12 gap-6 p-2">
@@ -466,6 +471,7 @@ const getProjectTelemetry = (id: string) => {
                 <div class="mt-6 flex sm:hidden">
                     <a
                         href="/blog"
+                        data-astro-prefetch="hover"
                         class="group inline-flex items-center gap-1 text-sm font-medium text-(--accent) transition-colors hover:text-slate-900 dark:hover:text-white"
                     >
                         View All Posts
@@ -496,42 +502,60 @@ const getProjectTelemetry = (id: string) => {
                 // --- 1. Dynamic "Identity" Typewriter ---
                 const typeTarget = document.getElementById('identity-rotator');
                 let typewriterTimeout;
+                let nextDelay = 1200;
+                let identities = [];
+                let currentIdx = 0;
+                let charIdx = 0;
+                let isDeleting = false;
+                let currentText = '';
 
-                if (typeTarget) {
-                    const identities = JSON.parse(typeTarget.dataset.identities || '[]');
-                    let currentIdx = 0;
-                    let charIdx = identities[0].length;
-                    let isDeleting = false;
-                    let currentText = identities[0];
-
-                    function typeEffect() {
-                        const fullTxt = identities[currentIdx];
-                        if (isDeleting) {
-                            currentText = fullTxt.substring(0, charIdx - 1);
-                            charIdx--;
-                        } else {
-                            currentText = fullTxt.substring(0, charIdx + 1);
-                            charIdx++;
-                        }
-
-                        typeTarget.textContent = currentText;
-
-                        let delay = isDeleting ? 30 : 65;
-
-                        if (!isDeleting && charIdx === fullTxt.length) {
-                            delay = 2200; // hold at end
-                            isDeleting = true;
-                        } else if (isDeleting && charIdx === 0) {
-                            isDeleting = false;
-                            currentIdx = (currentIdx + 1) % identities.length;
-                            delay = 400; // pause before typing next
-                        }
-
-                        typewriterTimeout = setTimeout(typeEffect, delay);
+                function typeEffect() {
+                    const fullTxt = identities[currentIdx];
+                    if (isDeleting) {
+                        currentText = fullTxt.substring(0, charIdx - 1);
+                        charIdx--;
+                    } else {
+                        currentText = fullTxt.substring(0, charIdx + 1);
+                        charIdx++;
                     }
 
+                    typeTarget.textContent = currentText;
+
+                    let delay = isDeleting ? 30 : 65;
+
+                    if (!isDeleting && charIdx === fullTxt.length) {
+                        delay = 2200; // hold at end
+                        isDeleting = true;
+                    } else if (isDeleting && charIdx === 0) {
+                        isDeleting = false;
+                        currentIdx = (currentIdx + 1) % identities.length;
+                        delay = 400; // pause before typing next
+                    }
+
+                    nextDelay = delay;
+                    if (!document.hidden) {
+                        typewriterTimeout = setTimeout(typeEffect, delay);
+                    } else {
+                        typewriterTimeout = null;
+                    }
+                }
+
+                const handleVisibilityChange = () => {
+                    if (!document.hidden && !typewriterTimeout && typeTarget) {
+                        typewriterTimeout = setTimeout(typeEffect, nextDelay);
+                    } else if (document.hidden && typewriterTimeout) {
+                        clearTimeout(typewriterTimeout);
+                        typewriterTimeout = null;
+                    }
+                };
+
+                if (typeTarget) {
+                    identities = JSON.parse(typeTarget.dataset.identities || '[]');
+                    charIdx = identities[0].length;
+                    currentText = identities[0];
                     // Start typewriter
                     typewriterTimeout = setTimeout(typeEffect, 1200);
+                    document.addEventListener('visibilitychange', handleVisibilityChange);
                 }
 
                 // --- 2. Tactile Flashlight Background ---
@@ -561,7 +585,25 @@ const getProjectTelemetry = (id: string) => {
                 let mouseX = 0, mouseY = 0;
                 let ringX = 0, ringY = 0;
                 let isMoving = false;
-                let cursorFrameId;
+                let cursorFrameId = null;
+
+                function updateRing() {
+                    const dx = mouseX - ringX;
+                    const dy = mouseY - ringY;
+                    
+                    // Lerp equation
+                    ringX += dx * 0.15;
+                    ringY += dy * 0.15;
+
+                    cursorRing.style.left = ringX + 'px';
+                    cursorRing.style.top = ringY + 'px';
+
+                    if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+                        cursorFrameId = null;
+                    } else {
+                        cursorFrameId = requestAnimationFrame(updateRing);
+                    }
+                }
 
                 const handleCursorMove = (e) => {
                     mouseX = e.clientX;
@@ -574,6 +616,10 @@ const getProjectTelemetry = (id: string) => {
                         cursorDot.style.opacity = '1';
                         cursorRing.style.opacity = '1';
                         isMoving = true;
+                    }
+
+                    if (!cursorFrameId) {
+                        cursorFrameId = requestAnimationFrame(updateRing);
                     }
                 };
 
@@ -589,18 +635,11 @@ const getProjectTelemetry = (id: string) => {
                     document.addEventListener('mouseenter', () => {
                         cursorDot.style.opacity = '1';
                         cursorRing.style.opacity = '1';
+                        if (!cursorFrameId) {
+                            cursorFrameId = requestAnimationFrame(updateRing);
+                        }
                     });
 
-                    function updateRing() {
-                        // Lerp equation
-                        ringX += (mouseX - ringX) * 0.15;
-                        ringY += (mouseY - ringY) * 0.15;
-
-                        cursorRing.style.left = ringX + 'px';
-                        cursorRing.style.top = ringY + 'px';
-
-                        cursorFrameId = requestAnimationFrame(updateRing);
-                    }
                     updateRing();
 
                     // Connect hovers
@@ -684,12 +723,30 @@ const getProjectTelemetry = (id: string) => {
                     });
                 });
 
-                // --- 6. Cleanup Event Listeners on Page Transition ---
+                // --- 6. Pause/Resume Videos based on content-visibility ---
+                const projectsSection = document.querySelector('.content-visibility-auto-projects');
+                if (projectsSection) {
+                    projectsSection.addEventListener('contentvisibilityautostatechange', (e) => {
+                        const videos = projectsSection.querySelectorAll('video');
+                        if (e.skipped) {
+                            videos.forEach(v => {
+                                try { v.pause(); } catch(err) {}
+                            });
+                        } else {
+                            videos.forEach(v => {
+                                try { v.play(); } catch(err) {}
+                            });
+                        }
+                    });
+                }
+
+                // --- 7. Cleanup Event Listeners on Page Transition ---
                 document.addEventListener('astro:before-preparation', () => {
                     if (typewriterTimeout) clearTimeout(typewriterTimeout);
                     if (cursorFrameId) cancelAnimationFrame(cursorFrameId);
                     document.removeEventListener('mousemove', handleBgMove);
                     document.removeEventListener('mousemove', handleCursorMove);
+                    document.removeEventListener('visibilitychange', handleVisibilityChange);
                 }, { once: true });
             });
         </script>

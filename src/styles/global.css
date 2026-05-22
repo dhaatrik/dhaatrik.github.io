@@ -423,4 +423,13 @@
     animation: pulse-ring 2s infinite ease-in-out;
 }
 
+/* Performance Optimizations: Content-visibility for heavy sections */
+.content-visibility-auto-projects {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 800px;
+}
 
+.content-visibility-auto-blog {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 500px;
+}
