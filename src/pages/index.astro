@@ -52,13 +52,9 @@ const getProjectTelemetry = (id: string) => {
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
-    <body class="bg-grid-motif relative pt-24 has-custom-cursor">
+    <body class="bg-grid-motif relative pt-24">
         <!-- Tactile Flashlight Background -->
         <div id="flashlight-bg"></div>
-
-        <!-- Custom Cursor elements -->
-        <div id="custom-cursor" class="custom-cursor hidden md:block"></div>
-        <div id="custom-cursor-ring" class="custom-cursor-ring hidden md:block"></div>
 
         <Header />
         <main id="main-content" tabindex="-1" class="layout-container space-y-24">
@@ -579,83 +575,6 @@ const getProjectTelemetry = (id: string) => {
                     document.addEventListener('mousemove', handleBgMove);
                 }
 
-                // --- 3. Custom Cursor with Lerp ---
-                const cursorDot = document.getElementById('custom-cursor');
-                const cursorRing = document.getElementById('custom-cursor-ring');
-                let mouseX = 0, mouseY = 0;
-                let ringX = 0, ringY = 0;
-                let isMoving = false;
-                let cursorFrameId = null;
-
-                function updateRing() {
-                    const dx = mouseX - ringX;
-                    const dy = mouseY - ringY;
-                    
-                    // Lerp equation
-                    ringX += dx * 0.15;
-                    ringY += dy * 0.15;
-
-                    cursorRing.style.left = ringX + 'px';
-                    cursorRing.style.top = ringY + 'px';
-
-                    if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
-                        cursorFrameId = null;
-                    } else {
-                        cursorFrameId = requestAnimationFrame(updateRing);
-                    }
-                }
-
-                const handleCursorMove = (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-
-                    cursorDot.style.left = mouseX + 'px';
-                    cursorDot.style.top = mouseY + 'px';
-
-                    if (!isMoving) {
-                        cursorDot.style.opacity = '1';
-                        cursorRing.style.opacity = '1';
-                        isMoving = true;
-                    }
-
-                    if (!cursorFrameId) {
-                        cursorFrameId = requestAnimationFrame(updateRing);
-                    }
-                };
-
-                const handleMouseLeaveWindow = () => {
-                    cursorDot.style.opacity = '0';
-                    cursorRing.style.opacity = '0';
-                    isMoving = false;
-                };
-
-                if (cursorDot && cursorRing) {
-                    document.addEventListener('mousemove', handleCursorMove);
-                    document.addEventListener('mouseleave', handleMouseLeaveWindow);
-                    document.addEventListener('mouseenter', () => {
-                        cursorDot.style.opacity = '1';
-                        cursorRing.style.opacity = '1';
-                        if (!cursorFrameId) {
-                            cursorFrameId = requestAnimationFrame(updateRing);
-                        }
-                    });
-
-                    updateRing();
-
-                    // Connect hovers
-                    const hoverElements = document.querySelectorAll('a, button, [role="button"], input, select, textarea, .bento-card');
-                    hoverElements.forEach(el => {
-                        el.addEventListener('mouseenter', () => {
-                            cursorRing.classList.add('cursor-hover');
-                            cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
-                        });
-                        el.addEventListener('mouseleave', () => {
-                            cursorRing.classList.remove('cursor-hover');
-                            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-                        });
-                    });
-                }
-
                 // --- 4. 3D Bento Card Parallax Tilt ---
                 const cards = document.querySelectorAll('.bento-card');
                 cards.forEach(card => {
@@ -743,9 +662,7 @@ const getProjectTelemetry = (id: string) => {
                 // --- 7. Cleanup Event Listeners on Page Transition ---
                 document.addEventListener('astro:before-preparation', () => {
                     if (typewriterTimeout) clearTimeout(typewriterTimeout);
-                    if (cursorFrameId) cancelAnimationFrame(cursorFrameId);
                     document.removeEventListener('mousemove', handleBgMove);
-                    document.removeEventListener('mousemove', handleCursorMove);
                     document.removeEventListener('visibilitychange', handleVisibilityChange);
                 }, { once: true });
             });
