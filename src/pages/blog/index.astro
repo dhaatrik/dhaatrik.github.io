@@ -42,7 +42,7 @@ const postsWithReadingTime = posts.map((post) => {
                     </h1>
                     <a
                         href="/rss.xml"
-                        class="flex items-center gap-2 rounded border border-(--accent)/20 bg-(--accent)/10 px-3 py-1.5 font-mono text-xs tracking-widest text-(--accent) transition-colors hover:bg-(--accent)/20"
+                        class="magnetic-target flex items-center gap-2 rounded border border-(--accent)/20 bg-(--accent)/10 px-3 py-1.5 font-mono text-xs tracking-widest text-(--accent) transition-colors hover:bg-(--accent)/20"
                     >
                         <span
                             class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent) shadow-[0_0_8px_var(--accent)]"
@@ -87,6 +87,8 @@ const postsWithReadingTime = posts.map((post) => {
                                     {
                                         'md:col-span-2 md:grid md:grid-cols-2 md:items-center md:gap-8':
                                             i === 0,
+                                        'content-visibility-auto-post-card':
+                                            i >= 2,
                                     },
                                 ]}
                             >
@@ -221,53 +223,101 @@ const postsWithReadingTime = posts.map((post) => {
         <Footer />
 
         <script>
-            // Client-side filtering logic
+            // Client-side filtering logic with state retention
+            let searchAbortController: AbortController | null = null;
+            let replaceStateTimeout: number | undefined;
+
             const setupSearch = () => {
                 const searchInput = document.getElementById('search-logs') as HTMLInputElement;
                 const cards = document.querySelectorAll('.blog-post-card');
                 const emptyState = document.getElementById('search-empty-state');
                 const announcer = document.getElementById('search-announcer');
 
-                if (searchInput) {
-                    searchInput.addEventListener('input', (e) => {
-                        const term = (e.target as HTMLInputElement).value.toLowerCase();
-                        let visibleCount = 0;
+                if (!searchInput) return;
 
-                        cards.forEach((card) => {
-                            const htmlCard = card as HTMLElement;
-                            const text = htmlCard.textContent?.toLowerCase() || '';
-                            if (text.includes(term)) {
-                                htmlCard.style.display = '';
-                                visibleCount++;
-                            } else {
-                                htmlCard.style.display = 'none';
-                            }
-                        });
+                // Abort any existing search listeners
+                if (searchAbortController) {
+                    searchAbortController.abort();
+                }
+                searchAbortController = new AbortController();
+                const { signal } = searchAbortController;
 
-                        if (emptyState) {
-                            if (visibleCount === 0) {
-                                emptyState.classList.remove('hidden');
-                                emptyState.setAttribute('aria-hidden', 'false');
-                            } else {
-                                emptyState.classList.add('hidden');
-                                emptyState.setAttribute('aria-hidden', 'true');
-                            }
-                        }
+                // Function to perform filtering
+                const filterPosts = (term: string) => {
+                    let visibleCount = 0;
 
-                        if (announcer) {
-                            announcer.textContent = term
-                                ? `Found ${visibleCount} transmission${visibleCount === 1 ? '' : 's'}.`
-                                : '';
+                    cards.forEach((card) => {
+                        const htmlCard = card as HTMLElement;
+                        const text = htmlCard.textContent?.toLowerCase() || '';
+                        if (text.includes(term)) {
+                            htmlCard.style.display = '';
+                            visibleCount++;
+                        } else {
+                            htmlCard.style.display = 'none';
                         }
                     });
+
+                    if (emptyState) {
+                        if (visibleCount === 0) {
+                            emptyState.classList.remove('hidden');
+                            emptyState.setAttribute('aria-hidden', 'false');
+                        } else {
+                            emptyState.classList.add('hidden');
+                            emptyState.setAttribute('aria-hidden', 'true');
+                        }
+                    }
+
+                    if (announcer) {
+                        announcer.textContent = term
+                            ? `Found ${visibleCount} transmission${visibleCount === 1 ? '' : 's'}.`
+                            : '';
+                    }
+                };
+
+                // Check for URL query parameter first, then sessionStorage, then default to empty
+                const urlParams = new URLSearchParams(window.location.search);
+                const queryParam = urlParams.get('q');
+                const sessionSearch = sessionStorage.getItem('blog-search-term');
+                const initialTerm = queryParam !== null ? queryParam : (sessionSearch || '');
+
+                if (initialTerm) {
+                    searchInput.value = initialTerm;
+                    filterPosts(initialTerm.toLowerCase());
                 }
+
+                const updateSearchState = (term: string) => {
+                    sessionStorage.setItem('blog-search-term', term);
+
+                    clearTimeout(replaceStateTimeout);
+                    replaceStateTimeout = setTimeout(() => {
+                        const url = new URL(window.location.href);
+                        if (term) {
+                            url.searchParams.set('q', term);
+                        } else {
+                            url.searchParams.delete('q');
+                        }
+                        window.history.replaceState(null, '', url.pathname + url.search);
+                    }, 300) as any;
+                };
+
+                searchInput.addEventListener('input', (e) => {
+                    const term = (e.target as HTMLInputElement).value;
+                    filterPosts(term.toLowerCase());
+                    updateSearchState(term);
+                }, { signal });
             };
 
-            // Run on initial load
-            setupSearch();
-
-            // Run on Astro page navigation if view transitions are used
+            // Run strictly on Astro page navigation / page load
             document.addEventListener('astro:page-load', setupSearch);
+
+            // Cleanup event listeners and timeouts when navigating away
+            document.addEventListener('astro:before-preparation', () => {
+                if (searchAbortController) {
+                    searchAbortController.abort();
+                    searchAbortController = null;
+                }
+                clearTimeout(replaceStateTimeout);
+            });
         </script>
     </body>
 </html>

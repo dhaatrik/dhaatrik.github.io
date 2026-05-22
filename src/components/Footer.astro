@@ -149,7 +149,7 @@ const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
             <!-- Support CTA -->
             <button
                 onclick="document.getElementById('support-modal').showModal()"
-                class="group flex w-full cursor-pointer items-center justify-center gap-2 rounded border border-(--accent)/30 bg-(--accent)/10 py-3 font-mono text-xs tracking-widest text-(--accent) uppercase transition-all hover:bg-(--accent)/20 hover:shadow-[0_0_15px_var(--accent-glow)]"
+                class="magnetic-target group flex w-full cursor-pointer items-center justify-center gap-2 rounded border border-(--accent)/30 bg-(--accent)/10 py-3 font-mono text-xs tracking-widest text-(--accent) uppercase transition-all hover:bg-(--accent)/20 hover:shadow-[0_0_15px_var(--accent-glow)]"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +184,7 @@ const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
                 href={SOCIAL_LINKS.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="cyber-icon group flex h-8 w-8 items-center justify-center rounded border border-slate-200 bg-white text-slate-400 transition-colors hover:text-slate-900 dark:border-white/5 dark:bg-[#151a22] dark:hover:text-white"
+                class="magnetic-target cyber-icon group flex h-8 w-8 items-center justify-center rounded border border-slate-200 bg-white text-slate-400 transition-colors hover:text-slate-900 dark:border-white/5 dark:bg-[#151a22] dark:hover:text-white"
                 data-icon="x"
                 aria-label="X (Twitter)"
             >
@@ -201,7 +201,7 @@ const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
                 href={SOCIAL_LINKS.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="cyber-icon group flex h-8 w-8 items-center justify-center rounded border border-slate-200 bg-white text-slate-400 transition-colors hover:text-slate-900 dark:border-white/5 dark:bg-[#151a22] dark:hover:text-white"
+                class="magnetic-target cyber-icon group flex h-8 w-8 items-center justify-center rounded border border-slate-200 bg-white text-slate-400 transition-colors hover:text-slate-900 dark:border-white/5 dark:bg-[#151a22] dark:hover:text-white"
                 data-icon="github"
                 aria-label="GitHub"
             >
@@ -218,7 +218,7 @@ const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="cyber-icon group flex h-8 w-8 items-center justify-center rounded border border-slate-200 bg-white text-slate-400 transition-colors hover:text-slate-900 dark:border-white/5 dark:bg-[#151a22] dark:hover:text-white"
+                class="magnetic-target cyber-icon group flex h-8 w-8 items-center justify-center rounded border border-slate-200 bg-white text-slate-400 transition-colors hover:text-slate-900 dark:border-white/5 dark:bg-[#151a22] dark:hover:text-white"
                 data-icon="linkedin"
                 aria-label="LinkedIn"
             >
@@ -319,12 +319,25 @@ const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
     </dialog>
 </footer>
 
-<script is:inline>
-    document.addEventListener('astro:page-load', () => {
+<script>
+    let footerAbortController: AbortController | null = null;
+    let clockInterval: number | undefined;
+
+    const setupFooter = () => {
+        // Clean up any existing state/intervals
+        if (footerAbortController) {
+            footerAbortController.abort();
+        }
+        if (clockInterval) {
+            clearInterval(clockInterval);
+            clockInterval = undefined;
+        }
+
+        footerAbortController = new AbortController();
+        const { signal } = footerAbortController;
+
         // 1. Dynamic IST Clock
         const clockEl = document.getElementById('ist-clock');
-        let clockInterval;
-
         if (clockEl) {
             // ⚡ Bolt: Cache Intl.DateTimeFormat instance outside the interval to avoid
             // expensive re-instantiation and Date parsing every second (~90x faster)
@@ -339,28 +352,14 @@ const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
                 clockEl.textContent = formatter.format(new Date());
             };
             updateTime();
-            clockInterval = setInterval(updateTime, 1000);
+            clockInterval = window.setInterval(updateTime, 1000);
         }
 
         // 2. Cyber Scramble Micro-interactions
         const cyberIcons = document.querySelectorAll('.cyber-icon');
         const hexChars = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-            '7',
-            '8',
-            '9',
-            'A',
-            'B',
-            'C',
-            'D',
-            'E',
-            'F',
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            'A', 'B', 'C', 'D', 'E', 'F'
         ];
 
         cyberIcons.forEach((icon) => {
@@ -368,39 +367,48 @@ const buildHash = btoa(Date.now().toString()).substring(0, 7).toUpperCase();
             if (!container) return;
 
             const originalHTML = container.innerHTML;
-            let scrambleInterval;
+            let scrambleInterval: number | undefined;
 
             icon.addEventListener('mouseenter', () => {
-                clearInterval(scrambleInterval);
+                if (scrambleInterval) {
+                    clearInterval(scrambleInterval);
+                }
                 let iterations = 0;
 
-                scrambleInterval = setInterval(() => {
+                scrambleInterval = window.setInterval(() => {
                     const char1 = hexChars[Math.floor(Math.random() * hexChars.length)];
                     const char2 = hexChars[Math.floor(Math.random() * hexChars.length)];
                     container.innerHTML = `<span class="font-mono text-[10px] font-bold text-(--accent) opacity-80">0x${char1}${char2}</span>`;
 
                     iterations++;
                     if (iterations > 5) {
-                        // Run for ~150ms (5 * 30ms)
                         clearInterval(scrambleInterval);
+                        scrambleInterval = undefined;
                         container.innerHTML = originalHTML;
                     }
                 }, 30);
-            });
+            }, { signal });
 
             icon.addEventListener('mouseleave', () => {
-                clearInterval(scrambleInterval);
+                if (scrambleInterval) {
+                    clearInterval(scrambleInterval);
+                    scrambleInterval = undefined;
+                }
                 container.innerHTML = originalHTML;
-            });
+            }, { signal });
         });
+    };
 
-        // Cleanup intervals on page transition
-        document.addEventListener(
-            'astro:before-preparation',
-            () => {
-                if (clockInterval) clearInterval(clockInterval);
-            },
-            { once: true }
-        );
+    document.addEventListener('astro:page-load', setupFooter);
+
+    document.addEventListener('astro:before-preparation', () => {
+        if (footerAbortController) {
+            footerAbortController.abort();
+            footerAbortController = null;
+        }
+        if (clockInterval) {
+            clearInterval(clockInterval);
+            clockInterval = undefined;
+        }
     });
 </script>

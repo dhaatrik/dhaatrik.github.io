@@ -52,14 +52,7 @@ const getProjectTelemetry = (id: string) => {
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
-    <body class="bg-grid-motif relative pt-24 has-custom-cursor">
-        <!-- Tactile Flashlight Background -->
-        <div id="flashlight-bg"></div>
-
-        <!-- Custom Cursor elements -->
-        <div id="custom-cursor" class="custom-cursor hidden md:block"></div>
-        <div id="custom-cursor-ring" class="custom-cursor-ring hidden md:block"></div>
-
+    <body class="bg-grid-motif relative pt-24">
         <Header />
         <main id="main-content" tabindex="-1" class="layout-container space-y-24">
             <!-- Hero Section: The Boring Section -->
@@ -130,15 +123,6 @@ const getProjectTelemetry = (id: string) => {
                     </a>
 
                     <div class="flex items-center gap-3">
-                        <!-- Email Link -->
-                        <a
-                            href="mailto:dhaatrik.c@gmail.com"
-                            class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
-                            aria-label="Send Email"
-                            title="Send Email"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        </a>
                         <!-- X/Twitter Link -->
                         <a
                             href="https://x.com/dhaatrik"
@@ -198,7 +182,8 @@ const getProjectTelemetry = (id: string) => {
                                     alt={tech.name}
                                     title={tech.name}
                                     class="h-6 rounded-sm opacity-80 transition-opacity hover:opacity-100 dark:opacity-70 dark:hover:opacity-100"
-                                    loading="lazy"
+                                    loading="eager"
+                                    fetchpriority="high"
                                 />
                             ))
                         }
@@ -215,7 +200,7 @@ const getProjectTelemetry = (id: string) => {
             </section>
 
             <!-- Projects Section: Featured Engineering -->
-            <section class="animate-fade-in-up mb-16 delay-400">
+            <section class="animate-fade-in-up mb-16 delay-400 content-visibility-auto-projects">
                 <div class="mb-10">
                     <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                         Featured Engineering
@@ -264,22 +249,24 @@ const getProjectTelemetry = (id: string) => {
                                     
                                     <!-- Hologram WebM Video with Fallback to Static Logo -->
                                     <div class="absolute inset-0 opacity-12 dark:opacity-8 mix-blend-screen dark:mix-blend-lighten overflow-hidden pointer-events-none rounded-2xl flex items-center justify-center">
-                                        <video
-                                            src={`/videos/${project.id.replace(/\.md$/, '')}.webm`}
-                                            autoplay
-                                            loop
-                                            muted
-                                            playsinline
-                                            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                            style="display: none;"
-                                            onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
-                                            onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden');"
-                                        ></video>
+                                        {project.data.video && (
+                                            <video
+                                                src={project.data.video}
+                                                autoplay
+                                                loop
+                                                muted
+                                                playsinline
+                                                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                style="display: none;"
+                                                onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
+                                                onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden');"
+                                            ></video>
+                                        )}
                                         {project.data.logo && (
                                             <img
                                                 src={project.data.logo}
                                                 alt=""
-                                                class="absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 group-hover:scale-110"
+                                                class={`absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 group-hover:scale-110 ${project.data.video ? 'hidden' : ''}`}
                                                 aria-hidden="true"
                                                 loading="lazy"
                                             />
@@ -359,7 +346,7 @@ const getProjectTelemetry = (id: string) => {
             </section>
 
             <!-- Latest Thinking Section (Abstract Layout) -->
-            <section class="animate-fade-in-up mb-16 delay-500">
+            <section class="animate-fade-in-up mb-16 delay-500 content-visibility-auto-blog">
                 <div class="mb-10 flex items-end justify-between">
                     <div>
                         <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
@@ -371,6 +358,7 @@ const getProjectTelemetry = (id: string) => {
                     </div>
                     <a
                         href="/blog"
+                        data-astro-prefetch="hover"
                         class="group hidden items-center gap-1 text-sm font-medium text-(--accent) transition-colors hover:text-slate-900 sm:flex dark:hover:text-white"
                     >
                         View All Posts
@@ -399,6 +387,7 @@ const getProjectTelemetry = (id: string) => {
                             return (
                                 <a
                                     href={`/blog/${post.id}/`}
+                                    data-astro-prefetch="hover"
                                     class="bento-card group block transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
                                 >
                                     <article class="grid grid-cols-1 md:grid-cols-12 gap-6 p-2">
@@ -466,6 +455,7 @@ const getProjectTelemetry = (id: string) => {
                 <div class="mt-6 flex sm:hidden">
                     <a
                         href="/blog"
+                        data-astro-prefetch="hover"
                         class="group inline-flex items-center gap-1 text-sm font-medium text-(--accent) transition-colors hover:text-slate-900 dark:hover:text-white"
                     >
                         View All Posts
@@ -496,125 +486,60 @@ const getProjectTelemetry = (id: string) => {
                 // --- 1. Dynamic "Identity" Typewriter ---
                 const typeTarget = document.getElementById('identity-rotator');
                 let typewriterTimeout;
+                let nextDelay = 1200;
+                let identities = [];
+                let currentIdx = 0;
+                let charIdx = 0;
+                let isDeleting = false;
+                let currentText = '';
+
+                function typeEffect() {
+                    const fullTxt = identities[currentIdx];
+                    if (isDeleting) {
+                        currentText = fullTxt.substring(0, charIdx - 1);
+                        charIdx--;
+                    } else {
+                        currentText = fullTxt.substring(0, charIdx + 1);
+                        charIdx++;
+                    }
+
+                    typeTarget.textContent = currentText;
+
+                    let delay = isDeleting ? 30 : 65;
+
+                    if (!isDeleting && charIdx === fullTxt.length) {
+                        delay = 2200; // hold at end
+                        isDeleting = true;
+                    } else if (isDeleting && charIdx === 0) {
+                        isDeleting = false;
+                        currentIdx = (currentIdx + 1) % identities.length;
+                        delay = 400; // pause before typing next
+                    }
+
+                    nextDelay = delay;
+                    if (!document.hidden) {
+                        typewriterTimeout = setTimeout(typeEffect, delay);
+                    } else {
+                        typewriterTimeout = null;
+                    }
+                }
+
+                const handleVisibilityChange = () => {
+                    if (!document.hidden && !typewriterTimeout && typeTarget) {
+                        typewriterTimeout = setTimeout(typeEffect, nextDelay);
+                    } else if (document.hidden && typewriterTimeout) {
+                        clearTimeout(typewriterTimeout);
+                        typewriterTimeout = null;
+                    }
+                };
 
                 if (typeTarget) {
-                    const identities = JSON.parse(typeTarget.dataset.identities || '[]');
-                    let currentIdx = 0;
-                    let charIdx = identities[0].length;
-                    let isDeleting = false;
-                    let currentText = identities[0];
-
-                    function typeEffect() {
-                        const fullTxt = identities[currentIdx];
-                        if (isDeleting) {
-                            currentText = fullTxt.substring(0, charIdx - 1);
-                            charIdx--;
-                        } else {
-                            currentText = fullTxt.substring(0, charIdx + 1);
-                            charIdx++;
-                        }
-
-                        typeTarget.textContent = currentText;
-
-                        let delay = isDeleting ? 30 : 65;
-
-                        if (!isDeleting && charIdx === fullTxt.length) {
-                            delay = 2200; // hold at end
-                            isDeleting = true;
-                        } else if (isDeleting && charIdx === 0) {
-                            isDeleting = false;
-                            currentIdx = (currentIdx + 1) % identities.length;
-                            delay = 400; // pause before typing next
-                        }
-
-                        typewriterTimeout = setTimeout(typeEffect, delay);
-                    }
-
+                    identities = JSON.parse(typeTarget.dataset.identities || '[]');
+                    charIdx = identities[0].length;
+                    currentText = identities[0];
                     // Start typewriter
                     typewriterTimeout = setTimeout(typeEffect, 1200);
-                }
-
-                // --- 2. Tactile Flashlight Background ---
-                const flashlightBg = document.getElementById('flashlight-bg');
-                let bgTicking = false;
-
-                const handleBgMove = (e) => {
-                    if (!bgTicking) {
-                        window.requestAnimationFrame(() => {
-                            if (flashlightBg) {
-                                flashlightBg.style.setProperty('--bg-mouse-x', `${e.clientX}px`);
-                                flashlightBg.style.setProperty('--bg-mouse-y', `${e.clientY}px`);
-                            }
-                            bgTicking = false;
-                        });
-                        bgTicking = true;
-                    }
-                };
-
-                if (flashlightBg) {
-                    document.addEventListener('mousemove', handleBgMove);
-                }
-
-                // --- 3. Custom Cursor with Lerp ---
-                const cursorDot = document.getElementById('custom-cursor');
-                const cursorRing = document.getElementById('custom-cursor-ring');
-                let mouseX = 0, mouseY = 0;
-                let ringX = 0, ringY = 0;
-                let isMoving = false;
-                let cursorFrameId;
-
-                const handleCursorMove = (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-
-                    cursorDot.style.left = mouseX + 'px';
-                    cursorDot.style.top = mouseY + 'px';
-
-                    if (!isMoving) {
-                        cursorDot.style.opacity = '1';
-                        cursorRing.style.opacity = '1';
-                        isMoving = true;
-                    }
-                };
-
-                const handleMouseLeaveWindow = () => {
-                    cursorDot.style.opacity = '0';
-                    cursorRing.style.opacity = '0';
-                    isMoving = false;
-                };
-
-                if (cursorDot && cursorRing) {
-                    document.addEventListener('mousemove', handleCursorMove);
-                    document.addEventListener('mouseleave', handleMouseLeaveWindow);
-                    document.addEventListener('mouseenter', () => {
-                        cursorDot.style.opacity = '1';
-                        cursorRing.style.opacity = '1';
-                    });
-
-                    function updateRing() {
-                        // Lerp equation
-                        ringX += (mouseX - ringX) * 0.15;
-                        ringY += (mouseY - ringY) * 0.15;
-
-                        cursorRing.style.left = ringX + 'px';
-                        cursorRing.style.top = ringY + 'px';
-
-                        cursorFrameId = requestAnimationFrame(updateRing);
-                    }
-                    updateRing();
-
-                    // Connect hovers
-                    const hoverElements = document.querySelectorAll('a, button, [role="button"], input, select, textarea, .bento-card');
-                    hoverElements.forEach(el => {
-                        el.addEventListener('mouseenter', () => {
-                            cursorRing.classList.add('cursor-hover');
-                            cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
-                        });
-                        el.addEventListener('mouseleave', () => {
-                            cursorRing.classList.remove('cursor-hover');
-                            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-                        });
-                    });
+                    document.addEventListener('visibilitychange', handleVisibilityChange);
                 }
 
                 // --- 4. 3D Bento Card Parallax Tilt ---
@@ -628,17 +553,17 @@ const getProjectTelemetry = (id: string) => {
                         const xc = rect.width / 2;
                         const yc = rect.height / 2;
 
-                        const tiltX = (yc - y) / 12;
-                        const tiltY = (x - xc) / 12;
+                        const tiltX = (yc - y) / 30;
+                        const tiltY = (x - xc) / 30;
 
-                        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+                        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.01, 1.01, 1.01)`;
                         card.style.setProperty('--mouse-x', `${x}px`);
                         card.style.setProperty('--mouse-y', `${y}px`);
 
                         // Push inner elements outwards
                         const tilts = card.querySelectorAll('[data-tilt-z]');
                         tilts.forEach(target => {
-                            target.style.transform = 'translateZ(25px)';
+                            target.style.transform = 'translateZ(10px)';
                         });
                     };
 
@@ -654,42 +579,27 @@ const getProjectTelemetry = (id: string) => {
                     card.addEventListener('mouseleave', handleCardLeave);
                 });
 
-                // --- 5. Magnetic Physics on CTA & Social Icons ---
-                const magnetics = document.querySelectorAll('.magnetic-target');
-                magnetics.forEach(el => {
-                    const handleMagnetMove = (e) => {
-                        const rect = el.getBoundingClientRect();
-                        const centerX = rect.left + rect.width / 2;
-                        const centerY = rect.top + rect.height / 2;
-                        const dx = e.clientX - centerX;
-                        const dy = e.clientY - centerY;
-
-                        const px = dx * 0.35;
-                        const py = dy * 0.35;
-
-                        el.style.transform = `translate(${px}px, ${py}px) scale(1.06)`;
-                    };
-
-                    const handleMagnetLeave = () => {
-                        el.style.transform = 'translate(0px, 0px) scale(1)';
-                    };
-
-                    el.addEventListener('mouseenter', () => {
-                        el.style.transition = 'none';
+                // --- 6. Pause/Resume Videos based on content-visibility ---
+                const projectsSection = document.querySelector('.content-visibility-auto-projects');
+                if (projectsSection) {
+                    projectsSection.addEventListener('contentvisibilityautostatechange', (e) => {
+                        const videos = projectsSection.querySelectorAll('video');
+                        if (e.skipped) {
+                            videos.forEach(v => {
+                                try { v.pause(); } catch(err) {}
+                            });
+                        } else {
+                            videos.forEach(v => {
+                                try { v.play(); } catch(err) {}
+                            });
+                        }
                     });
-                    el.addEventListener('mousemove', handleMagnetMove);
-                    el.addEventListener('mouseleave', () => {
-                        el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
-                        handleMagnetLeave();
-                    });
-                });
+                }
 
-                // --- 6. Cleanup Event Listeners on Page Transition ---
+                // --- 7. Cleanup Event Listeners on Page Transition ---
                 document.addEventListener('astro:before-preparation', () => {
                     if (typewriterTimeout) clearTimeout(typewriterTimeout);
-                    if (cursorFrameId) cancelAnimationFrame(cursorFrameId);
-                    document.removeEventListener('mousemove', handleBgMove);
-                    document.removeEventListener('mousemove', handleCursorMove);
+                    document.removeEventListener('visibilitychange', handleVisibilityChange);
                 }, { once: true });
             });
         </script>

@@ -274,57 +274,6 @@
 
 /* Premium UI Refresh Additions */
 
-/* Custom Cursor */
-.custom-cursor {
-    width: 6px;
-    height: 6px;
-    background-color: var(--accent);
-    border-radius: 50%;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease;
-}
-
-.custom-cursor-ring {
-    width: 24px;
-    height: 24px;
-    border: 1px solid var(--accent);
-    border-radius: 50%;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 9998;
-    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease;
-}
-
-.custom-cursor-ring.cursor-hover {
-    width: 44px;
-    height: 44px;
-    background-color: rgba(59, 130, 246, 0.15);
-    border-color: rgba(59, 130, 246, 0.4);
-}
-
-.dark .custom-cursor-ring.cursor-hover {
-    background-color: rgba(59, 130, 246, 0.25);
-    border-color: rgba(147, 197, 253, 0.5);
-}
-
-@media (pointer: fine) {
-    body.has-custom-cursor,
-    body.has-custom-cursor a,
-    body.has-custom-cursor button,
-    body.has-custom-cursor input,
-    body.has-custom-cursor select,
-    body.has-custom-cursor textarea,
-    body.has-custom-cursor [role="button"],
-    body.has-custom-cursor dialog button {
-        cursor: none !important;
-    }
-}
-
 /* Flashlight Spotlight Background */
 #flashlight-bg {
     position: fixed;
@@ -423,4 +372,23 @@
     animation: pulse-ring 2s infinite ease-in-out;
 }
 
+/* Performance Optimizations: Content-visibility for heavy sections */
+.content-visibility-auto-projects {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 800px;
+}
 
+.content-visibility-auto-blog {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 500px;
+}
+
+.content-visibility-auto-tech-stack {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 600px;
+}
+
+.content-visibility-auto-post-card {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 380px;
+}

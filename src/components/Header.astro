@@ -106,8 +106,17 @@ import ThemeToggle from './ThemeToggle.astro';
     </nav>
 </header>
 
-<script is:inline>
-    document.addEventListener('astro:page-load', () => {
+<script>
+    let headerAbortController: AbortController | null = null;
+    let headerScrollTicking = false;
+
+    const setupHeader = () => {
+        if (headerAbortController) {
+            headerAbortController.abort();
+        }
+        headerAbortController = new AbortController();
+        const { signal } = headerAbortController;
+
         let lastScroll = window.scrollY;
         const header = document.getElementById('main-header');
         const nav = document.getElementById('main-nav');
@@ -142,10 +151,27 @@ import ThemeToggle from './ThemeToggle.astro';
             }
             
             lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+            headerScrollTicking = false;
         };
 
-        window.addEventListener('scroll', updateHeader, { passive: true });
+        const onScroll = () => {
+            if (!headerScrollTicking) {
+                window.requestAnimationFrame(updateHeader);
+                headerScrollTicking = true;
+            }
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true, signal });
         // Initial check
         updateHeader();
+    };
+
+    document.addEventListener('astro:page-load', setupHeader);
+
+    document.addEventListener('astro:before-preparation', () => {
+        if (headerAbortController) {
+            headerAbortController.abort();
+            headerAbortController = null;
+        }
     });
 </script>
