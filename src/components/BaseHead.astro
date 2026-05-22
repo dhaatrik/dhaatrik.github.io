@@ -27,6 +27,26 @@ const { title, description, image = FallbackImage } = Astro.props;
 
 // ⚡ Bolt: Cache image URL instantiation to avoid redundant parsing during SSG
 const imageUrl = new URL(image.src, Astro.site);
+
+const personSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Dhaatrik Chowdhury',
+    url: Astro.site,
+    sameAs: [
+        'https://github.com/dhaatrik',
+        'https://linkedin.com/in/dhaatrik',
+        'https://x.com/dhaatrik',
+        'https://medium.com/@dhaatrik',
+    ],
+    jobTitle: 'Entrepreneur & AI Engineer',
+    address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Kolkata',
+        addressRegion: 'West Bengal',
+        addressCountry: 'IN',
+    },
+}).replace(/</g, '\\u003c');
 ---
 
 <!-- Global Metadata -->
@@ -106,25 +126,7 @@ const imageUrl = new URL(image.src, Astro.site);
 <!-- Schema.org Script -->
 <script
     type="application/ld+json"
-    set:html={JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Person',
-        name: 'Dhaatrik Chowdhury',
-        url: Astro.site,
-        sameAs: [
-            'https://github.com/dhaatrik',
-            'https://linkedin.com/in/dhaatrik',
-            'https://x.com/dhaatrik',
-            'https://medium.com/@dhaatrik',
-        ],
-        jobTitle: 'Entrepreneur & AI Engineer',
-        address: {
-            '@type': 'PostalAddress',
-            addressLocality: 'Kolkata',
-            addressRegion: 'West Bengal',
-            addressCountry: 'IN',
-        },
-    }).replace(new RegExp('<', 'g'), '\\u003c')}
+    set:html={personSchema}
 />
 
 <script is:inline>

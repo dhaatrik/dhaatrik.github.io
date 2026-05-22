@@ -397,7 +397,7 @@ const commitHash = id
                                 </h3>
                                 <nav id="toc">
                                     <ul class="flex flex-col space-y-2 text-sm">
-                                        {headings.map((heading) => (
+                                        {headings.map((heading: { depth: number; slug: string; text: string }) => (
                                             <li class="toc-item">
                                                 <a
                                                     href={`#${heading.slug}`}

@@ -4,8 +4,8 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import { getCollection } from 'astro:content';
-import { techGroups } from '../data/techStack';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
 
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
@@ -14,9 +14,9 @@ const [rawProjects, rawPosts] = await Promise.all([
     getCollection('blog'),
 ]);
 
-const projects = rawProjects.sort((a, b) => a.data.order - b.data.order);
-const posts = rawPosts
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+const projects: CollectionEntry<'projects'>[] = rawProjects.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => a.data.order - b.data.order);
+const posts: CollectionEntry<'blog'>[] = rawPosts
+    .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .slice(0, 3);
 
 // Premium Founder Lineup
@@ -29,7 +29,7 @@ const premiumLineup = lineupNames
         }
         return null;
     })
-    .filter((t) => t !== null);
+    .filter((t): t is TechIcon => t !== null);
 ---
 
 <!doctype html>
@@ -259,7 +259,7 @@ const premiumLineup = lineupNames
                                 )}
                                 {project.data.tags && project.data.tags.length > 0 && (
                                     <div class="relative z-10 mt-4 flex flex-wrap gap-2">
-                                        {project.data.tags.map((tag) => (
+                                        {project.data.tags.map((tag: string) => (
                                             <span class="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-500 dark:bg-white/5 dark:text-slate-400">
                                                 {tag}
                                             </span>
