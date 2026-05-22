@@ -7,6 +7,7 @@ import katex from 'katex';
 import 'katex/dist/katex.min.css';
 
 import { techGroups } from '../data/techStack';
+import { recommendedBooks } from '../data/readingList';
 
 // Library Tracking Data
 const booksRead = 7;
@@ -506,6 +507,12 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* MODULE 01: Frontend */}
                     <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Target Accents -->
+                        <span class="absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+
                         <!-- Corner Labels -->
                         <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_01 // FE_SYS</span>
                         <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
@@ -531,6 +538,12 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
 
                     {/* MODULE 02: Backend */}
                     <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Target Accents -->
+                        <span class="absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+
                         <!-- Corner Labels -->
                         <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_02 // BE_SYS</span>
                         <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
@@ -556,6 +569,12 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
 
                     {/* MODULE 03: Data & Cloud */}
                     <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Target Accents -->
+                        <span class="absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+
                         <!-- Corner Labels -->
                         <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_03 // DB_SYS</span>
                         <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
@@ -581,6 +600,12 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
 
                     {/* MODULE 04: AI & Learning */}
                     <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Target Accents -->
+                        <span class="absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+
                         <!-- Corner Labels -->
                         <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_04 // AI_SYS</span>
                         <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
@@ -606,6 +631,12 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
 
                     {/* MODULE 05: Model Orchestration */}
                     <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-4 min-h-[140px]">
+                        <!-- Corner Target Accents -->
+                        <span class="absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+
                         <!-- Corner Labels -->
                         <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_05 // CORE_ORCHESTRATION</span>
                         <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
@@ -636,7 +667,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                 id="books-modal"
                 aria-labelledby="books-modal-title"
                 onclick="event.target === this && this.close()"
-                class="m-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl dark:border-white/10 dark:bg-[#0b0e14]"
+                class="m-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl dark:border-white/10 dark:bg-[#0b0e14] opacity-0 scale-95 transition-[opacity,transform,display,overlay] duration-300 [transition-behavior:allow-discrete] ease-out open:opacity-100 open:scale-100 starting:open:opacity-0 starting:open:scale-95 backdrop:bg-black/0 backdrop:backdrop-blur-none backdrop:transition-[background-color,backdrop-filter,display,overlay] backdrop:duration-300 backdrop:[transition-behavior:allow-discrete] open:backdrop:bg-black/50 open:backdrop:backdrop-blur-sm starting:open:backdrop:bg-black/0 starting:open:backdrop:backdrop-blur-none motion-reduce:transition-none motion-reduce:transform-none motion-reduce:starting:open:transform-none"
             >
                 <div
                     class="flex items-center justify-between border-b border-slate-100 p-6 dark:border-white/5"
@@ -667,58 +698,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                 </div>
                 <div class="max-h-[60vh] space-y-4 overflow-y-auto p-6">
                     {
-                        [
-                            {
-                                title: 'As a Man Thinketh',
-                                author: 'James Allen',
-                                link: 'https://www.amazon.in/As-Man-Thinketh-James-Allen/dp/9386538172',
-                            },
-                            {
-                                title: 'How to Win Friends and Influence People',
-                                author: 'Dale Carnegie',
-                                link: 'https://www.amazon.in/How-Win-Friends-Influence-People/dp/0671027034?s=bazaar',
-                            },
-                            {
-                                title: 'Marketing Management',
-                                author: 'Philip Kotler',
-                                link: 'https://www.amazon.in/Marketing-Management-17th-Philip-Kotler/dp/9367138199/ref=sr_1_1_sspa?crid=3LXWM7OV5BGZC&dib=eyJ2IjoiMSJ9.sLFz-n94M3czJDqJ9PP_32HJu72s7iE60M-ItoJp6vdG_i_luKRHC5qjtvFvbwdbhaDQcAcqREZdFZ0Ed0tq4MvMlFxqTsTgReZYC_jjnP86oxfOhad4BxPUlGEJKdmeDfCW7VZbG3SKTxzuPh-YvA4b-NlscmOi4It-IP8RT0okW55U_hkkSUZ4gnB6BNKsQFpR4PmxOjdhLWS8dOlLIbyIG8aAQeS7EB0glkLcZRw.TSj1dE0pcTX9PnG4fTof_JbQM04mjr9Rv2TPs-ne3zg&dib_tag=se&keywords=marketing+management+by+philip+kotler&qid=1778389155&sprefix=Marketing%2Caps%2C567&sr=8-1-spons&aref=WM64g7r717&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',
-                            },
-                            {
-                                title: 'Zero to One',
-                                author: 'Peter Thiel',
-                                link: 'https://www.amazon.in/Zero-One-Notes-Startups-Future/dp/0804139296',
-                            },
-                            {
-                                title: 'The Pragmatic Programmer',
-                                author: 'Andrew Hunt & David Thomas',
-                                link: 'https://www.amazon.in/Pragmatic-Programmer-journey-mastery-20th/dp/0135957052',
-                            },
-                            {
-                                title: 'Deep Work',
-                                author: 'Cal Newport',
-                                link: 'https://www.amazon.in/Deep-Work-Rules-Focused-Success/dp/0349411905',
-                            },
-                            {
-                                title: 'Atomic Habits',
-                                author: 'James Clear',
-                                link: 'https://www.amazon.in/Atomic-Habits-James-Clear/dp/1847941834',
-                            },
-                            {
-                                title: 'Clean Code',
-                                author: 'Robert C. Martin',
-                                link: 'https://www.amazon.in/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882',
-                            },
-                            {
-                                title: 'The Lean Startup',
-                                author: 'Eric Ries',
-                                link: 'https://www.amazon.in/Lean-Startup-Eric-Ries/dp/0307887898',
-                            },
-                            {
-                                title: 'The Alchemist',
-                                author: 'Paulo Coelho',
-                                link: 'https://www.amazon.in/Alchemist-Paulo-Coelho/dp/8172234988',
-                            },
-                        ].map((book) => (
+                        recommendedBooks.map((book) => (
                             <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-3 transition-colors hover:border-slate-300 dark:border-white/5 dark:bg-white/5 dark:hover:border-white/20">
                                 <div>
                                     <h4 class="text-sm font-bold text-slate-900 dark:text-white">
@@ -743,67 +723,9 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
         </main>
         <Footer />
         <style is:global>
-            /* Dialog Animating Styles */
-            dialog#books-modal {
-                opacity: 0;
-                transform: scale(0.95);
-                transition:
-                    opacity 0.3s ease-out,
-                    transform 0.3s ease-out,
-                    display 0.3s ease-out allow-discrete,
-                    overlay 0.3s ease-out allow-discrete;
-            }
-
-            dialog#books-modal[open] {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            @starting-style {
-                dialog#books-modal[open] {
-                    opacity: 0;
-                    transform: scale(0.95);
-                }
-            }
-
-            /* Backdrop styling */
-            dialog#books-modal::backdrop {
-                background-color: rgba(0, 0, 0, 0);
-                backdrop-filter: blur(0px);
-                transition:
-                    display 0.3s allow-discrete,
-                    overlay 0.3s allow-discrete,
-                    background-color 0.3s ease-out,
-                    backdrop-filter 0.3s ease-out;
-            }
-
-            dialog#books-modal[open]::backdrop {
-                background-color: rgba(0, 0, 0, 0.5);
-                backdrop-filter: blur(8px);
-            }
-
-            @starting-style {
-                dialog#books-modal[open]::backdrop {
-                    background-color: rgba(0, 0, 0, 0);
-                    backdrop-filter: blur(0px);
-                }
-            }
-
             /* KaTeX margin reset */
             .katex-display {
                 margin: 0 !important;
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-                dialog#books-modal {
-                    transform: none;
-                    transition-duration: 0.1s;
-                }
-                @starting-style {
-                    dialog#books-modal[open] {
-                        transform: none;
-                    }
-                }
             }
         </style>
         <script>
