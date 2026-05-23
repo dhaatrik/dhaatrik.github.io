@@ -124,14 +124,12 @@
                 ];
                 document.documentElement.animate(
                     {
-                        clipPath: isDarkBefore ? [clipPath[1], clipPath[0]] : clipPath
+                        clipPath: clipPath
                     },
                     {
                         duration: 400,
                         easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-                        pseudoElement: isDarkBefore
-                            ? '::view-transition-old(root)'
-                            : '::view-transition-new(root)'
+                        pseudoElement: '::view-transition-new(root)'
                     }
                 );
             });
