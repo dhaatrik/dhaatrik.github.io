@@ -470,12 +470,18 @@
 
 
 
-/* Magnetic Transition smooth reset */
+/* GPU layer promotion for hardware-accelerated micro-interactions */
+.magnetic-target,
+.transition-spring {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+/* Magnetic Transition layout placement */
 @layer components {
     .magnetic-target {
         display: inline-flex;
-        transform-style: preserve-3d;
-        backface-visibility: hidden;
     }
 }
 
