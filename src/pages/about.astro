@@ -2,15 +2,24 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import TechMarquee from '../components/TechMarquee.astro';
 import { SITE_TITLE, SOCIAL_LINKS } from '../consts';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 
 import { techGroups } from '../data/techStack';
+import { recommendedBooks } from '../data/readingList';
 
 // Library Tracking Data
 const booksRead = 7;
 const booksGoal = 52;
 const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100);
+
+// Pre-render rocket equation using KaTeX
+const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0}{m_f}', {
+    displayMode: true,
+    throwOnError: false
+});
+
 ---
 
 <!doctype html>
@@ -29,7 +38,8 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             class="layout-container relative grow space-y-20 py-8"
         >
             <div
-                class="pointer-events-none absolute top-32 right-0 -z-10 text-slate-900 opacity-5 dark:text-white"
+                id="reticle-bg"
+                class="pointer-events-none absolute top-32 right-0 -z-10 text-slate-900 opacity-5 transition-transform duration-300 ease-out dark:text-white"
             >
                 <svg
                     width="400"
@@ -48,24 +58,40 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
 
             <section class="max-w-4xl">
                 <div class="mb-16 flex flex-col items-center gap-8 md:flex-row md:items-start">
-                    <div class="w-full shrink-0 md:w-1/3">
-                        <img
-                            src="/me.jpeg"
-                            alt="Dhaatrik"
-                            loading="eager"
-                            fetchpriority="high"
-                            class="aspect-square w-full rounded-2xl border border-slate-200 object-cover shadow-xl grayscale transition-all duration-500 hover:grayscale-0 dark:border-white/10"
-                        />
+                    <div class="relative w-full shrink-0 p-4 md:w-1/3">
+                        {/* Clinical blueprint borders and target marks */}
+                        <div class="absolute inset-0 border border-dashed border-slate-200 dark:border-white/10 pointer-events-none">
+                            {/* Corner target marks '+' */}
+                            <span class="absolute -top-1.5 -left-1.5 font-mono text-[10px] font-bold text-(--accent)">+</span>
+                            <span class="absolute -top-1.5 -right-1.5 font-mono text-[10px] font-bold text-(--accent)">+</span>
+                            <span class="absolute -bottom-1.5 -left-1.5 font-mono text-[10px] font-bold text-(--accent)">+</span>
+                            <span class="absolute -bottom-1.5 -right-1.5 font-mono text-[10px] font-bold text-(--accent)">+</span>
+                            
+                            {/* Absolute layout text arrays along borders */}
+                            <span class="absolute top-1 left-2 font-mono text-[9px] font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase">SPECIMEN_REF: 01</span>
+                            <span class="absolute bottom-1 right-2 font-mono text-[9px] font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase">DATA.CAP // 100%</span>
+                        </div>
+                        
+                        <div class="relative overflow-hidden rounded-lg bg-slate-100 dark:bg-black/40">
+                            {/* Technical grid overlay */}
+                            <div class="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(rgba(0,0,0,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.08)_1px,transparent_1px)] bg-[size:10px_10px] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] opacity-50"></div>
+                            
+                            <img
+                                src="/me.jpeg"
+                                alt="Dhaatrik"
+                                loading="eager"
+                                fetchpriority="high"
+                                class="aspect-square w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
+                            />
+                        </div>
                     </div>
                     <div class="w-full md:w-2/3">
                         <h1
-                            class="mb-2 text-4xl leading-tight font-bold text-slate-900 md:text-5xl dark:text-white"
+                            class="mb-2 text-4xl leading-tight font-bold text-slate-900 md:text-5xl text-balance tracking-tight dark:text-white"
                         >
                             About Me
                         </h1>
-                        <span class="mb-6 block font-mono text-sm text-(--accent)"
-                            >Current Status: Q2 2026</span
-                        >
+
 
                         <div
                             class="space-y-6 text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)"
@@ -76,6 +102,15 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                 data-sovereign systems by stripping complex problems down to their
                                 fundamental truths.
                             </p>
+                            
+                            <div class="mt-8 border-l-2 border-(--accent) pl-4 font-mono text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                <div class="mb-2 text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">
+                                    // OPERATIONAL PHILOSOPHY
+                                </div>
+                                <p>
+                                    I choose not to reinvent the wheel or build foundation models from scratch, but act as an execution engine leveraging AI to build functional, data-sovereign systems.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,7 +123,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                     >
                         <div class="relative z-10">
                             <h2
-                                class="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white"
+                                class="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900 text-balance tracking-tight dark:text-white"
                             >
                                 <svg
                                     class="h-6 w-6 text-slate-500 dark:text-(--text-secondary)"
@@ -142,13 +177,12 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                         class="bento-card group relative flex flex-col justify-between overflow-hidden p-6"
                     >
                         <div
-                            class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 font-serif text-4xl whitespace-nowrap text-slate-900 opacity-5 blur-[1px] transition-opacity duration-500 select-none group-hover:opacity-10 sm:text-5xl dark:text-white"
-                        >
-                            Δv = v<sub>e</sub> ln(m<sub>0</sub> / m<sub>f</sub>)
-                        </div>
+                            class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 text-2xl whitespace-nowrap text-slate-900 opacity-5 blur-[0.5px] transition-opacity duration-500 select-none group-hover:opacity-15 sm:text-3xl dark:text-white"
+                            set:html={rocketEquationHtml}
+                        />
                         <div class="relative z-10">
                             <h2
-                                class="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white"
+                                class="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900 text-balance tracking-tight dark:text-white"
                             >
                                 <svg
                                     class="h-6 w-6 text-slate-500 dark:text-(--text-secondary)"
@@ -185,7 +219,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             </section>
 
             <section class="relative mb-20 max-w-5xl">
-                <h2 class="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
+                <h2 class="mb-6 text-2xl font-bold text-slate-900 text-balance tracking-tight dark:text-white">
                     Current Trajectory
                 </h2>
 
@@ -293,7 +327,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             </section>
 
             <section class="mb-20 max-w-5xl">
-                <h2 class="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
+                <h2 class="mb-6 text-2xl font-bold text-slate-900 text-balance tracking-tight dark:text-white">
                     Signal & Metrics
                 </h2>
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -325,8 +359,8 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                 </h3>
                                 <span class="font-mono text-xs text-(--text-secondary)">2026 Goal</span>
                             </div>
-                            <div class="mb-4">
-                                <div class="mb-1 flex justify-between text-sm">
+                            <div class="mb-6">
+                                <div class="mb-3 flex justify-between text-sm">
                                     <span class="text-slate-600 dark:text-slate-400"
                                         >Books Read</span
                                     >
@@ -334,14 +368,22 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                                         >{booksRead} / {booksGoal}</span
                                     >
                                 </div>
-                                <div
-                                    class="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-white/5"
-                                >
-                                    <div
-                                        class="h-full rounded-full bg-(--accent)"
-                                        style={`width: ${readingProgress}%`}
-                                    >
-                                    </div>
+                                <div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1.5 w-full max-w-xs">
+                                    {
+                                        Array.from({ length: booksGoal }).map((_, index) => {
+                                            const isRead = index < booksRead;
+                                            return (
+                                                <div
+                                                    class={`aspect-square w-full rounded-[2px] transition-all duration-500 ${
+                                                        isRead
+                                                            ? 'bg-(--accent) shadow-[0_0_8px_var(--accent)] border border-(--accent)'
+                                                            : 'border border-slate-200 dark:border-white/5 bg-transparent'
+                                                    }`}
+                                                    title={`Book ${index + 1}: ${isRead ? 'Completed' : 'Pending'}`}
+                                                />
+                                            );
+                                        })
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -370,7 +412,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                             </div>
                             <button
                                 onclick="document.getElementById('books-modal').showModal()"
-                                class="magnetic-target w-full rounded-lg bg-slate-900 py-2 text-sm font-bold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-[0_0_15px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-(--bg-main)"
+                                class="magnetic-target w-full rounded-lg bg-slate-900 py-2 text-sm font-bold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-[0_0_15px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-(--bg-main) flex items-center justify-center text-center"
                             >
                                 Recommended Books
                             </button>
@@ -393,11 +435,12 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                         </div>
                         <div class="grow p-4 font-mono text-sm">
                             <div class="mb-2 text-[#50fa7b]">$ cat /logs/may-reflection.txt</div>
-                            <div class="leading-relaxed text-[#f8f8f2]">
-                                <span class="text-[#bd93f9]">"</span>Optimization is a trap if you
-                                haven't nailed the fundamentals first. Build robust, scale later.<span
-                                    class="text-[#bd93f9]">"</span
-                                >
+                            <div
+                                id="terminal-snippet"
+                                class="leading-relaxed text-[#f8f8f2]"
+                                data-text="Optimization is a trap if you haven't nailed the fundamentals first. Build robust, scale later."
+                            >
+                                <span class="text-[#bd93f9]">"</span><span class="animate-pulse">█</span>
                             </div>
                             <div class="mt-2 animate-pulse text-[#50fa7b]">_</div>
                         </div>
@@ -414,7 +457,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                     </div>
                     <div class="relative z-10 w-full max-w-2xl">
                         <h2
-                            class="mb-4 font-mono text-3xl font-bold text-slate-900 md:text-4xl dark:text-white"
+                            class="mb-4 font-mono text-3xl font-bold text-slate-900 md:text-4xl text-balance tracking-tight dark:text-white"
                         >
                             &gt; Let's Connect
                         </h2>
@@ -454,10 +497,169 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             </section>
 
             <section class="max-w-5xl content-visibility-auto-tech-stack">
-                <h2 class="mb-8 text-3xl font-bold text-slate-900 dark:text-white">
+                <h2 class="mb-2 text-3xl font-bold text-slate-900 text-balance tracking-tight dark:text-white">
                     My Tech Stack
                 </h2>
-                <TechMarquee techGroups={techGroups} />
+                <p class="mb-8 font-mono text-[10px] tracking-tight text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed uppercase">
+                    // SYSTEM_INVENTORY: TECHNICAL ASSETS REGISTERED FOR TARGETED SYSTEM ARCHITECTURE AND HIGH-VELOCITY DEPLOYMENT. UTILITY PRIORITIZED OVER SYNTAX MEMORIZATION.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* MODULE 01: Frontend */}
+                    <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Target Accents -->
+                        <span class="absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+
+                        <!-- Corner Labels -->
+                        <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_01 // FE_SYS</span>
+                        <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
+                        
+                        <div>
+                            <h3 class="cypher-text mb-4 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide" data-original="Frontend Subsystem">Frontend Subsystem</h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {techGroups.Frontend.map((tech) => (
+                                    <div class="group/tech relative flex items-center gap-2 border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-full text-[11px] font-medium text-slate-800 dark:text-slate-200 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] transition-all duration-300">
+                                        <span>{tech.name}</span>
+                                        {tech.deployment && (
+                                            <span class="font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">{tech.deployment}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Corner Labels -->
+                        <span class="absolute bottom-2 left-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">REF_ID: FE-01</span>
+                        <span class="absolute bottom-2 right-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">CAP: 100%</span>
+                    </div>
+
+                    {/* MODULE 02: Backend */}
+                    <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Target Accents -->
+                        <span class="absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+
+                        <!-- Corner Labels -->
+                        <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_02 // BE_SYS</span>
+                        <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
+                        
+                        <div>
+                            <h3 class="cypher-text mb-4 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide" data-original="Backend Engine">Backend Engine</h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {techGroups.Backend.map((tech) => (
+                                    <div class="group/tech relative flex items-center gap-2 border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-full text-[11px] font-medium text-slate-800 dark:text-slate-200 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] transition-all duration-300">
+                                        <span>{tech.name}</span>
+                                        {tech.deployment && (
+                                            <span class="font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">{tech.deployment}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Corner Labels -->
+                        <span class="absolute bottom-2 left-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">REF_ID: BE-02</span>
+                        <span class="absolute bottom-2 right-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">CAP: 100%</span>
+                    </div>
+
+                    {/* MODULE 03: Data & Cloud */}
+                    <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Target Accents -->
+                        <span class="absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+
+                        <!-- Corner Labels -->
+                        <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_03 // DB_SYS</span>
+                        <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
+                        
+                        <div>
+                            <h3 class="cypher-text mb-4 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide" data-original="Data & Cloud">Data & Cloud</h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {techGroups.Cloud_Db.map((tech) => (
+                                    <div class="group/tech relative flex items-center gap-2 border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-full text-[11px] font-medium text-slate-800 dark:text-slate-200 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] transition-all duration-300">
+                                        <span>{tech.name}</span>
+                                        {tech.deployment && (
+                                            <span class="font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">{tech.deployment}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Corner Labels -->
+                        <span class="absolute bottom-2 left-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">REF_ID: DB-03</span>
+                        <span class="absolute bottom-2 right-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">CAP: 100%</span>
+                    </div>
+
+                    {/* MODULE 04: AI & Learning */}
+                    <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between min-h-[200px]">
+                        <!-- Corner Target Accents -->
+                        <span class="absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+
+                        <!-- Corner Labels -->
+                        <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_04 // AI_SYS</span>
+                        <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
+                        
+                        <div>
+                            <h3 class="cypher-text mb-4 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide" data-original="AI & Learning">AI & Learning</h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {techGroups.AI_Math.map((tech) => (
+                                    <div class="group/tech relative flex items-center gap-2 border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-full text-[11px] font-medium text-slate-800 dark:text-slate-200 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] transition-all duration-300">
+                                        <span>{tech.name}</span>
+                                        {tech.deployment && (
+                                            <span class="font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">{tech.deployment}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Corner Labels -->
+                        <span class="absolute bottom-2 left-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">REF_ID: AI-04</span>
+                        <span class="absolute bottom-2 right-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">CAP: 100%</span>
+                    </div>
+
+                    {/* MODULE 05: Model Orchestration */}
+                    <div class="relative border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-black/20 p-6 pt-10 pb-8 rounded-lg overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-4 min-h-[140px]">
+                        <!-- Corner Target Accents -->
+                        <span class="absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+                        <span class="absolute -bottom-1.5 -right-1 font-mono text-[10px] font-bold text-(--accent) pointer-events-none">+</span>
+
+                        <!-- Corner Labels -->
+                        <span class="absolute top-2 left-3 font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">// MODULE_05 // CORE_ORCHESTRATION</span>
+                        <span class="absolute top-2 right-3 font-mono text-[8px] text-(--accent) uppercase tracking-wider">[SYS.ACTIVE]</span>
+                        
+                        <div>
+                            <h3 class="cypher-text mb-4 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide" data-original="Model Orchestration">Model Orchestration</h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {techGroups.Model_Orchestration.map((tech) => (
+                                    <div class="group/tech relative flex items-center gap-2 border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-full text-[11px] font-medium text-slate-800 dark:text-slate-200 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] transition-all duration-300">
+                                        <span>{tech.name}</span>
+                                        {tech.deployment && (
+                                            <span class="font-mono text-[8px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">{tech.deployment}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Corner Labels -->
+                        <span class="absolute bottom-2 left-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">REF_ID: ORCH-05</span>
+                        <span class="absolute bottom-2 right-3 font-mono text-[7px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">CAP: 100%</span>
+                    </div>
+                </div>
             </section>
 
             {/* Recommended Books Modal */}
@@ -465,7 +667,7 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                 id="books-modal"
                 aria-labelledby="books-modal-title"
                 onclick="event.target === this && this.close()"
-                class="m-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm dark:border-white/10 dark:bg-[#0b0e14]"
+                class="m-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl dark:border-white/10 dark:bg-[#0b0e14] opacity-0 scale-95 transition-[opacity,transform,display,overlay] duration-300 [transition-behavior:allow-discrete] ease-out open:opacity-100 open:scale-100 starting:open:opacity-0 starting:open:scale-95 backdrop:bg-black/0 backdrop:backdrop-blur-none backdrop:transition-[background-color,backdrop-filter,display,overlay] backdrop:duration-300 backdrop:[transition-behavior:allow-discrete] open:backdrop:bg-black/50 open:backdrop:backdrop-blur-sm starting:open:backdrop:bg-black/0 starting:open:backdrop:backdrop-blur-none motion-reduce:transition-none motion-reduce:transform-none motion-reduce:starting:open:transform-none"
             >
                 <div
                     class="flex items-center justify-between border-b border-slate-100 p-6 dark:border-white/5"
@@ -496,71 +698,25 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                 </div>
                 <div class="max-h-[60vh] space-y-4 overflow-y-auto p-6">
                     {
-                        [
-                            {
-                                title: 'As a Man Thinketh',
-                                author: 'James Allen',
-                                link: 'https://www.amazon.in/As-Man-Thinketh-James-Allen/dp/9386538172',
-                            },
-                            {
-                                title: 'How to Win Friends and Influence People',
-                                author: 'Dale Carnegie',
-                                link: 'https://www.amazon.in/How-Win-Friends-Influence-People/dp/0671027034?s=bazaar',
-                            },
-                            {
-                                title: 'Marketing Management',
-                                author: 'Philip Kotler',
-                                link: 'https://www.amazon.in/Marketing-Management-17th-Philip-Kotler/dp/9367138199/ref=sr_1_1_sspa?crid=3LXWM7OV5BGZC&dib=eyJ2IjoiMSJ9.sLFz-n94M3czJDqJ9PP_32HJu72s7iE60M-ItoJp6vdG_i_luKRHC5qjtvFvbwdbhaDQcAcqREZdFZ0Ed0tq4MvMlFxqTsTgReZYC_jjnP86oxfOhad4BxPUlGEJKdmeDfCW7VZbG3SKTxzuPh-YvA4b-NlscmOi4It-IP8RT0okW55U_hkkSUZ4gnB6BNKsQFpR4PmxOjdhLWS8dOlLIbyIG8aAQeS7EB0glkLcZRw.TSj1dE0pcTX9PnG4fTof_JbQM04mjr9Rv2TPs-ne3zg&dib_tag=se&keywords=marketing+management+by+philip+kotler&qid=1778389155&sprefix=Marketing%2Caps%2C567&sr=8-1-spons&aref=WM64g7r717&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',
-                            },
-                            {
-                                title: 'Zero to One',
-                                author: 'Peter Thiel',
-                                link: 'https://www.amazon.in/Zero-One-Notes-Startups-Future/dp/0804139296',
-                            },
-                            {
-                                title: 'The Pragmatic Programmer',
-                                author: 'Andrew Hunt & David Thomas',
-                                link: 'https://www.amazon.in/Pragmatic-Programmer-journey-mastery-20th/dp/0135957052',
-                            },
-                            {
-                                title: 'Deep Work',
-                                author: 'Cal Newport',
-                                link: 'https://www.amazon.in/Deep-Work-Rules-Focused-Success/dp/0349411905',
-                            },
-                            {
-                                title: 'Atomic Habits',
-                                author: 'James Clear',
-                                link: 'https://www.amazon.in/Atomic-Habits-James-Clear/dp/1847941834',
-                            },
-                            {
-                                title: 'Clean Code',
-                                author: 'Robert C. Martin',
-                                link: 'https://www.amazon.in/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882',
-                            },
-                            {
-                                title: 'The Lean Startup',
-                                author: 'Eric Ries',
-                                link: 'https://www.amazon.in/Lean-Startup-Eric-Ries/dp/0307887898',
-                            },
-                            {
-                                title: 'The Alchemist',
-                                author: 'Paulo Coelho',
-                                link: 'https://www.amazon.in/Alchemist-Paulo-Coelho/dp/8172234988',
-                            },
-                        ].map((book) => (
-                            <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-3 transition-colors hover:border-slate-300 dark:border-white/5 dark:bg-white/5 dark:hover:border-white/20">
-                                <div>
+                        recommendedBooks.map((book) => (
+                            <div class="group/book flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-3 transition-all duration-300 hover:border-slate-300 dark:border-white/5 dark:bg-white/5 dark:hover:border-white/20">
+                                <div class="pr-4">
                                     <h4 class="text-sm font-bold text-slate-900 dark:text-white">
                                         {book.title}
                                     </h4>
                                     <p class="mt-0.5 text-xs text-slate-500">{book.author}</p>
+                                    {book.hint && (
+                                        <p class="mt-1.5 text-xs text-slate-400 dark:text-slate-500 line-clamp-2 max-h-0 opacity-0 group-hover/book:max-h-12 group-hover/book:opacity-100 transition-all duration-300 ease-out overflow-hidden leading-relaxed">
+                                            {book.hint}
+                                        </p>
+                                    )}
                                 </div>
                                 <a
                                     aria-label={`Buy ${book.title} (opens in a new tab)`}
                                     href={book.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="magnetic-target rounded-md bg-(--accent) px-4 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
+                                    class="magnetic-target rounded-md bg-(--accent) px-4 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main) shrink-0"
                                 >
                                     Buy
                                 </a>
@@ -571,20 +727,25 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
             </dialog>
         </main>
         <Footer />
+        <style is:global>
+            /* KaTeX margin reset */
+            .katex-display {
+                margin: 0 !important;
+            }
+        </style>
         <script>
             document.addEventListener('astro:page-load', () => {
-                // Scramble / Cypher Text Hover Effects
+                // 1. Coordinated sequential decode animation on load
                 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
-                const cypherElements = document.querySelectorAll('.cypher-text');
+                const cypherElements = Array.from(document.querySelectorAll('.cypher-text')) as HTMLElement[];
                 const activeIntervals = new Map<HTMLElement, ReturnType<typeof setInterval>>();
 
-                cypherElements.forEach((el) => {
-                    const element = el as HTMLElement;
-                    const originalText = element.dataset.original || '';
-                    const length = originalText.length;
-
-                    const startScramble = () => {
+                const decodeElement = (element: HTMLElement): Promise<void> => {
+                    return new Promise((resolve) => {
+                        const originalText = element.dataset.original || '';
+                        const length = originalText.length;
                         let iterations = 0;
+
                         if (activeIntervals.has(element)) {
                             clearInterval(activeIntervals.get(element)!);
                         }
@@ -601,17 +762,80 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
                             if (iterations >= length) {
                                 clearInterval(interval);
                                 activeIntervals.delete(element);
+                                resolve();
                             }
                             iterations += 1 / 3;
                         }, 30);
 
                         activeIntervals.set(element, interval);
+                    });
+                };
+
+                const runSequentialDecode = async () => {
+                    for (const el of cypherElements) {
+                        await decodeElement(el);
+                    }
+                };
+
+                runSequentialDecode();
+
+                // 2. Scroll-triggered IntersectionObserver Typewriter for Terminal
+                const terminalSnippet = document.getElementById('terminal-snippet');
+                let typewriterTimeout: ReturnType<typeof setTimeout> | null = null;
+                
+                if (terminalSnippet) {
+                    const rawText = terminalSnippet.dataset.text || '';
+                    let index = 0;
+                    let isTyping = false;
+
+                    const typeWriter = () => {
+                        if (index <= rawText.length) {
+                            let displayed = '<span class="text-[#bd93f9]">"</span>';
+                            displayed += rawText.substring(0, index);
+                            if (index < rawText.length) {
+                                displayed += '<span class="animate-pulse">█</span>';
+                            } else {
+                                displayed += '<span class="text-[#bd93f9]">"</span>';
+                            }
+                            terminalSnippet.innerHTML = displayed;
+                            index++;
+                            typewriterTimeout = setTimeout(typeWriter, 45);
+                        }
                     };
 
-                    element.addEventListener('mouseenter', startScramble);
-                });
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting && !isTyping) {
+                                isTyping = true;
+                                typeWriter();
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.1 });
 
-                // The "Offline-First" Easter Egg
+                    observer.observe(terminalSnippet);
+                }
+
+
+
+                // 4. Kinetic Reticle Mouse Tracking Parallax
+                const reticle = document.getElementById('reticle-bg');
+                const handleReticleParallax = (e: MouseEvent) => {
+                    const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+                    const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+                    
+                    const moveX = x * 8; // max 8px
+                    const moveY = y * 8; // max 8px
+                    const rotate = x * 5; // max 5deg
+                    
+                    if (reticle) {
+                        reticle.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) rotate(${rotate}deg)`;
+                    }
+                };
+
+                window.addEventListener('mousemove', handleReticleParallax);
+
+                // 5. The "Offline-First" Easter Egg
                 const handleOffline = () => {
                     const toast = document.createElement('div');
                     toast.className =
@@ -635,9 +859,19 @@ const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100)
 
                 // Cleanup Event Listeners on Page Transition
                 document.addEventListener('astro:before-preparation', () => {
-                    // Clear all active cypher intervals
+                    // Clear cypher intervals
                     activeIntervals.forEach((interval) => clearInterval(interval));
                     activeIntervals.clear();
+
+
+
+                    // Clear typewriter timeout
+                    if (typewriterTimeout) {
+                        clearTimeout(typewriterTimeout);
+                    }
+
+                    // Remove mousemove listener
+                    window.removeEventListener('mousemove', handleReticleParallax);
 
                     // Remove offline event listener
                     window.removeEventListener('offline', handleOffline);
