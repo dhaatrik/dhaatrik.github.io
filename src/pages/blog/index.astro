@@ -59,10 +59,10 @@ const postsWithReadingTime = posts.map((post: any) => {
 
                 <!-- Subsystem Domain Tabs -->
                 <div class="mb-10 flex flex-wrap gap-2.5 font-mono text-xs select-none">
-                    <button data-filter="all" class="filter-tab px-3 py-1.5 border border-(--accent) bg-(--accent)/10 text-(--accent) rounded cursor-pointer transition-all hover:bg-(--accent)/20">[ ALL ]</button>
-                    <button data-filter="ai_orchestration" class="filter-tab px-3 py-1.5 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 rounded cursor-pointer transition-all hover:border-(--accent)/35 hover:text-(--accent)/80 hover:bg-(--accent)/5">[ AI_ORCHESTRATION ]</button>
-                    <button data-filter="flight_dynamics" class="filter-tab px-3 py-1.5 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 rounded cursor-pointer transition-all hover:border-(--accent)/35 hover:text-(--accent)/80 hover:bg-(--accent)/5">[ FLIGHT_DYNAMICS ]</button>
-                    <button data-filter="agtech" class="filter-tab px-3 py-1.5 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 rounded cursor-pointer transition-all hover:border-(--accent)/35 hover:text-(--accent)/80 hover:bg-(--accent)/5">[ AGTECH ]</button>
+                    <button data-filter="all" class="filter-tab px-3 py-1.5 border border-slate-300 bg-slate-100/80 text-slate-600 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 rounded-md cursor-pointer transition-all hover:bg-slate-200/50 hover:border-slate-400 dark:hover:bg-[#1c232e] dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:hover:bg-(--accent)/20 [&.active]:shadow-[0_0_12px_var(--accent-glow)] active">[ ALL ]</button>
+                    <button data-filter="ai_orchestration" class="filter-tab px-3 py-1.5 border border-slate-300 bg-slate-100/80 text-slate-600 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 rounded-md cursor-pointer transition-all hover:bg-slate-200/50 hover:border-slate-400 dark:hover:bg-[#1c232e] dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:hover:bg-(--accent)/20 [&.active]:shadow-[0_0_12px_var(--accent-glow)]">[ AI_ORCHESTRATION ]</button>
+                    <button data-filter="flight_dynamics" class="filter-tab px-3 py-1.5 border border-slate-300 bg-slate-100/80 text-slate-600 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 rounded-md cursor-pointer transition-all hover:bg-slate-200/50 hover:border-slate-400 dark:hover:bg-[#1c232e] dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:hover:bg-(--accent)/20 [&.active]:shadow-[0_0_12px_var(--accent-glow)]">[ FLIGHT_DYNAMICS ]</button>
+                    <button data-filter="agtech" class="filter-tab px-3 py-1.5 border border-slate-300 bg-slate-100/80 text-slate-600 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 rounded-md cursor-pointer transition-all hover:bg-slate-200/50 hover:border-slate-400 dark:hover:bg-[#1c232e] dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:hover:bg-(--accent)/20 [&.active]:shadow-[0_0_12px_var(--accent-glow)]">[ AGTECH ]</button>
                 </div>
 
                 <!-- Terminal-Style Search Bar -->
@@ -351,9 +351,9 @@ const postsWithReadingTime = posts.map((post: any) => {
                 tabs.forEach((t) => {
                     const htmlT = t as HTMLElement;
                     if (htmlT.dataset.filter === activeTag) {
-                        htmlT.className = 'filter-tab px-3 py-1.5 border border-(--accent) bg-(--accent)/10 text-(--accent) rounded cursor-pointer transition-all hover:bg-(--accent)/20';
+                        htmlT.classList.add('active');
                     } else {
-                        htmlT.className = 'filter-tab px-3 py-1.5 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 rounded cursor-pointer transition-all hover:border-(--accent)/35 hover:text-(--accent)/80 hover:bg-(--accent)/5';
+                        htmlT.classList.remove('active');
                     }
                 });
 
@@ -376,9 +376,9 @@ const postsWithReadingTime = posts.map((post: any) => {
                         tabs.forEach((t) => {
                             const htmlT = t as HTMLElement;
                             if (htmlT.dataset.filter === activeTag) {
-                                htmlT.className = 'filter-tab px-3 py-1.5 border border-(--accent) bg-(--accent)/10 text-(--accent) rounded cursor-pointer transition-all hover:bg-(--accent)/20';
+                                htmlT.classList.add('active');
                             } else {
-                                htmlT.className = 'filter-tab px-3 py-1.5 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 rounded cursor-pointer transition-all hover:border-(--accent)/35 hover:text-(--accent)/80 hover:bg-(--accent)/5';
+                                htmlT.classList.remove('active');
                             }
                         });
 
