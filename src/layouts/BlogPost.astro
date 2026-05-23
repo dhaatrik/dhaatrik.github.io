@@ -31,6 +31,8 @@ const {
     series,
     entropy,
     rawContent = '',
+    author,
+    clearance,
 } = Astro.props;
 
 // Generate simulated commit hash
@@ -95,7 +97,7 @@ const commitHash = id
                     <div
                         class="mb-10 rounded-lg border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-500 shadow-sm dark:border-slate-800 dark:bg-[#151a22] dark:text-slate-400"
                     >
-                        <div class="grid grid-cols-2 gap-4 md:grid-cols-5">
+                        <div class="grid grid-cols-2 gap-4 md:grid-cols-6">
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">DATE</div>
                                 <div class="font-bold text-slate-900 dark:text-slate-200">
@@ -104,7 +106,11 @@ const commitHash = id
                             </div>
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">AUTHOR</div>
-                                <div class="font-bold text-(--accent)">DHAATRIK</div>
+                                <div class="font-bold text-(--accent) uppercase">{author}</div>
+                            </div>
+                            <div>
+                                <div class="mb-1 text-slate-400 dark:text-slate-600">CLEARANCE</div>
+                                <div class="font-bold text-red-500 dark:text-red-400 uppercase">{clearance}</div>
                             </div>
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">
@@ -482,6 +488,7 @@ const commitHash = id
             import { glossary } from '../data/glossary';
 
             let postAbortController: AbortController | null = null;
+            let tocObserver: IntersectionObserver | null = null;
 
             document.addEventListener('astro:page-load', async () => {
                 if (postAbortController) {
@@ -490,23 +497,25 @@ const commitHash = id
                 postAbortController = new AbortController();
                 const { signal } = postAbortController;
 
-                // Load polyfills if necessary
-                try {
-                    if (!HTMLElement.prototype.hasOwnProperty('popover')) {
-                        // @ts-ignore
-                        await import('https://unpkg.com/@oddbird/popover-polyfill@latest');
+                // Load polyfills if necessary asynchronously without blocking main initialization
+                (async () => {
+                    try {
+                        if (!HTMLElement.prototype.hasOwnProperty('popover')) {
+                            // @ts-ignore
+                            await import('https://unpkg.com/@oddbird/popover-polyfill@latest');
+                        }
+                        if (!HTMLButtonElement.prototype.hasOwnProperty('interestForElement')) {
+                            // @ts-ignore
+                            await import('https://unpkg.com/interestfor@latest');
+                        }
+                        if (!('anchorName' in document.documentElement.style)) {
+                            // @ts-ignore
+                            await import('https://unpkg.com/@oddbird/css-anchor-positioning');
+                        }
+                    } catch (err) {
+                        console.warn('Polyfill loading deferred or offline:', err);
                     }
-                    if (!HTMLButtonElement.prototype.hasOwnProperty('interestForElement')) {
-                        // @ts-ignore
-                        await import('https://unpkg.com/interestfor@latest');
-                    }
-                    if (!('anchorName' in document.documentElement.style)) {
-                        // @ts-ignore
-                        await import('https://unpkg.com/@oddbird/css-anchor-positioning');
-                    }
-                } catch (err) {
-                    console.warn('Polyfill loading deferred or offline:', err);
-                }
+                })();
 
                 // 1. Reading Progress Bar
                 const progressBar = document.getElementById('progress-bar');
@@ -757,25 +766,11 @@ const commitHash = id
                     }, { signal });
                 }
 
-                // 3. TOC active link tracking
+                // 3. TOC active link tracking (using high-performance IntersectionObserver)
                 const tocLinks = document.querySelectorAll('#toc a');
-                const sections = Array.from(
-                    document.querySelectorAll('.prose h2, .prose h3, .prose h4')
-                );
+                const sections = document.querySelectorAll('.prose h2, .prose h3, .prose h4');
 
-                const updateActiveToc = () => {
-                    if (sections.length === 0) return;
-                    let currentSectionId = '';
-
-                    const threshold = 120;
-                    for (let i = 0; i < sections.length; i++) {
-                        const section = sections[i] as HTMLElement;
-                        const rect = section.getBoundingClientRect();
-                        if (rect.top <= threshold) {
-                            currentSectionId = section.id;
-                        }
-                    }
-
+                const updateActiveToc = (currentSectionId: string) => {
                     tocLinks.forEach((link) => {
                         const htmlLink = link as HTMLElement;
                         if (htmlLink.dataset.slug === currentSectionId) {
@@ -796,12 +791,44 @@ const commitHash = id
                     });
                 };
 
+                let activeSectionId = '';
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px 0px -50% 0px',
+                    threshold: 0
+                };
+
+                const observerCallback = (entries: IntersectionObserverEntry[]) => {
+                    let currentActive = '';
+                    const threshold = 130; // matches fixed header height
+                    sections.forEach((sec) => {
+                        const htmlSec = sec as HTMLElement;
+                        const rect = htmlSec.getBoundingClientRect();
+                        if (rect.top <= threshold) {
+                            currentActive = htmlSec.id;
+                        }
+                    });
+                    
+                    // Fallback for short pages: if we have scrolled down but no heading has crossed the threshold
+                    if (!currentActive && sections.length > 0 && window.scrollY > 10) {
+                        currentActive = sections[0].id;
+                    }
+
+                    if (currentActive !== activeSectionId) {
+                        activeSectionId = currentActive;
+                        updateActiveToc(activeSectionId);
+                    }
+                };
+
+                tocObserver = new IntersectionObserver(observerCallback, observerOptions);
+                sections.forEach((sec) => tocObserver?.observe(sec));
+
+                // Maintain a single hyper-lightweight scroll listener for the reading progress bar
                 let scrollTicking = false;
                 const handleScroll = () => {
                     if (!scrollTicking) {
                         window.requestAnimationFrame(() => {
                             updateProgress();
-                            updateActiveToc();
                             scrollTicking = false;
                         });
                         scrollTicking = true;
@@ -811,7 +838,6 @@ const commitHash = id
                 window.addEventListener('scroll', handleScroll, { passive: true, signal });
 
                 updateProgress();
-                updateActiveToc();
 
                 // 3.1 RAW / RENDERED Mode Toggle Action
                 const toggleModeBtn = document.getElementById('toggle-mode-btn');
@@ -1050,105 +1076,117 @@ const commitHash = id
                     }, { signal });
                 });
 
-                // 5. Global Glossary Popovers
-                const proseContainer = document.querySelector('.prose');
-                if (!proseContainer) return;
+                // 5. Global Glossary Popovers (wrapped in requestIdleCallback to safeguard main-thread responsiveness)
+                const initializeGlossary = () => {
+                    if (signal.aborted) return;
 
-                const textNodes: Text[] = [];
-                const walk = document.createTreeWalker(
-                    proseContainer,
-                    NodeFilter.SHOW_TEXT,
-                    null
-                );
-                let node;
-                while ((node = walk.nextNode())) {
-                    const parent = node.parentElement;
-                    if (
-                        parent &&
-                        !['PRE', 'CODE', 'A', 'SPAN', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(
-                            parent.tagName
-                        )
-                    ) {
-                        textNodes.push(node as Text);
-                    }
-                }
+                    const proseContainer = document.querySelector('.prose');
+                    if (!proseContainer) return;
 
-                const terms = Object.keys(glossary);
-                const popoversContainer = document.getElementById('glossary-popovers-container');
-                if (terms.length > 0 && textNodes.length > 0) {
-                    const regex = new RegExp(
-                        `\\b(${terms.map((t) => t.replace(/[.*+?^$\{}()|[\]\\]/g, '\\$&')).join('|')})\\b`,
-                        'gi'
+                    const textNodes: Text[] = [];
+                    const walk = document.createTreeWalker(
+                        proseContainer,
+                        NodeFilter.SHOW_TEXT,
+                        null
                     );
+                    let node;
+                    while ((node = walk.nextNode())) {
+                        const parent = node.parentElement;
+                        if (
+                            parent &&
+                            !['PRE', 'CODE', 'A', 'SPAN', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(
+                                parent.tagName
+                            )
+                        ) {
+                            textNodes.push(node as Text);
+                        }
+                    }
 
-                    let matchCount = 0;
-                    textNodes.forEach((textNode) => {
-                        const content = textNode.nodeValue;
-                        if (!content) return;
+                    const terms = Object.keys(glossary);
+                    const popoversContainer = document.getElementById('glossary-popovers-container');
+                    if (terms.length > 0 && textNodes.length > 0) {
+                        const regex = new RegExp(
+                            `\\b(${terms.map((t) => t.replace(/[.*+?^$\{}()|[\]\\]/g, '\\$&')).join('|')})\\b`,
+                            'gi'
+                        );
 
-                        if (regex.test(content)) {
-                            regex.lastIndex = 0;
-                            const fragment = document.createDocumentFragment();
-                            let lastIndex = 0;
-                            let match;
+                        let matchCount = 0;
+                        textNodes.forEach((textNode) => {
+                            if (signal.aborted) return;
 
-                            while ((match = regex.exec(content)) !== null) {
-                                if (match.index > lastIndex) {
+                            const content = textNode.nodeValue;
+                            if (!content) return;
+
+                            if (regex.test(content)) {
+                                regex.lastIndex = 0;
+                                const fragment = document.createDocumentFragment();
+                                let lastIndex = 0;
+                                let match;
+
+                                while ((match = regex.exec(content)) !== null) {
+                                    if (match.index > lastIndex) {
+                                        fragment.appendChild(
+                                            document.createTextNode(
+                                                content.substring(lastIndex, match.index)
+                                            )
+                                        );
+                                    }
+
+                                    const term = match[0];
+                                    const termLower = term.toLowerCase();
+                                    const definition = glossary[termLower];
+                                    matchCount++;
+
+                                    const tooltipId = `tooltip-glossary-${termLower}-${matchCount}`;
+                                    const anchorName = `--tooltip-glossary-${termLower}-${matchCount}`;
+
+                                    const trigger = document.createElement('a');
+                                    trigger.href = 'javascript:void(0)';
+                                    trigger.className =
+                                        'relative inline-block border-b border-dashed border-(--accent)/50 text-slate-800 dark:text-slate-200 cursor-help transition-colors hover:text-(--accent) hover:border-(--accent)';
+                                    trigger.setAttribute('interestfor', tooltipId);
+                                    trigger.style.setProperty('anchor-name', anchorName);
+                                    trigger.textContent = term;
+
+                                    const popover = document.createElement('div');
+                                    popover.setAttribute('popover', 'hint');
+                                    popover.id = tooltipId;
+                                    popover.className =
+                                        'glossary-popover p-3 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs font-sans font-normal text-slate-300 text-left normal-case leading-relaxed w-64 max-w-xs z-50 transition-all pointer-events-none';
+                                    popover.style.setProperty('position-anchor', anchorName);
+                                    popover.style.setProperty('top', 'anchor(bottom)');
+                                    popover.style.setProperty('left', 'anchor(center)');
+                                    popover.style.setProperty('margin', 'unset');
+                                    popover.style.setProperty('transform', 'translateX(-50%)');
+                                    popover.style.setProperty('position-try', 'flip-block');
+                                    popover.textContent = definition;
+
+                                    if (popoversContainer) {
+                                        popoversContainer.appendChild(popover);
+                                    } else {
+                                        trigger.appendChild(popover);
+                                    }
+                                    fragment.appendChild(trigger);
+
+                                    lastIndex = match.index + term.length;
+                                }
+
+                                if (lastIndex < content.length) {
                                     fragment.appendChild(
-                                        document.createTextNode(
-                                            content.substring(lastIndex, match.index)
-                                        )
+                                        document.createTextNode(content.substring(lastIndex))
                                     );
                                 }
 
-                                const term = match[0];
-                                const termLower = term.toLowerCase();
-                                const definition = glossary[termLower];
-                                matchCount++;
-
-                                const tooltipId = `tooltip-glossary-${termLower}-${matchCount}`;
-                                const anchorName = `--tooltip-glossary-${termLower}-${matchCount}`;
-
-                                const trigger = document.createElement('a');
-                                trigger.href = 'javascript:void(0)';
-                                trigger.className =
-                                    'relative inline-block border-b border-dashed border-(--accent)/50 text-slate-800 dark:text-slate-200 cursor-help transition-colors hover:text-(--accent) hover:border-(--accent)';
-                                trigger.setAttribute('interestfor', tooltipId);
-                                trigger.style.setProperty('anchor-name', anchorName);
-                                trigger.textContent = term;
-
-                                const popover = document.createElement('div');
-                                popover.setAttribute('popover', 'hint');
-                                popover.id = tooltipId;
-                                popover.className =
-                                    'glossary-popover p-3 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs font-sans font-normal text-slate-300 text-left normal-case leading-relaxed w-64 max-w-xs z-50 transition-all pointer-events-none';
-                                popover.style.setProperty('position-anchor', anchorName);
-                                popover.style.setProperty('top', 'anchor(bottom)');
-                                popover.style.setProperty('left', 'anchor(center)');
-                                popover.style.setProperty('margin', 'unset');
-                                popover.style.setProperty('transform', 'translateX(-50%)');
-                                popover.style.setProperty('position-try', 'flip-block');
-                                popover.textContent = definition;
-
-                                if (popoversContainer) {
-                                    popoversContainer.appendChild(popover);
-                                } else {
-                                    trigger.appendChild(popover);
-                                }
-                                fragment.appendChild(trigger);
-
-                                lastIndex = match.index + term.length;
+                                textNode.parentNode?.replaceChild(fragment, textNode);
                             }
+                        });
+                    }
+                };
 
-                            if (lastIndex < content.length) {
-                                fragment.appendChild(
-                                    document.createTextNode(content.substring(lastIndex))
-                                );
-                            }
-
-                            textNode.parentNode?.replaceChild(fragment, textNode);
-                        }
-                    });
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(() => initializeGlossary());
+                } else {
+                    setTimeout(initializeGlossary, 50);
                 }
             });
 
@@ -1157,6 +1195,10 @@ const commitHash = id
                 if (postAbortController) {
                     postAbortController.abort();
                     postAbortController = null;
+                }
+                if (tocObserver) {
+                    tocObserver.disconnect();
+                    tocObserver = null;
                 }
             });
         </script>
