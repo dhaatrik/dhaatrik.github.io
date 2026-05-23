@@ -523,6 +523,11 @@
     contain-intrinsic-size: auto none auto 380px;
 }
 
+.content-visibility-auto-books {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 400px;
+}
+
 /* Custom Scrollbars */
 * {
     --scrollbar-thumb: rgba(100, 116, 139, 0.3);
@@ -615,6 +620,72 @@
     #support-popover:popover-open::backdrop {
         background: rgba(0, 0, 0, 0);
         backdrop-filter: blur(0px);
+    }
+}
+
+/* Books Popover Entrance & Exit Transitions */
+#books-popover {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, display 0.2s ease-out allow-discrete, overlay 0.2s ease-out allow-discrete;
+}
+
+#books-popover:popover-open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@starting-style {
+    #books-popover:popover-open {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.96);
+    }
+}
+
+#books-popover::backdrop {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    transition: background 0.2s ease-out, backdrop-filter 0.2s ease-out, display 0.2s ease-out allow-discrete, overlay 0.2s ease-out allow-discrete;
+}
+
+#books-popover:popover-open::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+@starting-style {
+    #books-popover:popover-open::backdrop {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+}
+
+/* Books Grid & Subgrid Layout */
+.books-grid-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+}
+
+.book-card-row {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: center;
+}
+
+@media (min-width: 640px) {
+    .books-grid-container {
+        grid-template-columns: 1fr auto auto;
+        gap: 0.75rem;
+    }
+    
+    .book-card-row {
+        grid-column: span 3;
     }
 }
 
