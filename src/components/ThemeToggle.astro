@@ -10,10 +10,10 @@
     title="Toggle theme"
     class="magnetic-target relative flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-all duration-300 hover:bg-slate-200/60 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:text-(--text-secondary) dark:hover:bg-white/10 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
 >
-    <!-- Sun icon (shown in dark mode — click to go light) -->
+    <!-- Sun icon -->
     <svg
         id="theme-icon-sun"
-        class="hidden h-5 w-5 transition-transform duration-300"
+        class="absolute h-5 w-5 transition-all duration-500 ease-out transform"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
@@ -33,10 +33,10 @@
         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
     </svg>
 
-    <!-- Moon icon (shown in light mode — click to go dark) -->
+    <!-- Moon icon -->
     <svg
         id="theme-icon-moon"
-        class="h-5 w-5 transition-transform duration-300"
+        class="absolute h-5 w-5 transition-all duration-500 ease-out transform"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
@@ -58,8 +58,17 @@
             var moon = document.getElementById('theme-icon-moon');
             var btn = document.getElementById('theme-toggle');
             if (sun && moon) {
-                sun.style.display = isDark ? 'block' : 'none';
-                moon.style.display = isDark ? 'none' : 'block';
+                if (isDark) {
+                    sun.style.transform = 'scale(1) rotate(0deg)';
+                    sun.style.opacity = '1';
+                    moon.style.transform = 'scale(0) rotate(90deg)';
+                    moon.style.opacity = '0';
+                } else {
+                    sun.style.transform = 'scale(0) rotate(-90deg)';
+                    sun.style.opacity = '0';
+                    moon.style.transform = 'scale(1) rotate(0deg)';
+                    moon.style.opacity = '1';
+                }
             }
             if (btn) {
                 var label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
