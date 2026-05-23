@@ -112,4 +112,26 @@ test.describe('Portfolio UI Interactivity', () => {
     await expect(tocLink).toHaveClass(/!text-\(--accent\)/);
   });
 
+  test('Recommended Books popover should open and close correctly', async ({ page }) => {
+    await page.goto('/');
+
+    const popover = page.locator('#books-popover');
+    await expect(popover).toBeHidden();
+
+    // Click recommended books in footer
+    const footerLink = page.locator('footer button[popovertarget="books-popover"]').first();
+    await footerLink.click();
+
+    // Verify it is open
+    await expect(popover).toBeVisible();
+
+    // Click close button inside popover
+    const closeBtn = popover.locator('button[popovertarget="books-popover"]').first();
+    await closeBtn.click();
+
+    // Verify it is hidden again
+    await expect(popover).toBeHidden();
+  });
+
 });
+
