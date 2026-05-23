@@ -27,8 +27,9 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         animation: sonar 1s cubic-bezier(0, 0.2, 0.8, 1) forwards;
     }
     
-    /* Ensure the header transition is smooth for the hide/show effect */
+    /* Ensure the header transition is smooth for the hide/show effect and promoted to GPU */
     #main-header {
+        will-change: transform;
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 </style>
@@ -135,6 +136,7 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         if (!header || !nav) return;
 
         const updateHeader = () => {
+            if (signal.aborted) return;
             const currentScroll = window.scrollY;
             
             // Shrink header and add subtle shadow on scroll
