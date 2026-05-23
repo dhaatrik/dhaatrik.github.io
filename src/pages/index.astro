@@ -259,7 +259,7 @@ const getProjectTelemetry = (id: string) => {
                                     <div class="hologram-scanner"></div>
                                     
                                     <!-- Hologram WebM Video with Fallback to Static Logo -->
-                                    <div class="absolute inset-0 opacity-12 dark:opacity-8 mix-blend-screen dark:mix-blend-lighten overflow-hidden pointer-events-none rounded-2xl flex items-center justify-center">
+                                    <div class="absolute inset-0 overflow-hidden pointer-events-none rounded-2xl flex items-center justify-center">
                                         {project.data.video && (
                                             <video
                                                 src={project.data.video}
@@ -267,20 +267,22 @@ const getProjectTelemetry = (id: string) => {
                                                 loop
                                                 muted
                                                 playsinline
-                                                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-12 dark:opacity-8 mix-blend-screen dark:mix-blend-lighten"
                                                 style="display: none;"
                                                 onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
                                                 onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden');"
                                             ></video>
                                         )}
                                         {project.data.logo && (
-                                            <img
-                                                src={project.data.logo}
-                                                alt=""
-                                                class={`absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 group-hover:scale-110 ${project.data.video ? 'hidden' : ''}`}
-                                                aria-hidden="true"
-                                                loading="lazy"
-                                            />
+                                            <div class={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-5 bg-slate-950 dark:bg-black/60 border border-slate-900 dark:border-white/10 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 opacity-20 dark:opacity-15 shadow-lg ${project.data.video ? 'hidden' : ''}`}>
+                                                <img
+                                                    src={project.data.logo}
+                                                    alt=""
+                                                    class="h-20 w-20 object-contain"
+                                                    aria-hidden="true"
+                                                    loading="lazy"
+                                                />
+                                            </div>
                                         )}
                                     </div>
                                     
