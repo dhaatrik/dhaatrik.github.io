@@ -58,7 +58,7 @@ const commitHash = id
         <div id="progress-container" class="fixed top-0 left-0 z-50 h-[2px] w-full bg-transparent">
             <div
                 id="progress-bar"
-                class="h-full w-0 bg-(--accent) shadow-[0_0_10px_var(--accent)] transition-all duration-150 ease-out"
+                class="h-full w-full bg-(--accent) shadow-[0_0_10px_var(--accent)] origin-left scale-x-0 transition-transform duration-150 ease-out"
             >
             </div>
         </div>
@@ -157,6 +157,7 @@ const commitHash = id
 
                     <h1
                         class="font-heading mb-6 text-4xl leading-tight font-bold tracking-tight text-balance text-slate-900 md:text-5xl dark:text-white"
+                        style="view-transition-name: active-post-title;"
                     >
                         {title}
                     </h1>
@@ -200,6 +201,7 @@ const commitHash = id
                                     loading="eager"
                                     fetchpriority="high"
                                     class="w-full object-cover"
+                                    style="view-transition-name: active-post-img;"
                                 />
                             </div>
                         )
@@ -517,15 +519,17 @@ const commitHash = id
                     }
                 })();
 
-                // 1. Reading Progress Bar
+                // 1. Reading Progress Bar (Fallback logic for unsupported browsers)
                 const progressBar = document.getElementById('progress-bar');
+                const hasScrollTimeline = CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)');
                 const updateProgress = () => {
+                    if (hasScrollTimeline || !progressBar) return;
                     const scrollTotal =
                         document.documentElement.scrollHeight -
                         document.documentElement.clientHeight;
                     if (scrollTotal > 0) {
                         const progress = (window.scrollY / scrollTotal) * 100;
-                        if (progressBar) progressBar.style.width = `${progress}%`;
+                        progressBar.style.transform = `scaleX(${progress / 100})`;
                     }
                 };
 
@@ -823,21 +827,22 @@ const commitHash = id
                 tocObserver = new IntersectionObserver(observerCallback, observerOptions);
                 sections.forEach((sec) => tocObserver?.observe(sec));
 
-                // Maintain a single hyper-lightweight scroll listener for the reading progress bar
-                let scrollTicking = false;
-                const handleScroll = () => {
-                    if (!scrollTicking) {
-                        window.requestAnimationFrame(() => {
-                            updateProgress();
-                            scrollTicking = false;
-                        });
-                        scrollTicking = true;
-                    }
-                };
+                // Maintain a single fallback scroll listener for the reading progress bar (only if CSS timelines are unsupported)
+                if (!hasScrollTimeline && progressBar) {
+                    let scrollTicking = false;
+                    const handleScroll = () => {
+                        if (!scrollTicking) {
+                            window.requestAnimationFrame(() => {
+                                updateProgress();
+                                scrollTicking = false;
+                            });
+                            scrollTicking = true;
+                        }
+                    };
 
-                window.addEventListener('scroll', handleScroll, { passive: true, signal });
-
-                updateProgress();
+                    window.addEventListener('scroll', handleScroll, { passive: true, signal });
+                    updateProgress();
+                }
 
                 // 3.1 RAW / RENDERED Mode Toggle Action
                 const toggleModeBtn = document.getElementById('toggle-mode-btn');

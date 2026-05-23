@@ -1,6 +1,6 @@
 ## Developer’s Guide: Upgrading dhaatrik.github.io to v3.0.0 – “Premium Smoothness Edition”
 
-### **Phase 0: Foundation & Environment Setup** → **v2.1.0**
+### **Phase 0: Foundation & Environment Setup** → **v2.1.0** 
 
 Prepare the environment for premium motion design by stripping legacy packages and configuring native web architecture.
 

@@ -387,6 +387,20 @@ const postsWithReadingTime = posts.map((post: any) => {
                     }, { signal });
                 });
 
+                // Bind dynamic view-transition-names to clicked card components
+                cards.forEach((card) => {
+                    card.addEventListener('click', () => {
+                        const titleEl = card.querySelector('h2') as HTMLElement | null;
+                        const imgEl = card.querySelector('img, .bento-card-inner') as HTMLElement | null;
+                        if (titleEl) {
+                            titleEl.style.viewTransitionName = 'active-post-title';
+                        }
+                        if (imgEl) {
+                            imgEl.style.viewTransitionName = 'active-post-img';
+                        }
+                    }, { signal });
+                });
+
                 // Global Forward Slash / Hotkey Listener
                 const handleHotkey = (e: KeyboardEvent) => {
                     // Ignore if typing in another input/textarea

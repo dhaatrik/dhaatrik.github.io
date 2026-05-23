@@ -3,7 +3,7 @@
     "description": "Personal portfolio and blog of Dhaatrik",
     "author": "Dhaatrik Chowdhury",
     "type": "module",
-    "version": "2.1.0",
+    "version": "3.0.0",
     "engines": {
         "node": ">=22.12.0"
     },

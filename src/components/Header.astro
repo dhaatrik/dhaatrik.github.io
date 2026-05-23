@@ -63,7 +63,7 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
     id="main-header"
     class="fixed top-0 z-50 w-full backdrop-blur-lg bg-white/70 dark:bg-[#0b0e14]/70 border-b border-slate-200/50 dark:border-white/10"
 >
-    <nav id="main-nav" class="layout-container flex items-center justify-between py-4 transition-all duration-300 ease-in-out">
+    <nav id="main-nav" class="layout-container flex items-center justify-between py-4 transition-colors duration-300 ease-in-out">
         {
             /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */
         }
@@ -241,21 +241,25 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         
         if (!header || !nav) return;
 
+        const hasScrollTimeline = CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)');
+
         const updateHeader = () => {
             if (signal.aborted) return;
             const currentScroll = window.scrollY;
             
-            // Shrink header and add subtle shadow on scroll
-            if (currentScroll > 50) {
-                nav.classList.remove('py-4');
-                nav.classList.add('py-2');
-                header.classList.add('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
-                header.classList.remove('bg-white/70', 'dark:bg-[#0b0e14]/70');
-            } else {
-                nav.classList.add('py-4');
-                nav.classList.remove('py-2');
-                header.classList.remove('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
-                header.classList.add('bg-white/70', 'dark:bg-[#0b0e14]/70');
+            // Shrink header and add subtle shadow on scroll (JS fallback only)
+            if (!hasScrollTimeline) {
+                if (currentScroll > 50) {
+                    nav.classList.remove('py-4');
+                    nav.classList.add('py-2');
+                    header.classList.add('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
+                    header.classList.remove('bg-white/70', 'dark:bg-[#0b0e14]/70');
+                } else {
+                    nav.classList.add('py-4');
+                    nav.classList.remove('py-2');
+                    header.classList.remove('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
+                    header.classList.add('bg-white/70', 'dark:bg-[#0b0e14]/70');
+                }
             }
 
             // Hide on scroll down, show on scroll up - more deliberate threshold
@@ -292,6 +296,30 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
             let currentX = 0;
             let isSwiping = false;
 
+            const getFocusableElements = () => {
+                return drawer.querySelectorAll('a, button');
+            };
+
+            const handleFocusTrap = (e: KeyboardEvent) => {
+                if (e.key !== 'Tab') return;
+                const focusables = getFocusableElements();
+                if (focusables.length === 0) return;
+                const first = focusables[0] as HTMLElement;
+                const last = focusables[focusables.length - 1] as HTMLElement;
+                
+                if (e.shiftKey) {
+                    if (document.activeElement === first) {
+                        last.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === last) {
+                        first.focus();
+                        e.preventDefault();
+                    }
+                }
+            };
+
             const openMenu = () => {
                 drawer.classList.remove('translate-x-full');
                 drawer.classList.add('translate-x-0');
@@ -300,6 +328,12 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                 toggleBtn.classList.add('open');
                 toggleBtn.setAttribute('aria-expanded', 'true');
                 document.body.style.overflow = 'hidden';
+
+                const focusables = getFocusableElements();
+                if (focusables.length > 0) {
+                    (focusables[0] as HTMLElement).focus();
+                }
+                document.addEventListener('keydown', handleFocusTrap, { signal });
             };
 
             const closeMenu = () => {
@@ -311,6 +345,9 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                 toggleBtn.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
                 drawer.style.transform = '';
+
+                document.removeEventListener('keydown', handleFocusTrap);
+                toggleBtn.focus();
             };
 
             toggleBtn.addEventListener('click', () => {
