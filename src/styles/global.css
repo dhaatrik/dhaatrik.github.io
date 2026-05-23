@@ -3,6 +3,38 @@
 /* Override Tailwind v4 default: use class-based dark mode instead of prefers-color-scheme */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Global Motion Accessibility Safety Reset */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-delay: -1ms !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        background-attachment: initial !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+    }
+}
+
+/* Custom Tailwind CSS v4 GPU Utilities */
+@utility transition-gpu {
+    transition-property: transform, opacity, filter, backdrop-filter;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility promote-gpu {
+    will-change: transform, opacity;
+}
+
+@utility transition-bento {
+    transition-property: transform, opacity, background-color, border-color, box-shadow;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @theme {
     --font-sans: 'Nunito', 'sans-serif';
     --font-heading: 'Poppins', 'sans-serif';
@@ -182,7 +214,8 @@
         border-radius: var(--bento-radius);
         padding: var(--bento-padding);
         border: 1px solid transparent;
-        transition-property: all;
+        will-change: transform, opacity;
+        transition-property: transform, opacity, background-color, border-color, box-shadow;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 300ms;
     }
@@ -380,7 +413,10 @@
 
 .bento-card {
     transform-style: preserve-3d;
-    transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    will-change: transform, opacity;
+    transition-property: transform, opacity, background-color, border-color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* Hologram effect */
