@@ -40,12 +40,6 @@ const personSchema = JSON.stringify({
         'https://medium.com/@dhaatrik',
     ],
     jobTitle: 'Entrepreneur & AI Engineer',
-    address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Kolkata',
-        addressRegion: 'West Bengal',
-        addressCountry: 'IN',
-    },
 }).replace(/</g, '\\u003c');
 ---
 
@@ -94,9 +88,6 @@ const personSchema = JSON.stringify({
     href={new URL('rss.xml', Astro.site)}
 />
 
-<!-- GEO Meta Tags -->
-<meta name="geo.region" content="IN-WB" />
-<meta name="geo.placename" content="Kolkata, West Bengal, India" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
