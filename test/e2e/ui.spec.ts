@@ -66,8 +66,8 @@ test.describe('Portfolio UI Interactivity', () => {
     await page.goto('/blog?q=second');
     
     // The second post should be visible, others should be hidden
-    const secondPostCard = page.locator('a[href*="/second-post/"]');
-    const firstPostCard = page.locator('a[href*="/first-post/"]');
+    const secondPostCard = page.locator('.blog-post-card[href*="/second-post/"]');
+    const firstPostCard = page.locator('.blog-post-card[href*="/first-post/"]');
     
     await expect(secondPostCard).toBeVisible();
     await expect(firstPostCard).toBeHidden();
