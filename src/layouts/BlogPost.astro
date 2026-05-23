@@ -65,7 +65,7 @@ const commitHash = id
 
         <Header />
         <main id="main-content" tabindex="-1" class="layout-container grow py-8">
-            <div class="mb-8">
+            <div class="mb-8 blog-reveal blog-reveal-1">
                 <a
                     href="/blog"
                     data-astro-prefetch="hover"
@@ -95,7 +95,7 @@ const commitHash = id
                 <div class="prose-container w-full min-w-0">
                     <!-- Laboratory Report Header -->
                     <div
-                        class="mb-10 rounded-lg border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-500 shadow-sm dark:border-slate-800 dark:bg-[#151a22] dark:text-slate-400"
+                        class="mb-10 rounded-lg border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-500 shadow-sm dark:border-slate-800 dark:bg-[#151a22] dark:text-slate-400 blog-reveal blog-reveal-1"
                     >
                         <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
                             <div>
@@ -207,7 +207,7 @@ const commitHash = id
                         )
                     }
 
-                    <div id="rendered-content-container">
+                    <div id="rendered-content-container" class="blog-reveal blog-reveal-2">
                         <div
                             class="prose prose-slate dark:prose-invert max-w-none md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 marker:text-(--accent)"
                         >
@@ -220,7 +220,7 @@ const commitHash = id
                     </div>
 
                     <!-- Transmission Export CTA -->
-                    <div class="mt-16 border-t border-slate-200 pt-8 dark:border-slate-800">
+                    <div class="mt-16 border-t border-slate-200 pt-8 dark:border-slate-800 blog-reveal blog-reveal-3">
                         <button
                             id="export-btn"
                             class="magnetic-target group flex w-full cursor-pointer items-center justify-center gap-3 rounded border border-(--accent)/20 bg-(--accent)/10 px-6 py-3 font-mono text-sm tracking-widest text-(--accent) transition-all hover:bg-(--accent)/20 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:focus-visible:ring-offset-(--bg-main)"
@@ -431,7 +431,7 @@ const commitHash = id
                 <!-- Sticky Sidebar TOC -->
                 {
                     headings.length > 0 ? (
-                        <aside class="sticky top-24 hidden max-h-[calc(100vh-8rem)] w-full overflow-y-auto pr-2 lg:block">
+                        <aside class="sticky top-24 hidden max-h-[calc(100vh-8rem)] w-full overflow-y-auto pr-2 lg:block blog-reveal blog-reveal-4">
                             <div class="rounded-xl border border-slate-200 bg-slate-50 p-4 backdrop-blur-sm dark:border-slate-800 dark:bg-[#151a22]/80">
                                 <h3 class="mb-4 flex items-center gap-2 font-mono text-[10px] tracking-widest text-slate-500 uppercase">
                                     <svg

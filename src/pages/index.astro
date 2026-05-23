@@ -607,6 +607,17 @@ const getProjectTelemetry = (id: string) => {
                     }
                 }
 
+                // --- 8.5. Bind View Transition Names to Homepage Blog Cards ---
+                const homeBlogCards = document.querySelectorAll('a.bento-card[href*="/blog/"]');
+                homeBlogCards.forEach((card) => {
+                    card.addEventListener('click', () => {
+                        const titleEl = card.querySelector('h3');
+                        if (titleEl) {
+                            titleEl.style.setProperty('view-transition-name', 'active-post-title');
+                        }
+                    });
+                });
+
                 // --- 9. Cleanup Event Listeners on Page Transition ---
                 document.addEventListener('astro:before-preparation', () => {
                     if (typewriterTimeout) clearTimeout(typewriterTimeout);
