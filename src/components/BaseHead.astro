@@ -244,11 +244,13 @@ const personSchema = JSON.stringify({
             card.addEventListener('mouseleave', handleCardLeave);
         });
 
-        // Programmatic Accessibility Routing: Focus h1 on page load/transition
-        const h1 = document.querySelector('main h1, h1');
-        if (h1) {
-            h1.setAttribute('tabindex', '-1');
-            h1.focus({ preventScroll: true });
+        // Programmatic Accessibility Routing: Focus header or main container on page load/transition
+        const focusTarget = document.querySelector('main h1, h1, #main-content, main');
+        if (focusTarget) {
+            if (!focusTarget.hasAttribute('tabindex')) {
+                focusTarget.setAttribute('tabindex', '-1');
+            }
+            focusTarget.focus({ preventScroll: true });
         }
 
         // Clean up temporary transition names on the newly loaded page
