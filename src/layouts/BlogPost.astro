@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import { Code } from 'astro:components';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -14,6 +15,7 @@ type Props = CollectionEntry<'blog'>['data'] & {
     headings?: { depth: number; slug: string; text: string }[];
     prevPost?: CollectionEntry<'blog'> | null;
     nextPost?: CollectionEntry<'blog'> | null;
+    rawContent?: string;
 };
 
 const {
@@ -28,6 +30,7 @@ const {
     nextPost,
     series,
     entropy,
+    rawContent = '',
 } = Astro.props;
 
 // Generate simulated commit hash
@@ -46,6 +49,9 @@ const commitHash = id
     </head>
 
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
+        <!-- Flashlight Spotlight Background -->
+        <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
+
         <!-- Reading Progress Bar -->
         <div id="progress-container" class="fixed top-0 left-0 z-50 h-[2px] w-full bg-transparent">
             <div
@@ -89,7 +95,7 @@ const commitHash = id
                     <div
                         class="mb-10 rounded-lg border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-500 shadow-sm dark:border-slate-800 dark:bg-[#151a22] dark:text-slate-400"
                     >
-                        <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+                        <div class="grid grid-cols-2 gap-4 md:grid-cols-5">
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">DATE</div>
                                 <div class="font-bold text-slate-900 dark:text-slate-200">
@@ -130,6 +136,14 @@ const commitHash = id
                                     <span class="text-[10px] font-bold tracking-widest uppercase"
                                         >{entropy || 'STANDARD'}</span
                                     >
+                                </div>
+                            </div>
+                            <div>
+                                <div class="mb-1 text-slate-400 dark:text-slate-600">MODE</div>
+                                <div class="font-bold text-slate-900 dark:text-slate-200">
+                                    <button id="toggle-mode-btn" class="text-(--accent) cursor-pointer hover:underline uppercase select-none font-bold">
+                                        [ RENDERED ]
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -185,10 +199,16 @@ const commitHash = id
                         )
                     }
 
-                    <div
-                        class="prose prose-slate dark:prose-invert prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 max-w-none marker:text-(--accent)"
-                    >
-                        <slot />
+                    <div id="rendered-content-container">
+                        <div
+                            class="prose prose-slate dark:prose-invert prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 max-w-none marker:text-(--accent)"
+                        >
+                            <slot />
+                        </div>
+                    </div>
+
+                    <div id="raw-markdown-container" class="hidden font-mono text-sm leading-relaxed text-slate-800 dark:text-slate-300 bg-[#0d1117] border border-slate-700 rounded-lg p-2 overflow-x-auto my-6">
+                        <Code code={rawContent} lang="markdown" theme="github-dark" class="!bg-transparent !p-4" />
                     </div>
 
                     <!-- Transmission Export CTA -->
@@ -284,6 +304,24 @@ const commitHash = id
                                         d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
                                     ></path></svg
                                 >
+                            </button>
+                            <button
+                                id="export-json-btn"
+                                aria-label="Export to JSON metadata"
+                                class="flex w-full cursor-pointer items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-(--bg-main)"
+                            >
+                                <span aria-hidden="true">~ $ export --to-json-metadata</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                             </button>
                         </div>
                     </div>
@@ -396,16 +434,16 @@ const commitHash = id
                                     INDEX
                                 </h3>
                                 <nav id="toc">
-                                    <ul class="flex flex-col space-y-2 text-sm">
-                                        {headings.map((heading: { depth: number; slug: string; text: string }) => (
+                                    <ul class="flex flex-col space-y-2 text-sm font-mono">
+                                        {headings.map((heading: { depth: number; slug: string; text: string }, index: number) => (
                                             <li class="toc-item">
                                                 <a
                                                     href={`#${heading.slug}`}
-                                                    class="block border-l-2 border-transparent py-1 text-slate-600 transition-colors hover:text-(--accent) dark:text-slate-400"
+                                                    class="block border-l-2 border-transparent py-1 text-slate-600 transition-colors hover:text-(--accent) dark:text-slate-400 text-xs"
                                                     data-slug={heading.slug}
                                                     style={`padding-left: ${(heading.depth - 1) * 0.75}rem;`}
                                                 >
-                                                    {heading.text}
+                                                    <span class="text-slate-400 dark:text-slate-600">{String(index + 1).padStart(2, '0')} //</span> {heading.text}
                                                 </a>
                                             </li>
                                         ))}
@@ -418,6 +456,7 @@ const commitHash = id
                     )
                 }
             </article>
+            <div id="glossary-popovers-container" class="contents"></div>
         </main>
         <Footer />
 
@@ -426,12 +465,27 @@ const commitHash = id
 
             let postAbortController: AbortController | null = null;
 
-            document.addEventListener('astro:page-load', () => {
+            document.addEventListener('astro:page-load', async () => {
                 if (postAbortController) {
                     postAbortController.abort();
                 }
                 postAbortController = new AbortController();
                 const { signal } = postAbortController;
+
+                // Load polyfills if necessary
+                try {
+                    if (!HTMLElement.prototype.hasOwnProperty('popover')) {
+                        await import('https://unpkg.com/@oddbird/popover-polyfill@latest');
+                    }
+                    if (!HTMLButtonElement.prototype.hasOwnProperty('interestForElement')) {
+                        await import('https://unpkg.com/interestfor@latest');
+                    }
+                    if (!('anchorName' in document.documentElement.style)) {
+                        await import('https://unpkg.com/@oddbird/css-anchor-positioning');
+                    }
+                } catch (err) {
+                    console.warn('Polyfill loading deferred or offline:', err);
+                }
 
                 // 1. Reading Progress Bar
                 const progressBar = document.getElementById('progress-bar');
@@ -452,8 +506,52 @@ const commitHash = id
                     exportBtn.addEventListener('click', () => {
                         exportOptions.classList.toggle('hidden');
                         exportOptions.classList.toggle('flex');
-                    });
+                    }, { signal });
                 }
+
+                // 2.1 Export to JSON-LD Metadata Action
+                const exportJsonBtn = document.getElementById('export-json-btn');
+                if (exportJsonBtn) {
+                    exportJsonBtn.addEventListener('click', () => {
+                        // Extract metadata from document state
+                        const url = new URL(window.location.href);
+                        const titleEl = document.querySelector('h1');
+                        const descriptionEl = document.querySelector('meta[name="description"]');
+                        
+                        const metadata = {
+                            "@context": "https://schema.org",
+                            "@type": "BlogPosting",
+                            "headline": titleEl?.innerText || "Transmission Log",
+                            "description": descriptionEl?.getAttribute('content') || "",
+                            "datePublished": new Date().toISOString(),
+                            "author": {
+                                "@type": "Person",
+                                "name": "Dhaatrik"
+                            },
+                            "url": url.href
+                        };
+
+                        const blob = new Blob([JSON.stringify(metadata, null, 4)], { type: 'application/json' });
+                        const blobUrl = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = blobUrl;
+                        a.download = `transmission-metadata-${Date.now()}.json`;
+                        a.click();
+                        URL.revokeObjectURL(blobUrl);
+
+                        const textSpan = exportJsonBtn.querySelector('span');
+                        if (textSpan) {
+                            const originalText = textSpan.innerText;
+                            textSpan.innerText = '~ $ export_completed';
+                            textSpan.classList.add('text-(--accent)');
+                            setTimeout(() => {
+                                textSpan.innerText = originalText;
+                                textSpan.classList.remove('text-(--accent)');
+                            }, 2000);
+                        }
+                    }, { signal });
+                }
+
                 const copyLinkBtn = document.getElementById('copy-link-btn');
                 if (copyLinkBtn) {
                     copyLinkBtn.addEventListener('click', async () => {
@@ -472,7 +570,7 @@ const commitHash = id
                         } catch (err) {
                             console.error('Failed to copy', err);
                         }
-                    });
+                    }, { signal });
                 }
 
                 // 3. TOC active link tracking
@@ -485,7 +583,6 @@ const commitHash = id
                     if (sections.length === 0) return;
                     let currentSectionId = '';
 
-                    // Find the last section that has scrolled past the top threshold (120px from top)
                     const threshold = 120;
                     for (let i = 0; i < sections.length; i++) {
                         const section = sections[i] as HTMLElement;
@@ -515,7 +612,6 @@ const commitHash = id
                     });
                 };
 
-                // Throttled Scroll Listener using requestAnimationFrame
                 let scrollTicking = false;
                 const handleScroll = () => {
                     if (!scrollTicking) {
@@ -530,25 +626,135 @@ const commitHash = id
 
                 window.addEventListener('scroll', handleScroll, { passive: true, signal });
 
-                // Initialize state immediately
                 updateProgress();
                 updateActiveToc();
+
+                // 3.1 RAW / RENDERED Mode Toggle Action
+                const toggleModeBtn = document.getElementById('toggle-mode-btn');
+                const renderedContainer = document.getElementById('rendered-content-container');
+                const rawContainer = document.getElementById('raw-markdown-container');
+                if (toggleModeBtn && renderedContainer && rawContainer) {
+                    toggleModeBtn.addEventListener('click', () => {
+                        const isRaw = rawContainer.classList.contains('hidden');
+                        if (isRaw) {
+                            rawContainer.classList.remove('hidden');
+                            renderedContainer.classList.add('hidden');
+                            toggleModeBtn.innerText = '[ RAW ]';
+                        } else {
+                            rawContainer.classList.add('hidden');
+                            renderedContainer.classList.remove('hidden');
+                            toggleModeBtn.innerText = '[ RENDERED ]';
+                        }
+                    }, { signal });
+                }
+
+                // 3.2 Flashlight Spotlight mouse tracking
+                const flashlight = document.getElementById('flashlight-bg');
+                const handleMouseMove = (e: MouseEvent) => {
+                    if (flashlight) {
+                        document.documentElement.style.setProperty('--bg-mouse-x', `${e.clientX}px`);
+                        document.documentElement.style.setProperty('--bg-mouse-y', `${e.clientY}px`);
+                    }
+                };
+                document.addEventListener('mousemove', handleMouseMove, { passive: true, signal });
+
+                // 3.3 Interactive Formula Term Inspector
+                const mathBlocks = document.querySelectorAll('.katex-display, .katex');
+                mathBlocks.forEach((block) => {
+                    if (block.classList.contains('inspector-processed')) return;
+                    block.classList.add('inspector-processed');
+
+                    const annotation = block.querySelector('annotation[encoding="application/x-tex"]');
+                    const latex = annotation ? annotation.textContent?.trim() : block.textContent?.trim() || '';
+
+                    const formulas: Record<string, string> = {
+                        '\\Delta v = v_e \\ln \\frac{m_0}{m_f}': 'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass',
+                        '\\Delta v = v_e \\ln \\frac{m_{0}}{m_{f}}': 'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass',
+                        'F = G \\frac{m_1 m_2}{r^2}': 'F: Gravitational Force // G: Gravitational Constant // m1, m2: Masses // r: Distance',
+                        'F = G \\frac{m_{1} m_{2}}{r^{2}}': 'F: Gravitational Force // G: Gravitational Constant // m1, m2: Masses // r: Distance',
+                        'E = m c^2': 'E: Energy // m: Mass // c: Speed of Light',
+                        'PV = nRT': 'P: Pressure // V: Volume // n: Gas Amount // R: Gas Constant // T: Temperature'
+                    };
+
+                    let definition = '';
+                    for (const [key, value] of Object.entries(formulas)) {
+                        const normKey = key.replace(/\s+/g, '');
+                        const normLatex = latex.replace(/\s+/g, '');
+                        if (normLatex.includes(normKey) || normKey.includes(normLatex)) {
+                            definition = value;
+                            break;
+                        }
+                    }
+
+                    if (!definition) {
+                        if (latex.includes('\\Delta v') || latex.includes('v_e')) {
+                            definition = 'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass';
+                        } else if (latex.includes('F =') && latex.includes('G')) {
+                            definition = 'F: Gravitational Force // G: Gravitational Constant // m1, m2: Masses // r: Distance';
+                        } else {
+                            definition = 'Formula Parameters: Dynamic breakdown not loaded';
+                        }
+                    }
+
+                    const htmlBlock = block as HTMLElement;
+                    htmlBlock.style.cursor = 'pointer';
+                    htmlBlock.title = 'Click to inspect formula parameters';
+
+                    htmlBlock.addEventListener('click', (e) => {
+                        e.stopPropagation();
+
+                        const existing = document.getElementById('math-inspector-tooltip');
+                        if (existing) {
+                            existing.remove();
+                            if (existing.dataset.anchorId === htmlBlock.id) {
+                                return;
+                            }
+                        }
+
+                        if (!htmlBlock.id) {
+                            htmlBlock.id = `math-block-${Math.random().toString(36).substring(2, 9)}`;
+                        }
+
+                        const tooltip = document.createElement('div');
+                        tooltip.id = 'math-inspector-tooltip';
+                        tooltip.dataset.anchorId = htmlBlock.id;
+                        tooltip.className = 'absolute z-50 p-2.5 bg-slate-900 border border-slate-700 text-slate-300 font-mono text-[10px] rounded shadow-xl tracking-wider';
+                        tooltip.innerHTML = `[ <span class="text-(--accent)">INSPECTING</span> ] &rarr; ${definition}`;
+
+                        document.body.appendChild(tooltip);
+
+                        const rect = htmlBlock.getBoundingClientRect();
+                        tooltip.style.left = `${window.scrollX + rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
+                        tooltip.style.top = `${window.scrollY + rect.bottom + 6}px`;
+
+                        const tooltipRect = tooltip.getBoundingClientRect();
+                        if (tooltipRect.left < 10) {
+                            tooltip.style.left = '10px';
+                        } else if (tooltipRect.right > window.innerWidth - 10) {
+                            tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
+                        }
+
+                        const dismissTooltip = () => {
+                            tooltip.remove();
+                            document.removeEventListener('click', dismissTooltip);
+                        };
+                        setTimeout(() => {
+                            document.addEventListener('click', dismissTooltip);
+                        }, 10);
+                    });
+                });
 
                 // 4. Code Block Hacker Polish
                 const codeBlocks = document.querySelectorAll('pre');
                 codeBlocks.forEach((pre) => {
-                    // Prevent double processing
                     if (pre.parentElement?.classList.contains('code-wrapper-processed')) return;
 
-                    // Create wrapper
                     const wrapper = document.createElement('div');
                     wrapper.className =
                         'code-wrapper-processed relative group rounded-lg overflow-hidden border border-slate-700 bg-[#0d1117] my-6 shadow-xl';
 
-                    // Insert wrapper before pre, then move pre inside
                     pre.parentNode?.insertBefore(wrapper, pre);
 
-                    // Extract language
                     const codeBlock = pre.querySelector('code');
                     let lang = 'CODE';
                     if (pre.className.includes('language-')) {
@@ -559,7 +765,6 @@ const commitHash = id
                         if (match) lang = match[1].toUpperCase();
                     }
 
-                    // Create Terminal Header
                     const header = document.createElement('div');
                     header.className =
                         'flex items-center justify-between px-4 py-2 bg-slate-800/80 border-b border-slate-700 backdrop-blur';
@@ -580,7 +785,6 @@ const commitHash = id
                     pre.classList.add('!m-0', '!border-0', '!rounded-none');
                     wrapper.appendChild(pre);
 
-                    // Copy functionality
                     const copyBtn = header.querySelector('.copy-btn');
                     copyBtn?.addEventListener('click', async () => {
                         try {
@@ -594,11 +798,11 @@ const commitHash = id
                                 copyBtn.innerHTML = `
                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                                     COPY
-                                `;
+                                    `;
                                 copyBtn.classList.remove('!text-green-400');
                             }, 2000);
                         } catch (e) {}
-                    });
+                    }, { signal });
                 });
 
                 // 5. Global Glossary Popovers
@@ -610,7 +814,6 @@ const commitHash = id
                 );
                 let node;
                 while ((node = walk.nextNode())) {
-                    // Skip code blocks, pre, a, and already processed tags
                     const parent = node.parentElement;
                     if (
                         parent &&
@@ -623,28 +826,25 @@ const commitHash = id
                 }
 
                 const terms = Object.keys(glossary);
+                const popoversContainer = document.getElementById('glossary-popovers-container');
                 if (terms.length > 0 && textNodes.length > 0) {
-                    // Create regex for all terms
                     const regex = new RegExp(
                         `\\b(${terms.map((t) => t.replace(/[.*+?^$\{}()|[\]\\]/g, '\\$&')).join('|')})\\b`,
                         'gi'
                     );
 
+                    let matchCount = 0;
                     textNodes.forEach((textNode) => {
                         const content = textNode.nodeValue;
                         if (!content) return;
 
-                        // Check if term exists in this node
                         if (regex.test(content)) {
-                            // Reset regex index
                             regex.lastIndex = 0;
-
                             const fragment = document.createDocumentFragment();
                             let lastIndex = 0;
                             let match;
 
                             while ((match = regex.exec(content)) !== null) {
-                                // Add preceding text
                                 if (match.index > lastIndex) {
                                     fragment.appendChild(
                                         document.createTextNode(
@@ -653,42 +853,51 @@ const commitHash = id
                                     );
                                 }
 
-                                // Add the highlighted term
                                 const term = match[0];
                                 const termLower = term.toLowerCase();
                                 const definition = glossary[termLower];
+                                matchCount++;
 
-                                const span = document.createElement('span');
-                                span.className =
-                                    'relative group inline-block border-b border-dashed border-(--accent)/50 text-slate-800 dark:text-slate-200 cursor-help transition-colors hover:text-(--accent) hover:border-(--accent)';
-                                span.textContent = term;
+                                const tooltipId = `tooltip-glossary-${termLower}-${matchCount}`;
+                                const anchorName = `--tooltip-glossary-${termLower}-${matchCount}`;
 
-                                // Popover element
-                                const popover = document.createElement('span');
+                                const trigger = document.createElement('a');
+                                trigger.href = 'javascript:void(0)';
+                                trigger.className =
+                                    'relative inline-block border-b border-dashed border-(--accent)/50 text-slate-800 dark:text-slate-200 cursor-help transition-colors hover:text-(--accent) hover:border-(--accent)';
+                                trigger.setAttribute('interestfor', tooltipId);
+                                trigger.style.setProperty('anchor-name', anchorName);
+                                trigger.textContent = term;
+
+                                const popover = document.createElement('div');
+                                popover.setAttribute('popover', 'hint');
+                                popover.id = tooltipId;
                                 popover.className =
-                                    'absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs font-sans font-normal text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 text-left normal-case leading-relaxed';
+                                    'glossary-popover p-3 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs font-sans font-normal text-slate-300 text-left normal-case leading-relaxed w-64 max-w-xs z-50 transition-all pointer-events-none';
+                                popover.style.setProperty('position-anchor', anchorName);
+                                popover.style.setProperty('top', 'anchor(bottom)');
+                                popover.style.setProperty('left', 'anchor(center)');
+                                popover.style.setProperty('margin', 'unset');
+                                popover.style.setProperty('transform', 'translateX(-50%)');
+                                popover.style.setProperty('position-try', 'flip-block');
                                 popover.textContent = definition;
 
-                                // Triangle pointer
-                                const pointer = document.createElement('span');
-                                pointer.className =
-                                    'absolute top-full left-1/2 -translate-x-1/2 -mt-px border-[6px] border-transparent border-t-slate-700';
-                                popover.appendChild(pointer);
-
-                                span.appendChild(popover);
-                                fragment.appendChild(span);
+                                if (popoversContainer) {
+                                    popoversContainer.appendChild(popover);
+                                } else {
+                                    trigger.appendChild(popover);
+                                }
+                                fragment.appendChild(trigger);
 
                                 lastIndex = match.index + term.length;
                             }
 
-                            // Add remaining text
                             if (lastIndex < content.length) {
                                 fragment.appendChild(
                                     document.createTextNode(content.substring(lastIndex))
                                 );
                             }
 
-                            // Replace the original node with our fragment
                             textNode.parentNode?.replaceChild(fragment, textNode);
                         }
                     });

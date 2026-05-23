@@ -280,16 +280,20 @@
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    opacity: 0;
+    opacity: 1;
+    background: radial-gradient(
+        400px circle at var(--bg-mouse-x, 50%) var(--bg-mouse-y, 50%),
+        rgba(59, 130, 246, 0.06),
+        transparent 80%
+    );
     transition: opacity 0.5s ease;
 }
 
 .dark #flashlight-bg {
-    opacity: 1;
     background: radial-gradient(
-        800px circle at var(--bg-mouse-x, 50%) var(--bg-mouse-y, 50%),
-        rgba(59, 130, 246, 0.06),
-        transparent 55%
+        400px circle at var(--bg-mouse-x, 50%) var(--bg-mouse-y, 50%),
+        rgba(59, 130, 246, 0.15),
+        transparent 80%
     );
 }
 
@@ -429,5 +433,24 @@
 
     *::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
+    }
+}
+
+/* Glossary Popover Entrance & Exit Transitions (Tailwind v4 / Modern CSS) */
+.glossary-popover {
+    opacity: 0;
+    transform: translate(-50%, 4px) scale(0.95);
+    transition: opacity 0.15s ease-out, transform 0.15s ease-out, display 0.15s ease-out allow-discrete, overlay 0.15s ease-out allow-discrete;
+}
+
+.glossary-popover:popover-open {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+}
+
+@starting-style {
+    .glossary-popover:popover-open {
+        opacity: 0;
+        transform: translate(-50%, 4px) scale(0.95);
     }
 }
