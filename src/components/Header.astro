@@ -133,16 +133,16 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         </div>
     </nav>
     <div id="mobile-nav-backdrop" class="fixed inset-0 z-40 bg-black/50 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"></div>
-    <nav id="mobile-nav-drawer" class="fixed top-0 right-0 z-40 h-full w-72 bg-white/95 dark:bg-[#151a22]/98 backdrop-blur-xl border-l border-slate-200/80 dark:border-white/10 p-6 pt-24 shadow-2xl transition-transform duration-300 translate-x-full flex flex-col gap-6 md:hidden" aria-label="Mobile navigation">
+    <nav id="mobile-nav-drawer" class="fixed top-0 right-0 z-40 h-full w-72 bg-white dark:bg-[#151a22] border-l border-slate-200/80 dark:border-white/10 p-6 pt-24 shadow-2xl transition-transform duration-300 translate-x-full flex flex-col gap-6 md:hidden" aria-label="Mobile navigation">
         <div class="flex flex-col gap-4 font-mono">
             <div class="text-[9px] text-slate-400 dark:text-slate-500 tracking-widest uppercase border-b border-slate-200/50 dark:border-white/5 pb-2 mb-2">// DIRECTORY_INDEX</div>
-            <HeaderLink href="/" class="text-lg text-slate-600 hover:text-(--accent) dark:text-(--text-secondary) flex items-center py-2 border-b border-slate-100 dark:border-white/5">
+            <HeaderLink href="/" class="text-lg text-slate-800 hover:text-(--accent) dark:text-slate-100 dark:hover:text-(--accent) flex items-center py-2 border-b border-slate-100 dark:border-white/5">
                 <span class="text-[10px] text-(--accent) mr-3">[ 01 ]</span>Home
             </HeaderLink>
-            <HeaderLink href="/about" class="text-lg text-slate-600 hover:text-(--accent) dark:text-(--text-secondary) flex items-center py-2 border-b border-slate-100 dark:border-white/5">
+            <HeaderLink href="/about" class="text-lg text-slate-800 hover:text-(--accent) dark:text-slate-100 dark:hover:text-(--accent) flex items-center py-2 border-b border-slate-100 dark:border-white/5">
                 <span class="text-[10px] text-(--accent) mr-3">[ 02 ]</span>Personnel
             </HeaderLink>
-            <HeaderLink href="/blog" class="text-lg text-slate-600 hover:text-(--accent) dark:text-(--text-secondary) flex items-center py-2 border-b border-slate-100 dark:border-white/5">
+            <HeaderLink href="/blog" class="text-lg text-slate-800 hover:text-(--accent) dark:text-slate-100 dark:hover:text-(--accent) flex items-center py-2 border-b border-slate-100 dark:border-white/5">
                 <span class="text-[10px] text-(--accent) mr-3">[ 03 ]</span>Transmissions
             </HeaderLink>
         </div>
