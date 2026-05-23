@@ -371,6 +371,34 @@ const formatMarqueeDate = (date: Date) => {
         // 1. Isolated Web Worker Clock (runs completely off-thread)
         const clockEl = document.getElementById('ist-clock');
         if (clockEl) {
+            const formatter = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Kolkata',
+                hourCycle: 'h23',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            });
+
+            // Set initial time immediately
+            const updateTime = () => {
+                clockEl.textContent = formatter.format(new Date());
+            };
+            updateTime();
+
+            let fallbackInterval: number | null = null;
+            let workerActive = false;
+
+            const runFallback = () => {
+                if (fallbackInterval) return;
+                fallbackInterval = window.setInterval(updateTime, 1000);
+                signal.addEventListener('abort', () => {
+                    if (fallbackInterval) {
+                        clearInterval(fallbackInterval);
+                        fallbackInterval = null;
+                    }
+                });
+            };
+
             const workerCode = `
                 let formatter;
                 self.onmessage = function(e) {
@@ -389,30 +417,35 @@ const formatMarqueeDate = (date: Date) => {
                     }
                 };
             `;
+
             try {
                 const blob = new Blob([workerCode], { type: 'application/javascript' });
                 const blobURL = URL.createObjectURL(blob);
                 footerWorker = new Worker(blobURL);
                 
                 footerWorker.onmessage = (e) => {
+                    workerActive = true;
                     clockEl.textContent = e.data;
                 };
-                footerWorker.postMessage('start');
-            } catch (err) {
-                // Fallback to main-thread timing if web workers are disabled/restricted
-                const formatter = new Intl.DateTimeFormat('en-US', {
-                    timeZone: 'Asia/Kolkata',
-                    hourCycle: 'h23',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit',
-                });
-                const updateTime = () => {
-                    clockEl.textContent = formatter.format(new Date());
+
+                footerWorker.onerror = (e) => {
+                    console.warn('Footer clock worker error, falling back:', e);
+                    runFallback();
                 };
-                updateTime();
-                const fallbackInterval = window.setInterval(updateTime, 1000);
-                signal.addEventListener('abort', () => clearInterval(fallbackInterval));
+
+                footerWorker.postMessage('start');
+
+                // Safety timeout: if worker doesn't respond in 250ms, trigger fallback
+                const safetyTimeout = window.setTimeout(() => {
+                    if (!workerActive) {
+                        console.warn('Footer clock worker timed out, falling back to main thread.');
+                        runFallback();
+                    }
+                }, 250);
+                signal.addEventListener('abort', () => clearTimeout(safetyTimeout));
+            } catch (err) {
+                console.warn('Failed to initialize footer worker, using fallback:', err);
+                runFallback();
             }
         }
 
