@@ -695,7 +695,7 @@
 @keyframes blog-content-reveal {
     from {
         opacity: 0;
-        transform: translateY(16px);
+        transform: translateY(8px);
     }
     to {
         opacity: 1;
@@ -704,13 +704,14 @@
 }
 
 .blog-reveal {
-    animation: blog-content-reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity;
+    animation: blog-content-reveal 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.blog-reveal-1 { animation-delay: 150ms; }
-.blog-reveal-2 { animation-delay: 250ms; }
-.blog-reveal-3 { animation-delay: 350ms; }
-.blog-reveal-4 { animation-delay: 450ms; }
+.blog-reveal-1 { animation-delay: 60ms; }
+.blog-reveal-2 { animation-delay: 120ms; }
+.blog-reveal-3 { animation-delay: 180ms; }
+.blog-reveal-4 { animation-delay: 200ms; }
 
 @media (prefers-reduced-motion: reduce) {
     .blog-reveal,
