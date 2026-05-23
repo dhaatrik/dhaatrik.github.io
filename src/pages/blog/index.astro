@@ -40,32 +40,15 @@ const postsWithReadingTime = posts.map((post: any) => {
                     >
                         Mission <span class="text-slate-400 dark:text-slate-600">Logs</span>
                     </h1>
-                    <div class="flex flex-wrap items-center gap-6">
-                        <!-- Git Contribution Velocity Matrix -->
-                        <div class="hidden sm:flex flex-col items-end gap-1 font-mono text-[9px] text-slate-400 dark:text-slate-600 select-none">
-                            <div class="text-[8px] uppercase tracking-wider text-slate-400 dark:text-slate-500">EXECUTION_VELOCITY // ACTIVE</div>
-                            <div class="grid grid-flow-col gap-0.5" id="contrib-matrix">
-                                {Array.from({ length: 14 }).map((_, col) => (
-                                    <div class="grid gap-0.5">
-                                        {Array.from({ length: 7 }).map((_, row) => {
-                                            const val = (col * 7 + row) % 3 === 0 || (col * 3 + row * 2) % 5 === 0;
-                                            const intensity = val ? ((col * 2 + row) % 3 === 0 ? 'bg-(--accent)' : 'bg-(--accent)/40') : 'bg-slate-200 dark:bg-slate-800';
-                                            return <div class="w-1.5 h-1.5 rounded-xs bg-slate-200 dark:bg-slate-800" class:list={[intensity]} />;
-                                        })}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <a
-                            href="/rss.xml"
-                            class="magnetic-target flex items-center gap-2 rounded border border-(--accent)/20 bg-(--accent)/10 px-3 py-1.5 font-mono text-xs tracking-widest text-(--accent) transition-colors hover:bg-(--accent)/20"
-                        >
-                            <span
-                                class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent) shadow-[0_0_8px_var(--accent)]"
-                            ></span>
-                            [ RAW FEED // RSS ]
-                        </a>
-                    </div>
+                    <a
+                        href="/rss.xml"
+                        class="magnetic-target flex items-center gap-2 rounded border border-(--accent)/20 bg-(--accent)/10 px-3 py-1.5 font-mono text-xs tracking-widest text-(--accent) transition-colors hover:bg-(--accent)/20"
+                    >
+                        <span
+                            class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent) shadow-[0_0_8px_var(--accent)]"
+                        ></span>
+                        [ RAW FEED // RSS ]
+                    </a>
                 </div>
                 <p
                     class="mb-6 max-w-2xl font-mono text-sm leading-relaxed text-slate-500 dark:text-slate-400"
@@ -101,7 +84,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                     <div id="search-announcer" class="sr-only" aria-live="polite"></div>
                 </div>
 
-                <div class="relative p-6 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-500/5 backdrop-blur-xs">
+                <div class="relative p-6 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-500/5">
                     <!-- High-Science Blueprint Framing Calibration Marks -->
                     <div class="absolute top-0 left-0 -translate-x-1.5 -translate-y-1.5 font-mono text-xs text-slate-400 dark:text-slate-600 select-none pointer-events-none">+</div>
                     <div class="absolute top-0 right-0 translate-x-1.5 -translate-y-1.5 font-mono text-xs text-slate-400 dark:text-slate-600 select-none pointer-events-none">+</div>

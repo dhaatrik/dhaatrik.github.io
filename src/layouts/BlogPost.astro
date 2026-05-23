@@ -809,9 +809,12 @@ const commitHash = id
                 });
 
                 // 5. Global Glossary Popovers
+                const proseContainer = document.querySelector('.prose');
+                if (!proseContainer) return;
+
                 const textNodes: Text[] = [];
                 const walk = document.createTreeWalker(
-                    document.querySelector('.prose') as Node,
+                    proseContainer,
                     NodeFilter.SHOW_TEXT,
                     null
                 );
