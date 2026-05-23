@@ -205,7 +205,7 @@ const personSchema = JSON.stringify({
         }
     };
 
-    document.addEventListener('astro:page-load', () => {
+    const initMouseTracker = () => {
         // Ensure flashlight background exists on the page
         flashlightBg = document.getElementById('flashlight-bg');
         if (!flashlightBg) {
@@ -217,7 +217,20 @@ const personSchema = JSON.stringify({
         // Cache live collections and query targets
         cardsCollection = document.getElementsByClassName('bento-card');
         magneticTargets = Array.from(document.querySelectorAll('.magnetic-target'));
+        
+        document.removeEventListener('mousemove', onMouseMove);
         document.addEventListener('mousemove', onMouseMove, { passive: true });
+    };
+
+    const handlePageShow = (e) => {
+        if (e.persisted) {
+            initMouseTracker();
+        }
+    };
+
+    document.addEventListener('astro:page-load', () => {
+        initMouseTracker();
+        window.addEventListener('pageshow', handlePageShow);
 
         // Bind 3D Bento Card Parallax Tilt
         const cards = document.querySelectorAll('.bento-card');
@@ -274,6 +287,7 @@ const personSchema = JSON.stringify({
 
     document.addEventListener('astro:before-preparation', () => {
         document.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('pageshow', handlePageShow);
         if (spotlightRafId) {
             cancelAnimationFrame(spotlightRafId);
             spotlightRafId = null;

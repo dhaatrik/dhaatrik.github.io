@@ -499,7 +499,6 @@ const getProjectTelemetry = (id: string) => {
         <script is:inline>
             document.addEventListener('astro:page-load', () => {
                 // --- 1. Dynamic "Identity" Typewriter ---
-                const typeTarget = document.getElementById('identity-rotator');
                 let typewriterTimeout;
                 let nextDelay = 1200;
                 let identities = [];
@@ -509,6 +508,9 @@ const getProjectTelemetry = (id: string) => {
                 let currentText = '';
 
                 function typeEffect() {
+                    const target = document.getElementById('identity-rotator');
+                    if (!target) return;
+
                     const fullTxt = identities[currentIdx];
                     if (isDeleting) {
                         currentText = fullTxt.substring(0, charIdx - 1);
@@ -518,7 +520,7 @@ const getProjectTelemetry = (id: string) => {
                         charIdx++;
                     }
 
-                    typeTarget.textContent = currentText;
+                    target.textContent = currentText;
 
                     let delay = isDeleting ? 30 : 65;
 
@@ -540,7 +542,8 @@ const getProjectTelemetry = (id: string) => {
                 }
 
                 const handleVisibilityChange = () => {
-                    if (!document.hidden && !typewriterTimeout && typeTarget) {
+                    const target = document.getElementById('identity-rotator');
+                    if (!document.hidden && !typewriterTimeout && target) {
                         typewriterTimeout = setTimeout(typeEffect, nextDelay);
                     } else if (document.hidden && typewriterTimeout) {
                         clearTimeout(typewriterTimeout);
@@ -548,13 +551,36 @@ const getProjectTelemetry = (id: string) => {
                     }
                 };
 
-                if (typeTarget) {
-                    identities = JSON.parse(typeTarget.dataset.identities || '[]');
-                    charIdx = identities[0].length;
-                    currentText = identities[0];
-                    // Start typewriter
-                    typewriterTimeout = setTimeout(typeEffect, 1200);
+                const startTypewriter = () => {
+                    const target = document.getElementById('identity-rotator');
+                    if (typewriterTimeout) {
+                        clearTimeout(typewriterTimeout);
+                        typewriterTimeout = null;
+                    }
+                    if (target) {
+                        identities = JSON.parse(target.dataset.identities || '[]');
+                        if (identities.length > 0) {
+                            currentIdx = 0;
+                            charIdx = identities[0].length;
+                            currentText = identities[0];
+                            target.textContent = currentText;
+                            isDeleting = true;
+                            typewriterTimeout = setTimeout(typeEffect, 1200);
+                        }
+                    }
+                };
+
+                const handlePageShow = (e) => {
+                    if (e.persisted) {
+                        startTypewriter();
+                    }
+                };
+
+                const target = document.getElementById('identity-rotator');
+                if (target) {
+                    startTypewriter();
                     document.addEventListener('visibilitychange', handleVisibilityChange);
+                    window.addEventListener('pageshow', handlePageShow);
                 }
 
 
@@ -622,6 +648,7 @@ const getProjectTelemetry = (id: string) => {
                 document.addEventListener('astro:before-preparation', () => {
                     if (typewriterTimeout) clearTimeout(typewriterTimeout);
                     document.removeEventListener('visibilitychange', handleVisibilityChange);
+                    window.removeEventListener('pageshow', handlePageShow);
                     if (handleScroll) window.removeEventListener('scroll', handleScroll);
                 }, { once: true });
             });
