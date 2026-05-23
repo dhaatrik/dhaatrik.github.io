@@ -693,3 +693,95 @@
     padding: 0.5rem 0;
     -webkit-overflow-scrolling: touch;
 }
+
+/* Phase IV: Native Scroll-Driven Animations */
+@supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+    @keyframes progress-grow {
+        from {
+            transform: scaleX(0);
+        }
+        to {
+            transform: scaleX(1);
+        }
+    }
+
+    #progress-bar {
+        animation: progress-grow auto linear forwards;
+        animation-timeline: scroll(block root);
+    }
+
+    @keyframes header-scroll {
+        to {
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    @keyframes header-scroll-dark {
+        to {
+            background-color: rgba(11, 14, 20, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    @keyframes nav-scroll {
+        to {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+    }
+
+    #main-header {
+        animation: header-scroll auto linear forwards;
+        animation-timeline: scroll(block root);
+        animation-range: 0px 50px;
+    }
+
+    .dark #main-header {
+        animation: header-scroll-dark auto linear forwards;
+        animation-timeline: scroll(block root);
+        animation-range: 0px 50px;
+    }
+
+    #main-nav {
+        animation: nav-scroll auto linear forwards;
+        animation-timeline: scroll(block root);
+        animation-range: 0px 50px;
+    }
+}
+
+@supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes bento-reveal {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .bento-card {
+        animation: bento-reveal auto cubic-bezier(0.16, 1, 0.3, 1) both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 30%;
+    }
+}
+
+/* Scroll-Driven Animations Accessibility Fallbacks */
+@media (prefers-reduced-motion: reduce) {
+    #progress-bar {
+        animation: none !important;
+        transform: scaleX(0) !important;
+    }
+    
+    #main-header,
+    .dark #main-header,
+    #main-nav,
+    .bento-card {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

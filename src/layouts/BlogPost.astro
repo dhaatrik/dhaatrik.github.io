@@ -519,15 +519,17 @@ const commitHash = id
                     }
                 })();
 
-                // 1. Reading Progress Bar
+                // 1. Reading Progress Bar (Fallback logic for unsupported browsers)
                 const progressBar = document.getElementById('progress-bar');
+                const hasScrollTimeline = CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)');
                 const updateProgress = () => {
+                    if (hasScrollTimeline || !progressBar) return;
                     const scrollTotal =
                         document.documentElement.scrollHeight -
                         document.documentElement.clientHeight;
                     if (scrollTotal > 0) {
                         const progress = (window.scrollY / scrollTotal) * 100;
-                        if (progressBar) progressBar.style.transform = `scaleX(${progress / 100})`;
+                        progressBar.style.transform = `scaleX(${progress / 100})`;
                     }
                 };
 
@@ -825,21 +827,22 @@ const commitHash = id
                 tocObserver = new IntersectionObserver(observerCallback, observerOptions);
                 sections.forEach((sec) => tocObserver?.observe(sec));
 
-                // Maintain a single hyper-lightweight scroll listener for the reading progress bar
-                let scrollTicking = false;
-                const handleScroll = () => {
-                    if (!scrollTicking) {
-                        window.requestAnimationFrame(() => {
-                            updateProgress();
-                            scrollTicking = false;
-                        });
-                        scrollTicking = true;
-                    }
-                };
+                // Maintain a single fallback scroll listener for the reading progress bar (only if CSS timelines are unsupported)
+                if (!hasScrollTimeline && progressBar) {
+                    let scrollTicking = false;
+                    const handleScroll = () => {
+                        if (!scrollTicking) {
+                            window.requestAnimationFrame(() => {
+                                updateProgress();
+                                scrollTicking = false;
+                            });
+                            scrollTicking = true;
+                        }
+                    };
 
-                window.addEventListener('scroll', handleScroll, { passive: true, signal });
-
-                updateProgress();
+                    window.addEventListener('scroll', handleScroll, { passive: true, signal });
+                    updateProgress();
+                }
 
                 // 3.1 RAW / RENDERED Mode Toggle Action
                 const toggleModeBtn = document.getElementById('toggle-mode-btn');

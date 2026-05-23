@@ -241,21 +241,25 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         
         if (!header || !nav) return;
 
+        const hasScrollTimeline = CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)');
+
         const updateHeader = () => {
             if (signal.aborted) return;
             const currentScroll = window.scrollY;
             
-            // Shrink header and add subtle shadow on scroll
-            if (currentScroll > 50) {
-                nav.classList.remove('py-4');
-                nav.classList.add('py-2');
-                header.classList.add('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
-                header.classList.remove('bg-white/70', 'dark:bg-[#0b0e14]/70');
-            } else {
-                nav.classList.add('py-4');
-                nav.classList.remove('py-2');
-                header.classList.remove('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
-                header.classList.add('bg-white/70', 'dark:bg-[#0b0e14]/70');
+            // Shrink header and add subtle shadow on scroll (JS fallback only)
+            if (!hasScrollTimeline) {
+                if (currentScroll > 50) {
+                    nav.classList.remove('py-4');
+                    nav.classList.add('py-2');
+                    header.classList.add('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
+                    header.classList.remove('bg-white/70', 'dark:bg-[#0b0e14]/70');
+                } else {
+                    nav.classList.add('py-4');
+                    nav.classList.remove('py-2');
+                    header.classList.remove('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
+                    header.classList.add('bg-white/70', 'dark:bg-[#0b0e14]/70');
+                }
             }
 
             // Hide on scroll down, show on scroll up - more deliberate threshold
