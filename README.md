@@ -17,7 +17,6 @@
   <img src="https://img.shields.io/badge/built%20with-Astro%20v6-ff5e00?style=flat-square" alt="Built with Astro" />
   <img src="https://img.shields.io/badge/styling-Tailwind%20v4-06b6d4?style=flat-square" alt="Styled with Tailwind" />
   <img src="https://img.shields.io/badge/tests-Node%20%26%20Playwright-3178c6?style=flat-square" alt="E2E & Unit Tests" />
-  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" />
 </p>
 
 <p align="center">
@@ -53,7 +52,6 @@ It is designed to act as an interactive "Engineering Journal" for zero-to-one st
 5. [Developer Commands](#-developer-commands)
 6. [Testing Instructions](#-testing-instructions)
 7. [Contribution Guidelines](#-contribution-guidelines)
-8. [License Information](#-license-information)
 
 ---
 
@@ -181,12 +179,5 @@ Please check [CONTRIBUTING.md](CONTRIBUTING.md) to review guidelines for committ
 We require all contributors to adhere to the high standard of conduct defined in our code of conduct, prioritizing mutual respect and technical integrity.
 
 ---
-
-## 📄 License Information
-
-This repository is released under the terms of the **MIT License**.
-
-You are free to fork this codebase, make changes, and use it for your own personal websites or research journals, provided you include Dhaatrik's copyright notice and attribution.
-
----
 *End of Transmission. System is fully operational.*
+
