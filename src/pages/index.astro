@@ -596,7 +596,18 @@ const getProjectTelemetry = (id: string) => {
                     }
                 }
 
-                // --- 8. Cleanup Event Listeners on Page Transition ---
+                // --- 8. Programmatic Accessibility Focus Routing ---
+                if (document.activeElement === document.body || !document.activeElement) {
+                    const mainContent = document.getElementById('main-content');
+                    if (mainContent) {
+                        if (!mainContent.hasAttribute('tabindex')) {
+                            mainContent.setAttribute('tabindex', '-1');
+                        }
+                        mainContent.focus({ preventScroll: true });
+                    }
+                }
+
+                // --- 9. Cleanup Event Listeners on Page Transition ---
                 document.addEventListener('astro:before-preparation', () => {
                     if (typewriterTimeout) clearTimeout(typewriterTimeout);
                     document.removeEventListener('visibilitychange', handleVisibilityChange);
