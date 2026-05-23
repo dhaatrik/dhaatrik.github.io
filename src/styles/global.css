@@ -26,11 +26,20 @@
         /* Clean blue accent */
         --accent-glow: rgba(59, 130, 246, 0.3);
 
-        /* Bento Grid Constants */
-        --bento-gap: 1.5rem;
-        --bento-radius: 1.5rem;
-        --bento-radius-inner: 1rem;
-        --bento-padding: 2rem;
+        /* Bento Grid Constants (Mobile first) */
+        --bento-gap: 1rem;
+        --bento-radius: 1.25rem;
+        --bento-radius-inner: 0.75rem;
+        --bento-padding: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+        :root {
+            --bento-gap: 1.5rem;
+            --bento-radius: 1.5rem;
+            --bento-radius-inner: 1rem;
+            --bento-padding: 2rem;
+        }
     }
 
     .dark {
@@ -102,7 +111,7 @@
     .bento-grid {
         display: grid;
         gap: var(--bento-gap);
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     }
 
     .bento-card {
