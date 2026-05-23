@@ -396,10 +396,12 @@
 }
 
 /* Magnetic Transition smooth reset */
-.magnetic-target {
-    display: inline-flex;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
+@layer components {
+    .magnetic-target {
+        display: inline-flex;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+    }
 }
 
 /* Premium dynamic keyframes for scroll telemetry */

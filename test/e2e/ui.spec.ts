@@ -50,7 +50,7 @@ test.describe('Portfolio UI Interactivity', () => {
     });
 
     // Navigate to the Blog page - using a selector that is likely to work
-    const blogLink = page.locator('header a:has-text("Transmissions")');
+    const blogLink = page.locator('header a:has-text("Transmissions")').first();
     await blogLink.click();
 
     // Verify URL change

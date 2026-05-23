@@ -32,6 +32,18 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         will-change: transform;
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
+
+    /* Hamburger Line Animations */
+    #mobile-nav-toggle.open .hamburger-line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    #mobile-nav-toggle.open .hamburger-line:nth-child(2) {
+        opacity: 0;
+        transform: scale(0);
+    }
+    #mobile-nav-toggle.open .hamburger-line:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
 </style>
 
 <!-- Subtle Noise Texture -->
@@ -87,25 +99,57 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
             </div>
         </a>
         <div class="flex items-center gap-2.5 sm:gap-4 md:gap-6">
-            <HeaderLink
-                href="/"
-                class="text-[13px] sm:text-sm md:text-base text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
-            >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 01 ]</span>Home
-            </HeaderLink>
-            <HeaderLink
-                href="/about"
-                class="text-[13px] sm:text-sm md:text-base text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
-            >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 02 ]</span>Personnel
-            </HeaderLink>
-            <HeaderLink
-                href="/blog"
-                class="text-[13px] sm:text-sm md:text-base text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
-            >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 03 ]</span>Transmissions
-            </HeaderLink>
+            <div class="hidden md:flex items-center gap-6">
+                <HeaderLink
+                    href="/"
+                    class="text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
+                >
+                    <span aria-hidden="true" class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 01 ]</span>Home
+                </HeaderLink>
+                <HeaderLink
+                    href="/about"
+                    class="text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
+                >
+                    <span aria-hidden="true" class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 02 ]</span>Personnel
+                </HeaderLink>
+                <HeaderLink
+                    href="/blog"
+                    class="text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
+                >
+                    <span aria-hidden="true" class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 03 ]</span>Transmissions
+                </HeaderLink>
+            </div>
             <ThemeToggle />
+            <button
+                id="mobile-nav-toggle"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                class="magnetic-target flex flex-col justify-center items-center gap-1.5 h-9 w-9 border border-transparent rounded-full hover:bg-slate-200/60 hover:text-slate-900 dark:hover:bg-white/10 dark:hover:text-white transition-colors cursor-pointer relative z-50 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 dark:focus-visible:ring-offset-(--bg-main) md:hidden"
+            >
+                <span class="hamburger-line w-5 h-0.5 bg-current transition-all duration-300"></span>
+                <span class="hamburger-line w-5 h-0.5 bg-current transition-all duration-300"></span>
+                <span class="hamburger-line w-5 h-0.5 bg-current transition-all duration-300"></span>
+            </button>
+        </div>
+    </nav>
+    <div id="mobile-nav-backdrop" class="fixed inset-0 z-40 bg-black/50 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"></div>
+    <nav id="mobile-nav-drawer" class="fixed top-0 right-0 z-40 h-full w-72 bg-white/95 dark:bg-[#151a22]/98 backdrop-blur-xl border-l border-slate-200/80 dark:border-white/10 p-6 pt-24 shadow-2xl transition-transform duration-300 translate-x-full flex flex-col gap-6 md:hidden" aria-label="Mobile navigation">
+        <div class="flex flex-col gap-4 font-mono">
+            <div class="text-[9px] text-slate-400 dark:text-slate-500 tracking-widest uppercase border-b border-slate-200/50 dark:border-white/5 pb-2 mb-2">// DIRECTORY_INDEX</div>
+            <HeaderLink href="/" class="text-lg text-slate-600 hover:text-(--accent) dark:text-(--text-secondary) flex items-center py-2 border-b border-slate-100 dark:border-white/5">
+                <span class="text-[10px] text-(--accent) mr-3">[ 01 ]</span>Home
+            </HeaderLink>
+            <HeaderLink href="/about" class="text-lg text-slate-600 hover:text-(--accent) dark:text-(--text-secondary) flex items-center py-2 border-b border-slate-100 dark:border-white/5">
+                <span class="text-[10px] text-(--accent) mr-3">[ 02 ]</span>Personnel
+            </HeaderLink>
+            <HeaderLink href="/blog" class="text-lg text-slate-600 hover:text-(--accent) dark:text-(--text-secondary) flex items-center py-2 border-b border-slate-100 dark:border-white/5">
+                <span class="text-[10px] text-(--accent) mr-3">[ 03 ]</span>Transmissions
+            </HeaderLink>
+        </div>
+        
+        <div class="mt-auto border-t border-slate-200/50 dark:border-white/5 pt-4 font-mono text-[9px] text-slate-400 dark:text-slate-500 leading-relaxed uppercase">
+            SYS.LINK // ENCRYPTED<br/>
+            SWIPE RIGHT TO CLOSE
         </div>
     </nav>
 </header>
@@ -124,6 +168,9 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         let lastScroll = window.scrollY;
         const header = document.getElementById('main-header');
         const nav = document.getElementById('main-nav');
+        const toggleBtn = document.getElementById('mobile-nav-toggle');
+        const drawer = document.getElementById('mobile-nav-drawer');
+        const backdrop = document.getElementById('mobile-nav-backdrop');
         
         if (!header || !nav) return;
 
@@ -145,14 +192,17 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
             }
 
             // Hide on scroll down, show on scroll up - more deliberate threshold
-            if (currentScroll <= 0) {
-                header.style.transform = 'translateY(0)';
-            } else if (currentScroll > lastScroll && currentScroll > 150) {
-                // Scrolling down past threshold
-                header.style.transform = 'translateY(-100%)';
-            } else if (currentScroll < lastScroll && (lastScroll - currentScroll > 10 || currentScroll < 50)) {
-                // Scrolling up (with a small buffer to prevent jitter)
-                header.style.transform = 'translateY(0)';
+            const isDrawerOpen = toggleBtn && toggleBtn.classList.contains('open');
+            if (!isDrawerOpen) {
+                if (currentScroll <= 0) {
+                    header.style.transform = 'translateY(0)';
+                } else if (currentScroll > lastScroll && currentScroll > 150) {
+                    // Scrolling down past threshold
+                    header.style.transform = 'translateY(-100%)';
+                } else if (currentScroll < lastScroll && (lastScroll - currentScroll > 10 || currentScroll < 50)) {
+                    // Scrolling up (with a small buffer to prevent jitter)
+                    header.style.transform = 'translateY(0)';
+                }
             }
             
             lastScroll = currentScroll <= 0 ? 0 : currentScroll;
@@ -168,11 +218,92 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
 
         window.addEventListener('scroll', onScroll, { passive: true, signal });
         updateHeader();
+
+        // Hamburger Drawer Control
+        if (toggleBtn && drawer && backdrop) {
+            let startX = 0;
+            let currentX = 0;
+            let isSwiping = false;
+
+            const openMenu = () => {
+                drawer.classList.remove('translate-x-full');
+                drawer.classList.add('translate-x-0');
+                backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                backdrop.classList.add('opacity-100', 'pointer-events-auto');
+                toggleBtn.classList.add('open');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeMenu = () => {
+                drawer.classList.remove('translate-x-0');
+                drawer.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+                backdrop.classList.add('opacity-0', 'pointer-events-none');
+                toggleBtn.classList.remove('open');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                drawer.style.transform = '';
+            };
+
+            toggleBtn.addEventListener('click', () => {
+                const isOpen = toggleBtn.classList.contains('open');
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            }, { signal });
+
+            backdrop.addEventListener('click', closeMenu, { signal });
+
+            // Swipe Right to Close Drawer Gestures
+            drawer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                currentX = startX;
+                isSwiping = true;
+                drawer.style.transition = 'none';
+            }, { passive: true, signal });
+
+            drawer.addEventListener('touchmove', (e) => {
+                if (!isSwiping) return;
+                currentX = e.touches[0].clientX;
+                const diffX = currentX - startX;
+                if (diffX > 0) {
+                    drawer.style.transform = `translateX(${diffX}px)`;
+                }
+            }, { passive: true, signal });
+
+            drawer.addEventListener('touchend', () => {
+                if (!isSwiping) return;
+                isSwiping = false;
+                drawer.style.transition = '';
+                const diffX = currentX - startX;
+                if (diffX > 60) {
+                    closeMenu();
+                } else {
+                    drawer.style.transform = '';
+                }
+                startX = 0;
+                currentX = 0;
+            }, { signal });
+        }
     };
 
     document.addEventListener('astro:page-load', setupHeader);
 
     document.addEventListener('astro:before-preparation', () => {
+        // Ensure menu is closed when initiating transition to prevent overflow lock
+        const toggleBtn = document.getElementById('mobile-nav-toggle');
+        const drawer = document.getElementById('mobile-nav-drawer');
+        const backdrop = document.getElementById('mobile-nav-backdrop');
+        if (toggleBtn && toggleBtn.classList.contains('open')) {
+            drawer?.classList.add('translate-x-full');
+            backdrop?.classList.add('opacity-0', 'pointer-events-none');
+            toggleBtn.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
         if (headerAbortController) {
             headerAbortController.abort();
             headerAbortController = null;
