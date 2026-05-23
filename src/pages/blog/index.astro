@@ -123,7 +123,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                                         <div
                                             class:list={[
                                                 'bento-card-inner',
-                                                i !== 0 ? 'mb-4' : 'mb-4 md:mb-0 h-full',
+                                                i !== 0 ? 'mb-4' : 'mb-4 md:mb-0 md:h-full',
                                             ]}
                                         >
                                             {/* ⚡ Bolt: Optimize LCP by eager loading the first image (above the fold) with high priority */}
@@ -144,7 +144,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                                         <div
                                             class:list={[
                                                 'bento-card-inner relative flex items-center justify-center overflow-hidden bg-slate-100 dark:bg-slate-900',
-                                                i !== 0 ? 'mb-4 h-48' : 'mb-4 md:mb-0 h-full min-h-[300px]',
+                                                i !== 0 ? 'mb-4 h-48' : 'mb-4 md:mb-0 md:h-full h-48 md:min-h-[300px]',
                                             ]}
                                         >
                                             <div class="bg-grid-motif absolute inset-0 opacity-20 dark:opacity-50" />
