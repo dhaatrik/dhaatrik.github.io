@@ -36,7 +36,7 @@
 }
 
 @utility transition-spring {
-    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s, background-color 0.3s, border-color 0.3s, color 0.3s;
     transition-timing-function: var(--ease-spring-bounce), ease, ease, ease, ease;
 }
 
@@ -470,12 +470,18 @@
 
 
 
-/* Magnetic Transition smooth reset */
+/* GPU layer promotion for hardware-accelerated micro-interactions */
+.magnetic-target,
+.transition-spring {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+/* Magnetic Transition layout placement */
 @layer components {
     .magnetic-target {
         display: inline-flex;
-        transform-style: preserve-3d;
-        backface-visibility: hidden;
     }
 }
 
@@ -515,6 +521,11 @@
 .content-visibility-auto-post-card {
     content-visibility: auto;
     contain-intrinsic-size: auto none auto 380px;
+}
+
+.content-visibility-auto-books {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 400px;
 }
 
 /* Custom Scrollbars */
@@ -612,16 +623,176 @@
     }
 }
 
-/* Snappy View Transitions */
+/* Books Popover Entrance & Exit Transitions */
+#books-popover {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, display 0.2s ease-out allow-discrete, overlay 0.2s ease-out allow-discrete;
+}
+
+#books-popover:popover-open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@starting-style {
+    #books-popover:popover-open {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.96);
+    }
+}
+
+#books-popover::backdrop {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    transition: background 0.2s ease-out, backdrop-filter 0.2s ease-out, display 0.2s ease-out allow-discrete, overlay 0.2s ease-out allow-discrete;
+}
+
+#books-popover:popover-open::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+@starting-style {
+    #books-popover:popover-open::backdrop {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+}
+
+/* Books Grid & Subgrid Layout */
+.books-grid-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+}
+
+.book-card-row {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: center;
+}
+
+@media (min-width: 640px) {
+    .books-grid-container {
+        grid-template-columns: 1fr auto auto;
+        gap: 0.75rem;
+    }
+    
+    .book-card-row {
+        grid-column: span 3;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Premium View Transitions — Page Navigation & Blog Morphing
+   ═══════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: no-preference) {
     @view-transition {
         navigation: auto;
     }
 
-    ::view-transition-old(root),
+    /* --- Root page transition: cinematic slide-fade --- */
+    @keyframes vt-page-exit {
+        to {
+            opacity: 0;
+            transform: translateY(-8px) scale(0.99);
+            filter: blur(2px);
+        }
+    }
+
+    @keyframes vt-page-enter {
+        from {
+            opacity: 0;
+            transform: translateY(12px) scale(0.99);
+            filter: blur(2px);
+        }
+    }
+
+    ::view-transition-old(root) {
+        animation: 220ms cubic-bezier(0.4, 0, 1, 1) both vt-page-exit;
+    }
+
     ::view-transition-new(root) {
-        animation-duration: 150ms;
-        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        animation: 320ms cubic-bezier(0, 0, 0.2, 1) 80ms both vt-page-enter;
+    }
+
+    /* --- Blog post morph targets: smooth hero & title morph --- */
+    @keyframes vt-morph-expand {
+        from {
+            opacity: 0.7;
+            transform: scale(0.96);
+            border-radius: 12px;
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+            border-radius: 12px;
+        }
+    }
+
+    @keyframes vt-morph-shrink {
+        to {
+            opacity: 0.5;
+            transform: scale(0.96);
+        }
+    }
+
+    ::view-transition-old(active-post-title) {
+        animation: 250ms cubic-bezier(0.4, 0, 1, 1) both vt-morph-shrink;
+    }
+
+    ::view-transition-new(active-post-title) {
+        animation: 400ms cubic-bezier(0.16, 1, 0.3, 1) 50ms both vt-morph-expand;
+    }
+
+    ::view-transition-old(active-post-img) {
+        animation: 280ms cubic-bezier(0.4, 0, 1, 1) both vt-morph-shrink;
+        overflow: hidden;
+    }
+
+    ::view-transition-new(active-post-img) {
+        animation: 450ms cubic-bezier(0.16, 1, 0.3, 1) 30ms both vt-morph-expand;
+        overflow: hidden;
+    }
+}
+
+/* Blog post content staggered entrance */
+@keyframes blog-content-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.blog-reveal {
+    will-change: transform, opacity;
+    animation: blog-content-reveal 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.blog-reveal-1 { animation-delay: 60ms; }
+.blog-reveal-2 { animation-delay: 120ms; }
+.blog-reveal-3 { animation-delay: 180ms; }
+.blog-reveal-4 { animation-delay: 200ms; }
+
+@media (prefers-reduced-motion: reduce) {
+    .blog-reveal,
+    .blog-reveal-1,
+    .blog-reveal-2,
+    .blog-reveal-3,
+    .blog-reveal-4 {
+        animation: none;
+        opacity: 1;
+        transform: none;
     }
 }
 
@@ -685,6 +856,12 @@
     color: var(--accent);
     font-weight: bold;
 }
+
+/* CSS Custom Highlight API Styling */
+::highlight(code-focus) {
+    background-color: rgba(59, 130, 246, 0.2);
+}
+
 
 /* Responsive Tables and Equations in Blog Posts */
 .prose table {

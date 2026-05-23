@@ -128,22 +128,72 @@ const personSchema = JSON.stringify({
     let mouseY = 0;
     let cardsCollection = null;
     let flashlightBg = null;
+    let magneticTargets = [];
 
     const updateSpotlights = () => {
+        // Read Phase: Get all current layouts first to prevent layout thrashing
+        let cardsData = [];
         if (cardsCollection) {
             for (let i = 0; i < cardsCollection.length; i++) {
                 const card = cardsCollection[i];
-                const rect = card.getBoundingClientRect();
-                const x = mouseX - rect.left;
-                const y = mouseY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
+                cardsData.push({ card, rect: card.getBoundingClientRect() });
             }
         }
+
+        let magnetData = [];
+        for (let i = 0; i < magneticTargets.length; i++) {
+            const el = magneticTargets[i];
+            magnetData.push({ el, rect: el.getBoundingClientRect() });
+        }
+
+        // Write Phase: Apply CSS visual transitions on compositor thread
+        cardsData.forEach(({ card, rect }) => {
+            const x = mouseX - rect.left;
+            const y = mouseY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+
         if (flashlightBg) {
             flashlightBg.style.setProperty('--bg-mouse-x', `${mouseX}px`);
             flashlightBg.style.setProperty('--bg-mouse-y', `${mouseY}px`);
         }
+
+        magnetData.forEach(({ el, rect }) => {
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const dx = mouseX - centerX;
+            const dy = mouseY - centerY;
+            const distance = Math.hypot(dx, dy);
+
+            // Proximity pull threshold: 80px
+            const threshold = 80;
+
+            if (distance < threshold) {
+                const ratio = 1 - distance / threshold; // 0 at threshold, 1 at center
+                const pullX = dx * 0.35 * ratio;
+                const pullY = dy * 0.35 * ratio;
+                const scale = 1 + ratio * 0.06;
+
+                el.style.transition = 'none';
+                el.style.transform = `translate(${pullX}px, ${pullY}px) scale(${scale})`;
+                el.setAttribute('data-magnetic-active', 'true');
+            } else if (el.getAttribute('data-magnetic-active') === 'true') {
+                el.style.transform = 'translate(0px, 0px) scale(1)';
+                if (el.classList.contains('transition-spring')) {
+                    const supportsLinear = window.CSS && CSS.supports('animation-timing-function', 'linear(0, 1)');
+                    if (supportsLinear) {
+                        el.style.transition = 'transform 0.8s var(--ease-spring-bounce), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
+                    } else {
+                        el.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
+                    }
+                } else {
+                    el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+                }
+                el.setAttribute('data-magnetic-active', 'false');
+            }
+        });
+
         spotlightRafId = null;
     };
 
@@ -155,7 +205,7 @@ const personSchema = JSON.stringify({
         }
     };
 
-    document.addEventListener('astro:page-load', () => {
+    const initMouseTracker = () => {
         // Ensure flashlight background exists on the page
         flashlightBg = document.getElementById('flashlight-bg');
         if (!flashlightBg) {
@@ -164,48 +214,23 @@ const personSchema = JSON.stringify({
             document.body.prepend(flashlightBg);
         }
 
-        // Cache the live HTMLCollection to avoid expensive querySelectorAll calls on every tick
+        // Cache live collections and query targets
         cardsCollection = document.getElementsByClassName('bento-card');
+        magneticTargets = Array.from(document.querySelectorAll('.magnetic-target'));
+        
+        document.removeEventListener('mousemove', onMouseMove);
         document.addEventListener('mousemove', onMouseMove, { passive: true });
+    };
 
-        // Bind Magnetic Button Physics
-        const magnetics = document.querySelectorAll('.magnetic-target');
-        magnetics.forEach(el => {
-            const handleMagnetMove = (e) => {
-                const rect = el.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                const dx = e.clientX - centerX;
-                const dy = e.clientY - centerY;
+    const handlePageShow = (e) => {
+        if (e.persisted) {
+            initMouseTracker();
+        }
+    };
 
-                const px = dx * 0.35;
-                const py = dy * 0.35;
-
-                el.style.transform = `translate(${px}px, ${py}px) scale(1.06)`;
-            };
-
-            const handleMagnetLeave = () => {
-                el.style.transform = 'translate(0px, 0px) scale(1)';
-            };
-
-            el.addEventListener('mouseenter', () => {
-                el.style.transition = 'none';
-            });
-            el.addEventListener('mousemove', handleMagnetMove);
-            el.addEventListener('mouseleave', () => {
-                if (el.classList.contains('transition-spring')) {
-                    const supportsLinear = window.CSS && CSS.supports('animation-timing-function', 'linear(0, 1)');
-                    if (supportsLinear) {
-                        el.style.transition = 'transform 0.8s var(--ease-spring-bounce), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
-                    } else {
-                        el.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
-                    }
-                } else {
-                    el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
-                }
-                handleMagnetLeave();
-            });
-        });
+    document.addEventListener('astro:page-load', () => {
+        initMouseTracker();
+        window.addEventListener('pageshow', handlePageShow);
 
         // Bind 3D Bento Card Parallax Tilt
         const cards = document.querySelectorAll('.bento-card');
@@ -244,27 +269,31 @@ const personSchema = JSON.stringify({
             card.addEventListener('mouseleave', handleCardLeave);
         });
 
-        // Programmatic Accessibility Routing: Focus h1 on page load/transition
-        const h1 = document.querySelector('main h1, h1');
-        if (h1) {
-            h1.setAttribute('tabindex', '-1');
-            h1.focus({ preventScroll: true });
+        // Programmatic Accessibility Routing: Focus header or main container on page load/transition
+        const focusTarget = document.querySelector('main h1, h1, #main-content, main');
+        if (focusTarget) {
+            if (!focusTarget.hasAttribute('tabindex')) {
+                focusTarget.setAttribute('tabindex', '-1');
+            }
+            focusTarget.focus({ preventScroll: true });
         }
 
         // Clean up temporary transition names on the newly loaded page
         const activeTitle = document.querySelector('h1[style*="view-transition-name"]');
         const activeImg = document.querySelector('img[style*="view-transition-name"], div[style*="view-transition-name"]');
-        if (activeTitle) activeTitle.style.viewTransitionName = '';
-        if (activeImg) activeImg.style.viewTransitionName = '';
+        if (activeTitle) activeTitle.style.removeProperty('view-transition-name');
+        if (activeImg) activeImg.style.removeProperty('view-transition-name');
     });
 
     document.addEventListener('astro:before-preparation', () => {
         document.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('pageshow', handlePageShow);
         if (spotlightRafId) {
             cancelAnimationFrame(spotlightRafId);
             spotlightRafId = null;
         }
         cardsCollection = null;
         flashlightBg = null;
+        magneticTargets = [];
     });
 </script>
