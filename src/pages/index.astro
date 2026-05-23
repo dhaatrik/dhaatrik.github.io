@@ -231,12 +231,12 @@ const getProjectTelemetry = (id: string) => {
                         <div class="hologram-overlay"></div>
                         <div class="hologram-scanner"></div>
                         <div class="relative z-10" data-tilt-z>
-                            <div class="flex items-center justify-between border-b border-slate-200/50 pb-2 mb-4 dark:border-white/5 font-mono text-[9px] text-slate-400 dark:text-slate-500">
-                                <div class="flex items-center gap-1.5">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                                    <span>STATUS: RESEARCH_ACTIVE // CORE: RUST_WASM</span>
+                            <div class="flex items-center justify-between gap-4 border-b border-slate-200/50 pb-2 mb-4 dark:border-white/5 font-mono text-[9px] text-slate-400 dark:text-slate-500 min-w-0">
+                                <div class="flex items-center gap-1.5 min-w-0">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse shrink-0"></span>
+                                    <span class="truncate">STATUS: RESEARCH_ACTIVE // CORE: RUST_WASM</span>
                                 </div>
-                                <span class="font-bold text-(--accent)">[ CORE ]</span>
+                                <span class="font-bold text-(--accent) whitespace-nowrap shrink-0">[ CORE ]</span>
                             </div>
                             <div class="mb-4 flex items-start justify-between">
                                 <h3
@@ -291,12 +291,12 @@ const getProjectTelemetry = (id: string) => {
                                     <div class="relative z-10 flex flex-col justify-between h-full" data-tilt-z>
                                         <div>
                                             <!-- Live Telemetry Badge -->
-                                            <div class="flex items-center justify-between border-b border-slate-200/50 pb-2 mb-4 dark:border-white/5 font-mono text-[9px] text-slate-400 dark:text-slate-500">
-                                                <div class="flex items-center gap-1.5">
-                                                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                                                    <span>{telemetryStr}</span>
+                                            <div class="flex items-center justify-between gap-4 border-b border-slate-200/50 pb-2 mb-4 dark:border-white/5 font-mono text-[9px] text-slate-400 dark:text-slate-500 min-w-0">
+                                                <div class="flex items-center gap-1.5 min-w-0">
+                                                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse shrink-0"></span>
+                                                    <span class="truncate">{telemetryStr}</span>
                                                 </div>
-                                                <span class="font-bold text-(--accent)">[ OK ]</span>
+                                                <span class="font-bold text-(--accent) whitespace-nowrap shrink-0">[ OK ]</span>
                                             </div>
                                             
                                             <div class="mb-4 flex items-start justify-between">
