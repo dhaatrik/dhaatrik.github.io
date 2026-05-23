@@ -3,7 +3,7 @@
     "description": "Personal portfolio and blog of Dhaatrik",
     "author": "Dhaatrik Chowdhury",
     "type": "module",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "engines": {
         "node": ">=22.12.0"
     },
@@ -32,6 +32,7 @@
     },
     "devDependencies": {
         "@playwright/test": "^1.59.1",
+        "@types/node": "^25.9.1",
         "js-yaml": "^4.1.0",
         "prettier": "^3.8.3",
         "prettier-plugin-astro": "^0.14.1",

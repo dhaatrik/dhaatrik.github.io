@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Portfolio UI Interactivity', () => {
-
   test('Theme toggle should switch between light and dark modes', async ({ page }) => {
     await page.goto('/');
 
