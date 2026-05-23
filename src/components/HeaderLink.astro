@@ -35,3 +35,12 @@ const isActive = href === pathname || href === '/' + firstSegment;
         transition:name={isActive ? "nav-underline" : undefined}
     ></span>
 </a>
+
+<style>
+    @supports (anchor-name: --x) {
+        a:not([aria-current="page"]) span {
+            display: none;
+        }
+    }
+</style>
+

@@ -786,6 +786,12 @@
     font-weight: bold;
 }
 
+/* CSS Custom Highlight API Styling */
+::highlight(code-focus) {
+    background-color: rgba(59, 130, 246, 0.2);
+}
+
+
 /* Responsive Tables and Equations in Blog Posts */
 .prose table {
     display: block;
@@ -890,6 +896,30 @@
         animation: none !important;
         opacity: 1 !important;
         transform: none !important;
+    }
+}
+
+/* Phase V: Scroll-Driven Viewport Edge Fading */
+@media (prefers-reduced-motion: no-preference) {
+    main.scroll-edge-fade {
+        -webkit-mask-image: linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 4rem,
+            black 7rem,
+            black calc(100vh - 4rem),
+            transparent calc(100vh - 1rem)
+        );
+        mask-image: linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 4rem,
+            black 7rem,
+            black calc(100vh - 4rem),
+            transparent calc(100vh - 1rem)
+        );
+        -webkit-mask-attachment: fixed;
+        mask-attachment: fixed;
     }
 }
 

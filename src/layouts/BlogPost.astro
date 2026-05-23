@@ -64,7 +64,7 @@ const commitHash = id
         </div>
 
         <Header />
-        <main id="main-content" tabindex="-1" class="layout-container grow py-8">
+        <main id="main-content" tabindex="-1" class="layout-container grow py-8 scroll-edge-fade">
             <div class="mb-8 blog-reveal blog-reveal-1">
                 <a
                     href="/blog"
@@ -1028,6 +1028,9 @@ const commitHash = id
 
                             // Reset focus on all lines in this block
                             allLines.forEach((l) => l.classList.remove('focused-line'));
+                            if (typeof CSS !== 'undefined' && CSS.highlights) {
+                                CSS.highlights.delete('code-focus');
+                            }
 
                             if (isFocused) {
                                 wrapper.classList.remove('focus-active');
@@ -1035,6 +1038,17 @@ const commitHash = id
                             } else {
                                 wrapper.classList.add('focus-active');
                                 line.classList.add('focused-line');
+
+                                if (typeof CSS !== 'undefined' && CSS.highlights) {
+                                    try {
+                                        const range = new Range();
+                                        range.selectNodeContents(line);
+                                        const highlight = new Highlight(range);
+                                        CSS.highlights.set('code-focus', highlight);
+                                    } catch (err) {
+                                        console.error('Highlight API failed:', err);
+                                    }
+                                }
 
                                 const lineIndex = Array.from(allLines).indexOf(line) + 1;
 
