@@ -906,17 +906,13 @@
             to bottom,
             transparent 0px,
             transparent 4rem,
-            black 7rem,
-            black calc(100vh - 4rem),
-            transparent calc(100vh - 1rem)
+            black 7rem
         );
         mask-image: linear-gradient(
             to bottom,
             transparent 0px,
             transparent 4rem,
-            black 7rem,
-            black calc(100vh - 4rem),
-            transparent calc(100vh - 1rem)
+            black 7rem
         );
         -webkit-mask-attachment: fixed;
         mask-attachment: fixed;

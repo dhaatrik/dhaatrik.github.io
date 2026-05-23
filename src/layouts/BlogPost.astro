@@ -1028,8 +1028,8 @@ const commitHash = id
 
                             // Reset focus on all lines in this block
                             allLines.forEach((l) => l.classList.remove('focused-line'));
-                            if (typeof CSS !== 'undefined' && CSS.highlights) {
-                                CSS.highlights.delete('code-focus');
+                            if (typeof CSS !== 'undefined' && (CSS as any).highlights) {
+                                (CSS as any).highlights.delete('code-focus');
                             }
 
                             if (isFocused) {
@@ -1039,12 +1039,16 @@ const commitHash = id
                                 wrapper.classList.add('focus-active');
                                 line.classList.add('focused-line');
 
-                                if (typeof CSS !== 'undefined' && CSS.highlights) {
+                                if (
+                                    typeof CSS !== 'undefined' &&
+                                    (CSS as any).highlights &&
+                                    typeof (window as any).Highlight !== 'undefined'
+                                ) {
                                     try {
                                         const range = new Range();
                                         range.selectNodeContents(line);
-                                        const highlight = new Highlight(range);
-                                        CSS.highlights.set('code-focus', highlight);
+                                        const highlight = new (window as any).Highlight(range);
+                                        (CSS as any).highlights.set('code-focus', highlight);
                                     } catch (err) {
                                         console.error('Highlight API failed:', err);
                                     }
