@@ -12,7 +12,7 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog'))
 const today = new Date();
 
 let gitSha = '';
-if (import.meta.env.DEV) {
+if ((import.meta.env as any).DEV) {
     gitSha = 'DEV';
 } else {
     try {
