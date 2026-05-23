@@ -56,7 +56,7 @@ const getProjectTelemetry = (id: string) => {
         <Header />
         <main id="main-content" tabindex="-1" class="layout-container space-y-24">
             <!-- Hero Section: The Boring Section -->
-            <section class="relative flex flex-col justify-center min-h-[60vh] pt-12 pb-12 md:pb-16 max-w-3xl">
+            <section class="relative flex flex-col justify-center min-h-[60vh] pt-12 pb-24 md:pb-24 max-w-3xl">
                 <div
                     class="animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs sm:text-sm font-medium text-green-600 dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400 w-fit"
                 >
@@ -191,11 +191,22 @@ const getProjectTelemetry = (id: string) => {
                 </div>
 
                 <!-- Scroll Telemetry Indicator -->
-                <div class="absolute bottom-4 left-0 right-0 flex flex-col items-center gap-1.5 text-slate-400 dark:text-slate-500 select-none pointer-events-none md:bottom-8">
-                    <span class="font-mono text-[9px] tracking-widest uppercase opacity-75">[ SCROLL TO INITIATE ]</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="telemetry-pulse">
-                        <path d="M12 5v14M19 12l-7 7-7-7"/>
-                    </svg>
+                <div class="scroll-telemetry-container absolute bottom-4 left-0 right-0 z-20 flex flex-col items-center gap-2 select-none pointer-events-none md:bottom-8">
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-slate-900/5 dark:bg-white/5 border border-slate-950/10 dark:border-white/10 rounded-md backdrop-blur-md shadow-xs">
+                        <span class="relative flex h-1.5 w-1.5">
+                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
+                            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                        </span>
+                        <span class="font-mono text-[9px] font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400">
+                            SCROLL TO INITIATE
+                        </span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-[1px] h-3 bg-gradient-to-b from-slate-300 to-transparent dark:from-slate-700 dark:to-transparent mb-1"></div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400 dark:text-slate-500 telemetry-pulse">
+                            <path d="M12 5v14M19 12l-7 7-7-7"/>
+                        </svg>
+                    </div>
                 </div>
             </section>
 
@@ -560,10 +571,32 @@ const getProjectTelemetry = (id: string) => {
                     });
                 }
 
-                // --- 7. Cleanup Event Listeners on Page Transition ---
+                // --- 7. Scroll Telemetry Indicator Fallback ---
+                const telemetry = document.querySelector('.scroll-telemetry-container');
+                let handleScroll;
+                if (telemetry) {
+                    if (!CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)')) {
+                        handleScroll = () => {
+                            const scrollY = window.scrollY;
+                            const opacity = Math.max(0, 1 - scrollY / 120);
+                            const translate = scrollY * 0.15;
+                            telemetry.style.opacity = opacity.toString();
+                            telemetry.style.transform = `translateY(${translate}px) scale(${0.95 + opacity * 0.05})`;
+                            if (opacity === 0) {
+                                telemetry.style.visibility = 'hidden';
+                            } else {
+                                telemetry.style.visibility = 'visible';
+                            }
+                        };
+                        window.addEventListener('scroll', handleScroll, { passive: true });
+                    }
+                }
+
+                // --- 8. Cleanup Event Listeners on Page Transition ---
                 document.addEventListener('astro:before-preparation', () => {
                     if (typewriterTimeout) clearTimeout(typewriterTimeout);
                     document.removeEventListener('visibilitychange', handleVisibilityChange);
+                    if (handleScroll) window.removeEventListener('scroll', handleScroll);
                 }, { once: true });
             });
         </script>
