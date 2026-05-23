@@ -254,8 +254,8 @@ const personSchema = JSON.stringify({
         // Clean up temporary transition names on the newly loaded page
         const activeTitle = document.querySelector('h1[style*="view-transition-name"]');
         const activeImg = document.querySelector('img[style*="view-transition-name"], div[style*="view-transition-name"]');
-        if (activeTitle) activeTitle.style.viewTransitionName = '';
-        if (activeImg) activeImg.style.viewTransitionName = '';
+        if (activeTitle) activeTitle.style.removeProperty('view-transition-name');
+        if (activeImg) activeImg.style.removeProperty('view-transition-name');
     });
 
     document.addEventListener('astro:before-preparation', () => {

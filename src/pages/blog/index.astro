@@ -393,10 +393,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                         const titleEl = card.querySelector('h2') as HTMLElement | null;
                         const imgEl = card.querySelector('img, .bento-card-inner') as HTMLElement | null;
                         if (titleEl) {
-                            titleEl.style.viewTransitionName = 'active-post-title';
+                            titleEl.style.setProperty('view-transition-name', 'active-post-title');
                         }
                         if (imgEl) {
-                            imgEl.style.viewTransitionName = 'active-post-img';
+                            imgEl.style.setProperty('view-transition-name', 'active-post-img');
                         }
                     }, { signal });
                 });
