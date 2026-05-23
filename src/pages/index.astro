@@ -407,7 +407,7 @@ const getProjectTelemetry = (id: string) => {
                                             <!-- Tags -->
                                             {post.data.tags && post.data.tags.length > 0 && (
                                                 <div class="flex flex-wrap gap-1.5 mt-2">
-                                                    {post.data.tags.slice(0, 3).map((tag) => (
+                                                    {post.data.tags.slice(0, 3).map((tag: string) => (
                                                         <span class="rounded-xs bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 font-mono text-[9px] px-1.5 py-0.5">
                                                             #{tag.replace(/\s+/g, '').toLowerCase()}
                                                         </span>
@@ -434,15 +434,15 @@ const getProjectTelemetry = (id: string) => {
                                                 </div>
                                                 <!-- Simulated Barcode -->
                                                 <div class="hidden sm:flex items-center gap-0.5 h-6 opacity-40 group-hover:opacity-75 transition-opacity" aria-hidden="true">
-                                                    <div class="w-[1px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-px h-full bg-slate-800 dark:bg-white"></div>
                                                     <div class="w-[2px] h-full bg-slate-800 dark:bg-white"></div>
-                                                    <div class="w-[1px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-px h-full bg-slate-800 dark:bg-white"></div>
                                                     <div class="w-[3px] h-full bg-slate-800 dark:bg-white"></div>
-                                                    <div class="w-[1px] h-full bg-slate-800 dark:bg-white"></div>
-                                                    <div class="w-[1px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-px h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-px h-full bg-slate-800 dark:bg-white"></div>
                                                     <div class="w-[2px] h-full bg-slate-800 dark:bg-white"></div>
                                                     <div class="w-[4px] h-full bg-slate-800 dark:bg-white"></div>
-                                                    <div class="w-[1px] h-full bg-slate-800 dark:bg-white"></div>
+                                                    <div class="w-px h-full bg-slate-800 dark:bg-white"></div>
                                                 </div>
                                             </div>
                                         </div>

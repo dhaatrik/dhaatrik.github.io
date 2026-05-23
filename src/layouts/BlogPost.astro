@@ -208,7 +208,7 @@ const commitHash = id
                     </div>
 
                     <div id="raw-markdown-container" class="hidden font-mono text-sm leading-relaxed text-slate-800 dark:text-slate-300 bg-[#0d1117] border border-slate-700 rounded-lg p-2 overflow-x-auto my-6">
-                        <Code code={rawContent} lang="markdown" theme="github-dark" class="!bg-transparent !p-4" />
+                        <Code code={rawContent} lang="markdown" theme="github-dark" class="bg-transparent! p-4!" />
                     </div>
 
                     <!-- Transmission Export CTA -->
@@ -475,12 +475,15 @@ const commitHash = id
                 // Load polyfills if necessary
                 try {
                     if (!HTMLElement.prototype.hasOwnProperty('popover')) {
+                        // @ts-ignore
                         await import('https://unpkg.com/@oddbird/popover-polyfill@latest');
                     }
                     if (!HTMLButtonElement.prototype.hasOwnProperty('interestForElement')) {
+                        // @ts-ignore
                         await import('https://unpkg.com/interestfor@latest');
                     }
                     if (!('anchorName' in document.documentElement.style)) {
+                        // @ts-ignore
                         await import('https://unpkg.com/@oddbird/css-anchor-positioning');
                     }
                 } catch (err) {
@@ -665,7 +668,7 @@ const commitHash = id
                     block.classList.add('inspector-processed');
 
                     const annotation = block.querySelector('annotation[encoding="application/x-tex"]');
-                    const latex = annotation ? annotation.textContent?.trim() : block.textContent?.trim() || '';
+                    const latex = (annotation ? annotation.textContent?.trim() : block.textContent?.trim()) || '';
 
                     const formulas: Record<string, string> = {
                         '\\Delta v = v_e \\ln \\frac{m_0}{m_f}': 'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass',

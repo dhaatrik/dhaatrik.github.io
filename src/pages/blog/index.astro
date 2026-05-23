@@ -9,11 +9,11 @@ import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+    (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
 // ⚡ Bolt: Optimize reading time calculation by using raw body instead of full AST rendering
-const postsWithReadingTime = posts.map((post) => {
+const postsWithReadingTime = posts.map((post: any) => {
     // `post.body` contains the raw uncompiled markdown string (available in Astro 5 glob loader)
     const body = post.body || '';
     return {
@@ -117,7 +117,7 @@ const postsWithReadingTime = posts.map((post) => {
 
                     <div class="grid gap-8 md:grid-cols-2" id="logs-grid">
                         {
-                            postsWithReadingTime.map((post, i) => (
+                            postsWithReadingTime.map((post: any, i: number) => (
                                 <a
                                     href={`/blog/${post.id}/`}
                                     data-astro-prefetch="hover"
