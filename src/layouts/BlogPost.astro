@@ -603,14 +603,14 @@ const commitHash = id
                         // Extract content from `#rendered-content-container`
                         const renderedContent = document.getElementById('rendered-content-container')?.innerHTML || '';
                         
-                        // Build full offline HTML package
-                        const offlineHtml = `<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${postTitle} - Offline Transmission</title>
-        <style>
+                        // Build full offline HTML package with escaped brackets to prevent Astro build failures
+                        const offlineHtml = `\x3c!doctype html\x3e
+\x3chtml lang="en"\x3e
+    \x3chead\x3e
+        \x3cmeta charset="utf-8"\x3e
+        \x3cmeta name="viewport" content="width=device-width, initial-scale=1.0"\x3e
+        \x3ctitle\x3e${postTitle} - Offline Transmission\x3c/title\x3e
+        \x3cstyle\x3e
             :root {
                 --bg-main: #f8fafc;
                 --text-primary: #0f172a;
@@ -706,35 +706,35 @@ const commitHash = id
                 font-size: 12px;
                 color: #64748b;
             }
-        </style>
-    </head>
-    <body>
-        <div class="header-block">
-            <h1>${postTitle}</h1>
-            <p style="margin: 0 0 16px 0; color: #64748b;">${postDesc}</p>
-            <div class="meta-grid">
-                <div>
-                    <div class="meta-label">SOURCE</div>
-                    <div class="meta-val">VELLOR TRANSMISSION LOG</div>
-                </div>
-                <div>
-                    <div class="meta-label">EXPORT_TIME</div>
-                    <div class="meta-val">${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC</div>
-                </div>
-                <div>
-                    <div class="meta-label">INTEGRITY</div>
-                    <div class="meta-val">AIR-GAPPED ARCHIVE</div>
-                </div>
-            </div>
-        </div>
-        <div class="prose">
+        \x3c/style\x3e
+    \x3c/head\x3e
+    \x3cbody\x3e
+        \x3cdiv class="header-block"\x3e
+            \x3ch1\x3e${postTitle}\x3c/h1\x3e
+            \x3cp style="margin: 0 0 16px 0; color: #64748b;"\x3e${postDesc}\x3c/p\x3e
+            \x3cdiv class="meta-grid"\x3e
+                \x3cdiv\x3e
+                    \x3cdiv class="meta-label"\x3eSOURCE\x3c/div\x3e
+                    \x3cdiv class="meta-val"\x3eVELLOR TRANSMISSION LOG\x3c/div\x3e
+                \x3c/div\x3e
+                \x3cdiv\x3e
+                    \x3cdiv class="meta-label"\x3eEXPORT_TIME\x3c/div\x3e
+                    \x3cdiv class="meta-val"\x3e${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC\x3c/div\x3e
+                \x3c/div\x3e
+                \x3cdiv\x3e
+                    \x3cdiv class="meta-label"\x3eINTEGRITY\x3c/div\x3e
+                    \x3cdiv class="meta-val"\x3eAIR-GAPPED ARCHIVE\x3c/div\x3e
+                \x3c/div\x3e
+            \x3c/div\x3e
+        \x3c/div\x3e
+        \x3cdiv class="prose"\x3e
             ${renderedContent}
-        </div>
-        <div class="footer">
+        \x3c/div\x3e
+        \x3cdiv class="footer"\x3e
             [ OFFLINE ARCHIVE GENERATED SUCCESSFULLY // DATA SOVEREIGN ]
-        </div>
-    </body>
-</html>`;
+        \x3c/div\x3e
+    \x3c/body\x3e
+\x3c/html\x3e`;
                         
                         const blob = new Blob([offlineHtml], { type: 'text/html' });
                         const url = URL.createObjectURL(blob);
