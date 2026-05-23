@@ -32,6 +32,18 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         will-change: transform;
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
+
+    /* Hamburger Line Animations */
+    #mobile-nav-toggle.open .hamburger-line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    #mobile-nav-toggle.open .hamburger-line:nth-child(2) {
+        opacity: 0;
+        transform: scale(0);
+    }
+    #mobile-nav-toggle.open .hamburger-line:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
 </style>
 
 <!-- Subtle Noise Texture -->
@@ -86,37 +98,128 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                 </div>
             </div>
         </a>
-        <div class="flex items-center gap-4 sm:gap-6">
-            <HeaderLink
-                href="/"
-                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
-            >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 01 ]</span>Home
-            </HeaderLink>
-            <HeaderLink
-                href="/about"
-                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
-            >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 02 ]</span>Personnel
-            </HeaderLink>
-            <HeaderLink
-                href="/blog"
-                class="text-sm sm:text-base text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
-            >
-                <span aria-hidden="true" class="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 03 ]</span>Transmissions
-            </HeaderLink>
-            <div class="h-5 w-px bg-slate-200 dark:bg-white/10 mx-1"></div>
-            <div id="ping-indicator" class="flex items-center gap-1.5 font-mono text-[9px] tracking-widest text-emerald-500 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded select-none">
-                <span class="relative flex h-1.5 w-1.5">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-                </span>
-                <span id="ping-status-text">ONLINE</span>
+        <div class="flex items-center gap-2.5 sm:gap-4 md:gap-6">
+            <div class="hidden md:flex items-center gap-6">
+                <HeaderLink
+                    href="/"
+                    class="text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
+                >
+                    <span aria-hidden="true" class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 01 ]</span>Home
+                </HeaderLink>
+                <HeaderLink
+                    href="/about"
+                    class="text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
+                >
+                    <span aria-hidden="true" class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 02 ]</span>Personnel
+                </HeaderLink>
+                <HeaderLink
+                    href="/blog"
+                    class="text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
+                >
+                    <span aria-hidden="true" class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 03 ]</span>Transmissions
+                </HeaderLink>
             </div>
             <ThemeToggle />
+            <button
+                id="mobile-nav-toggle"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                class="magnetic-target flex flex-col justify-center items-center gap-1.5 h-9 w-9 border border-transparent rounded-full hover:bg-slate-200/60 hover:text-slate-900 dark:hover:bg-white/10 dark:hover:text-white transition-colors cursor-pointer relative z-50 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 dark:focus-visible:ring-offset-(--bg-main) md:hidden"
+            >
+                <span class="hamburger-line w-5 h-0.5 bg-current transition-all duration-300"></span>
+                <span class="hamburger-line w-5 h-0.5 bg-current transition-all duration-300"></span>
+                <span class="hamburger-line w-5 h-0.5 bg-current transition-all duration-300"></span>
+            </button>
         </div>
     </nav>
 </header>
+
+<div id="mobile-nav-backdrop" class="fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"></div>
+
+<nav id="mobile-nav-drawer" class="fixed top-0 right-0 z-40 h-full w-72 backdrop-blur-xl bg-white/90 dark:bg-[#151a22]/90 border-l border-slate-200/50 dark:border-white/10 p-6 pt-24 shadow-2xl transition-transform duration-300 translate-x-full flex flex-col gap-6 md:hidden" aria-label="Mobile navigation">
+    <!-- Decorative Grid Motif -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.02] dark:opacity-[0.04] bg-grid-motif"></div>
+
+    <div class="flex flex-col gap-3 font-mono relative z-10">
+        <div class="text-[9px] text-slate-400 dark:text-slate-500 tracking-widest uppercase border-b border-slate-200/50 dark:border-white/5 pb-2 mb-2">// DIRECTORY_INDEX</div>
+        
+        {
+            [
+                { href: "/", label: "Home", index: "[ 01 ]", isActive: cleanPath === "" || cleanPath === "/" },
+                { href: "/about", label: "Personnel", index: "[ 02 ]", isActive: cleanPath.startsWith("/about") },
+                { href: "/blog", label: "Transmissions", index: "[ 03 ]", isActive: cleanPath.startsWith("/blog") }
+            ].map((item) => (
+                <a
+                    href={item.href}
+                    data-astro-prefetch="hover"
+                    class:list={[
+                        "group/link relative flex items-center justify-between py-2.5 px-3.5 rounded-lg transition-all duration-300 text-sm outline-none focus-visible:ring-2 focus-visible:ring-(--accent)",
+                        item.isActive
+                            ? "text-(--accent) bg-(--accent)/10 dark:bg-(--accent)/15 font-semibold"
+                            : "text-slate-700 dark:text-slate-300 hover:text-(--accent) dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-white/5"
+                    ]}
+                >
+                    {item.isActive && (
+                        <span class="absolute left-0 top-2 bottom-2 w-1 rounded-r-md bg-(--accent) shadow-[0_0_8px_var(--accent)]" />
+                    )}
+                    <div class="flex items-center gap-3">
+                        <span class:list={[
+                            "text-[10px] transition-colors",
+                            item.isActive ? "text-(--accent)" : "text-slate-400 dark:text-slate-500 group-hover/link:text-(--accent)"
+                        ]}>
+                            {item.index}
+                        </span>
+                        <span class="tracking-wide">{item.label}</span>
+                    </div>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class:list={[
+                            "transition-transform duration-300",
+                            item.isActive ? "text-(--accent) translate-x-0" : "text-slate-400 dark:text-slate-600 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0"
+                        ]}
+                    >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                </a>
+            ))
+        }
+    </div>
+    
+    <!-- Telemetry sci-fi panel in footer -->
+    <div class="mt-auto border-t border-slate-200/60 dark:border-white/10 pt-5 flex flex-col gap-4 font-mono text-[10px] text-slate-500 dark:text-slate-400 relative z-10">
+        <div class="flex items-center justify-between">
+            <span class="tracking-wider uppercase text-[9px] text-slate-400 dark:text-slate-500">SYS.STATUS</span>
+            <div class="flex items-center gap-1.5 text-green-600 dark:text-green-400 font-semibold">
+                <span class="relative flex h-1.5 w-1.5">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+                    <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-500" />
+                </span>
+                <span class="tracking-widest uppercase text-[9px]">ACTIVE</span>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-1 border-t border-dashed border-slate-200/60 dark:border-white/5 pt-3">
+            <span class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">SYS.LOCATION</span>
+            <span id="mobile-telemetry-path" class="text-(--accent) font-semibold truncate leading-none lowercase tracking-wide">
+                {displayPath}
+            </span>
+        </div>
+
+        <div class="border-t border-slate-200/60 dark:border-white/10 pt-3 flex items-center justify-between text-[9px] text-slate-400 dark:text-slate-500 tracking-wider">
+            <span>SWIPE RIGHT TO CLOSE</span>
+            <span>[ ESC ]</span>
+        </div>
+    </div>
+</nav>
 
 <script>
     let headerAbortController: AbortController | null = null;
@@ -132,6 +235,9 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         let lastScroll = window.scrollY;
         const header = document.getElementById('main-header');
         const nav = document.getElementById('main-nav');
+        const toggleBtn = document.getElementById('mobile-nav-toggle');
+        const drawer = document.getElementById('mobile-nav-drawer');
+        const backdrop = document.getElementById('mobile-nav-backdrop');
         
         if (!header || !nav) return;
 
@@ -153,14 +259,17 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
             }
 
             // Hide on scroll down, show on scroll up - more deliberate threshold
-            if (currentScroll <= 0) {
-                header.style.transform = 'translateY(0)';
-            } else if (currentScroll > lastScroll && currentScroll > 150) {
-                // Scrolling down past threshold
-                header.style.transform = 'translateY(-100%)';
-            } else if (currentScroll < lastScroll && (lastScroll - currentScroll > 10 || currentScroll < 50)) {
-                // Scrolling up (with a small buffer to prevent jitter)
-                header.style.transform = 'translateY(0)';
+            const isDrawerOpen = toggleBtn && toggleBtn.classList.contains('open');
+            if (!isDrawerOpen) {
+                if (currentScroll <= 0) {
+                    header.style.transform = 'translateY(0)';
+                } else if (currentScroll > lastScroll && currentScroll > 150) {
+                    // Scrolling down past threshold
+                    header.style.transform = 'translateY(-100%)';
+                } else if (currentScroll < lastScroll && (lastScroll - currentScroll > 10 || currentScroll < 50)) {
+                    // Scrolling up (with a small buffer to prevent jitter)
+                    header.style.transform = 'translateY(0)';
+                }
             }
             
             lastScroll = currentScroll <= 0 ? 0 : currentScroll;
@@ -175,47 +284,112 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         };
 
         window.addEventListener('scroll', onScroll, { passive: true, signal });
-        // Initial check
         updateHeader();
 
-        // Active Ping Status Indicator
-        const pingIndicator = document.getElementById('ping-indicator');
-        const pingText = document.getElementById('ping-status-text');
-        const pingDot = pingIndicator?.querySelector('.relative.flex.h-1.5.w-1.5');
-        
-        const updateOnlineStatus = () => {
-            if (window.navigator.onLine) {
-                if (pingIndicator) {
-                    pingIndicator.className = "flex items-center gap-1.5 font-mono text-[9px] tracking-widest text-emerald-500 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded select-none";
-                }
-                if (pingText) pingText.textContent = "ONLINE";
-                if (pingDot) {
-                    pingDot.innerHTML = `
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-                    `;
-                }
-            } else {
-                if (pingIndicator) {
-                    pingIndicator.className = "flex items-center gap-1.5 font-mono text-[9px] tracking-widest text-rose-500 bg-rose-500/10 border border-rose-500/20 px-2 py-0.5 rounded select-none";
-                }
-                if (pingText) pingText.textContent = "OFFLINE";
-                if (pingDot) {
-                    pingDot.innerHTML = `
-                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-rose-500"></span>
-                    `;
-                }
-            }
-        };
+        // Hamburger Drawer Control
+        if (toggleBtn && drawer && backdrop) {
+            let startX = 0;
+            let currentX = 0;
+            let isSwiping = false;
 
-        window.addEventListener('online', updateOnlineStatus, { signal });
-        window.addEventListener('offline', updateOnlineStatus, { signal });
-        updateOnlineStatus();
+            const openMenu = () => {
+                drawer.classList.remove('translate-x-full');
+                drawer.classList.add('translate-x-0');
+                backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                backdrop.classList.add('opacity-100', 'pointer-events-auto');
+                toggleBtn.classList.add('open');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeMenu = () => {
+                drawer.classList.remove('translate-x-0');
+                drawer.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+                backdrop.classList.add('opacity-0', 'pointer-events-none');
+                toggleBtn.classList.remove('open');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                drawer.style.transform = '';
+            };
+
+            toggleBtn.addEventListener('click', () => {
+                const isOpen = toggleBtn.classList.contains('open');
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            }, { signal });
+
+            backdrop.addEventListener('click', closeMenu, { signal });
+
+            // Swipe Right to Close Drawer Gestures
+            drawer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                currentX = startX;
+                isSwiping = true;
+                drawer.style.transition = 'none';
+            }, { passive: true, signal });
+
+            drawer.addEventListener('touchmove', (e) => {
+                if (!isSwiping) return;
+                currentX = e.touches[0].clientX;
+                const diffX = currentX - startX;
+                if (diffX > 0) {
+                    drawer.style.transform = `translateX(${diffX}px)`;
+                }
+            }, { passive: true, signal });
+
+            drawer.addEventListener('touchend', () => {
+                if (!isSwiping) return;
+                isSwiping = false;
+                drawer.style.transition = '';
+                const diffX = currentX - startX;
+                if (diffX > 60) {
+                    closeMenu();
+                } else {
+                    drawer.style.transform = '';
+                }
+                startX = 0;
+                currentX = 0;
+            }, { signal });
+
+            // ESC key to close drawer
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key === 'Escape' && toggleBtn.classList.contains('open')) {
+                    closeMenu();
+                }
+            };
+            document.addEventListener('keydown', handleKeyDown, { signal });
+
+            // Synchronize SPA path name in the telemetry log
+            const updateTelemetryPath = () => {
+                const telemetryPathEl = document.getElementById('mobile-telemetry-path');
+                if (telemetryPathEl) {
+                    const pathname = window.location.pathname;
+                    const cleanPath = pathname.replace(/\/$/, "");
+                    telemetryPathEl.textContent = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
+                }
+            };
+            updateTelemetryPath();
+        }
     };
 
     document.addEventListener('astro:page-load', setupHeader);
 
     document.addEventListener('astro:before-preparation', () => {
+        // Ensure menu is closed when initiating transition to prevent overflow lock
+        const toggleBtn = document.getElementById('mobile-nav-toggle');
+        const drawer = document.getElementById('mobile-nav-drawer');
+        const backdrop = document.getElementById('mobile-nav-backdrop');
+        if (toggleBtn && toggleBtn.classList.contains('open')) {
+            drawer?.classList.add('translate-x-full');
+            backdrop?.classList.add('opacity-0', 'pointer-events-none');
+            toggleBtn.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
         if (headerAbortController) {
             headerAbortController.abort();
             headerAbortController = null;

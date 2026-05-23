@@ -56,146 +56,159 @@ const getProjectTelemetry = (id: string) => {
         <Header />
         <main id="main-content" tabindex="-1" class="layout-container space-y-24">
             <!-- Hero Section: The Boring Section -->
-            <section class="relative flex flex-col justify-center min-h-[78vh] pt-12 pb-24 md:pb-28 max-w-3xl">
-                <div
-                    class="animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-sm font-medium text-green-600 dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400"
-                >
-                    <span class="relative flex h-2 w-2">
-                        <span
-                            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75 dark:bg-green-400"
-                        ></span>
-                        <span
-                            class="relative inline-flex h-2 w-2 rounded-full bg-green-500 dark:bg-green-400"
-                        ></span>
-                    </span>
-                    Researching and Developing AI driven Agriculture Solutions
-                </div>
-                <h1
-                    class="animate-fade-in-up mb-6 text-4xl leading-tight font-bold text-slate-900 delay-100 md:text-5xl lg:text-6xl dark:text-white"
-                >
-                    <span id="dynamic-greeting">Hey!</span> I'm Dhaatrik. <br />
-                    <span
-                        id="identity-rotator"
-                        class="font-mono mt-2 block bg-linear-to-r from-blue-600 to-purple-500 bg-clip-text text-2xl font-bold text-transparent md:text-3xl dark:from-blue-400 dark:to-purple-400 min-h-[1.5em]"
-                        data-identities='["First-Principles Thinker.", "AI Systems Architect.", "Aerospace Enthusiast.", "Open-Source Builder."]'
-                    >First-Principles Thinker.</span>
-                </h1>
-                <script is:inline>
-                    const hour = new Date().getHours();
-                    let greeting = 'Good evening,';
-                    if (hour < 12) greeting = 'Good morning,';
-                    else if (hour < 18) greeting = 'Good afternoon,';
-                    const el = document.getElementById('dynamic-greeting');
-                    if (el) el.innerText = greeting;
-                </script>
-                <p
-                    class="animate-fade-in-up mb-8 text-lg leading-relaxed text-slate-600 delay-200 md:text-xl dark:text-(--text-secondary)"
-                >
-                    I'm a 26-year-old entrepreneur and developer from India, building the next
-                    generation of tech-driven solutions. I believe that best products come from
-                    understanding the absolute fundamentals.
-                </p>
-
-                <!-- CTA Hierarchy -->
-                <div class="animate-fade-in-up flex flex-wrap items-center gap-6 delay-300">
-                    <a
-                        href="/about"
-                        data-astro-prefetch="hover"
-                        class="magnetic-target group inline-flex items-center gap-2 rounded-full bg-(--accent) px-6 py-2.5 font-medium text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] focus-visible:scale-105 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
+            <section class="relative flex flex-col justify-center min-h-[60vh] pt-12 pb-28 md:pb-28 w-full">
+                <div class="max-w-3xl flex flex-col justify-center w-full">
+                    <div
+                        class="animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs sm:text-sm font-medium text-green-600 dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400 w-fit"
                     >
-                        View Mission Dossier
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="transition-transform group-hover:translate-x-1"
-                            aria-hidden="true"
-                        >
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </a>
-
-                    <div class="flex items-center gap-3">
-                        <!-- X/Twitter Link -->
-                        <a
-                            href="https://x.com/dhaatrik"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
-                            aria-label="Follow on X (Twitter)"
-                            title="Follow on X"
-                        >
-                            <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="currentColor"
-                                ><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg
-                            >
-                        </a>
-                        <!-- GitHub Link -->
-                        <a
-                            href="https://github.com/dhaatrik"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
-                            aria-label="View GitHub"
-                            title="View GitHub"
-                        >
-                            <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16" fill="currentColor"
-                                ><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg
-                            >
-                        </a>
-                        <!-- LinkedIn Link -->
-                        <a
-                            href="https://linkedin.com/in/dhaatrik"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
-                            aria-label="View LinkedIn"
-                            title="View LinkedIn"
-                        >
-                            <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="currentColor"
-                                ><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg
-                            >
-                        </a>
+                        <span class="relative flex h-2 w-2 shrink-0">
+                            <span
+                                class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75 dark:bg-green-400"
+                            ></span>
+                            <span
+                                class="relative inline-flex h-2 w-2 rounded-full bg-green-500 dark:bg-green-400"
+                            ></span>
+                        </span>
+                        Researching & Developing AI-Driven Agriculture Solutions
                     </div>
-                </div>
-
-                <!-- Built With Badges -->
-                <div
-                    class="animate-fade-in-up mt-8 flex flex-col items-start gap-3 opacity-80 delay-400"
-                >
-                    <span
-                        class="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400"
+                    <h1
+                        class="animate-fade-in-up mb-6 text-4xl leading-tight font-bold text-slate-900 delay-100 md:text-5xl lg:text-6xl dark:text-white"
                     >
-                        Building primarily with:
-                    </span>
-                    <div class="flex flex-wrap items-center gap-3">
-                        {
-                            premiumLineup.map((tech) => (
-                                <img
-                                    src={tech.src}
-                                    alt={tech.name}
-                                    title={tech.name}
-                                    class="h-6 rounded-sm opacity-80 transition-opacity hover:opacity-100 dark:opacity-70 dark:hover:opacity-100"
-                                    loading="eager"
-                                    fetchpriority="high"
-                                />
-                            ))
-                        }
+                        <span id="dynamic-greeting">Hey!</span> I'm Dhaatrik. <br />
+                        <span
+                            id="identity-rotator"
+                            class="font-mono mt-2 block bg-linear-to-r from-blue-600 to-purple-500 bg-clip-text text-2xl font-bold text-transparent md:text-3xl dark:from-blue-400 dark:to-purple-400 min-h-[1.5em]"
+                            data-identities='["First-Principles Thinker.", "AI Systems Architect.", "Aerospace Enthusiast.", "Open-Source Builder."]'
+                        >First-Principles Thinker.</span>
+                    </h1>
+                    <script is:inline>
+                        const hour = new Date().getHours();
+                        let greeting = 'Good evening,';
+                        if (hour < 12) greeting = 'Good morning,';
+                        else if (hour < 18) greeting = 'Good afternoon,';
+                        const el = document.getElementById('dynamic-greeting');
+                        if (el) el.innerText = greeting;
+                    </script>
+                    <p
+                        class="animate-fade-in-up mb-8 text-lg leading-relaxed text-slate-600 delay-200 md:text-xl dark:text-(--text-secondary)"
+                    >
+                        I'm a 26-year-old entrepreneur and developer from India, building the next
+                        generation of tech-driven solutions. I believe that best products come from
+                        understanding the absolute fundamentals.
+                    </p>
+
+                    <!-- CTA Hierarchy -->
+                    <div class="animate-fade-in-up flex flex-wrap items-center gap-6 delay-300">
+                        <a
+                            href="/about"
+                            data-astro-prefetch="hover"
+                            class="magnetic-target group inline-flex items-center gap-2 rounded-full bg-(--accent) px-6 py-2.5 font-medium text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] focus-visible:scale-105 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
+                        >
+                            View Mission Dossier
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="transition-transform group-hover:translate-x-1"
+                                aria-hidden="true"
+                            >
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </a>
+
+                        <div class="flex items-center gap-3">
+                            <!-- X/Twitter Link -->
+                            <a
+                                href="https://x.com/dhaatrik"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
+                                aria-label="Follow on X (Twitter)"
+                                title="Follow on X"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="currentColor"
+                                    ><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg
+                                >
+                            </a>
+                            <!-- GitHub Link -->
+                            <a
+                                href="https://github.com/dhaatrik"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
+                                aria-label="View GitHub"
+                                title="View GitHub"
+                            >
+                                <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16" fill="currentColor"
+                                    ><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg
+                                >
+                            </a>
+                            <!-- LinkedIn Link -->
+                            <a
+                                href="https://linkedin.com/in/dhaatrik"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="magnetic-target group flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-all hover:scale-110 hover:text-(--accent) hover:border-(--accent) dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:border-white/20"
+                                aria-label="View LinkedIn"
+                                title="View LinkedIn"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="currentColor"
+                                    ><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg
+                                >
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Built With Badges -->
+                    <div
+                        class="animate-fade-in-up mt-8 flex flex-col items-start gap-3 opacity-80 delay-400"
+                    >
+                        <span
+                            class="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400"
+                        >
+                            Building primarily with:
+                        </span>
+                        <div class="flex flex-wrap items-center gap-3">
+                            {
+                                premiumLineup.map((tech) => (
+                                    <img
+                                        src={tech.src}
+                                        alt={tech.name}
+                                        title={tech.name}
+                                        class="h-6 rounded-sm opacity-80 transition-opacity hover:opacity-100 dark:opacity-70 dark:hover:opacity-100"
+                                        loading="eager"
+                                        fetchpriority="high"
+                                    />
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
 
                 <!-- Scroll Telemetry Indicator -->
-                <div class="absolute bottom-4 left-0 right-0 flex flex-col items-center gap-1.5 text-slate-400 dark:text-slate-500 select-none pointer-events-none md:bottom-8">
-                    <span class="font-mono text-[9px] tracking-widest uppercase opacity-75">[ SCROLL TO INITIATE ]</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="telemetry-pulse">
-                        <path d="M12 5v14M19 12l-7 7-7-7"/>
-                    </svg>
+                <div class="scroll-telemetry-container absolute bottom-2 left-0 right-0 z-20 flex flex-col items-center gap-2 select-none pointer-events-none md:bottom-4">
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-slate-900/5 dark:bg-white/5 border border-slate-950/10 dark:border-white/10 rounded-md backdrop-blur-md shadow-xs">
+                        <span class="relative flex h-1.5 w-1.5">
+                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
+                            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                        </span>
+                        <span class="font-mono text-[9px] font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400">
+                            SCROLL TO INITIATE
+                        </span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-[1px] h-3 bg-gradient-to-b from-slate-300 to-transparent dark:from-slate-700 dark:to-transparent mb-1"></div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400 dark:text-slate-500 telemetry-pulse">
+                            <path d="M12 5v14M19 12l-7 7-7-7"/>
+                        </svg>
+                    </div>
                 </div>
             </section>
 
@@ -218,12 +231,12 @@ const getProjectTelemetry = (id: string) => {
                         <div class="hologram-overlay"></div>
                         <div class="hologram-scanner"></div>
                         <div class="relative z-10" data-tilt-z>
-                            <div class="flex items-center justify-between border-b border-slate-200/50 pb-2 mb-4 dark:border-white/5 font-mono text-[9px] text-slate-400 dark:text-slate-500">
-                                <div class="flex items-center gap-1.5">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                                    <span>STATUS: RESEARCH_ACTIVE // CORE: RUST_WASM</span>
+                            <div class="flex items-center justify-between gap-4 border-b border-slate-200/50 pb-2 mb-4 dark:border-white/5 font-mono text-[9px] text-slate-400 dark:text-slate-500 min-w-0">
+                                <div class="flex items-center gap-1.5 min-w-0">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse shrink-0"></span>
+                                    <span class="truncate">STATUS: RESEARCH_ACTIVE // CORE: RUST_WASM</span>
                                 </div>
-                                <span class="font-bold text-(--accent)">[ CORE ]</span>
+                                <span class="font-bold text-(--accent) whitespace-nowrap shrink-0">[ CORE ]</span>
                             </div>
                             <div class="mb-4 flex items-start justify-between">
                                 <h3
@@ -248,7 +261,7 @@ const getProjectTelemetry = (id: string) => {
                                     <div class="hologram-scanner"></div>
                                     
                                     <!-- Hologram WebM Video with Fallback to Static Logo -->
-                                    <div class="absolute inset-0 opacity-12 dark:opacity-8 mix-blend-screen dark:mix-blend-lighten overflow-hidden pointer-events-none rounded-2xl flex items-center justify-center">
+                                    <div class="absolute inset-0 overflow-hidden pointer-events-none rounded-2xl flex items-center justify-center">
                                         {project.data.video && (
                                             <video
                                                 src={project.data.video}
@@ -256,32 +269,34 @@ const getProjectTelemetry = (id: string) => {
                                                 loop
                                                 muted
                                                 playsinline
-                                                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-12 dark:opacity-8 mix-blend-screen dark:mix-blend-lighten"
                                                 style="display: none;"
                                                 onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
                                                 onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden');"
                                             ></video>
                                         )}
                                         {project.data.logo && (
-                                            <img
-                                                src={project.data.logo}
-                                                alt=""
-                                                class={`absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 group-hover:scale-110 ${project.data.video ? 'hidden' : ''}`}
-                                                aria-hidden="true"
-                                                loading="lazy"
-                                            />
+                                            <div class={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 bg-slate-950 dark:bg-black/60 border border-slate-900 dark:border-white/10 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 opacity-20 dark:opacity-15 shadow-lg ${project.data.video ? 'hidden' : ''}`}>
+                                                <img
+                                                    src={project.data.logo}
+                                                    alt=""
+                                                    class="h-36 w-36 object-contain"
+                                                    aria-hidden="true"
+                                                    loading="lazy"
+                                                />
+                                            </div>
                                         )}
                                     </div>
                                     
                                     <div class="relative z-10 flex flex-col justify-between h-full" data-tilt-z>
                                         <div>
                                             <!-- Live Telemetry Badge -->
-                                            <div class="flex items-center justify-between border-b border-slate-200/50 pb-2 mb-4 dark:border-white/5 font-mono text-[9px] text-slate-400 dark:text-slate-500">
-                                                <div class="flex items-center gap-1.5">
-                                                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                                                    <span>{telemetryStr}</span>
+                                            <div class="flex items-center justify-between gap-4 border-b border-slate-200/50 pb-2 mb-4 dark:border-white/5 font-mono text-[9px] text-slate-400 dark:text-slate-500 min-w-0">
+                                                <div class="flex items-center gap-1.5 min-w-0">
+                                                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse shrink-0"></span>
+                                                    <span class="truncate">{telemetryStr}</span>
                                                 </div>
-                                                <span class="font-bold text-(--accent)">[ OK ]</span>
+                                                <span class="font-bold text-(--accent) whitespace-nowrap shrink-0">[ OK ]</span>
                                             </div>
                                             
                                             <div class="mb-4 flex items-start justify-between">
@@ -560,10 +575,32 @@ const getProjectTelemetry = (id: string) => {
                     });
                 }
 
-                // --- 7. Cleanup Event Listeners on Page Transition ---
+                // --- 7. Scroll Telemetry Indicator Fallback ---
+                const telemetry = document.querySelector('.scroll-telemetry-container');
+                let handleScroll;
+                if (telemetry) {
+                    if (!CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)')) {
+                        handleScroll = () => {
+                            const scrollY = window.scrollY;
+                            const opacity = Math.max(0, 1 - scrollY / 120);
+                            const translate = scrollY * 0.15;
+                            telemetry.style.opacity = opacity.toString();
+                            telemetry.style.transform = `translateY(${translate}px) scale(${0.95 + opacity * 0.05})`;
+                            if (opacity === 0) {
+                                telemetry.style.visibility = 'hidden';
+                            } else {
+                                telemetry.style.visibility = 'visible';
+                            }
+                        };
+                        window.addEventListener('scroll', handleScroll, { passive: true });
+                    }
+                }
+
+                // --- 8. Cleanup Event Listeners on Page Transition ---
                 document.addEventListener('astro:before-preparation', () => {
                     if (typewriterTimeout) clearTimeout(typewriterTimeout);
                     document.removeEventListener('visibilitychange', handleVisibilityChange);
+                    if (handleScroll) window.removeEventListener('scroll', handleScroll);
                 }, { once: true });
             });
         </script>

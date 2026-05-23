@@ -97,10 +97,10 @@ const commitHash = id
                     <div
                         class="mb-10 rounded-lg border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-500 shadow-sm dark:border-slate-800 dark:bg-[#151a22] dark:text-slate-400"
                     >
-                        <div class="grid grid-cols-2 gap-4 md:grid-cols-6">
+                        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">DATE</div>
-                                <div class="font-bold text-slate-900 dark:text-slate-200">
+                                <div class="font-bold text-slate-900 dark:text-slate-200 whitespace-nowrap">
                                     <FormattedDate date={pubDate} format="technical" />
                                 </div>
                             </div>
@@ -191,7 +191,7 @@ const commitHash = id
 
                     {
                         heroImage && (
-                            <div class="mb-12 overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-800">
+                            <div class="mb-6 sm:mb-12 overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-800">
                                 <Image
                                     width={1020}
                                     height={510}
@@ -207,7 +207,7 @@ const commitHash = id
 
                     <div id="rendered-content-container">
                         <div
-                            class="prose prose-slate dark:prose-invert prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 max-w-none marker:text-(--accent)"
+                            class="prose prose-slate dark:prose-invert max-w-none md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 marker:text-(--accent)"
                         >
                             <slot />
                         </div>
