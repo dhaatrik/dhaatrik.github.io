@@ -296,6 +296,30 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
             let currentX = 0;
             let isSwiping = false;
 
+            const getFocusableElements = () => {
+                return drawer.querySelectorAll('a, button');
+            };
+
+            const handleFocusTrap = (e: KeyboardEvent) => {
+                if (e.key !== 'Tab') return;
+                const focusables = getFocusableElements();
+                if (focusables.length === 0) return;
+                const first = focusables[0] as HTMLElement;
+                const last = focusables[focusables.length - 1] as HTMLElement;
+                
+                if (e.shiftKey) {
+                    if (document.activeElement === first) {
+                        last.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === last) {
+                        first.focus();
+                        e.preventDefault();
+                    }
+                }
+            };
+
             const openMenu = () => {
                 drawer.classList.remove('translate-x-full');
                 drawer.classList.add('translate-x-0');
@@ -304,6 +328,12 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                 toggleBtn.classList.add('open');
                 toggleBtn.setAttribute('aria-expanded', 'true');
                 document.body.style.overflow = 'hidden';
+
+                const focusables = getFocusableElements();
+                if (focusables.length > 0) {
+                    (focusables[0] as HTMLElement).focus();
+                }
+                document.addEventListener('keydown', handleFocusTrap, { signal });
             };
 
             const closeMenu = () => {
@@ -315,6 +345,9 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                 toggleBtn.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
                 drawer.style.transform = '';
+
+                document.removeEventListener('keydown', handleFocusTrap);
+                toggleBtn.focus();
             };
 
             toggleBtn.addEventListener('click', () => {

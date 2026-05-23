@@ -785,3 +785,16 @@
         transform: none !important;
     }
 }
+
+/* De-coupled Theme Transitions (Circular Reveal) */
+html.theme-transition::view-transition-old(root),
+html.theme-transition::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+html.theme-transition::view-transition-new(root) {
+    z-index: 999;
+}
+html.theme-transition::view-transition-old(root) {
+    z-index: 1;
+}
