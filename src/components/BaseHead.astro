@@ -245,15 +245,15 @@ const personSchema = JSON.stringify({
         });
 
         // Programmatic Accessibility Routing: Focus h1 on page load/transition
-        const h1 = document.querySelector('main h1, h1') as HTMLElement | null;
+        const h1 = document.querySelector('main h1, h1');
         if (h1) {
             h1.setAttribute('tabindex', '-1');
             h1.focus({ preventScroll: true });
         }
 
         // Clean up temporary transition names on the newly loaded page
-        const activeTitle = document.querySelector('h1[style*="view-transition-name"]') as HTMLElement | null;
-        const activeImg = document.querySelector('img[style*="view-transition-name"], div[style*="view-transition-name"]') as HTMLElement | null;
+        const activeTitle = document.querySelector('h1[style*="view-transition-name"]');
+        const activeImg = document.querySelector('img[style*="view-transition-name"], div[style*="view-transition-name"]');
         if (activeTitle) activeTitle.style.viewTransitionName = '';
         if (activeImg) activeImg.style.viewTransitionName = '';
     });
