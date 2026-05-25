@@ -78,8 +78,8 @@ test.describe('Portfolio UI Interactivity', () => {
     // Initially should not be updated yet (debouncing)
     expect(page.url()).toContain('q=second');
 
-    // Wait for debounce timeout (300ms + buffer)
-    await page.waitForTimeout(400);
+    // Wait for debounce timeout (150ms debounce + 300ms replacestate + buffer)
+    await page.waitForTimeout(600);
     expect(page.url()).toContain('q=first');
 
     // Check sessionStorage
