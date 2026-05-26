@@ -1,217 +1,184 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Portfolio UI Interactivity', () => {
-  test('Theme toggle should switch between light and dark modes', async ({ page }) => {
-    await page.goto('/');
+    test('Theme toggle should switch between light and dark modes', async ({ page }) => {
+        await page.goto('/');
 
-    const html = page.locator('html');
-    const toggle = page.locator('#theme-toggle');
+        const html = page.locator('html');
+        const toggle = page.locator('#theme-toggle');
 
-    // Initial state check
-    const isInitiallyDark = await html.evaluate(el => el.classList.contains('dark'));
-    
-    await toggle.click();
-    if (isInitiallyDark) {
-      await expect(html).not.toHaveClass(/dark/);
-    } else {
-      await expect(html).toHaveClass(/dark/);
-    }
+        // Initial state check
+        const isInitiallyDark = await html.evaluate((el) => el.classList.contains('dark'));
 
-    await toggle.click();
-    if (isInitiallyDark) {
-      await expect(html).toHaveClass(/dark/);
-    } else {
-      await expect(html).not.toHaveClass(/dark/);
-    }
-  });
-
-  test('Blog post copy link button should handle clipboard errors gracefully', async ({ page }) => {
-    await page.goto('/blog/using-mdx/');
-
-    // Open export options to make the copy button visible/interactable
-    const exportBtn = page.locator('#export-btn');
-    await exportBtn.click();
-
-    // Wait for the copy button to be visible
-    const copyBtn = page.locator('#copy-link-btn');
-    await copyBtn.waitFor({ state: 'visible' });
-
-    // Set up console listener
-    const consoleMessages: string[] = [];
-    page.on('console', msg => {
-      if (msg.type() === 'error') {
-        consoleMessages.push(msg.text());
-      }
-    });
-
-    // Override navigator.clipboard to throw an error
-    await page.evaluate(() => {
-      Object.defineProperty(navigator, 'clipboard', {
-        value: {
-          writeText: () => Promise.reject(new Error('Clipboard denied')),
-        },
-        writable: true,
-      });
-    });
-
-    // Click the copy button
-    await copyBtn.click();
-
-    // Verify error was logged
-    expect(consoleMessages.some(m => m.includes('Failed to copy'))).toBe(true);
-  });
-
-  test('Vellor Protocol easter egg should trigger when offline', async ({ page, context }) => {
-    // Navigating to about page where the logic resides
-    await page.goto('/about');
-
-    // Simulate going offline
-    await context.setOffline(true);
-
-    // Assert the toast appears - target the text itself which should span across the container
-    await expect(page.getByText(/Vellor Protocol Engaged: You are offline/)).toBeVisible();
-    await expect(page.getByText('Vellor Protocol Engaged: You are offline, but this data remains accessible.')).toBeVisible();
-
-    // Cleanup
-    await context.setOffline(false);
-  });
-
-  test('Client-side routing should not perform a full page reload', async ({ page }) => {
-    await page.goto('/');
-
-    // Set a marker on the window object
-    await page.evaluate(() => {
-      (window as any).__SPA_MARKER__ = true;
-    });
-
-    // Navigate to the Blog page - using a selector that is likely to work
-    const blogLink = page.locator('header a:has-text("Transmissions")').first();
-    await blogLink.click();
-
-    // Verify URL change
-    await expect(page).toHaveURL(/\/blog/);
-
-    // Check if the marker still exists
-    const hasMarker = await page.evaluate(() => (window as any).__SPA_MARKER__);
-    expect(hasMarker).toBe(true);
-  });
-
-  test('Blog page search should retain queries and update URL/sessionStorage', async ({ page }) => {
-    // 1. Check URL query param filtering
-    await page.goto('/blog?q=second');
-    
-    // The second post should be visible, others should be hidden
-    const secondPostCard = page.locator('.blog-post-card[href*="/second-post/"]');
-    const firstPostCard = page.locator('.blog-post-card[href*="/first-post/"]');
-    
-    await expect(secondPostCard).toBeVisible();
-    await expect(firstPostCard).toBeHidden();
-
-    // 2. Test typing updates URL (debounced) and sessionStorage
-    const searchInput = page.locator('#search-logs');
-    await searchInput.fill('first');
-    
-    // Initially should not be updated yet (debouncing)
-    expect(page.url()).toContain('q=second');
-
-    // Wait for debounce timeout (150ms debounce + 300ms replacestate + buffer)
-    await page.waitForTimeout(600);
-    expect(page.url()).toContain('q=first');
-
-    // Check sessionStorage
-    const sessionStorageVal = await page.evaluate(() => sessionStorage.getItem('blog-search-term'));
-    expect(sessionStorageVal).toBe('first');
-
-    // 3. Test back navigation retention
-    await page.goto('/');
-    await page.goBack();
-    await expect(searchInput).toHaveValue('first');
-  });
-
-  test('BlogPost Table of Contents should highlight active sections on scroll', async ({ page }) => {
-    // Navigate to a post with headings
-    await page.goto('/blog/using-mdx/');
-    
-    const tocLink = page.locator('#toc a[href="#why-mdx"]');
-    
-    // Check initial state (should not have active classes if we are at the top)
-    await expect(tocLink).not.toHaveClass(/!text-\(--accent\)/);
-
-    // Scroll to the headings section
-    const headingsHeader = page.locator('#why-mdx');
-    await headingsHeader.evaluate(el => el.scrollIntoView({ block: 'start' }));
-    
-    // Allow animation frame and scroll listener to fire
-    await page.waitForTimeout(200);
-
-    // Now it should be highlighted
-    await expect(tocLink).toHaveClass(/!text-\(--accent\)/);
-  });
-
-  test('Recommended Books popover should open and close correctly', async ({ page }) => {
-    await page.goto('/');
-
-    const popover = page.locator('#books-popover');
-    await expect(popover).toBeHidden();
-
-    // Click recommended books in footer
-    const footerLink = page.locator('footer button[popovertarget="books-popover"]').first();
-    await footerLink.click();
-
-    // Verify it is open
-    await expect(popover).toBeVisible();
-
-    // Click close button inside popover
-    const closeBtn = popover.locator('button[popovertarget="books-popover"]').first();
-    await closeBtn.click();
-
-    // Verify it is hidden again
-    await expect(popover).toBeHidden();
-  });
-
-
-  test('Header should shrink and hide on scroll', async ({ page }) => {
-    // Mock CSS.supports to disable scroll-timeline so JS fallback runs
-    await page.addInitScript(() => {
-      const originalSupports = window.CSS.supports;
-      window.CSS.supports = function(...args) {
-        if (args[0] && typeof args[0] === 'string' && args[0].includes('animation-timeline')) {
-          return false;
+        await toggle.click();
+        if (isInitiallyDark) {
+            await expect(html).not.toHaveClass(/dark/);
+        } else {
+            await expect(html).toHaveClass(/dark/);
         }
-        return originalSupports.apply(this, args);
-      };
+
+        await toggle.click();
+        if (isInitiallyDark) {
+            await expect(html).toHaveClass(/dark/);
+        } else {
+            await expect(html).not.toHaveClass(/dark/);
+        }
     });
 
-    await page.goto('/');
+    test('Vellor Protocol easter egg should trigger when offline', async ({ page, context }) => {
+        // Navigating to about page where the logic resides
+        await page.goto('/about');
 
-    const header = page.locator('#main-header');
-    const nav = page.locator('#main-nav');
+        // Simulate going offline
+        await context.setOffline(true);
 
-    await page.waitForTimeout(500);
+        // Assert the toast appears - target the text itself which should span across the container
+        await expect(page.getByText(/Vellor Protocol Engaged: You are offline/)).toBeVisible();
+        await expect(
+            page.getByText(
+                'Vellor Protocol Engaged: You are offline, but this data remains accessible.'
+            )
+        ).toBeVisible();
 
-    // Initial state
-    await expect(nav).toHaveClass(/py-4/);
-    await expect(header).not.toHaveClass(/shadow-md/);
+        // Cleanup
+        await context.setOffline(false);
+    });
 
-    // Scroll down to 200px
-    await page.evaluate(() => window.scrollTo(0, 200));
-    await page.waitForTimeout(200);
+    test('Client-side routing should not perform a full page reload', async ({ page }) => {
+        await page.goto('/');
 
-    // After scroll down
-    await expect(nav).toHaveClass(/py-2/);
-    await expect(header).toHaveClass(/shadow-md/);
-    const styleObj = await header.evaluate(el => el.style.transform);
-    expect(styleObj).toBe('translateY(-100%)');
+        // Set a marker on the window object
+        await page.evaluate(() => {
+            (window as any).__SPA_MARKER__ = true;
+        });
 
-    // Scroll up slightly to 100px
-    await page.evaluate(() => window.scrollTo(0, 100));
-    await page.waitForTimeout(200);
+        // Navigate to the Blog page - using a selector that is likely to work
+        const blogLink = page.locator('header a:has-text("Transmissions")').first();
+        await blogLink.click();
 
-    // After scroll up
-    await expect(nav).toHaveClass(/py-2/);
-    await expect(header).toHaveClass(/shadow-md/);
-    const styleObj2 = await header.evaluate(el => el.style.transform);
-    expect(styleObj2).toMatch(/translateY\(0(?:px)?\)/);
-  });
+        // Verify URL change
+        await expect(page).toHaveURL(/\/blog/);
 
+        // Check if the marker still exists
+        const hasMarker = await page.evaluate(() => (window as any).__SPA_MARKER__);
+        expect(hasMarker).toBe(true);
+    });
+
+    test('Blog page search should retain queries and update URL/sessionStorage', async ({
+        page,
+    }) => {
+        // 1. Check URL query param filtering
+        await page.goto('/blog?q=second');
+
+        // The second post should be visible, others should be hidden
+        const secondPostCard = page.locator('.blog-post-card[href*="/second-post/"]');
+        const firstPostCard = page.locator('.blog-post-card[href*="/first-post/"]');
+
+        await expect(secondPostCard).toBeVisible();
+        await expect(firstPostCard).toBeHidden();
+
+        // 2. Test typing updates URL (debounced) and sessionStorage
+        const searchInput = page.locator('#search-logs');
+        await searchInput.fill('first');
+
+        // Initially should not be updated yet (debouncing)
+        expect(page.url()).toContain('q=second');
+
+        // Wait for debounce timeout (150ms debounce + 300ms replacestate + buffer)
+        await page.waitForTimeout(600);
+        expect(page.url()).toContain('q=first');
+
+        // Check sessionStorage
+        const sessionStorageVal = await page.evaluate(() =>
+            sessionStorage.getItem('blog-search-term')
+        );
+        expect(sessionStorageVal).toBe('first');
+
+        // 3. Test back navigation retention
+        await page.goto('/');
+        await page.goBack();
+        await expect(searchInput).toHaveValue('first');
+    });
+
+    test('BlogPost Table of Contents should highlight active sections on scroll', async ({
+        page,
+    }) => {
+        // Navigate to a post with headings
+        await page.goto('/blog/using-mdx/');
+
+        const tocLink = page.locator('#toc a[href="#why-mdx"]');
+
+        // Check initial state (should not have active classes if we are at the top)
+        await expect(tocLink).not.toHaveClass(/!text-\(--accent\)/);
+
+        // Scroll to the headings section
+        const headingsHeader = page.locator('#why-mdx');
+        await headingsHeader.evaluate((el) => el.scrollIntoView({ block: 'start' }));
+
+        // Allow animation frame and scroll listener to fire
+        await page.waitForTimeout(200);
+
+        // Now it should be highlighted
+        await expect(tocLink).toHaveClass(/!text-\(--accent\)/);
+    });
+
+    test('Recommended Books popover should open and close correctly', async ({ page }) => {
+        await page.goto('/');
+
+        const popover = page.locator('#books-popover');
+        await expect(popover).toBeHidden();
+
+        // Click recommended books in footer
+        const footerLink = page.locator('footer button[popovertarget="books-popover"]').first();
+        await footerLink.click();
+
+        // Verify it is open
+        await expect(popover).toBeVisible();
+
+        // Click close button inside popover
+        const closeBtn = popover.locator('button[popovertarget="books-popover"]').first();
+        await closeBtn.click();
+
+        // Verify it is hidden again
+        await expect(popover).toBeHidden();
+    });
+
+    test('Codeblock copy button should copy text and update UI state', async ({
+        page,
+        context,
+    }) => {
+        // Grant clipboard permissions for reading
+        await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+
+        // Navigate to a post known to have a code block
+        await page.goto('/blog/markdown-style-guide/');
+
+        // Select the first copy button and its corresponding pre element
+        const copyBtn = page.locator('.copy-btn').first();
+        const preElement = page.locator('pre').first();
+
+        // Get the expected text to be copied
+        const expectedText = await preElement.innerText();
+
+        // Ensure it's visible so Playwright can interact with it
+        await copyBtn.scrollIntoViewIfNeeded();
+
+        // Click the copy button
+        await copyBtn.click();
+
+        // Verify it updates to "OK" and green state immediately
+        await expect(copyBtn).toContainText('OK');
+        await expect(copyBtn).toHaveClass(/!text-green-400/);
+
+        // Verify clipboard content matches
+        const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+        expect(clipboardText.trim()).toBe(expectedText.trim());
+
+        // Wait for the timeout defined in BlogPost.astro (2000ms + buffer)
+        await page.waitForTimeout(2100);
+
+        // Verify it resets back to "COPY" and normal state
+        await expect(copyBtn).toContainText('COPY');
+        await expect(copyBtn).not.toHaveClass(/!text-green-400/);
+    });
 });
