@@ -25,6 +25,42 @@ test.describe('Portfolio UI Interactivity', () => {
     }
   });
 
+  test('Blog post copy link button should handle clipboard errors gracefully', async ({ page }) => {
+    await page.goto('/blog/using-mdx/');
+
+    // Open export options to make the copy button visible/interactable
+    const exportBtn = page.locator('#export-btn');
+    await exportBtn.click();
+
+    // Wait for the copy button to be visible
+    const copyBtn = page.locator('#copy-link-btn');
+    await copyBtn.waitFor({ state: 'visible' });
+
+    // Set up console listener
+    const consoleMessages: string[] = [];
+    page.on('console', msg => {
+      if (msg.type() === 'error') {
+        consoleMessages.push(msg.text());
+      }
+    });
+
+    // Override navigator.clipboard to throw an error
+    await page.evaluate(() => {
+      Object.defineProperty(navigator, 'clipboard', {
+        value: {
+          writeText: () => Promise.reject(new Error('Clipboard denied')),
+        },
+        writable: true,
+      });
+    });
+
+    // Click the copy button
+    await copyBtn.click();
+
+    // Verify error was logged
+    expect(consoleMessages.some(m => m.includes('Failed to copy'))).toBe(true);
+  });
+
   test('Vellor Protocol easter egg should trigger when offline', async ({ page, context }) => {
     // Navigating to about page where the logic resides
     await page.goto('/about');
