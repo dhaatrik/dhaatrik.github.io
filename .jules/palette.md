@@ -77,3 +77,7 @@
 
 **Learning:** Native `<dialog>` elements do not automatically close when their backdrop is clicked, which is a common user expectation. Also, screen readers require explicit `aria-labelledby` on the dialog pointing to its title for proper context.
 **Action:** Always add `onclick="event.target === this && this.close()"` to native `<dialog>` elements to easily support backdrop clicks, and ensure `aria-labelledby` is linked to the modal's heading.
+
+## 2026-05-25 - Contextual aria-labels for external icons
+**Learning:** Found that external donation links (Ko-fi, PayPal) opening in a new tab (`target="_blank"`) in `Footer.astro` lacked descriptive context in their `aria-label`s, which can be disorienting for screen reader users.
+**Action:** Always include an explicit `aria-label` that states both the purpose of the link and the tab behavior (e.g. `aria-label="Support via Ko-fi (opens in a new tab)"`) when building external support or social links.
