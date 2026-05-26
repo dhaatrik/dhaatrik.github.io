@@ -62,3 +62,8 @@
 
 **Learning:** Using sequential `await getCollection()` calls on Astro pages during SSG blocks execution, resulting in linear file I/O wait times.
 **Action:** Always fetch multiple collections concurrently using `Promise.all()` to parallelize file reads and improve page build speed.
+
+## 2026-05-25 - Debounce high-frequency DOM events on text inputs
+
+**Learning:** Running expensive layout recalculations (like filtering large lists of DOM elements) synchronously on every `input` event keystroke causes layout thrashing and UI jank.
+**Action:** Always debounce text input event listeners (e.g. `150ms`) when the handler performs DOM manipulation or searching to significantly reduce redundant processing and ensure a smooth typing experience.
