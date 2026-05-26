@@ -133,5 +133,49 @@ test.describe('Portfolio UI Interactivity', () => {
     await expect(popover).toBeHidden();
   });
 
-});
 
+  test('Header should shrink and hide on scroll', async ({ page }) => {
+    // Mock CSS.supports to disable scroll-timeline so JS fallback runs
+    await page.addInitScript(() => {
+      const originalSupports = window.CSS.supports;
+      window.CSS.supports = function(...args) {
+        if (args[0] && typeof args[0] === 'string' && args[0].includes('animation-timeline')) {
+          return false;
+        }
+        return originalSupports.apply(this, args);
+      };
+    });
+
+    await page.goto('/');
+
+    const header = page.locator('#main-header');
+    const nav = page.locator('#main-nav');
+
+    await page.waitForTimeout(500);
+
+    // Initial state
+    await expect(nav).toHaveClass(/py-4/);
+    await expect(header).not.toHaveClass(/shadow-md/);
+
+    // Scroll down to 200px
+    await page.evaluate(() => window.scrollTo(0, 200));
+    await page.waitForTimeout(200);
+
+    // After scroll down
+    await expect(nav).toHaveClass(/py-2/);
+    await expect(header).toHaveClass(/shadow-md/);
+    const styleObj = await header.evaluate(el => el.style.transform);
+    expect(styleObj).toBe('translateY(-100%)');
+
+    // Scroll up slightly to 100px
+    await page.evaluate(() => window.scrollTo(0, 100));
+    await page.waitForTimeout(200);
+
+    // After scroll up
+    await expect(nav).toHaveClass(/py-2/);
+    await expect(header).toHaveClass(/shadow-md/);
+    const styleObj2 = await header.evaluate(el => el.style.transform);
+    expect(styleObj2).toMatch(/translateY\(0(?:px)?\)/);
+  });
+
+});
