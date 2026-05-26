@@ -77,3 +77,6 @@
 
 **Learning:** Native `<dialog>` elements do not automatically close when their backdrop is clicked, which is a common user expectation. Also, screen readers require explicit `aria-labelledby` on the dialog pointing to its title for proper context.
 **Action:** Always add `onclick="event.target === this && this.close()"` to native `<dialog>` elements to easily support backdrop clicks, and ensure `aria-labelledby` is linked to the modal's heading.
+## 2026-05-26 - [Aria-pressed for Filter Tabs]
+**Learning:** State-toggling filter buttons (like blog category tags) often rely solely on visual cues (e.g., active classes). They need an `aria-pressed` attribute to clearly communicate their current toggle state to screen reader users.
+**Action:** Apply `aria-pressed="true"` or `"false"` to filter tab buttons and ensure the JS updates these attributes synchronously with visual class changes.

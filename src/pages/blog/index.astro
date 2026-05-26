@@ -59,10 +59,30 @@ const postsWithReadingTime = posts.map((post: any) => {
 
                 <!-- Subsystem Domain Tabs -->
                 <div class="mb-10 flex flex-wrap gap-2.5 font-mono text-xs select-none">
-                    <button data-filter="all" class="filter-tab px-3 py-1.5 border border-slate-300 bg-slate-100/80 text-slate-600 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 rounded-md cursor-pointer transition-all hover:bg-slate-200/50 hover:border-slate-400 dark:hover:bg-[#1c232e] dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:hover:bg-(--accent)/20 [&.active]:shadow-[0_0_12px_var(--accent-glow)] active">[ ALL ]</button>
-                    <button data-filter="ai_orchestration" class="filter-tab px-3 py-1.5 border border-slate-300 bg-slate-100/80 text-slate-600 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 rounded-md cursor-pointer transition-all hover:bg-slate-200/50 hover:border-slate-400 dark:hover:bg-[#1c232e] dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:hover:bg-(--accent)/20 [&.active]:shadow-[0_0_12px_var(--accent-glow)]">[ AI_ORCHESTRATION ]</button>
-                    <button data-filter="flight_dynamics" class="filter-tab px-3 py-1.5 border border-slate-300 bg-slate-100/80 text-slate-600 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 rounded-md cursor-pointer transition-all hover:bg-slate-200/50 hover:border-slate-400 dark:hover:bg-[#1c232e] dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:hover:bg-(--accent)/20 [&.active]:shadow-[0_0_12px_var(--accent-glow)]">[ FLIGHT_DYNAMICS ]</button>
-                    <button data-filter="agtech" class="filter-tab px-3 py-1.5 border border-slate-300 bg-slate-100/80 text-slate-600 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 rounded-md cursor-pointer transition-all hover:bg-slate-200/50 hover:border-slate-400 dark:hover:bg-[#1c232e] dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:hover:bg-(--accent)/20 [&.active]:shadow-[0_0_12px_var(--accent-glow)]">[ AGTECH ]</button>
+                    <button
+                        aria-pressed="true"
+                        data-filter="all"
+                        class="filter-tab active cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-[#1c232e] [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)] [&.active]:hover:bg-(--accent)/20"
+                        >[ ALL ]</button
+                    >
+                    <button
+                        aria-pressed="false"
+                        data-filter="ai_orchestration"
+                        class="filter-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-[#1c232e] [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)] [&.active]:hover:bg-(--accent)/20"
+                        >[ AI_ORCHESTRATION ]</button
+                    >
+                    <button
+                        aria-pressed="false"
+                        data-filter="flight_dynamics"
+                        class="filter-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-[#1c232e] [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)] [&.active]:hover:bg-(--accent)/20"
+                        >[ FLIGHT_DYNAMICS ]</button
+                    >
+                    <button
+                        aria-pressed="false"
+                        data-filter="agtech"
+                        class="filter-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-[#1c232e] [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)] [&.active]:hover:bg-(--accent)/20"
+                        >[ AGTECH ]</button
+                    >
                 </div>
 
                 <!-- Terminal-Style Search Bar -->
@@ -70,11 +90,11 @@ const postsWithReadingTime = posts.map((post: any) => {
                     <label for="search-logs" class="sr-only">Search Mission Logs</label>
                     <div class="group relative flex items-center">
                         <span
-                            class="pointer-events-none absolute left-4 text-slate-400 transition-colors select-none group-focus-within:text-(--accent) dark:text-slate-500 hidden sm:inline"
+                            class="pointer-events-none absolute left-4 hidden text-slate-400 transition-colors select-none group-focus-within:text-(--accent) sm:inline dark:text-slate-500"
                             >~ $ grep -i</span
                         >
                         <span
-                            class="pointer-events-none absolute left-4 text-slate-400 transition-colors select-none group-focus-within:text-(--accent) dark:text-slate-500 sm:hidden"
+                            class="pointer-events-none absolute left-4 text-slate-400 transition-colors select-none group-focus-within:text-(--accent) sm:hidden dark:text-slate-500"
                             >$ grep</span
                         >
                         <input
@@ -82,26 +102,51 @@ const postsWithReadingTime = posts.map((post: any) => {
                             id="search-logs"
                             placeholder='"Search archives..."'
                             aria-controls="logs-grid"
-                            class="w-full rounded-md border border-slate-200 bg-slate-100 py-3 pr-4 pl-20 sm:pl-32 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:border-(--accent)/50 focus:ring-1 focus:ring-(--accent)/50 focus:outline-none dark:border-slate-800 dark:bg-[#151a22] dark:text-white dark:placeholder:text-slate-600"
+                            class="w-full rounded-md border border-slate-200 bg-slate-100 py-3 pr-4 pl-20 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:border-(--accent)/50 focus:ring-1 focus:ring-(--accent)/50 focus:outline-none sm:pl-32 dark:border-slate-800 dark:bg-[#151a22] dark:text-white dark:placeholder:text-slate-600"
                         />
                     </div>
-                    <p class="mt-2 text-[11px] text-slate-400 dark:text-slate-500 select-none">
-                        Press <kbd class="inline-flex items-center justify-center rounded border border-slate-300 bg-slate-200/60 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-slate-500 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-400">/</kbd> to search
+                    <p class="mt-2 text-[11px] text-slate-400 select-none dark:text-slate-500">
+                        Press <kbd
+                            class="inline-flex items-center justify-center rounded border border-slate-300 bg-slate-200/60 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-slate-500 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-400"
+                            >/</kbd
+                        > to search
                     </p>
                     <div id="search-announcer" class="sr-only" aria-live="polite"></div>
                 </div>
 
-                <div class="relative p-4 sm:p-6 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-500/5">
+                <div
+                    class="relative rounded-xl border border-slate-200 bg-slate-500/5 p-4 sm:p-6 dark:border-slate-800"
+                >
                     <!-- High-Science Blueprint Framing Calibration Marks -->
-                    <div class="absolute top-0 left-0 -translate-x-1.5 -translate-y-1.5 font-mono text-xs text-slate-400 dark:text-slate-600 select-none pointer-events-none">+</div>
-                    <div class="absolute top-0 right-0 translate-x-1.5 -translate-y-1.5 font-mono text-xs text-slate-400 dark:text-slate-600 select-none pointer-events-none">+</div>
-                    <div class="absolute bottom-0 left-0 -translate-x-1.5 translate-y-1.5 font-mono text-xs text-slate-400 dark:text-slate-600 select-none pointer-events-none">+</div>
-                    <div class="absolute bottom-0 right-0 translate-x-1.5 translate-y-1.5 font-mono text-xs text-slate-400 dark:text-slate-600 select-none pointer-events-none">+</div>
-                    
-                    <div class="absolute -top-3 left-4 bg-(--bg-main) px-2 font-mono text-[9px] text-(--accent) tracking-widest uppercase">
+                    <div
+                        class="pointer-events-none absolute top-0 left-0 -translate-x-1.5 -translate-y-1.5 font-mono text-xs text-slate-400 select-none dark:text-slate-600"
+                    >
+                        +
+                    </div>
+                    <div
+                        class="pointer-events-none absolute top-0 right-0 translate-x-1.5 -translate-y-1.5 font-mono text-xs text-slate-400 select-none dark:text-slate-600"
+                    >
+                        +
+                    </div>
+                    <div
+                        class="pointer-events-none absolute bottom-0 left-0 -translate-x-1.5 translate-y-1.5 font-mono text-xs text-slate-400 select-none dark:text-slate-600"
+                    >
+                        +
+                    </div>
+                    <div
+                        class="pointer-events-none absolute right-0 bottom-0 translate-x-1.5 translate-y-1.5 font-mono text-xs text-slate-400 select-none dark:text-slate-600"
+                    >
+                        +
+                    </div>
+
+                    <div
+                        class="absolute -top-3 left-4 bg-(--bg-main) px-2 font-mono text-[9px] tracking-widest text-(--accent) uppercase"
+                    >
                         [ SYS.LOG_MATRIX // ACTIVE ]
                     </div>
-                    <div class="absolute -bottom-3 right-4 bg-(--bg-main) px-2 font-mono text-[9px] text-slate-400 dark:text-slate-600 tracking-widest uppercase">
+                    <div
+                        class="absolute right-4 -bottom-3 bg-(--bg-main) px-2 font-mono text-[9px] tracking-widest text-slate-400 uppercase dark:text-slate-600"
+                    >
                         REF_GRID: 50.84.11
                     </div>
 
@@ -117,8 +162,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                                         {
                                             'md:col-span-2 md:grid md:grid-cols-2 md:items-center md:gap-8':
                                                 i === 0,
-                                            'content-visibility-auto-post-card':
-                                                i >= 2,
+                                            'content-visibility-auto-post-card': i >= 2,
                                         },
                                     ]}
                                 >
@@ -137,7 +181,9 @@ const postsWithReadingTime = posts.map((post: any) => {
                                                 alt=""
                                                 class:list={[
                                                     'w-full object-cover transition-transform duration-300 group-hover:scale-105 group-focus-visible:scale-105',
-                                                    i === 0 ? 'h-48 md:h-full md:min-h-[300px]' : 'h-48',
+                                                    i === 0
+                                                        ? 'h-48 md:h-full md:min-h-[300px]'
+                                                        : 'h-48',
                                                 ]}
                                                 loading={i === 0 ? 'eager' : 'lazy'}
                                                 fetchpriority={i === 0 ? 'high' : 'auto'}
@@ -147,7 +193,9 @@ const postsWithReadingTime = posts.map((post: any) => {
                                         <div
                                             class:list={[
                                                 'bento-card-inner relative flex items-center justify-center overflow-hidden bg-slate-100 dark:bg-slate-900',
-                                                i !== 0 ? 'mb-4 h-48' : 'mb-4 md:mb-0 md:h-full h-48 md:min-h-[300px]',
+                                                i !== 0
+                                                    ? 'mb-4 h-48'
+                                                    : 'mb-4 h-48 md:mb-0 md:h-full md:min-h-[300px]',
                                             ]}
                                         >
                                             <div class="bg-grid-motif absolute inset-0 opacity-20 dark:opacity-50" />
@@ -166,7 +214,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                                     >
                                         <div class="mb-3 font-mono text-[10px] tracking-widest text-(--accent)">
                                             LOG_
-                                            {String(postsWithReadingTime.length - i).padStart(3, '0')}
+                                            {String(postsWithReadingTime.length - i).padStart(
+                                                3,
+                                                '0'
+                                            )}
                                         </div>
                                         <div class="mb-3 flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-(--text-secondary)">
                                             <FormattedDate
@@ -308,9 +359,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                     }
 
                     if (announcer) {
-                        announcer.textContent = term || activeTag !== 'all'
-                            ? `Found ${visibleCount} transmission${visibleCount === 1 ? '' : 's'}.`
-                            : '';
+                        announcer.textContent =
+                            term || activeTag !== 'all'
+                                ? `Found ${visibleCount} transmission${visibleCount === 1 ? '' : 's'}.`
+                                : '';
                     }
                 };
 
@@ -339,11 +391,11 @@ const postsWithReadingTime = posts.map((post: any) => {
                 const urlParams = new URLSearchParams(window.location.search);
                 const queryParam = urlParams.get('q');
                 const sessionSearch = sessionStorage.getItem('blog-search-term');
-                const initialTerm = queryParam !== null ? queryParam : (sessionSearch || '');
+                const initialTerm = queryParam !== null ? queryParam : sessionSearch || '';
 
                 const tagParam = urlParams.get('tag');
                 const sessionTag = sessionStorage.getItem('blog-search-tag');
-                const initialTag = tagParam !== null ? tagParam : (sessionTag || 'all');
+                const initialTag = tagParam !== null ? tagParam : sessionTag || 'all';
 
                 activeTag = initialTag;
                 if (initialTerm) {
@@ -355,59 +407,84 @@ const postsWithReadingTime = posts.map((post: any) => {
                     const htmlT = t as HTMLElement;
                     if (htmlT.dataset.filter === activeTag) {
                         htmlT.classList.add('active');
+                        htmlT.setAttribute('aria-pressed', 'true');
                     } else {
                         htmlT.classList.remove('active');
+                        htmlT.setAttribute('aria-pressed', 'false');
                     }
                 });
 
                 filterPosts();
 
                 // Search Input event listener
-                searchInput.addEventListener('input', (e) => {
-                    const term = (e.target as HTMLInputElement).value;
-                    filterPosts();
-                    updateSearchState(term, activeTag);
-                }, { signal });
+                searchInput.addEventListener(
+                    'input',
+                    (e) => {
+                        const term = (e.target as HTMLInputElement).value;
+                        filterPosts();
+                        updateSearchState(term, activeTag);
+                    },
+                    { signal }
+                );
 
                 // Tabs event listener
                 tabs.forEach((tab) => {
-                    tab.addEventListener('click', (e) => {
-                        const clickedTag = (e.currentTarget as HTMLElement).dataset.filter || 'all';
-                        activeTag = clickedTag;
+                    tab.addEventListener(
+                        'click',
+                        (e) => {
+                            const clickedTag =
+                                (e.currentTarget as HTMLElement).dataset.filter || 'all';
+                            activeTag = clickedTag;
 
-                        // Update tabs styles
-                        tabs.forEach((t) => {
-                            const htmlT = t as HTMLElement;
-                            if (htmlT.dataset.filter === activeTag) {
-                                htmlT.classList.add('active');
-                            } else {
-                                htmlT.classList.remove('active');
-                            }
-                        });
+                            // Update tabs styles
+                            tabs.forEach((t) => {
+                                const htmlT = t as HTMLElement;
+                                if (htmlT.dataset.filter === activeTag) {
+                                    htmlT.classList.add('active');
+                                    htmlT.setAttribute('aria-pressed', 'true');
+                                } else {
+                                    htmlT.classList.remove('active');
+                                    htmlT.setAttribute('aria-pressed', 'false');
+                                }
+                            });
 
-                        filterPosts();
-                        updateSearchState(searchInput.value, activeTag);
-                    }, { signal });
+                            filterPosts();
+                            updateSearchState(searchInput.value, activeTag);
+                        },
+                        { signal }
+                    );
                 });
 
                 // Bind dynamic view-transition-names to clicked card components
                 cards.forEach((card) => {
-                    card.addEventListener('click', () => {
-                        const titleEl = card.querySelector('h2') as HTMLElement | null;
-                        const imgEl = card.querySelector('img, .bento-card-inner') as HTMLElement | null;
-                        if (titleEl) {
-                            titleEl.style.setProperty('view-transition-name', 'active-post-title');
-                        }
-                        if (imgEl) {
-                            imgEl.style.setProperty('view-transition-name', 'active-post-img');
-                        }
-                    }, { signal });
+                    card.addEventListener(
+                        'click',
+                        () => {
+                            const titleEl = card.querySelector('h2') as HTMLElement | null;
+                            const imgEl = card.querySelector(
+                                'img, .bento-card-inner'
+                            ) as HTMLElement | null;
+                            if (titleEl) {
+                                titleEl.style.setProperty(
+                                    'view-transition-name',
+                                    'active-post-title'
+                                );
+                            }
+                            if (imgEl) {
+                                imgEl.style.setProperty('view-transition-name', 'active-post-img');
+                            }
+                        },
+                        { signal }
+                    );
                 });
 
                 // Global Forward Slash / Hotkey Listener
                 const handleHotkey = (e: KeyboardEvent) => {
                     // Ignore if typing in another input/textarea
-                    if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+                    if (
+                        document.activeElement &&
+                        ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
+                    ) {
                         return;
                     }
                     if (e.key === '/') {
@@ -419,9 +496,13 @@ const postsWithReadingTime = posts.map((post: any) => {
 
                 window.addEventListener('keydown', handleHotkey, { signal });
 
-                searchInput.addEventListener('blur', () => {
-                    searchInput.placeholder = '"Search archives..."';
-                }, { signal });
+                searchInput.addEventListener(
+                    'blur',
+                    () => {
+                        searchInput.placeholder = '"Search archives..."';
+                    },
+                    { signal }
+                );
             };
 
             // Run strictly on Astro page navigation / page load
