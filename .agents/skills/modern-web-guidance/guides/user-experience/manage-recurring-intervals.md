@@ -31,10 +31,10 @@ console.log(`Third billing: ${thirdBillingDate.toString()}`); // 2024-03-29
 
 // Example with 'reject' strategy
 try {
-  // Jan 31 + 1 month with 'reject' throws because Feb 31 is invalid
-  const invalidDate = startDate.add({ months: 1 }, { overflow: 'reject' });
+    // Jan 31 + 1 month with 'reject' throws because Feb 31 is invalid
+    const invalidDate = startDate.add({ months: 1 }, { overflow: 'reject' });
 } catch (e) {
-  console.log("Caught expected error:", e.name); // RangeError
+    console.log('Caught expected error:', e.name); // RangeError
 }
 ```
 
@@ -56,18 +56,18 @@ For browsers that do not yet support the native `Temporal` API, use feature dete
 ```javascript
 // Check if Temporal is supported natively
 (async () => {
-  if (typeof Temporal === 'undefined') {
-    // Load the polyfill conditionally
-    const module = await import("https://esm.sh/@js-temporal/polyfill");
-    globalThis.Temporal = module.Temporal;
-    // Extend Date.prototype if needed
-    Date.prototype.toTemporalInstant = module.toTemporalInstant;
-    initializeApp();
-  }
+    if (typeof Temporal === 'undefined') {
+        // Load the polyfill conditionally
+        const module = await import('https://esm.sh/@js-temporal/polyfill');
+        globalThis.Temporal = module.Temporal;
+        // Extend Date.prototype if needed
+        Date.prototype.toTemporalInstant = module.toTemporalInstant;
+        initializeApp();
+    }
 })();
 
 function initializeApp() {
-  const date = Temporal.PlainDate.from('2024-01-31');
-  console.log(date.add({ months: 1 }).toString());
+    const date = Temporal.PlainDate.from('2024-01-31');
+    console.log(date.add({ months: 1 }).toString());
 }
 ```

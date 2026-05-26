@@ -62,3 +62,8 @@
 
 **Learning:** Using sequential `await getCollection()` calls on Astro pages during SSG blocks execution, resulting in linear file I/O wait times.
 **Action:** Always fetch multiple collections concurrently using `Promise.all()` to parallelize file reads and improve page build speed.
+
+## 2026-05-22 - Optimize layout thrashing in high-frequency events
+
+**Learning:** Calling `getBoundingClientRect()` and `querySelectorAll()` inside a non-throttled `mousemove` event forces synchronous layout recalcs and can cause severe layout thrashing, reducing frame rates.
+**Action:** Always hoist `querySelectorAll` to the upper scope if the elements are static, and wrap bounding rect measurements/style updates inside `requestAnimationFrame()` for `mousemove` handlers to ensure they only run once per render frame. Use `{ passive: true }` to decouple execution from scroll blocking.

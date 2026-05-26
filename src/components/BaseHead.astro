@@ -88,7 +88,6 @@ const personSchema = JSON.stringify({
     href={new URL('rss.xml', Astro.site)}
 />
 
-
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
@@ -115,10 +114,7 @@ const personSchema = JSON.stringify({
 <ClientRouter />
 
 <!-- Schema.org Script -->
-<script
-    type="application/ld+json"
-    set:html={personSchema}
-/>
+<script type="application/ld+json" set:html={personSchema} />
 
 <script is:inline>
     // ⚡ Bolt: Global mouse spotlight and flashlight background tracking
@@ -181,11 +177,14 @@ const personSchema = JSON.stringify({
             } else if (el.getAttribute('data-magnetic-active') === 'true') {
                 el.style.transform = 'translate(0px, 0px) scale(1)';
                 if (el.classList.contains('transition-spring')) {
-                    const supportsLinear = window.CSS && CSS.supports('animation-timing-function', 'linear(0, 1)');
+                    const supportsLinear =
+                        window.CSS && CSS.supports('animation-timing-function', 'linear(0, 1)');
                     if (supportsLinear) {
-                        el.style.transition = 'transform 0.8s var(--ease-spring-bounce), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
+                        el.style.transition =
+                            'transform 0.8s var(--ease-spring-bounce), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
                     } else {
-                        el.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
+                        el.style.transition =
+                            'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
                     }
                 } else {
                     el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -217,7 +216,7 @@ const personSchema = JSON.stringify({
         // Cache live collections and query targets
         cardsCollection = document.getElementsByClassName('bento-card');
         magneticTargets = Array.from(document.querySelectorAll('.magnetic-target'));
-        
+
         document.removeEventListener('mousemove', onMouseMove);
         document.addEventListener('mousemove', onMouseMove, { passive: true });
     };
@@ -234,11 +233,17 @@ const personSchema = JSON.stringify({
 
         // Bind 3D Bento Card Parallax Tilt
         const cards = document.querySelectorAll('.bento-card');
-        cards.forEach(card => {
-            const handleCardMove = (e) => {
+        cards.forEach((card) => {
+            let rafId = null;
+            let mouseX = 0;
+            let mouseY = 0;
+            // ⚡ Bolt: Cache DOM queries outside high-frequency events to prevent layout thrashing
+            const tilts = card.querySelectorAll('[data-tilt-z]');
+
+            const updateCardParallax = () => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+                const x = mouseX - rect.left;
+                const y = mouseY - rect.top;
 
                 const xc = rect.width / 2;
                 const yc = rect.height / 2;
@@ -251,21 +256,34 @@ const personSchema = JSON.stringify({
                 card.style.setProperty('--mouse-y', `${y}px`);
 
                 // Push inner elements outwards
-                const tilts = card.querySelectorAll('[data-tilt-z]');
-                tilts.forEach(target => {
+                tilts.forEach((target) => {
                     target.style.transform = 'translateZ(10px)';
                 });
+
+                rafId = null;
+            };
+
+            const handleCardMove = (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                if (!rafId) {
+                    rafId = requestAnimationFrame(updateCardParallax);
+                }
             };
 
             const handleCardLeave = () => {
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-                const tilts = card.querySelectorAll('[data-tilt-z]');
-                tilts.forEach(target => {
+                if (rafId) {
+                    cancelAnimationFrame(rafId);
+                    rafId = null;
+                }
+                card.style.transform =
+                    'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                tilts.forEach((target) => {
                     target.style.transform = 'translateZ(0px)';
                 });
             };
 
-            card.addEventListener('mousemove', handleCardMove);
+            card.addEventListener('mousemove', handleCardMove, { passive: true });
             card.addEventListener('mouseleave', handleCardLeave);
         });
 
@@ -280,7 +298,9 @@ const personSchema = JSON.stringify({
 
         // Clean up temporary transition names on the newly loaded page
         const activeTitle = document.querySelector('h1[style*="view-transition-name"]');
-        const activeImg = document.querySelector('img[style*="view-transition-name"], div[style*="view-transition-name"]');
+        const activeImg = document.querySelector(
+            'img[style*="view-transition-name"], div[style*="view-transition-name"]'
+        );
         if (activeTitle) activeTitle.style.removeProperty('view-transition-name');
         if (activeImg) activeImg.style.removeProperty('view-transition-name');
     });

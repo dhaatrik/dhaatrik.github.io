@@ -6,7 +6,11 @@ import yaml from 'js-yaml';
 import { z } from 'astro/zod';
 
 // Helper to mock the image() function in Astro schemas
-const imageMock = () => z.string().or(z.object({ src: z.string() })).optional();
+const imageMock = () =>
+    z
+        .string()
+        .or(z.object({ src: z.string() }))
+        .optional();
 
 // Re-defining schemas here to avoid complex Astro environment imports during node:test
 const blogSchema = z.object({
@@ -36,29 +40,35 @@ const projectsSchema = z.object({
 
 const validateDirectory = (dirPath, schema, collectionName) => {
     if (!fs.existsSync(dirPath)) {
-        console.warn(`Warning: Directory ${dirPath} does not exist. Skipping ${collectionName} validation.`);
+        console.warn(
+            `Warning: Directory ${dirPath} does not exist. Skipping ${collectionName} validation.`
+        );
         return;
     }
 
-    const files = fs.readdirSync(dirPath).filter(file => file.endsWith('.md') || file.endsWith('.mdx'));
-    
+    const files = fs
+        .readdirSync(dirPath)
+        .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'));
+
     describe(`${collectionName} Content Validation`, () => {
-        files.forEach(file => {
+        files.forEach((file) => {
             test(`${file} has valid frontmatter`, () => {
                 const filePath = path.join(dirPath, file);
                 const content = fs.readFileSync(filePath, 'utf8');
-                
+
                 // Simple regex to extract frontmatter between --- delimiters
                 const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
                 assert.ok(match, `${file} is missing frontmatter delimiters (---)`);
-                
+
                 const frontmatterRaw = match[1];
                 const frontmatter = yaml.load(frontmatterRaw);
-                
+
                 const result = schema.safeParse(frontmatter);
-                
+
                 if (!result.success) {
-                    const errors = result.error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', ');
+                    const errors = result.error.errors
+                        .map((e) => `${e.path.join('.')}: ${e.message}`)
+                        .join(', ');
                     assert.fail(`${file} frontmatter is invalid: ${errors}`);
                 }
             });

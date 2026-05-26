@@ -58,14 +58,14 @@ const commitHash = id
         <div id="progress-container" class="fixed top-0 left-0 z-50 h-[2px] w-full bg-transparent">
             <div
                 id="progress-bar"
-                class="h-full w-full bg-(--accent) shadow-[0_0_10px_var(--accent)] origin-left scale-x-0 transition-transform duration-150 ease-out"
+                class="h-full w-full origin-left scale-x-0 bg-(--accent) shadow-[0_0_10px_var(--accent)] transition-transform duration-150 ease-out"
             >
             </div>
         </div>
 
         <Header />
         <main id="main-content" tabindex="-1" class="layout-container grow py-8">
-            <div class="mb-8 blog-reveal blog-reveal-1">
+            <div class="blog-reveal blog-reveal-1 mb-8">
                 <a
                     href="/blog"
                     data-astro-prefetch="hover"
@@ -95,12 +95,14 @@ const commitHash = id
                 <div class="prose-container w-full min-w-0">
                     <!-- Laboratory Report Header -->
                     <div
-                        class="mb-10 rounded-lg border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-500 shadow-sm dark:border-slate-800 dark:bg-[#151a22] dark:text-slate-400 blog-reveal blog-reveal-1"
+                        class="blog-reveal blog-reveal-1 mb-10 rounded-lg border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-500 shadow-sm dark:border-slate-800 dark:bg-[#151a22] dark:text-slate-400"
                     >
                         <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">DATE</div>
-                                <div class="font-bold text-slate-900 dark:text-slate-200 whitespace-nowrap">
+                                <div
+                                    class="font-bold whitespace-nowrap text-slate-900 dark:text-slate-200"
+                                >
                                     <FormattedDate date={pubDate} format="technical" />
                                 </div>
                             </div>
@@ -110,7 +112,9 @@ const commitHash = id
                             </div>
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">CLEARANCE</div>
-                                <div class="font-bold text-red-500 dark:text-red-400 uppercase">{clearance}</div>
+                                <div class="font-bold text-red-500 uppercase dark:text-red-400">
+                                    {clearance}
+                                </div>
                             </div>
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">
@@ -147,7 +151,10 @@ const commitHash = id
                             <div>
                                 <div class="mb-1 text-slate-400 dark:text-slate-600">MODE</div>
                                 <div class="font-bold text-slate-900 dark:text-slate-200">
-                                    <button id="toggle-mode-btn" class="text-(--accent) cursor-pointer hover:underline uppercase select-none font-bold">
+                                    <button
+                                        id="toggle-mode-btn"
+                                        class="cursor-pointer font-bold text-(--accent) uppercase select-none hover:underline"
+                                    >
                                         [ RENDERED ]
                                     </button>
                                 </div>
@@ -192,7 +199,7 @@ const commitHash = id
 
                     {
                         heroImage && (
-                            <div class="mb-6 sm:mb-12 overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-800">
+                            <div class="mb-6 overflow-hidden rounded-xl border border-slate-200 shadow-lg sm:mb-12 dark:border-slate-800">
                                 <Image
                                     width={1020}
                                     height={510}
@@ -209,18 +216,28 @@ const commitHash = id
 
                     <div id="rendered-content-container" class="blog-reveal blog-reveal-2">
                         <div
-                            class="prose prose-slate dark:prose-invert max-w-none md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 marker:text-(--accent)"
+                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 max-w-none marker:text-(--accent)"
                         >
                             <slot />
                         </div>
                     </div>
 
-                    <div id="raw-markdown-container" class="hidden font-mono text-sm leading-relaxed text-slate-800 dark:text-slate-300 bg-[#0d1117] border border-slate-700 rounded-lg p-2 overflow-x-auto my-6">
-                        <Code code={rawContent} lang="markdown" theme="github-dark" class="bg-transparent! p-4!" />
+                    <div
+                        id="raw-markdown-container"
+                        class="my-6 hidden overflow-x-auto rounded-lg border border-slate-700 bg-[#0d1117] p-2 font-mono text-sm leading-relaxed text-slate-800 dark:text-slate-300"
+                    >
+                        <Code
+                            code={rawContent}
+                            lang="markdown"
+                            theme="github-dark"
+                            class="bg-transparent! p-4!"
+                        />
                     </div>
 
                     <!-- Transmission Export CTA -->
-                    <div class="mt-16 border-t border-slate-200 pt-8 dark:border-slate-800 blog-reveal blog-reveal-3">
+                    <div
+                        class="blog-reveal blog-reveal-3 mt-16 border-t border-slate-200 pt-8 dark:border-slate-800"
+                    >
                         <button
                             id="export-btn"
                             class="magnetic-target group flex w-full cursor-pointer items-center justify-center gap-3 rounded border border-(--accent)/20 bg-(--accent)/10 px-6 py-3 font-mono text-sm tracking-widest text-(--accent) transition-all hover:bg-(--accent)/20 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:focus-visible:ring-offset-(--bg-main)"
@@ -329,7 +346,13 @@ const commitHash = id
                                     stroke-width="2"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                                    ></path><polyline points="7 10 12 15 17 10"></polyline><line
+                                        x1="12"
+                                        y1="15"
+                                        x2="12"
+                                        y2="3"></line></svg
+                                >
                             </button>
                             <button
                                 id="export-offline-btn"
@@ -347,7 +370,13 @@ const commitHash = id
                                     stroke-width="2"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                                    ></path><polyline points="7 10 12 15 17 10"></polyline><line
+                                        x1="12"
+                                        y1="15"
+                                        x2="12"
+                                        y2="3"></line></svg
+                                >
                             </button>
                         </div>
                     </div>
@@ -431,7 +460,7 @@ const commitHash = id
                 <!-- Sticky Sidebar TOC -->
                 {
                     headings.length > 0 ? (
-                        <aside class="sticky top-24 hidden max-h-[calc(100vh-8rem)] w-full overflow-y-auto pr-2 lg:block blog-reveal blog-reveal-4">
+                        <aside class="blog-reveal blog-reveal-4 sticky top-24 hidden max-h-[calc(100vh-8rem)] w-full overflow-y-auto pr-2 lg:block">
                             <div class="rounded-xl border border-slate-200 bg-slate-50 p-4 backdrop-blur-sm dark:border-slate-800 dark:bg-[#151a22]/80">
                                 <h3 class="mb-4 flex items-center gap-2 font-mono text-[10px] tracking-widest text-slate-500 uppercase">
                                     <svg
@@ -460,19 +489,31 @@ const commitHash = id
                                     INDEX
                                 </h3>
                                 <nav id="toc">
-                                    <ul class="flex flex-col space-y-2 text-sm font-mono">
-                                        {headings.map((heading: { depth: number; slug: string; text: string }, index: number) => (
-                                            <li class="toc-item">
-                                                <a
-                                                    href={`#${heading.slug}`}
-                                                    class="block border-l-2 border-transparent py-1 text-slate-600 transition-colors hover:text-(--accent) dark:text-slate-400 text-xs"
-                                                    data-slug={heading.slug}
-                                                    style={`padding-left: ${(heading.depth - 1) * 0.75}rem;`}
-                                                >
-                                                    <span class="text-slate-400 dark:text-slate-600">{String(index + 1).padStart(2, '0')} //</span> {heading.text}
-                                                </a>
-                                            </li>
-                                        ))}
+                                    <ul class="flex flex-col space-y-2 font-mono text-sm">
+                                        {headings.map(
+                                            (
+                                                heading: {
+                                                    depth: number;
+                                                    slug: string;
+                                                    text: string;
+                                                },
+                                                index: number
+                                            ) => (
+                                                <li class="toc-item">
+                                                    <a
+                                                        href={`#${heading.slug}`}
+                                                        class="block border-l-2 border-transparent py-1 text-xs text-slate-600 transition-colors hover:text-(--accent) dark:text-slate-400"
+                                                        data-slug={heading.slug}
+                                                        style={`padding-left: ${(heading.depth - 1) * 0.75}rem;`}
+                                                    >
+                                                        <span class="text-slate-400 dark:text-slate-600">
+                                                            {String(index + 1).padStart(2, '0')} //
+                                                        </span>{' '}
+                                                        {heading.text}
+                                                    </a>
+                                                </li>
+                                            )
+                                        )}
                                     </ul>
                                 </nav>
                             </div>
@@ -521,7 +562,9 @@ const commitHash = id
 
                 // 1. Reading Progress Bar (Fallback logic for unsupported browsers)
                 const progressBar = document.getElementById('progress-bar');
-                const hasScrollTimeline = CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)');
+                const hasScrollTimeline = CSS.supports(
+                    '(animation-timeline: scroll()) and (animation-range: 0% 100%)'
+                );
                 const updateProgress = () => {
                     if (hasScrollTimeline || !progressBar) return;
                     const scrollTotal =
@@ -537,87 +580,111 @@ const commitHash = id
                 const exportBtn = document.getElementById('export-btn');
                 const exportOptions = document.getElementById('export-options');
                 if (exportBtn && exportOptions) {
-                    exportBtn.addEventListener('click', () => {
-                        exportOptions.classList.toggle('hidden');
-                        exportOptions.classList.toggle('flex');
-                    }, { signal });
+                    exportBtn.addEventListener(
+                        'click',
+                        () => {
+                            exportOptions.classList.toggle('hidden');
+                            exportOptions.classList.toggle('flex');
+                        },
+                        { signal }
+                    );
                 }
 
                 // 2.1 Export to JSON-LD Metadata Action
                 const exportJsonBtn = document.getElementById('export-json-btn');
                 if (exportJsonBtn) {
-                    exportJsonBtn.addEventListener('click', () => {
-                        // Extract metadata from document state
-                        const url = new URL(window.location.href);
-                        const titleEl = document.querySelector('h1');
-                        const descriptionEl = document.querySelector('meta[name="description"]');
-                        
-                        const metadata = {
-                            "@context": "https://schema.org",
-                            "@type": "BlogPosting",
-                            "headline": titleEl?.innerText || "Transmission Log",
-                            "description": descriptionEl?.getAttribute('content') || "",
-                            "datePublished": new Date().toISOString(),
-                            "author": {
-                                "@type": "Person",
-                                "name": "Dhaatrik"
-                            },
-                            "url": url.href
-                        };
+                    exportJsonBtn.addEventListener(
+                        'click',
+                        () => {
+                            // Extract metadata from document state
+                            const url = new URL(window.location.href);
+                            const titleEl = document.querySelector('h1');
+                            const descriptionEl = document.querySelector(
+                                'meta[name="description"]'
+                            );
 
-                        const blob = new Blob([JSON.stringify(metadata, null, 4)], { type: 'application/json' });
-                        const blobUrl = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = blobUrl;
-                        a.download = `transmission-metadata-${Date.now()}.json`;
-                        a.click();
-                        URL.revokeObjectURL(blobUrl);
+                            const metadata = {
+                                '@context': 'https://schema.org',
+                                '@type': 'BlogPosting',
+                                headline: titleEl?.innerText || 'Transmission Log',
+                                description: descriptionEl?.getAttribute('content') || '',
+                                datePublished: new Date().toISOString(),
+                                author: {
+                                    '@type': 'Person',
+                                    name: 'Dhaatrik',
+                                },
+                                url: url.href,
+                            };
 
-                        const textSpan = exportJsonBtn.querySelector('span');
-                        if (textSpan) {
-                            const originalText = textSpan.innerText;
-                            textSpan.innerText = '~ $ export_completed';
-                            textSpan.classList.add('text-(--accent)');
-                            setTimeout(() => {
-                                textSpan.innerText = originalText;
-                                textSpan.classList.remove('text-(--accent)');
-                            }, 2000);
-                        }
-                    }, { signal });
-                }
+                            const blob = new Blob([JSON.stringify(metadata, null, 4)], {
+                                type: 'application/json',
+                            });
+                            const blobUrl = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = blobUrl;
+                            a.download = `transmission-metadata-${Date.now()}.json`;
+                            a.click();
+                            URL.revokeObjectURL(blobUrl);
 
-                const copyLinkBtn = document.getElementById('copy-link-btn');
-                if (copyLinkBtn) {
-                    copyLinkBtn.addEventListener('click', async () => {
-                        try {
-                            await navigator.clipboard.writeText(window.location.href);
-                            const textSpan = copyLinkBtn.querySelector('span');
+                            const textSpan = exportJsonBtn.querySelector('span');
                             if (textSpan) {
                                 const originalText = textSpan.innerText;
-                                textSpan.innerText = '~ $ copied_to_clipboard';
+                                textSpan.innerText = '~ $ export_completed';
                                 textSpan.classList.add('text-(--accent)');
                                 setTimeout(() => {
                                     textSpan.innerText = originalText;
                                     textSpan.classList.remove('text-(--accent)');
                                 }, 2000);
                             }
-                        } catch (err) {
-                            console.error('Failed to copy', err);
-                        }
-                    }, { signal });
+                        },
+                        { signal }
+                    );
+                }
+
+                const copyLinkBtn = document.getElementById('copy-link-btn');
+                if (copyLinkBtn) {
+                    copyLinkBtn.addEventListener(
+                        'click',
+                        async () => {
+                            try {
+                                await navigator.clipboard.writeText(window.location.href);
+                                const textSpan = copyLinkBtn.querySelector('span');
+                                if (textSpan) {
+                                    const originalText = textSpan.innerText;
+                                    textSpan.innerText = '~ $ copied_to_clipboard';
+                                    textSpan.classList.add('text-(--accent)');
+                                    setTimeout(() => {
+                                        textSpan.innerText = originalText;
+                                        textSpan.classList.remove('text-(--accent)');
+                                    }, 2000);
+                                }
+                            } catch (err) {
+                                console.error('Failed to copy', err);
+                            }
+                        },
+                        { signal }
+                    );
                 }
 
                 const exportOfflineBtn = document.getElementById('export-offline-btn');
                 if (exportOfflineBtn) {
-                    exportOfflineBtn.addEventListener('click', () => {
-                        const postTitle = document.querySelector('h1')?.innerText || 'Transmission Log';
-                        const postDesc = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
-                        
-                        // Extract content from `#rendered-content-container`
-                        const renderedContent = document.getElementById('rendered-content-container')?.innerHTML || '';
-                        
-                        // Build full offline HTML package with escaped brackets to prevent Astro build failures
-                        const offlineHtml = `\x3c!doctype html\x3e
+                    exportOfflineBtn.addEventListener(
+                        'click',
+                        () => {
+                            const postTitle =
+                                document.querySelector('h1')?.innerText || 'Transmission Log';
+                            const postDesc =
+                                document
+                                    .querySelector('meta[name="description"]')
+                                    ?.getAttribute('content') || '';
+
+                            // Extract content from `#rendered-content-container`
+                            const renderedContent =
+                                document.getElementById('rendered-content-container')?.innerHTML ||
+                                '';
+
+                            // Build full offline HTML package with escaped brackets to prevent Astro build failures
+                            const offlineHtml = `\x3c!doctype html\x3e
 \x3chtml lang="en"\x3e
     \x3chead\x3e
         \x3cmeta charset="utf-8"\x3e
@@ -748,26 +815,28 @@ const commitHash = id
         \x3c/div\x3e
     \x3c/body\x3e
 \x3c/html\x3e`;
-                        
-                        const blob = new Blob([offlineHtml], { type: 'text/html' });
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = `transmission-archive-${postTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.html`;
-                        a.click();
-                        URL.revokeObjectURL(url);
 
-                        const textSpan = exportOfflineBtn.querySelector('span');
-                        if (textSpan) {
-                            const originalText = textSpan.innerText;
-                            textSpan.innerText = '~ $ export_archived';
-                            textSpan.classList.add('text-(--accent)');
-                            setTimeout(() => {
-                                textSpan.innerText = originalText;
-                                textSpan.classList.remove('text-(--accent)');
-                            }, 2000);
-                        }
-                    }, { signal });
+                            const blob = new Blob([offlineHtml], { type: 'text/html' });
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `transmission-archive-${postTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.html`;
+                            a.click();
+                            URL.revokeObjectURL(url);
+
+                            const textSpan = exportOfflineBtn.querySelector('span');
+                            if (textSpan) {
+                                const originalText = textSpan.innerText;
+                                textSpan.innerText = '~ $ export_archived';
+                                textSpan.classList.add('text-(--accent)');
+                                setTimeout(() => {
+                                    textSpan.innerText = originalText;
+                                    textSpan.classList.remove('text-(--accent)');
+                                }, 2000);
+                            }
+                        },
+                        { signal }
+                    );
                 }
 
                 // 3. TOC active link tracking (using high-performance IntersectionObserver)
@@ -778,14 +847,22 @@ const commitHash = id
                     tocLinks.forEach((link) => {
                         const htmlLink = link as HTMLElement;
                         if (htmlLink.dataset.slug === currentSectionId) {
-                            htmlLink.classList.add('!text-(--accent)', '!border-(--accent)', 'font-medium');
+                            htmlLink.classList.add(
+                                '!text-(--accent)',
+                                '!border-(--accent)',
+                                'font-medium'
+                            );
                             htmlLink.classList.remove(
                                 'text-slate-600',
                                 'dark:text-slate-400',
                                 'border-transparent'
                             );
                         } else {
-                            htmlLink.classList.remove('!text-(--accent)', '!border-(--accent)', 'font-medium');
+                            htmlLink.classList.remove(
+                                '!text-(--accent)',
+                                '!border-(--accent)',
+                                'font-medium'
+                            );
                             htmlLink.classList.add(
                                 'text-slate-600',
                                 'dark:text-slate-400',
@@ -799,7 +876,7 @@ const commitHash = id
                 const observerOptions = {
                     root: null,
                     rootMargin: '0px 0px -50% 0px',
-                    threshold: 0
+                    threshold: 0,
                 };
 
                 const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -812,7 +889,7 @@ const commitHash = id
                             currentActive = htmlSec.id;
                         }
                     });
-                    
+
                     // Fallback for short pages: if we have scrolled down but no heading has crossed the threshold
                     if (!currentActive && sections.length > 0 && window.scrollY > 10) {
                         currentActive = sections[0].id;
@@ -849,26 +926,36 @@ const commitHash = id
                 const renderedContainer = document.getElementById('rendered-content-container');
                 const rawContainer = document.getElementById('raw-markdown-container');
                 if (toggleModeBtn && renderedContainer && rawContainer) {
-                    toggleModeBtn.addEventListener('click', () => {
-                        const isRaw = rawContainer.classList.contains('hidden');
-                        if (isRaw) {
-                            rawContainer.classList.remove('hidden');
-                            renderedContainer.classList.add('hidden');
-                            toggleModeBtn.innerText = '[ RAW ]';
-                        } else {
-                            rawContainer.classList.add('hidden');
-                            renderedContainer.classList.remove('hidden');
-                            toggleModeBtn.innerText = '[ RENDERED ]';
-                        }
-                    }, { signal });
+                    toggleModeBtn.addEventListener(
+                        'click',
+                        () => {
+                            const isRaw = rawContainer.classList.contains('hidden');
+                            if (isRaw) {
+                                rawContainer.classList.remove('hidden');
+                                renderedContainer.classList.add('hidden');
+                                toggleModeBtn.innerText = '[ RAW ]';
+                            } else {
+                                rawContainer.classList.add('hidden');
+                                renderedContainer.classList.remove('hidden');
+                                toggleModeBtn.innerText = '[ RENDERED ]';
+                            }
+                        },
+                        { signal }
+                    );
                 }
 
                 // 3.2 Flashlight Spotlight mouse tracking
                 const flashlight = document.getElementById('flashlight-bg');
                 const handleMouseMove = (e: MouseEvent) => {
                     if (flashlight) {
-                        document.documentElement.style.setProperty('--bg-mouse-x', `${e.clientX}px`);
-                        document.documentElement.style.setProperty('--bg-mouse-y', `${e.clientY}px`);
+                        document.documentElement.style.setProperty(
+                            '--bg-mouse-x',
+                            `${e.clientX}px`
+                        );
+                        document.documentElement.style.setProperty(
+                            '--bg-mouse-y',
+                            `${e.clientY}px`
+                        );
                     }
                 };
                 document.addEventListener('mousemove', handleMouseMove, { passive: true, signal });
@@ -879,16 +966,25 @@ const commitHash = id
                     if (block.classList.contains('inspector-processed')) return;
                     block.classList.add('inspector-processed');
 
-                    const annotation = block.querySelector('annotation[encoding="application/x-tex"]');
-                    const latex = (annotation ? annotation.textContent?.trim() : block.textContent?.trim()) || '';
+                    const annotation = block.querySelector(
+                        'annotation[encoding="application/x-tex"]'
+                    );
+                    const latex =
+                        (annotation ? annotation.textContent?.trim() : block.textContent?.trim()) ||
+                        '';
 
                     const formulas: Record<string, string> = {
-                        '\\Delta v = v_e \\ln \\frac{m_0}{m_f}': 'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass',
-                        '\\Delta v = v_e \\ln \\frac{m_{0}}{m_{f}}': 'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass',
-                        'F = G \\frac{m_1 m_2}{r^2}': 'F: Gravitational Force // G: Gravitational Constant // m1, m2: Masses // r: Distance',
-                        'F = G \\frac{m_{1} m_{2}}{r^{2}}': 'F: Gravitational Force // G: Gravitational Constant // m1, m2: Masses // r: Distance',
+                        '\\Delta v = v_e \\ln \\frac{m_0}{m_f}':
+                            'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass',
+                        '\\Delta v = v_e \\ln \\frac{m_{0}}{m_{f}}':
+                            'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass',
+                        'F = G \\frac{m_1 m_2}{r^2}':
+                            'F: Gravitational Force // G: Gravitational Constant // m1, m2: Masses // r: Distance',
+                        'F = G \\frac{m_{1} m_{2}}{r^{2}}':
+                            'F: Gravitational Force // G: Gravitational Constant // m1, m2: Masses // r: Distance',
                         'E = m c^2': 'E: Energy // m: Mass // c: Speed of Light',
-                        'PV = nRT': 'P: Pressure // V: Volume // n: Gas Amount // R: Gas Constant // T: Temperature'
+                        'PV = nRT':
+                            'P: Pressure // V: Volume // n: Gas Amount // R: Gas Constant // T: Temperature',
                     };
 
                     let definition = '';
@@ -903,9 +999,11 @@ const commitHash = id
 
                     if (!definition) {
                         if (latex.includes('\\Delta v') || latex.includes('v_e')) {
-                            definition = 'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass';
+                            definition =
+                                'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass';
                         } else if (latex.includes('F =') && latex.includes('G')) {
-                            definition = 'F: Gravitational Force // G: Gravitational Constant // m1, m2: Masses // r: Distance';
+                            definition =
+                                'F: Gravitational Force // G: Gravitational Constant // m1, m2: Masses // r: Distance';
                         } else {
                             definition = 'Formula Parameters: Dynamic breakdown not loaded';
                         }
@@ -933,7 +1031,8 @@ const commitHash = id
                         const tooltip = document.createElement('div');
                         tooltip.id = 'math-inspector-tooltip';
                         tooltip.dataset.anchorId = htmlBlock.id;
-                        tooltip.className = 'absolute z-50 p-2.5 bg-slate-900 border border-slate-700 text-slate-300 font-mono text-[10px] rounded shadow-xl tracking-wider';
+                        tooltip.className =
+                            'absolute z-50 p-2.5 bg-slate-900 border border-slate-700 text-slate-300 font-mono text-[10px] rounded shadow-xl tracking-wider';
                         tooltip.innerHTML = `[ <span class="text-(--accent)">INSPECTING</span> ] &rarr; ${definition}`;
 
                         document.body.appendChild(tooltip);
@@ -1008,7 +1107,10 @@ const commitHash = id
                         if (codeBlock.querySelectorAll('.line').length === 0) {
                             const rawHtml = codeBlock.innerHTML;
                             const linesText = rawHtml.split('\n');
-                            if (linesText.length > 1 && linesText[linesText.length - 1].trim() === '') {
+                            if (
+                                linesText.length > 1 &&
+                                linesText[linesText.length - 1].trim() === ''
+                            ) {
                                 linesText.pop();
                             }
                             codeBlock.innerHTML = linesText
@@ -1062,8 +1164,12 @@ const commitHash = id
                                     const lineText = allLines[j].textContent || '';
                                     // Match standard function declaration signatures across multiple languages
                                     const match =
-                                        lineText.match(/(?:function|def|fn|func|const|let|var)\s+([a-zA-Z0-9_]+)/) ||
-                                        lineText.match(/([a-zA-Z0-9_]+)\s*=\s*(?:async\s*)?\([^)]*\)\s*=>/) ||
+                                        lineText.match(
+                                            /(?:function|def|fn|func|const|let|var)\s+([a-zA-Z0-9_]+)/
+                                        ) ||
+                                        lineText.match(
+                                            /([a-zA-Z0-9_]+)\s*=\s*(?:async\s*)?\([^)]*\)\s*=>/
+                                        ) ||
                                         lineText.match(/([a-zA-Z0-9_]+)\s*\([^)]*\)\s*\{/);
                                     if (match) {
                                         funcName = match[1];
@@ -1080,23 +1186,27 @@ const commitHash = id
                     }
 
                     const copyBtn = header.querySelector('.copy-btn');
-                    copyBtn?.addEventListener('click', async () => {
-                        try {
-                            await navigator.clipboard.writeText(pre.innerText);
-                            copyBtn.innerHTML = `
+                    copyBtn?.addEventListener(
+                        'click',
+                        async () => {
+                            try {
+                                await navigator.clipboard.writeText(pre.innerText);
+                                copyBtn.innerHTML = `
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                                 OK
                             `;
-                            copyBtn.classList.add('!text-green-400');
-                            setTimeout(() => {
-                                copyBtn.innerHTML = `
+                                copyBtn.classList.add('!text-green-400');
+                                setTimeout(() => {
+                                    copyBtn.innerHTML = `
                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                                     COPY
                                     `;
-                                copyBtn.classList.remove('!text-green-400');
-                            }, 2000);
-                        } catch (e) {}
-                    }, { signal });
+                                    copyBtn.classList.remove('!text-green-400');
+                                }, 2000);
+                            } catch (e) {}
+                        },
+                        { signal }
+                    );
                 });
 
                 // 5. Global Glossary Popovers (wrapped in requestIdleCallback to safeguard main-thread responsiveness)
@@ -1117,16 +1227,27 @@ const commitHash = id
                         const parent = node.parentElement;
                         if (
                             parent &&
-                            !['PRE', 'CODE', 'A', 'SPAN', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(
-                                parent.tagName
-                            )
+                            ![
+                                'PRE',
+                                'CODE',
+                                'A',
+                                'SPAN',
+                                'H1',
+                                'H2',
+                                'H3',
+                                'H4',
+                                'H5',
+                                'H6',
+                            ].includes(parent.tagName)
                         ) {
                             textNodes.push(node as Text);
                         }
                     }
 
                     const terms = Object.keys(glossary);
-                    const popoversContainer = document.getElementById('glossary-popovers-container');
+                    const popoversContainer = document.getElementById(
+                        'glossary-popovers-container'
+                    );
                     if (terms.length > 0 && textNodes.length > 0) {
                         const regex = new RegExp(
                             `\\b(${terms.map((t) => t.replace(/[.*+?^$\{}()|[\]\\]/g, '\\$&')).join('|')})\\b`,

@@ -20,7 +20,10 @@ const bookTelemetry: Record<string, { status: string; focus: string }> = {
 
 // Fetch the 4 most recent blog posts for "Transmissions"
 const posts: CollectionEntry<'blog'>[] = (await getCollection('blog'))
-    .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .sort(
+        (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+            b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+    )
     .slice(0, 4);
 
 const today = new Date();
@@ -45,31 +48,43 @@ const formatMarqueeDate = (date: Date) => {
 ---
 
 <footer
-    class="relative mt-20 w-full overflow-hidden border-t border-slate-200 bg-slate-50/50 pb-12 pt-0 text-slate-500 dark:border-white/5 dark:bg-[#0b0e14] dark:text-slate-400"
+    class="relative mt-20 w-full overflow-hidden border-t border-slate-200 bg-slate-50/50 pt-0 pb-12 text-slate-500 dark:border-white/5 dark:bg-[#0b0e14] dark:text-slate-400"
 >
     <!-- Subtle Grid Background -->
     <div class="bg-grid-motif pointer-events-none absolute inset-0 opacity-5"></div>
 
     <!-- Real-Time Transmission Horizon Marquee -->
-    <div class="border-b border-slate-200/80 bg-slate-100/50 py-2.5 dark:border-white/5 dark:bg-black/20 overflow-hidden select-none mb-12">
-        <div class="animate-marquee flex whitespace-nowrap w-max text-[10px] font-mono tracking-widest text-slate-500 dark:text-slate-400">
-            <div class="flex gap-16 px-4 shrink-0">
+    <div
+        class="mb-12 overflow-hidden border-b border-slate-200/80 bg-slate-100/50 py-2.5 select-none dark:border-white/5 dark:bg-black/20"
+    >
+        <div
+            class="animate-marquee flex w-max font-mono text-[10px] tracking-widest whitespace-nowrap text-slate-500 dark:text-slate-400"
+        >
+            <div class="flex shrink-0 gap-16 px-4">
                 <span>ALERT // LATEST LOGS OVER THE HORIZON:</span>
-                {posts.map((post) => (
-                    <span class="flex gap-2">
-                        <span class="text-(--accent)">[{formatMarqueeDate(post.data.pubDate)}]</span>
-                        <span>{post.data.title.toUpperCase()}</span>
-                    </span>
-                ))}
+                {
+                    posts.map((post) => (
+                        <span class="flex gap-2">
+                            <span class="text-(--accent)">
+                                [{formatMarqueeDate(post.data.pubDate)}]
+                            </span>
+                            <span>{post.data.title.toUpperCase()}</span>
+                        </span>
+                    ))
+                }
             </div>
-            <div aria-hidden="true" class="flex gap-16 px-4 shrink-0">
+            <div aria-hidden="true" class="flex shrink-0 gap-16 px-4">
                 <span>ALERT // LATEST LOGS OVER THE HORIZON:</span>
-                {posts.map((post) => (
-                    <span class="flex gap-2">
-                        <span class="text-(--accent)">[{formatMarqueeDate(post.data.pubDate)}]</span>
-                        <span>{post.data.title.toUpperCase()}</span>
-                    </span>
-                ))}
+                {
+                    posts.map((post) => (
+                        <span class="flex gap-2">
+                            <span class="text-(--accent)">
+                                [{formatMarqueeDate(post.data.pubDate)}]
+                            </span>
+                            <span>{post.data.title.toUpperCase()}</span>
+                        </span>
+                    ))
+                }
             </div>
         </div>
     </div>
@@ -91,7 +106,8 @@ const formatMarqueeDate = (date: Date) => {
                         ><span
                             class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
                             >/</span
-                        >Home</a>
+                        >Home</a
+                    >
                 </li>
                 <li>
                     <a
@@ -100,7 +116,8 @@ const formatMarqueeDate = (date: Date) => {
                         ><span
                             class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
                             >/</span
-                        >Personnel</a>
+                        >Personnel</a
+                    >
                 </li>
                 <li>
                     <a
@@ -109,12 +126,13 @@ const formatMarqueeDate = (date: Date) => {
                         ><span
                             class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
                             >/</span
-                        >Transmissions</a>
+                        >Transmissions</a
+                    >
                 </li>
                 <li>
                     <button
                         popovertarget="books-popover"
-                        class="group inline-flex items-center gap-2 transition-colors hover:text-(--accent) bg-transparent border-none p-0 cursor-pointer font-sans text-sm text-slate-500 dark:text-slate-400 focus-visible:outline-none"
+                        class="group inline-flex cursor-pointer items-center gap-2 border-none bg-transparent p-0 font-sans text-sm text-slate-500 transition-colors hover:text-(--accent) focus-visible:outline-none dark:text-slate-400"
                     >
                         <span
                             class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
@@ -129,10 +147,10 @@ const formatMarqueeDate = (date: Date) => {
                         ><span
                             class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
                             >/</span
-                        >RSS Feed</a>
+                        >RSS Feed</a
+                    >
                 </li>
             </ul>
-
         </div>
 
         <!-- Column 2: Recent Transmissions -->
@@ -144,24 +162,31 @@ const formatMarqueeDate = (date: Date) => {
                 Recent Transmissions
             </h3>
             <ul class="flex flex-col space-y-3">
-                {posts.map((post) => (
-                    <li>
-                        <a
-                            href={`/blog/${post.id}/`}
-                            class="group flex flex-col space-y-0.5 transition-colors"
-                        >
-                            <div class="font-mono text-[10px] text-slate-400 dark:text-slate-500 group-hover:text-(--accent) flex items-center gap-1.5 transition-colors">
-                                <span class="text-(--accent)">[ {formatMarqueeDate(post.data.pubDate)} ]</span>
-                                <span class="relative-time-indicator opacity-80" data-timestamp={post.data.pubDate.toISOString()}>
-                                    --
+                {
+                    posts.map((post) => (
+                        <li>
+                            <a
+                                href={`/blog/${post.id}/`}
+                                class="group flex flex-col space-y-0.5 transition-colors"
+                            >
+                                <div class="flex items-center gap-1.5 font-mono text-[10px] text-slate-400 transition-colors group-hover:text-(--accent) dark:text-slate-500">
+                                    <span class="text-(--accent)">
+                                        [ {formatMarqueeDate(post.data.pubDate)} ]
+                                    </span>
+                                    <span
+                                        class="relative-time-indicator opacity-80"
+                                        data-timestamp={post.data.pubDate.toISOString()}
+                                    >
+                                        --
+                                    </span>
+                                </div>
+                                <span class="line-clamp-1 text-sm text-slate-500 transition-colors group-hover:text-(--accent) dark:text-slate-400">
+                                    {post.data.title}
                                 </span>
-                            </div>
-                            <span class="text-sm text-slate-500 dark:text-slate-400 group-hover:text-(--accent) line-clamp-1 transition-colors">
-                                {post.data.title}
-                            </span>
-                        </a>
-                    </li>
-                ))}
+                            </a>
+                        </li>
+                    ))
+                }
             </ul>
         </div>
 
@@ -174,20 +199,27 @@ const formatMarqueeDate = (date: Date) => {
                     <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
                     System Diagnostics
                 </h3>
-                <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-white/5 dark:bg-[#151a22] font-mono text-[11px] leading-relaxed text-slate-500 dark:text-slate-400 space-y-1.5 select-none">
+                <div
+                    class="space-y-1.5 rounded-lg border border-slate-200 bg-white p-4 font-mono text-[11px] leading-relaxed text-slate-500 shadow-sm select-none dark:border-white/5 dark:bg-[#151a22] dark:text-slate-400"
+                >
                     <div>SYS_CORE: ASTRO v6.1.7</div>
                     <div>STYLE_SYS: TAILWIND CSS v4.0</div>
                     <div>RENDER_MODE: STATIC (SSG)</div>
                     <div>HOST: GITHUB PAGES</div>
                     <div>INTEGRITY: SECURE (HTTPS)</div>
-                    <div class="border-t border-dashed border-slate-200 dark:border-white/5 pt-1.5 mt-1.5 flex items-center justify-between">
+                    <div
+                        class="mt-1.5 flex items-center justify-between border-t border-dashed border-slate-200 pt-1.5 dark:border-white/5"
+                    >
                         <span>BUILD_ID:</span>
                         <span class="font-bold text-(--accent)">{gitSha}</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <span>SYS.STATUS:</span>
-                        <span class="text-green-600 dark:text-green-400 font-bold flex items-center gap-1">
-                            <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                        <span
+                            class="flex items-center gap-1 font-bold text-green-600 dark:text-green-400"
+                        >
+                            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500"
+                            ></span>
                             OPERATIONAL
                         </span>
                     </div>
@@ -286,7 +318,7 @@ const formatMarqueeDate = (date: Date) => {
         popover
         id="support-popover"
         aria-labelledby="support-modal-title"
-        class="m-auto w-[calc(100%-2rem)] md:w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm dark:border-white/10 dark:bg-[#0b0e14]"
+        class="m-auto w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm md:w-full dark:border-white/10 dark:bg-[#0b0e14]"
     >
         <div
             class="flex items-center justify-between border-b border-slate-100 p-6 dark:border-white/5"
@@ -371,29 +403,34 @@ const formatMarqueeDate = (date: Date) => {
         popover
         id="books-popover"
         aria-labelledby="books-popover-title"
-        class="m-auto w-[calc(100%-2rem)] md:w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl dark:border-white/10 dark:bg-[#0b0e14]"
+        class="m-auto w-[calc(100%-2rem)] max-w-2xl rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl md:w-full dark:border-white/10 dark:bg-[#0b0e14]"
     >
         <!-- Grid Motif Backdrop inside Popover -->
-        <div class="absolute inset-0 pointer-events-none opacity-[0.02] dark:opacity-[0.04] bg-grid-motif rounded-2xl"></div>
+        <div
+            class="bg-grid-motif pointer-events-none absolute inset-0 rounded-2xl opacity-[0.02] dark:opacity-[0.04]"
+        >
+        </div>
 
         <div
             class="relative z-10 flex items-start justify-between border-b border-slate-100 p-5 sm:p-6 dark:border-white/5"
         >
-            <div class="flex flex-col gap-1 min-w-0 pr-4">
+            <div class="flex min-w-0 flex-col gap-1 pr-4">
                 <div class="flex flex-wrap items-center gap-2">
                     <h3
                         id="books-popover-title"
-                        class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white"
+                        class="text-lg font-bold text-slate-900 sm:text-xl dark:text-white"
                     >
                         Recommended Books
                     </h3>
                     <span
-                        class="inline-flex items-center rounded-full border border-(--accent)/35 bg-(--accent)/5 px-2 py-0.5 text-[9px] sm:text-[10px] font-mono font-bold tracking-wider text-(--accent) uppercase whitespace-nowrap shrink-0"
+                        class="inline-flex shrink-0 items-center rounded-full border border-(--accent)/35 bg-(--accent)/5 px-2 py-0.5 font-mono text-[9px] font-bold tracking-wider whitespace-nowrap text-(--accent) uppercase sm:text-[10px]"
                     >
                         Not Sponsored
                     </span>
                 </div>
-                <p class="font-mono text-[9px] sm:text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                <p
+                    class="font-mono text-[9px] tracking-wider text-slate-400 uppercase sm:text-xs dark:text-slate-500"
+                >
                     Curated reading list // No affiliate links
                 </p>
             </div>
@@ -401,47 +438,50 @@ const formatMarqueeDate = (date: Date) => {
                 aria-label="Close recommended books list"
                 popovertarget="books-popover"
                 popovertargetaction="hide"
-                class="cursor-pointer rounded-sm p-1 text-slate-500 transition-colors hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main) mt-0.5 sm:mt-1 shrink-0"
+                class="mt-0.5 shrink-0 cursor-pointer rounded-sm p-1 text-slate-500 transition-colors hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none sm:mt-1 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
             >
-                <svg
-                    width="24"
-                    height="24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                    ><path d="M18 6L6 18M6 6l12 12"></path></svg
                 >
             </button>
         </div>
-        
-        <div class="relative z-10 max-h-[60vh] overflow-y-auto p-5 sm:p-6 content-visibility-auto-books">
+
+        <div
+            class="content-visibility-auto-books relative z-10 max-h-[60vh] overflow-y-auto p-5 sm:p-6"
+        >
             <div class="books-grid-container">
                 {
                     recommendedBooks.map((book) => {
-                        const telemetry = bookTelemetry[book.title] || { status: 'COMPLETED', focus: 'SYS_ENG' };
+                        const telemetry = bookTelemetry[book.title] || {
+                            status: 'COMPLETED',
+                            focus: 'SYS_ENG',
+                        };
                         return (
-                            <div class="book-card-row group/book transition-spring hover:scale-[1.01] hover:shadow-[0_0_12px_var(--accent-glow)] items-center rounded-lg border border-slate-100 bg-slate-50 p-3.5 sm:p-4 dark:border-white/5 dark:bg-white/5 dark:hover:border-white/20 gap-4">
+                            <div class="book-card-row group/book transition-spring items-center gap-4 rounded-lg border border-slate-100 bg-slate-50 p-3.5 hover:scale-[1.01] hover:shadow-[0_0_12px_var(--accent-glow)] sm:p-4 dark:border-white/5 dark:bg-white/5 dark:hover:border-white/20">
                                 <div class="min-w-0">
-                                    <h4 class="text-sm font-bold text-slate-900 dark:text-white leading-snug">
+                                    <h4 class="text-sm leading-snug font-bold text-slate-900 dark:text-white">
                                         {book.title}
                                     </h4>
-                                    <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{book.author}</p>
+                                    <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                                        {book.author}
+                                    </p>
                                     {book.hint && (
-                                        <p class="mt-1.5 text-xs text-slate-400 dark:text-slate-500 line-clamp-2 max-h-0 opacity-0 group-hover/book:max-h-12 group-hover/book:opacity-100 transition-all duration-300 ease-out overflow-hidden leading-relaxed">
+                                        <p class="mt-1.5 line-clamp-2 max-h-0 overflow-hidden text-xs leading-relaxed text-slate-400 opacity-0 transition-all duration-300 ease-out group-hover/book:max-h-12 group-hover/book:opacity-100 dark:text-slate-500">
                                             {book.hint}
                                         </p>
                                     )}
                                 </div>
-                                
-                                <div class="hidden sm:block font-mono text-[9px] text-(--accent) opacity-80 tracking-tight select-none truncate">
+
+                                <div class="hidden truncate font-mono text-[9px] tracking-tight text-(--accent) opacity-80 select-none sm:block">
                                     STATUS: {telemetry.status} // FOCUS: {telemetry.focus}
                                 </div>
-                                
+
                                 <a
                                     aria-label={`Buy ${book.title} (opens in a new tab)`}
                                     href={book.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="magnetic-target rounded-md bg-(--accent) px-3.5 py-1.5 sm:px-4 text-xs font-bold text-white shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main) justify-self-end shrink-0"
+                                    class="magnetic-target shrink-0 justify-self-end rounded-md bg-(--accent) px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 sm:px-4 dark:focus-visible:ring-offset-(--bg-main)"
                                 >
                                     Buy
                                 </a>
@@ -518,8 +558,22 @@ const formatMarqueeDate = (date: Date) => {
         // 2. Sequential Cyber Scramble Text Deceleration Sequence
         const cyberIcons = document.querySelectorAll('.cyber-icon');
         const hexChars = [
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-            'A', 'B', 'C', 'D', 'E', 'F'
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            'A',
+            'B',
+            'C',
+            'D',
+            'E',
+            'F',
         ];
 
         cyberIcons.forEach((icon) => {
@@ -529,45 +583,53 @@ const formatMarqueeDate = (date: Date) => {
             const originalHTML = container.innerHTML;
             let scrambleInterval: number | undefined;
 
-            icon.addEventListener('mouseenter', () => {
-                if (scrambleInterval) {
-                    clearInterval(scrambleInterval);
-                }
-                const platform = icon.getAttribute('data-icon') || '';
-                const target = {
-                    x: ['5', '8'],
-                    github: ['4', '7'],
-                    linkedin: ['4', 'C']
-                }[platform] || ['F', 'F'];
+            icon.addEventListener(
+                'mouseenter',
+                () => {
+                    if (scrambleInterval) {
+                        clearInterval(scrambleInterval);
+                    }
+                    const platform = icon.getAttribute('data-icon') || '';
+                    const target = {
+                        x: ['5', '8'],
+                        github: ['4', '7'],
+                        linkedin: ['4', 'C'],
+                    }[platform] || ['F', 'F'];
 
-                let step = 0;
+                    let step = 0;
 
-                scrambleInterval = window.setInterval(() => {
-                    if (step === 0 || step === 1) {
-                        const char1 = hexChars[Math.floor(Math.random() * hexChars.length)];
-                        const char2 = hexChars[Math.floor(Math.random() * hexChars.length)];
-                        container.innerHTML = `<span class="font-mono text-[10px] font-bold text-(--accent) opacity-80">0x${char1}${char2}</span>`;
-                    } else if (step === 2) {
-                        const char2 = hexChars[Math.floor(Math.random() * hexChars.length)];
-                        container.innerHTML = `<span class="font-mono text-[10px] font-bold text-(--accent) opacity-80">0x${target[0]}${char2}</span>`;
-                    } else if (step === 3) {
-                        container.innerHTML = `<span class="font-mono text-[10px] font-bold text-(--accent) opacity-80">0x${target[0]}${target[1]}</span>`;
-                    } else {
+                    scrambleInterval = window.setInterval(() => {
+                        if (step === 0 || step === 1) {
+                            const char1 = hexChars[Math.floor(Math.random() * hexChars.length)];
+                            const char2 = hexChars[Math.floor(Math.random() * hexChars.length)];
+                            container.innerHTML = `<span class="font-mono text-[10px] font-bold text-(--accent) opacity-80">0x${char1}${char2}</span>`;
+                        } else if (step === 2) {
+                            const char2 = hexChars[Math.floor(Math.random() * hexChars.length)];
+                            container.innerHTML = `<span class="font-mono text-[10px] font-bold text-(--accent) opacity-80">0x${target[0]}${char2}</span>`;
+                        } else if (step === 3) {
+                            container.innerHTML = `<span class="font-mono text-[10px] font-bold text-(--accent) opacity-80">0x${target[0]}${target[1]}</span>`;
+                        } else {
+                            clearInterval(scrambleInterval);
+                            scrambleInterval = undefined;
+                            container.innerHTML = originalHTML;
+                        }
+                        step++;
+                    }, 60);
+                },
+                { signal }
+            );
+
+            icon.addEventListener(
+                'mouseleave',
+                () => {
+                    if (scrambleInterval) {
                         clearInterval(scrambleInterval);
                         scrambleInterval = undefined;
-                        container.innerHTML = originalHTML;
                     }
-                    step++;
-                }, 60);
-            }, { signal });
-
-            icon.addEventListener('mouseleave', () => {
-                if (scrambleInterval) {
-                    clearInterval(scrambleInterval);
-                    scrambleInterval = undefined;
-                }
-                container.innerHTML = originalHTML;
-            }, { signal });
+                    container.innerHTML = originalHTML;
+                },
+                { signal }
+            );
         });
     };
 

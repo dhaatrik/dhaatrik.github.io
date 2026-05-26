@@ -31,18 +31,19 @@ const popoverOrDialog = document.getElementById('my-top-layer-element');
 
 // Check if moveBefore is supported
 if ('moveBefore' in Element.prototype) {
-  targetParent.moveBefore(popoverOrDialog, null);
+    targetParent.moveBefore(popoverOrDialog, null);
 } else {
-  // Fallback: traditional move.
-  // Note: This WILL close <dialog>, popover, and fullscreen elements.
-  const wasOpen = popoverOrDialog.hasAttribute('open') || popoverOrDialog.matches(':popover-open');
-  targetParent.insertBefore(popoverOrDialog, null);
-  
-  // Manually restore state if possible
-  if (wasOpen && typeof popoverOrDialog.showModal === 'function') {
-    popoverOrDialog.showModal();
-  } else if (wasOpen && typeof popoverOrDialog.showPopover === 'function') {
-    popoverOrDialog.showPopover();
-  }
+    // Fallback: traditional move.
+    // Note: This WILL close <dialog>, popover, and fullscreen elements.
+    const wasOpen =
+        popoverOrDialog.hasAttribute('open') || popoverOrDialog.matches(':popover-open');
+    targetParent.insertBefore(popoverOrDialog, null);
+
+    // Manually restore state if possible
+    if (wasOpen && typeof popoverOrDialog.showModal === 'function') {
+        popoverOrDialog.showModal();
+    } else if (wasOpen && typeof popoverOrDialog.showPopover === 'function') {
+        popoverOrDialog.showPopover();
+    }
 }
 ```

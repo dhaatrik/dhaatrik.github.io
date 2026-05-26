@@ -22,34 +22,34 @@ This code measures the session duration of a user's visit to a page using `fetch
 const ANALYTICS_ENDPOINT = '/path/to/analytics/endpoint';
 
 const sessionData = {
-  duration: 0,
-  id: crypto.randomUUID(),
+    duration: 0,
+    id: crypto.randomUUID(),
 };
 
 let fetchLaterController = null;
 
 function queueBeacon() {
-  // Abort any pending beacons before creating a new one.
-  if (fetchLaterController) {
-    fetchLaterController.abort();
-  }
-  fetchLaterController = new AbortController();
+    // Abort any pending beacons before creating a new one.
+    if (fetchLaterController) {
+        fetchLaterController.abort();
+    }
+    fetchLaterController = new AbortController();
 
-  // Update session duration to the current page time.
-  sessionData.duration = performance.now();
+    // Update session duration to the current page time.
+    sessionData.duration = performance.now();
 
-  // Schedule a fetch for the data payload to be sent later.
-  // IMPORTANT: wrap the call in a try/catch to handle quota errors.
-  try {
-    fetchLater(ANALYTICS_ENDPOINT, {
-      method: 'POST',
-      headers: {'content-type': 'application/json'},
-      body: JSON.stringify(sessionData),
-      signal: fetchLaterController.signal,
-    });
-  } catch (error) {
-    // Handle errors as needed.
-  }
+    // Schedule a fetch for the data payload to be sent later.
+    // IMPORTANT: wrap the call in a try/catch to handle quota errors.
+    try {
+        fetchLater(ANALYTICS_ENDPOINT, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(sessionData),
+            signal: fetchLaterController.signal,
+        });
+    } catch (error) {
+        // Handle errors as needed.
+    }
 }
 
 // Update the session data and queue a new beacon every 10 seconds.
@@ -83,53 +83,49 @@ The only notable behavior difference with this polyfill is that it uses `visibil
 
 ```js
 globalThis.fetchLater ??= function fetchLater(url, init = {}) {
-  let timeoutHandle;
-  let activated = false;
+    let timeoutHandle;
+    let activated = false;
 
-  function sendNow() {
-    if (!(init.signal && init.signal.aborted)) {
-      // Use fetch keepalive if the browser supports it or if custom fetch
-      // parameters are specified (e.g. custom headers or methods).
-      // Otherwise fall back to `navigator.sendBeacon()`.
-      if (
-        'keepalive' in Request.prototype ||
-        init.method !== 'POST' ||
-        init.headers
-      ) {
-        fetch(url, Object.assign({}, init, {keepalive: true}));
-        activated = true;
-      } else {
-        activated = navigator.sendBeacon(url, init.body);
-      }
+    function sendNow() {
+        if (!(init.signal && init.signal.aborted)) {
+            // Use fetch keepalive if the browser supports it or if custom fetch
+            // parameters are specified (e.g. custom headers or methods).
+            // Otherwise fall back to `navigator.sendBeacon()`.
+            if ('keepalive' in Request.prototype || init.method !== 'POST' || init.headers) {
+                fetch(url, Object.assign({}, init, { keepalive: true }));
+                activated = true;
+            } else {
+                activated = navigator.sendBeacon(url, init.body);
+            }
+        }
+        destroy();
     }
-    destroy();
-  }
 
-  function destroy() {
-    document.removeEventListener('visibilitychange', sendNow);
-    clearTimeout(timeoutHandle);
-  }
-
-  if (document.visibilityState === 'hidden') {
-    // If the beacon was created while the page is already hidden, send data
-    // ASAP but wait until the next microtask to allow all sync code to run.
-    queueMicrotask(sendNow);
-  } else {
-    document.addEventListener('visibilitychange', sendNow);
-
-    if (typeof init.activateAfter === 'number' && init.activateAfter >= 0) {
-      timeoutHandle = setTimeout(sendNow, init.activateAfter);
+    function destroy() {
+        document.removeEventListener('visibilitychange', sendNow);
+        clearTimeout(timeoutHandle);
     }
-  }
 
-  if (init.signal) {
-    init.signal.addEventListener('abort', destroy);
-  }
+    if (document.visibilityState === 'hidden') {
+        // If the beacon was created while the page is already hidden, send data
+        // ASAP but wait until the next microtask to allow all sync code to run.
+        queueMicrotask(sendNow);
+    } else {
+        document.addEventListener('visibilitychange', sendNow);
 
-  return {
-    get activated() {
-      return activated;
-    },
-  };
+        if (typeof init.activateAfter === 'number' && init.activateAfter >= 0) {
+            timeoutHandle = setTimeout(sendNow, init.activateAfter);
+        }
+    }
+
+    if (init.signal) {
+        init.signal.addEventListener('abort', destroy);
+    }
+
+    return {
+        get activated() {
+            return activated;
+        },
+    };
 };
 ```

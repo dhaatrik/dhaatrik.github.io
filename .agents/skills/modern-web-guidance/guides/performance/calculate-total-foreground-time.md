@@ -15,34 +15,32 @@ MANDATORY: You must query the `visibility-state` performance entries to calculat
  * @returns {number} Total foreground time in milliseconds.
  */
 function getTotalForegroundTime() {
-  // MANDATORY: Query the visibility-state entries from the performance timeline.
-  const entries = performance.getEntriesByType('visibility-state');
+    // MANDATORY: Query the visibility-state entries from the performance timeline.
+    const entries = performance.getEntriesByType('visibility-state');
 
-  // Fallback: If the browser does not support VisibilityStateEntry,
-  // the API will gracefully return an empty array.
-  if (entries.length === 0) {
-    // Return total time since navigation start as a fallback.
-    return performance.now();
-  }
-
-  let totalForegroundTime = 0;
-
-  for (let i = 0; i < entries.length; i++) {
-    // Only calculate duration for periods where the state was 'visible'
-    if (entries[i].name === 'visible') {
-      const start = entries[i].startTime;
-
-      // The end time is the start time of the next state change,
-      // or the current time if this is the final entry.
-      const end = i + 1 < entries.length
-          ? entries[i + 1].startTime
-          : performance.now();
-
-      totalForegroundTime += (end - start);
+    // Fallback: If the browser does not support VisibilityStateEntry,
+    // the API will gracefully return an empty array.
+    if (entries.length === 0) {
+        // Return total time since navigation start as a fallback.
+        return performance.now();
     }
-  }
 
-  return totalForegroundTime;
+    let totalForegroundTime = 0;
+
+    for (let i = 0; i < entries.length; i++) {
+        // Only calculate duration for periods where the state was 'visible'
+        if (entries[i].name === 'visible') {
+            const start = entries[i].startTime;
+
+            // The end time is the start time of the next state change,
+            // or the current time if this is the final entry.
+            const end = i + 1 < entries.length ? entries[i + 1].startTime : performance.now();
+
+            totalForegroundTime += end - start;
+        }
+    }
+
+    return totalForegroundTime;
 }
 ```
 
@@ -63,7 +61,7 @@ const entries = performance.getEntriesByType('visibility-state');
 
 // If the array is empty, the API is likely unsupported.
 if (entries.length === 0) {
-  // Fallback: Return total time since page load.
-  return performance.now();
+    // Fallback: Return total time since page load.
+    return performance.now();
 }
 ```

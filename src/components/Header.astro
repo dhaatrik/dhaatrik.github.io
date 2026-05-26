@@ -3,20 +3,31 @@ import HeaderLink from './HeaderLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
 const pathname = Astro.url.pathname;
-const cleanPath = pathname.replace(/\/$/, "");
-const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
+const cleanPath = pathname.replace(/\/$/, '');
+const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
 ---
 
 <style>
     @keyframes sonar {
-        0% { transform: scale(1); opacity: 0.6; }
-        100% { transform: scale(2.5); opacity: 0; }
+        0% {
+            transform: scale(1);
+            opacity: 0.6;
+        }
+        100% {
+            transform: scale(2.5);
+            opacity: 0;
+        }
     }
-    .sonar-icon { position: relative; }
+    .sonar-icon {
+        position: relative;
+    }
     .sonar-icon::after {
         content: '';
         position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         border-radius: 50%;
         background-color: var(--accent);
         opacity: 0;
@@ -26,11 +37,15 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
     .sonar-trigger:hover .sonar-icon::after {
         animation: sonar 1s cubic-bezier(0, 0.2, 0.8, 1) forwards;
     }
-    
+
     /* Ensure the header transition is smooth for the hide/show effect and promoted to GPU */
     #main-header {
         will-change: transform;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        transition:
+            transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            background-color 0.3s ease,
+            border-color 0.3s ease,
+            box-shadow 0.3s ease;
     }
 
     /* Hamburger Line Animations */
@@ -65,22 +80,23 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
             bottom: anchor(bottom);
             left: anchor(left);
             right: anchor(right);
-            
+
             margin: -0.25rem -0.5rem;
-            
+
             border-radius: 0.375rem;
             background-color: color-mix(in srgb, var(--accent) 8%, transparent);
-            
+
             opacity: 0;
             pointer-events: none;
             z-index: 0;
-            
+
             @media (prefers-reduced-motion: no-preference) {
-                transition: top 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            bottom 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            left 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            right 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-                            opacity 0.2s ease;
+                transition:
+                    top 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                    bottom 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                    left 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                    right 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 0.2s ease;
             }
             @media (prefers-reduced-motion: reduce) {
                 transition: opacity 0.2s ease;
@@ -94,10 +110,20 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
 </style>
 
 <!-- Subtle Noise Texture -->
-<div class="pointer-events-none fixed inset-0 z-100 h-full w-full opacity-[0.03] mix-blend-overlay" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC42NScgbnVtT2N0YXZlcz0nMycgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0ndXJsKCNuKScvPjwvc3ZnPg==');"></div>
+<div
+    class="pointer-events-none fixed inset-0 z-100 h-full w-full opacity-[0.03] mix-blend-overlay"
+    style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC42NScgbnVtT2N0YXZlcz0nMycgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0ndXJsKCNuKScvPjwvc3ZnPg==');"
+>
+</div>
 <!-- Ambient Background Glows -->
-<div class="pointer-events-none fixed -top-[20%] -left-[10%] -z-10 h-[50vw] w-[50vw] rounded-full bg-(--accent)/20 mix-blend-multiply blur-[120px] dark:bg-(--accent)/10 dark:mix-blend-screen"></div>
-<div class="pointer-events-none fixed -bottom-[20%] -right-[10%] -z-10 h-[50vw] w-[50vw] rounded-full bg-purple-500/20 mix-blend-multiply blur-[120px] dark:bg-purple-500/10 dark:mix-blend-screen"></div>
+<div
+    class="pointer-events-none fixed -top-[20%] -left-[10%] -z-10 h-[50vw] w-[50vw] rounded-full bg-(--accent)/20 mix-blend-multiply blur-[120px] dark:bg-(--accent)/10 dark:mix-blend-screen"
+>
+</div>
+<div
+    class="pointer-events-none fixed -right-[10%] -bottom-[20%] -z-10 h-[50vw] w-[50vw] rounded-full bg-purple-500/20 mix-blend-multiply blur-[120px] dark:bg-purple-500/10 dark:mix-blend-screen"
+>
+</div>
 
 <a
     href="#main-content"
@@ -108,62 +134,86 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
 
 <header
     id="main-header"
-    class="fixed top-0 z-50 w-full backdrop-blur-lg bg-white/70 dark:bg-[#0b0e14]/70 border-b border-slate-200/50 dark:border-white/10"
+    class="fixed top-0 z-50 w-full border-b border-slate-200/50 bg-white/70 backdrop-blur-lg dark:border-white/10 dark:bg-[#0b0e14]/70"
 >
-    <nav id="main-nav" class="layout-container flex items-center justify-between py-4 transition-colors duration-300 ease-in-out">
+    <nav
+        id="main-nav"
+        class="layout-container flex items-center justify-between py-4 transition-colors duration-300 ease-in-out"
+    >
         {
             /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */
         }
         <a
             href="/"
             data-astro-prefetch="hover"
-            class="flex items-center transition-opacity hover:opacity-80 focus-visible:opacity-80 sonar-trigger group"
+            class="sonar-trigger group flex items-center transition-opacity hover:opacity-80 focus-visible:opacity-80"
             aria-label="Dhaatrik — Home"
         >
             <div class="sonar-icon rounded-full">
                 <img
                     src="/logo_dark.svg"
                     alt="Dhaatrik Logo"
-                    class="h-10 w-10 sm:h-12 sm:w-12 dark:hidden relative z-10"
+                    class="relative z-10 h-10 w-10 sm:h-12 sm:w-12 dark:hidden"
                     width="48"
                     height="48"
                 />
                 <img
                     src="/logo_light.svg"
                     alt="Dhaatrik Logo"
-                    class="hidden h-10 w-10 sm:h-12 sm:w-12 dark:block relative z-10"
+                    class="relative z-10 hidden h-10 w-10 sm:h-12 sm:w-12 dark:block"
                     width="48"
                     height="48"
                 />
             </div>
-            
-            <div class="hidden sm:flex items-center">
-                <div class="border-l border-slate-300 dark:border-white/20 h-6 mx-3 transition-colors group-hover:border-(--accent)/50"></div>
+
+            <div class="hidden items-center sm:flex">
+                <div
+                    class="mx-3 h-6 border-l border-slate-300 transition-colors group-hover:border-(--accent)/50 dark:border-white/20"
+                >
+                </div>
                 <div class="flex flex-col justify-center">
-                    <span class="font-bold text-slate-900 dark:text-white leading-none tracking-tight">DHAATRIK</span>
-                    <span class="font-mono text-[10px] text-(--accent) opacity-80 tracking-widest leading-none mt-1">{displayPath}</span>
+                    <span
+                        class="leading-none font-bold tracking-tight text-slate-900 dark:text-white"
+                        >DHAATRIK</span
+                    >
+                    <span
+                        class="mt-1 font-mono text-[10px] leading-none tracking-widest text-(--accent) opacity-80"
+                        >{displayPath}</span
+                    >
                 </div>
             </div>
         </a>
         <div class="flex items-center gap-2.5 sm:gap-4 md:gap-6">
-            <div class="hidden md:flex items-center gap-6 desktop-nav-links">
+            <div class="desktop-nav-links hidden items-center gap-6 md:flex">
                 <HeaderLink
                     href="/"
-                    class="text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
+                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
-                    <span aria-hidden="true" class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 01 ]</span>Home
+                    <span
+                        aria-hidden="true"
+                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
+                        >[ 01 ]</span
+                    >Home
                 </HeaderLink>
                 <HeaderLink
                     href="/about"
-                    class="text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
+                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
-                    <span aria-hidden="true" class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 02 ]</span>Personnel
+                    <span
+                        aria-hidden="true"
+                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
+                        >[ 02 ]</span
+                    >Personnel
                 </HeaderLink>
                 <HeaderLink
                     href="/blog"
-                    class="text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary) flex items-center group/link"
+                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
-                    <span aria-hidden="true" class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mr-2 opacity-70 group-hover/link:text-(--accent) transition-colors">[ 03 ]</span>Transmissions
+                    <span
+                        aria-hidden="true"
+                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
+                        >[ 03 ]</span
+                    >Transmissions
                 </HeaderLink>
             </div>
             <ThemeToggle />
@@ -171,49 +221,86 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                 id="mobile-nav-toggle"
                 aria-label="Toggle navigation menu"
                 aria-expanded="false"
-                class="magnetic-target flex flex-col justify-center items-center gap-1.5 h-9 w-9 border border-transparent rounded-full hover:bg-slate-200/60 hover:text-slate-900 dark:hover:bg-white/10 dark:hover:text-white transition-colors cursor-pointer relative z-50 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 dark:focus-visible:ring-offset-(--bg-main) md:hidden"
+                class="magnetic-target relative z-50 flex h-9 w-9 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full border border-transparent transition-colors hover:bg-slate-200/60 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 md:hidden dark:hover:bg-white/10 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
             >
-                <span class="hamburger-line w-5 h-0.5 bg-current transition-all duration-300"></span>
-                <span class="hamburger-line w-5 h-0.5 bg-current transition-all duration-300"></span>
-                <span class="hamburger-line w-5 h-0.5 bg-current transition-all duration-300"></span>
+                <span class="hamburger-line h-0.5 w-5 bg-current transition-all duration-300"
+                ></span>
+                <span class="hamburger-line h-0.5 w-5 bg-current transition-all duration-300"
+                ></span>
+                <span class="hamburger-line h-0.5 w-5 bg-current transition-all duration-300"
+                ></span>
             </button>
         </div>
     </nav>
 </header>
 
-<div id="mobile-nav-backdrop" class="fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"></div>
+<div
+    id="mobile-nav-backdrop"
+    class="pointer-events-none fixed inset-0 z-40 bg-slate-950/40 opacity-0 backdrop-blur-md transition-opacity duration-300 md:hidden"
+>
+</div>
 
-<nav id="mobile-nav-drawer" class="fixed top-0 right-0 z-40 h-full w-72 backdrop-blur-xl bg-white/90 dark:bg-[#151a22]/90 border-l border-slate-200/50 dark:border-white/10 p-6 pt-24 shadow-2xl transition-transform duration-300 translate-x-full flex flex-col gap-6 md:hidden" aria-label="Mobile navigation">
+<nav
+    id="mobile-nav-drawer"
+    class="fixed top-0 right-0 z-40 flex h-full w-72 translate-x-full flex-col gap-6 border-l border-slate-200/50 bg-white/90 p-6 pt-24 shadow-2xl backdrop-blur-xl transition-transform duration-300 md:hidden dark:border-white/10 dark:bg-[#151a22]/90"
+    aria-label="Mobile navigation"
+>
     <!-- Decorative Grid Motif -->
-    <div class="absolute inset-0 pointer-events-none opacity-[0.02] dark:opacity-[0.04] bg-grid-motif"></div>
+    <div
+        class="bg-grid-motif pointer-events-none absolute inset-0 opacity-[0.02] dark:opacity-[0.04]"
+    >
+    </div>
 
-    <div class="flex flex-col gap-3 font-mono relative z-10">
-        <div class="text-[9px] text-slate-400 dark:text-slate-500 tracking-widest uppercase border-b border-slate-200/50 dark:border-white/5 pb-2 mb-2">// DIRECTORY_INDEX</div>
-        
+    <div class="relative z-10 flex flex-col gap-3 font-mono">
+        <div
+            class="mb-2 border-b border-slate-200/50 pb-2 text-[9px] tracking-widest text-slate-400 uppercase dark:border-white/5 dark:text-slate-500"
+        >
+            // DIRECTORY_INDEX
+        </div>
+
         {
             [
-                { href: "/", label: "Home", index: "[ 01 ]", isActive: cleanPath === "" || cleanPath === "/" },
-                { href: "/about", label: "Personnel", index: "[ 02 ]", isActive: cleanPath.startsWith("/about") },
-                { href: "/blog", label: "Transmissions", index: "[ 03 ]", isActive: cleanPath.startsWith("/blog") }
+                {
+                    href: '/',
+                    label: 'Home',
+                    index: '[ 01 ]',
+                    isActive: cleanPath === '' || cleanPath === '/',
+                },
+                {
+                    href: '/about',
+                    label: 'Personnel',
+                    index: '[ 02 ]',
+                    isActive: cleanPath.startsWith('/about'),
+                },
+                {
+                    href: '/blog',
+                    label: 'Transmissions',
+                    index: '[ 03 ]',
+                    isActive: cleanPath.startsWith('/blog'),
+                },
             ].map((item) => (
                 <a
                     href={item.href}
                     data-astro-prefetch="hover"
                     class:list={[
-                        "group/link relative flex items-center justify-between py-2.5 px-3.5 rounded-lg transition-all duration-300 text-sm outline-none focus-visible:ring-2 focus-visible:ring-(--accent)",
+                        'group/link relative flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-(--accent)',
                         item.isActive
-                            ? "text-(--accent) bg-(--accent)/10 dark:bg-(--accent)/15 font-semibold"
-                            : "text-slate-700 dark:text-slate-300 hover:text-(--accent) dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-white/5"
+                            ? 'bg-(--accent)/10 font-semibold text-(--accent) dark:bg-(--accent)/15'
+                            : 'text-slate-700 hover:bg-slate-100/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white',
                     ]}
                 >
                     {item.isActive && (
-                        <span class="absolute left-0 top-2 bottom-2 w-1 rounded-r-md bg-(--accent) shadow-[0_0_8px_var(--accent)]" />
+                        <span class="absolute top-2 bottom-2 left-0 w-1 rounded-r-md bg-(--accent) shadow-[0_0_8px_var(--accent)]" />
                     )}
                     <div class="flex items-center gap-3">
-                        <span class:list={[
-                            "text-[10px] transition-colors",
-                            item.isActive ? "text-(--accent)" : "text-slate-400 dark:text-slate-500 group-hover/link:text-(--accent)"
-                        ]}>
+                        <span
+                            class:list={[
+                                'text-[10px] transition-colors',
+                                item.isActive
+                                    ? 'text-(--accent)'
+                                    : 'text-slate-400 group-hover/link:text-(--accent) dark:text-slate-500',
+                            ]}
+                        >
                             {item.index}
                         </span>
                         <span class="tracking-wide">{item.label}</span>
@@ -229,8 +316,10 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         class:list={[
-                            "transition-transform duration-300",
-                            item.isActive ? "text-(--accent) translate-x-0" : "text-slate-400 dark:text-slate-600 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0"
+                            'transition-transform duration-300',
+                            item.isActive
+                                ? 'translate-x-0 text-(--accent)'
+                                : '-translate-x-2 text-slate-400 opacity-0 group-hover/link:translate-x-0 group-hover/link:opacity-100 dark:text-slate-600',
                         ]}
                     >
                         <path d="M5 12h14" />
@@ -240,28 +329,43 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
             ))
         }
     </div>
-    
+
     <!-- Telemetry sci-fi panel in footer -->
-    <div class="mt-auto border-t border-slate-200/60 dark:border-white/10 pt-5 flex flex-col gap-4 font-mono text-[10px] text-slate-500 dark:text-slate-400 relative z-10">
+    <div
+        class="relative z-10 mt-auto flex flex-col gap-4 border-t border-slate-200/60 pt-5 font-mono text-[10px] text-slate-500 dark:border-white/10 dark:text-slate-400"
+    >
         <div class="flex items-center justify-between">
-            <span class="tracking-wider uppercase text-[9px] text-slate-400 dark:text-slate-500">SYS.STATUS</span>
-            <div class="flex items-center gap-1.5 text-green-600 dark:text-green-400 font-semibold">
+            <span class="text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
+                >SYS.STATUS</span
+            >
+            <div class="flex items-center gap-1.5 font-semibold text-green-600 dark:text-green-400">
                 <span class="relative flex h-1.5 w-1.5">
-                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
-                    <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-500" />
+                    <span
+                        class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"
+                    ></span>
+                    <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-500"></span>
                 </span>
-                <span class="tracking-widest uppercase text-[9px]">ACTIVE</span>
+                <span class="text-[9px] tracking-widest uppercase">ACTIVE</span>
             </div>
         </div>
 
-        <div class="flex flex-col gap-1 border-t border-dashed border-slate-200/60 dark:border-white/5 pt-3">
-            <span class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">SYS.LOCATION</span>
-            <span id="mobile-telemetry-path" class="text-(--accent) font-semibold truncate leading-none lowercase tracking-wide">
+        <div
+            class="flex flex-col gap-1 border-t border-dashed border-slate-200/60 pt-3 dark:border-white/5"
+        >
+            <span class="text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
+                >SYS.LOCATION</span
+            >
+            <span
+                id="mobile-telemetry-path"
+                class="truncate leading-none font-semibold tracking-wide text-(--accent) lowercase"
+            >
                 {displayPath}
             </span>
         </div>
 
-        <div class="border-t border-slate-200/60 dark:border-white/10 pt-3 flex items-center justify-between text-[9px] text-slate-400 dark:text-slate-500 tracking-wider">
+        <div
+            class="flex items-center justify-between border-t border-slate-200/60 pt-3 text-[9px] tracking-wider text-slate-400 dark:border-white/10 dark:text-slate-500"
+        >
             <span>SWIPE RIGHT TO CLOSE</span>
             <span>[ ESC ]</span>
         </div>
@@ -285,26 +389,38 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
         const toggleBtn = document.getElementById('mobile-nav-toggle');
         const drawer = document.getElementById('mobile-nav-drawer');
         const backdrop = document.getElementById('mobile-nav-backdrop');
-        
+
         if (!header || !nav) return;
 
-        const hasScrollTimeline = CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)');
+        const hasScrollTimeline = CSS.supports(
+            '(animation-timeline: scroll()) and (animation-range: 0% 100%)'
+        );
 
         const updateHeader = () => {
             if (signal.aborted) return;
             const currentScroll = window.scrollY;
-            
+
             // Shrink header and add subtle shadow on scroll (JS fallback only)
             if (!hasScrollTimeline) {
                 if (currentScroll > 50) {
                     nav.classList.remove('py-4');
                     nav.classList.add('py-2');
-                    header.classList.add('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
+                    header.classList.add(
+                        'shadow-md',
+                        'dark:shadow-black/50',
+                        'bg-white/80',
+                        'dark:bg-[#0b0e14]/80'
+                    );
                     header.classList.remove('bg-white/70', 'dark:bg-[#0b0e14]/70');
                 } else {
                     nav.classList.add('py-4');
                     nav.classList.remove('py-2');
-                    header.classList.remove('shadow-md', 'dark:shadow-black/50', 'bg-white/80', 'dark:bg-[#0b0e14]/80');
+                    header.classList.remove(
+                        'shadow-md',
+                        'dark:shadow-black/50',
+                        'bg-white/80',
+                        'dark:bg-[#0b0e14]/80'
+                    );
                     header.classList.add('bg-white/70', 'dark:bg-[#0b0e14]/70');
                 }
             }
@@ -317,12 +433,15 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                 } else if (currentScroll > lastScroll && currentScroll > 150) {
                     // Scrolling down past threshold
                     header.style.transform = 'translateY(-100%)';
-                } else if (currentScroll < lastScroll && (lastScroll - currentScroll > 10 || currentScroll < 50)) {
+                } else if (
+                    currentScroll < lastScroll &&
+                    (lastScroll - currentScroll > 10 || currentScroll < 50)
+                ) {
                     // Scrolling up (with a small buffer to prevent jitter)
                     header.style.transform = 'translateY(0)';
                 }
             }
-            
+
             lastScroll = currentScroll <= 0 ? 0 : currentScroll;
             headerScrollTicking = false;
         };
@@ -353,7 +472,7 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                 if (focusables.length === 0) return;
                 const first = focusables[0] as HTMLElement;
                 const last = focusables[focusables.length - 1] as HTMLElement;
-                
+
                 if (e.shiftKey) {
                     if (document.activeElement === first) {
                         last.focus();
@@ -397,47 +516,63 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                 toggleBtn.focus();
             };
 
-            toggleBtn.addEventListener('click', () => {
-                const isOpen = toggleBtn.classList.contains('open');
-                if (isOpen) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
-            }, { signal });
+            toggleBtn.addEventListener(
+                'click',
+                () => {
+                    const isOpen = toggleBtn.classList.contains('open');
+                    if (isOpen) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                },
+                { signal }
+            );
 
             backdrop.addEventListener('click', closeMenu, { signal });
 
             // Swipe Right to Close Drawer Gestures
-            drawer.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-                currentX = startX;
-                isSwiping = true;
-                drawer.style.transition = 'none';
-            }, { passive: true, signal });
+            drawer.addEventListener(
+                'touchstart',
+                (e) => {
+                    startX = e.touches[0].clientX;
+                    currentX = startX;
+                    isSwiping = true;
+                    drawer.style.transition = 'none';
+                },
+                { passive: true, signal }
+            );
 
-            drawer.addEventListener('touchmove', (e) => {
-                if (!isSwiping) return;
-                currentX = e.touches[0].clientX;
-                const diffX = currentX - startX;
-                if (diffX > 0) {
-                    drawer.style.transform = `translateX(${diffX}px)`;
-                }
-            }, { passive: true, signal });
+            drawer.addEventListener(
+                'touchmove',
+                (e) => {
+                    if (!isSwiping) return;
+                    currentX = e.touches[0].clientX;
+                    const diffX = currentX - startX;
+                    if (diffX > 0) {
+                        drawer.style.transform = `translateX(${diffX}px)`;
+                    }
+                },
+                { passive: true, signal }
+            );
 
-            drawer.addEventListener('touchend', () => {
-                if (!isSwiping) return;
-                isSwiping = false;
-                drawer.style.transition = '';
-                const diffX = currentX - startX;
-                if (diffX > 60) {
-                    closeMenu();
-                } else {
-                    drawer.style.transform = '';
-                }
-                startX = 0;
-                currentX = 0;
-            }, { signal });
+            drawer.addEventListener(
+                'touchend',
+                () => {
+                    if (!isSwiping) return;
+                    isSwiping = false;
+                    drawer.style.transition = '';
+                    const diffX = currentX - startX;
+                    if (diffX > 60) {
+                        closeMenu();
+                    } else {
+                        drawer.style.transform = '';
+                    }
+                    startX = 0;
+                    currentX = 0;
+                },
+                { signal }
+            );
 
             // ESC key to close drawer
             const handleKeyDown = (e: KeyboardEvent) => {
@@ -452,8 +587,9 @@ const displayPath = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
                 const telemetryPathEl = document.getElementById('mobile-telemetry-path');
                 if (telemetryPathEl) {
                     const pathname = window.location.pathname;
-                    const cleanPath = pathname.replace(/\/$/, "");
-                    telemetryPathEl.textContent = cleanPath === "" ? "~/home" : `~/home${cleanPath}`;
+                    const cleanPath = pathname.replace(/\/$/, '');
+                    telemetryPathEl.textContent =
+                        cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                 }
             };
             updateTelemetryPath();

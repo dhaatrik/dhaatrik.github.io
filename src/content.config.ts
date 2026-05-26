@@ -19,7 +19,9 @@ const blog = defineCollection({
             series: z.string().optional(),
             entropy: z.enum(['low', 'medium', 'high', 'deep-dive']).optional(),
             author: z.string().default('DHAATRIK'),
-            clearance: z.enum(['PUBLIC', 'INTERNAL', 'RESTRICTED', 'CONFIDENTIAL', 'LEVEL_4']).default('PUBLIC'),
+            clearance: z
+                .enum(['PUBLIC', 'INTERNAL', 'RESTRICTED', 'CONFIDENTIAL', 'LEVEL_4'])
+                .default('PUBLIC'),
         }),
 });
 

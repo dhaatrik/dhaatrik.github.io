@@ -10,7 +10,7 @@ Use `moveBefore()` exactly as you would use `insertBefore()`. It requires two ar
 const newParent = document.getElementById('new-parent');
 const elementWithState = document.getElementById('iframe-or-focused-input');
 
-// MANDATORY: Use moveBefore to preserve state. 
+// MANDATORY: Use moveBefore to preserve state.
 // Passing null as the second argument appends the element to the end of newParent.
 newParent.moveBefore(elementWithState, null);
 ```
@@ -23,14 +23,14 @@ If your custom element needs to perform specific logic when moved, implement the
 
 ```javascript
 class MyCustomElement extends HTMLElement {
-  connectedCallback() {
-    // Runs on initial insertion.
-  }
-  
-  connectedMoveCallback() {
-    // Runs when the element is moved via moveBefore().
-    // Use this to update state that depends on the new DOM location.
-  }
+    connectedCallback() {
+        // Runs on initial insertion.
+    }
+
+    connectedMoveCallback() {
+        // Runs when the element is moved via moveBefore().
+        // Use this to update state that depends on the new DOM location.
+    }
 }
 ```
 
@@ -40,7 +40,7 @@ moveBefore() has limited availability.
 Supported by: Chrome 133 (Feb 2025), Edge 133 (Feb 2025), and Firefox 144 (Oct 2025).
 Unsupported in: Safari.
 
-Since `moveBefore()` is a progressive enhancement, you MUST use feature detection before calling it, falling back to traditional `insertBefore()` or `appendChild()` operations for older browsers. 
+Since `moveBefore()` is a progressive enhancement, you MUST use feature detection before calling it, falling back to traditional `insertBefore()` or `appendChild()` operations for older browsers.
 
 ```javascript
 const targetParent = document.getElementById('target-container');
@@ -48,10 +48,10 @@ const nodeToMove = document.getElementById('moving-element');
 
 // Check if moveBefore is supported on the Element prototype
 if ('moveBefore' in Element.prototype) {
-  targetParent.moveBefore(nodeToMove, null);
+    targetParent.moveBefore(nodeToMove, null);
 } else {
-  // Fallback: traditional move. 
-  // Note: This WILL reset <iframe>, animation, and focus state in unsupported browsers.
-  targetParent.insertBefore(nodeToMove, null);
+    // Fallback: traditional move.
+    // Note: This WILL reset <iframe>, animation, and focus state in unsupported browsers.
+    targetParent.insertBefore(nodeToMove, null);
 }
 ```

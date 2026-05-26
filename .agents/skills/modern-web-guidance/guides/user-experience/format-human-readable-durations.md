@@ -27,10 +27,10 @@ console.log(formatter.format(balanced));
 
 ### Best Practices
 
-*   **DO** use `Temporal.Duration.round()` with `largestUnit` to control the display strategy (detailed breakdown vs total count).
-*   **DO** use `Intl.DurationFormat` for localized string formatting and automatic pluralization, or fall back to manual construction if not supported. 
-*   **DO NOT** rely on `Temporal.Duration.prototype.toString()` for user-facing text; it returns ISO 8601 strings (e.g., `PT1H30M`).
-*   **DO** use feature detection and a polyfill for environments lacking native support.
+- **DO** use `Temporal.Duration.round()` with `largestUnit` to control the display strategy (detailed breakdown vs total count).
+- **DO** use `Intl.DurationFormat` for localized string formatting and automatic pluralization, or fall back to manual construction if not supported.
+- **DO NOT** rely on `Temporal.Duration.prototype.toString()` for user-facing text; it returns ISO 8601 strings (e.g., `PT1H30M`).
+- **DO** use feature detection and a polyfill for environments lacking native support.
 
 ## Fallback strategies
 
@@ -47,14 +47,14 @@ Note that the polyfill does not automatically assign the `Temporal` object to th
 ```javascript
 // Check if Temporal is supported natively
 (async () => {
-  if (typeof Temporal === 'undefined') {
-    // Load the polyfill conditionally
-    const module = await import("https://esm.sh/@js-temporal/polyfill");
-    globalThis.Temporal = module.Temporal;
-    // Extend Date.prototype if needed
-    Date.prototype.toTemporalInstant = module.toTemporalInstant;
-    initializeApp();
-  }
+    if (typeof Temporal === 'undefined') {
+        // Load the polyfill conditionally
+        const module = await import('https://esm.sh/@js-temporal/polyfill');
+        globalThis.Temporal = module.Temporal;
+        // Extend Date.prototype if needed
+        Date.prototype.toTemporalInstant = module.toTemporalInstant;
+        initializeApp();
+    }
 })();
 ```
 
@@ -65,23 +65,23 @@ Supported by: Chrome 129 (Sep 2024), Edge 129 (Sep 2024), Firefox 136 (Mar 2025)
 
 If `Intl.DurationFormat` is not supported, you should feature-detect it and fall back to manual string construction by extracting the balanced duration properties.
 
-* **Guidance:** Use `typeof Intl.DurationFormat !== 'undefined'` to check for support. If unsupported, extract properties like `.hours` and `.minutes` from the balanced `Temporal.Duration` object and combine them, handling pluralization properly.
+- **Guidance:** Use `typeof Intl.DurationFormat !== 'undefined'` to check for support. If unsupported, extract properties like `.hours` and `.minutes` from the balanced `Temporal.Duration` object and combine them, handling pluralization properly.
 
 ```javascript
 // 3. Format the display string
 
 if (typeof Intl.DurationFormat !== 'undefined') {
-  // Use recommended Intl API if available
-  const formatter = new Intl.DurationFormat('en', { style: 'long' });
-  console.log(formatter.format(balanced));
+    // Use recommended Intl API if available
+    const formatter = new Intl.DurationFormat('en', { style: 'long' });
+    console.log(formatter.format(balanced));
 } else {
-  // Fallback manual formatting (assuming duration is already balanced)
-  const h = balanced.hours;
-  const m = balanced.minutes;
+    // Fallback manual formatting (assuming duration is already balanced)
+    const h = balanced.hours;
+    const m = balanced.minutes;
 
-  const hoursStr = `${h} hour${h === 1 ? '' : 's'}`;
-  const minutesStr = `${m} minute${m === 1 ? '' : 's'}`;
+    const hoursStr = `${h} hour${h === 1 ? '' : 's'}`;
+    const minutesStr = `${m} minute${m === 1 ? '' : 's'}`;
 
-  console.log(`${hoursStr} and ${minutesStr}`);
+    console.log(`${hoursStr} and ${minutesStr}`);
 }
 ```

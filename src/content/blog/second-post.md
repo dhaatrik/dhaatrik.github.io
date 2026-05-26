@@ -23,4 +23,3 @@ $$\Delta v = v_e \ln \frac{m_0}{m_f}$$
 And here is Newton's law of universal gravitation representing orbital mechanics:
 
 $$F = G \frac{m_1 m_2}{r^2}$$
-
