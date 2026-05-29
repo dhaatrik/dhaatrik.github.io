@@ -67,3 +67,8 @@
 
 **Learning:** Running expensive layout recalculations (like filtering large lists of DOM elements) synchronously on every `input` event keystroke causes layout thrashing and UI jank.
 **Action:** Always debounce text input event listeners (e.g. `150ms`) when the handler performs DOM manipulation or searching to significantly reduce redundant processing and ensure a smooth typing experience.
+
+## 2026-05-26 - Cache DOM extraction in client-side search to prevent redundant parsing
+
+**Learning:** During client-side filtering on every keystroke, repeatedly reading textContent and dataset values from the DOM is an expensive operation that can cause layout thrashing and slow down search performance.
+**Action:** When performing client-side filtering, extract the necessary data (textContent, dataset tags) once into an array during initialization and use this cached data during the `filterPosts` method instead of re-reading from the DOM elements on every keystroke.
