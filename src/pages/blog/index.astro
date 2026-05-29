@@ -326,6 +326,16 @@ const postsWithReadingTime = posts.map((post: any) => {
                 searchAbortController = new AbortController();
                 const { signal } = searchAbortController;
 
+                // ⚡ Bolt: Cache expensive DOM text extraction to avoid redundant parsing on every keystroke
+                const cachedCardsData = Array.from(cards).map((card) => {
+                    const htmlCard = card as HTMLElement;
+                    return {
+                        element: htmlCard,
+                        tags: htmlCard.dataset.tags?.toLowerCase().split(',') || [],
+                        text: htmlCard.textContent?.toLowerCase() || '',
+                    };
+                });
+
                 let activeTag = 'all';
 
                 // Function to perform combined filtering
@@ -333,19 +343,15 @@ const postsWithReadingTime = posts.map((post: any) => {
                     const term = searchInput.value.toLowerCase();
                     let visibleCount = 0;
 
-                    cards.forEach((card) => {
-                        const htmlCard = card as HTMLElement;
-                        const cardTags = htmlCard.dataset.tags?.toLowerCase().split(',') || [];
-                        const text = htmlCard.textContent?.toLowerCase() || '';
-
+                    cachedCardsData.forEach(({ element, tags, text }) => {
                         const matchesSearch = text.includes(term);
-                        const matchesTag = activeTag === 'all' || cardTags.includes(activeTag);
+                        const matchesTag = activeTag === 'all' || tags.includes(activeTag);
 
                         if (matchesSearch && matchesTag) {
-                            htmlCard.style.display = '';
+                            element.style.display = '';
                             visibleCount++;
                         } else {
-                            htmlCard.style.display = 'none';
+                            element.style.display = 'none';
                         }
                     });
 
