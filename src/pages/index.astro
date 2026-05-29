@@ -9,15 +9,19 @@ import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
 
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
-const [rawProjects, rawPosts] = await Promise.all([
-    getCollection('projects'),
-    getCollection('blog'),
+const [projects, posts] = await Promise.all([
+    getCollection('projects').then((raw) =>
+        raw.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => a.data.order - b.data.order)
+    ),
+    getCollection('blog').then((raw) =>
+        raw
+            .sort(
+                (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+                    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+            )
+            .slice(0, 3)
+    ),
 ]);
-
-const projects: CollectionEntry<'projects'>[] = rawProjects.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => a.data.order - b.data.order);
-const posts: CollectionEntry<'blog'>[] = rawPosts
-    .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    .slice(0, 3);
 
 // Premium Founder Lineup
 const lineupNames = ['Astro', 'React', 'TypeScript', 'Rust', 'Python', 'TensorFlow'];
