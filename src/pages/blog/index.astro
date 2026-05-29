@@ -61,26 +61,31 @@ const postsWithReadingTime = posts.map((post: any) => {
                 <div class="mb-10 flex flex-wrap gap-2.5 font-mono text-xs select-none">
                     <button
                         data-filter="all"
+                        aria-pressed="true"
                         class="filter-tab active cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-[#1c232e] [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)] [&.active]:hover:bg-(--accent)/20"
                         >[ ALL ]</button
                     >
                     <button
                         data-filter="ai_orchestration"
+                        aria-pressed="false"
                         class="filter-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-[#1c232e] [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)] [&.active]:hover:bg-(--accent)/20"
                         >[ AI_ORCHESTRATION ]</button
                     >
                     <button
                         data-filter="flight_dynamics"
+                        aria-pressed="false"
                         class="filter-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-[#1c232e] [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)] [&.active]:hover:bg-(--accent)/20"
                         >[ FLIGHT_DYNAMICS ]</button
                     >
                     <button
                         data-filter="aerospace"
+                        aria-pressed="false"
                         class="filter-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-[#1c232e] [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)] [&.active]:hover:bg-(--accent)/20"
                         >[ AEROSPACE ]</button
                     >
                     <button
                         data-filter="agtech"
+                        aria-pressed="false"
                         class="filter-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-[#1c232e] [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)] [&.active]:hover:bg-(--accent)/20"
                         >[ AGTECH ]</button
                     >
@@ -414,8 +419,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                     const htmlT = t as HTMLElement;
                     if (htmlT.dataset.filter === activeTag) {
                         htmlT.classList.add('active');
+                        htmlT.setAttribute('aria-pressed', 'true');
                     } else {
                         htmlT.classList.remove('active');
+                        htmlT.setAttribute('aria-pressed', 'false');
                     }
                 });
 
@@ -453,8 +460,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                                 const htmlT = t as HTMLElement;
                                 if (htmlT.dataset.filter === activeTag) {
                                     htmlT.classList.add('active');
+                                    htmlT.setAttribute('aria-pressed', 'true');
                                 } else {
                                     htmlT.classList.remove('active');
+                                    htmlT.setAttribute('aria-pressed', 'false');
                                 }
                             });
 
