@@ -52,8 +52,16 @@ export async function setupPost() {
         exportBtn.addEventListener(
             'click',
             () => {
-                exportOptions.classList.toggle('hidden');
-                exportOptions.classList.toggle('flex');
+                const isHidden = exportOptions.classList.contains('hidden');
+                if (isHidden) {
+                    exportOptions.classList.remove('hidden');
+                    exportOptions.classList.add('flex');
+                    exportBtn.setAttribute('aria-expanded', 'true');
+                } else {
+                    exportOptions.classList.add('hidden');
+                    exportOptions.classList.remove('flex');
+                    exportBtn.setAttribute('aria-expanded', 'false');
+                }
             },
             { signal }
         );
