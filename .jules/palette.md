@@ -83,6 +83,6 @@
 **Learning:** Interactive filter tabs that visually indicate their active state (e.g., using an `.active` class) must also communicate this state programmatically to assistive technologies. Simply toggling a CSS class leaves screen reader users unaware of which filter is currently applied.
 **Action:** Always add `aria-pressed="true"` to the currently active filter tab and `aria-pressed="false"` to the inactive tabs. Ensure these attributes are dynamically toggled alongside their corresponding visual classes in the client-side JavaScript logic.
 
-## 2024-05-30 - Added aria-expanded to disclosure widget
+## 2026-05-30 - Added aria-expanded to disclosure widget
 **Learning:** Buttons that toggle the visibility of content (like dropdowns or menus) need `aria-expanded` and `aria-controls` for screen readers to properly understand their relationship and current state.
 **Action:** Ensure all disclosure widgets implement `aria-expanded` and update it dynamically in JavaScript.
