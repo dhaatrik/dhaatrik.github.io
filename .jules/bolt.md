@@ -72,3 +72,8 @@
 
 **Learning:** During client-side filtering on every keystroke, repeatedly reading textContent and dataset values from the DOM is an expensive operation that can cause layout thrashing and slow down search performance.
 **Action:** When performing client-side filtering, extract the necessary data (textContent, dataset tags) once into an array during initialization and use this cached data during the `filterPosts` method instead of re-reading from the DOM elements on every keystroke.
+
+## 2026-05-27 - Throttle mousemove with requestAnimationFrame to prevent layout thrashing
+
+**Learning:** Unthrottled `mousemove` events can fire significantly faster than the browser's refresh rate (e.g., a 1000Hz gaming mouse vs a 60Hz screen). Updating CSS variables inside these callbacks causes wasted style recalculations and potential UI jank.
+**Action:** When updating continuous visual effects via `mousemove` (like a flashlight or spotlight tracking the cursor), wrap the style updates inside a `requestAnimationFrame` callback to synchronize them with the browser's render cycle.
