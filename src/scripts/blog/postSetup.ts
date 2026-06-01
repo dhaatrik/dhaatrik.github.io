@@ -408,22 +408,6 @@ export async function setupPost() {
         );
     }
 
-    // 3.2 Flashlight Spotlight mouse tracking
-    const flashlight = document.getElementById('flashlight-bg');
-    // ⚡ Bolt: Throttle mousemove with requestAnimationFrame to prevent layout thrashing
-    let mouseMoveRafId: number | null = null;
-    const handleMouseMove = (e: MouseEvent) => {
-        if (!flashlight) return;
-        if (!mouseMoveRafId) {
-            mouseMoveRafId = requestAnimationFrame(() => {
-                document.documentElement.style.setProperty('--bg-mouse-x', `${e.clientX}px`);
-                document.documentElement.style.setProperty('--bg-mouse-y', `${e.clientY}px`);
-                mouseMoveRafId = null;
-            });
-        }
-    };
-    document.addEventListener('mousemove', handleMouseMove, { passive: true, signal });
-
     // 3.3 Interactive Formula Term Inspector
     const mathBlocks = document.querySelectorAll('.katex-display, .katex');
     mathBlocks.forEach((block) => {

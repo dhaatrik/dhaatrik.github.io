@@ -77,3 +77,8 @@
 
 **Learning:** Unthrottled `mousemove` events can fire significantly faster than the browser's refresh rate (e.g., a 1000Hz gaming mouse vs a 60Hz screen). Updating CSS variables inside these callbacks causes wasted style recalculations and potential UI jank.
 **Action:** When updating continuous visual effects via `mousemove` (like a flashlight or spotlight tracking the cursor), wrap the style updates inside a `requestAnimationFrame` callback to synchronize them with the browser's render cycle.
+
+## 2026-06-01 - Throttling redundant layout recalcs
+
+**Learning:** Using `getBoundingClientRect` inside an unthrottled `mousemove` event triggers synchronous layout recalcs and layout thrashing, severely degrading UI performance on pages with multiple active event listeners.
+**Action:** Always throttle high-frequency layout-reading DOM events (like `mousemove` triggering `getBoundingClientRect`) using `requestAnimationFrame`, and ensure duplicated event listeners across multiple files are removed to maintain a single source of truth for global interactions.
