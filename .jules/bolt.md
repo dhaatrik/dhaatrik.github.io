@@ -72,3 +72,7 @@
 
 **Learning:** During client-side filtering on every keystroke, repeatedly reading textContent and dataset values from the DOM is an expensive operation that can cause layout thrashing and slow down search performance.
 **Action:** When performing client-side filtering, extract the necessary data (textContent, dataset tags) once into an array during initialization and use this cached data during the `filterPosts` method instead of re-reading from the DOM elements on every keystroke.
+
+## 2026-06-01 - Throttling redundant layout recalcs
+**Learning:** Using `getBoundingClientRect` inside an unthrottled `mousemove` event triggers synchronous layout recalcs and layout thrashing, severely degrading UI performance on pages with multiple active event listeners.
+**Action:** Always throttle high-frequency layout-reading DOM events (like `mousemove` triggering `getBoundingClientRect`) using `requestAnimationFrame`, and ensure duplicated event listeners across multiple files are removed to maintain a single source of truth for global interactions.

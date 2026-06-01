@@ -408,16 +408,6 @@ export async function setupPost() {
         );
     }
 
-    // 3.2 Flashlight Spotlight mouse tracking
-    const flashlight = document.getElementById('flashlight-bg');
-    const handleMouseMove = (e: MouseEvent) => {
-        if (flashlight) {
-            document.documentElement.style.setProperty('--bg-mouse-x', `${e.clientX}px`);
-            document.documentElement.style.setProperty('--bg-mouse-y', `${e.clientY}px`);
-        }
-    };
-    document.addEventListener('mousemove', handleMouseMove, { passive: true, signal });
-
     // 3.3 Interactive Formula Term Inspector
     const mathBlocks = document.querySelectorAll('.katex-display, .katex');
     mathBlocks.forEach((block) => {
