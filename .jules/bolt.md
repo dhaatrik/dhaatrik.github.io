@@ -82,3 +82,8 @@
 
 **Learning:** Using `getBoundingClientRect` inside an unthrottled `mousemove` event triggers synchronous layout recalcs and layout thrashing, severely degrading UI performance on pages with multiple active event listeners.
 **Action:** Always throttle high-frequency layout-reading DOM events (like `mousemove` triggering `getBoundingClientRect`) using `requestAnimationFrame`, and ensure duplicated event listeners across multiple files are removed to maintain a single source of truth for global interactions.
+
+## 2026-06-02 - Throttling mousemove with requestAnimationFrame
+
+**Learning:** Unthrottled `mousemove` events for visual effects like parallax can fire significantly faster than the browser's refresh rate, causing layout thrashing and UI jank.
+**Action:** Always throttle high-frequency DOM events that trigger style updates (like the reticle parallax) using `requestAnimationFrame`, and ensure they are cleaned up with `cancelAnimationFrame`.
