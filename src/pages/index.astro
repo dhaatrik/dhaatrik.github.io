@@ -625,16 +625,23 @@ const getProjectTelemetry = (id: string) => {
                 let handleScroll;
                 if (telemetry) {
                     if (!CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)')) {
+                        let scrollTicking = false;
                         handleScroll = () => {
-                            const scrollY = window.scrollY;
-                            const opacity = Math.max(0, 1 - scrollY / 120);
-                            const translate = scrollY * 0.15;
-                            telemetry.style.opacity = opacity.toString();
-                            telemetry.style.transform = `translateY(${translate}px) scale(${0.95 + opacity * 0.05})`;
-                            if (opacity === 0) {
-                                telemetry.style.visibility = 'hidden';
-                            } else {
-                                telemetry.style.visibility = 'visible';
+                            if (!scrollTicking) {
+                                window.requestAnimationFrame(() => {
+                                    const scrollY = window.scrollY;
+                                    const opacity = Math.max(0, 1 - scrollY / 120);
+                                    const translate = scrollY * 0.15;
+                                    telemetry.style.opacity = opacity.toString();
+                                    telemetry.style.transform = `translateY(${translate}px) scale(${0.95 + opacity * 0.05})`;
+                                    if (opacity === 0) {
+                                        telemetry.style.visibility = 'hidden';
+                                    } else {
+                                        telemetry.style.visibility = 'visible';
+                                    }
+                                    scrollTicking = false;
+                                });
+                                scrollTicking = true;
                             }
                         };
                         window.addEventListener('scroll', handleScroll, { passive: true });
