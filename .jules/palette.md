@@ -86,3 +86,7 @@
 ## 2026-05-30 - Added aria-expanded to disclosure widget
 **Learning:** Buttons that toggle the visibility of content (like dropdowns or menus) need `aria-expanded` and `aria-controls` for screen readers to properly understand their relationship and current state.
 **Action:** Ensure all disclosure widgets implement `aria-expanded` and update it dynamically in JavaScript.
+
+## 2026-06-05 - Dynamic Context and Focus Styles for View Toggles
+**Learning:** Text-based toggle buttons (like switching between RAW/RENDERED views) can be confusing for screen reader users if they only announce their current visual text, and inaccessible to keyboard users if they lack focus rings.
+**Action:** Always provide dynamically updated `aria-label` and `title` attributes that describe the *next* state, and explicitly apply the standard `focus-visible` utility classes to ensure clear keyboard navigation.
