@@ -237,14 +237,16 @@ const personSchema = JSON.stringify({
             let cardRafId = null;
             let cardMouseX = 0;
             let cardMouseY = 0;
+            let cachedRect = null;
 
             const updateCardTilt = () => {
-                const rect = card.getBoundingClientRect();
-                const x = cardMouseX - rect.left;
-                const y = cardMouseY - rect.top;
+                if (!cachedRect) return;
 
-                const xc = rect.width / 2;
-                const yc = rect.height / 2;
+                const x = cardMouseX - cachedRect.left;
+                const y = cardMouseY - cachedRect.top;
+
+                const xc = cachedRect.width / 2;
+                const yc = cachedRect.height / 2;
 
                 const tiltX = (yc - y) / 30;
                 const tiltY = (x - xc) / 30;
@@ -262,10 +264,20 @@ const personSchema = JSON.stringify({
                 cardRafId = null;
             };
 
+            const handleCardEnter = () => {
+                const rect = card.getBoundingClientRect();
+                cachedRect = {
+                    left: rect.left + window.scrollX,
+                    top: rect.top + window.scrollY,
+                    width: rect.width,
+                    height: rect.height,
+                };
+            };
+
             const handleCardMove = (e) => {
-                cardMouseX = e.clientX;
-                cardMouseY = e.clientY;
-                if (!cardRafId) {
+                cardMouseX = e.pageX;
+                cardMouseY = e.pageY;
+                if (!cardRafId && cachedRect) {
                     cardRafId = requestAnimationFrame(updateCardTilt);
                 }
             };
@@ -281,8 +293,10 @@ const personSchema = JSON.stringify({
                 tilts.forEach((target) => {
                     target.style.transform = 'translateZ(0px)';
                 });
+                cachedRect = null;
             };
 
+            card.addEventListener('mouseenter', handleCardEnter);
             card.addEventListener('mousemove', handleCardMove);
             card.addEventListener('mouseleave', handleCardLeave);
         });
