@@ -305,6 +305,12 @@ const postsWithReadingTime = posts.map((post: any) => {
                     <p class="mx-auto max-w-sm text-sm text-slate-500 dark:text-slate-400">
                         Try adjusting your search parameters to find what you're looking for.
                     </p>
+                    <button
+                        id="clear-filters-btn"
+                        class="mt-4 cursor-pointer rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
+                    >
+                        Clear Filters
+                    </button>
                 </div>
             </section>
         </main>
@@ -473,6 +479,34 @@ const postsWithReadingTime = posts.map((post: any) => {
                         { signal }
                     );
                 });
+
+                // Clear Filters event listener
+                const clearFiltersBtn = document.getElementById('clear-filters-btn');
+                if (clearFiltersBtn) {
+                    clearFiltersBtn.addEventListener(
+                        'click',
+                        () => {
+                            searchInput.value = '';
+                            activeTag = 'all';
+
+                            // Update tabs styles
+                            tabs.forEach((t) => {
+                                const htmlT = t as HTMLElement;
+                                if (htmlT.dataset.filter === activeTag) {
+                                    htmlT.classList.add('active');
+                                    htmlT.setAttribute('aria-pressed', 'true');
+                                } else {
+                                    htmlT.classList.remove('active');
+                                    htmlT.setAttribute('aria-pressed', 'false');
+                                }
+                            });
+
+                            filterPosts();
+                            updateSearchState('', 'all');
+                        },
+                        { signal }
+                    );
+                }
 
                 // Bind dynamic view-transition-names to clicked card components
                 cards.forEach((card) => {

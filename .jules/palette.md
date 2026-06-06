@@ -90,3 +90,7 @@
 ## 2026-06-05 - Dynamic Context and Focus Styles for View Toggles
 **Learning:** Text-based toggle buttons (like switching between RAW/RENDERED views) can be confusing for screen reader users if they only announce their current visual text, and inaccessible to keyboard users if they lack focus rings.
 **Action:** Always provide dynamically updated `aria-label` and `title` attributes that describe the *next* state, and explicitly apply the standard `focus-visible` utility classes to ensure clear keyboard navigation.
+
+## 2026-06-06 - Clear Filters on Empty State
+**Learning:** Empty states for client-side filtering must provide an actionable way to reset the filters. Without a 'Clear Filters' button, users are forced to manually delete their search query or click the 'All' tab, increasing interaction cost.
+**Action:** Always add an explicit "Clear Filters" button to empty states that reset the search and filter state via JavaScript when clicked.
