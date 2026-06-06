@@ -91,3 +91,7 @@
 ## 2024-06-05 - Throttling high-frequency scroll events
 **Learning:** Unthrottled `scroll` events that trigger style recalculations or DOM updates can fire synchronously and faster than the browser's frame rate, leading to severe layout thrashing and UI jank.
 **Action:** Always throttle continuous `scroll` event listeners using `window.requestAnimationFrame()` combined with a ticking boolean flag, unless natively handled via CSS `animation-timeline`.
+
+## 2026-06-06 - Caching layout rects on mousemove
+**Learning:** Calling getBoundingClientRect() inside requestAnimationFrame for high-frequency events (like mousemove) still causes significant layout recalculations (layout thrashing) for every active element on the page.
+**Action:** Always pre-calculate and cache document-relative coordinates (e.g. rect.left + window.scrollX) during initialization (and update via ResizeObserver) instead of querying the DOM layout during the continuous event loop.
