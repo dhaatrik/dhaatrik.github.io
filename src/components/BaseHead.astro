@@ -126,26 +126,56 @@ const personSchema = JSON.stringify({
     let flashlightBg = null;
     let magneticTargets = [];
 
-    const updateSpotlights = () => {
-        // Read Phase: Get all current layouts first to prevent layout thrashing
-        let cardsData = [];
+    // ⚡ Bolt: Cache layout rects to prevent layout thrashing on mousemove
+    let cachedCardsData = [];
+    let cachedMagnetData = [];
+    let layoutUpdateTimeout = null;
+
+    const cacheLayouts = () => {
+        cachedCardsData = [];
         if (cardsCollection) {
             for (let i = 0; i < cardsCollection.length; i++) {
                 const card = cardsCollection[i];
-                cardsData.push({ card, rect: card.getBoundingClientRect() });
+                const rect = card.getBoundingClientRect();
+                // Cache document-relative coordinates
+                cachedCardsData.push({
+                    card,
+                    rect: {
+                        left: rect.left + window.scrollX,
+                        top: rect.top + window.scrollY,
+                        width: rect.width,
+                        height: rect.height,
+                    },
+                });
             }
         }
 
-        let magnetData = [];
+        cachedMagnetData = [];
         for (let i = 0; i < magneticTargets.length; i++) {
             const el = magneticTargets[i];
-            magnetData.push({ el, rect: el.getBoundingClientRect() });
+            const rect = el.getBoundingClientRect();
+            // Cache document-relative coordinates
+            cachedMagnetData.push({
+                el,
+                rect: {
+                    left: rect.left + window.scrollX,
+                    top: rect.top + window.scrollY,
+                    width: rect.width,
+                    height: rect.height,
+                },
+            });
         }
+    };
 
+    const updateSpotlights = () => {
         // Write Phase: Apply CSS visual transitions on compositor thread
-        cardsData.forEach(({ card, rect }) => {
-            const x = mouseX - rect.left;
-            const y = mouseY - rect.top;
+        cachedCardsData.forEach(({ card, rect }) => {
+            // Adjust cached rect for current scroll position
+            const currentRectLeft = rect.left - window.scrollX;
+            const currentRectTop = rect.top - window.scrollY;
+
+            const x = mouseX - currentRectLeft;
+            const y = mouseY - currentRectTop;
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
         });
@@ -155,9 +185,12 @@ const personSchema = JSON.stringify({
             flashlightBg.style.setProperty('--bg-mouse-y', `${mouseY}px`);
         }
 
-        magnetData.forEach(({ el, rect }) => {
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
+        cachedMagnetData.forEach(({ el, rect }) => {
+            const currentRectLeft = rect.left - window.scrollX;
+            const currentRectTop = rect.top - window.scrollY;
+
+            const centerX = currentRectLeft + rect.width / 2;
+            const centerY = currentRectTop + rect.height / 2;
             const dx = mouseX - centerX;
             const dy = mouseY - centerY;
             const distance = Math.hypot(dx, dy);
@@ -204,6 +237,16 @@ const personSchema = JSON.stringify({
         }
     };
 
+    const handleScrollOrResize = () => {
+        if (layoutUpdateTimeout) clearTimeout(layoutUpdateTimeout);
+        layoutUpdateTimeout = setTimeout(() => {
+            cacheLayouts();
+            if (!spotlightRafId) {
+                spotlightRafId = requestAnimationFrame(updateSpotlights);
+            }
+        }, 150); // debounce scroll/resize cache updates
+    };
+
     const initMouseTracker = () => {
         // Ensure flashlight background exists on the page
         flashlightBg = document.getElementById('flashlight-bg');
@@ -217,8 +260,15 @@ const personSchema = JSON.stringify({
         cardsCollection = document.getElementsByClassName('bento-card');
         magneticTargets = Array.from(document.querySelectorAll('.magnetic-target'));
 
+        cacheLayouts();
+
         document.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('scroll', handleScrollOrResize);
+        window.removeEventListener('resize', handleScrollOrResize);
+
         document.addEventListener('mousemove', onMouseMove, { passive: true });
+        window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+        window.addEventListener('resize', handleScrollOrResize, { passive: true });
     };
 
     const handlePageShow = (e) => {
@@ -322,6 +372,9 @@ const personSchema = JSON.stringify({
     document.addEventListener('astro:before-preparation', () => {
         document.removeEventListener('mousemove', onMouseMove);
         window.removeEventListener('pageshow', handlePageShow);
+        window.removeEventListener('scroll', handleScrollOrResize);
+        window.removeEventListener('resize', handleScrollOrResize);
+        if (layoutUpdateTimeout) clearTimeout(layoutUpdateTimeout);
         if (spotlightRafId) {
             cancelAnimationFrame(spotlightRafId);
             spotlightRafId = null;
