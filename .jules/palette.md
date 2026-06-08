@@ -94,3 +94,7 @@
 ## 2026-06-06 - Clear Filters on Empty State
 **Learning:** Empty states for client-side filtering must provide an actionable way to reset the filters. Without a 'Clear Filters' button, users are forced to manually delete their search query or click the 'All' tab, increasing interaction cost.
 **Action:** Always add an explicit "Clear Filters" button to empty states that reset the search and filter state via JavaScript when clicked.
+
+## 2026-06-08 - Managing Focus on Empty State Reset
+**Learning:** When users click a "Clear Filters" button inside a search empty state, the empty state is immediately hidden via DOM manipulation. This causes the focus to drop to the document body because the active element no longer exists (or is invisible), breaking keyboard navigation flow.
+**Action:** Always programmatically return focus to a logical next step (like the search input field via `element.focus()`) in the click handler when resetting filters from an empty state to maintain continuous keyboard accessibility.
