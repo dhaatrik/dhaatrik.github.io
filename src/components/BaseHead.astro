@@ -168,11 +168,15 @@ const personSchema = JSON.stringify({
     };
 
     const updateSpotlights = () => {
+        // ⚡ Bolt: Hoist window scroll properties to prevent repeated DOM reads in the RAF loop
+        const scrollX = window.scrollX;
+        const scrollY = window.scrollY;
+
         // Write Phase: Apply CSS visual transitions on compositor thread
         cachedCardsData.forEach(({ card, rect }) => {
             // Adjust cached rect for current scroll position
-            const currentRectLeft = rect.left - window.scrollX;
-            const currentRectTop = rect.top - window.scrollY;
+            const currentRectLeft = rect.left - scrollX;
+            const currentRectTop = rect.top - scrollY;
 
             const x = mouseX - currentRectLeft;
             const y = mouseY - currentRectTop;
@@ -186,8 +190,8 @@ const personSchema = JSON.stringify({
         }
 
         cachedMagnetData.forEach(({ el, rect }) => {
-            const currentRectLeft = rect.left - window.scrollX;
-            const currentRectTop = rect.top - window.scrollY;
+            const currentRectLeft = rect.left - scrollX;
+            const currentRectTop = rect.top - scrollY;
 
             const centerX = currentRectLeft + rect.width / 2;
             const centerY = currentRectTop + rect.height / 2;
