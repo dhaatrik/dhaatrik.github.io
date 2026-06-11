@@ -99,3 +99,7 @@
 ## 2026-06-06 - Caching layout rects on mousemove
 **Learning:** Calling getBoundingClientRect() inside requestAnimationFrame for high-frequency events (like mousemove) still causes significant layout recalculations (layout thrashing) for every active element on the page.
 **Action:** Always pre-calculate and cache document-relative coordinates (e.g. rect.left + window.scrollX) during initialization (and update via debounced scroll/resize events) instead of querying the DOM layout during the continuous event loop.
+
+## 2026-06-11 - Prevent layout thrashing in TOC IntersectionObserver
+**Learning:** Calling getBoundingClientRect() inside an IntersectionObserver forces synchronous layout recalculation, defeating the observer's asynchronous purpose.
+**Action:** Leverage entry.isIntersecting to track visibility state instead.

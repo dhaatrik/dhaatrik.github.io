@@ -337,22 +337,31 @@ export async function setupPost() {
     };
 
     let activeSectionId = '';
+    const visibleSections = new Set<string>();
+
     const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -50% 0px',
+        rootMargin: '-130px 0px -60% 0px',
         threshold: 0,
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
-        let currentActive = '';
-        const threshold = 130; // matches fixed header height
-        sections.forEach((sec) => {
-            const htmlSec = sec as HTMLElement;
-            const rect = htmlSec.getBoundingClientRect();
-            if (rect.top <= threshold) {
-                currentActive = htmlSec.id;
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                visibleSections.add(entry.target.id);
+            } else {
+                visibleSections.delete(entry.target.id);
             }
         });
+
+        let currentActive = '';
+
+        for (const sec of sections) {
+            if (visibleSections.has(sec.id)) {
+                currentActive = sec.id;
+                break;
+            }
+        }
 
         // Fallback for short pages: if we have scrolled down but no heading has crossed the threshold
         if (!currentActive && sections.length > 0 && window.scrollY > 10) {
