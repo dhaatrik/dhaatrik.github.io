@@ -98,3 +98,7 @@
 ## 2026-06-08 - Managing Focus on Empty State Reset
 **Learning:** When users click a "Clear Filters" button inside a search empty state, the empty state is immediately hidden via DOM manipulation. This causes the focus to drop to the document body because the active element no longer exists (or is invisible), breaking keyboard navigation flow.
 **Action:** Always programmatically return focus to a logical next step (like the search input field via `element.focus()`) in the click handler when resetting filters from an empty state to maintain continuous keyboard accessibility.
+
+## 2026-06-09 - ARIA Live on Dynamic Buttons
+**Learning:** When a button's text dynamically changes to indicate success (like a 'Copy' button changing to 'OK'), screen reader users are completely unaware of the change unless the element has an `aria-live` attribute to announce the update.
+**Action:** Always add `aria-live="polite"` to buttons or their text wrappers when their text content updates asynchronously to provide feedback.
