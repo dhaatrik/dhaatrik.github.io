@@ -282,8 +282,9 @@ const personSchema = JSON.stringify({
         window.addEventListener('pageshow', handlePageShow);
 
         // Bind 3D Bento Card Parallax Tilt
-        const cards = document.querySelectorAll('.bento-card');
-        cards.forEach((card) => {
+        // ⚡ Bolt: Use getElementsByClassName instead of querySelectorAll to avoid unnecessary DOM traversal overhead
+        const cards = document.getElementsByClassName('bento-card');
+        Array.from(cards).forEach((card) => {
             let cardRafId = null;
             let cardMouseX = 0;
             let cardMouseY = 0;
