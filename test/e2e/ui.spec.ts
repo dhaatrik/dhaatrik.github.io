@@ -195,4 +195,29 @@ test.describe('Portfolio UI Interactivity', () => {
         await expect(copyBtn).toContainText('COPY');
         await expect(copyBtn).not.toHaveClass(/!text-green-400/);
     });
+
+    test('Currently Exploring popover should open and close correctly', async ({ page }) => {
+        await page.goto('/');
+
+        const popover = page.locator('#project-popover-currently-exploring');
+        await expect(popover).toBeHidden();
+
+        // Click "Currently Exploring" card
+        const card = page
+            .locator('article[data-popover-target="project-popover-currently-exploring"]')
+            .first();
+        await card.click();
+
+        // Verify it is open
+        await expect(popover).toBeVisible();
+
+        // Click close button inside popover
+        const closeBtn = popover
+            .locator('button[popovertarget="project-popover-currently-exploring"]')
+            .first();
+        await closeBtn.click();
+
+        // Verify it is hidden again
+        await expect(popover).toBeHidden();
+    });
 });
