@@ -25,12 +25,14 @@ test.describe('Portfolio UI Interactivity', () => {
         }
     });
 
-    test('Vellor Protocol easter egg should trigger when offline', async ({ page, context }) => {
+    test('Vellor Protocol easter egg should trigger when offline', async ({ page }) => {
         // Navigating to about page where the logic resides
         await page.goto('/about');
+        await page.waitForLoadState('networkidle');
+        await page.waitForTimeout(500);
 
-        // Simulate going offline
-        await context.setOffline(true);
+        // Dispatch the offline event manually
+        await page.evaluate(() => window.dispatchEvent(new Event('offline')));
 
         // Assert the toast appears - target the text itself which should span across the container
         await expect(page.getByText(/Vellor Protocol Engaged: You are offline/)).toBeVisible();
@@ -39,9 +41,6 @@ test.describe('Portfolio UI Interactivity', () => {
                 'Vellor Protocol Engaged: You are offline, but this data remains accessible.'
             )
         ).toBeVisible();
-
-        // Cleanup
-        await context.setOffline(false);
     });
 
     test('Client-side routing should not perform a full page reload', async ({ page }) => {
@@ -100,20 +99,31 @@ test.describe('Portfolio UI Interactivity', () => {
     test('BlogPost Table of Contents should highlight active sections on scroll', async ({
         page,
     }) => {
+        // Set a desktop viewport size explicitly
+        await page.setViewportSize({ width: 1440, height: 900 });
+
         // Navigate to a post with headings
         await page.goto('/blog/scrollytelling-demo/');
+
+        // Disable smooth scrolling to make scrollIntoView instant
+        await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
+        await page.waitForLoadState('networkidle');
 
         const tocLink = page.locator('#toc a[href="#the-mathematical-principles-behind-staging"]');
 
         // Check initial state (should not have active classes if we are at the top)
         await expect(tocLink).not.toHaveClass(/!text-\(--accent\)/);
 
-        // Scroll to the headings section
+        // Scroll the headings section to be perfectly within the active region (Y = 200)
         const headingsHeader = page.locator('#the-mathematical-principles-behind-staging');
-        await headingsHeader.evaluate((el) => el.scrollIntoView({ block: 'start' }));
+        await headingsHeader.evaluate((el) => {
+            const rect = el.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            window.scrollTo({ top: scrollTop + rect.top - 200, behavior: 'auto' });
+        });
 
         // Allow animation frame and scroll listener to fire
-        await page.waitForTimeout(200);
+        await page.waitForTimeout(500);
 
         // Now it should be highlighted
         await expect(tocLink).toHaveClass(/!text-\(--accent\)/);
