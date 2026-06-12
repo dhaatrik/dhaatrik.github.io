@@ -96,10 +96,12 @@ const postsWithReadingTime = posts.map((post: any) => {
                     <label for="search-logs" class="sr-only">Search Mission Logs</label>
                     <div class="group relative flex items-center">
                         <span
+                            aria-hidden="true"
                             class="pointer-events-none absolute left-4 hidden text-slate-400 transition-colors select-none group-focus-within:text-(--accent) sm:inline dark:text-slate-500"
                             >~ $ grep -i</span
                         >
                         <span
+                            aria-hidden="true"
                             class="pointer-events-none absolute left-4 text-slate-400 transition-colors select-none group-focus-within:text-(--accent) sm:hidden dark:text-slate-500"
                             >$ grep</span
                         >

@@ -84,21 +84,31 @@
 **Action:** Always add `aria-pressed="true"` to the currently active filter tab and `aria-pressed="false"` to the inactive tabs. Ensure these attributes are dynamically toggled alongside their corresponding visual classes in the client-side JavaScript logic.
 
 ## 2026-05-30 - Added aria-expanded to disclosure widget
+
 **Learning:** Buttons that toggle the visibility of content (like dropdowns or menus) need `aria-expanded` and `aria-controls` for screen readers to properly understand their relationship and current state.
 **Action:** Ensure all disclosure widgets implement `aria-expanded` and update it dynamically in JavaScript.
 
 ## 2026-06-05 - Dynamic Context and Focus Styles for View Toggles
+
 **Learning:** Text-based toggle buttons (like switching between RAW/RENDERED views) can be confusing for screen reader users if they only announce their current visual text, and inaccessible to keyboard users if they lack focus rings.
-**Action:** Always provide dynamically updated `aria-label` and `title` attributes that describe the *next* state, and explicitly apply the standard `focus-visible` utility classes to ensure clear keyboard navigation.
+**Action:** Always provide dynamically updated `aria-label` and `title` attributes that describe the _next_ state, and explicitly apply the standard `focus-visible` utility classes to ensure clear keyboard navigation.
 
 ## 2026-06-06 - Clear Filters on Empty State
+
 **Learning:** Empty states for client-side filtering must provide an actionable way to reset the filters. Without a 'Clear Filters' button, users are forced to manually delete their search query or click the 'All' tab, increasing interaction cost.
 **Action:** Always add an explicit "Clear Filters" button to empty states that reset the search and filter state via JavaScript when clicked.
 
 ## 2026-06-08 - Managing Focus on Empty State Reset
+
 **Learning:** When users click a "Clear Filters" button inside a search empty state, the empty state is immediately hidden via DOM manipulation. This causes the focus to drop to the document body because the active element no longer exists (or is invisible), breaking keyboard navigation flow.
 **Action:** Always programmatically return focus to a logical next step (like the search input field via `element.focus()`) in the click handler when resetting filters from an empty state to maintain continuous keyboard accessibility.
 
 ## 2026-06-09 - ARIA Live on Dynamic Buttons
+
 **Learning:** When a button's text dynamically changes to indicate success (like a 'Copy' button changing to 'OK'), screen reader users are completely unaware of the change unless the element has an `aria-live` attribute to announce the update.
 **Action:** Always add `aria-live="polite"` to buttons or their text wrappers when their text content updates asynchronously to provide feedback.
+
+## 2026-06-10 - Hiding Decorative Terminal Text
+
+**Learning:** Decorative terminal-style text (like `~ $ grep -i` or code block language labels) can cause noise and confusion for screen reader users if left exposed, as it interrupts the main content or input label.
+**Action:** Always add `aria-hidden="true"` to decorative ASCII or terminal prefixes that are purely visual and do not convey functional meaning.
