@@ -45,6 +45,11 @@ const formatMarqueeDate = (date: Date) => {
     const d = String(date.getDate()).padStart(2, '0');
     return `${y}.${m}.${d}`;
 };
+// ⚡ Bolt: Cache mapped marquee posts to prevent redundant parsing and rendering in SSG loop
+const mappedMarqueePostsData = posts.map((post) => ({
+    date: formatMarqueeDate(post.data.pubDate),
+    title: post.data.title.toUpperCase(),
+}));
 ---
 
 <footer
@@ -63,12 +68,10 @@ const formatMarqueeDate = (date: Date) => {
             <div class="flex shrink-0 gap-16 px-4">
                 <span>ALERT // LATEST LOGS OVER THE HORIZON:</span>
                 {
-                    posts.map((post) => (
+                    mappedMarqueePostsData.map((data) => (
                         <span class="flex gap-2">
-                            <span class="text-(--accent)">
-                                [{formatMarqueeDate(post.data.pubDate)}]
-                            </span>
-                            <span>{post.data.title.toUpperCase()}</span>
+                            <span class="text-(--accent)">[{data.date}]</span>
+                            <span>{data.title}</span>
                         </span>
                     ))
                 }
@@ -76,12 +79,10 @@ const formatMarqueeDate = (date: Date) => {
             <div aria-hidden="true" class="flex shrink-0 gap-16 px-4">
                 <span>ALERT // LATEST LOGS OVER THE HORIZON:</span>
                 {
-                    posts.map((post) => (
+                    mappedMarqueePostsData.map((data) => (
                         <span class="flex gap-2">
-                            <span class="text-(--accent)">
-                                [{formatMarqueeDate(post.data.pubDate)}]
-                            </span>
-                            <span>{post.data.title.toUpperCase()}</span>
+                            <span class="text-(--accent)">[{data.date}]</span>
+                            <span>{data.title}</span>
                         </span>
                     ))
                 }
