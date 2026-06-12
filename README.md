@@ -31,15 +31,16 @@
 
 ## 🛰️ Project Overview
 
-**Mission Control** is a bespoke, high-science personal website and technical blog representing Dhaatrik Chowdhury's professional work, startups, and research. 
+**Mission Control** is a bespoke, high-science personal website and technical blog representing Dhaatrik Chowdhury's professional work, startups, and research.
 
 It is designed to act as an interactive "Engineering Journal" for zero-to-one startups, AI systems engineering (focused on AgTech solutions), and orbital mechanics/aerospace simulation research. By departing from standard flat portfolio templates, this codebase acts as a **virtual storefront** showcasing clean code practices, responsive animations, and strict frontend performance optimization.
 
 ### Why this stack?
-* **Astro 6:** Delivers zero-JS-by-default output for exceptional core web vitals and fast initial load speeds.
-* **Tailwind CSS v4 (with Vite integration):** Keeps style weight minimal while providing custom design tokens for glassmorphism, responsive grid layouts, and custom theme switches.
-* **Node.js Native Runner:** Keeps unit testing lightweight, using native TypeScript stripping loaders without heavy third-party runners.
-* **Playwright E2E:** Ensures that interactive elements (client routing, theme toggling, search indexers) remain error-free across major updates.
+
+- **Astro 6:** Delivers zero-JS-by-default output for exceptional core web vitals and fast initial load speeds.
+- **Tailwind CSS v4 (with Vite integration):** Keeps style weight minimal while providing custom design tokens for glassmorphism, responsive grid layouts, and custom theme switches.
+- **Node.js Native Runner:** Keeps unit testing lightweight, using native TypeScript stripping loaders without heavy third-party runners.
+- **Playwright E2E:** Ensures that interactive elements (client routing, theme toggling, search indexers) remain error-free across major updates.
 
 ---
 
@@ -57,15 +58,15 @@ It is designed to act as an interactive "Engineering Journal" for zero-to-one st
 
 ## ⚡ Key Features
 
-* **Premium Glassmorphic Aesthetics**: Modern dark mode/light mode themes integrated with smooth gradients, blueprint frames, custom mouse spotlights, and custom scrollbars.
-* **Science-Ready Blog Layouts**: Complete LaTeX inline and block math support (`$$ \Delta v $$`) rendered locally via rehype-katex to ensure seamless rendering for technical articles.
-* **Smart Mobile Hamburger Drawer**: Positioned outside the header context to prevent layout clipping, featuring glassmorphism, dynamic path logging, and full touch-swipe gesture support to close.
-* **Recent Transmissions Footer**: Displays the 4 most recently published research logs, integrated with client-side script trackers that automatically show human-readable relative time (e.g. `// 3d ago`).
-* **Interactive Terminal Search**: An instant search utility under "Mission Logs" featuring:
-  - Client-side fuzzy query matches and tag filters.
-  - Session and history routing state synchronization.
-  - Dynamic accessibility announcers.
-  - Global hotkey support (Press `/` on your keyboard to instantly focus search).
+- **Premium Glassmorphic Aesthetics**: Modern dark mode/light mode themes integrated with smooth gradients, blueprint frames, custom mouse spotlights, and custom scrollbars.
+- **Science-Ready Blog Layouts**: Complete LaTeX inline and block math support (`$$ \Delta v $$`) rendered locally via rehype-katex to ensure seamless rendering for technical articles.
+- **Smart Mobile Hamburger Drawer**: Positioned outside the header context to prevent layout clipping, featuring glassmorphism, dynamic path logging, and full touch-swipe gesture support to close.
+- **Recent Transmissions Footer**: Displays the 4 most recently published research logs, integrated with client-side script trackers that automatically show human-readable relative time (e.g. `// 3d ago`).
+- **Interactive Terminal Search**: An instant search utility under "Mission Logs" featuring:
+    - Client-side fuzzy query matches and tag filters.
+    - Session and history routing state synchronization.
+    - Dynamic accessibility announcers.
+    - Global hotkey support (Press `/` on your keyboard to instantly focus search).
 
 ---
 
@@ -110,26 +111,30 @@ dhaatrik.github.io/
 ## 🚀 Installation & Requirements
 
 ### Prerequisites
+
 - **Node.js**: `>= 22.12.0` (LTS version is recommended)
 - **npm**: Built-in with Node
 
 ### Local setup
+
 1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/dhaatrik/dhaatrik.github.io.git
-   cd dhaatrik.github.io
-   ```
+
+    ```bash
+    git clone https://github.com/dhaatrik/dhaatrik.github.io.git
+    cd dhaatrik.github.io
+    ```
 
 2. **Install node dependencies:**
-   ```bash
-   npm install
-   ```
+
+    ```bash
+    npm install
+    ```
 
 3. **Launch local dev environment:**
-   ```bash
-   npm run dev
-   ```
-   *The server runs locally at `http://localhost:4321/`.*
+    ```bash
+    npm run dev
+    ```
+    _The server runs locally at `http://localhost:4321/`._
 
 ---
 
@@ -137,14 +142,14 @@ dhaatrik.github.io/
 
 Use the following npm scripts to work on the project:
 
-| Command | Action |
-| :--- | :--- |
-| `npm run dev` | Spin up local Astro dev server with hot reload |
-| `npm run build` | Build static production assets under the `dist/` folder |
-| `npm run preview` | Run a local static server previewing the built files |
-| `npm run test` | Run local unit test suites via Node |
-| `npm run test:e2e` | Run Playwright E2E browser tests |
-| `npm run format` | Run Prettier formatter across the codebase |
+| Command            | Action                                                  |
+| :----------------- | :------------------------------------------------------ |
+| `npm run dev`      | Spin up local Astro dev server with hot reload          |
+| `npm run build`    | Build static production assets under the `dist/` folder |
+| `npm run preview`  | Run a local static server previewing the built files    |
+| `npm run test`     | Run local unit test suites via Node                     |
+| `npm run test:e2e` | Run Playwright E2E browser tests                        |
+| `npm run format`   | Run Prettier formatter across the codebase              |
 
 ---
 
@@ -153,13 +158,17 @@ Use the following npm scripts to work on the project:
 This codebase has robust testing coverage divided into unit and integration boundaries to prevent build failures during deployment.
 
 ### 1. Data Unit Tests
+
 We test static data configurations and schema layouts using Node's native test module:
+
 ```bash
 npm run test
 ```
 
 ### 2. Integration / E2E Tests
+
 We verify visual features, search accessibility, theme toggling, routing, and mobile drawers across Chrome, Firefox, and WebKit layout engines:
+
 ```bash
 # If running for the first time, install browser dependencies
 npx playwright install
@@ -179,5 +188,5 @@ Please check [CONTRIBUTING.md](CONTRIBUTING.md) to review guidelines for committ
 We require all contributors to adhere to the high standard of conduct defined in our code of conduct, prioritizing mutual respect and technical integrity.
 
 ---
-*End of Transmission. System is fully operational.*
 
+_End of Transmission. System is fully operational._

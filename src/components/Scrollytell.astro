@@ -1,83 +1,155 @@
 ---
 interface Props {
-  id?: string;
-  stepCount: number;
+    id?: string;
+    stepCount: number;
 }
 
-const { id = "scrollytell-dossier", stepCount } = Astro.props;
+const { id = 'scrollytell-dossier', stepCount } = Astro.props;
 ---
 
 <div id={id} class="scrollytell-container my-16" data-steps={stepCount}>
-  <!-- Sticky Visual Display Panel -->
-  <div class="scrollytell-visual">
-    {stepCount >= 1 && <div class="scrollytell-visual-layer" data-step="1"><slot name="visual-1" /></div>}
-    {stepCount >= 2 && <div class="scrollytell-visual-layer" data-step="2"><slot name="visual-2" /></div>}
-    {stepCount >= 3 && <div class="scrollytell-visual-layer" data-step="3"><slot name="visual-3" /></div>}
-    {stepCount >= 4 && <div class="scrollytell-visual-layer" data-step="4"><slot name="visual-4" /></div>}
-    {stepCount >= 5 && <div class="scrollytell-visual-layer" data-step="5"><slot name="visual-5" /></div>}
-    {stepCount >= 6 && <div class="scrollytell-visual-layer" data-step="6"><slot name="visual-6" /></div>}
-  </div>
+    <!-- Sticky Visual Display Panel -->
+    <div class="scrollytell-visual">
+        {
+            stepCount >= 1 && (
+                <div class="scrollytell-visual-layer" data-step="1">
+                    <slot name="visual-1" />
+                </div>
+            )
+        }
+        {
+            stepCount >= 2 && (
+                <div class="scrollytell-visual-layer" data-step="2">
+                    <slot name="visual-2" />
+                </div>
+            )
+        }
+        {
+            stepCount >= 3 && (
+                <div class="scrollytell-visual-layer" data-step="3">
+                    <slot name="visual-3" />
+                </div>
+            )
+        }
+        {
+            stepCount >= 4 && (
+                <div class="scrollytell-visual-layer" data-step="4">
+                    <slot name="visual-4" />
+                </div>
+            )
+        }
+        {
+            stepCount >= 5 && (
+                <div class="scrollytell-visual-layer" data-step="5">
+                    <slot name="visual-5" />
+                </div>
+            )
+        }
+        {
+            stepCount >= 6 && (
+                <div class="scrollytell-visual-layer" data-step="6">
+                    <slot name="visual-6" />
+                </div>
+            )
+        }
+    </div>
 
-  <!-- Scrollable Story Steps -->
-  <div class="scrollytell-steps">
-    {stepCount >= 1 && <div class="scrollytell-step-card" data-step="1" id={`${id}-step-1`}><slot name="step-1" /></div>}
-    {stepCount >= 2 && <div class="scrollytell-step-card" data-step="2" id={`${id}-step-2`}><slot name="step-2" /></div>}
-    {stepCount >= 3 && <div class="scrollytell-step-card" data-step="3" id={`${id}-step-3`}><slot name="step-3" /></div>}
-    {stepCount >= 4 && <div class="scrollytell-step-card" data-step="4" id={`${id}-step-4`}><slot name="step-4" /></div>}
-    {stepCount >= 5 && <div class="scrollytell-step-card" data-step="5" id={`${id}-step-5`}><slot name="step-5" /></div>}
-    {stepCount >= 6 && <div class="scrollytell-step-card" data-step="6" id={`${id}-step-6`}><slot name="step-6" /></div>}
-  </div>
+    <!-- Scrollable Story Steps -->
+    <div class="scrollytell-steps">
+        {
+            stepCount >= 1 && (
+                <div class="scrollytell-step-card" data-step="1" id={`${id}-step-1`}>
+                    <slot name="step-1" />
+                </div>
+            )
+        }
+        {
+            stepCount >= 2 && (
+                <div class="scrollytell-step-card" data-step="2" id={`${id}-step-2`}>
+                    <slot name="step-2" />
+                </div>
+            )
+        }
+        {
+            stepCount >= 3 && (
+                <div class="scrollytell-step-card" data-step="3" id={`${id}-step-3`}>
+                    <slot name="step-3" />
+                </div>
+            )
+        }
+        {
+            stepCount >= 4 && (
+                <div class="scrollytell-step-card" data-step="4" id={`${id}-step-4`}>
+                    <slot name="step-4" />
+                </div>
+            )
+        }
+        {
+            stepCount >= 5 && (
+                <div class="scrollytell-step-card" data-step="5" id={`${id}-step-5`}>
+                    <slot name="step-5" />
+                </div>
+            )
+        }
+        {
+            stepCount >= 6 && (
+                <div class="scrollytell-step-card" data-step="6" id={`${id}-step-6`}>
+                    <slot name="step-6" />
+                </div>
+            )
+        }
+    </div>
 </div>
 
 <script>
-  function initScrollytelling() {
-    const containers = document.querySelectorAll('.scrollytell-container');
+    function initScrollytelling() {
+        const containers = document.querySelectorAll('.scrollytell-container');
 
-    containers.forEach((container) => {
-      const steps = container.querySelectorAll('.scrollytell-step-card');
-      const layers = container.querySelectorAll('.scrollytell-visual-layer');
+        containers.forEach((container) => {
+            const steps = container.querySelectorAll('.scrollytell-step-card');
+            const layers = container.querySelectorAll('.scrollytell-visual-layer');
 
-      if (layers[0]) layers[0].classList.add('active');
-      if (steps[0]) steps[0].classList.add('active');
+            if (layers[0]) layers[0].classList.add('active');
+            if (steps[0]) steps[0].classList.add('active');
 
-      // Use IntersectionObserver to toggle active classes for elements currently centered
-      const observerOptions = {
-        root: null,
-        rootMargin: '-30% 0px -40% 0px', // Triggers when step card is around the center-third of the screen
-        threshold: 0.1
-      };
+            // Use IntersectionObserver to toggle active classes for elements currently centered
+            const observerOptions = {
+                root: null,
+                rootMargin: '-30% 0px -40% 0px', // Triggers when step card is around the center-third of the screen
+                threshold: 0.1,
+            };
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const stepNum = entry.target.getAttribute('data-step');
-            if (!stepNum) return;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const stepNum = entry.target.getAttribute('data-step');
+                        if (!stepNum) return;
 
-            // Update step card states
-            steps.forEach((step) => {
-              if (step.getAttribute('data-step') === stepNum) {
-                step.classList.add('active');
-              } else {
-                step.classList.remove('active');
-              }
-            });
+                        // Update step card states
+                        steps.forEach((step) => {
+                            if (step.getAttribute('data-step') === stepNum) {
+                                step.classList.add('active');
+                            } else {
+                                step.classList.remove('active');
+                            }
+                        });
 
-            // Update visual layer states
-            layers.forEach((layer) => {
-              if (layer.getAttribute('data-step') === stepNum) {
-                layer.classList.add('active');
-              } else {
-                layer.classList.remove('active');
-              }
-            });
-          }
+                        // Update visual layer states
+                        layers.forEach((layer) => {
+                            if (layer.getAttribute('data-step') === stepNum) {
+                                layer.classList.add('active');
+                            } else {
+                                layer.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            steps.forEach((step) => observer.observe(step));
         });
-      }, observerOptions);
+    }
 
-      steps.forEach((step) => observer.observe(step));
-    });
-  }
-
-  // Bind to Astro view transition lifecycle
-  document.addEventListener('astro:page-load', initScrollytelling);
+    // Bind to Astro view transition lifecycle
+    document.addEventListener('astro:page-load', initScrollytelling);
 </script>
