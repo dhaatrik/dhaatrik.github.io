@@ -743,42 +743,10 @@
     }
 
     /* --- Blog post morph targets: smooth hero & title morph --- */
-    @keyframes vt-morph-expand {
-        from {
-            opacity: 0.7;
-            transform: scale(0.96);
-            border-radius: 12px;
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-            border-radius: 12px;
-        }
-    }
-
-    @keyframes vt-morph-shrink {
-        to {
-            opacity: 0.5;
-            transform: scale(0.96);
-        }
-    }
-
-    ::view-transition-old(active-post-title) {
-        animation: 250ms cubic-bezier(0.4, 0, 1, 1) both vt-morph-shrink;
-    }
-
-    ::view-transition-new(active-post-title) {
-        animation: 400ms cubic-bezier(0.16, 1, 0.3, 1) 50ms both vt-morph-expand;
-    }
-
-    ::view-transition-old(active-post-img) {
-        animation: 280ms cubic-bezier(0.4, 0, 1, 1) both vt-morph-shrink;
-        overflow: hidden;
-    }
-
-    ::view-transition-new(active-post-img) {
-        animation: 450ms cubic-bezier(0.16, 1, 0.3, 1) 30ms both vt-morph-expand;
-        overflow: hidden;
+    ::view-transition-group(active-post-title),
+    ::view-transition-group(active-post-img) {
+        animation-duration: 350ms;
+        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     }
 }
 
