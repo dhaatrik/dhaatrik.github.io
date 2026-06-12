@@ -103,3 +103,7 @@
 ## 2026-06-11 - Prevent layout thrashing in TOC IntersectionObserver
 **Learning:** Calling getBoundingClientRect() inside an IntersectionObserver forces synchronous layout recalculation, defeating the observer's asynchronous purpose.
 **Action:** Leverage entry.isIntersecting to track visibility state instead.
+
+## 2026-06-12 - Reusing mapped data instead of JSX elements in Astro frontmatter
+**Learning:** In Astro components, the frontmatter script block (`---`) is evaluated as standard TypeScript/JavaScript, not JSX. Attempting to assign raw HTML or JSX elements directly to variables inside the frontmatter (e.g., `const mappedElements = posts.map(p => <div/>)`) causes an esbuild parsing error like `Expected ">" but found "class"`.
+**Action:** When caching redundant mapped data to avoid recalculation in SSG loops, strictly cache the *raw data objects* in the frontmatter, and perform the actual HTML/JSX component mapping inline within the component's HTML section.
