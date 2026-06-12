@@ -623,8 +623,9 @@
     }
 }
 
-/* Books Popover Entrance & Exit Transitions */
-#books-popover {
+/* Books & Project Popover Entrance & Exit Transitions */
+#books-popover,
+[id^="project-popover-"] {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.96);
     position: fixed;
@@ -634,31 +635,36 @@
     transition: opacity 0.2s ease-out, transform 0.2s ease-out, display 0.2s ease-out allow-discrete, overlay 0.2s ease-out allow-discrete;
 }
 
-#books-popover:popover-open {
+#books-popover:popover-open,
+[id^="project-popover-"]:popover-open {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
 }
 
 @starting-style {
-    #books-popover:popover-open {
+    #books-popover:popover-open,
+    [id^="project-popover-"]:popover-open {
         opacity: 0;
         transform: translate(-50%, -50%) scale(0.96);
     }
 }
 
-#books-popover::backdrop {
+#books-popover::backdrop,
+[id^="project-popover-"]::backdrop {
     background: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
     transition: background 0.2s ease-out, backdrop-filter 0.2s ease-out, display 0.2s ease-out allow-discrete, overlay 0.2s ease-out allow-discrete;
 }
 
-#books-popover:popover-open::backdrop {
+#books-popover:popover-open::backdrop,
+[id^="project-popover-"]:popover-open::backdrop {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
 }
 
 @starting-style {
-    #books-popover:popover-open::backdrop {
+    #books-popover:popover-open::backdrop,
+    [id^="project-popover-"]:popover-open::backdrop {
         background: rgba(0, 0, 0, 0);
         backdrop-filter: blur(0px);
     }
