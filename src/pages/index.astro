@@ -72,9 +72,9 @@ const getProjectTelemetry = (id: string) => {
     </head>
     <body class="bg-grid-motif relative pt-24">
         <Header />
-        <main id="main-content" tabindex="-1" class="layout-container flex flex-col gap-24">
+        <main id="main-content" tabindex="-1" class="flex flex-col gap-24">
             <!-- Hero Section: The Boring Section -->
-            <section class="relative flex flex-col justify-center min-h-[60vh] pt-20 pb-20 w-full overflow-hidden">
+            <section class="layout-container relative flex flex-col justify-center min-h-[60vh] pt-20 pb-20 w-full overflow-hidden">
                 <!-- Parallax Background Element -->
                 <div class="parallax-hero-bg flex items-center justify-center">
                     <svg viewBox="0 0 1000 1000" fill="none" stroke="currentColor" stroke-width="0.5" class="text-slate-400 dark:text-slate-500 w-[140%] h-[140%] max-w-none opacity-40" aria-hidden="true">
@@ -246,7 +246,7 @@ const getProjectTelemetry = (id: string) => {
             </section>
 
             <!-- Projects Section: Featured Engineering -->
-            <section class="animate-fade-in-up mb-0 delay-400 content-visibility-auto-projects">
+            <section class="layout-container animate-fade-in-up mb-0 delay-400 content-visibility-auto-projects">
                 <div class="mb-10">
                     <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                         Featured Engineering
@@ -456,7 +456,7 @@ const getProjectTelemetry = (id: string) => {
             </section>
 
             <!-- Latest Thinking Section (Abstract Layout) -->
-            <section class="animate-fade-in-up mb-0 delay-500 content-visibility-auto-blog">
+            <section class="layout-container animate-fade-in-up mb-0 delay-500 content-visibility-auto-blog">
                 <div class="mb-10 flex items-end justify-between">
                     <div>
                         <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
