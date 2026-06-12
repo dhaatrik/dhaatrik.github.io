@@ -54,10 +54,10 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                 </svg>
             </div>
 
-            <section class="layout-container max-w-4xl">
+            <section class="layout-container max-w-5xl">
                 <div class="mb-16 flex flex-col items-center gap-8 md:flex-row-reverse md:items-start">
                     <div
-                        class="relative mx-auto w-full max-w-[240px] shrink-0 p-3 sm:max-w-[260px] md:mx-0 md:w-[260px]"
+                        class="relative mx-auto w-full max-w-[260px] shrink-0 p-3 sm:max-w-[320px] md:mx-0 md:w-[320px]"
                     >
                         {/* Clinical blueprint borders and target marks */}
                         <div
@@ -110,7 +110,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                             />
                         </div>
                     </div>
-                    <div class="w-full md:w-2/3">
+                    <div class="w-full md:w-[calc(100%-352px)]">
                         <h1
                             class="mb-2 text-4xl leading-tight font-bold tracking-tight text-balance text-slate-900 md:text-5xl dark:text-white"
                         >
@@ -154,7 +154,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                         <div class="relative z-10 flex flex-col h-full justify-between">
                             <div>
                                 <h2
-                                    class="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight text-balance text-slate-900 dark:text-white"
+                                    class="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white"
                                 >
                                     <svg
                                         class="h-6 w-6 text-slate-500 dark:text-(--text-secondary)"
@@ -245,7 +245,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                         <div class="relative z-10 flex flex-col h-full justify-between">
                             <div>
                                 <h2
-                                    class="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight text-balance text-slate-900 dark:text-white"
+                                    class="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white"
                                 >
                                     <svg
                                         class="h-6 w-6 text-slate-500 dark:text-(--text-secondary)"
@@ -905,7 +905,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
         </style>
         <script>
             document.addEventListener('astro:page-load', () => {
-                // 1. Coordinated sequential decode animation on load
+                // 1. Coordinated parallel decode animation on load
                 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
                 const cypherElements = Array.from(
                     document.querySelectorAll('.cypher-text')
@@ -943,13 +943,11 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                     });
                 };
 
-                const runSequentialDecode = async () => {
-                    for (const el of cypherElements) {
-                        await decodeElement(el);
-                    }
+                const runParallelDecode = () => {
+                    cypherElements.forEach((el) => decodeElement(el));
                 };
 
-                runSequentialDecode();
+                runParallelDecode();
 
                 // 2. Scroll-triggered IntersectionObserver Typewriter for Terminal
                 const terminalSnippet = document.getElementById('terminal-snippet');
