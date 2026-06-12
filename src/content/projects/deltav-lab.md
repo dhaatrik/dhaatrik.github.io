@@ -10,4 +10,4 @@ tags: ['TypeScript', 'Vanilla DOM', 'Web Workers', 'esbuild', 'Vitest']
 
 #### The "Why"
 
-I wanted to create a platform that combines the creative freedom of Kerbal Space Program with the rigorous mathematical validation required by real-world engineering. By moving simulation logic into dedicated Web Workers and using deterministic integration, DeltaV Lab provides a high-fidelity tool for researchers, students, and "solopreneur" space enthusiasts to test complex orbital maneuvers and vehicle designs without the cost of proprietary software.
+Dhaatrik wanted to create a platform that combines the creative freedom of Kerbal Space Program with the rigorous mathematical validation required by real-world engineering. By moving simulation logic into dedicated Web Workers and using deterministic integration, DeltaV Lab provides a high-fidelity tool for researchers, students, and "solopreneur" space enthusiasts to test complex orbital maneuvers and vehicle designs without the cost of proprietary software.

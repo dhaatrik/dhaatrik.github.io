@@ -10,7 +10,7 @@ tags: ['React 19', 'TypeScript 5.7', 'Zustand 5', 'Tailwind CSS 3']
 
 #### The "Why"
 
-I noticed that most tutoring tools were either overpriced, overly complex, or invasive with data. I built Vellor to solve this—giving "solopreneur" teachers a professional tool that runs instantly in a browser with zero setup, ensuring they own their data while enjoying a gamified experience.
+Dhaatrik noticed that most tutoring tools were either overpriced, overly complex, or invasive with data. He built Vellor to solve this—giving "solopreneur" teachers a professional tool that runs instantly in a browser with zero setup, ensuring they own their data while enjoying a gamified experience.
 
 #### Tech Note
 

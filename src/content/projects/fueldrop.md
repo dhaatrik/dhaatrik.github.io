@@ -10,4 +10,4 @@ tags: ['React 19', 'TypeScript 5.8', 'Tailwind CSS 4', 'Vite 6']
 
 #### The "Why"
 
-Refueling is a legacy friction point in modern logistics. I built FuelDrop to solve the inefficiencies of traditional stations—specifically the lack of real-time tracking for businesses and the unnecessary time wasted by individuals. By treating fuel as a service rather than a destination, we can optimize delivery routes and reduce the carbon footprint associated with "searching for fuel".
+Refueling is a legacy friction point in modern logistics. Dhaatrik built FuelDrop to solve the inefficiencies of traditional stations—specifically the lack of real-time tracking for businesses and the unnecessary time wasted by individuals. By treating fuel as a service rather than a destination, the system optimizes delivery routes and reduces the carbon footprint associated with "searching for fuel".
