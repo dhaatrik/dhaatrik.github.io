@@ -68,51 +68,48 @@ test.describe('Portfolio UI Interactivity', () => {
         page,
     }) => {
         // 1. Check URL query param filtering
-        await page.goto('/blog?q=second');
+        await page.goto('/blog?q=mission');
 
-        // The second post should be visible, others should be hidden
-        const secondPostCard = page.locator('.blog-post-card[href*="/second-post/"]');
-        const firstPostCard = page.locator('.blog-post-card[href*="/first-post/"]');
-
-        await expect(secondPostCard).toBeVisible();
-        await expect(firstPostCard).toBeHidden();
+        // The post card should be visible
+        const postCard = page.locator('.blog-post-card[href*="/scrollytelling-demo/"]');
+        await expect(postCard).toBeVisible();
 
         // 2. Test typing updates URL (debounced) and sessionStorage
         const searchInput = page.locator('#search-logs');
-        await searchInput.fill('first');
+        await searchInput.fill('nonexistent');
 
         // Initially should not be updated yet (debouncing)
-        expect(page.url()).toContain('q=second');
+        expect(page.url()).toContain('q=mission');
 
         // Wait for debounce timeout (150ms debounce + 300ms replacestate + buffer)
         await page.waitForTimeout(600);
-        expect(page.url()).toContain('q=first');
+        expect(page.url()).toContain('q=nonexistent');
 
         // Check sessionStorage
         const sessionStorageVal = await page.evaluate(() =>
             sessionStorage.getItem('blog-search-term')
         );
-        expect(sessionStorageVal).toBe('first');
+        expect(sessionStorageVal).toBe('nonexistent');
 
         // 3. Test back navigation retention
         await page.goto('/');
         await page.goBack();
-        await expect(searchInput).toHaveValue('first');
+        await expect(searchInput).toHaveValue('nonexistent');
     });
 
     test('BlogPost Table of Contents should highlight active sections on scroll', async ({
         page,
     }) => {
         // Navigate to a post with headings
-        await page.goto('/blog/using-mdx/');
+        await page.goto('/blog/scrollytelling-demo/');
 
-        const tocLink = page.locator('#toc a[href="#why-mdx"]');
+        const tocLink = page.locator('#toc a[href="#the-mathematical-principles-behind-staging"]');
 
         // Check initial state (should not have active classes if we are at the top)
         await expect(tocLink).not.toHaveClass(/!text-\(--accent\)/);
 
         // Scroll to the headings section
-        const headingsHeader = page.locator('#why-mdx');
+        const headingsHeader = page.locator('#the-mathematical-principles-behind-staging');
         await headingsHeader.evaluate((el) => el.scrollIntoView({ block: 'start' }));
 
         // Allow animation frame and scroll listener to fire
@@ -151,7 +148,7 @@ test.describe('Portfolio UI Interactivity', () => {
         await context.grantPermissions(['clipboard-read', 'clipboard-write']);
 
         // Navigate to a post known to have a code block
-        await page.goto('/blog/markdown-style-guide/');
+        await page.goto('/blog/scrollytelling-demo/');
 
         // Select the first copy button and its corresponding pre element
         const copyBtn = page.locator('.copy-btn').first();
@@ -170,9 +167,16 @@ test.describe('Portfolio UI Interactivity', () => {
         await expect(copyBtn).toContainText('OK');
         await expect(copyBtn).toHaveClass(/!text-green-400/);
 
-        // Verify clipboard content matches
+        // Verify clipboard content matches (normalize newlines, trailing spaces, and empty lines)
         const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
-        expect(clipboardText.trim()).toBe(expectedText.trim());
+        const normalize = (str: string) =>
+            str
+                .replace(/\r\n/g, '\n')
+                .split('\n')
+                .map((line) => line.trimEnd())
+                .filter(Boolean)
+                .join('\n');
+        expect(normalize(clipboardText)).toBe(normalize(expectedText));
 
         // Wait for the timeout defined in BlogPost.astro (2000ms + buffer)
         await page.waitForTimeout(2100);

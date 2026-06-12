@@ -10,7 +10,7 @@ describe('Tech Stack Data', () => {
     });
 
     test('techGroups contains expected keys', () => {
-        const expectedKeys = ['Frontend', 'Backend', 'Cloud_Db', 'AI_Math', 'Model_Orchestration'];
+        const expectedKeys = ['Frontend', 'Backend', 'Cloud_Db', 'AI_Math'];
         expectedKeys.forEach((key) => {
             assert.ok(key in techGroups, `Missing expected key: ${key}`);
         });

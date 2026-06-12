@@ -159,6 +159,14 @@ Where:
 * $m_0$ is the initial wet mass of the stage.
 * $m_f$ is the final dry mass after fuel depletion.
 
+```python
+# Rocket equation implementation
+import math
+
+def calculate_delta_v(isp, g0, m0, mf):
+    return isp * g0 * math.log(m0 / mf)
+```
+
 By employing multi-stage architectures, we avoid lifting the massive empty structural tanks of Stage 1 into orbital velocity, maximizing payload capacity and minimizing required thermal fuel.
 
 By matching the scrolling velocity of the reader directly to the visualization, we allow complex telemetry profiles to be digested at an individual reader's natural pace.
