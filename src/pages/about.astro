@@ -33,7 +33,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
         <main
             id="main-content"
             tabindex="-1"
-            class="relative grow flex flex-col gap-12 py-12 md:gap-20 md:py-20"
+            class="relative grow flex flex-col gap-12 py-12 md:gap-20 md:py-20 overflow-x-hidden"
         >
             <div
                 id="reticle-bg"
@@ -55,9 +55,9 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
             </div>
 
             <section class="layout-container max-w-4xl">
-                <div class="mb-16 flex flex-col items-center gap-8 md:flex-row md:items-start">
+                <div class="mb-16 flex flex-col items-center gap-8 md:flex-row-reverse md:items-start">
                     <div
-                        class="relative mx-auto w-full max-w-[280px] shrink-0 p-4 sm:max-w-xs md:mx-0 md:w-1/3 md:max-w-none"
+                        class="relative mx-auto w-full max-w-[240px] shrink-0 p-3 sm:max-w-[260px] md:mx-0 md:w-[260px]"
                     >
                         {/* Clinical blueprint borders and target marks */}
                         <div
@@ -151,55 +151,87 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                     <div
                         class="bento-card group relative flex flex-col justify-between overflow-hidden p-6"
                     >
-                        <div class="relative z-10">
-                            <h2
-                                class="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight text-balance text-slate-900 dark:text-white"
-                            >
-                                <svg
-                                    class="h-6 w-6 text-slate-500 dark:text-(--text-secondary)"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    ><rect x="4" y="4" width="16" height="16" rx="2" ry="2"
-                                    ></rect><rect x="9" y="9" width="6" height="6"></rect><line
-                                        x1="9"
-                                        y1="1"
-                                        x2="9"
-                                        y2="4"></line><line x1="15" y1="1" x2="15" y2="4"
-                                    ></line><line x1="9" y1="20" x2="9" y2="23"></line><line
-                                        x1="15"
-                                        y1="20"
-                                        x2="15"
-                                        y2="23"></line><line x1="20" y1="9" x2="23" y2="9"
-                                    ></line><line x1="20" y1="14" x2="23" y2="14"></line><line
-                                        x1="1"
-                                        y1="9"
-                                        x2="4"
-                                        y2="9"></line><line x1="1" y1="14" x2="4" y2="14"
-                                    ></line></svg
+                        <div class="relative z-10 flex flex-col h-full justify-between">
+                            <div>
+                                <h2
+                                    class="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight text-balance text-slate-900 dark:text-white"
                                 >
-                                <span class="cypher-text" data-original="What Dhaatrik is Building"
-                                    >What Dhaatrik is Building</span
-                                >
-                            </h2>
-                            <p class="leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                                He is currently focused on the agriculture domain, working to
-                                integrate AI into the core fundamentals of farming to solve
-                                real-world problems. He also loves building tools for the community,
-                                like <a
-                                    href="https://github.com/dhaatrik"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="text-(--accent) decoration-dashed underline-offset-4 hover:underline"
-                                    >Vellor</a
-                                >, an offline-first tool for independent educators.
-                            </p>
+                                    <svg
+                                        class="h-6 w-6 text-slate-500 dark:text-(--text-secondary)"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        ><rect x="4" y="4" width="16" height="16" rx="2" ry="2"
+                                        ></rect><rect x="9" y="9" width="6" height="6"></rect><line
+                                            x1="9"
+                                            y1="1"
+                                            x2="9"
+                                            y2="4"></line><line x1="15" y1="1" x2="15" y2="4"
+                                        ></line><line x1="9" y1="20" x2="9" y2="23"></line><line
+                                            x1="15"
+                                            y1="20"
+                                            x2="15"
+                                            y2="23"></line><line x1="20" y1="9" x2="23" y2="9"
+                                        ></line><line x1="20" y1="14" x2="23" y2="14"></line><line
+                                            x1="1"
+                                            y1="9"
+                                            x2="4"
+                                            y2="9"></line><line x1="1" y1="14" x2="4" y2="14"
+                                        ></line></svg
+                                    >
+                                    <span class="cypher-text" data-original="What Dhaatrik is Building"
+                                        >What Dhaatrik is Building</span
+                                    >
+                                </h2>
+                                <p class="leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                    He is currently focused on the agriculture domain, working to
+                                    integrate AI into the core fundamentals of farming to solve
+                                    real-world problems. He also loves building tools for the community,
+                                    like <a
+                                        href="https://github.com/dhaatrik"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="text-(--accent) decoration-dashed underline-offset-4 hover:underline font-medium"
+                                        >Vellor</a
+                                    >, an offline-first tool for independent educators.
+                                </p>
+                            </div>
+
+                            <div class="mt-8 space-y-3">
+                                <div class="flex items-center justify-between border-b border-slate-200/50 pb-2 dark:border-white/5 font-mono text-[9px] tracking-wider">
+                                    <span class="text-slate-400 dark:text-slate-500 uppercase">// ACTIVE FOCUS NODE</span>
+                                    <span class="font-bold text-(--accent)">[ STATUS ]</span>
+                                </div>
+                                <ul class="space-y-2.5 font-mono text-[11px] text-slate-600 dark:text-(--text-secondary)">
+                                    <li class="flex items-center justify-between">
+                                        <span class="flex items-center gap-2">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                            Agritech AI Solutions
+                                        </span>
+                                        <span class="text-green-600 dark:text-green-400 font-bold">[ R&D_ACTIVE ]</span>
+                                    </li>
+                                    <li class="flex items-center justify-between">
+                                        <span class="flex items-center gap-2">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                                            Vellor Protocol
+                                        </span>
+                                        <span class="text-(--accent) font-bold">[ LOCAL_CORE ]</span>
+                                    </li>
+                                    <li class="flex items-center justify-between">
+                                        <span class="flex items-center gap-2">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-slate-400 dark:bg-slate-500"></span>
+                                            Data-Sovereign Tooling
+                                        </span>
+                                        <span class="text-slate-500 dark:text-slate-400 font-bold">[ DEPLOYED ]</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -210,39 +242,77 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                             class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 text-2xl whitespace-nowrap text-slate-900 opacity-5 blur-[0.5px] transition-opacity duration-500 select-none group-hover:opacity-15 sm:text-3xl dark:text-white"
                             set:html={rocketEquationHtml}
                         />
-                        <div class="relative z-10">
-                            <h2
-                                class="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight text-balance text-slate-900 dark:text-white"
-                            >
-                                <svg
-                                    class="h-6 w-6 text-slate-500 dark:text-(--text-secondary)"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    ><path
-                                        d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
-                                    ></path><path
-                                        d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
-                                    ></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"
-                                    ></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"
-                                    ></path></svg
+                        <div class="relative z-10 flex flex-col h-full justify-between">
+                            <div>
+                                <h2
+                                    class="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight text-balance text-slate-900 dark:text-white"
                                 >
-                                <span class="cypher-text" data-original="What Dhaatrik is Learning"
-                                    >What Dhaatrik is Learning</span
-                                >
-                            </h2>
-                            <p class="leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                                His curiosity pulls him toward the intricacies of reality. Right now,
-                                that means diving deep into the math of rocket engineering, the
-                                weirdness of quantum mechanics, and the fascinating depths of human
-                                psychology.
-                            </p>
+                                    <svg
+                                        class="h-6 w-6 text-slate-500 dark:text-(--text-secondary)"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        ><path
+                                            d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+                                        ></path><path
+                                            d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+                                        ></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"
+                                        ></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"
+                                        ></path></svg
+                                    >
+                                    <span class="cypher-text" data-original="What Dhaatrik is Learning"
+                                        >What Dhaatrik is Learning</span
+                                    >
+                                </h2>
+                                <p class="leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                    His curiosity pulls him toward the intricacies of reality. Right now,
+                                    that means diving deep into the math of rocket engineering, the
+                                    weirdness of quantum mechanics, and the fascinating depths of human
+                                    psychology.
+                                </p>
+                            </div>
+
+                            <div class="mt-8 space-y-3.5 font-mono text-[11px] text-slate-600 dark:text-(--text-secondary)">
+                                <div class="flex items-center justify-between border-b border-slate-200/50 pb-2 dark:border-white/5 font-mono text-[9px] tracking-wider">
+                                    <span class="text-slate-400 dark:text-slate-500 uppercase">// RESEARCH NODES</span>
+                                    <span class="font-bold text-(--accent)">[ DEPTH ]</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <div class="flex justify-between mb-1 text-[10px]">
+                                            <span>Rocket Physics & Math</span>
+                                            <span class="text-(--accent) font-bold">75%</span>
+                                        </div>
+                                        <div class="h-1 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-linear-to-r from-blue-500 to-indigo-500 rounded-full" style="width: 75%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1 text-[10px]">
+                                            <span>Quantum Mechanics</span>
+                                            <span class="text-(--accent) font-bold">45%</span>
+                                        </div>
+                                        <div class="h-1 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-linear-to-r from-blue-500 to-indigo-500 rounded-full" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1 text-[10px]">
+                                            <span>Cognitive Psychology</span>
+                                            <span class="text-(--accent) font-bold">60%</span>
+                                        </div>
+                                        <div class="h-1 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-linear-to-r from-blue-500 to-indigo-500 rounded-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
