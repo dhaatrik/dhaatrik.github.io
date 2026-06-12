@@ -24,22 +24,12 @@ export const techGroups: TechGroupsType = {
             deployment: 'UI_THEMING',
         },
         {
-            name: 'Astro',
-            src: 'https://img.shields.io/badge/Astro-black?style=flat&logo=astro&logoColor=white',
-            deployment: 'SSG_PIPELINE',
-        },
-        {
             name: 'Next JS',
             src: 'https://img.shields.io/badge/Next.js-black?style=flat&logo=nextdotjs&logoColor=white',
             deployment: 'SSR_ROUTER',
         },
     ],
     Backend: [
-        {
-            name: 'Rust',
-            src: 'https://img.shields.io/badge/Rust-black?style=flat&logo=rust&logoColor=white',
-            deployment: 'WASM_CORE',
-        },
         {
             name: 'NodeJS',
             src: 'https://img.shields.io/badge/Node.js-black?style=flat&logo=nodedotjs&logoColor=white',
@@ -60,18 +50,8 @@ export const techGroups: TechGroupsType = {
             src: 'https://img.shields.io/badge/FastAPI-black?style=flat&logo=fastapi&logoColor=white',
             deployment: 'API_GATEWAY',
         },
-        {
-            name: 'Django',
-            src: 'https://img.shields.io/badge/Django-black?style=flat&logo=django&logoColor=white',
-            deployment: 'ADMIN_PORTAL',
-        },
     ],
     Cloud_Db: [
-        {
-            name: 'AWS',
-            src: 'https://img.shields.io/badge/AWS-black?style=flat&logo=amazonwebservices&logoColor=white',
-            deployment: 'INFRASTRUCTURE',
-        },
         {
             name: 'Google Cloud',
             src: 'https://img.shields.io/badge/Google_Cloud-black?style=flat&logo=googlecloud&logoColor=white',
@@ -113,23 +93,6 @@ export const techGroups: TechGroupsType = {
             name: 'Scikit-Learn',
             src: 'https://img.shields.io/badge/Scikit_Learn-black?style=flat&logo=scikitlearn&logoColor=white',
             deployment: 'CLASSIC_ML',
-        },
-    ],
-    Model_Orchestration: [
-        {
-            name: 'Gemma 4 / Llama 3',
-            src: 'https://img.shields.io/badge/Llama_/_Gemma-black?style=flat&logo=meta&logoColor=white',
-            deployment: 'OPEN_WEIGHTS',
-        },
-        {
-            name: 'Ollama',
-            src: 'https://img.shields.io/badge/Ollama-black?style=flat&logo=ollama&logoColor=white',
-            deployment: 'LOCAL_INFERENCE',
-        },
-        {
-            name: 'Multi-Agent Networks',
-            src: 'https://img.shields.io/badge/Multi_Agent-black?style=flat&logo=openai&logoColor=white',
-            deployment: 'API_ORCHESTRATION',
         },
     ],
 };

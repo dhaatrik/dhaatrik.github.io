@@ -24,7 +24,7 @@ const [projects, posts] = await Promise.all([
 ]);
 
 // Premium Founder Lineup
-const lineupNames = ['Astro', 'React', 'TypeScript', 'Rust', 'Python', 'TensorFlow'];
+const lineupNames = ['React', 'TypeScript', 'Python', 'TensorFlow'];
 const premiumLineup = lineupNames
     .map((name) => {
         for (const group of Object.values(techGroups)) {
