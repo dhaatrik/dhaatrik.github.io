@@ -79,7 +79,7 @@ const getProjectTelemetry = (id: string) => {
         <main id="main-content" tabindex="-1" class="flex flex-col gap-24">
             <!-- Hero Section: The Boring Section -->
             <section
-                class="layout-container relative flex min-h-[60vh] w-full flex-col justify-center overflow-hidden pt-20 pb-20"
+                class="layout-container relative flex min-h-[60vh] w-full flex-col justify-center overflow-hidden pt-20 pb-28 md:pb-20"
             >
                 <!-- Parallax Background Element -->
                 <div class="parallax-hero-bg flex items-center justify-center">
@@ -280,42 +280,56 @@ const getProjectTelemetry = (id: string) => {
 
                 <!-- Scroll Telemetry Indicator -->
                 <div
-                    class="scroll-telemetry-container pointer-events-none absolute right-0 bottom-2 left-0 z-20 flex flex-col items-center gap-2 select-none md:bottom-4"
+                    class="scroll-telemetry-container pointer-events-none fixed right-0 bottom-4 left-0 z-20 flex flex-col items-center gap-2 select-none md:bottom-6"
                 >
                     <div
-                        class="flex items-center gap-2 rounded-md border border-slate-950/10 bg-slate-900/5 px-3 py-1.5 shadow-xs backdrop-blur-md dark:border-white/10 dark:bg-white/5"
+                        class="flex items-center gap-2 rounded-full border border-(--accent)/15 bg-slate-950/5 px-3.5 py-1.5 shadow-[0_0_15px_var(--accent-glow)] backdrop-blur-md dark:border-white/10 dark:bg-white/5"
                     >
                         <span class="relative flex h-1.5 w-1.5">
                             <span
-                                class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"
+                                class="absolute inline-flex h-full w-full animate-ping rounded-full bg-(--accent) opacity-70"
                             ></span>
-                            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-blue-500"
+                            <span
+                                class="relative inline-flex h-1.5 w-1.5 rounded-full bg-(--accent)"
                             ></span>
                         </span>
                         <span
-                            class="font-mono text-[9px] font-semibold tracking-widest text-slate-500 uppercase dark:text-slate-400"
+                            class="font-mono text-[9px] font-bold tracking-widest text-slate-500 uppercase dark:text-slate-400"
                         >
                             SCROLL TO INITIATE
                         </span>
                     </div>
-                    <div class="flex flex-col items-center">
-                        <div
-                            class="mb-1 h-3 w-px bg-linear-to-b from-slate-300 to-transparent dark:from-slate-700 dark:to-transparent"
-                        >
+                    <div class="flex flex-col items-center opacity-85">
+                        <div class="mb-1 h-4 w-px bg-linear-to-b from-(--accent)/40 to-transparent">
                         </div>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="12"
+                            width="9"
+                            height="9"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="3"
+                            stroke-width="3.5"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="telemetry-pulse text-slate-400 dark:text-slate-500"
+                            class="telemetry-pulse text-(--accent)"
                         >
-                            <path d="M12 5v14M19 12l-7 7-7-7"></path>
+                            <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="9"
+                            height="9"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="telemetry-pulse -mt-1 text-(--accent)"
+                            style="animation-delay: 0.3s;"
+                        >
+                            <path d="M6 9l6 6 6-6"></path>
                         </svg>
                     </div>
                 </div>
