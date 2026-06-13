@@ -83,6 +83,24 @@ const getProjectTelemetry = (id: string) => {
             >
                 <!-- Parallax Background Element -->
                 <div class="parallax-hero-bg flex items-center justify-center">
+                    <div
+                        class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-25 select-none dark:opacity-20"
+                    >
+                        <img
+                            src="/logo_dark.svg"
+                            alt=""
+                            class="h-[60%] w-[60%] max-w-[600px] object-contain dark:hidden"
+                            loading="eager"
+                            fetchpriority="high"
+                        />
+                        <img
+                            src="/logo_light.svg"
+                            alt=""
+                            class="hidden h-[60%] w-[60%] max-w-[600px] object-contain dark:block"
+                            loading="eager"
+                            fetchpriority="high"
+                        />
+                    </div>
                     <svg
                         viewBox="0 0 1000 1000"
                         fill="none"
