@@ -45,50 +45,13 @@ const formatMarqueeDate = (date: Date) => {
     const d = String(date.getDate()).padStart(2, '0');
     return `${y}.${m}.${d}`;
 };
-// ⚡ Bolt: Cache mapped marquee posts to prevent redundant parsing and rendering in SSG loop
-const mappedMarqueePostsData = posts.map((post) => ({
-    date: formatMarqueeDate(post.data.pubDate),
-    title: post.data.title.toUpperCase(),
-}));
 ---
 
 <footer
-    class="relative mt-20 w-full overflow-hidden border-t border-slate-200 bg-slate-50/50 pt-0 pb-12 text-slate-500 dark:border-white/5 dark:bg-[#0b0e14] dark:text-slate-400"
+    class="relative mt-12 w-full overflow-hidden border-t border-slate-200 bg-slate-50/50 pt-12 pb-12 text-slate-500 dark:border-white/5 dark:bg-[#0b0e14] dark:text-slate-400"
 >
     <!-- Subtle Grid Background -->
     <div class="bg-grid-motif pointer-events-none absolute inset-0 opacity-5"></div>
-
-    <!-- Real-Time Transmission Horizon Marquee -->
-    <div
-        class="mb-12 overflow-hidden border-b border-slate-200/80 bg-slate-100/50 py-2.5 select-none dark:border-white/5 dark:bg-black/20"
-    >
-        <div
-            class="animate-marquee flex w-max font-mono text-[10px] tracking-widest whitespace-nowrap text-slate-500 dark:text-slate-400"
-        >
-            <div class="flex shrink-0 gap-16 px-4">
-                <span>ALERT // LATEST LOGS OVER THE HORIZON:</span>
-                {
-                    mappedMarqueePostsData.map((data) => (
-                        <span class="flex gap-2">
-                            <span class="text-(--accent)">[{data.date}]</span>
-                            <span>{data.title}</span>
-                        </span>
-                    ))
-                }
-            </div>
-            <div aria-hidden="true" class="flex shrink-0 gap-16 px-4">
-                <span>ALERT // LATEST LOGS OVER THE HORIZON:</span>
-                {
-                    mappedMarqueePostsData.map((data) => (
-                        <span class="flex gap-2">
-                            <span class="text-(--accent)">[{data.date}]</span>
-                            <span>{data.title}</span>
-                        </span>
-                    ))
-                }
-            </div>
-        </div>
-    </div>
 
     <div class="layout-container relative z-10 grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
         <!-- Column 1: Base Ops -->
@@ -461,19 +424,9 @@ const mappedMarqueePostsData = posts.map((post) => ({
                                     )}
                                 </div>
 
-                                <div class="hidden truncate font-mono text-[9px] tracking-tight text-(--accent) opacity-80 select-none sm:block">
-                                    STATUS: {telemetry.status} // FOCUS: {telemetry.focus}
+                                <div class="shrink-0 font-mono text-[9px] tracking-tight text-(--accent) opacity-80 select-none">
+                                    FOCUS: {telemetry.focus}
                                 </div>
-
-                                <a
-                                    aria-label={`Buy ${book.title} (opens in a new tab)`}
-                                    href={book.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="magnetic-target shrink-0 justify-self-end rounded-md bg-(--accent) px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 sm:px-4 dark:focus-visible:ring-offset-(--bg-main)"
-                                >
-                                    Buy
-                                </a>
                             </div>
                         );
                     })

@@ -89,21 +89,26 @@
 **Action:** Always throttle high-frequency DOM events that trigger style updates (like the reticle parallax) using `requestAnimationFrame`, and ensure they are cleaned up with `cancelAnimationFrame`.
 
 ## 2026-06-05 - Throttling high-frequency scroll events
+
 **Learning:** Unthrottled `scroll` events that trigger style recalculations or DOM updates can fire synchronously and faster than the browser's frame rate, leading to severe layout thrashing and UI jank.
 **Action:** Always throttle continuous `scroll` event listeners using `window.requestAnimationFrame()` combined with a ticking boolean flag, unless natively handled via CSS `animation-timeline`.
 
 ## 2026-06-06 - Caching layout rects on mousemove
+
 **Learning:** Calling getBoundingClientRect() inside requestAnimationFrame for high-frequency events (like mousemove) still causes significant layout recalculations (layout thrashing) for every active element on the page.
 **Action:** Always pre-calculate and cache document-relative coordinates (e.g. rect.left + window.scrollX) during initialization (and update via ResizeObserver) instead of querying the DOM layout during the continuous event loop.
 
 ## 2026-06-06 - Caching layout rects on mousemove
+
 **Learning:** Calling getBoundingClientRect() inside requestAnimationFrame for high-frequency events (like mousemove) still causes significant layout recalculations (layout thrashing) for every active element on the page.
 **Action:** Always pre-calculate and cache document-relative coordinates (e.g. rect.left + window.scrollX) during initialization (and update via debounced scroll/resize events) instead of querying the DOM layout during the continuous event loop.
 
 ## 2026-06-11 - Prevent layout thrashing in TOC IntersectionObserver
+
 **Learning:** Calling getBoundingClientRect() inside an IntersectionObserver forces synchronous layout recalculation, defeating the observer's asynchronous purpose.
 **Action:** Leverage entry.isIntersecting to track visibility state instead.
 
 ## 2026-06-12 - Reusing mapped data instead of JSX elements in Astro frontmatter
+
 **Learning:** In Astro components, the frontmatter script block (`---`) is evaluated as standard TypeScript/JavaScript, not JSX. Attempting to assign raw HTML or JSX elements directly to variables inside the frontmatter (e.g., `const mappedElements = posts.map(p => <div/>)`) causes an esbuild parsing error like `Expected ">" but found "class"`.
-**Action:** When caching redundant mapped data to avoid recalculation in SSG loops, strictly cache the *raw data objects* in the frontmatter, and perform the actual HTML/JSX component mapping inline within the component's HTML section.
+**Action:** When caching redundant mapped data to avoid recalculation in SSG loops, strictly cache the _raw data objects_ in the frontmatter, and perform the actual HTML/JSX component mapping inline within the component's HTML section.

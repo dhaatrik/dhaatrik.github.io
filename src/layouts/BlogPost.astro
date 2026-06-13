@@ -34,14 +34,6 @@ const {
     author,
     clearance,
 } = Astro.props;
-
-// Generate simulated commit hash
-const commitHash = id
-    ? btoa(id + pubDate.toISOString())
-          .substring(0, 7)
-          .replace(/[^a-zA-Z0-9]/g, 'X')
-          .toUpperCase()
-    : '0X4F9A';
 ---
 
 <!doctype html>
@@ -64,7 +56,7 @@ const commitHash = id
         </div>
 
         <Header />
-        <main id="main-content" tabindex="-1" class="layout-container grow py-8">
+        <main id="main-content" tabindex="-1" class="layout-container grow py-12 md:py-20">
             <div class="blog-reveal blog-reveal-1 mb-8">
                 <a
                     href="/blog"
@@ -95,67 +87,51 @@ const commitHash = id
                 <div class="prose-container w-full min-w-0">
                     <!-- Laboratory Report Header -->
                     <div
-                        class="blog-reveal blog-reveal-1 mb-10 rounded-lg border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-500 shadow-sm dark:border-slate-800 dark:bg-[#151a22] dark:text-slate-400"
+                        class="blog-reveal blog-reveal-1 mb-10 rounded-xl border border-slate-200/60 bg-slate-50/60 p-5 font-mono text-xs text-slate-500 shadow-xs backdrop-blur-md dark:border-white/5 dark:bg-[#0f141f] dark:text-slate-400"
                     >
-                        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
-                            <div>
-                                <div class="mb-1 text-slate-400 dark:text-slate-600">DATE</div>
+                        <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+                            <div class="space-y-1">
                                 <div
-                                    class="font-bold whitespace-nowrap text-slate-900 dark:text-slate-200"
+                                    class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
                                 >
+                                    // DATE
+                                </div>
+                                <div class="font-bold text-slate-900 dark:text-slate-200">
                                     <FormattedDate date={pubDate} format="technical" />
                                 </div>
                             </div>
-                            <div>
-                                <div class="mb-1 text-slate-400 dark:text-slate-600">AUTHOR</div>
-                                <div class="font-bold text-(--accent) uppercase">{author}</div>
+                            <div class="space-y-1">
+                                <div
+                                    class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                                >
+                                    // AUTHOR
+                                </div>
+                                <div class="font-bold tracking-wide text-(--accent) uppercase">
+                                    {author}
+                                </div>
                             </div>
-                            <div>
-                                <div class="mb-1 text-slate-400 dark:text-slate-600">CLEARANCE</div>
+                            <div class="space-y-1">
+                                <div
+                                    class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                                >
+                                    // CLEARANCE
+                                </div>
                                 <div class="font-bold text-red-500 uppercase dark:text-red-400">
                                     {clearance}
                                 </div>
                             </div>
-                            <div>
-                                <div class="mb-1 text-slate-400 dark:text-slate-600">
-                                    COMMIT_HASH
+                            <div class="space-y-1">
+                                <div
+                                    class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                                >
+                                    // INTERACTION
                                 </div>
-                                <div class="font-bold text-slate-900 dark:text-slate-200">
-                                    {commitHash}
-                                </div>
-                            </div>
-                            <div>
-                                <div class="mb-1 text-slate-400 dark:text-slate-600">
-                                    SIGNAL_STRENGTH
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <span class="flex gap-0.5">
-                                        <span
-                                            class={`w-1 h-2 rounded-sm ${entropy === 'low' || entropy === 'medium' || entropy === 'high' || entropy === 'deep-dive' ? 'bg-(--accent)' : 'bg-slate-300 dark:bg-slate-700'}`}
-                                        ></span>
-                                        <span
-                                            class={`w-1 h-3 rounded-sm ${entropy === 'medium' || entropy === 'high' || entropy === 'deep-dive' ? 'bg-(--accent)' : 'bg-slate-300 dark:bg-slate-700'}`}
-                                        ></span>
-                                        <span
-                                            class={`w-1 h-4 rounded-sm ${entropy === 'high' || entropy === 'deep-dive' ? 'bg-(--accent)' : 'bg-slate-300 dark:bg-slate-700'}`}
-                                        ></span>
-                                        <span
-                                            class={`w-1 h-5 rounded-sm ${entropy === 'deep-dive' ? 'bg-(--accent) shadow-[0_0_5px_var(--accent)]' : 'bg-slate-300 dark:bg-slate-700'}`}
-                                        ></span>
-                                    </span>
-                                    <span class="text-[10px] font-bold tracking-widest uppercase"
-                                        >{entropy || 'STANDARD'}</span
-                                    >
-                                </div>
-                            </div>
-                            <div>
-                                <div class="mb-1 text-slate-400 dark:text-slate-600">MODE</div>
-                                <div class="font-bold text-slate-900 dark:text-slate-200">
+                                <div>
                                     <button
                                         id="toggle-mode-btn"
                                         aria-label="Switch to raw markdown mode"
                                         title="Switch to raw markdown mode"
-                                        class="cursor-pointer rounded font-bold text-(--accent) uppercase select-none hover:underline focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
+                                        class="cursor-pointer font-bold text-(--accent) uppercase hover:underline focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
                                     >
                                         [ RENDERED ]
                                     </button>
