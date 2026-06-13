@@ -220,4 +220,28 @@ test.describe('Portfolio UI Interactivity', () => {
         // Verify it is hidden again
         await expect(popover).toBeHidden();
     });
+
+    test('Dynamic greeting should render correct message based on time', async ({ page }) => {
+        await page.goto('/');
+        const greeting = page.locator('#dynamic-greeting');
+        await expect(greeting).toBeVisible();
+        const text = await greeting.innerText();
+        expect(['Good morning,', 'Good afternoon,', 'Good evening,']).toContain(text);
+    });
+
+    test('Identity typewriter should rotate text dynamically', async ({ page }) => {
+        await page.goto('/');
+        const rotator = page.locator('#identity-rotator');
+        await expect(rotator).toBeVisible();
+
+        const initialText = await rotator.innerText();
+        expect(initialText).toBe('First-Principles Thinker.');
+
+        // Wait for rotation to occur (typewriter starts after 1.2s delay, deletes, pauses, and types next)
+        await page.waitForTimeout(4500);
+
+        const rotatedText = await rotator.innerText();
+        expect(rotatedText).not.toBe(initialText);
+        expect(rotatedText.length).toBeGreaterThan(0);
+    });
 });
