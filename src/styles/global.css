@@ -769,28 +769,22 @@
     }
 }
 
-/* Books Grid & Subgrid Layout */
+/* Books Grid & Flex Row Layout */
 .books-grid-container {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
 }
 
 .book-card-row {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: subgrid;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
 @media (min-width: 640px) {
     .books-grid-container {
-        grid-template-columns: 1fr auto auto;
         gap: 0.75rem;
-    }
-
-    .book-card-row {
-        grid-column: span 3;
     }
 }
 

@@ -424,19 +424,9 @@ const formatMarqueeDate = (date: Date) => {
                                     )}
                                 </div>
 
-                                <div class="hidden truncate font-mono text-[9px] tracking-tight text-(--accent) opacity-80 select-none sm:block">
-                                    STATUS: {telemetry.status} // FOCUS: {telemetry.focus}
+                                <div class="shrink-0 font-mono text-[9px] tracking-tight text-(--accent) opacity-80 select-none">
+                                    FOCUS: {telemetry.focus}
                                 </div>
-
-                                <a
-                                    aria-label={`Buy ${book.title} (opens in a new tab)`}
-                                    href={book.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="magnetic-target shrink-0 justify-self-end rounded-md bg-(--accent) px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 sm:px-4 dark:focus-visible:ring-offset-(--bg-main)"
-                                >
-                                    Buy
-                                </a>
                             </div>
                         );
                     })
