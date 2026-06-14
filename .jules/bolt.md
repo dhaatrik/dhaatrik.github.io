@@ -112,3 +112,8 @@
 
 **Learning:** In Astro components, the frontmatter script block (`---`) is evaluated as standard TypeScript/JavaScript, not JSX. Attempting to assign raw HTML or JSX elements directly to variables inside the frontmatter (e.g., `const mappedElements = posts.map(p => <div/>)`) causes an esbuild parsing error like `Expected ">" but found "class"`.
 **Action:** When caching redundant mapped data to avoid recalculation in SSG loops, strictly cache the _raw data objects_ in the frontmatter, and perform the actual HTML/JSX component mapping inline within the component's HTML section.
+
+## 2026-06-14 - Prevent repetitive DOM queries in RAF loop
+
+**Learning:** Performing DOM queries like `querySelectorAll` inside a high-frequency `requestAnimationFrame` callback (such as for mouse tracking) wastes resources and unnecessarily queries the DOM when the set of elements does not change. Further, continuously reapplying static styles (like `translateZ(10px)`) inside an RAF loop is inefficient compared to applying them once at the boundary of interaction (e.g., `mouseenter`).
+**Action:** Cache DOM queries during initialization instead of inside an RAF loop, and move static state transitions (like applying depth to parallax cards) to event boundaries like `mouseenter` and `mouseleave` rather than computing them continuously.

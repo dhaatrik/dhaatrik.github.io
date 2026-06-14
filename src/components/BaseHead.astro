@@ -293,6 +293,9 @@ const personSchema = JSON.stringify({
             let cardMouseY = 0;
             let cachedRect = null;
 
+            // ⚡ Bolt: Cache DOM queries outside RAF
+            const tilts = card.querySelectorAll('[data-tilt-z]');
+
             const updateCardTilt = () => {
                 if (!cachedRect) return;
 
@@ -309,12 +312,6 @@ const personSchema = JSON.stringify({
                 card.style.setProperty('--mouse-x', `${x}px`);
                 card.style.setProperty('--mouse-y', `${y}px`);
 
-                // Push inner elements outwards
-                const tilts = card.querySelectorAll('[data-tilt-z]');
-                tilts.forEach((target) => {
-                    target.style.transform = 'translateZ(10px)';
-                });
-
                 cardRafId = null;
             };
 
@@ -326,6 +323,11 @@ const personSchema = JSON.stringify({
                     width: rect.width,
                     height: rect.height,
                 };
+
+                // ⚡ Bolt: Push inner elements outwards once on enter instead of inside continuous RAF loop
+                tilts.forEach((target) => {
+                    target.style.transform = 'translateZ(10px)';
+                });
             };
 
             const handleCardMove = (e) => {
@@ -343,7 +345,6 @@ const personSchema = JSON.stringify({
                 }
                 card.style.transform =
                     'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-                const tilts = card.querySelectorAll('[data-tilt-z]');
                 tilts.forEach((target) => {
                     target.style.transform = 'translateZ(0px)';
                 });
