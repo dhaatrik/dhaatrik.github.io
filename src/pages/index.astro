@@ -353,6 +353,10 @@ const getProjectTelemetry = (id: string) => {
                     <article
                         class="bento-card group bento-card-project relative flex cursor-pointer flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
                         data-popover-target="project-popover-currently-exploring"
+                        role="button"
+                        tabindex="0"
+                        aria-expanded="false"
+                        aria-controls="project-popover-currently-exploring"
                     >
                         <div class="hologram-overlay"></div>
                         <div class="relative z-10 flex h-full flex-col justify-between" data-tilt-z>
@@ -548,6 +552,10 @@ const getProjectTelemetry = (id: string) => {
                                     <article
                                         class="bento-card group bento-card-project relative flex cursor-pointer flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
                                         data-popover-target={`project-popover-${projectIdClean}`}
+                                        role="button"
+                                        tabindex="0"
+                                        aria-expanded="false"
+                                        aria-controls={`project-popover-${projectIdClean}`}
                                     >
                                         <div class="hologram-overlay" />
 
@@ -909,6 +917,26 @@ const getProjectTelemetry = (id: string) => {
                             }
                         }
                     });
+
+                    card.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            card.click();
+                        }
+                    });
+
+                    const popoverId = card.getAttribute('data-popover-target');
+                    if (popoverId) {
+                        const popover = document.getElementById(popoverId);
+                        if (popover) {
+                            popover.addEventListener('toggle', (e) => {
+                                card.setAttribute(
+                                    'aria-expanded',
+                                    e.newState === 'open' ? 'true' : 'false'
+                                );
+                            });
+                        }
+                    }
                 });
                 // --- 1. Dynamic "Identity" Typewriter ---
                 let typewriterTimeout;
