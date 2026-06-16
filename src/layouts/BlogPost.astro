@@ -59,6 +59,32 @@ const articleSchema = JSON.stringify({
     },
     ...(tags && tags.length > 0 && { keywords: tags.join(', ') }),
 }).replace(/</g, '\\u003c');
+
+// Generate BreadcrumbList JSON-LD
+const breadcrumbSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: new URL('/', Astro.site).href,
+        },
+        {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Transmissions',
+            item: new URL('/transmissions/', Astro.site).href,
+        },
+        {
+            '@type': 'ListItem',
+            position: 3,
+            name: title,
+            item: new URL(Astro.url.pathname, Astro.site).href,
+        },
+    ],
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -67,6 +93,8 @@ const articleSchema = JSON.stringify({
         <BaseHead title={title} description={description} image={heroImage} type="article" pubDate={pubDate} updatedDate={updatedDate} keywords={tags} />
         <!-- Article-specific JSON-LD -->
         <script type="application/ld+json" set:html={articleSchema} />
+        <!-- Breadcrumb JSON-LD -->
+        <script type="application/ld+json" set:html={breadcrumbSchema} />
     </head>
 
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">

@@ -40,13 +40,6 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 ## P2 — Medium impact
 
-- [ ] **Per-page SEO metadata** _(SEO)_
-  - `/transmissions` reuses generic `SITE_DESCRIPTION`.
-  - Missing `twitter:site`, `og:locale`, and `BreadcrumbList` schema on inner pages.
-  - Write unique titles/descriptions per route.
-  - Add breadcrumb JSON-LD on blog posts and (future) project pages.
-  - Files: `src/components/BaseHead.astro`, `src/pages/transmissions/index.astro`, `src/layouts/BlogPost.astro`
-
 - [ ] **Reduce CSS payload** _(Performance)_
   - Built CSS is ~127 KB (`Header.-3pzV_ci.css`), duplicated across pages.
   - KaTeX CSS/fonts load on `/personnel` for a single pre-rendered equation.
@@ -115,3 +108,4 @@ _Move completed items here with date when finished._
 - [x] **Extract and defer global mouse-tracking JS** — completed 2026-06-17
 - [x] **Complete link prefetch coverage** — completed 2026-06-17
 - [x] **Add automated accessibility audits** — completed 2026-06-17
+- [x] **Per-page SEO metadata** — completed 2026-06-17
