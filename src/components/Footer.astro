@@ -462,10 +462,10 @@ const formatMarqueeDate = (date: Date) => {
 
         // 1. Calculate relative time for recent transmissions (automatically updates)
         const updateRelativeTimes = () => {
-            const indicators = document.querySelectorAll('.relative-time-indicator');
+            const indicators = document.getElementsByClassName('relative-time-indicator');
             const now = new Date().getTime();
 
-            indicators.forEach((el) => {
+            Array.from(indicators).forEach((el) => {
                 const timestampStr = el.getAttribute('data-timestamp');
                 if (!timestampStr) return;
                 const date = new Date(timestampStr).getTime();
@@ -498,7 +498,7 @@ const formatMarqueeDate = (date: Date) => {
         updateRelativeTimes();
 
         // 2. Sequential Cyber Scramble Text Deceleration Sequence
-        const cyberIcons = document.querySelectorAll('.cyber-icon');
+        const cyberIcons = document.getElementsByClassName('cyber-icon');
         const hexChars = [
             '0',
             '1',
@@ -518,7 +518,7 @@ const formatMarqueeDate = (date: Date) => {
             'F',
         ];
 
-        cyberIcons.forEach((icon) => {
+        Array.from(cyberIcons).forEach((icon) => {
             const container = icon.querySelector('.icon-container');
             if (!container) return;
 

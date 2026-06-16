@@ -900,8 +900,8 @@ const getProjectTelemetry = (id: string) => {
         <script is:inline>
             document.addEventListener('astro:page-load', () => {
                 // --- 0. Project Bento Cards click to open popover ---
-                const projectCards = document.querySelectorAll('.bento-card-project');
-                projectCards.forEach((card) => {
+                const projectCards = document.getElementsByClassName('bento-card-project');
+                Array.from(projectCards).forEach((card) => {
                     card.addEventListener('click', (e) => {
                         // Ignore clicks on links/buttons inside the card
                         if (e.target.closest('.github-link')) {
@@ -1029,15 +1029,15 @@ const getProjectTelemetry = (id: string) => {
                 const projectsSection = document.querySelector('.content-visibility-auto-projects');
                 if (projectsSection) {
                     projectsSection.addEventListener('contentvisibilityautostatechange', (e) => {
-                        const videos = projectsSection.querySelectorAll('video');
+                        const videos = projectsSection.getElementsByTagName('video');
                         if (e.skipped) {
-                            videos.forEach((v) => {
+                            Array.from(videos).forEach((v) => {
                                 try {
                                     v.pause();
                                 } catch (err) {}
                             });
                         } else {
-                            videos.forEach((v) => {
+                            Array.from(videos).forEach((v) => {
                                 try {
                                     v.play();
                                 } catch (err) {}

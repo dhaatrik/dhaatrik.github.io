@@ -103,11 +103,11 @@ const { id = 'scrollytell-dossier', stepCount } = Astro.props;
 
 <script>
     function initScrollytelling() {
-        const containers = document.querySelectorAll('.scrollytell-container');
+        const containers = document.getElementsByClassName('scrollytell-container');
 
-        containers.forEach((container) => {
-            const steps = container.querySelectorAll('.scrollytell-step-card');
-            const layers = container.querySelectorAll('.scrollytell-visual-layer');
+        Array.from(containers).forEach((container) => {
+            const steps = container.getElementsByClassName('scrollytell-step-card');
+            const layers = container.getElementsByClassName('scrollytell-visual-layer');
 
             if (layers[0]) layers[0].classList.add('active');
             if (steps[0]) steps[0].classList.add('active');
@@ -126,7 +126,7 @@ const { id = 'scrollytell-dossier', stepCount } = Astro.props;
                         if (!stepNum) return;
 
                         // Update step card states
-                        steps.forEach((step) => {
+                        Array.from(steps).forEach((step) => {
                             if (step.getAttribute('data-step') === stepNum) {
                                 step.classList.add('active');
                             } else {
@@ -135,7 +135,7 @@ const { id = 'scrollytell-dossier', stepCount } = Astro.props;
                         });
 
                         // Update visual layer states
-                        layers.forEach((layer) => {
+                        Array.from(layers).forEach((layer) => {
                             if (layer.getAttribute('data-step') === stepNum) {
                                 layer.classList.add('active');
                             } else {
@@ -146,7 +146,7 @@ const { id = 'scrollytell-dossier', stepCount } = Astro.props;
                 });
             }, observerOptions);
 
-            steps.forEach((step) => observer.observe(step));
+            Array.from(steps).forEach((step) => observer.observe(step));
         });
     }
 
