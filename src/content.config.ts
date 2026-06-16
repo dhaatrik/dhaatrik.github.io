@@ -21,6 +21,8 @@ const blog = defineCollection({
             clearance: z
                 .enum(['PUBLIC', 'INTERNAL', 'RESTRICTED', 'CONFIDENTIAL', 'LEVEL_4'])
                 .default('PUBLIC'),
+            // Set to true on posts that contain KaTeX math ($$) so the CSS is loaded conditionally
+            hasMath: z.boolean().default(false),
         }),
 });
 
