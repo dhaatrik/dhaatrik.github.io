@@ -35,12 +35,6 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
   - Topics are already referenced in homepage FAQ schema but underrepresented in content.
   - Files: `src/content/blog/`
 
-- [ ] **Add automated accessibility audits** _(Mobile, Code quality)_
-  - Track `accessibility_audits_20260524` is planned but `test/e2e/accessibility.spec.ts` does not exist.
-  - Install `@axe-core/playwright`.
-  - Scan `/`, `/personnel`, `/pedagogy`, `/transmissions`.
-  - Fail CI on critical WCAG violations.
-  - Reference: `conductor/tracks/accessibility_audits_20260524/`
 
 ---
 
@@ -120,3 +114,4 @@ _Move completed items here with date when finished._
 - [x] **Pass `heroImage` to `BaseHead` on blog posts** — completed 2026-06-17
 - [x] **Extract and defer global mouse-tracking JS** — completed 2026-06-17
 - [x] **Complete link prefetch coverage** — completed 2026-06-17
+- [x] **Add automated accessibility audits** — completed 2026-06-17
