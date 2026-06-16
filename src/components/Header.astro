@@ -207,13 +207,23 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                     >Personnel
                 </HeaderLink>
                 <HeaderLink
-                    href="/pedagogy"
+                    href="/projects"
                     class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
                         class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
                         >[ 03 ]</span
+                    >Projects
+                </HeaderLink>
+                <HeaderLink
+                    href="/pedagogy"
+                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                >
+                    <span
+                        aria-hidden="true"
+                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
+                        >[ 04 ]</span
                     >Pedagogy
                 </HeaderLink>
                 <HeaderLink
@@ -223,7 +233,7 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                     <span
                         aria-hidden="true"
                         class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
-                        >[ 04 ]</span
+                        >[ 05 ]</span
                     >Transmissions
                 </HeaderLink>
             </div>
@@ -285,15 +295,21 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                     isActive: cleanPath.startsWith('/personnel'),
                 },
                 {
+                    href: '/projects',
+                    label: 'Projects',
+                    index: '[ 03 ]',
+                    isActive: cleanPath.startsWith('/projects'),
+                },
+                {
                     href: '/pedagogy',
                     label: 'Pedagogy',
-                    index: '[ 03 ]',
+                    index: '[ 04 ]',
                     isActive: cleanPath.startsWith('/pedagogy'),
                 },
                 {
                     href: '/transmissions',
                     label: 'Transmissions',
-                    index: '[ 04 ]',
+                    index: '[ 05 ]',
                     isActive: cleanPath.startsWith('/transmissions'),
                 },
             ].map((item) => (

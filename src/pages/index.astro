@@ -11,10 +11,12 @@ import { getReadingTime } from '../utils/readingTime';
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
     getCollection('projects').then((raw) =>
-        raw.sort(
-            (a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) =>
-                a.data.order - b.data.order
-        )
+        raw
+            .sort(
+                (a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) =>
+                    a.data.order - b.data.order
+            )
+            .slice(0, 4)
     ),
     getCollection('blog').then((raw) =>
         raw
@@ -680,6 +682,47 @@ const webSiteSchema = JSON.stringify({
                             );
                         })
                     }
+
+                    {/* More Projects Bento Card */}
+                    <article
+                        class="bento-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
+                    >
+                        <div class="hologram-overlay" />
+                        <div
+                            class="relative z-10 flex h-full flex-col justify-between"
+                            data-tilt-z
+                        >
+                            <div>
+                                <div class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                                    <div class="flex min-w-0 items-center gap-1.5">
+                                        <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
+                                        <span class="truncate">DIRECTORY: 12_ITEMS // ACTIVE_LOGS</span>
+                                    </div>
+                                    <span class="shrink-0 font-bold text-(--accent)">
+                                        [ MORE ]
+                                    </span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-slate-900 transition-colors dark:text-white mb-4">
+                                    <a
+                                        href="/projects"
+                                        data-astro-prefetch="hover"
+                                        class="after:absolute after:inset-0 after:z-10 focus:outline-none"
+                                    >
+                                        Explore More Projects
+                                    </a>
+                                </h3>
+                                <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                    View Dhaatrik's full engineering catalog including local Electron utilities, security sandboxes, real-time dining solutions, and client-side compilers.
+                                </p>
+                            </div>
+                            <div class="flex items-center justify-between border-t border-slate-200/50 pt-4 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                                <span>SHOWCASE ARCHIVE</span>
+                                <span class="text-xs transition-transform group-hover:translate-x-1">
+                                    →
+                                </span>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </section>
 

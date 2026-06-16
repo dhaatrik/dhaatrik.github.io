@@ -30,10 +30,13 @@ He is also known by his nickname **"Dhaatu"**, and his students affectionately c
 ## Pages
 
 ### Home (https://dhaatrik.github.io/)
-The landing page features a dynamic greeting based on time of day, a hero section introducing Dhaatrik as an Entrepreneur & AI Engineer, a showcase of 4 major projects (DeltaV Lab, Vellor, FuelDrop, The Infinite Intelligence), a tech stack marquee, and the 3 most recent blog posts.
+The landing page features a dynamic greeting based on time of day, a hero section introducing Dhaatrik as an Entrepreneur & AI Engineer, a showcase of 4 featured projects, a tech stack marquee, and the 3 most recent blog posts.
 
 ### Personnel (https://dhaatrik.github.io/personnel/)
 A detailed personnel file covering Dhaatrik's background, education, work experience, and technical capabilities. Styled as a classified dossier with a technical/military aesthetic.
+
+### Projects (https://dhaatrik.github.io/projects/)
+A dedicated archive displaying Dhaatrik Chowdhury's complete engineering directory. Displays card previews for all 12 projects, showing titles, descriptions, live telemetry states, tags, and progress logs.
 
 ### Pedagogy (https://dhaatrik.github.io/pedagogy/)
 Dedicated to Dhaatrik's teaching philosophy and the DBS Classes YouTube channel. Contains:
@@ -89,6 +92,38 @@ An honest post-mortem on why the DBS Classes YouTube channel stopped after 20 vi
 ### The Infinite Intelligence
 - **URL**: https://dhaatrik.github.io/projects/the-infinite-intelligence/
 - **Description**: Multi-agent AI debate system where multiple AI agents engage in structured parallel debates.
+
+### Instant App Opener
+- **URL**: https://dhaatrik.github.io/projects/instant-app-opener/
+- **Description**: Electron-based local desktop launcher built with JavaScript, Node.js, and CSS. Summons productivity utilities via system-tray global keyboard listeners under 150ms.
+
+### Glassbox
+- **URL**: https://dhaatrik.github.io/projects/glassbox/
+- **Description**: Secure Node.js proxy execution sandbox built with TypeScript, Node.js, VM2, and ES6 Proxies. Intercepts core system APIs to audit untrusted scripts locally.
+
+### FinTrack
+- **URL**: https://dhaatrik.github.io/projects/expense-vs-investment-tracker/
+- **Description**: Offline-first personal finance tracker visualizing expense-vs-investment ratios using Chart.js, HTML/CSS, JavaScript, and localStorage.
+
+### Seamless QR Dining
+- **URL**: https://dhaatrik.github.io/projects/seamless-qr-dining/
+- **Description**: Real-time restaurant menu, ordering, and billing pipeline utilizing WebSockets, Node.js, React, and Tailwind CSS.
+
+### Vireo Wellness
+- **URL**: https://dhaatrik.github.io/projects/vireo-wellness/
+- **Description**: Client-side health tracker built with HTML/CSS, Vanilla JS, and IndexedDB, ensuring 100% privacy and local-only data persistence.
+
+### Bill Express
+- **URL**: https://dhaatrik.github.io/projects/bill-express/
+- **Description**: Local PDF billing invoice generator utilizing client-side print layout and JavaScript to format print grids and produce downloadable PDFs instantly.
+
+### MarkPDF
+- **URL**: https://dhaatrik.github.io/projects/free-markdown-to-pdf-converter/
+- **Description**: Markdown-to-PDF document compiler featuring Remark markdown parsing, CSS formatting, and KaTeX mathematical rendering in the browser.
+
+### Read Aloud Chrome Extension
+- **URL**: https://dhaatrik.github.io/projects/readaloud_chromeextension/
+- **Description**: Manifest V3 Chrome extension wrapping the Web Speech API for custom text-to-speech with speech speed control and shortcut bindings.
 
 ---
 

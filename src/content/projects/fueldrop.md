@@ -1,7 +1,7 @@
 ---
 title: 'FuelDrop'
 description: 'Redefine the refueling experience by bringing the station to the user—eliminating wait times and detours through a transparent, mobile-first delivery platform.'
-logo: '/fueldrop_logo.png'
+logo: '../../assets/fueldrop.png'
 githubUrl: 'https://github.com/dhaatrik/fueldrop'
 progress: 'v3.0.0 High-concurrency React 19 architecture'
 order: 3
