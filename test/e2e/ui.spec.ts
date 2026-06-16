@@ -63,6 +63,30 @@ test.describe('Portfolio UI Interactivity', () => {
         expect(hasMarker).toBe(true);
     });
 
+    test('Page transition progress indicator should show up on navigation', async ({ page }) => {
+        await page.goto('/');
+        await page.waitForLoadState('networkidle');
+
+        // Click to navigate and immediately check for indicator elements
+        const blogLink = page.locator('header a:has-text("Transmissions")').first();
+        await blogLink.click();
+
+        const progressBar = page.locator('#transition-progress-bar');
+        const statusTag = page.locator('#transition-status-tag');
+
+        await expect(progressBar).toBeAttached();
+        await expect(statusTag).toBeAttached();
+
+        // After page loads and timeout passes, elements should fade out
+        await page.waitForLoadState('networkidle');
+        await page.waitForTimeout(1500);
+
+        const pbOpacity = parseFloat(await progressBar.evaluate((el) => window.getComputedStyle(el).opacity));
+        const stOpacity = parseFloat(await statusTag.evaluate((el) => window.getComputedStyle(el).opacity));
+        expect(pbOpacity).toBeLessThan(0.01);
+        expect(stOpacity).toBeLessThan(0.01);
+    });
+
     test('Blog page search should retain queries and update URL/sessionStorage', async ({
         page,
     }) => {
@@ -90,7 +114,24 @@ test.describe('Portfolio UI Interactivity', () => {
         );
         expect(sessionStorageVal).toBe('nonexistent');
 
-        // 3. Test back navigation retention
+        // 3. Verify Custom Highlight API is registered and matches are highlighted
+        await searchInput.fill('teaching');
+        await page.waitForTimeout(600);
+        const highlightsSize = await page.evaluate(() => {
+            return typeof CSS !== 'undefined' && (CSS as any).highlights
+                ? (CSS as any).highlights.get('search-match')?.size || 0
+                : -1;
+        });
+        // If Custom Highlight API is supported, assert ranges were registered
+        if (highlightsSize !== -1) {
+            expect(highlightsSize).toBeGreaterThan(0);
+        }
+
+        // Restore to nonexistent for the back navigation retention test
+        await searchInput.fill('nonexistent');
+        await page.waitForTimeout(600);
+
+        // 4. Test back navigation retention
         await page.goto('/');
         await page.goBack();
         await expect(searchInput).toHaveValue('nonexistent');
