@@ -35,14 +35,6 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
   - Topics are already referenced in homepage FAQ schema but underrepresented in content.
   - Files: `src/content/blog/`
 
-- [ ] **Extract and defer global mouse-tracking JS** _(Performance, Mobile, Code quality)_
-  - `BaseHead.astro` ships ~270 lines of inline JS on every page (spotlight, magnetic pull, 3D tilt).
-  - Effects are mouse-only — parse cost on mobile with no UX benefit.
-  - Move script to a bundled module (e.g. `src/scripts/mouseTracker.ts`).
-  - Gate behind `@media (hover: hover) and (pointer: fine)`.
-  - Skip initialization on touch-only devices.
-  - File: `src/components/BaseHead.astro`
-
 - [ ] **Complete link prefetch coverage** _(Performance)_
   - `prefetch: true` is set in `astro.config.mjs`, but Footer internal links lack `data-astro-prefetch`.
   - Header and main CTAs already have prefetch; Footer does not.
@@ -132,3 +124,4 @@ _Move completed items here with date when finished._
 - [x] **Optimize hero images** — completed 2026-06-16
 - [x] **Add dedicated project pages** — completed 2026-06-16
 - [x] **Pass `heroImage` to `BaseHead` on blog posts** — completed 2026-06-17
+- [x] **Extract and defer global mouse-tracking JS** — completed 2026-06-17
