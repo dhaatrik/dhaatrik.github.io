@@ -15,9 +15,13 @@ Throughout this journey, he realized that the conventional education system is o
 
 He started **DBS Classes** (short for *Dhaatu Bhaiyaa's Classes*, where "Dhaatu" is his personal nickname and "Bhaiyaa" is the Hindi word for big brother, reflecting what his students called him) on YouTube on October 31, 2022, to break this cycle, guided by a singular, non-negotiable philosophy:
 
-> **"Education Is Not Free BUT KNOWLEDGE IS FREE" and must be shared with "ZERO TERMS AND CONDITIONS"**
+<p align="center">
+    <strong> "Education Is Not Free BUT KNOWLEDGE IS FREE" <br>
+    ...and must be shared with "ZERO TERMS AND CONDITIONS"</strong>
+</p>
 
 With this core thought as his compass, the goal of the channel was straightforward:
+
 1. Make Physics and Mathematics highly intuitive.
 2. Teach using first-principles thinking.
 3. Bridge the gap between abstract equations and real-life observations (like why a bus wheel rotates the way it does, or how kinematics play out on a football field).
