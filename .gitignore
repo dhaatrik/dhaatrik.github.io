@@ -6,6 +6,8 @@ dist/
 # dependencies
 node_modules/
 
+# Custom MCP
+mcps/
 # logs
 npm-debug.log*
 yarn-debug.log*
