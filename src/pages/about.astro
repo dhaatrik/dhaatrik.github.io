@@ -965,13 +965,16 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                         }
 
                         const interval = setInterval(() => {
-                            element.innerText = originalText
-                                .split('')
-                                .map((letter: string, index: number) => {
-                                    if (index < iterations) return originalText[index];
-                                    return letters[Math.floor(Math.random() * letters.length)];
-                                })
-                                .join('');
+                            // ⚡ Bolt: Eliminate massive array allocations/GC pressure by using string concatenation
+                            let nextText = '';
+                            for (let i = 0; i < length; i++) {
+                                if (i < iterations) {
+                                    nextText += originalText[i];
+                                } else {
+                                    nextText += letters[Math.floor(Math.random() * letters.length)];
+                                }
+                            }
+                            element.innerText = nextText;
 
                             if (iterations >= length) {
                                 clearInterval(interval);
