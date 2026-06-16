@@ -112,3 +112,8 @@
 
 **Learning:** Decorative terminal-style text (like `~ $ grep -i` or code block language labels) can cause noise and confusion for screen reader users if left exposed, as it interrupts the main content or input label.
 **Action:** Always add `aria-hidden="true"` to decorative ASCII or terminal prefixes that are purely visual and do not convey functional meaning.
+
+## 2026-06-11 - Focus Rings on Secondary CTAs
+
+**Learning:** Secondary or less prominent Call-To-Action buttons (like 'Dismiss Report' or 'Recommended Books') often lack default or explicit focus styling, making them invisible to keyboard navigation and failing basic accessibility requirements.
+**Action:** Always ensure that all interactive elements, including secondary and tertiary CTAs, have explicit `focus-visible` ring styles applied using the project's standard utility classes to maintain full keyboard accessibility.

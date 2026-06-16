@@ -7,7 +7,9 @@ test.describe('BlogPost Interactive Features', () => {
         await page.locator('#toggle-mode-btn').waitFor({ state: 'visible' });
     });
 
-    test('RAW/RENDERED mode toggle should hide/show markdown vs rendered container', async ({ page }) => {
+    test('RAW/RENDERED mode toggle should hide/show markdown vs rendered container', async ({
+        page,
+    }) => {
         const toggleBtn = page.locator('#toggle-mode-btn');
         const renderedContent = page.locator('#rendered-content-container');
         const rawContent = page.locator('#raw-markdown-container');
@@ -34,7 +36,9 @@ test.describe('BlogPost Interactive Features', () => {
         await expect(toggleBtn).toHaveText('[ RENDERED ]');
     });
 
-    test('KaTeX formula inspector should trigger popover tooltip on click and dismiss on document click', async ({ page }) => {
+    test('KaTeX formula inspector should trigger popover tooltip on click and dismiss on document click', async ({
+        page,
+    }) => {
         const mathBlock = page.locator('.katex').first();
         await mathBlock.scrollIntoViewIfNeeded();
 
@@ -57,14 +61,18 @@ test.describe('BlogPost Interactive Features', () => {
         await expect(tooltip).toHaveCount(0);
     });
 
-    test('Codeblock line selection should display and update telemetry (LNC/FUNC)', async ({ page }) => {
+    test('Codeblock line selection should display and update telemetry (LNC/FUNC)', async ({
+        page,
+    }) => {
         const firstLine = page.locator('pre code .line').first();
         await firstLine.scrollIntoViewIfNeeded();
 
         // The telemetry element is within the header of the code block wrapper
         // The structure: wrapper (code-wrapper-processed) -> header -> code-telemetry
         // Let's locate the corresponding telemetry element
-        const codeWrapper = firstLine.locator('xpath=ancestor::div[contains(@class, "code-wrapper-processed")]');
+        const codeWrapper = firstLine.locator(
+            'xpath=ancestor::div[contains(@class, "code-wrapper-processed")]'
+        );
         const telemetry = codeWrapper.locator('.code-telemetry');
 
         // Initially telemetry should be hidden or not display LNC
@@ -82,10 +90,12 @@ test.describe('BlogPost Interactive Features', () => {
         await expect(telemetry).toBeHidden();
     });
 
-    test('JSON-LD metadata export should trigger file download with valid schema', async ({ page }) => {
+    test('JSON-LD metadata export should trigger file download with valid schema', async ({
+        page,
+    }) => {
         const exportBtn = page.locator('#export-btn');
         await exportBtn.scrollIntoViewIfNeeded();
-        
+
         // Open export menu options
         await exportBtn.click();
 
