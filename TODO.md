@@ -23,14 +23,6 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 ## P0 — Critical
 
-- [ ] **Optimize hero images** _(Performance, Mobile)_
-  - `public/me.jpeg` is ~1.7 MB and loaded with `fetchpriority="high"` on `/personnel` — worst LCP offender.
-  - `logo_light.svg` is ~997 KB; `logo_dark.svg` is ~301 KB — far too large for logos.
-  - Convert `me.jpeg` to WebP/AVIF via `astro:assets`.
-  - Add responsive `srcset` for the personnel photo.
-  - Compress logos with SVGO or switch to a lighter raster fallback.
-  - Files: `public/me.jpeg`, `public/logo_light.svg`, `public/logo_dark.svg`, `src/pages/personnel.astro`
-
 - [ ] **Add dedicated project pages** _(Content, SEO)_
   - Four projects exist in `src/content/projects/` but there are no `/projects/[slug]` routes.
   - Project cards on the homepage have nowhere deep to link.
@@ -149,6 +141,4 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 _Move completed items here with date when finished._
 
-<!-- Example:
-- [x] **Optimize hero images** — completed 2026-06-20
--->
+- [x] **Optimize hero images** — completed 2026-06-16

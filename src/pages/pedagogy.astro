@@ -4,6 +4,8 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE } from '../consts';
 import { youtubeVideos } from '../data/videos';
+import { Picture } from 'astro:assets';
+import dbImage from '../assets/DB.jpeg';
 
 // Pre-render a math symbol or formula using KaTeX if desired, or use standard text
 // Since we want this to load fast, we can render normal HTML and styled math
@@ -160,11 +162,15 @@ import { youtubeVideos } from '../data/videos';
                             >
                             </div>
 
-                            <img
-                                src="/DB.jpeg"
+                            <Picture
+                                src={dbImage}
                                 alt="DBS Classes Logo"
                                 loading="eager"
                                 fetchpriority="high"
+                                widths={[260, 320, 520, 640]}
+                                sizes="(max-width: 640px) 260px, (max-width: 768px) 320px, 320px"
+                                formats={['avif', 'webp']}
+                                fallbackFormat="jpeg"
                                 class="aspect-square w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
                             />
                         </div>
