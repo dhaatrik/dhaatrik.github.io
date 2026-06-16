@@ -108,6 +108,7 @@ const personSchema = JSON.stringify({
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
+<meta property="og:locale" content="en_US" />
 {type === 'article' && pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
 {type === 'article' && updatedDate && <meta property="article:modified_time" content={updatedDate.toISOString()} />}
 {type === 'article' && <meta property="article:author" content="Dhaatrik Chowdhury" />}
@@ -118,6 +119,8 @@ const personSchema = JSON.stringify({
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={imageUrl} />
+<meta name="twitter:site" content="@dhaatrik" />
+<meta name="twitter:creator" content="@dhaatrik" />
 
 <!-- SPA-like Client Router for instant page transitions -->
 <ClientRouter />

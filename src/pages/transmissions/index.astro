@@ -26,7 +26,10 @@ const postsWithReadingTime = posts.map((post: any) => {
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <BaseHead
+            title={`Transmissions | ${SITE_TITLE}`}
+            description="Read Dhaatrik Chowdhury's mission logs and engineering notes on First-Principles, AI orchestration, flight dynamics, and startup architectures."
+        />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <Header />
