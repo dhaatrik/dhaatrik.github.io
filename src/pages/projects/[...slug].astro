@@ -50,12 +50,16 @@ const jsonLd = JSON.stringify(projectSchema);
         <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
 
         <Header />
-        
-        <main id="main-content" tabindex="-1" class="layout-container relative z-10 grow py-12 md:py-20">
+
+        <main
+            id="main-content"
+            tabindex="-1"
+            class="layout-container relative z-10 grow py-12 md:py-20"
+        >
             <!-- Back Navigation -->
-            <div class="mb-8 animate-fade-in">
+            <div class="animate-fade-in mb-8">
                 <a
-                    href="/#projects"
+                    href="/projects"
                     data-astro-prefetch="hover"
                     class="magnetic-target group inline-flex items-center gap-2 rounded-lg text-sm font-medium text-slate-500 transition-all hover:text-(--accent) focus-visible:text-(--accent) focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:text-(--text-secondary) dark:focus-visible:ring-offset-(--bg-main)"
                 >
@@ -80,45 +84,63 @@ const jsonLd = JSON.stringify(projectSchema);
 
             <article class="mx-auto max-w-4xl">
                 <!-- Case Study Header -->
-                <div class="mb-12 animate-fade-in-up">
-                    <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between border-b border-slate-200/60 pb-8 dark:border-white/5">
+                <div class="animate-fade-in-up mb-12">
+                    <div
+                        class="flex flex-col gap-6 border-b border-slate-200/60 pb-8 md:flex-row md:items-center md:justify-between dark:border-white/5"
+                    >
                         <div class="space-y-4">
-                            <h1 class="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl dark:text-white">
+                            <h1
+                                class="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl dark:text-white"
+                            >
                                 {title}
                             </h1>
-                            <p class="text-xl leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                            <p
+                                class="text-xl leading-relaxed text-slate-600 dark:text-(--text-secondary)"
+                            >
                                 {description}
                             </p>
                         </div>
-                        {logo && (
-                            <div class="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-slate-200/50 bg-slate-50/50 p-2 shadow-xs dark:border-white/10 dark:bg-black/40">
-                                <Image src={logo} alt={`${title} Logo`} class="h-full w-full object-contain" />
-                            </div>
-                        )}
+                        {
+                            logo && (
+                                <div class="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-slate-200/50 bg-slate-50/50 p-2 shadow-xs dark:border-white/10 dark:bg-black/40">
+                                    <Image
+                                        src={logo}
+                                        alt={`${title} Logo`}
+                                        class="h-full w-full object-contain"
+                                    />
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
 
                 <!-- Classification / Telemetry Metadata Block -->
-                <div class="mb-12 rounded-xl border border-slate-200/60 bg-slate-50/60 p-5 font-mono text-xs text-slate-500 shadow-xs backdrop-blur-md dark:border-white/5 dark:bg-[#0f141f] dark:text-slate-400 animate-fade-in-up delay-100">
+                <div
+                    class="animate-fade-in-up mb-12 rounded-xl border border-slate-200/60 bg-slate-50/60 p-5 font-mono text-xs text-slate-500 shadow-xs backdrop-blur-md delay-100 dark:border-white/5 dark:bg-[#0f141f] dark:text-slate-400"
+                >
                     <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
                         <div class="space-y-1">
-                            <div class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                            <div
+                                class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                            >
                                 // PROJECT_ID
                             </div>
-                            <div class="font-bold text-slate-900 dark:text-slate-200 uppercase">
+                            <div class="font-bold text-slate-900 uppercase dark:text-slate-200">
                                 {project.id.replace(/\.md$/, '')}
                             </div>
                         </div>
                         <div class="space-y-1">
-                            <div class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                            <div
+                                class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                            >
                                 // AUTHOR
                             </div>
-                            <div class="font-bold text-(--accent)">
-                                DHAATRIK CHOWDHURY
-                            </div>
+                            <div class="font-bold text-(--accent)">DHAATRIK CHOWDHURY</div>
                         </div>
                         <div class="space-y-1">
-                            <div class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                            <div
+                                class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                            >
                                 // SUBJECT
                             </div>
                             <div class="font-bold text-slate-900 dark:text-slate-200">
@@ -126,10 +148,12 @@ const jsonLd = JSON.stringify(projectSchema);
                             </div>
                         </div>
                         <div class="space-y-1">
-                            <div class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                            <div
+                                class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                            >
                                 // CLASSIFICATION
                             </div>
-                            <div class="font-bold text-green-600 dark:text-green-400 uppercase">
+                            <div class="font-bold text-green-600 uppercase dark:text-green-400">
                                 PUBLIC // OPEN
                             </div>
                         </div>
@@ -137,32 +161,40 @@ const jsonLd = JSON.stringify(projectSchema);
                 </div>
 
                 <!-- Main Content Area -->
-                <div class="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_260px] items-start">
+                <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_260px]">
                     <!-- Markdown Body -->
-                    <div class="prose prose-slate max-w-none dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:text-slate-900 dark:prose-code:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 animate-fade-in-up delay-200">
+                    <div
+                        class="prose prose-slate dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:text-slate-900 dark:prose-code:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 animate-fade-in-up max-w-none delay-200"
+                    >
                         <Content />
                     </div>
 
                     <!-- Sidebar details -->
-                    <aside class="space-y-8 animate-fade-in-up delay-300 lg:sticky lg:top-28">
-                        {githubUrl && (
-                            <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50">
-                                <h3 class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
-                                    // REPOSITORY
-                                </h3>
-                                <a
-                                    href={githubUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="magnetic-target inline-flex w-full items-center justify-center gap-2 rounded-lg bg-(--accent) px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
-                                >
-                                    GitHub Source
-                                </a>
-                            </div>
-                        )}
+                    <aside class="animate-fade-in-up space-y-8 delay-300 lg:sticky lg:top-28">
+                        {
+                            githubUrl && (
+                                <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50">
+                                    <h3 class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                                        // REPOSITORY
+                                    </h3>
+                                    <a
+                                        href={githubUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="magnetic-target inline-flex w-full items-center justify-center gap-2 rounded-lg bg-(--accent) px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
+                                    >
+                                        GitHub Source
+                                    </a>
+                                </div>
+                            )
+                        }
 
-                        <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50">
-                            <h3 class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                        <div
+                            class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50"
+                        >
+                            <h3
+                                class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                            >
                                 // CURRENT_STATUS
                             </h3>
                             <p class="font-mono text-xs text-slate-700 dark:text-slate-300">
@@ -170,20 +202,22 @@ const jsonLd = JSON.stringify(projectSchema);
                             </p>
                         </div>
 
-                        {tags && tags.length > 0 && (
-                            <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50">
-                                <h3 class="mb-4 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
-                                    // STACK
-                                </h3>
-                                <div class="flex flex-wrap gap-2">
-                                    {tags.map((tag) => (
-                                        <span class="rounded-md border border-slate-200 bg-slate-100 px-2 py-1 font-mono text-[10px] text-slate-600 dark:border-white/5 dark:bg-white/5 dark:text-(--text-secondary)">
-                                            {tag}
-                                        </span>
-                                    ))}
+                        {
+                            tags && tags.length > 0 && (
+                                <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50">
+                                    <h3 class="mb-4 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                                        // STACK
+                                    </h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        {tags.map((tag) => (
+                                            <span class="rounded-md border border-slate-200 bg-slate-100 px-2 py-1 font-mono text-[10px] text-slate-600 dark:border-white/5 dark:bg-white/5 dark:text-(--text-secondary)">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )
+                        }
                     </aside>
                 </div>
             </article>
