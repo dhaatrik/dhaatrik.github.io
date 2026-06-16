@@ -117,3 +117,8 @@
 
 **Learning:** Performing DOM queries like `querySelectorAll` inside a high-frequency `requestAnimationFrame` callback (such as for mouse tracking) wastes resources and unnecessarily queries the DOM when the set of elements does not change. Further, continuously reapplying static styles (like `translateZ(10px)`) inside an RAF loop is inefficient compared to applying them once at the boundary of interaction (e.g., `mouseenter`).
 **Action:** Cache DOM queries during initialization instead of inside an RAF loop, and move static state transitions (like applying depth to parallax cards) to event boundaries like `mouseenter` and `mouseleave` rather than computing them continuously.
+
+## 2026-06-15 - Replace querySelectorAll with getElementsByClassName/TagName
+
+**Learning:** `querySelectorAll` parses a CSS selector string and returns a static NodeList, which is slower than `getElementsByClassName` or `getElementsByTagName` that directly access elements by class or tag name and return a live HTMLCollection.
+**Action:** When selecting elements simply by a single class name or tag name, prefer using `getElementsByClassName` or `getElementsByTagName` paired with `Array.from()` (when array methods are needed) to optimize DOM traversal speed.

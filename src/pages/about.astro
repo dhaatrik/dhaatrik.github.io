@@ -950,7 +950,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                 // 1. Coordinated parallel decode animation on load
                 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
                 const cypherElements = Array.from(
-                    document.querySelectorAll('.cypher-text')
+                    document.getElementsByClassName('cypher-text')
                 ) as HTMLElement[];
                 const activeIntervals = new Map<HTMLElement, ReturnType<typeof setInterval>>();
 

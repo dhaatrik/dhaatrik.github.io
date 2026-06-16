@@ -517,8 +517,8 @@ export async function setupPost() {
     });
 
     // 4. Code Block Hacker Polish
-    const codeBlocks = document.querySelectorAll('pre');
-    codeBlocks.forEach((pre) => {
+    const codeBlocks = document.getElementsByTagName('pre');
+    Array.from(codeBlocks).forEach((pre) => {
         if (pre.parentElement?.classList.contains('code-wrapper-processed')) return;
 
         const wrapper = document.createElement('div');
@@ -562,7 +562,7 @@ export async function setupPost() {
 
         if (codeBlock) {
             // Fallback line-wrapper for code blocks that do not use Shiki line wrapping natively
-            if (codeBlock.querySelectorAll('.line').length === 0) {
+            if (codeBlock.getElementsByClassName('line').length === 0) {
                 const rawHtml = codeBlock.innerHTML;
                 const linesText = rawHtml.split('\n');
                 if (linesText.length > 1 && linesText[linesText.length - 1].trim() === '') {
@@ -580,11 +580,11 @@ export async function setupPost() {
                 const line = target.closest('.line');
                 if (!line) return;
 
-                const allLines = codeBlock.querySelectorAll('.line');
+                const allLines = codeBlock.getElementsByClassName('line');
                 const isFocused = line.classList.contains('focused-line');
 
                 // Reset focus on all lines in this block
-                allLines.forEach((l) => l.classList.remove('focused-line'));
+                Array.from(allLines).forEach((l) => l.classList.remove('focused-line'));
                 if (typeof CSS !== 'undefined' && (CSS as any).highlights) {
                     (CSS as any).highlights.delete('code-focus');
                 }

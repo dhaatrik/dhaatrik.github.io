@@ -350,10 +350,10 @@ const postsWithReadingTime = posts.map((post: any) => {
 
             const setupSearch = () => {
                 const searchInput = document.getElementById('search-logs') as HTMLInputElement;
-                const cards = document.querySelectorAll('.blog-post-card');
+                const cards = document.getElementsByClassName('blog-post-card');
                 const emptyState = document.getElementById('search-empty-state');
                 const announcer = document.getElementById('search-announcer');
-                const tabs = document.querySelectorAll('.filter-tab');
+                const tabs = document.getElementsByClassName('filter-tab');
 
                 if (!searchInput) return;
 
@@ -448,7 +448,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                 }
 
                 // Setup tabs active state on load
-                tabs.forEach((t) => {
+                Array.from(tabs).forEach((t) => {
                     const htmlT = t as HTMLElement;
                     if (htmlT.dataset.filter === activeTag) {
                         htmlT.classList.add('active');
@@ -480,7 +480,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                 searchInput.addEventListener('input', handleSearchInput, { signal });
 
                 // Tabs event listener
-                tabs.forEach((tab) => {
+                Array.from(tabs).forEach((tab) => {
                     tab.addEventListener(
                         'click',
                         (e) => {
@@ -489,7 +489,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                             activeTag = clickedTag;
 
                             // Update tabs styles
-                            tabs.forEach((t) => {
+                            Array.from(tabs).forEach((t) => {
                                 const htmlT = t as HTMLElement;
                                 if (htmlT.dataset.filter === activeTag) {
                                     htmlT.classList.add('active');
@@ -517,7 +517,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                             activeTag = 'all';
 
                             // Update tabs styles
-                            tabs.forEach((t) => {
+                            Array.from(tabs).forEach((t) => {
                                 const htmlT = t as HTMLElement;
                                 if (htmlT.dataset.filter === activeTag) {
                                     htmlT.classList.add('active');
@@ -537,7 +537,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                 }
 
                 // Bind dynamic view-transition-names to clicked card components
-                cards.forEach((card) => {
+                Array.from(cards).forEach((card) => {
                     card.addEventListener(
                         'click',
                         () => {
