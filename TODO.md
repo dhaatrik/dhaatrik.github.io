@@ -46,15 +46,7 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 ## P3 — Polish
 
-- [/] **Complete open Conductor tracks** _(Code quality, UX)_
-  - [x] Search highlight API — `conductor/tracks/search_highlight_20260524/` — completed 2026-06-17
-  - [x] Monospace transition progress indicator — `conductor/tracks/transition_indicator_20260524/` — completed 2026-06-17
-  - [ ] Terminal theme customization — `conductor/tracks/terminal_themes_20260524/`
-  - [ ] Enhance SEO metadata (partially done; verify remaining items) — `conductor/tracks/enhance_seo_20260510/`
-
-- [ ] **Keep `llms-full.txt` synced** _(SEO / GEO)_
-  - `public/llms.txt` and `public/llms-full.txt` are already strong.
-  - Regenerate or update when new posts and project pages ship.
+- _No active items in this category._
 
 ---
 
@@ -78,6 +70,8 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 _Move completed items here with date when finished._
 
+- [x] **Complete open Conductor tracks** — completed 2026-06-17
+- [x] **Keep `llms-full.txt` synced** — completed 2026-06-17
 - [x] **Replace `execSync` in Footer** — completed 2026-06-17
 - [x] **Fix build warnings** — completed 2026-06-17
 - [x] **Optimize hero images** — completed 2026-06-16
