@@ -3,8 +3,9 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE, SOCIAL_LINKS } from '../consts';
+// katex JS is used server-side at build time to pre-render the rocket equation HTML.
+// The katex CSS is NOT imported here — it's served from CDN via a <link> in <head> instead.
 import katex from 'katex';
-import 'katex/dist/katex.min.css';
 import { Picture } from 'astro:assets';
 import meImage from '../assets/me.jpeg';
 
@@ -28,6 +29,13 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
         <BaseHead
             title={`About | ${SITE_TITLE}`}
             description="Learn more about Dhaatrik's journey and tech stack."
+        />
+        <!-- KaTeX CSS for pre-rendered rocket equation on this page -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+            integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+            crossorigin="anonymous"
         />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">

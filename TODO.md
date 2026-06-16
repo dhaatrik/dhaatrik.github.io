@@ -40,12 +40,6 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 ## P2 — Medium impact
 
-- [ ] **Reduce CSS payload** _(Performance)_
-  - Built CSS is ~127 KB (`Header.-3pzV_ci.css`), duplicated across pages.
-  - KaTeX CSS/fonts load on `/personnel` for a single pre-rendered equation.
-  - Audit Tailwind purging / unused utilities.
-  - Lazy-load KaTeX only on pages that need math rendering.
-  - Files: `src/pages/personnel.astro`, `src/layouts/BlogPost.astro`, `src/styles/global.css`
 
 - [ ] **Gate decorative motion on mobile** _(Mobile)_
   - `prefers-reduced-motion` is handled well, but parallax/marquee/backdrop-blur still run on phones.
@@ -109,3 +103,4 @@ _Move completed items here with date when finished._
 - [x] **Complete link prefetch coverage** — completed 2026-06-17
 - [x] **Add automated accessibility audits** — completed 2026-06-17
 - [x] **Per-page SEO metadata** — completed 2026-06-17
+- [x] **Reduce CSS payload** — completed 2026-06-17
