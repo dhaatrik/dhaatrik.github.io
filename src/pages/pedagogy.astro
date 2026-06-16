@@ -522,7 +522,7 @@ import { youtubeVideos } from '../data/videos';
 
             const setupReticleParallax = () => {
                 const reticle = document.getElementById('reticle-bg');
-                if (!reticle) return;
+                if (!reticle) return null;
 
                 const updateReticleParallax = () => {
                     const x = (mouseX - window.innerWidth / 2) / (window.innerWidth / 2);
