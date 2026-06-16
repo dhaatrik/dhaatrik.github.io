@@ -1347,3 +1347,48 @@ html.theme-transition::view-transition-old(root) {
         padding: 0 !important;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Mobile Motion Gate
+   Disables GPU-expensive decorative effects on touch / coarse-pointer
+   devices (phones, tablets). Uses pointer: coarse rather than a
+   max-width breakpoint so desktop users with narrow windows still
+   receive the full interactive experience.
+
+   Note: mouseTracker.ts (flashlight, magnetic pull, 3D bento tilt)
+   is already gated in JS via (hover: hover) and (pointer: fine) —
+   no JS changes are needed here.
+   ═══════════════════════════════════════════════════════════════ */
+@media (pointer: coarse) {
+    /* 1. Stop the infinite marquee animation on touch devices.
+          Icons become horizontally scrollable instead. */
+    .animate-marquee {
+        animation: none;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* 2. Disable hero parallax scroll-driven animation.
+          The element stays visible but no longer shifts on scroll. */
+    .parallax-hero-bg {
+        animation: none !important;
+        transform: none !important;
+        will-change: auto;
+    }
+
+    /* 3. Remove the compositor layer from bento cards.
+          The 3D tilt JS never fires on touch — the layer is pure waste. */
+    .bento-card {
+        will-change: auto;
+        transform-style: flat;
+    }
+
+    /* 4. Remove the compositor layer from magnetic targets.
+          The magnetic-pull JS never fires on touch devices. */
+    .magnetic-target,
+    .transition-spring {
+        will-change: auto;
+        backface-visibility: visible;
+        transform-style: flat;
+    }
+}
