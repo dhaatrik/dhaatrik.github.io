@@ -41,12 +41,6 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 ## P2 — Medium impact
 
 
-- [ ] **Gate decorative motion on mobile** _(Mobile)_
-  - `prefers-reduced-motion` is handled well, but parallax/marquee/backdrop-blur still run on phones.
-  - Disable or simplify `backdrop-blur`, marquee, and parallax below `md` breakpoint.
-  - Alternatively gate on `pointer: coarse`.
-  - Files: `src/styles/global.css`, `src/components/Header.astro`, `src/components/TechMarquee.astro`
-
 - [ ] **Fix build warnings** _(Code quality)_
   - `::highlight(code-focus)` is invalid CSS — build warns to use `:highlight`.
   - `markdown.remarkPlugins` / `markdown.rehypePlugins` are deprecated in `astro.config.mjs`.
@@ -104,3 +98,4 @@ _Move completed items here with date when finished._
 - [x] **Add automated accessibility audits** — completed 2026-06-17
 - [x] **Per-page SEO metadata** — completed 2026-06-17
 - [x] **Reduce CSS payload** — completed 2026-06-17
+- [x] **Gate decorative motion on mobile** — completed 2026-06-17
