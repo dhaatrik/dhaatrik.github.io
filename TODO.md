@@ -23,14 +23,6 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 ## P0 — Critical
 
-- [ ] **Add dedicated project pages** _(Content, SEO)_
-  - Four projects exist in `src/content/projects/` but there are no `/projects/[slug]` routes.
-  - Project cards on the homepage have nowhere deep to link.
-  - Create `src/pages/projects/[...slug].astro` (or equivalent dynamic route).
-  - Add case-study structure: problem → approach → stack → outcome.
-  - Link project cards on the homepage to these pages.
-  - Files: `src/content/projects/`, `src/pages/index.astro`
-
 - [ ] **Pass `heroImage` to `BaseHead` on blog posts** _(SEO)_
   - `BlogPost.astro` accepts `heroImage` but does not pass it to `<BaseHead />`.
   - All posts currently share the fallback OG image.
@@ -142,3 +134,4 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 _Move completed items here with date when finished._
 
 - [x] **Optimize hero images** — completed 2026-06-16
+- [x] **Add dedicated project pages** — completed 2026-06-16
