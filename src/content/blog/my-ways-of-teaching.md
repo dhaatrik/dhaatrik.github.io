@@ -3,7 +3,6 @@ title: 'Pedagogy from First Principles: Cooking, Open Skies, and Bus Wheels'
 description: "A deep dive into Dhaatrik's non-traditional teaching philosophy, treating students like younger siblings, and using everyday observations to explain scientific phenomena."
 pubDate: 2026-06-16
 tags: ['pedagogy']
-entropy: 'deep-dive'
 clearance: 'PUBLIC'
 ---
 

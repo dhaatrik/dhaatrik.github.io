@@ -3,7 +3,6 @@ title: 'Why Dhaatrik Stopped: An Honest Audit of Consistency and Flaws'
 description: 'A candid post-mortem on the DBS Classes YouTube channel. Accepting failure, addressing inconsistency, and the importance of self-honesty.'
 pubDate: 2026-06-16
 tags: ['pedagogy', 'youtube']
-entropy: 'deep-dive'
 clearance: 'PUBLIC'
 ---
 

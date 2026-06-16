@@ -43,7 +43,7 @@ Dedicated to Dhaatrik's teaching philosophy and the DBS Classes YouTube channel.
 - An honest reflection on the channel's cessation due to inconsistency
 
 ### Transmissions (https://dhaatrik.github.io/transmissions/)
-The blog index page listing all published articles ("transmissions") with reading times, dates, tags, and entropy levels.
+The blog index page listing all published articles ("transmissions") with reading times, dates, and tags.
 
 ---
 

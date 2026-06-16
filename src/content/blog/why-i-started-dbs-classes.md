@@ -3,7 +3,6 @@ title: 'Why Dhaatrik Started: DBS Classes and the Physics of Curiosity'
 description: 'An honest look at why Dhaatrik launched a YouTube channel for maths and physics, the mission to spark first-principles thinking, and the initial momentum.'
 pubDate: 2026-06-16
 tags: ['pedagogy', 'youtube']
-entropy: 'medium'
 clearance: 'PUBLIC'
 ---
 
