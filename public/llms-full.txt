@@ -73,6 +73,13 @@ A deep dive into Dhaatrik's non-traditional teaching methodology. He treated stu
 
 An honest post-mortem on why the DBS Classes YouTube channel stopped after 20 videos (final upload: "Point Mass is a Myth" on September 15, 2023). Root causes identified: (1) the solo production bottleneck where Dhaatrik had to fill every role from researcher to editor, (2) the illusion of "next week" where delays compounded into years, and (3) the fragility of motivation — relying on creative sparks instead of systematic production calendars. Includes a structured "Motivation vs. Systems" comparison framework. The experience taught Dhaatrik to apply systems-first thinking to his engineering work: reducing friction, lowering cognitive load, and maintaining sustainable pace.
 
+### Interactive Mission Logs: Orbital Insertion Dynamics
+**URL:** https://dhaatrik.github.io/transmissions/scrollytelling-demo/
+**Published:** 2026-05-29
+**Tags:** aerospace, physics, ui-ux, deltav-lab
+
+A technical simulation study on launch trajectories, staging calculations, and circularization burns using native scroll-driven animations and custom interactive aerospace telemetry graphics. The post serves as a scrollytelling showcase, illustrating how standard physics and orbital mechanics equations (like the Tsiolkovsky rocket equation and Runge-Kutta 4th order integration) can be dynamically visualized in real-time as the user scrolls. Focuses on bridging the gap between mathematical theory and interactive visual UI design.
+
 ---
 
 ## Projects
