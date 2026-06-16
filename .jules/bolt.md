@@ -122,3 +122,8 @@
 
 **Learning:** `querySelectorAll` parses a CSS selector string and returns a static NodeList, which is slower than `getElementsByClassName` or `getElementsByTagName` that directly access elements by class or tag name and return a live HTMLCollection.
 **Action:** When selecting elements simply by a single class name or tag name, prefer using `getElementsByClassName` or `getElementsByTagName` paired with `Array.from()` (when array methods are needed) to optimize DOM traversal speed.
+
+## 2026-06-16 - Eliminate GC pressure in high-frequency text animation loops
+
+**Learning:** Using `String.prototype.split('')` chained with `.map()` and `.join('')` inside a high-frequency `setInterval` loop (e.g., a 30ms decode animation) for multiple elements simultaneously creates massive unnecessary garbage collection (GC) pressure. It forces the browser to rapidly allocate and discard arrays and closures every frame, which can cause micro-stutters.
+**Action:** Always replace array manipulation with simple string concatenation in continuous animation loops to minimize object allocations and keep the main thread smooth.
