@@ -1,7 +1,7 @@
 ---
 title: 'Bill Express'
 description: 'A fast, browser-based invoice and receipt generator designed for small merchants and freelancers with PDF export.'
-logo: '/bill-express_logo.png'
+logo: '../../assets/bill-express.png'
 githubUrl: 'https://github.com/dhaatrik/bill-express'
 progress: 'Production build deployed, instant PDF export'
 order: 10

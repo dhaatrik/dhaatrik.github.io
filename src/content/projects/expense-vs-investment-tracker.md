@@ -1,7 +1,7 @@
 ---
 title: 'FinTrack'
 description: 'An investment-first financial logger that visually distinguishes between depreciating expenses and wealth-generating investments.'
-logo: '/fintrack_logo.png'
+logo: '../../assets/fintrack.png'
 githubUrl: 'https://github.com/dhaatrik/expense-vs-investment-tracker'
 progress: 'v1.0.0 released, features interactive portfolio charts'
 order: 7

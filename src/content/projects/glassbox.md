@@ -1,7 +1,7 @@
 ---
 title: 'Glassbox'
 description: 'A minimalist, high-transparency sandbox environment for executing and auditing untrusted JavaScript files locally.'
-logo: '/glassbox_logo.png'
+logo: '../../assets/glassbox.png'
 githubUrl: 'https://github.com/dhaatrik/glassbox'
 progress: 'v2.1.0 stable release, secure sandbox API'
 order: 6

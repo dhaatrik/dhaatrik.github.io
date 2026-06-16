@@ -1,7 +1,7 @@
 ---
 title: 'Seamless QR Dining'
 description: 'A contactless digital ordering system for restaurants featuring QR scanning, menu customization, and real-time order tracking.'
-logo: '/seamless-qr-dining_logo.png'
+logo: '../../assets/seamless-qr-dining.png'
 githubUrl: 'https://github.com/dhaatrik/seamless-qr-dining'
 progress: 'Prototype complete, WebSocket integration verified'
 order: 8

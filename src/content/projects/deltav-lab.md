@@ -1,7 +1,7 @@
 ---
 title: 'DeltaV Lab'
 description: 'Bridge the gap between spaceflight games and industry-standard aerospace software by providing an accessible, open-source, and uncompromisingly accurate 4th-order physics environment.'
-logo: '/deltav_logo.png'
+logo: '../../assets/delta-v-lab.png'
 githubUrl: 'https://github.com/dhaatrik/professional-rocket-launch-simulation'
 progress: '50Hz deterministic RK4 integration, VAB'
 order: 2

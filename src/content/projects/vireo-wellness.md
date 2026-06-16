@@ -1,7 +1,7 @@
 ---
 title: 'Vireo Wellness'
 description: 'A privacy-centric health journal and meditation timer that tracks habit patterns offline.'
-logo: '/vireo-wellness_logo.png'
+logo: '../../assets/vireo-wellness.png'
 githubUrl: 'https://github.com/dhaatrik/vireo-wellness'
 progress: 'PWA ready, works offline with database caching'
 order: 9

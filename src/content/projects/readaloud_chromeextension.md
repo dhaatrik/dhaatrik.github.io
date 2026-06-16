@@ -1,7 +1,7 @@
 ---
 title: 'Read Aloud Chrome Extension'
 description: 'A lightweight browser extension that reads web page text aloud using native text-to-speech synthesis with speed control.'
-logo: '/read-aloud-chrome-extension_logo.png'
+logo: '../../assets/read-aloud.png'
 githubUrl: 'https://github.com/dhaatrik/ReadAloud_ChromeExtension'
 progress: 'Manifest V3 extension, published locally'
 order: 12

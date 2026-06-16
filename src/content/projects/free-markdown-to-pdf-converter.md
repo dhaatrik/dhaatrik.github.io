@@ -1,7 +1,7 @@
 ---
 title: 'MarkPDF'
 description: 'A markdown-to-PDF compiler that runs entirely in the browser, supporting math rendering, code highlighting, and theme customization.'
-logo: '/markpdf_logo.png'
+logo: '../../assets/markpdf.png'
 githubUrl: 'https://github.com/dhaatrik/free-markdown-to-pdf-converter'
 progress: 'v1.1.0 stable, full KaTeX and highlight.js support'
 order: 11

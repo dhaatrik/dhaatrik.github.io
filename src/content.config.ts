@@ -30,7 +30,7 @@ const projects = defineCollection({
         z.object({
             title: z.string(),
             description: z.string(),
-            logo: z.string().optional(),
+            logo: z.optional(image()),
             video: z.string().optional(),
             tags: z.array(z.string()).optional(),
             githubUrl: z

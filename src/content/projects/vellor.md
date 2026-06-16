@@ -1,7 +1,7 @@
 ---
 title: 'Vellor'
 description: "Empowering independent educators with a completely free, open-source 'Operating System' that makes managing a tutoring business effortless while keeping student data 100% private and offline."
-logo: '/vellor_logo.png'
+logo: '../../assets/vellor.png'
 githubUrl: 'https://github.com/dhaatrik/vellor'
 progress: "v4.0.0 'Power-Tutor' Update"
 order: 1

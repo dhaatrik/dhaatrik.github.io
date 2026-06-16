@@ -1,7 +1,7 @@
 ---
 title: 'Instant App Opener'
 description: 'A lightweight local utility/launcher to bypass browser loading times and open frequently used apps instantly.'
-logo: '/instant-app-opener_logo.png'
+logo: '../../assets/instant-app-opener.png'
 githubUrl: 'https://github.com/dhaatrik/instant-app-opener'
 progress: 'v1.2.0 fully operational, local desktop application'
 order: 5
