@@ -3,6 +3,7 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 
 import tailwindcss from '@tailwindcss/vite';
 import remarkMath from 'remark-math';
@@ -13,8 +14,12 @@ export default defineConfig({
     site: 'https://dhaatrik.github.io',
     integrations: [mdx(), sitemap()],
     markdown: {
-        remarkPlugins: [remarkMath],
-        rehypePlugins: [rehypeKatex],
+        // Migrated from deprecated top-level remarkPlugins/rehypePlugins keys
+        // (removed in Astro 8.0) to the unified() processor pattern (Astro 6.4+)
+        processor: unified({
+            remarkPlugins: [remarkMath],
+            rehypePlugins: [rehypeKatex],
+        }),
     },
 
     // ⚡ Bolt: Enable Astro link prefetching for instant perceived page transitions
