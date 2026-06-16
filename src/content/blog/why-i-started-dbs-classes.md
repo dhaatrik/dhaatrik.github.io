@@ -13,7 +13,7 @@ Dhaatrik has been teaching for roughly nine years. Over that time, he has guided
 
 Throughout this journey, he realized that the conventional education system is obsessed with rote memorization. Students are trained to solve equations without ever understanding *why* the equations exist or what they represent in the physical world.
 
-He started **DBS Classes** on YouTube on October 31, 2022, to break this cycle, guided by a singular, non-negotiable philosophy:
+He started **DBS Classes** (short for *Dhaatu Bhaiyaa's Classes*, where "Dhaatu" is his personal nickname and "Bhaiyaa" is the Hindi word for big brother, reflecting what his students called him) on YouTube on October 31, 2022, to break this cycle, guided by a singular, non-negotiable philosophy:
 
 > **"Education Is Not Free BUT KNOWLEDGE IS FREE" and must be shared with "ZERO TERMS AND CONDITIONS"**
 

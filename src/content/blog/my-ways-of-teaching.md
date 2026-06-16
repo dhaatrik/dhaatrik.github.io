@@ -12,7 +12,7 @@ clearance: "PUBLIC"
 Teaching isn't about lecturing from a podium; it's about engineering an environment where curiosity is inevitable. Over his 9 years of teaching, Dhaatrik moved away from standard textbook-focused paradigms and designed personalized learning journeys based on a few core beliefs:
 
 #### 1. Sibling-Centric and Friend-Centric Relationships
-He never wanted to be a distant authority figure. He treated his students like younger siblings and friends. This dismantled their fear of asking "dumb" questions, which is the absolute killer of learning. He celebrated small wins with rewards, gifts, and treats to build a supportive, high-momentum environment.
+He never wanted to be a distant authority figure. He treated his students like younger siblings and friends—so much so that they called him **"Dhaatu Bhaiyaa"** (Big Brother Dhaatu, a nickname derived from Dhaatrik). This dismantled their fear of asking "dumb" questions, which is the absolute killer of learning. He celebrated small wins with rewards, gifts, and treats to build a supportive, high-momentum environment.
 
 #### 2. Science in the Real World
 To explain physics, they didn't just look at diagrams:
