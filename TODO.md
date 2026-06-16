@@ -35,12 +35,6 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
   - Topics are already referenced in homepage FAQ schema but underrepresented in content.
   - Files: `src/content/blog/`
 
-- [ ] **Complete link prefetch coverage** _(Performance)_
-  - `prefetch: true` is set in `astro.config.mjs`, but Footer internal links lack `data-astro-prefetch`.
-  - Header and main CTAs already have prefetch; Footer does not.
-  - Add `data-astro-prefetch="hover"` to Footer nav links and recent-post links.
-  - File: `src/components/Footer.astro`
-
 - [ ] **Add automated accessibility audits** _(Mobile, Code quality)_
   - Track `accessibility_audits_20260524` is planned but `test/e2e/accessibility.spec.ts` does not exist.
   - Install `@axe-core/playwright`.
@@ -125,3 +119,4 @@ _Move completed items here with date when finished._
 - [x] **Add dedicated project pages** — completed 2026-06-16
 - [x] **Pass `heroImage` to `BaseHead` on blog posts** — completed 2026-06-17
 - [x] **Extract and defer global mouse-tracking JS** — completed 2026-06-17
+- [x] **Complete link prefetch coverage** — completed 2026-06-17
