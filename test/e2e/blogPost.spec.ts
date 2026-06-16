@@ -39,7 +39,7 @@ test.describe('BlogPost Interactive Features', () => {
     test('KaTeX formula inspector should trigger popover tooltip on click and dismiss on document click', async ({
         page,
     }) => {
-        const mathBlock = page.locator('.katex').first();
+        const mathBlock = page.locator('p:has-text("Tsiolkovsky rocket equation") + p .katex').first();
         await mathBlock.scrollIntoViewIfNeeded();
 
         // Initially no math inspector tooltip should exist
