@@ -1,8 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { SOCIAL_LINKS } from '../consts';
-import FormattedDate from './FormattedDate.astro';
-import { execSync } from 'child_process';
 import { recommendedBooks } from '../data/readingList';
 
 const bookTelemetry: Record<string, { status: string; focus: string }> = {
@@ -29,10 +27,13 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog'))
 const today = new Date();
 
 let gitSha = '';
-if ((import.meta.env as any).DEV) {
+if (import.meta.env.DEV) {
     gitSha = 'DEV';
+} else if (import.meta.env.PUBLIC_GIT_SHA) {
+    gitSha = import.meta.env.PUBLIC_GIT_SHA.substring(0, 7).toUpperCase();
 } else {
     try {
+        const { execSync } = await import('child_process');
         gitSha = execSync('git rev-parse --short HEAD').toString().trim().toUpperCase();
     } catch (e) {
         gitSha = 'UNKNOWN';
@@ -48,6 +49,7 @@ const formatMarqueeDate = (date: Date) => {
 ---
 
 <footer
+    data-build-sha={gitSha}
     class="relative mt-12 w-full overflow-hidden border-t border-slate-200 bg-slate-50/50 pt-12 pb-12 text-slate-500 dark:border-white/5 dark:bg-[#0b0e14] dark:text-slate-400"
 >
     <!-- Subtle Grid Background -->

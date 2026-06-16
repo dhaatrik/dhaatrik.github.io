@@ -40,23 +40,11 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 ## P2 — Medium impact
 
-
-- [ ] **Fix build warnings** _(Code quality)_
-  - `::highlight(code-focus)` is invalid CSS — build warns to use `:highlight`.
-  - `markdown.remarkPlugins` / `markdown.rehypePlugins` are deprecated in `astro.config.mjs`.
-  - Fix pseudo-element syntax in global CSS.
-  - Migrate to `@astrojs/markdown-remark` unified config.
-  - Files: `src/styles/global.css`, `astro.config.mjs`
+- _No active items in this category._
 
 ---
 
 ## P3 — Polish
-
-- [ ] **Replace `execSync` in Footer** _(Code quality)_
-  - `Footer.astro` calls `git rev-parse --short HEAD` at build time.
-  - Fragile in CI/CD environments without a `.git` directory.
-  - Inject build SHA via env var at deploy time instead.
-  - File: `src/components/Footer.astro`
 
 - [ ] **Complete open Conductor tracks** _(Code quality, UX)_
   - Search highlight API — `conductor/tracks/search_highlight_20260524/`
@@ -90,6 +78,8 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 _Move completed items here with date when finished._
 
+- [x] **Replace `execSync` in Footer** — completed 2026-06-17
+- [x] **Fix build warnings** — completed 2026-06-17
 - [x] **Optimize hero images** — completed 2026-06-16
 - [x] **Add dedicated project pages** — completed 2026-06-16
 - [x] **Pass `heroImage` to `BaseHead` on blog posts** — completed 2026-06-17
