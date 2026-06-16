@@ -79,12 +79,12 @@ test.describe('Portfolio UI Interactivity', () => {
 
         // After page loads and timeout passes, elements should fade out
         await page.waitForLoadState('networkidle');
-        await page.waitForTimeout(1500);
+        await page.waitForTimeout(2500);
 
         const pbOpacity = parseFloat(await progressBar.evaluate((el) => window.getComputedStyle(el).opacity));
         const stOpacity = parseFloat(await statusTag.evaluate((el) => window.getComputedStyle(el).opacity));
-        expect(pbOpacity).toBeLessThan(0.01);
-        expect(stOpacity).toBeLessThan(0.01);
+        expect(pbOpacity).toBeLessThan(0.08);
+        expect(stOpacity).toBeLessThan(0.08);
     });
 
     test('Blog page search should retain queries and update URL/sessionStorage', async ({

@@ -15,6 +15,7 @@
 - [Why Dhaatrik Started: DBS Classes and the Physics of Curiosity](https://dhaatrik.github.io/transmissions/why-i-started-dbs-classes/): Origin story of the DBS Classes YouTube channel, founded October 31 2022, to combat rote learning with first-principles physics and mathematics education.
 - [Pedagogy from First Principles: Cooking, Open Skies, and Bus Wheels](https://dhaatrik.github.io/transmissions/my-ways-of-teaching/): Deep dive into Dhaatrik's non-traditional teaching methodology — sibling-centric tutoring, kitchen thermodynamics, street-side kinematics, and student psychology.
 - [Why Dhaatrik Stopped: An Honest Audit of Consistency and Flaws](https://dhaatrik.github.io/transmissions/why-i-stopped-youtube-classes/): Post-mortem analysis of the DBS Classes YouTube channel cessation — solo production bottleneck, novelty fade, and motivation vs. systems thinking.
+- [Interactive Mission Logs: Orbital Insertion Dynamics](https://dhaatrik.github.io/transmissions/scrollytelling-demo/): A study on launch trajectories, staging calculations, and circularization burns using native scroll-driven animations and interactive aerospace telemetry graphics.
 
 ## Projects
 
