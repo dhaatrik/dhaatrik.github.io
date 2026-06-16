@@ -35,37 +35,78 @@ import { youtubeVideos } from '../data/videos';
                     viewBox="0 0 200 200"
                     xmlns="http://www.w3.org/2000/svg"
                 >
+                    <!-- Background Grid Dots (Blueprint style) -->
+                    <path d="M 20 20 L 20 180 L 180 180 L 180 20 Z" fill="none" stroke="currentColor" stroke-width="0.3" stroke-dasharray="1 19" opacity="0.3" />
+                    <path d="M 40 20 L 40 180 M 60 20 L 60 180 M 80 20 L 80 180 M 120 20 L 120 180 M 140 20 L 140 180 M 160 20 L 160 180" fill="none" stroke="currentColor" stroke-width="0.3" stroke-dasharray="1 9" opacity="0.15" />
+                    <path d="M 20 40 L 180 40 M 20 60 L 180 60 M 20 80 L 180 80 M 20 120 L 180 120 M 20 140 L 180 140 M 20 160 L 180 160" fill="none" stroke="currentColor" stroke-width="0.3" stroke-dasharray="1 9" opacity="0.15" />
+
                     <!-- Concentric dashed calibration circles -->
+                    <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="0.3" stroke-dasharray="2 8" opacity="0.4" />
                     <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="3 3" />
                     <circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="6 6" />
+                    <circle cx="100" cy="100" r="30" fill="none" stroke="currentColor" stroke-width="0.3" stroke-dasharray="1 3" opacity="0.5" />
                     
                     <!-- Calibration axes -->
-                    <line x1="20" y1="100" x2="180" y2="100" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" />
-                    <line x1="100" y1="20" x2="100" y2="180" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" />
+                    <line x1="10" y1="100" x2="190" y2="100" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" />
+                    <line x1="100" y1="10" x2="100" y2="190" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" />
+                    
+                    <!-- Compass Ticks -->
+                    <line x1="100" y1="10" x2="100" y2="15" stroke="currentColor" stroke-width="1" />
+                    <line x1="100" y1="185" x2="100" y2="190" stroke="currentColor" stroke-width="1" />
+                    <line x1="10" y1="100" x2="15" y2="100" stroke="currentColor" stroke-width="1" />
+                    <line x1="185" y1="100" x2="190" y2="100" stroke="currentColor" stroke-width="1" />
                     
                     <!-- Outer diamond projection bounds -->
-                    <path d="M 100 35 L 185 90 L 100 145 L 15 90 Z" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1 5" />
+                    <path d="M 100 20 L 180 100 L 100 180 L 20 100 Z" fill="none" stroke="currentColor" stroke-width="0.3" stroke-dasharray="1 5" />
                     
-                    <!-- Mortarboard Cap Top (Diamond) -->
+                    <!-- Diagonal Projection Rays to Cap Corners -->
+                    <line x1="100" y1="20" x2="100" y2="45" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.5" />
+                    <line x1="180" y1="100" x2="175" y2="85" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.5" />
+                    <line x1="20" y1="100" x2="25" y2="85" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.5" />
+                    
+                    <!-- Wireframe Diagonals of Cap Top -->
+                    <line x1="100" y1="45" x2="100" y2="125" stroke="currentColor" stroke-width="0.4" stroke-dasharray="1 2" opacity="0.6" />
+                    <line x1="25" y1="85" x2="175" y2="85" stroke="currentColor" stroke-width="0.4" stroke-dasharray="1 2" opacity="0.6" />
+                    
+                    <!-- Mortarboard Cap Top (Diamond double layered for depth) -->
                     <polygon points="100,45 175,85 100,125 25,85" fill="none" stroke="currentColor" stroke-width="1.5" />
+                    <polygon points="100,48 175,88 100,128 25,88" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.7" />
+                    <!-- Connecting edges for diamond depth -->
+                    <line x1="25" y1="85" x2="25" y2="88" stroke="currentColor" stroke-width="1" />
+                    <line x1="175" y1="85" x2="175" y2="88" stroke="currentColor" stroke-width="1" />
+                    <line x1="100" y1="125" x2="100" y2="128" stroke="currentColor" stroke-width="1" />
                     
-                    <!-- Cap Underneath (Skullcap) -->
+                    <!-- Cap Underneath (Skullcap with contour details) -->
                     <path d="M 60,103 C 60,135 140,135 140,103" fill="none" stroke="currentColor" stroke-width="1.2" />
                     <path d="M 60,115 C 60,145 140,145 140,115" fill="none" stroke="currentColor" stroke-width="1.2" />
+                    <path d="M 65,109 C 65,135 135,135 135,109" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.7" />
+                    
+                    <!-- Skullcap side borders -->
                     <path d="M 60,103 L 60,115" fill="none" stroke="currentColor" stroke-width="1.2" />
                     <path d="M 140,103 L 140,115" fill="none" stroke="currentColor" stroke-width="1.2" />
                     
                     <!-- Button on top -->
-                    <circle cx="100" cy="85" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+                    <circle cx="100" cy="85" r="3" fill="none" stroke="currentColor" stroke-width="1.5" />
+                    <circle cx="100" cy="85" r="1" fill="currentColor" />
                     
                     <!-- Tassel -->
                     <path d="M 100,85 C 75,90 55,100 50,115" fill="none" stroke="currentColor" stroke-width="1" />
-                    <polygon points="50,115 47,135 53,135" fill="none" stroke="currentColor" stroke-width="1" />
+                    <polygon points="50,115 47,135 53,135" fill="none" stroke="currentColor" stroke-width="1.2" />
+                    <!-- Tassel cords/threads lines -->
+                    <line x1="48" y1="120" x2="48" y2="135" stroke="currentColor" stroke-width="0.4" opacity="0.7" />
+                    <line x1="52" y1="120" x2="52" y2="135" stroke="currentColor" stroke-width="0.4" opacity="0.7" />
+                    
+                    <!-- Technical Callout Pointer -->
+                    <line x1="100" y1="85" x2="135" y2="65" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1 1" opacity="0.7" />
+                    <circle cx="135" cy="65" r="1" fill="currentColor" />
+                    <text x="139" y="67" font-family="monospace" font-size="5" fill="currentColor" opacity="0.6">APEX: (100,85)</text>
                     
                     <!-- Blueprint labels -->
                     <text x="110" y="30" font-family="monospace" font-size="6" fill="currentColor" opacity="0.6">MODEL: MORTARBOARD_CAP</text>
-                    <text x="110" y="40" font-family="monospace" font-size="6" fill="currentColor" opacity="0.6">CAL_DEG: 45.000</text>
-                    <text x="25" y="170" font-family="monospace" font-size="6" fill="currentColor" opacity="0.6">SYS.PEDAGOGICAL_RECON // V1.0</text>
+                    <text x="110" y="38" font-family="monospace" font-size="6" fill="currentColor" opacity="0.6">Z-PLANE: ISO_PRJ</text>
+                    <text x="110" y="46" font-family="monospace" font-size="6" fill="currentColor" opacity="0.6">TILT_ANG: 14.50°</text>
+                    <text x="25" y="170" font-family="monospace" font-size="6" fill="currentColor" opacity="0.6">SYS.PEDAGOGICAL_RECON // V2.0</text>
+                    <text x="25" y="178" font-family="monospace" font-size="5" fill="currentColor" opacity="0.4">DBS_CLASSES.ARCHIVE</text>
                 </svg>
             </div>
 
