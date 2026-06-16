@@ -6,30 +6,34 @@ test.describe('Header Navigation & Scroll Behaviors', () => {
         await page.waitForLoadState('networkidle');
     });
 
-    test('Header should shrink on scroll down past 50px (fallback behavior check) and hide/show on scroll direction', async ({ page }) => {
+    test('Header should shrink on scroll down past 50px (fallback behavior check) and hide/show on scroll direction', async ({
+        page,
+    }) => {
         const header = page.locator('#main-header');
-        
+
         // Ensure header is initially visible
         await expect(async () => {
-            const transform = await header.evaluate(el => el.style.transform);
-            expect(transform === '' || transform === 'translateY(0px)' || transform === 'translateY(0)').toBe(true);
+            const transform = await header.evaluate((el) => el.style.transform);
+            expect(
+                transform === '' || transform === 'translateY(0px)' || transform === 'translateY(0)'
+            ).toBe(true);
         }).toPass();
 
         // Scroll down past 150px to hide header
         await page.evaluate(() => window.scrollTo(0, 300));
-        
+
         // Check if header is hidden
         await expect(async () => {
-            const transform = await header.evaluate(el => el.style.transform);
+            const transform = await header.evaluate((el) => el.style.transform);
             expect(transform).toBe('translateY(-100%)');
         }).toPass();
 
         // Scroll back up to show header
         await page.evaluate(() => window.scrollTo(0, 100));
-        
+
         // Check if header is visible again
         await expect(async () => {
-            const transform = await header.evaluate(el => el.style.transform);
+            const transform = await header.evaluate((el) => el.style.transform);
             expect(transform === 'translateY(0)' || transform === 'translateY(0px)').toBe(true);
         }).toPass();
     });
@@ -81,27 +85,33 @@ test.describe('Mobile Navigation Drawer', () => {
         // Get all focusable elements inside drawer
         const focusables = await drawer.evaluate((el) => {
             const items = el.querySelectorAll('a, button');
-            return Array.from(items).map(item => item.textContent?.trim() || '');
+            return Array.from(items).map((item) => item.textContent?.trim() || '');
         });
 
         expect(focusables.length).toBeGreaterThan(0);
 
         // The first focusable element should be active
         await expect(async () => {
-            const activeText = await page.evaluate(() => document.activeElement?.textContent?.trim() || '');
+            const activeText = await page.evaluate(
+                () => document.activeElement?.textContent?.trim() || ''
+            );
             expect(activeText).toBe(focusables[0]);
         }).toPass();
 
         // Tab through the elements
         for (let i = 1; i < focusables.length; i++) {
             await page.keyboard.press('Tab');
-            const activeText = await page.evaluate(() => document.activeElement?.textContent?.trim() || '');
+            const activeText = await page.evaluate(
+                () => document.activeElement?.textContent?.trim() || ''
+            );
             expect(activeText).toBe(focusables[i]);
         }
 
         // Tabbing again should wrap focus back to the first element
         await page.keyboard.press('Tab');
-        const activeTextAfterWrap = await page.evaluate(() => document.activeElement?.textContent?.trim() || '');
+        const activeTextAfterWrap = await page.evaluate(
+            () => document.activeElement?.textContent?.trim() || ''
+        );
         expect(activeTextAfterWrap).toBe(focusables[0]);
     });
 
