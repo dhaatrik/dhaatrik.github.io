@@ -75,16 +75,20 @@ An honest post-mortem on why the DBS Classes YouTube channel stopped after 20 vi
 ## Projects
 
 ### DeltaV Lab
-Real-time orbital mechanics simulation engine using RK4 integration at 50Hz. Simulates gravitational dynamics, orbital transfers, and spacecraft trajectories.
+- **URL**: https://dhaatrik.github.io/projects/deltav-lab/
+- **Description**: Real-time orbital mechanics simulation engine using RK4 integration at 50Hz. Simulates gravitational dynamics, orbital transfers, and spacecraft trajectories.
 
 ### Vellor
-Offline-first note-taking application with local database synchronization. Currently in V4 development.
+- **URL**: https://dhaatrik.github.io/projects/vellor/
+- **Description**: Offline-first note-taking application with local database synchronization. Currently in V4 development.
 
 ### FuelDrop
-High-concurrency fuel delivery platform. Version 3.0.0 shipped and operational.
+- **URL**: https://dhaatrik.github.io/projects/fueldrop/
+- **Description**: High-concurrency fuel delivery platform. Version 3.0.0 shipped and operational.
 
 ### The Infinite Intelligence
-Multi-agent AI debate system where multiple AI agents engage in structured parallel debates.
+- **URL**: https://dhaatrik.github.io/projects/the-infinite-intelligence/
+- **Description**: Multi-agent AI debate system where multiple AI agents engage in structured parallel debates.
 
 ---
 

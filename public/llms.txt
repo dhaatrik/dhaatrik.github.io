@@ -17,10 +17,10 @@
 
 ## Projects
 
-- [DeltaV Lab](https://dhaatrik.github.io/#projects): Real-time orbital mechanics simulation engine.
-- [Vellor](https://dhaatrik.github.io/#projects): Offline-first note-taking application.
-- [FuelDrop](https://dhaatrik.github.io/#projects): High-concurrency fuel delivery platform.
-- [The Infinite Intelligence](https://dhaatrik.github.io/#projects): Multi-agent AI debate system.
+- [DeltaV Lab](https://dhaatrik.github.io/projects/deltav-lab/): Real-time orbital mechanics simulation engine.
+- [Vellor](https://dhaatrik.github.io/projects/vellor/): Offline-first note-taking application.
+- [FuelDrop](https://dhaatrik.github.io/projects/fueldrop/): High-concurrency fuel delivery platform.
+- [The Infinite Intelligence](https://dhaatrik.github.io/projects/the-infinite-intelligence/): Multi-agent AI debate system.
 
 ## Key Entities
 

@@ -38,20 +38,6 @@ const premiumLineup = lineupNames
     })
     .filter((t): t is TechIcon => t !== null);
 
-const parseProjectBody = (body: string) => {
-    if (!body) return [];
-    const sections = body.split(/####\s+/);
-    return sections
-        .map((section) => {
-            const lines = section.trim().split('\n');
-            const title = lines[0]?.trim();
-            const content = lines.slice(1).join('\n').trim();
-            if (!title) return null;
-            return { title, content };
-        })
-        .filter(Boolean) as { title: string; content: string }[];
-};
-
 const getProjectTelemetry = (id: string) => {
     const rawId = id.replace(/\.md$/, '');
     switch (rawId) {
@@ -393,6 +379,7 @@ const webSiteSchema = JSON.stringify({
 
             <!-- Projects Section: Featured Engineering -->
             <section
+                id="projects"
                 class="layout-container animate-fade-in-up content-visibility-auto-projects mb-0 pb-8 delay-400"
             >
                 <div class="mb-10">
@@ -604,195 +591,92 @@ const webSiteSchema = JSON.stringify({
                             const telemetryStr = getProjectTelemetry(project.id);
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             return (
-                                <>
-                                    <article
-                                        class="bento-card group bento-card-project relative flex cursor-pointer flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
-                                        data-popover-target={`project-popover-${projectIdClean}`}
-                                        role="button"
-                                        tabindex="0"
-                                        aria-expanded="false"
-                                        aria-controls={`project-popover-${projectIdClean}`}
-                                    >
-                                        <div class="hologram-overlay" />
+                                <article
+                                    class="bento-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
+                                >
+                                    <div class="hologram-overlay" />
 
-                                        {/* Hologram WebM Video */}
-                                        <div class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl">
-                                            {project.data.video && (
-                                                <video
-                                                    src={project.data.video}
-                                                    autoplay
-                                                    loop
-                                                    muted
-                                                    playsinline
-                                                    class="h-full w-full object-cover opacity-12 mix-blend-screen transition-transform duration-500 group-hover:scale-110 dark:opacity-8 dark:mix-blend-lighten"
-                                                    style="display: none;"
-                                                    onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
-                                                    onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden');"
-                                                />
-                                            )}
-                                        </div>
+                                    {/* Hologram WebM Video */}
+                                    <div class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl">
+                                        {project.data.video && (
+                                            <video
+                                                src={project.data.video}
+                                                autoplay
+                                                loop
+                                                muted
+                                                playsinline
+                                                class="h-full w-full object-cover opacity-12 mix-blend-screen transition-transform duration-500 group-hover:scale-110 dark:opacity-8 dark:mix-blend-lighten"
+                                                style="display: none;"
+                                                onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
+                                                onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.classList.remove('hidden');"
+                                            />
+                                        )}
+                                    </div>
 
-                                        <div
-                                            class="relative z-10 flex h-full flex-col justify-between"
-                                            data-tilt-z
-                                        >
-                                            <div>
-                                                {/* Live Telemetry Badge */}
-                                                <div class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
-                                                    <div class="flex min-w-0 items-center gap-1.5">
-                                                        <span class="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-green-500" />
-                                                        <span class="truncate">{telemetryStr}</span>
-                                                    </div>
-                                                    <span class="shrink-0 font-bold whitespace-nowrap text-(--accent)">
-                                                        [ OK ]
-                                                    </span>
-                                                </div>
-
-                                                <div class="mb-4 flex items-start justify-between">
-                                                    <h3 class="text-2xl font-bold text-slate-900 transition-colors dark:text-white">
-                                                        {project.data.title}
-                                                    </h3>
-                                                    {project.data.githubUrl && (
-                                                        <a
-                                                            href={project.data.githubUrl}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            aria-label={`View ${project.data.title} on GitHub (opens in a new tab)`}
-                                                            title={`View ${project.data.title} on GitHub`}
-                                                            class="github-link relative z-20 text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-(--text-secondary) dark:hover:text-white dark:focus-visible:text-white"
-                                                        >
-                                                            <svg
-                                                                viewBox="0 0 16 16"
-                                                                aria-hidden="true"
-                                                                width="24"
-                                                                height="24"
-                                                            >
-                                                                <path
-                                                                    fill="currentColor"
-                                                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                                                                />
-                                                            </svg>
-                                                        </a>
-                                                    )}
-                                                </div>
-                                                <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                                                    {project.data.description}
-                                                </p>
-                                            </div>
-
-                                            <div class="flex items-center justify-between border-t border-slate-200/50 pt-4 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
-                                                <span class="truncate">
-                                                    PROGRESS: {project.data.progress}
-                                                </span>
-                                                <span class="text-xs transition-transform group-hover:translate-x-1">
-                                                    →
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </article>
-
-                                    {/* Project popover details popup */}
                                     <div
-                                        popover
-                                        id={`project-popover-${projectIdClean}`}
-                                        aria-labelledby={`project-popover-title-${projectIdClean}`}
-                                        class="m-auto w-[calc(100%-2rem)] max-w-xl rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl md:w-full dark:border-white/10 dark:bg-[#0b0e14]"
+                                        class="relative z-10 flex h-full flex-col justify-between"
+                                        data-tilt-z
                                     >
-                                        {/* Grid Motif Backdrop inside Popover */}
-                                        <div class="bg-grid-motif pointer-events-none absolute inset-0 rounded-2xl opacity-[0.02] dark:opacity-[0.04]" />
+                                        <div>
+                                            {/* Live Telemetry Badge */}
+                                            <div class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                                                <div class="flex min-w-0 items-center gap-1.5">
+                                                    <span class="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-green-500" />
+                                                    <span class="truncate">{telemetryStr}</span>
+                                                </div>
+                                                <span class="shrink-0 font-bold whitespace-nowrap text-(--accent)">
+                                                    [ OK ]
+                                                </span>
+                                            </div>
 
-                                        <div class="relative z-10 flex items-start justify-between border-b border-slate-100 p-5 sm:p-6 dark:border-white/5">
-                                            <div class="flex min-w-0 flex-col gap-1 pr-4">
-                                                <div class="flex flex-wrap items-center gap-2">
-                                                    <h3
-                                                        id={`project-popover-title-${projectIdClean}`}
-                                                        class="text-lg font-bold text-slate-900 sm:text-xl dark:text-white"
+                                            <div class="mb-4 flex items-start justify-between">
+                                                <h3 class="text-2xl font-bold text-slate-900 transition-colors dark:text-white">
+                                                    <a
+                                                        href={`/projects/${projectIdClean}`}
+                                                        data-astro-prefetch="hover"
+                                                        class="after:absolute after:inset-0 after:z-10 focus:outline-none"
                                                     >
                                                         {project.data.title}
-                                                    </h3>
-                                                    {project.data.progress && (
-                                                        <span class="inline-flex shrink-0 items-center rounded-full border border-(--accent)/35 bg-(--accent)/5 px-2 py-0.5 font-mono text-[9px] font-bold tracking-wider whitespace-nowrap text-(--accent) uppercase sm:text-[10px]">
-                                                            {project.data.progress.split(' ')[0]}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                                <p class="font-mono text-[9px] tracking-wider text-slate-400 uppercase sm:text-xs dark:text-slate-500">
-                                                    {telemetryStr}
-                                                </p>
-                                            </div>
-                                            <button
-                                                aria-label="Close project description"
-                                                popovertarget={`project-popover-${projectIdClean}`}
-                                                popovertargetaction="hide"
-                                                class="mt-0.5 shrink-0 cursor-pointer rounded-sm p-1 text-slate-500 transition-colors hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none sm:mt-1 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
-                                            >
-                                                <svg
-                                                    width="24"
-                                                    height="24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                >
-                                                    <path d="M18 6L6 18M6 6l12 12" />
-                                                </svg>
-                                            </button>
-                                        </div>
-
-                                        <div class="relative z-10 space-y-6 p-5 sm:p-6">
-                                            <div class="space-y-3">
-                                                <h4 class="font-mono text-[10px] font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500">
-                                                    // PROJECT OVERVIEW
-                                                </h4>
-                                                <p class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                                                    {project.data.description}
-                                                </p>
-                                            </div>
-
-                                            {project.body &&
-                                                parseProjectBody(project.body).map((section) => (
-                                                    <div class="space-y-3 border-t border-slate-100 pt-4 dark:border-white/5">
-                                                        <h4 class="font-mono text-[10px] font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500">
-                                                            // {section.title}
-                                                        </h4>
-                                                        <p class="text-sm leading-relaxed whitespace-pre-line text-slate-600 dark:text-(--text-secondary)">
-                                                            {section.content}
-                                                        </p>
-                                                    </div>
-                                                ))}
-
-                                            {project.data.tags && project.data.tags.length > 0 && (
-                                                <div class="flex flex-wrap gap-1.5 pt-4 font-mono text-[9px]">
-                                                    {project.data.tags.map((tag) => (
-                                                        <span class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400">
-                                                            #{tag.toUpperCase()}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            )}
-
-                                            <div class="flex gap-4 border-t border-slate-100 pt-6 dark:border-white/5">
-                                                <a
-                                                    href={`/transmissions?tag=${projectIdClean}`}
-                                                    aria-label={`View Transmissions for ${project.data.title}`}
-                                                    class="flex-1 rounded bg-(--accent) px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
-                                                >
-                                                    View Transmissions
-                                                </a>
+                                                    </a>
+                                                </h3>
                                                 {project.data.githubUrl && (
                                                     <a
                                                         href={project.data.githubUrl}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        aria-label={`View Source Code for ${project.data.title} (opens in a new tab)`}
-                                                        class="rounded border border-slate-200 px-4 py-2.5 font-mono text-xs font-bold tracking-wider text-slate-600 uppercase transition-all hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5 dark:focus-visible:ring-offset-(--bg-main)"
+                                                        aria-label={`View ${project.data.title} on GitHub (opens in a new tab)`}
+                                                        title={`View ${project.data.title} on GitHub`}
+                                                        class="github-link relative z-20 text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-(--text-secondary) dark:hover:text-white dark:focus-visible:text-white"
                                                     >
-                                                        Source Code
+                                                        <svg
+                                                            viewBox="0 0 16 16"
+                                                            aria-hidden="true"
+                                                            width="24"
+                                                            height="24"
+                                                        >
+                                                            <path
+                                                                fill="currentColor"
+                                                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                                                            />
+                                                        </svg>
                                                     </a>
                                                 )}
                                             </div>
+                                            <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                                {project.data.description}
+                                            </p>
+                                        </div>
+
+                                        <div class="flex items-center justify-between border-t border-slate-200/50 pt-4 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                                            <span class="truncate">
+                                                PROGRESS: {project.data.progress}
+                                            </span>
+                                            <span class="text-xs transition-transform group-hover:translate-x-1">
+                                                →
+                                            </span>
                                         </div>
                                     </div>
-                                </>
+                                </article>
                             );
                         })
                     }
