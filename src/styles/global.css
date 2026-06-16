@@ -955,6 +955,15 @@
     background-color: rgba(59, 130, 246, 0.2);
 }
 
+::highlight(search-match) {
+    background-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+mark.search-match-fallback {
+    background-color: color-mix(in srgb, var(--accent) 30%, transparent);
+    color: inherit;
+}
+
 /* Responsive Tables and Equations in Blog Posts */
 .prose table {
     display: block;

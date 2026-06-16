@@ -670,14 +670,102 @@ const postsWithReadingTime = posts.map((post: any) => {
                 // ⚡ Bolt: Cache expensive DOM text extraction to avoid redundant parsing on every keystroke
                 const cachedCardsData = Array.from(cards).map((card) => {
                     const htmlCard = card as HTMLElement;
+                    const titleElement = htmlCard.querySelector('h2');
+                    const descElement = htmlCard.querySelector('p');
                     return {
                         element: htmlCard,
+                        titleElement,
+                        descElement,
+                        originalTitleHTML: titleElement ? titleElement.innerHTML : '',
+                        originalDescHTML: descElement ? descElement.innerHTML : '',
                         tags: htmlCard.dataset.tags?.toLowerCase().split(',') || [],
                         text: htmlCard.textContent?.toLowerCase() || '',
                     };
                 });
 
                 let activeTag = 'all';
+
+                const highlightQuery = (term: string) => {
+                    const hasHighlightAPI = typeof CSS !== 'undefined' && (CSS as any).highlights;
+
+                    if (hasHighlightAPI) {
+                        (CSS as any).highlights.delete('search-match');
+                    } else {
+                        // Reset fallback elements
+                        cachedCardsData.forEach(({ titleElement, descElement, originalTitleHTML, originalDescHTML }) => {
+                            if (titleElement) titleElement.innerHTML = originalTitleHTML;
+                            if (descElement) descElement.innerHTML = originalDescHTML;
+                        });
+                    }
+
+                    if (!term) return;
+
+                    const words = term.split(/\s+/).filter(Boolean);
+                    if (words.length === 0) return;
+
+                    const visibleCards = cachedCardsData.filter(({ element }) => element.style.display !== 'none');
+
+                    if (hasHighlightAPI) {
+                        const ranges: Range[] = [];
+                        visibleCards.forEach(({ titleElement, descElement }) => {
+                            [titleElement, descElement].forEach(el => {
+                                if (!el) return;
+                                const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+                                let node;
+                                while (node = walk.nextNode()) {
+                                    const textContent = node.textContent?.toLowerCase() || '';
+                                    words.forEach(word => {
+                                        let startPos = 0;
+                                        while ((startPos = textContent.indexOf(word.toLowerCase(), startPos)) !== -1) {
+                                            const range = new Range();
+                                            range.setStart(node, startPos);
+                                            range.setEnd(node, startPos + word.length);
+                                            ranges.push(range);
+                                            startPos += word.length;
+                                        }
+                                    });
+                                }
+                            });
+                        });
+
+                        if (ranges.length > 0) {
+                            const searchHighlight = new (window as any).Highlight(...ranges);
+                            (CSS as any).highlights.set('search-match', searchHighlight);
+                        }
+                    } else {
+                        // Fallback for browsers that do not support the Custom Highlight API
+                        visibleCards.forEach(({ titleElement, descElement }) => {
+                            [titleElement, descElement].forEach(el => {
+                                if (!el) return;
+                                const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+                                const textNodes: Node[] = [];
+                                let node;
+                                while (node = walk.nextNode()) {
+                                    textNodes.push(node);
+                                }
+
+                                textNodes.forEach(textNode => {
+                                    const text = textNode.textContent || '';
+                                    const escapedWords = words.map(w => w.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
+                                    const regex = new RegExp(`(${escapedWords.join('|')})`, 'gi');
+
+                                    if (regex.test(text)) {
+                                        const tempSpan = document.createElement('span');
+                                        tempSpan.innerHTML = text.replace(regex, '<mark class="search-match-fallback">$1</mark>');
+
+                                        const parent = textNode.parentNode;
+                                        if (parent) {
+                                            while (tempSpan.firstChild) {
+                                                parent.insertBefore(tempSpan.firstChild, textNode);
+                                            }
+                                            parent.removeChild(textNode);
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    }
+                };
 
                 // Function to perform combined filtering
                 const filterPosts = () => {
@@ -695,6 +783,9 @@ const postsWithReadingTime = posts.map((post: any) => {
                             element.style.display = 'none';
                         }
                     });
+
+                    // Update highlights
+                    highlightQuery(term);
 
                     if (emptyState) {
                         if (visibleCount === 0) {
@@ -931,6 +1022,9 @@ const postsWithReadingTime = posts.map((post: any) => {
                 if (reticleRafId) {
                     window.cancelAnimationFrame(reticleRafId);
                     reticleRafId = null;
+                }
+                if (typeof CSS !== 'undefined' && (CSS as any).highlights) {
+                    (CSS as any).highlights.delete('search-match');
                 }
             });
         </script>
