@@ -42,7 +42,7 @@ test.describe('Glossary Popover Functionality', () => {
         expect(errors).toHaveLength(0);
 
         // Verify that the prose section is still intact
-        const hasProse = await page.locator('.prose').isVisible();
+        const hasProse = await page.locator('.prose').first().isVisible();
         expect(hasProse).toBe(true);
     });
 });
