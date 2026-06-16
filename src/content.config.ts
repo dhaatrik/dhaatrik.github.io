@@ -42,6 +42,7 @@ const projects = defineCollection({
                 .optional(),
             progress: z.string().optional(),
             order: z.number().default(0),
+            transmissionTag: z.string().optional(),
         }),
 });
 

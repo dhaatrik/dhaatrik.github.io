@@ -14,8 +14,11 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, description, logo, githubUrl, progress, tags } = project.data;
+const { title, description, logo, githubUrl, progress, tags, transmissionTag: rawTransmissionTag } = project.data;
 const { Content } = await render(project);
+
+const projectSlug = project.id.replace(/\.md$/, '');
+const transmissionTag = rawTransmissionTag || projectSlug;
 
 // Generate JSON-LD CreativeWork Schema
 const projectSchema = {
@@ -188,6 +191,18 @@ const jsonLd = JSON.stringify(projectSchema);
                                 </div>
                             )
                         }
+
+                        <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50">
+                            <h3 class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                                // TRANSMISSIONS
+                            </h3>
+                            <a
+                                href={`/transmissions?tag=${transmissionTag}`}
+                                class="magnetic-target inline-flex w-full items-center justify-center gap-2 rounded-lg border border-(--accent)/30 bg-(--accent)/5 px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-(--accent) uppercase shadow-xs transition-all hover:bg-(--accent)/15 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
+                            >
+                                More Info
+                            </a>
+                        </div>
 
                         <div
                             class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50"
