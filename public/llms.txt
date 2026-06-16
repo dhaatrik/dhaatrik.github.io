@@ -6,6 +6,7 @@
 
 - [Home](https://dhaatrik.github.io/): Portfolio homepage with project showcases, tech stack, and recent blog posts.
 - [Personnel](https://dhaatrik.github.io/personnel/): About page with personal background, education, and professional experience.
+- [Projects](https://dhaatrik.github.io/projects/): Dedicated projects index page displaying all software engineering case studies.
 - [Pedagogy](https://dhaatrik.github.io/pedagogy/): Teaching philosophy, DBS Classes YouTube channel archive, and educational methodology.
 - [Transmissions](https://dhaatrik.github.io/transmissions/): Blog index listing all published articles.
 
@@ -21,6 +22,14 @@
 - [Vellor](https://dhaatrik.github.io/projects/vellor/): Offline-first note-taking application.
 - [FuelDrop](https://dhaatrik.github.io/projects/fueldrop/): High-concurrency fuel delivery platform.
 - [The Infinite Intelligence](https://dhaatrik.github.io/projects/the-infinite-intelligence/): Multi-agent AI debate system.
+- [Instant App Opener](https://dhaatrik.github.io/projects/instant-app-opener/): Electron-based local desktop launcher to bypass browser boot latency.
+- [Glassbox](https://dhaatrik.github.io/projects/glassbox/): Minimalist secure VM2-isolated Node.js proxy execution sandbox.
+- [FinTrack](https://dhaatrik.github.io/projects/expense-vs-investment-tracker/): Offline-first personal finance tracker visualizing expense-vs-investment ratios.
+- [Seamless QR Dining](https://dhaatrik.github.io/projects/seamless-qr-dining/): Real-time restaurant menu, ordering, and admin billing pipeline.
+- [Vireo Wellness](https://dhaatrik.github.io/projects/vireo-wellness/): Client-side health tracker built with HTML/CSS and IndexedDB.
+- [Bill Express](https://dhaatrik.github.io/projects/bill-express/): Fast local PDF billing invoice generator utilizing client-side print layout.
+- [MarkPDF](https://dhaatrik.github.io/projects/free-markdown-to-pdf-converter/): Markdown-to-PDF document compiler featuring KaTeX mathematical rendering.
+- [Read Aloud Chrome Extension](https://dhaatrik.github.io/projects/readaloud_chromeextension/): Manifest V3 extension wrapping the Web Speech API for custom text-to-speech.
 
 ## Key Entities
 
