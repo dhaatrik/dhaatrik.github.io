@@ -197,7 +197,7 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                     >Home
                 </HeaderLink>
                 <HeaderLink
-                    href="/about"
+                    href="/personnel"
                     class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
@@ -207,24 +207,24 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                     >Personnel
                 </HeaderLink>
                 <HeaderLink
-                    href="/blog"
-                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
-                >
-                    <span
-                        aria-hidden="true"
-                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
-                        >[ 03 ]</span
-                    >Transmissions
-                </HeaderLink>
-                <HeaderLink
                     href="/pedagogy"
                     class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
                         class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
-                        >[ 04 ]</span
+                        >[ 03 ]</span
                     >Pedagogy
+                </HeaderLink>
+                <HeaderLink
+                    href="/transmissions"
+                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                >
+                    <span
+                        aria-hidden="true"
+                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
+                        >[ 04 ]</span
+                    >Transmissions
                 </HeaderLink>
             </div>
             <ThemeToggle />
@@ -279,22 +279,22 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                     isActive: cleanPath === '' || cleanPath === '/',
                 },
                 {
-                    href: '/about',
+                    href: '/personnel',
                     label: 'Personnel',
                     index: '[ 02 ]',
-                    isActive: cleanPath.startsWith('/about'),
-                },
-                {
-                    href: '/blog',
-                    label: 'Transmissions',
-                    index: '[ 03 ]',
-                    isActive: cleanPath.startsWith('/blog'),
+                    isActive: cleanPath.startsWith('/personnel'),
                 },
                 {
                     href: '/pedagogy',
                     label: 'Pedagogy',
-                    index: '[ 04 ]',
+                    index: '[ 03 ]',
                     isActive: cleanPath.startsWith('/pedagogy'),
+                },
+                {
+                    href: '/transmissions',
+                    label: 'Transmissions',
+                    index: '[ 04 ]',
+                    isActive: cleanPath.startsWith('/transmissions'),
                 },
             ].map((item) => (
                 <a

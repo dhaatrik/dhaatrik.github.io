@@ -59,7 +59,7 @@ const {
         <main id="main-content" tabindex="-1" class="layout-container grow py-12 md:py-20">
             <div class="blog-reveal blog-reveal-1 mb-8">
                 <a
-                    href="/blog"
+                    href="/transmissions"
                     data-astro-prefetch="hover"
                     class="magnetic-target group inline-flex items-center gap-2 rounded-lg text-sm font-medium text-slate-500 transition-all hover:text-(--accent) focus-visible:text-(--accent) focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:text-(--text-secondary) dark:focus-visible:ring-offset-(--bg-main)"
                 >
@@ -367,7 +367,7 @@ const {
                             <div class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
                                 {prevPost ? (
                                     <a
-                                        href={`/blog/${prevPost.id}/`}
+                                        href={`/transmissions/${prevPost.id}/`}
                                         class="group relative block overflow-hidden rounded-lg border border-slate-200 bg-white p-6 transition-all hover:border-(--accent)/50 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-slate-800 dark:bg-[#151a22]"
                                     >
                                         <div class="bg-grid-motif absolute inset-0 opacity-10 dark:opacity-30" />
@@ -401,7 +401,7 @@ const {
 
                                 {nextPost ? (
                                     <a
-                                        href={`/blog/${nextPost.id}/`}
+                                        href={`/transmissions/${nextPost.id}/`}
                                         class="group relative block overflow-hidden rounded-lg border border-slate-200 bg-white p-6 text-right transition-all hover:border-(--accent)/50 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-slate-800 dark:bg-[#151a22]"
                                     >
                                         <div class="bg-grid-motif absolute inset-0 opacity-10 dark:opacity-30" />

@@ -198,7 +198,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                         {
                             postsWithReadingTime.map((post: any, i: number) => (
                                 <a
-                                    href={`/blog/${post.id}/`}
+                                    href={`/transmissions/${post.id}/`}
                                     data-astro-prefetch="hover"
                                     data-tags={post.data.tags ? post.data.tags.join(',') : ''}
                                     class:list={[

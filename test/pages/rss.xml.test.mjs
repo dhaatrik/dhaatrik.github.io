@@ -19,7 +19,7 @@ test('rss GET endpoint returns correctly formatted rss data', async () => {
     assert.ok(postItem);
     assert.strictEqual(postItem.description, 'This is my first post');
     assert.strictEqual(postItem.pubDate.getTime(), new Date('2024-01-01').getTime());
-    assert.strictEqual(postItem.link, '/blog/my-first-post/');
+    assert.strictEqual(postItem.link, '/transmissions/my-first-post/');
 
     const projectItem = result.items.find((item) => item.title === 'Project: My Project');
     assert.ok(projectItem);
