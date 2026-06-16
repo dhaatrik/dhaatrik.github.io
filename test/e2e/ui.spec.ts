@@ -26,8 +26,8 @@ test.describe('Portfolio UI Interactivity', () => {
     });
 
     test('Vellor Protocol easter egg should trigger when offline', async ({ page }) => {
-        // Navigating to about page where the logic resides
-        await page.goto('/about');
+        // Navigating to personnel page where the logic resides
+        await page.goto('/personnel');
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(500);
 
@@ -56,7 +56,7 @@ test.describe('Portfolio UI Interactivity', () => {
         await blogLink.click();
 
         // Verify URL change
-        await expect(page).toHaveURL(/\/blog/);
+        await expect(page).toHaveURL(/\/transmissions/);
 
         // Check if the marker still exists
         const hasMarker = await page.evaluate(() => (window as any).__SPA_MARKER__);
@@ -67,7 +67,7 @@ test.describe('Portfolio UI Interactivity', () => {
         page,
     }) => {
         // 1. Check URL query param filtering
-        await page.goto('/blog?q=mission');
+        await page.goto('/transmissions?q=mission');
 
         // The post card should be visible
         const postCard = page.locator('.blog-post-card[href*="/scrollytelling-demo/"]');
@@ -103,7 +103,7 @@ test.describe('Portfolio UI Interactivity', () => {
         await page.setViewportSize({ width: 1440, height: 900 });
 
         // Navigate to a post with headings
-        await page.goto('/blog/scrollytelling-demo/');
+        await page.goto('/transmissions/scrollytelling-demo/');
 
         // Disable smooth scrolling to make scrollIntoView instant
         await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
@@ -158,7 +158,7 @@ test.describe('Portfolio UI Interactivity', () => {
         await context.grantPermissions(['clipboard-read', 'clipboard-write']);
 
         // Navigate to a post known to have a code block
-        await page.goto('/blog/scrollytelling-demo/');
+        await page.goto('/transmissions/scrollytelling-demo/');
 
         // Select the first copy button and its corresponding pre element
         const copyBtn = page.locator('.copy-btn').first();

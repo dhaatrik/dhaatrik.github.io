@@ -23,6 +23,7 @@
         "@astrojs/sitemap": "^3.7.3",
         "@fontsource/nunito": "^5.2.7",
         "@fontsource/poppins": "^5.2.7",
+        "@tailwindcss/typography": "^0.5.20",
         "@tailwindcss/vite": "^4.2.2",
         "astro": "^6.4.6",
         "katex": "^0.16.45",

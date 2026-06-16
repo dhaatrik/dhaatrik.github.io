@@ -1,0 +1,34 @@
+# Dhaatrik Chowdhury — Personal Portfolio & Blog
+
+> Personal website of Dhaatrik Chowdhury, an Entrepreneur and AI Engineer from India. Features a portfolio of projects, pedagogy philosophy, and technical blog posts (called "transmissions").
+
+## Core Pages
+
+- [Home](https://dhaatrik.github.io/): Portfolio homepage with project showcases, tech stack, and recent blog posts.
+- [Personnel](https://dhaatrik.github.io/personnel/): About page with personal background, education, and professional experience.
+- [Pedagogy](https://dhaatrik.github.io/pedagogy/): Teaching philosophy, DBS Classes YouTube channel archive, and educational methodology.
+- [Transmissions](https://dhaatrik.github.io/transmissions/): Blog index listing all published articles.
+
+## Blog Posts (Transmissions)
+
+- [Why Dhaatrik Started: DBS Classes and the Physics of Curiosity](https://dhaatrik.github.io/transmissions/why-i-started-dbs-classes/): Origin story of the DBS Classes YouTube channel, founded October 31 2022, to combat rote learning with first-principles physics and mathematics education.
+- [Pedagogy from First Principles: Cooking, Open Skies, and Bus Wheels](https://dhaatrik.github.io/transmissions/my-ways-of-teaching/): Deep dive into Dhaatrik's non-traditional teaching methodology — sibling-centric tutoring, kitchen thermodynamics, street-side kinematics, and student psychology.
+- [Why Dhaatrik Stopped: An Honest Audit of Consistency and Flaws](https://dhaatrik.github.io/transmissions/why-i-stopped-youtube-classes/): Post-mortem analysis of the DBS Classes YouTube channel cessation — solo production bottleneck, novelty fade, and motivation vs. systems thinking.
+
+## Projects
+
+- [DeltaV Lab](https://dhaatrik.github.io/#projects): Real-time orbital mechanics simulation engine.
+- [Vellor](https://dhaatrik.github.io/#projects): Offline-first note-taking application.
+- [FuelDrop](https://dhaatrik.github.io/#projects): High-concurrency fuel delivery platform.
+- [The Infinite Intelligence](https://dhaatrik.github.io/#projects): Multi-agent AI debate system.
+
+## Key Entities
+
+- **Dhaatrik Chowdhury**: Founder, author, and developer. Nickname: Dhaatu. Known as "Dhaatu Bhaiyaa" (Big Brother Dhaatu) by students.
+- **DBS Classes**: "Dhaatu Bhaiyaa's Classes" — a free YouTube channel for physics and mathematics education. 20 videos published between October 2022 and September 2023.
+- **Core Philosophy**: "Education Is Not Free BUT KNOWLEDGE IS FREE" — shared with zero terms and conditions.
+
+## Feeds
+
+- [RSS Feed](https://dhaatrik.github.io/rss.xml)
+- [Sitemap](https://dhaatrik.github.io/sitemap-index.xml)

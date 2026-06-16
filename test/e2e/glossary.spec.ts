@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Glossary Popover Functionality', () => {
     test('handles empty or null text nodes without throwing errors', async ({ page }) => {
         // Navigate to a blog post to test the glossary initialization
-        await page.goto('/blog/scrollytelling-demo/');
+        await page.goto('/transmissions/scrollytelling-demo/');
 
         // Wait for the page to fully load
         await page.waitForLoadState('networkidle');

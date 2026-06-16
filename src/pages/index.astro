@@ -67,12 +67,68 @@ const getProjectTelemetry = (id: string) => {
             return 'STATUS: OPERATIONAL // SYSTEM: OK';
     }
 };
+
+// FAQ and WebSite JSON-LD schemas for AEO/GEO
+const faqSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        {
+            '@type': 'Question',
+            name: 'Who is Dhaatrik Chowdhury?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Dhaatrik Chowdhury is an Entrepreneur and AI Engineer from India with approximately 9 years of experience tutoring students in physics and mathematics. He has guided roughly 200 students across school classrooms, coaching centers, one-on-one mentoring, and online sessions. He is the founder of DBS Classes, a free YouTube channel for physics and mathematics education.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'What is DBS Classes?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: "DBS Classes stands for \"Dhaatu Bhaiyaa's Classes\" — a free YouTube channel for physics and mathematics education founded on October 31, 2022 by Dhaatrik Chowdhury. \"Dhaatu\" is his nickname and \"Bhaiyaa\" is the Hindi word for big brother. The channel produced 20 educational video lessons covering topics like dimensional analysis, trigonometry, and kinematics.",
+            },
+        },
+        {
+            '@type': 'Question',
+            name: "What is Dhaatrik's teaching philosophy?",
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: "Dhaatrik's teaching philosophy is built on first-principles thinking, using everyday observations (kitchen thermodynamics, bus wheel mechanics, open-sky optics) to make physics and mathematics intuitive. His core axiom is: \"Education Is Not Free BUT KNOWLEDGE IS FREE\" — shared with zero terms and conditions. He uses a sibling-centric tutoring model where students are treated as younger siblings rather than subordinates.",
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'What projects has Dhaatrik built?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Dhaatrik has built several notable projects: DeltaV Lab (real-time orbital mechanics simulation), Vellor (offline-first note-taking app), FuelDrop (high-concurrency fuel delivery platform), and The Infinite Intelligence (multi-agent AI debate system). He works with React, TypeScript, Python, and TensorFlow.',
+            },
+        },
+    ],
+}).replace(/</g, '\\u003c');
+
+const webSiteSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Dhaatrik Chowdhury',
+    url: 'https://dhaatrik.github.io',
+    description: 'Personal portfolio and blog of Dhaatrik Chowdhury, an Entrepreneur and AI Engineer from India.',
+    author: {
+        '@type': 'Person',
+        name: 'Dhaatrik Chowdhury',
+    },
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} keywords={['Dhaatrik Chowdhury', 'AI Engineer', 'Entrepreneur', 'portfolio', 'DBS Classes', 'physics tutor', 'first-principles teaching', 'India']} />
+        <!-- FAQ Structured Data for AEO/GEO -->
+        <script type="application/ld+json" set:html={faqSchema} />
+        <!-- WebSite Structured Data -->
+        <script type="application/ld+json" set:html={webSiteSchema} />
     </head>
     <body class="bg-grid-motif relative pt-24">
         <Header />
@@ -138,7 +194,7 @@ const getProjectTelemetry = (id: string) => {
                     <h1
                         class="animate-fade-in-up mb-6 text-4xl leading-tight font-bold text-slate-900 delay-100 md:text-5xl lg:text-6xl dark:text-white"
                     >
-                        <span id="dynamic-greeting">Hey!</span> Dhaatrik Chowdhury. <br />
+                        <span id="dynamic-greeting">Hey!</span> Buddy. <br />
                         <span
                             id="identity-rotator"
                             class="mt-2 block min-h-[1.5em] bg-linear-to-r from-blue-600 to-purple-500 bg-clip-text font-mono text-2xl font-bold text-transparent md:text-3xl dark:from-blue-400 dark:to-purple-400"
@@ -165,7 +221,7 @@ const getProjectTelemetry = (id: string) => {
                     <!-- CTA Hierarchy -->
                     <div class="animate-fade-in-up flex flex-wrap items-center gap-6 delay-300">
                         <a
-                            href="/about"
+                            href="/personnel"
                             data-astro-prefetch="hover"
                             class="magnetic-target group transition-spring inline-flex items-center gap-2 rounded-full bg-(--accent) px-6 py-2.5 font-medium text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] focus-visible:scale-105 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                         >
@@ -716,7 +772,7 @@ const getProjectTelemetry = (id: string) => {
 
                                             <div class="flex gap-4 border-t border-slate-100 pt-6 dark:border-white/5">
                                                 <a
-                                                    href={`/blog?tag=${projectIdClean}`}
+                                                    href={`/transmissions?tag=${projectIdClean}`}
                                                     aria-label={`View Transmissions for ${project.data.title}`}
                                                     class="flex-1 rounded bg-(--accent) px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                                                 >
@@ -757,7 +813,7 @@ const getProjectTelemetry = (id: string) => {
                         </p>
                     </div>
                     <a
-                        href="/blog"
+                        href="/transmissions"
                         data-astro-prefetch="hover"
                         class="group hidden items-center gap-1 text-sm font-medium text-(--accent) transition-colors hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none sm:flex dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
                     >
@@ -786,7 +842,7 @@ const getProjectTelemetry = (id: string) => {
                             const doiNum = `10.1012/DH.${post.id.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'POST'}`;
                             return (
                                 <a
-                                    href={`/blog/${post.id}/`}
+                                    href={`/transmissions/${post.id}/`}
                                     data-astro-prefetch="hover"
                                     class="bento-card group block transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
                                 >
@@ -870,7 +926,7 @@ const getProjectTelemetry = (id: string) => {
                 </div>
                 <div class="mt-6 flex sm:hidden">
                     <a
-                        href="/blog"
+                        href="/transmissions"
                         data-astro-prefetch="hover"
                         class="group inline-flex items-center gap-1 text-sm font-medium text-(--accent) transition-colors hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
                     >
@@ -1090,7 +1146,9 @@ const getProjectTelemetry = (id: string) => {
                 }
 
                 // --- 8.5. Bind View Transition Names to Homepage Blog Cards ---
-                const homeBlogCards = document.querySelectorAll('a.bento-card[href*="/blog/"]');
+                const homeBlogCards = document.querySelectorAll(
+                    'a.bento-card[href*="/transmissions/"]'
+                );
                 homeBlogCards.forEach((card) => {
                     card.addEventListener('click', () => {
                         const titleEl = card.querySelector('h3');

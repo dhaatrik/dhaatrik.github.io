@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 /* Override Tailwind v4 default: use class-based dark mode instead of prefers-color-scheme */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -105,6 +106,7 @@
         0% {
             transform: translateX(0);
         }
+
         100% {
             transform: translateX(-50%);
         }
@@ -115,6 +117,7 @@
             opacity: 0;
             transform: translateY(20px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -125,6 +128,7 @@
         0% {
             transform: translateY(-100%);
         }
+
         100% {
             transform: translateY(100%);
         }
@@ -135,10 +139,12 @@
             transform: translateY(-3px);
             opacity: 0.25;
         }
+
         50% {
             transform: translateY(1px);
             opacity: 1;
         }
+
         100% {
             transform: translateY(5px);
             opacity: 0;
@@ -150,6 +156,7 @@
             opacity: 1;
             transform: translateY(0) scale(1);
         }
+
         to {
             opacity: 0;
             transform: translateY(20px) scale(0.95);
@@ -835,6 +842,7 @@
         opacity: 0;
         transform: translateY(8px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -849,12 +857,15 @@
 .blog-reveal-1 {
     animation-delay: 60ms;
 }
+
 .blog-reveal-2 {
     animation-delay: 120ms;
 }
+
 .blog-reveal-3 {
     animation-delay: 180ms;
 }
+
 .blog-reveal-4 {
     animation-delay: 200ms;
 }
@@ -950,6 +961,33 @@
     -webkit-overflow-scrolling: touch;
 }
 
+/* Custom spacing between paragraphs in blog posts */
+.prose p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Ensure proper list markers are visible and styled */
+.prose ol {
+    list-style-type: decimal !important;
+    padding-left: 1.5rem !important;
+    margin-left: 0 !important;
+}
+
+.prose ol li::marker {
+    color: var(--accent);
+}
+
+.prose ul {
+    list-style-type: disc !important;
+    padding-left: 1.5rem !important;
+    margin-left: 0 !important;
+}
+
+.prose ul li::marker {
+    color: var(--accent);
+}
+
 .katex-display {
     overflow-x: auto;
     overflow-y: hidden;
@@ -963,6 +1001,7 @@
         from {
             transform: scaleX(0);
         }
+
         to {
             transform: scaleX(1);
         }
@@ -1023,6 +1062,7 @@
             opacity: 0;
             transform: translateY(30px) scale(0.98);
         }
+
         to {
             opacity: 1;
             transform: translateY(0) scale(1);
@@ -1059,9 +1099,11 @@ html.theme-transition::view-transition-new(root) {
     animation: none;
     mix-blend-mode: normal;
 }
+
 html.theme-transition::view-transition-new(root) {
     z-index: 999;
 }
+
 html.theme-transition::view-transition-old(root) {
     z-index: 1;
 }
@@ -1091,6 +1133,7 @@ html.theme-transition::view-transition-old(root) {
     from {
         transform: translateY(0) scale(1) rotate(0deg);
     }
+
     to {
         transform: translateY(120px) scale(1.05) rotate(5deg);
     }
@@ -1125,7 +1168,8 @@ html.theme-transition::view-transition-old(root) {
     width: 100%;
     aspect-ratio: 16 / 9;
     border-radius: 1rem;
-    background-color: rgb(15 23 42 / 0.95); /* Deep slate-900 */
+    background-color: rgb(15 23 42 / 0.95);
+    /* Deep slate-900 */
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -1137,7 +1181,8 @@ html.theme-transition::view-transition-old(root) {
 @media (min-width: 768px) {
     .scrollytell-visual {
         position: sticky;
-        top: 6.5rem; /* Beneath header padding-top */
+        top: 6.5rem;
+        /* Beneath header padding-top */
         width: 50%;
         aspect-ratio: 1 / 1;
     }
@@ -1183,7 +1228,8 @@ html.theme-transition::view-transition-old(root) {
     margin-bottom: 30vh;
     padding: 2rem;
     border-radius: 0.75rem;
-    border: 1px solid rgba(226, 232, 240, 0.8); /* Slate-200 */
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    /* Slate-200 */
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
     transition:
@@ -1215,11 +1261,13 @@ html.theme-transition::view-transition-old(root) {
             border-color: rgba(226, 232, 240, 0.8);
             box-shadow: none;
         }
+
         30%,
         70% {
             border-color: var(--accent);
             box-shadow: 0 0 20px var(--accent-glow);
         }
+
         100% {
             border-color: rgba(226, 232, 240, 0.8);
             box-shadow: none;
@@ -1231,11 +1279,13 @@ html.theme-transition::view-transition-old(root) {
             border-color: rgba(255, 255, 255, 0.05);
             box-shadow: none;
         }
+
         30%,
         70% {
             border-color: var(--accent);
             box-shadow: 0 0 20px var(--accent-glow);
         }
+
         100% {
             border-color: rgba(255, 255, 255, 0.05);
             box-shadow: none;

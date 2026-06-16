@@ -8,7 +8,7 @@ export async function GET(context) {
 
     const postItems = posts.map((post) => ({
         ...post.data,
-        link: `/blog/${post.id}/`,
+        link: `/transmissions/${post.id}/`,
     }));
 
     // ⚡ Bolt: Hoist date allocation to prevent redundant object instantiation in loop

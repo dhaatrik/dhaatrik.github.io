@@ -10,6 +10,8 @@
 
 - [Workflow](./workflow.md)
 - [Code Style Guides](./code_styleguides/)
+  - [Astro Style Guide](./code_styleguides/astro.md)
+  - [SEO & LLM Visibility Guide](./code_styleguides/seo-and-llm.md)
 
 ## Management
 

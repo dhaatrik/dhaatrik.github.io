@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('BlogPost Interactive Features', () => {
     test.beforeEach(async ({ page }) => {
         // Navigate to a post known to have interactive formulas and code blocks
-        await page.goto('/blog/scrollytelling-demo/');
+        await page.goto('/transmissions/scrollytelling-demo/');
         await page.locator('#toggle-mode-btn').waitFor({ state: 'visible' });
     });
 
