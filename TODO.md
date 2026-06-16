@@ -23,11 +23,7 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 ## P0 — Critical
 
-- [ ] **Pass `heroImage` to `BaseHead` on blog posts** _(SEO)_
-  - `BlogPost.astro` accepts `heroImage` but does not pass it to `<BaseHead />`.
-  - All posts currently share the fallback OG image.
-  - Add `image={heroImage}` to `<BaseHead />` in `src/layouts/BlogPost.astro`.
-  - Include `image` field in Article JSON-LD schema in the same file.
+- _No active items in this category._
 
 ---
 
@@ -135,3 +131,4 @@ _Move completed items here with date when finished._
 
 - [x] **Optimize hero images** — completed 2026-06-16
 - [x] **Add dedicated project pages** — completed 2026-06-16
+- [x] **Pass `heroImage` to `BaseHead` on blog posts** — completed 2026-06-17
