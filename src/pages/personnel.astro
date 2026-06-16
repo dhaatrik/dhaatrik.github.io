@@ -5,6 +5,8 @@ import Header from '../components/Header.astro';
 import { SITE_TITLE, SOCIAL_LINKS } from '../consts';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
+import { Picture } from 'astro:assets';
+import meImage from '../assets/me.jpeg';
 
 import { techGroups } from '../data/techStack';
 
@@ -388,11 +390,15 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                             >
                             </div>
 
-                            <img
-                                src="/me.jpeg"
+                            <Picture
+                                src={meImage}
                                 alt="Dhaatrik"
                                 loading="eager"
                                 fetchpriority="high"
+                                widths={[260, 320, 520, 640]}
+                                sizes="(max-width: 640px) 260px, (max-width: 768px) 320px, 320px"
+                                formats={['avif', 'webp']}
+                                fallbackFormat="jpeg"
                                 class="aspect-square w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
                             />
                         </div>
