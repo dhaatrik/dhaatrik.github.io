@@ -40,4 +40,6 @@ Dhaatrik fell into the classic traps:
 
 Acknowledging this failure isn't about self-pity; it is about self-calibration. If he cannot be honest about where he fell short—specifically his struggle with long-term execution consistency on solo side projects—he cannot hope to build robust systems in the future.
 
+The channel stood for a powerful ideal: **"Education Is Not Free BUT KNOWLEDGE IS FREE" and must be shared with "ZERO TERMS AND CONDITIONS"**. While Dhaatrik failed to sustain the channel, that core conviction remains fully intact and continues to shape his approach to building and sharing tools in his current engineering work.
+
 DBS Classes taught Dhaatrik how much he loves teaching and how easily he can get distracted when there is no external accountability. It remains online as a snapshot of what was, and a reminder of the discipline he needs to bring to everything he builds next.
