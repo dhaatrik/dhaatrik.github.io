@@ -35,12 +35,37 @@ import { youtubeVideos } from '../data/videos';
                     viewBox="0 0 200 200"
                     xmlns="http://www.w3.org/2000/svg"
                 >
-                    <path
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1"
-                        d="M100 100 m-80,0 a80,80 0 1,0 160,0 a80,80 0 1,0 -160,0 M100 100 m-60,0 a60,60 0 1,0 120,0 a60,60 0 1,0 -120,0 M100 100 m-40,0 a40,40 0 1,0 80,0 a40,40 0 1,0 -80,0 M20 100 h160 M100 20 v160"
-                    ></path>
+                    <!-- Concentric dashed calibration circles -->
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="3 3" />
+                    <circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="6 6" />
+                    
+                    <!-- Calibration axes -->
+                    <line x1="20" y1="100" x2="180" y2="100" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" />
+                    <line x1="100" y1="20" x2="100" y2="180" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" />
+                    
+                    <!-- Outer diamond projection bounds -->
+                    <path d="M 100 35 L 185 90 L 100 145 L 15 90 Z" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1 5" />
+                    
+                    <!-- Mortarboard Cap Top (Diamond) -->
+                    <polygon points="100,45 175,85 100,125 25,85" fill="none" stroke="currentColor" stroke-width="1.5" />
+                    
+                    <!-- Cap Underneath (Skullcap) -->
+                    <path d="M 60,103 C 60,135 140,135 140,103" fill="none" stroke="currentColor" stroke-width="1.2" />
+                    <path d="M 60,115 C 60,145 140,145 140,115" fill="none" stroke="currentColor" stroke-width="1.2" />
+                    <path d="M 60,103 L 60,115" fill="none" stroke="currentColor" stroke-width="1.2" />
+                    <path d="M 140,103 L 140,115" fill="none" stroke="currentColor" stroke-width="1.2" />
+                    
+                    <!-- Button on top -->
+                    <circle cx="100" cy="85" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+                    
+                    <!-- Tassel -->
+                    <path d="M 100,85 C 75,90 55,100 50,115" fill="none" stroke="currentColor" stroke-width="1" />
+                    <polygon points="50,115 47,135 53,135" fill="none" stroke="currentColor" stroke-width="1" />
+                    
+                    <!-- Blueprint labels -->
+                    <text x="110" y="30" font-family="monospace" font-size="6" fill="currentColor" opacity="0.6">MODEL: MORTARBOARD_CAP</text>
+                    <text x="110" y="40" font-family="monospace" font-size="6" fill="currentColor" opacity="0.6">CAL_DEG: 45.000</text>
+                    <text x="25" y="170" font-family="monospace" font-size="6" fill="currentColor" opacity="0.6">SYS.PEDAGOGICAL_RECON // V1.0</text>
                 </svg>
             </div>
 
@@ -420,8 +445,61 @@ import { youtubeVideos } from '../data/videos';
                 });
             };
 
+            // Kinetic Reticle Mouse Tracking Parallax
+            let reticleRafId: number | null = null;
+            let mouseX = 0;
+            let mouseY = 0;
+
+            const setupReticleParallax = () => {
+                const reticle = document.getElementById('reticle-bg');
+                if (!reticle) return;
+
+                const updateReticleParallax = () => {
+                    const x = (mouseX - window.innerWidth / 2) / (window.innerWidth / 2);
+                    const y = (mouseY - window.innerHeight / 2) / (window.innerHeight / 2);
+
+                    const moveX = x * 8; // max 8px
+                    const moveY = y * 8; // max 8px
+                    const rotate = x * 5; // max 5deg
+
+                    reticle.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) rotate(${rotate}deg)`;
+                    reticleRafId = null;
+                };
+
+                const handleReticleParallax = (e: MouseEvent) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    if (!reticleRafId) {
+                        reticleRafId = window.requestAnimationFrame(updateReticleParallax);
+                    }
+                };
+
+                window.addEventListener('mousemove', handleReticleParallax);
+
+                // Return cleanup function
+                return () => {
+                    window.removeEventListener('mousemove', handleReticleParallax);
+                    if (reticleRafId) {
+                        window.cancelAnimationFrame(reticleRafId);
+                    }
+                };
+            };
+
+            let cleanupParallax: (() => void) | null = null;
+
             // Run strictly on Astro page navigation / page load
-            document.addEventListener('astro:page-load', setupVideoFilters);
+            document.addEventListener('astro:page-load', () => {
+                setupVideoFilters();
+                if (cleanupParallax) cleanupParallax();
+                cleanupParallax = setupReticleParallax();
+            });
+
+            document.addEventListener('astro:before-preparation', () => {
+                if (cleanupParallax) {
+                    cleanupParallax();
+                    cleanupParallax = null;
+                }
+            });
         </script>
     </body>
 </html>
