@@ -1,3 +1,58 @@
+# =============================================================================
+# robots.txt — dhaatrik.github.io
+# =============================================================================
+# Default: Allow all crawlers
 User-agent: *
 Allow: /
+Disallow: /404
+
+# =============================================================================
+# AI / LLM Crawlers — Explicitly Welcomed
+# =============================================================================
+# Google AI (Gemini, AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+# OpenAI (ChatGPT with browsing, GPT crawlers)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Common Crawl (used by many AI training sets)
+User-agent: CCBot
+Allow: /
+
+# Microsoft / Bing AI (Copilot)
+User-agent: Bingbot
+Allow: /
+
+# Apple (Applebot-Extended for Apple Intelligence)
+User-agent: Applebot-Extended
+Allow: /
+
+# =============================================================================
+# Sitemap & LLM Context Files
+# =============================================================================
 Sitemap: https://dhaatrik.github.io/sitemap-index.xml

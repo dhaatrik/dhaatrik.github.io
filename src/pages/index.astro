@@ -67,12 +67,68 @@ const getProjectTelemetry = (id: string) => {
             return 'STATUS: OPERATIONAL // SYSTEM: OK';
     }
 };
+
+// FAQ and WebSite JSON-LD schemas for AEO/GEO
+const faqSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        {
+            '@type': 'Question',
+            name: 'Who is Dhaatrik Chowdhury?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Dhaatrik Chowdhury is an Entrepreneur and AI Engineer from India with approximately 9 years of experience tutoring students in physics and mathematics. He has guided roughly 200 students across school classrooms, coaching centers, one-on-one mentoring, and online sessions. He is the founder of DBS Classes, a free YouTube channel for physics and mathematics education.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'What is DBS Classes?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: "DBS Classes stands for \"Dhaatu Bhaiyaa's Classes\" — a free YouTube channel for physics and mathematics education founded on October 31, 2022 by Dhaatrik Chowdhury. \"Dhaatu\" is his nickname and \"Bhaiyaa\" is the Hindi word for big brother. The channel produced 20 educational video lessons covering topics like dimensional analysis, trigonometry, and kinematics.",
+            },
+        },
+        {
+            '@type': 'Question',
+            name: "What is Dhaatrik's teaching philosophy?",
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: "Dhaatrik's teaching philosophy is built on first-principles thinking, using everyday observations (kitchen thermodynamics, bus wheel mechanics, open-sky optics) to make physics and mathematics intuitive. His core axiom is: \"Education Is Not Free BUT KNOWLEDGE IS FREE\" — shared with zero terms and conditions. He uses a sibling-centric tutoring model where students are treated as younger siblings rather than subordinates.",
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'What projects has Dhaatrik built?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Dhaatrik has built several notable projects: DeltaV Lab (real-time orbital mechanics simulation), Vellor (offline-first note-taking app), FuelDrop (high-concurrency fuel delivery platform), and The Infinite Intelligence (multi-agent AI debate system). He works with React, TypeScript, Python, and TensorFlow.',
+            },
+        },
+    ],
+}).replace(/</g, '\\u003c');
+
+const webSiteSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Dhaatrik Chowdhury',
+    url: 'https://dhaatrik.github.io',
+    description: 'Personal portfolio and blog of Dhaatrik Chowdhury, an Entrepreneur and AI Engineer from India.',
+    author: {
+        '@type': 'Person',
+        name: 'Dhaatrik Chowdhury',
+    },
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} keywords={['Dhaatrik Chowdhury', 'AI Engineer', 'Entrepreneur', 'portfolio', 'DBS Classes', 'physics tutor', 'first-principles teaching', 'India']} />
+        <!-- FAQ Structured Data for AEO/GEO -->
+        <script type="application/ld+json" set:html={faqSchema} />
+        <!-- WebSite Structured Data -->
+        <script type="application/ld+json" set:html={webSiteSchema} />
     </head>
     <body class="bg-grid-motif relative pt-24">
         <Header />

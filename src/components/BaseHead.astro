@@ -19,11 +19,15 @@ interface Props {
     title: string;
     description: string;
     image?: ImageMetadata;
+    type?: 'website' | 'article';
+    keywords?: string[];
+    pubDate?: Date;
+    updatedDate?: Date;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, image = FallbackImage, type = 'website', keywords, pubDate, updatedDate } = Astro.props;
 
 // ⚡ Bolt: Cache image URL instantiation to avoid redundant parsing during SSG
 const imageUrl = new URL(image.src, Astro.site);
@@ -95,13 +99,18 @@ const personSchema = JSON.stringify({
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="author" content="Dhaatrik Chowdhury" />
+{keywords && keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
+{type === 'article' && pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
+{type === 'article' && updatedDate && <meta property="article:modified_time" content={updatedDate.toISOString()} />}
+{type === 'article' && <meta property="article:author" content="Dhaatrik Chowdhury" />}
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />

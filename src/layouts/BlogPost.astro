@@ -33,13 +33,40 @@ const {
     rawContent = '',
     author,
     clearance,
+    tags,
 } = Astro.props;
+
+// Generate Article JSON-LD for blog post SEO and LLM citation
+const articleSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description: description,
+    datePublished: pubDate.toISOString(),
+    ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+    author: {
+        '@type': 'Person',
+        name: 'Dhaatrik Chowdhury',
+        url: 'https://dhaatrik.github.io',
+    },
+    publisher: {
+        '@type': 'Person',
+        name: 'Dhaatrik Chowdhury',
+    },
+    mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': new URL(Astro.url.pathname, Astro.site).href,
+    },
+    ...(tags && tags.length > 0 && { keywords: tags.join(', ') }),
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
     <head>
-        <BaseHead title={title} description={description} />
+        <BaseHead title={title} description={description} type="article" pubDate={pubDate} updatedDate={updatedDate} keywords={tags} />
+        <!-- Article-specific JSON-LD -->
+        <script type="application/ld+json" set:html={articleSchema} />
     </head>
 
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
