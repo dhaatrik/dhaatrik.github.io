@@ -41,6 +41,7 @@ const articleSchema = JSON.stringify({
     '@type': 'Article',
     headline: title,
     description: description,
+    image: heroImage ? new URL(heroImage.src, Astro.site).href : undefined,
     datePublished: pubDate.toISOString(),
     ...(updatedDate && { dateModified: updatedDate.toISOString() }),
     author: {
@@ -63,7 +64,7 @@ const articleSchema = JSON.stringify({
 <!doctype html>
 <html lang="en" class="scroll-smooth">
     <head>
-        <BaseHead title={title} description={description} type="article" pubDate={pubDate} updatedDate={updatedDate} keywords={tags} />
+        <BaseHead title={title} description={description} image={heroImage} type="article" pubDate={pubDate} updatedDate={updatedDate} keywords={tags} />
         <!-- Article-specific JSON-LD -->
         <script type="application/ld+json" set:html={articleSchema} />
     </head>
