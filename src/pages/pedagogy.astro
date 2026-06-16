@@ -112,19 +112,78 @@ import { youtubeVideos } from '../data/videos';
 
             <!-- Page Hero -->
             <section class="layout-container">
-                <div class="mb-12">
-                    <div class="mb-2 font-mono text-xs tracking-widest text-(--accent)">
-                        // pedagogical_experiments.log
-                    </div>
-                    <h1
-                        class="mb-4 text-4xl leading-tight font-bold tracking-tight text-slate-900 md:text-5xl dark:text-white"
+                <div
+                    class="mb-12 flex flex-col items-center gap-8 md:flex-row-reverse md:items-start"
+                >
+                    <div
+                        class="relative mx-auto w-full max-w-[260px] shrink-0 p-3 sm:max-w-[320px] md:mx-0 md:w-[320px]"
                     >
-                        Pedagogy <span class="text-slate-400 dark:text-slate-600">& Teaching</span>
-                    </h1>
-                    <p class="max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                        A blueprint of 9 years of teaching experience, first-principles science demonstrations, 
-                        and reflections on the discipline of digital content creation.
-                    </p>
+                        {/* Clinical blueprint borders and target marks */}
+                        <div
+                            class="pointer-events-none absolute inset-0 border border-dashed border-slate-200 dark:border-white/10"
+                        >
+                            {/* Corner target marks '+' */}
+                            <span
+                                class="absolute -top-1.5 -left-1.5 font-mono text-[10px] font-bold text-(--accent)"
+                                >+</span
+                            >
+                            <span
+                                class="absolute -top-1.5 -right-1.5 font-mono text-[10px] font-bold text-(--accent)"
+                                >+</span
+                            >
+                            <span
+                                class="absolute -bottom-1.5 -left-1.5 font-mono text-[10px] font-bold text-(--accent)"
+                                >+</span
+                            >
+                            <span
+                                class="absolute -right-1.5 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
+                                >+</span
+                            >
+
+                            {/* Absolute layout text arrays along borders */}
+                            <span
+                                class="absolute top-1 left-2 font-mono text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                                >SOURCE: DBS_CLASSES</span
+                            >
+                            <span
+                                class="absolute right-2 bottom-1 font-mono text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                                >SPECIMEN: 02 // JPG</span
+                            >
+                        </div>
+
+                        <div
+                            class="relative overflow-hidden rounded-lg bg-slate-100 dark:bg-black/40"
+                        >
+                            {/* Technical grid overlay */}
+                            <div
+                                class="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(rgba(0,0,0,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.08)_1px,transparent_1px)] bg-size-[10px_10px] opacity-50 dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]"
+                            >
+                            </div>
+
+                            <img
+                                src="/DB.jpeg"
+                                alt="DBS Classes Logo"
+                                loading="eager"
+                                fetchpriority="high"
+                                class="aspect-square w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
+                            />
+                        </div>
+                    </div>
+                    
+                    <div class="w-full md:w-[calc(100%-352px)]">
+                        <div class="mb-2 font-mono text-xs tracking-widest text-(--accent)">
+                            // pedagogical_experiments.log
+                        </div>
+                        <h1
+                            class="mb-4 text-4xl leading-tight font-bold tracking-tight text-slate-900 md:text-5xl dark:text-white"
+                        >
+                            Pedagogy <span class="text-slate-400 dark:text-slate-600">& Teaching</span>
+                        </h1>
+                        <p class="text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                            A blueprint of 9 years of teaching experience, first-principles science demonstrations, 
+                            and reflections on the discipline of digital content creation.
+                        </p>
+                    </div>
                 </div>
             </section>
 
