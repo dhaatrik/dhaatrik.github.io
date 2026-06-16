@@ -948,7 +948,9 @@
     font-weight: bold;
 }
 
-/* CSS Custom Highlight API Styling */
+/* CSS Custom Highlight API — styles programmatically registered text ranges
+   via CSS.highlights.set() in postSetup.ts. ::highlight() is a pseudo-element
+   per the W3C CSS Custom Highlight API spec. */
 ::highlight(code-focus) {
     background-color: rgba(59, 130, 246, 0.2);
 }
