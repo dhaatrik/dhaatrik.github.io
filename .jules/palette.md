@@ -117,3 +117,6 @@
 
 **Learning:** Secondary or less prominent Call-To-Action buttons (like 'Dismiss Report' or 'Recommended Books') often lack default or explicit focus styling, making them invisible to keyboard navigation and failing basic accessibility requirements.
 **Action:** Always ensure that all interactive elements, including secondary and tertiary CTAs, have explicit `focus-visible` ring styles applied using the project's standard utility classes to maintain full keyboard accessibility.
+## 2026-06-17 - Keyboard Navigation for Dynamic Elements
+**Learning:** Dynamically injected interactive elements (like the code block copy button) often miss standard focus ring classes, hindering keyboard accessibility.
+**Action:** Always verify keyboard focus states for dynamically rendered interactive elements and apply standard `focus-visible` ring utilities.
