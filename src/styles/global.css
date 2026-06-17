@@ -612,6 +612,22 @@
     color: color-mix(in srgb, var(--accent) 60%, white);
 }
 
+/* Premium Terminal Search Custom Styles */
+#search-logs {
+    caret-color: var(--accent);
+    transition: text-shadow 0.2s ease;
+}
+#search-logs:focus {
+    text-shadow: 0 0 4px var(--accent-glow);
+}
+
+.post-card-tag.matched {
+    background-color: var(--accent) !important;
+    color: white !important;
+    box-shadow: 0 0 10px var(--accent-glow) !important;
+    border-color: color-mix(in srgb, var(--accent) 50%, transparent) !important;
+}
+
 /* Infinite Marquee Animation for Tech Stack */
 .animate-marquee {
     animation: var(--animate-marquee);

@@ -420,7 +420,9 @@ const postsWithReadingTime = posts.map((post: any) => {
                 <!-- Terminal-Style Search Bar -->
                 <div class="mb-10 font-mono">
                     <label for="search-logs" class="sr-only">Search Mission Logs</label>
-                    <div class="group relative flex items-center">
+                    <div
+                        class="group relative flex items-center premium-glass rounded-lg border border-slate-200 dark:border-slate-800 transition-all focus-within:border-(--accent)/50 focus-within:shadow-[0_0_15px_var(--accent-glow)]"
+                    >
                         <span
                             aria-hidden="true"
                             class="pointer-events-none absolute left-4 hidden text-slate-600 transition-colors select-none group-focus-within:text-(--accent) sm:inline dark:text-slate-400"
@@ -436,7 +438,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                             id="search-logs"
                             placeholder='"Search my diary: a concept, a bug, or a late-night thought..."'
                             aria-controls="logs-grid"
-                            class="w-full rounded-md border border-slate-200 bg-slate-100 py-3 pr-4 pl-20 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:border-(--accent)/50 focus:ring-1 focus:ring-(--accent)/50 focus:outline-none sm:pl-32 dark:border-slate-800 dark:bg-[#151a22] dark:text-white dark:placeholder:text-slate-600"
+                            class="w-full bg-transparent border-0 py-3 pr-4 pl-20 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:ring-0 focus:outline-none sm:pl-32 dark:text-white dark:placeholder:text-slate-600"
                         />
                     </div>
                     <p class="mt-2 text-[11px] text-slate-400 select-none dark:text-slate-500">
@@ -579,9 +581,16 @@ const postsWithReadingTime = posts.map((post: any) => {
                                                     >
                                                         |
                                                     </span>
-                                                    <span class="rounded bg-(--accent)/10 px-2 py-0.5 text-[10px] font-bold tracking-widest text-(--accent) uppercase">
-                                                        {post.data.tags[0]}
-                                                    </span>
+                                                    <div class="flex flex-wrap gap-1.5">
+                                                        {post.data.tags.map((tag: string) => (
+                                                            <span
+                                                                class="post-card-tag rounded bg-(--accent)/10 px-2 py-0.5 text-[10px] font-bold tracking-widest text-(--accent) uppercase transition-all duration-300"
+                                                                data-tag={tag.toLowerCase()}
+                                                            >
+                                                                {tag}
+                                                            </span>
+                                                        ))}
+                                                    </div>
                                                 </>
                                             )}
                                         </div>
@@ -627,10 +636,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                             ></path></svg
                         >
                     </div>
-                    <h3 class="mb-2 text-lg font-bold text-slate-900 dark:text-white">
+                    <h3 id="empty-state-title" class="mb-2 text-lg font-bold text-slate-900 dark:text-white">
                         Nothing in the archives, buddy.
                     </h3>
-                    <p class="mx-auto max-w-sm text-sm text-slate-500 dark:text-slate-400">
+                    <p id="empty-state-desc" class="mx-auto max-w-sm text-sm text-slate-500 dark:text-slate-400">
                         I either haven't made that mistake yet, or I just haven't written it down. Try checking another keyword.
                     </p>
                     <button
@@ -650,6 +659,7 @@ const postsWithReadingTime = posts.map((post: any) => {
             let searchAbortController: AbortController | null = null;
             let replaceStateTimeout: number | undefined;
             let reticleRafId: number | null = null;
+            let typingTimeoutId: number | undefined;
 
             const setupSearch = () => {
                 const searchInput = document.getElementById('search-logs') as HTMLInputElement;
@@ -678,7 +688,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                         descElement,
                         originalTitleHTML: titleElement ? titleElement.innerHTML : '',
                         originalDescHTML: descElement ? descElement.innerHTML : '',
-                        tags: htmlCard.dataset.tags?.toLowerCase().split(',') || [],
+                        tags: htmlCard.dataset.tags?.toLowerCase().split(',').filter(Boolean) || [],
                         text: htmlCard.textContent?.toLowerCase() || '',
                     };
                 });
@@ -715,13 +725,16 @@ const postsWithReadingTime = posts.map((post: any) => {
                                 while (node = walk.nextNode()) {
                                     const textContent = node.textContent?.toLowerCase() || '';
                                     words.forEach(word => {
+                                        // Ignore hashtags when highlighting text content
+                                        const cleanWord = word.startsWith('#') ? word.slice(1) : word;
+                                        if (!cleanWord) return;
                                         let startPos = 0;
-                                        while ((startPos = textContent.indexOf(word.toLowerCase(), startPos)) !== -1) {
+                                        while ((startPos = textContent.indexOf(cleanWord.toLowerCase(), startPos)) !== -1) {
                                             const range = new Range();
                                             range.setStart(node as Node, startPos);
-                                            range.setEnd(node as Node, startPos + word.length);
+                                            range.setEnd(node as Node, startPos + cleanWord.length);
                                             ranges.push(range);
-                                            startPos += word.length;
+                                            startPos += cleanWord.length;
                                         }
                                     });
                                 }
@@ -746,7 +759,11 @@ const postsWithReadingTime = posts.map((post: any) => {
 
                                 textNodes.forEach(textNode => {
                                     const text = textNode.textContent || '';
-                                    const escapedWords = words.map(w => w.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
+                                    const escapedWords = words.map(w => {
+                                        const clean = w.startsWith('#') ? w.slice(1) : w;
+                                        return clean.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                                    }).filter(Boolean);
+                                    if (escapedWords.length === 0) return;
                                     const regex = new RegExp(`(${escapedWords.join('|')})`, 'gi');
 
                                     if (regex.test(text)) {
@@ -770,10 +787,20 @@ const postsWithReadingTime = posts.map((post: any) => {
                 // Function to perform combined filtering
                 const filterPosts = () => {
                     const term = searchInput.value.toLowerCase();
+                    const words = term.split(/\s+/).filter(Boolean);
                     let visibleCount = 0;
 
                     cachedCardsData.forEach(({ element, tags, text }) => {
-                        const matchesSearch = text.includes(term);
+                        let matchesSearch = true;
+                        if (words.length > 0) {
+                            matchesSearch = words.every(word => {
+                                if (word.startsWith('#')) {
+                                    const cleanWord = word.slice(1);
+                                    return tags.some(tag => tag.includes(cleanWord));
+                                }
+                                return text.includes(word);
+                            });
+                        }
                         const matchesTag = activeTag === 'all' || tags.includes(activeTag);
 
                         if (matchesSearch && matchesTag) {
@@ -782,15 +809,54 @@ const postsWithReadingTime = posts.map((post: any) => {
                         } else {
                             element.style.display = 'none';
                         }
+
+                        // Tag Highlight updates
+                        const tagElements = element.querySelectorAll('.post-card-tag');
+                        tagElements.forEach((tagEl) => {
+                            const tagVal = tagEl.getAttribute('data-tag') || '';
+                            const isTagMatched = words.some(w => {
+                                const cleanW = w.startsWith('#') ? w.slice(1) : w;
+                                return tagVal.includes(cleanW);
+                            }) || activeTag === tagVal;
+
+                            if (isTagMatched && (term || activeTag !== 'all')) {
+                                tagEl.classList.add('matched');
+                            } else {
+                                tagEl.classList.remove('matched');
+                            }
+                        });
                     });
 
                     // Update highlights
                     highlightQuery(term);
 
                     if (emptyState) {
+                        const emptyTitle = document.getElementById('empty-state-title');
+                        const emptyDesc = document.getElementById('empty-state-desc');
+
                         if (visibleCount === 0) {
                             emptyState.classList.remove('hidden');
                             emptyState.setAttribute('aria-hidden', 'false');
+
+                            if (emptyTitle && emptyDesc) {
+                                const q = term.trim().toLowerCase();
+                                if (q.includes('perfect') || q.includes('success') || q.includes('working')) {
+                                    emptyTitle.textContent = "Error: Success Not Found.";
+                                    emptyDesc.textContent = "We don't log easy wins here. Search for a bug, a crash, or a late-night lesson instead — that's where the real story is.";
+                                } else if (q.includes('rust') || q.includes('wasm') || q.includes('cpp')) {
+                                    emptyTitle.textContent = "Compiler was too fast, buddy.";
+                                    emptyDesc.textContent = "No compiler panic reports found matching that. Try searching for 'orbital' or 'mechanics' to see my Rust simulation!";
+                                } else if (q.includes('ai') || q.includes('gemini') || q.includes('agent') || q.includes('llm')) {
+                                    emptyTitle.textContent = "The agents are sleeping.";
+                                    emptyDesc.textContent = "No logs match that query. Try searching for 'intelligence' or 'debate' to see the multi-agent console!";
+                                } else if (q.includes('secret') || q.includes('admin') || q.includes('password') || q.includes('flag')) {
+                                    emptyTitle.textContent = "Access Denied.";
+                                    emptyDesc.textContent = "Nice try, buddy. No backdoors here, but you're welcome to audit the open-source code on GitHub.";
+                                } else {
+                                    emptyTitle.textContent = "Nothing in the archives, buddy.";
+                                    emptyDesc.textContent = "I either haven't made that mistake yet, or I just haven't written it down. Try checking another keyword.";
+                                }
+                            }
                         } else {
                             emptyState.classList.add('hidden');
                             emptyState.setAttribute('aria-hidden', 'true');
@@ -965,19 +1031,117 @@ const postsWithReadingTime = posts.map((post: any) => {
                     if (e.key === '/') {
                         e.preventDefault();
                         searchInput.focus();
-                        searchInput.placeholder = "[ COMMAND CAPTURE ENGAGED // What are you looking for? ]";
                     }
                 };
 
                 window.addEventListener('keydown', handleHotkey, { signal });
 
-                searchInput.addEventListener(
-                    'blur',
-                    () => {
+                // Placeholder Typing Animation
+                const typingPhrases = [
+                    'grep "orbital mechanics" projects/',
+                    'grep "fuckup" brain/',
+                    'grep "lesson learned" transmissions/',
+                    'grep "late-night coding" diary/',
+                    'grep "how does pedagogy work?" pedagogy/',
+                    'grep -r "state management bug" src/',
+                    'grep "what actually happened..." posts/'
+                ];
+                let phraseIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+                let isFocused = false;
+
+                const typePlaceholder = () => {
+                    if (isFocused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                        return;
+                    }
+
+                    const currentPhrase = typingPhrases[phraseIndex];
+                    if (isDeleting) {
+                        charIndex--;
+                    } else {
+                        charIndex++;
+                    }
+
+                    searchInput.placeholder = `"${currentPhrase.substring(0, charIndex)}█"`;
+
+                    let delay = isDeleting ? 40 : 80;
+
+                    if (!isDeleting && charIndex === currentPhrase.length) {
+                        delay = 2000; // pause at the end
+                        isDeleting = true;
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        phraseIndex = (phraseIndex + 1) % typingPhrases.length;
+                        delay = 500; // pause before typing next
+                    }
+
+                    typingTimeoutId = setTimeout(typePlaceholder, delay) as any;
+                };
+
+                searchInput.addEventListener('focus', () => {
+                    isFocused = true;
+                    clearTimeout(typingTimeoutId);
+                    searchInput.placeholder = "[ COMMAND CAPTURE ENGAGED // What are you looking for? ]";
+                });
+
+                searchInput.addEventListener('blur', () => {
+                    isFocused = false;
+                    if (!searchInput.value) {
+                        charIndex = 0;
+                        isDeleting = false;
+                        typePlaceholder();
+                    } else {
                         searchInput.placeholder = '"Search my diary: a concept, a bug, or a late-night thought..."';
-                    },
-                    { signal }
-                );
+                    }
+                });
+
+                // Start only if not focused and empty
+                if (document.activeElement !== searchInput && !searchInput.value) {
+                    typePlaceholder();
+                }
+
+                // Keyboard Navigation
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowDown' || e.key === 'Enter') {
+                        const firstVisible = cachedCardsData.find(c => c.element.style.display !== 'none');
+                        if (firstVisible) {
+                            e.preventDefault();
+                            firstVisible.element.focus();
+                        }
+                    }
+                    if (e.key === 'Escape') {
+                        searchInput.value = '';
+                        filterPosts();
+                        updateSearchState('', activeTag);
+                        searchInput.blur();
+                    }
+                });
+
+                cachedCardsData.forEach(({ element }) => {
+                    element.setAttribute('tabindex', '0');
+                    element.addEventListener('keydown', (e) => {
+                        const visibleCards = cachedCardsData.filter(c => c.element.style.display !== 'none');
+                        const currentIndex = visibleCards.findIndex(c => c.element === element);
+
+                        if (e.key === 'ArrowDown') {
+                            e.preventDefault();
+                            const nextCard = visibleCards[currentIndex + 1];
+                            if (nextCard) nextCard.element.focus();
+                        } else if (e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            const prevCard = visibleCards[currentIndex - 1];
+                            if (prevCard) {
+                                prevCard.element.focus();
+                            } else {
+                                searchInput.focus();
+                            }
+                        } else if (e.key === 'Escape') {
+                            e.preventDefault();
+                            searchInput.focus();
+                        }
+                    });
+                });
 
                 // Kinetic Satellite Dish Mouse Tracking Parallax
                 const reticle = document.getElementById('reticle-bg');
@@ -1019,6 +1183,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                     searchAbortController = null;
                 }
                 clearTimeout(replaceStateTimeout);
+                clearTimeout(typingTimeoutId);
                 if (reticleRafId) {
                     window.cancelAnimationFrame(reticleRafId);
                     reticleRafId = null;
