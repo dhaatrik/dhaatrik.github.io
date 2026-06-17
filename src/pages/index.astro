@@ -68,7 +68,7 @@ const getGitLastModified = (projectId: string): Date => {
             filePath = filePath + '.mdx';
         }
     }
-    
+
     // In development mode, avoid slow process spawning (execSync git log) to prevent CPU starvation
     if (import.meta.env.DEV) {
         try {
@@ -83,7 +83,7 @@ const getGitLastModified = (projectId: string): Date => {
         if (fs.existsSync(filePath)) {
             const stdout = execSync(`git log -1 --format=%cI -- "${filePath}"`, {
                 encoding: 'utf-8',
-                stdio: ['ignore', 'pipe', 'ignore']
+                stdio: ['ignore', 'pipe', 'ignore'],
             }).trim();
             if (stdout) {
                 return new Date(stdout);
@@ -152,7 +152,7 @@ const parseTelemetry = (telemetryStr: string) => {
         colorClass,
         textClass,
         badgeText: `[ ${badgeText} ]`,
-        status
+        status,
     };
 };
 
@@ -174,7 +174,7 @@ const faqSchema = JSON.stringify({
             name: 'What is DBS Classes?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: "DBS Classes stands for \"Dhaatu Bhaiyaa's Classes\" — a free YouTube channel for physics and mathematics education founded on October 31, 2022 by Dhaatrik Chowdhury. \"Dhaatu\" is his nickname and \"Bhaiyaa\" is the Hindi word for big brother. The channel produced 20 educational video lessons covering topics like dimensional analysis, trigonometry, and kinematics.",
+                text: 'DBS Classes stands for "Dhaatu Bhaiyaa\'s Classes" — a free YouTube channel for physics and mathematics education founded on October 31, 2022 by Dhaatrik Chowdhury. "Dhaatu" is his nickname and "Bhaiyaa" is the Hindi word for big brother. The channel produced 20 educational video lessons covering topics like dimensional analysis, trigonometry, and kinematics.',
             },
         },
         {
@@ -182,7 +182,7 @@ const faqSchema = JSON.stringify({
             name: "What is Dhaatrik's teaching philosophy?",
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: "Dhaatrik's teaching philosophy is built on first-principles thinking, using everyday observations (kitchen thermodynamics, bus wheel mechanics, open-sky optics) to make physics and mathematics intuitive. His core axiom is: \"Education Is Not Free BUT KNOWLEDGE IS FREE\" — shared with zero terms and conditions. He uses a sibling-centric tutoring model where students are treated as younger siblings rather than subordinates.",
+                text: 'Dhaatrik\'s teaching philosophy is built on first-principles thinking, using everyday observations (kitchen thermodynamics, bus wheel mechanics, open-sky optics) to make physics and mathematics intuitive. His core axiom is: "Education Is Not Free BUT KNOWLEDGE IS FREE" — shared with zero terms and conditions. He uses a sibling-centric tutoring model where students are treated as younger siblings rather than subordinates.',
             },
         },
         {
@@ -201,7 +201,8 @@ const webSiteSchema = JSON.stringify({
     '@type': 'WebSite',
     name: 'Dhaatrik Chowdhury',
     url: 'https://dhaatrik.github.io',
-    description: 'Honest engineering transmissions from Dhaatrik Chowdhury — mission logs of what was built, what broke, and what was learned.',
+    description:
+        'Honest engineering transmissions from Dhaatrik Chowdhury — mission logs of what was built, what broke, and what was learned.',
     author: {
         '@type': 'Person',
         name: 'Dhaatrik Chowdhury',
@@ -212,7 +213,20 @@ const webSiteSchema = JSON.stringify({
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} keywords={['Dhaatrik Chowdhury', 'AI Engineer', 'engineering diary', 'mission logs', 'DBS Classes', 'physics tutor', 'first-principles teaching', 'India']} />
+        <BaseHead
+            title={SITE_TITLE}
+            description={SITE_DESCRIPTION}
+            keywords={[
+                'Dhaatrik Chowdhury',
+                'AI Engineer',
+                'engineering diary',
+                'mission logs',
+                'DBS Classes',
+                'physics tutor',
+                'first-principles teaching',
+                'India',
+            ]}
+        />
         <!-- FAQ Structured Data for AEO/GEO -->
         <script type="application/ld+json" set:html={faqSchema} />
         <!-- WebSite Structured Data -->
@@ -220,7 +234,11 @@ const webSiteSchema = JSON.stringify({
     </head>
     <body class="bg-grid-motif relative pt-24">
         <Header />
-        <main id="main-content" tabindex="-1" class="flex flex-col gap-36 md:gap-48 lg:gap-60 py-16 md:py-24">
+        <main
+            id="main-content"
+            tabindex="-1"
+            class="flex flex-col gap-36 py-16 md:gap-48 md:py-24 lg:gap-60"
+        >
             <!-- Hero Section: The Boring Section -->
             <section
                 class="layout-container relative flex min-h-[60vh] w-full flex-col justify-center overflow-hidden pt-24 pb-36 md:pt-32 md:pb-32"
@@ -301,10 +319,10 @@ const webSiteSchema = JSON.stringify({
                     <p
                         class="animate-fade-in-up mb-8 text-lg leading-relaxed text-slate-600 delay-200 md:text-xl dark:text-(--text-secondary)"
                     >
-                        I'm Dhaatrik — 26, building from India, and this site is my honest engineering
-                        diary. Not a polished portfolio. A log of what I shipped, what broke, and
-                        what I wish I'd known sooner. I build from first principles because shortcuts
-                        always come back to bite you.
+                        I'm Dhaatrik — 26, building from India, and this site is my honest
+                        engineering diary. Not a polished portfolio. A log of what I shipped, what
+                        broke, and what I wish I'd known sooner. I build from first principles
+                        because shortcuts always come back to bite you.
                     </p>
 
                     <!-- CTA Hierarchy -->
@@ -553,10 +571,8 @@ const webSiteSchema = JSON.stringify({
                         popover
                         id="project-popover-currently-exploring"
                         aria-labelledby="project-popover-title-currently-exploring"
-                        class="m-auto w-[calc(100%-2rem)] max-w-xl rounded-2xl p-0 md:w-full premium-glass"
+                        class="premium-glass m-auto w-[calc(100%-2rem)] max-w-xl rounded-2xl p-0 md:w-full"
                     >
-
-
                         <div
                             class="relative z-10 flex items-start justify-between border-b border-slate-100 p-5 sm:p-6 dark:border-white/5"
                         >
@@ -679,7 +695,7 @@ const webSiteSchema = JSON.stringify({
                                     popovertargetaction="hide"
                                     class="flex-1 cursor-pointer rounded bg-(--accent-button-bg) px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                                 >
-                                    Dismiss Report
+                                    Close Log Reader
                                 </button>
                             </div>
                         </div>
@@ -693,9 +709,7 @@ const webSiteSchema = JSON.stringify({
                             const relativeTime = getRelativeTimeString(lastModifiedDate);
                             const parsed = parseTelemetry(telemetryStr);
                             return (
-                                <article
-                                    class="bento-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
-                                >
+                                <article class="bento-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
                                     <div class="hologram-overlay" />
 
                                     {/* Hologram WebM Video */}
@@ -723,12 +737,20 @@ const webSiteSchema = JSON.stringify({
                                             {/* Live Telemetry Badge */}
                                             <div class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
                                                 <div class="flex min-w-0 items-center gap-1.5">
-                                                    <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`} />
+                                                    <span
+                                                        class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
+                                                    />
                                                     <span class="truncate">{telemetryStr}</span>
-                                                    <span class="shrink-0 text-slate-300 dark:text-slate-700 mx-0.5 select-none">•</span>
-                                                    <span class="shrink-0 text-slate-400 dark:text-slate-600 font-medium">{relativeTime}</span>
+                                                    <span class="mx-0.5 shrink-0 text-slate-300 select-none dark:text-slate-700">
+                                                        •
+                                                    </span>
+                                                    <span class="shrink-0 font-medium text-slate-400 dark:text-slate-600">
+                                                        {relativeTime}
+                                                    </span>
                                                 </div>
-                                                <span class={`shrink-0 font-bold whitespace-nowrap ${parsed.textClass}`}>
+                                                <span
+                                                    class={`shrink-0 font-bold whitespace-nowrap ${parsed.textClass}`}
+                                                >
                                                     {parsed.badgeText}
                                                 </span>
                                             </div>
@@ -789,22 +811,26 @@ const webSiteSchema = JSON.stringify({
                     <article
                         class="bento-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
                     >
-                        <div class="hologram-overlay" />
-                        <div
-                            class="relative z-10 flex h-full flex-col justify-between"
-                            data-tilt-z
-                        >
+                        <div class="hologram-overlay"></div>
+                        <div class="relative z-10 flex h-full flex-col justify-between" data-tilt-z>
                             <div>
-                                <div class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                                <div
+                                    class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500"
+                                >
                                     <div class="flex min-w-0 items-center gap-1.5">
-                                        <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                        <span class="truncate">DIRECTORY: 12_ITEMS // ACTIVE_LOGS</span>
+                                        <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500"
+                                        ></span>
+                                        <span class="truncate"
+                                            >DIRECTORY: 12_ITEMS // ACTIVE_LOGS</span
+                                        >
                                     </div>
                                     <span class="shrink-0 font-bold text-(--accent)">
                                         [ MORE ]
                                     </span>
                                 </div>
-                                <h3 class="text-2xl font-bold text-slate-900 transition-colors dark:text-white mb-4">
+                                <h3
+                                    class="mb-4 text-2xl font-bold text-slate-900 transition-colors dark:text-white"
+                                >
                                     <a
                                         href="/projects"
                                         data-astro-prefetch="hover"
@@ -813,13 +839,21 @@ const webSiteSchema = JSON.stringify({
                                         Explore More Projects
                                     </a>
                                 </h3>
-                                <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                                    The full workbench — Electron utilities, security sandboxes, dining prototypes, and client-side compilers I've shipped, shelved, or am still patching.
+                                <p
+                                    class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
+                                >
+                                    The full workbench — Electron utilities, security sandboxes,
+                                    dining prototypes, and client-side compilers I've shipped,
+                                    shelved, or am still patching.
                                 </p>
                             </div>
-                            <div class="flex items-center justify-between border-t border-slate-200/50 pt-4 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                            <div
+                                class="flex items-center justify-between border-t border-slate-200/50 pt-4 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500"
+                            >
                                 <span>SHOWCASE ARCHIVE</span>
-                                <span class="text-xs transition-transform group-hover:translate-x-1">
+                                <span
+                                    class="text-xs transition-transform group-hover:translate-x-1"
+                                >
                                     →
                                 </span>
                             </div>
@@ -838,7 +872,8 @@ const webSiteSchema = JSON.stringify({
                             Latest Thinking
                         </h2>
                         <p class="text-slate-600 dark:text-(--text-secondary)">
-                            Honest transmissions — fuckups, learnings, and late-night debugging sessions.
+                            Honest transmissions — fuckups, learnings, and late-night debugging
+                            sessions.
                         </p>
                     </div>
                     <a
