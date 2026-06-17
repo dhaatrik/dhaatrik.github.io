@@ -189,11 +189,21 @@ const formatMarqueeDate = (date: Date) => {
                 <div
                     class="space-y-1.5 rounded-lg p-4 font-mono text-[11px] leading-relaxed text-slate-500 select-none dark:text-slate-400 premium-glass"
                 >
-                    <div>SYS_CORE: ASTRO v6.1.7</div>
-                    <div>STYLE_SYS: TAILWIND CSS v4.0</div>
-                    <div>RENDER_MODE: STATIC (SSG)</div>
-                    <div>HOST: GITHUB PAGES</div>
-                    <div>INTEGRITY: SECURE (HTTPS)</div>
+                    <div class="flex items-center justify-between">
+                        <span>SYS.CORE // ASTRO v6.1.7</span>
+                        <span class="relative flex h-1.5 w-1.5 shrink-0">
+                            <span class="absolute inline-flex h-full w-full animate-pulse-emerald rounded-full bg-emerald-500 opacity-75"></span>
+                            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                        </span>
+                    </div>
+                    <div>STYLE.SYS // TAILWIND CSS v4.0</div>
+                    <div id="footer-uptime">SYS.UPTIME // 00h 00m 00s</div>
+                    <div id="footer-cpu-register">SYS.LOAD // 0.04%</div>
+                    <div>BUILD.SHA // {gitSha}</div>
+                    <div class="border-t border-dashed border-slate-200/50 dark:border-white/5 pt-2 mt-2 flex flex-col gap-1">
+                        <span class="text-[8px] text-slate-400 uppercase tracking-widest dark:text-slate-500">// LATEST_INSIGHT</span>
+                        <span class="text-slate-700 dark:text-slate-300 italic">"Nailed the scroll reveal physics, but keeping it simple is the real work. Focus on fundamentals."</span>
+                    </div>
                 </div>
             </div>
 
@@ -388,18 +398,18 @@ const formatMarqueeDate = (date: Date) => {
                         id="books-popover-title"
                         class="text-lg font-bold text-slate-900 sm:text-xl dark:text-white"
                     >
-                        Recommended Books
+                        Books That Shaped My Thinking
                     </h3>
                     <span
                         class="inline-flex shrink-0 items-center rounded-full border border-(--accent)/35 bg-(--accent)/5 px-2 py-0.5 font-mono text-[9px] font-bold tracking-wider whitespace-nowrap text-(--accent) uppercase sm:text-[10px]"
                     >
-                        Not Sponsored
+                        No Sponsor Garbage
                     </span>
                 </div>
                 <p
-                    class="font-mono text-[9px] tracking-wider text-slate-400 uppercase sm:text-xs dark:text-slate-500"
+                    class="font-sans text-[11px] leading-relaxed text-slate-500 dark:text-slate-400 mt-1"
                 >
-                    Curated reading list // No affiliate links
+                    Hey buddy, these are the few books that actually changed how I write code, structure systems, and solve hard problems. No affiliate links, just pure signal.
                 </p>
             </div>
             <button
@@ -609,6 +619,40 @@ const formatMarqueeDate = (date: Date) => {
                     { signal }
                 );
             }
+        });
+
+        // 3. Telemetry loop (Uptime and fluctuating CPU load)
+        const uptimeEl = document.getElementById('footer-uptime');
+        const cpuEl = document.getElementById('footer-cpu-register');
+        const startTime = Date.now();
+
+        const formatUptime = (ms: number) => {
+            const totalSecs = Math.floor(ms / 1000);
+            const hrs = Math.floor(totalSecs / 3600);
+            const mins = Math.floor((totalSecs % 3600) / 60);
+            const secs = totalSecs % 60;
+            return `${String(hrs).padStart(2, '0')}h ${String(mins).padStart(2, '0')}m ${String(secs).padStart(2, '0')}s`;
+        };
+
+        const updateTelemetry = () => {
+            if (uptimeEl) {
+                const elapsed = Date.now() - startTime;
+                uptimeEl.textContent = `SYS.UPTIME // ${formatUptime(elapsed)}`;
+            }
+            if (cpuEl) {
+                // Fluctuate randomly between 0.02% and 0.08%
+                const load = (0.02 + Math.random() * 0.06).toFixed(2);
+                cpuEl.textContent = `SYS.LOAD // ${load}%`;
+            }
+        };
+
+        // Run immediately to avoid a 1s delay
+        updateTelemetry();
+
+        const telemetryInterval = window.setInterval(updateTelemetry, 1000);
+
+        signal.addEventListener('abort', () => {
+            clearInterval(telemetryInterval);
         });
     };
 
