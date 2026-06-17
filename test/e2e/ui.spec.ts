@@ -80,13 +80,8 @@ test.describe('Portfolio UI Interactivity', () => {
         // After page loads, elements should fade out
         await page.waitForLoadState('networkidle');
 
-        await expect.poll(async () => {
-            return parseFloat(await progressBar.evaluate((el) => window.getComputedStyle(el).opacity));
-        }).toBeLessThan(0.08);
-
-        await expect.poll(async () => {
-            return parseFloat(await statusTag.evaluate((el) => window.getComputedStyle(el).opacity));
-        }).toBeLessThan(0.08);
+        await expect(progressBar).toHaveCSS('opacity', '0');
+        await expect(statusTag).toHaveCSS('opacity', '0');
     });
 
     test('Blog page search should retain queries and update URL/sessionStorage', async ({
@@ -107,8 +102,7 @@ test.describe('Portfolio UI Interactivity', () => {
         expect(page.url()).toContain('q=mission');
 
         // Wait for debounce timeout (150ms debounce + 300ms replacestate + buffer)
-        await page.waitForTimeout(600);
-        expect(page.url()).toContain('q=nonexistent');
+        await expect(page).toHaveURL(/.*q=nonexistent.*/);
 
         // Check sessionStorage
         const sessionStorageVal = await page.evaluate(() =>
@@ -118,7 +112,7 @@ test.describe('Portfolio UI Interactivity', () => {
 
         // 3. Verify Custom Highlight API is registered and matches are highlighted
         await searchInput.fill('teaching');
-        await page.waitForTimeout(600);
+        await expect(page).toHaveURL(/.*q=teaching.*/);
         const highlightsSize = await page.evaluate(() => {
             return typeof CSS !== 'undefined' && (CSS as any).highlights
                 ? (CSS as any).highlights.get('search-match')?.size || 0
@@ -131,7 +125,7 @@ test.describe('Portfolio UI Interactivity', () => {
 
         // Restore to nonexistent for the back navigation retention test
         await searchInput.fill('nonexistent');
-        await page.waitForTimeout(600);
+        await expect(page).toHaveURL(/.*q=nonexistent.*/);
 
         // 4. Test back navigation retention
         await page.goto('/');
@@ -277,15 +271,14 @@ test.describe('Portfolio UI Interactivity', () => {
         const rotator = page.locator('#identity-rotator');
         await expect(rotator).toBeVisible();
 
-        const initialText = await rotator.innerText();
-        expect(initialText).toBe('First-Principles Thinker.');
+        await expect(rotator).toHaveText('First-Principles Thinker.');
 
         // Wait for rotation to occur (typewriter starts after 1.2s delay, deletes, pauses, and types next)
-        await page.waitForTimeout(4500);
-
-        const rotatedText = await rotator.innerText();
-        expect(rotatedText).not.toBe(initialText);
-        expect(rotatedText.length).toBeGreaterThan(0);
+        await expect(async () => {
+            const currentText = await rotator.innerText();
+            expect(currentText).not.toBe('First-Principles Thinker.');
+            expect(currentText.length).toBeGreaterThan(0);
+        }).toPass({ timeout: 6000 });
     });
 
     test('Terminal theme selector should switch themes, persist on reload and navigation', async ({ page }) => {
