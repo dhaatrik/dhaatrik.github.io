@@ -18,6 +18,12 @@ pnpm-debug.log*
 playwright-report/
 test-results/
 
+# Grok Skills
+.grok/
+
+# TODO Files
+TODO_*.md
+
 # environment variables
 .env
 .env.production
