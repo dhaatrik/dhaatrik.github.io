@@ -1,6 +1,6 @@
 ---
 title: 'MarkPDF'
-description: 'A markdown-to-PDF compiler that runs entirely in the browser, supporting math rendering, code highlighting, and theme customization.'
+description: 'Markdown to PDF in the browser — KaTeX math, syntax highlighting, custom themes, no Pandoc install.'
 logo: '../../assets/markpdf.png'
 githubUrl: 'https://github.com/dhaatrik/free-markdown-to-pdf-converter'
 progress: 'v1.1.0 stable, full KaTeX and highlight.js support'
@@ -8,21 +8,33 @@ order: 11
 tags: ['TypeScript', 'Remark', 'KaTeX', 'jsPDF']
 ---
 
-## What is MarkPDF and why was it built?
+## SYS.STATUS: v1.1.0 stable — Remark pipeline, KaTeX, highlight.js, PDF export all shipping
 
-Compiling markdown notes into formal reports typically requires installing heavy command-line dependencies (like Pandoc or MacTeX). Dhaatrik built MarkPDF to give students, researchers, and engineers a browser-based, zero-installation markdown compiler that formats formulas, code blocks, and custom page sizes.
+I didn't want to install half of TeX Live to turn lecture notes into a PDF. MarkPDF compiles markdown in the browser with math and code blocks handled properly.
 
-## How did Dhaatrik approach the implementation?
+## Why I started this
 
-Dhaatrik created a client-side parsing pipeline. Raw markdown input is processed via the Remark parser into HTML. Equations are intercepted and compiled into HTML/SVG nodes using KaTeX, and codeblocks are tokensied via highlight.js. When the user exports, a custom print sheet is applied to output a highly formatted vector PDF.
+Students and engineers live in markdown. Formal submission wants PDF. The usual path — Pandoc, MacTeX, fighting templates — is heavy for a one-off report. I wanted **zero installation**, custom page sizing, and LaTeX math that actually renders.
 
-## What technologies were used in the stack?
+## What I tried (and what broke)
 
-- **TypeScript**: Structuring the compiler pipeline and markdown extensions.
-- **Remark & Rehype**: Parsing, compiling, and traversing markdown ASTs.
-- **KaTeX**: Fast, math-accurate rendering of LaTeX formulas.
-- **jsPDF / Browser Print APIs**: Outputting print-accurate vector layouts.
+Client-side pipeline: **Remark** parses markdown to an AST, **Rehype** traverses and compiles HTML. KaTeX intercepts math delimiters; highlight.js tokenizes code fences. Export applies a print stylesheet and outputs via jsPDF / browser print APIs.
 
-## What is the current progress and outcome?
+v1.1.0 added full KaTeX and highlight.js coverage — before that, edge-case math macros and nested code blocks were where exports fell apart. TypeScript structured the compiler extensions so I wasn't patching strings in six places.
 
-MarkPDF is active at version 1.1.0. It compiles custom markdown, processes LaTeX math equations, highlights syntax for major languages, and exports professional PDFs in seconds.
+Theme customization was a late add but worth it — dark code blocks on white paper look wrong without an explicit print theme. I separated screen preview styling from export stylesheet so WYSIWYG is closer to honest.
+
+## Fuckups & learnings
+
+- **Math in markdown has too many delimiter conventions.** Pick sensible defaults, document the rest.
+- **Browser PDF layout ≠ LaTeX layout.** Good enough for notes; not journal submission without manual tweaks.
+- **AST pipeline beats regex.** Every regex "fix" became a future bug.
+- **Large documents stress the browser.** Pagination and memory spike on 80-page thesis dumps — I document limits instead of pretending infinite scale.
+
+## Where it stands now
+
+v1.1.0 compiles custom markdown, renders LaTeX via KaTeX, highlights major languages, exports professional PDFs in seconds — all client-side. Custom page sizes and margins ship for lab reports and assignment templates that don't fit A4 defaults.
+
+## Closing transmission
+
+If your notes are in `.md` and your professor wants `.pdf`, try it before you apt-install the universe.

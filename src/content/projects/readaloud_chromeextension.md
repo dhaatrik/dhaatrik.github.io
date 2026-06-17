@@ -1,6 +1,6 @@
 ---
 title: 'Read Aloud Chrome Extension'
-description: 'A lightweight browser extension that reads web page text aloud using native text-to-speech synthesis with speed control.'
+description: 'Manifest V3 extension that reads the main article text via Web Speech API — skips nav junk, adjustable speed.'
 logo: '../../assets/read-aloud.png'
 githubUrl: 'https://github.com/dhaatrik/ReadAloud_ChromeExtension'
 progress: 'Manifest V3 extension, published locally'
@@ -8,20 +8,35 @@ order: 12
 tags: ['JavaScript', 'Web Speech API', 'Chrome Extension']
 ---
 
-## What is Read Aloud Chrome Extension and why was it built?
+## SYS.STATUS: MV3 compliant — article parsing works, native TTS, no external API calls
 
-Standard page screen readers are often bloated, capture screen focuses, or read out irrelevant header/footer navigation lists, disrupting content comprehension. Dhaatrik built this Chrome Extension to provide a single-click text-to-speech companion that parses and reads only the primary page text context.
+Built-in screen readers on web pages often read everything: menus, footers, cookie banners. I wanted one click to read **the actual article**.
 
-## How did Dhaatrik approach the implementation?
+## Why I started this
 
-Dhaatrik structured the extension using the Manifest V3 architecture. A content script executes upon trigger, identifying and parsing primary article nodes (e.g., `<article>`, `<main>`, or density-analyzed containers) while skipping navigation links and sidebars. The parsed text is processed using the browser's native Web Speech API synthesizer.
+Long-form reading tires my eyes before my interest. Existing read-aloud tools felt bloated or grabbed the wrong DOM nodes. I needed something minimal: detect primary content, pipe it to the browser's **Web Speech API**, control speed, stay local.
 
-## What technologies were used in the stack?
+## What I tried (and what broke)
 
-- **Chrome Extension Manifest V3**: Utilizing service workers and secure content scripts.
-- **Web Speech API**: Interfacing with the browser's native text-to-speech synthesizer engine.
-- **Vanilla JavaScript**: Writing highly optimized parsing logic to prevent browser frame-drops on large pages.
+Manifest V3 architecture — service worker, content script on demand. Trigger fires parsing logic that targets `<article>`, `<main>`, or density-scored containers and skips nav/sidebar noise. Vanilla JS keeps parsing fast on large pages; frame drops were real before I trimmed the walker.
 
-## What is the current progress and outcome?
+MV3 migration broke my old background script assumptions. Moving to service workers meant rethinking lifecycle and message passing — standard extension pain in 2024–2025.
 
-The extension is fully compliant with Chrome Manifest V3. It parses primary page content, supports real-time speed adjustments, and plays audio streams locally without communicating with external TTS servers.
+Speed control was non-negotiable. Web Speech API exposes rate on the utterance object; wiring a simple slider in the popup let me tune playback without re-parsing the page. Pause/resume meant tracking utterance boundaries — another place where reading nav text would have ruined the experience.
+
+## Fuckups & learnings
+
+- **Heuristic article detection fails on weird CMS themes.** `<main>` isn't always main.
+- **Web Speech API voices vary by OS.** Speed control helps; voice quality doesn't.
+- **MV3 is the right default now**, but debugging service workers is still annoying.
+- **Large pages need chunked utterances.** One 40k-character string can choke the synthesizer mid-paragraph.
+
+## Where it stands now
+
+Extension is Manifest V3 compliant: primary content parsing, real-time speed adjustment, audio via native synthesizer — no external TTS servers, no audio sent to a cloud API.
+
+Published locally; Chrome Web Store packaging is a separate chore I haven't finished. Unpacked load is fine for personal use and for anyone who wants to fork the content-detection heuristics.
+
+## Closing transmission
+
+Small accessibility-adjacent utility. Load it unpacked, test on a noisy news site, tell me what it read that it shouldn't have.
