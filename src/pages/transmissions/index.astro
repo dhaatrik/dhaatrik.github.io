@@ -434,7 +434,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                         <input
                             type="search"
                             id="search-logs"
-                            placeholder='"Search archives..."'
+                            placeholder='"Search my diary: a concept, a bug, or a late-night thought..."'
                             aria-controls="logs-grid"
                             class="w-full rounded-md border border-slate-200 bg-slate-100 py-3 pr-4 pl-20 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:border-(--accent)/50 focus:ring-1 focus:ring-(--accent)/50 focus:outline-none sm:pl-32 dark:border-slate-800 dark:bg-[#151a22] dark:text-white dark:placeholder:text-slate-600"
                         />
@@ -628,10 +628,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                         >
                     </div>
                     <h3 class="mb-2 text-lg font-bold text-slate-900 dark:text-white">
-                        No transmissions found
+                        Nothing in the archives, buddy.
                     </h3>
                     <p class="mx-auto max-w-sm text-sm text-slate-500 dark:text-slate-400">
-                        Try adjusting your search parameters to find what you're looking for.
+                        I either haven't made that mistake yet, or I just haven't written it down. Try checking another keyword.
                     </p>
                     <button
                         id="clear-filters-btn"
@@ -965,7 +965,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                     if (e.key === '/') {
                         e.preventDefault();
                         searchInput.focus();
-                        searchInput.placeholder = '[ SYSTEM CAPTURE ACTIVE ]';
+                        searchInput.placeholder = "[ COMMAND CAPTURE ENGAGED // What are you looking for? ]";
                     }
                 };
 
@@ -974,7 +974,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                 searchInput.addEventListener(
                     'blur',
                     () => {
-                        searchInput.placeholder = '"Search archives..."';
+                        searchInput.placeholder = '"Search my diary: a concept, a bug, or a late-night thought..."';
                     },
                     { signal }
                 );
