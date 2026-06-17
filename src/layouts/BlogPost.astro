@@ -6,8 +6,9 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import KatexStyles from '../components/KatexStyles.astro';
 
-// KaTeX CSS is loaded conditionally per-post via CDN (see hasMath prop below)
+// KaTeX CSS loaded conditionally via KatexStyles (self-hosted; CSP blocks CDN)
 
 type Props = CollectionEntry<'blog'>['data'] & {
     id?: string;
@@ -95,15 +96,7 @@ const breadcrumbSchema = JSON.stringify({
         <script type="application/ld+json" set:html={articleSchema} />
         <!-- Breadcrumb JSON-LD -->
         <script type="application/ld+json" set:html={breadcrumbSchema} />
-        <!-- KaTeX CSS: only load on posts that render math equations (hasMath: true in frontmatter) -->
-        {hasMath && (
-            <link
-                rel="stylesheet"
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
-                integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
-                crossorigin="anonymous"
-            />
-        )}
+        {hasMath && <KatexStyles />}
     </head>
 
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
