@@ -55,10 +55,7 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 
 ## P2 — Medium impact (reopened / remaining)
 
-- [ ] **Reduce global CSS payload further** _(Performance)_ — _Partial; optional follow-up_
-  - KaTeX is gated behind `hasMath` on blog posts and CDN-linked on personnel.
-  - Global CSS bundle is still ~129 KB (`Header.*.css`). Audit unused Tailwind utilities if a meaningful reduction is possible.
-  - Files: `src/styles/global.css`, build output under `dist/_astro/`
+
 
 ---
 
@@ -110,7 +107,7 @@ _Move fully completed items here. Partial completions are noted; reopened items 
 - [x] **Add automated accessibility audits** — completed 2026-06-17 _(partial: critical-only, 4 routes — see P2 for expansion)_
 - [x] **Pass project `logo` as OG image on project pages** — completed 2026-06-17 _(passed project logo to BaseHead as the image prop, and verified with E2E tests)_
 - [x] **Per-page SEO metadata** — completed 2026-06-17 _(fully complete; project OG images and blog OG images are now correctly populated)_
-- [x] **Reduce CSS payload** — completed 2026-06-17 _(partial: KaTeX gated; ~129 KB global CSS remains — see P2)_
+- [x] **Reduce CSS payload** — completed 2026-06-17 _(fully complete; gated KaTeX behind hasMath, subsetted Nunito and Poppins to latin-only specific weights, and removed unused hologram scanner keyframes and rules, shrinking bundle size)_
 - [x] **Gate decorative motion on mobile** — completed 2026-06-17 _(CSS `pointer: coarse` + JS media query)_
 - [x] **Optimize hero images** — completed 2026-06-16 _(partial: AVIF/WebP ✓; logo_light + JPEG fallback remain — see P2)_
 - [x] **Shrink personnel photo JPEG fallback** — completed 2026-06-17 _(source me.jpeg resized to 800x800 square and quality optimized, shrinking fallback JPEG from 1.56 MB to 117 KB)_
