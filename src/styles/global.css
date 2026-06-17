@@ -10,6 +10,32 @@
 /* Override Tailwind v4 default: use class-based dark mode instead of prefers-color-scheme */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* @property registrations for performant CSS transition animations */
+@property --glass-bg-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.35;
+}
+
+@property --glass-border-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.08;
+}
+
+@property --neon-glow-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --blueprint-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.02;
+}
+
+
 /* Global Motion Accessibility Safety Reset */
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -181,6 +207,14 @@
         --accent-glow: rgba(37, 99, 235, 0.3);
         --accent-button-bg: var(--accent);
 
+        /* Glass Raw values for RGB colors */
+        --glass-bg-raw: 255, 255, 255;
+        --glass-border-raw: 15, 23, 42;
+        --blueprint-color-major: rgba(37, 99, 235, 0.05);
+        --blueprint-color-minor: rgba(37, 99, 235, 0.015);
+        --neon-glow-1-rgb: 6, 182, 212;   /* cyan */
+        --neon-glow-2-rgb: 139, 92, 246;  /* purple */
+
         /* Bento Grid Constants (Mobile first) */
         --bento-gap: 1rem;
         --bento-radius: 1.25rem;
@@ -215,6 +249,12 @@
         --accent-glow: rgba(59, 130, 246, 0.5);
         --accent-button-bg: #2563eb;
         /* Accessible dark blue background for white text in dark mode */
+
+        /* Glass Raw values for RGB colors */
+        --glass-bg-raw: 11, 14, 20;
+        --glass-border-raw: 255, 255, 255;
+        --blueprint-color-major: rgba(6, 182, 212, 0.04);
+        --blueprint-color-minor: rgba(6, 182, 212, 0.01);
     }
 
     /* Terminal Themes definition */
@@ -222,33 +262,57 @@
         --accent: #15803d;
         --accent-glow: rgba(21, 128, 61, 0.3);
         --accent-button-bg: var(--accent);
+        --neon-glow-1-rgb: 34, 197, 94;
+        --neon-glow-2-rgb: 21, 128, 61;
+        --blueprint-color-major: rgba(34, 197, 94, 0.05);
+        --blueprint-color-minor: rgba(34, 197, 94, 0.015);
     }
     :root.dark.theme-matrix {
         --accent: #22c55e;
         --accent-glow: rgba(34, 197, 94, 0.5);
         --accent-button-bg: #15803d;
+        --neon-glow-1-rgb: 34, 197, 94;
+        --neon-glow-2-rgb: 21, 128, 61;
+        --blueprint-color-major: rgba(34, 197, 94, 0.04);
+        --blueprint-color-minor: rgba(34, 197, 94, 0.01);
     }
 
     :root.theme-amber {
         --accent: #b45309;
         --accent-glow: rgba(180, 83, 9, 0.3);
         --accent-button-bg: var(--accent);
+        --neon-glow-1-rgb: 245, 158, 11;
+        --neon-glow-2-rgb: 217, 119, 6;
+        --blueprint-color-major: rgba(245, 158, 11, 0.05);
+        --blueprint-color-minor: rgba(245, 158, 11, 0.015);
     }
     :root.dark.theme-amber {
         --accent: #f59e0b;
         --accent-glow: rgba(245, 158, 11, 0.5);
         --accent-button-bg: #b45309;
+        --neon-glow-1-rgb: 245, 158, 11;
+        --neon-glow-2-rgb: 217, 119, 6;
+        --blueprint-color-major: rgba(245, 158, 11, 0.04);
+        --blueprint-color-minor: rgba(245, 158, 11, 0.01);
     }
 
     :root.theme-cobalt {
         --accent: #0369a1;
         --accent-glow: rgba(3, 105, 161, 0.3);
         --accent-button-bg: var(--accent);
+        --neon-glow-1-rgb: 56, 189, 248;
+        --neon-glow-2-rgb: 3, 105, 161;
+        --blueprint-color-major: rgba(56, 189, 248, 0.05);
+        --blueprint-color-minor: rgba(56, 189, 248, 0.015);
     }
     :root.dark.theme-cobalt {
         --accent: #38bdf8;
         --accent-glow: rgba(56, 189, 248, 0.5);
         --accent-button-bg: #0369a1;
+        --neon-glow-1-rgb: 56, 189, 248;
+        --neon-glow-2-rgb: 3, 105, 161;
+        --blueprint-color-major: rgba(56, 189, 248, 0.04);
+        --blueprint-color-minor: rgba(56, 189, 248, 0.01);
     }
 
     html {
@@ -319,51 +383,72 @@
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     }
 
+    /* Premium Glassmorphic Design System Class */
+    .premium-glass,
     .bento-card {
+        --glass-bg-opacity: 0.35;
+        --glass-border-opacity: 0.08;
+        --neon-glow-opacity: 0;
+        --blueprint-opacity: 0.02;
+
         position: relative;
-        background-color: var(--bg-card);
-        border-radius: var(--bento-radius);
-        padding: var(--bento-padding);
-        border: 1px solid transparent;
-        will-change: transform, opacity;
-        transition-property: transform, opacity, background-color, border-color, box-shadow;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 300ms;
+        background-color: rgba(var(--glass-bg-raw), var(--glass-bg-opacity)) !important;
+        backdrop-filter: blur(16px) saturate(120%);
+        -webkit-backdrop-filter: blur(16px) saturate(120%);
+        border: 1px solid rgba(var(--glass-border-raw), var(--glass-border-opacity)) !important;
+        
+        box-shadow: 
+            0 8px 32px 0 rgba(0, 0, 0, 0.06),
+            0 0 calc(var(--neon-glow-opacity) * 15px) rgba(var(--neon-glow-1-rgb), calc(var(--neon-glow-opacity) * 0.4)),
+            0 0 calc(var(--neon-glow-opacity) * 30px) rgba(var(--neon-glow-2-rgb), calc(var(--neon-glow-opacity) * 0.25));
+
+        transition:
+            --glass-bg-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            --glass-border-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            --neon-glow-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            --blueprint-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Gradient Border Pseudo-element */
+    .premium-glass::after,
     .bento-card::after {
         content: '';
         position: absolute;
         inset: 0;
-        border-radius: var(--bento-radius);
-        padding: 1px;
-        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
-        -webkit-mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
         pointer-events: none;
+        z-index: 0;
+        border-radius: inherit;
+        background-image:
+            linear-gradient(to right, var(--blueprint-color-major) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--blueprint-color-major) 1px, transparent 1px),
+            linear-gradient(to right, var(--blueprint-color-minor) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--blueprint-color-minor) 1px, transparent 1px);
+        background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
+        opacity: var(--blueprint-opacity);
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .dark .bento-card::after {
-        background: linear-gradient(
-            to bottom right,
-            rgba(255, 255, 255, 0.2),
-            rgba(255, 255, 255, 0.05),
-            transparent
-        );
+    .premium-glass:hover,
+    .premium-glass:focus-within,
+    .bento-card:hover,
+    .bento-card:focus-within {
+        --glass-bg-opacity: 0.55;
+        --glass-border-opacity: 0.2;
+        --neon-glow-opacity: 1;
+        --blueprint-opacity: 0.08;
     }
 
-    :root .bento-card::after {
-        background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.1), transparent);
+    .bento-card {
+        border-radius: var(--bento-radius);
+        padding: var(--bento-padding);
+        will-change: transform, opacity;
+        transform-style: preserve-3d;
     }
 
-    /* Mouse Spotlight Pseudo-element */
+    /* Mouse Spotlight Pseudo-element (Specific to Bento Cards) */
     .bento-card::before {
         content: '';
         position: absolute;
@@ -387,29 +472,14 @@
     a.bento-card:hover,
     button.bento-card:hover,
     .bento-card:focus-within {
-        box-shadow: 0 0 20px var(--accent-glow);
         transform: translateY(-0.25rem);
-    }
-
-    :root a.bento-card:hover,
-    :root button.bento-card:hover,
-    :root a.bento-card:focus-visible,
-    :root button.bento-card:focus-visible,
-    :root .bento-card:focus-within {
-        border-color: #cbd5e1;
-    }
-
-    .dark a.bento-card:hover,
-    .dark button.bento-card:hover,
-    .dark a.bento-card:focus-visible,
-    .dark button.bento-card:focus-visible,
-    .dark .bento-card:focus-within {
-        border-color: rgba(255, 255, 255, 0.1);
     }
 
     .bento-card-inner {
         border-radius: var(--bento-radius-inner);
         overflow: hidden;
+        position: relative;
+        z-index: 1;
     }
 }
 
@@ -535,13 +605,6 @@
     perspective: 1000px;
 }
 
-.bento-card {
-    transform-style: preserve-3d;
-    will-change: transform, opacity;
-    transition-property: transform, opacity, background-color, border-color, box-shadow;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
-}
 
 /* Hologram effect */
 .hologram-overlay {

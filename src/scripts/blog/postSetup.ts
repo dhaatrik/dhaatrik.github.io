@@ -732,7 +732,7 @@ export async function setupPost() {
                         popover.setAttribute('popover', 'hint');
                         popover.id = tooltipId;
                         popover.className =
-                            'glossary-popover p-3 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs font-sans font-normal text-slate-300 text-left normal-case leading-relaxed w-64 max-w-xs z-50 transition-all pointer-events-none';
+                            'glossary-popover p-3 rounded-lg text-xs font-sans font-normal text-slate-700 dark:text-slate-300 text-left normal-case leading-relaxed w-64 max-w-xs z-50 transition-all pointer-events-none premium-glass';
                         popover.style.setProperty('position-anchor', anchorName);
                         popover.style.setProperty('top', 'anchor(bottom)');
                         popover.style.setProperty('left', 'anchor(center)');
