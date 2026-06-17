@@ -69,4 +69,16 @@ test.describe('SEO and Metadata Verification', () => {
             expect(sitemapText).toContain('<sitemapindex');
         }
     });
+
+    test('project detail page should contain project logo as OpenGraph and Twitter images', async ({ page }) => {
+        await page.goto('/projects/deltav-lab/');
+        await page.waitForLoadState('networkidle');
+
+        // Check og:image and twitter:image contain the project logo image
+        const ogImage = page.locator('meta[property="og:image"]');
+        await expect(ogImage).toHaveAttribute('content', /.*delta-v-lab.*/);
+
+        const twitterImage = page.locator('meta[property="twitter:image"]');
+        await expect(twitterImage).toHaveAttribute('content', /.*delta-v-lab.*/);
+    });
 });
