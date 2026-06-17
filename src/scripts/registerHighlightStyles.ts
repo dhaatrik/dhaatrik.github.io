@@ -14,7 +14,7 @@ const HIGHLIGHT_CSS = `
 `;
 
 export function registerHighlightStyles(): void {
-    if (typeof CSS === 'undefined' || !(CSS as CSS & { highlights?: unknown }).highlights) {
+    if (typeof CSS === 'undefined' || !(CSS as { highlights?: unknown }).highlights) {
         return;
     }
     if (document.getElementById(STYLE_ID)) {
