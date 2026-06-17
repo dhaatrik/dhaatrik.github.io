@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/glassbox'
 progress: 'v2.1.0 stable release, secure sandbox API'
 order: 6
 tags: ['TypeScript', 'Node.js', 'VM2', 'Security']
+pain_level: 3
+fuckup_teaser: "Sandbox escape research is humbling — I shipped boundaries I was sure were solid, then found edge cases."
 ---
 
 ## SYS.STATUS: v2.1.0 stable — scripts run isolated, host stays clean, telemetry logs ship

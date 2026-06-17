@@ -346,9 +346,40 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                     </a>
                                                 )}
                                             </div>
-                                            <p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                            <p class="mb-4 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
                                                 {project.data.description}
                                             </p>
+
+                                            {/* Pain Level Indicator */}
+                                            {project.data.pain_level && (
+                                                <div class="mb-3 space-y-1.5">
+                                                    <span class="block font-mono text-[9px] text-slate-400 dark:text-slate-600">
+                                                        // IMPACT.LOG
+                                                    </span>
+                                                    <div class="flex items-center gap-1">
+                                                        {[1, 2, 3, 4, 5].map((i) => (
+                                                            <span
+                                                                class={`h-1 w-5 rounded-sm transition-opacity duration-300 ${
+                                                                    i <= (project.data.pain_level ?? 0)
+                                                                        ? 'bg-(--accent) opacity-90'
+                                                                        : 'bg-slate-200 opacity-40 dark:bg-white/10'
+                                                                }`}
+                                                            />
+                                                        ))}
+                                                        <span class="ml-1 font-mono text-[9px] text-slate-400 dark:text-slate-600">
+                                                            {project.data.pain_level}/5
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {/* Fuckup Teaser */}
+                                            {project.data.fuckup_teaser && (
+                                                <div class="mission-fuckup-teaser mb-4">
+                                                    <span class="text-slate-400 dark:text-slate-500">[ FUCKUP LOG ]&nbsp;</span>
+                                                    {project.data.fuckup_teaser}
+                                                </div>
+                                            )}
                                         </div>
 
                                         <div class="space-y-4">
@@ -365,9 +396,13 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                 <span class="truncate">
                                                     PROGRESS: {project.data.progress}
                                                 </span>
-                                                <span class="text-xs transition-transform group-hover:translate-x-1">
-                                                    →
-                                                </span>
+                                                <a
+                                                    href={`/projects/${projectIdClean}`}
+                                                    class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all hover:opacity-80 group-hover:translate-x-0.5"
+                                                    aria-label={`Read the full ${project.data.title} mission log`}
+                                                >
+                                                    Read the full story&nbsp;→
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

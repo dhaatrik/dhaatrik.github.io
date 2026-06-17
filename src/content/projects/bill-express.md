@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/bill-express'
 progress: 'Production build deployed, instant PDF export'
 order: 10
 tags: ['JavaScript', 'HTML5', 'Tailwind CSS', 'jsPDF']
+pain_level: 2
+fuckup_teaser: "Print layout diverged between Firefox and Chrome after a CSS update — PDFs had surprise blank pages I only found after deploying."
 ---
 
 ## SYS.STATUS: Deployed — vector PDF export in under 50ms, zero server round-trips

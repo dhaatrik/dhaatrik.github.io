@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/vireo-wellness'
 progress: 'PWA ready, works offline with database caching'
 order: 9
 tags: ['React', 'PWA', 'IndexedDB', 'Tailwind CSS']
+pain_level: 2
+fuckup_teaser: "IndexedDB in private browsing throws silently — health data just disappeared for those users and I shipped it anyway."
 ---
 
 ## SYS.STATUS: PWA installable — 100% offline, IndexedDB persistence, export works

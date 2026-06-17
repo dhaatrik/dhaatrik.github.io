@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/the-infinite-intelligence'
 progress: 'Parallel Collaboration, Sequential Workflows, and Round-Robin Debate'
 order: 4
 tags: ['React 19', 'TypeScript 5.8', 'Google Gemini AI', 'Vite 6']
+pain_level: 3
+fuckup_teaser: "Agent loops without timeout guards hit rate limits and burned API credits before I added circuit breakers."
 ---
 
 ## SYS.STATUS: Council-of-agents pipeline works — Creator, Critic, Synthesizer all shipping

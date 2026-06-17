@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/vellor'
 progress: "v4.0.0 'Power-Tutor' Update"
 order: 1
 tags: ['React 19', 'TypeScript 5.7', 'Zustand 5', 'Tailwind CSS 3']
+pain_level: 3
+fuckup_teaser: "Gamification nearly ate the product — I almost shipped a mobile-game UI for a productivity tool."
 ---
 
 ## SYS.STATUS: v4.0.0 shipped — offline-first, no backend, still my daily driver for tutoring ops

@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/ReadAloud_ChromeExtension'
 progress: 'Manifest V3 extension, published locally'
 order: 12
 tags: ['JavaScript', 'Web Speech API', 'Chrome Extension']
+pain_level: 2
+fuckup_teaser: "MV3's service worker lifecycle killed my persistent state — took three rewrites to understand it's not a background page."
 ---
 
 ## SYS.STATUS: MV3 compliant — article parsing works, native TTS, no external API calls

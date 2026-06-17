@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/free-markdown-to-pdf-converter'
 progress: 'v1.1.0 stable, full KaTeX and highlight.js support'
 order: 11
 tags: ['TypeScript', 'Remark', 'KaTeX', 'jsPDF']
+pain_level: 2
+fuckup_teaser: "KaTeX in a headless print context had silent fallback failures — math rendered on screen but vanished in the exported PDF."
 ---
 
 ## SYS.STATUS: v1.1.0 stable — Remark pipeline, KaTeX, highlight.js, PDF export all shipping

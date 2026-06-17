@@ -45,6 +45,9 @@ const projects = defineCollection({
             progress: z.string().optional(),
             order: z.number().default(0),
             transmissionTag: z.string().optional(),
+            // Mission Report fields: honest fuckup teaser and build pain rating (1–5)
+            fuckup_teaser: z.string().optional(),
+            pain_level: z.number().min(1).max(5).optional(),
         }),
 });
 

@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/instant-app-opener'
 progress: 'v1.2.0 fully operational, local desktop application'
 order: 5
 tags: ['JavaScript', 'Electron', 'Node.js', 'CSS']
+pain_level: 2
+fuckup_teaser: "Electron auto-launch on startup needed registry writes I hadn't tested on fresh Windows installs — first users hit a broken tray."
 ---
 
 ## SYS.STATUS: v1.2.0 — sub-150ms popup, global hotkeys registered, lives in the tray

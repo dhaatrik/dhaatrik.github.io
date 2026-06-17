@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/seamless-qr-dining'
 progress: 'Prototype complete, WebSocket integration verified'
 order: 8
 tags: ['React', 'WebSockets', 'Tailwind CSS', 'Node.js']
+pain_level: 3
+fuckup_teaser: "WebSocket reconnection was an afterthought — real-time ordering failed silently when connections dropped under load."
 ---
 
 ## SYS.STATUS: Prototype done — table sockets verified, not production-hardened yet
