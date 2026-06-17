@@ -1,5 +1,11 @@
 @import 'tailwindcss';
-@plugin '@tailwindcss/typography';
+
+/* Scope utility generation to app source; typography lives in typography.css */
+@source "../**/*.{astro,ts,js,mjs}";
+@source not "../../test/**";
+@source not "../../dist/**";
+@source not "../../node_modules/**";
+@source not "../../conductor/**";
 
 /* Override Tailwind v4 default: use class-based dark mode instead of prefers-color-scheme */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -956,48 +962,6 @@
 mark.search-match-fallback {
     background-color: color-mix(in srgb, var(--accent) 30%, transparent);
     color: inherit;
-}
-
-/* Responsive Tables and Equations in Blog Posts */
-.prose table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Custom spacing between paragraphs in blog posts */
-.prose p {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-
-/* Ensure proper list markers are visible and styled */
-.prose ol {
-    list-style-type: decimal !important;
-    padding-left: 1.5rem !important;
-    margin-left: 0 !important;
-}
-
-.prose ol li::marker {
-    color: var(--accent);
-}
-
-.prose ul {
-    list-style-type: disc !important;
-    padding-left: 1.5rem !important;
-    margin-left: 0 !important;
-}
-
-.prose ul li::marker {
-    color: var(--accent);
-}
-
-.katex-display {
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 0.5rem 0;
-    -webkit-overflow-scrolling: touch;
 }
 
 /* Phase IV: Native Scroll-Driven Animations */

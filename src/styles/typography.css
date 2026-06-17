@@ -1,0 +1,47 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* Limit typography utility generation to files that use .prose */
+@source "../layouts/BlogPost.astro";
+@source "../pages/projects/[...slug].astro";
+@source "../scripts/blog/postSetup.ts";
+
+/* Responsive tables and lists inside blog / project prose */
+.prose table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.prose p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.prose ol {
+    list-style-type: decimal !important;
+    padding-left: 1.5rem !important;
+    margin-left: 0 !important;
+}
+
+.prose ol li::marker {
+    color: var(--accent);
+}
+
+.prose ul {
+    list-style-type: disc !important;
+    padding-left: 1.5rem !important;
+    margin-left: 0 !important;
+}
+
+.prose ul li::marker {
+    color: var(--accent);
+}
+
+.katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem 0;
+    -webkit-overflow-scrolling: touch;
+}
