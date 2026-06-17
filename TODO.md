@@ -56,11 +56,6 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 ## P2 — Medium impact (reopened / remaining)
 
 
-- [ ] **Shrink personnel photo JPEG fallback** _(Performance, Mobile)_
-  - `astro:assets` `Picture` already serves AVIF/WebP (7–35 KB) with responsive `srcset`.
-  - Largest JPEG fallback variant in dist is still ~1.56 MB — hurts legacy-browser LCP.
-  - Re-export source `src/assets/me.jpeg` at lower resolution/quality, or cap max `widths` in `Picture`.
-  - Files: `src/assets/me.jpeg`, `src/pages/personnel.astro`
 
 - [ ] **Expand a11y audit coverage** _(Mobile, Code quality)_
   - Add `/projects/` and at least one project detail route (e.g. `/projects/deltav-lab/`) to `accessibility.spec.ts`.
@@ -95,7 +90,7 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 
 | File | Status / notes |
 |------|----------------|
-| `src/assets/me.jpeg` | Optimized via `Picture`; JPEG fallback still large |
+| `src/assets/me.jpeg` | Optimized via `Picture`; fallback JPEG shrunk from 1.56 MB to 117 KB ✓ |
 | `public/logo_light.svg` / `logo_dark.svg` | Both optimized to ~81 KB ✓ |
 | `src/components/BaseHead.astro` | OG/Twitter meta done; mouse JS extracted |
 | `src/scripts/mouseTracker.ts` | Gated on `(hover: hover) and (pointer: fine)` |
@@ -127,6 +122,7 @@ _Move fully completed items here. Partial completions are noted; reopened items 
 - [x] **Reduce CSS payload** — completed 2026-06-17 _(partial: KaTeX gated; ~129 KB global CSS remains — see P2)_
 - [x] **Gate decorative motion on mobile** — completed 2026-06-17 _(CSS `pointer: coarse` + JS media query)_
 - [x] **Optimize hero images** — completed 2026-06-16 _(partial: AVIF/WebP ✓; logo_light + JPEG fallback remain — see P2)_
+- [x] **Shrink personnel photo JPEG fallback** — completed 2026-06-17 _(source me.jpeg resized to 800x800 square and quality optimized, shrinking fallback JPEG from 1.56 MB to 117 KB)_
 - [x] **Fix `::highlight` CSS build warnings** — completed 2026-06-17 _(→ runtime injection via `registerHighlightStyles.ts`; build is clean)_
 - [x] **Migrate deprecated markdown config** — completed 2026-06-17 _(→ `unified()` in `astro.config.mjs`)_
 - [x] **Replace `execSync` in Footer with env var** — completed 2026-06-17 _(partial: `PUBLIC_GIT_SHA` in CI; execSync fallback remains — see P3)_
