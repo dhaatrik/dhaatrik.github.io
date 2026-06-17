@@ -457,6 +457,7 @@ const webSiteSchema = JSON.stringify({
                             ></span>
                         </span>
                         <span
+                            id="scroll-telemetry-text"
                             class="font-mono text-[9px] font-bold tracking-widest text-slate-500 uppercase dark:text-slate-400"
                         >
                             SCROLL TO INITIATE
@@ -501,9 +502,9 @@ const webSiteSchema = JSON.stringify({
             <!-- Projects Section: Featured Engineering -->
             <section
                 id="projects"
-                class="layout-container animate-fade-in-up content-visibility-auto-projects mb-0 pb-16 delay-400"
+                class="layout-container content-visibility-auto-projects mb-0 pb-16"
             >
-                <div class="mb-10">
+                <div class="mb-10 reveal-on-scroll">
                     <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                         Featured Engineering
                     </h2>
@@ -512,7 +513,7 @@ const webSiteSchema = JSON.stringify({
                     </p>
                 </div>
 
-                <div class="bento-grid perspective-1000">
+                <div class="bento-grid perspective-1000 reveal-stagger">
                     <!-- Current Focus Bento Card -->
                     <article
                         class="bento-card group bento-card-project relative flex cursor-pointer flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
@@ -897,11 +898,10 @@ const webSiteSchema = JSON.stringify({
                 </div>
             </section>
 
-            <!-- Latest Thinking Section (Abstract Layout) -->
             <section
-                class="layout-container animate-fade-in-up content-visibility-auto-blog mb-0 pb-16 delay-500"
+                class="layout-container content-visibility-auto-blog mb-0 pb-16"
             >
-                <div class="mb-10 flex items-end justify-between">
+                <div class="mb-10 flex items-end justify-between reveal-on-scroll">
                     <div>
                         <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                             Latest Thinking
@@ -935,7 +935,7 @@ const webSiteSchema = JSON.stringify({
                     </a>
                 </div>
 
-                <div class="flex flex-col gap-6">
+                <div class="flex flex-col gap-6 reveal-stagger">
                     {
                         posts.map((post, index) => {
                             const doiNum = `10.1012/DH.${post.id.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'POST'}`;
@@ -1201,36 +1201,44 @@ const webSiteSchema = JSON.stringify({
                     });
                 }
 
-                // --- 7. Scroll Telemetry Indicator Fallback ---
+                // --- 7. Scroll Telemetry Indicator Connection Setup ---
                 const telemetry = document.querySelector('.scroll-telemetry-container');
+                const telemetryText = document.getElementById('scroll-telemetry-text');
                 let handleScroll;
                 if (telemetry) {
-                    if (
-                        !CSS.supports(
-                            '(animation-timeline: scroll()) and (animation-range: 0% 100%)'
-                        )
-                    ) {
-                        let scrollTicking = false;
-                        handleScroll = () => {
-                            if (!scrollTicking) {
-                                window.requestAnimationFrame(() => {
-                                    const scrollY = window.scrollY;
-                                    const opacity = Math.max(0, 1 - scrollY / 120);
-                                    const translate = scrollY * 0.15;
-                                    telemetry.style.opacity = opacity.toString();
-                                    telemetry.style.transform = `translateY(${translate}px) scale(${0.95 + opacity * 0.05})`;
-                                    if (opacity === 0) {
-                                        telemetry.style.visibility = 'hidden';
+                    let scrollTicking = false;
+                    handleScroll = () => {
+                        if (!scrollTicking) {
+                            window.requestAnimationFrame(() => {
+                                const scrollY = window.scrollY;
+                                const opacity = Math.max(0, 1 - scrollY / 130);
+                                const translate = scrollY * 0.12;
+                                
+                                telemetry.style.opacity = opacity.toString();
+                                telemetry.style.transform = `translateY(${translate}px) scale(${0.95 + opacity * 0.05})`;
+                                
+                                if (telemetryText) {
+                                    if (scrollY === 0) {
+                                        telemetryText.textContent = 'SCROLL TO INITIATE';
+                                    } else if (scrollY > 0 && scrollY < 120) {
+                                        const pct = Math.min(100, Math.round((scrollY / 120) * 100));
+                                        telemetryText.textContent = `LINKING TELEMETRY // ${pct}%`;
                                     } else {
-                                        telemetry.style.visibility = 'visible';
+                                        telemetryText.textContent = 'TELEMETRY ONLINE // 100%';
                                     }
-                                    scrollTicking = false;
-                                });
-                                scrollTicking = true;
-                            }
-                        };
-                        window.addEventListener('scroll', handleScroll, { passive: true });
-                    }
+                                }
+
+                                if (opacity === 0) {
+                                    telemetry.style.visibility = 'hidden';
+                                } else {
+                                    telemetry.style.visibility = 'visible';
+                                }
+                                scrollTicking = false;
+                            });
+                            scrollTicking = true;
+                        }
+                    };
+                    window.addEventListener('scroll', handleScroll, { passive: true });
                 }
 
                 // --- 8. Programmatic Accessibility Focus Routing ---
