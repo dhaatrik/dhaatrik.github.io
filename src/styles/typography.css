@@ -45,3 +45,24 @@
     padding: 0.5rem 0;
     -webkit-overflow-scrolling: touch;
 }
+
+.prose {
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    letter-spacing: 0.015em;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    font-family: var(--font-heading);
+    font-optical-sizing: auto;
+    text-wrap: balance;
+}
+
+.prose p {
+    text-wrap: pretty;
+}
