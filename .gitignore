@@ -18,8 +18,11 @@ pnpm-debug.log*
 playwright-report/
 test-results/
 
-# Grok Skills
+# Agent harness local config (keep project skills shareable)
 .grok/
+.agents/*
+!.agents/skills/
+!.agents/skills/**
 
 # TODO Files
 TODO_*.md
