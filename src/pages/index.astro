@@ -1082,20 +1082,21 @@ const webSiteSchema = JSON.stringify({
                         }
                     });
 
+                    /** @type {HTMLElement | null} */
                     let lastActiveElement = null;
                     const popoverId = card.getAttribute('data-popover-target');
                     if (popoverId) {
                         const popover = document.getElementById(popoverId);
                         if (popover) {
                             popover.addEventListener('toggle', (e) => {
-                                const isOpen = e.newState === 'open';
+                                const isOpen = /** @type {any} */ (e).newState === 'open';
                                 card.setAttribute(
                                     'aria-expanded',
                                     isOpen ? 'true' : 'false'
                                 );
                                 if (isOpen) {
-                                    lastActiveElement = document.activeElement;
-                                    const closeBtn = popover.querySelector('button[aria-label], button[popovertarget]');
+                                    lastActiveElement = /** @type {HTMLElement | null} */ (document.activeElement);
+                                    const closeBtn = /** @type {HTMLElement | null} */ (popover.querySelector('button[aria-label], button[popovertarget]'));
                                     if (closeBtn) {
                                         requestAnimationFrame(() => {
                                             closeBtn.focus();

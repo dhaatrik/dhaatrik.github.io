@@ -604,13 +604,13 @@ const formatMarqueeDate = (date: Date) => {
 
         // Bind dynamic aria-expanded state and focus management to popover toggles
         const popovers = ['books-popover', 'support-popover'];
-        let lastActiveElement = null;
+        let lastActiveElement: HTMLElement | null = null;
         popovers.forEach((id) => {
             const popover = document.getElementById(id);
             if (popover) {
                 popover.addEventListener(
                     'toggle',
-                    (e) => {
+                    (e: any) => {
                         const isOpen = e.newState === 'open';
                         const triggers = document.querySelectorAll(`[aria-controls="${id}"], [popovertarget="${id}"]`);
                         triggers.forEach((trigger) => {
@@ -621,8 +621,8 @@ const formatMarqueeDate = (date: Date) => {
                         });
 
                         if (isOpen) {
-                            lastActiveElement = document.activeElement;
-                            const closeBtn = popover.querySelector('button[aria-label], button[popovertarget]');
+                            lastActiveElement = document.activeElement as HTMLElement | null;
+                            const closeBtn = popover.querySelector('button[aria-label], button[popovertarget]') as HTMLElement | null;
                             if (closeBtn) {
                                 requestAnimationFrame(() => {
                                     closeBtn.focus();
