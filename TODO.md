@@ -55,10 +55,6 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 
 ## P2 — Medium impact (reopened / remaining)
 
-- [ ] **Further compress `logo_light.svg`** _(Performance)_
-  - Current size: ~320 KB (was ~997 KB). `logo_dark.svg` is ~82 KB — use as reference target.
-  - Run SVGO or simplify paths; consider a raster fallback for the light logo if SVG cannot shrink further.
-  - Files: `public/logo_light.svg`, `src/components/Header.astro`, `src/pages/index.astro`
 
 - [ ] **Shrink personnel photo JPEG fallback** _(Performance, Mobile)_
   - `astro:assets` `Picture` already serves AVIF/WebP (7–35 KB) with responsive `srcset`.
@@ -100,7 +96,7 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 | File | Status / notes |
 |------|----------------|
 | `src/assets/me.jpeg` | Optimized via `Picture`; JPEG fallback still large |
-| `public/logo_light.svg` / `logo_dark.svg` | Dark OK (~82 KB); light still ~320 KB |
+| `public/logo_light.svg` / `logo_dark.svg` | Both optimized to ~81 KB ✓ |
 | `src/components/BaseHead.astro` | OG/Twitter meta done; mouse JS extracted |
 | `src/scripts/mouseTracker.ts` | Gated on `(hover: hover) and (pointer: fine)` |
 | `src/layouts/BlogPost.astro` | `heroImage` → OG + Article schema ✓ |
@@ -122,7 +118,8 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 _Move fully completed items here. Partial completions are noted; reopened items moved back to P2/P3._
 
 - [x] **Add dedicated project pages** — completed 2026-06-16 _(12 projects, case-study structure, JSON-LD, breadcrumbs)_
-- [x] **Pass `heroImage` to `BaseHead` on blog posts** — completed 2026-06-17 _(OG image + Article schema `image` field)_
+- [x] **Further compress `logo_light.svg`** — completed 2026-06-17 _(matched size of logo_dark.svg at ~81 KB via path simplification and SVGO)_
+- [x] **Pass `heroImage` to `BaseHead` on blog posts** — completed 2026-06-17 _(photo OG image + Article schema `image` field)_
 - [x] **Extract and defer global mouse-tracking JS** — completed 2026-06-17 _(→ `mouseTracker.ts`, pointer-gated)_
 - [x] **Complete link prefetch coverage** — completed 2026-06-17 _(Footer internal links)_
 - [x] **Add automated accessibility audits** — completed 2026-06-17 _(partial: critical-only, 4 routes — see P2 for expansion)_
