@@ -152,13 +152,13 @@ test.describe('Portfolio UI Interactivity', () => {
         await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
         await page.waitForLoadState('networkidle');
 
-        const tocLink = page.locator('#toc a[href="#the-mathematical-principles-behind-staging"]');
+        const tocLink = page.locator('#toc a[href="#mission-report-the-math-behind-staging"]');
 
         // Check initial state (should not have active classes if we are at the top)
         await expect(tocLink).not.toHaveClass(/!text-\(--accent\)/);
 
         // Scroll the headings section to be perfectly within the active region (Y = 200)
-        const headingsHeader = page.locator('#the-mathematical-principles-behind-staging');
+        const headingsHeader = page.locator('#mission-report-the-math-behind-staging');
         await headingsHeader.evaluate((el) => {
             const rect = el.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
