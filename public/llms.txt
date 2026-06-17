@@ -12,10 +12,13 @@
 
 ## Blog Posts (Transmissions)
 
-- [Why Dhaatrik Started: DBS Classes and the Physics of Curiosity](https://dhaatrik.github.io/transmissions/why-i-started-dbs-classes/): Origin story of the DBS Classes YouTube channel, founded October 31 2022, to combat rote learning with first-principles physics and mathematics education.
-- [Pedagogy from First Principles: Cooking, Open Skies, and Bus Wheels](https://dhaatrik.github.io/transmissions/my-ways-of-teaching/): Deep dive into Dhaatrik's non-traditional teaching methodology — sibling-centric tutoring, kitchen thermodynamics, street-side kinematics, and student psychology.
-- [Why Dhaatrik Stopped: An Honest Audit of Consistency and Flaws](https://dhaatrik.github.io/transmissions/why-i-stopped-youtube-classes/): Post-mortem analysis of the DBS Classes YouTube channel cessation — solo production bottleneck, novelty fade, and motivation vs. systems thinking.
-- [Interactive Mission Logs: Orbital Insertion Dynamics](https://dhaatrik.github.io/transmissions/scrollytelling-demo/): A study on launch trajectories, staging calculations, and circularization burns using native scroll-driven animations and interactive aerospace telemetry graphics.
+- [DeltaV Lab Mission Log: RK4, Web Workers, and the KSP Problem](https://dhaatrik.github.io/transmissions/deltav-lab-mission-log/): Engineering diary on building a browser orbital mechanics simulator — Kerbal Space Program motivation, 50Hz RK4 integration, and Web Worker threading.
+- [Vellor Mission Log: Building an Offline OS for Tutors](https://dhaatrik.github.io/transmissions/vellor-power-tutor-log/): Why I built Vellor v4 Power-Tutor — offline-first IndexedDB storage, free tutoring operations, and data privacy for independent educators.
+- [Teaching From First Principles: A Mission Log on How I Actually Teach](https://dhaatrik.github.io/transmissions/teaching-from-first-principles/): First-person teaching philosophy — observation before equations, sibling-centric trust, and the axiom that knowledge must be free.
+- [Why I Started DBS Classes: The Physics of Curiosity](https://dhaatrik.github.io/transmissions/why-i-started-dbs-classes/): Origin story of the DBS Classes YouTube channel, founded October 31 2022, to combat rote learning with first-principles physics and mathematics education.
+- [How I Teach: Bus Wheels, Kitchen Labs, and Open Skies](https://dhaatrik.github.io/transmissions/my-ways-of-teaching/): Mission log on non-traditional teaching — sibling-centric tutoring, kitchen thermodynamics, street-side kinematics, and student psychology.
+- [Why I Stopped Uploading: An Honest Audit of Consistency and Flaws](https://dhaatrik.github.io/transmissions/why-i-stopped-youtube-classes/): Post-mortem on the DBS Classes YouTube channel cessation — solo production bottleneck, novelty fade, and motivation vs. systems thinking.
+- [Interactive Mission Logs: Orbital Insertion Dynamics](https://dhaatrik.github.io/transmissions/scrollytelling-demo/): Scroll-driven launch telemetry demo — staging, circularization burns, Tsiolkovsky equation, built from KSP intuition and DeltaV Lab engineering.
 
 ## Projects
 
