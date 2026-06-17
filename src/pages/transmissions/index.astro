@@ -711,15 +711,15 @@ const postsWithReadingTime = posts.map((post: any) => {
                             [titleElement, descElement].forEach(el => {
                                 if (!el) return;
                                 const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
-                                let node;
+                                let node: Node | null;
                                 while (node = walk.nextNode()) {
                                     const textContent = node.textContent?.toLowerCase() || '';
                                     words.forEach(word => {
                                         let startPos = 0;
                                         while ((startPos = textContent.indexOf(word.toLowerCase(), startPos)) !== -1) {
                                             const range = new Range();
-                                            range.setStart(node, startPos);
-                                            range.setEnd(node, startPos + word.length);
+                                            range.setStart(node as Node, startPos);
+                                            range.setEnd(node as Node, startPos + word.length);
                                             ranges.push(range);
                                             startPos += word.length;
                                         }
@@ -739,7 +739,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                                 if (!el) return;
                                 const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
                                 const textNodes: Node[] = [];
-                                let node;
+                                let node: Node | null;
                                 while (node = walk.nextNode()) {
                                     textNodes.push(node);
                                 }
