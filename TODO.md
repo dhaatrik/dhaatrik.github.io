@@ -58,9 +58,6 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 
 
 
-- [ ] **Pass project `logo` as OG image on project pages** _(SEO)_
-  - `CreativeWork` JSON-LD already includes `image`; `<BaseHead />` on project pages does not receive `logo`.
-  - Add `image={logo}` to `<BaseHead />` in `src/pages/projects/[...slug].astro`.
 
 - [ ] **Reduce global CSS payload further** _(Performance)_ — _Partial; optional follow-up_
   - KaTeX is gated behind `hasMath` on blog posts and CDN-linked on personnel.
@@ -115,7 +112,8 @@ _Move fully completed items here. Partial completions are noted; reopened items 
 - [x] **Extract and defer global mouse-tracking JS** — completed 2026-06-17 _(→ `mouseTracker.ts`, pointer-gated)_
 - [x] **Complete link prefetch coverage** — completed 2026-06-17 _(Footer internal links)_
 - [x] **Add automated accessibility audits** — completed 2026-06-17 _(partial: critical-only, 4 routes — see P2 for expansion)_
-- [x] **Per-page SEO metadata** — completed 2026-06-17 _(partial: project OG images pending — see P2)_
+- [x] **Pass project `logo` as OG image on project pages** — completed 2026-06-17 _(passed project logo to BaseHead as the image prop, and verified with E2E tests)_
+- [x] **Per-page SEO metadata** — completed 2026-06-17 _(fully complete; project OG images and blog OG images are now correctly populated)_
 - [x] **Reduce CSS payload** — completed 2026-06-17 _(partial: KaTeX gated; ~129 KB global CSS remains — see P2)_
 - [x] **Gate decorative motion on mobile** — completed 2026-06-17 _(CSS `pointer: coarse` + JS media query)_
 - [x] **Optimize hero images** — completed 2026-06-16 _(partial: AVIF/WebP ✓; logo_light + JPEG fallback remain — see P2)_
