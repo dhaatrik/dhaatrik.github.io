@@ -544,9 +544,11 @@ const formatMarqueeDate = (date: Date) => {
             'F',
         ];
 
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         Array.from(cyberIcons).forEach((icon) => {
             const container = icon.querySelector('.icon-container');
-            if (!container) return;
+            if (!container || prefersReducedMotion) return;
 
             const originalHTML = container.innerHTML;
             let scrambleInterval: number | undefined;
@@ -600,21 +602,38 @@ const formatMarqueeDate = (date: Date) => {
             );
         });
 
-        // Bind dynamic aria-expanded state to popover toggles
+        // Bind dynamic aria-expanded state and focus management to popover toggles
         const popovers = ['books-popover', 'support-popover'];
+        let lastActiveElement: HTMLElement | null = null;
         popovers.forEach((id) => {
             const popover = document.getElementById(id);
             if (popover) {
                 popover.addEventListener(
                     'toggle',
-                    (e) => {
-                        const triggers = document.querySelectorAll(`[aria-controls="${id}"]`);
+                    (e: any) => {
+                        const isOpen = e.newState === 'open';
+                        const triggers = document.querySelectorAll(`[aria-controls="${id}"], [popovertarget="${id}"]`);
                         triggers.forEach((trigger) => {
                             trigger.setAttribute(
                                 'aria-expanded',
-                                e.newState === 'open' ? 'true' : 'false'
+                                isOpen ? 'true' : 'false'
                             );
                         });
+
+                        if (isOpen) {
+                            lastActiveElement = document.activeElement as HTMLElement | null;
+                            const closeBtn = popover.querySelector('button[aria-label], button[popovertarget]') as HTMLElement | null;
+                            if (closeBtn) {
+                                requestAnimationFrame(() => {
+                                    closeBtn.focus();
+                                });
+                            }
+                        } else {
+                            if (lastActiveElement) {
+                                lastActiveElement.focus();
+                                lastActiveElement = null;
+                            }
+                        }
                     },
                     { signal }
                 );
