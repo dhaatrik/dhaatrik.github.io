@@ -152,7 +152,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                     <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
                         <div class="space-y-1">
                             <div
-                                class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                                class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
                             >
                                 // PROJECT_ID
                             </div>
@@ -162,7 +162,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                         </div>
                         <div class="space-y-1">
                             <div
-                                class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                                class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
                             >
                                 // AUTHOR
                             </div>
@@ -170,7 +170,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                         </div>
                         <div class="space-y-1">
                             <div
-                                class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                                class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
                             >
                                 // SUBJECT
                             </div>
@@ -180,7 +180,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                         </div>
                         <div class="space-y-1">
                             <div
-                                class="text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                                class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
                             >
                                 // CLASSIFICATION
                             </div>
@@ -205,14 +205,14 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                         {
                             githubUrl && (
                                 <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50">
-                                    <h3 class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                                    <h3 class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400">
                                         // REPOSITORY
                                     </h3>
                                     <a
                                         href={githubUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        class="magnetic-target inline-flex w-full items-center justify-center gap-2 rounded-lg bg-(--accent) px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
+                                        class="magnetic-target inline-flex w-full items-center justify-center gap-2 rounded-lg bg-(--accent) dark:bg-blue-600 px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                                     >
                                         GitHub Source
                                     </a>
@@ -221,7 +221,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                         }
 
                         <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50">
-                            <h3 class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                            <h3 class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400">
                                 // TRANSMISSIONS
                             </h3>
                             <a
@@ -236,7 +236,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                             class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50"
                         >
                             <h3
-                                class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                                class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
                             >
                                 // CURRENT_STATUS
                             </h3>
@@ -248,7 +248,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                         {
                             tags && tags.length > 0 && (
                                 <div class="rounded-xl border border-slate-200/60 bg-slate-50/50 p-5 dark:border-white/5 dark:bg-[#0f141f]/50">
-                                    <h3 class="mb-4 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500">
+                                    <h3 class="mb-4 font-mono text-[10px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400">
                                         // STACK
                                     </h3>
                                     <div class="flex flex-wrap gap-2">

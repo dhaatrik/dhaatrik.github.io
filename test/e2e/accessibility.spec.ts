@@ -6,11 +6,13 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
         '/',
         '/personnel/',
         '/pedagogy/',
-        '/transmissions/'
+        '/transmissions/',
+        '/projects/',
+        '/projects/deltav-lab/'
     ];
 
     for (const route of routes) {
-        test(`should have zero critical WCAG violations on route: ${route}`, async ({ page }) => {
+        test(`should have zero critical or serious WCAG violations on route: ${route}`, async ({ page }) => {
             await page.goto(route);
             
             // Wait for the page and network to be completely idle
@@ -21,16 +23,16 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
                 .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
                 .analyze();
 
-            // Filter for critical accessibility violations
-            const criticalViolations = results.violations.filter(
-                (violation) => violation.impact === 'critical'
+            // Filter for critical and serious accessibility violations
+            const violations = results.violations.filter(
+                (violation) => violation.impact === 'critical' || violation.impact === 'serious'
             );
 
             // Log details of violations if any exist
-            if (criticalViolations.length > 0) {
-                console.error(`\n[A11Y ERROR] ${criticalViolations.length} critical accessibility violation(s) found on route: ${route}`);
-                criticalViolations.forEach((violation, index) => {
-                    console.error(`\nViolation #${index + 1}: [${violation.id}] ${violation.help}`);
+            if (violations.length > 0) {
+                console.error(`\n[A11Y ERROR] ${violations.length} critical/serious accessibility violation(s) found on route: ${route}`);
+                violations.forEach((violation, index) => {
+                    console.error(`\nViolation #${index + 1}: [${violation.id}] (${violation.impact}) ${violation.help}`);
                     console.error(`Help URL: ${violation.helpUrl}`);
                     violation.nodes.forEach((node) => {
                         console.error(`- Target Element HTML: ${node.html}`);
@@ -39,8 +41,9 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
                 });
             }
 
-            // Assert that there are zero critical violations
-            expect(criticalViolations).toHaveLength(0);
+            // Assert that there are zero critical or serious violations
+            expect(violations).toHaveLength(0);
         });
     }
 });
+
