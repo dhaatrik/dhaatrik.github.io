@@ -57,10 +57,7 @@ These are the main reasons the implementation is not at 9.5+ yet.
 
 ## P3 — Polish
 
-- [ ] **Remove `execSync` fallback entirely** _(Code quality)_ — _Optional_
-  - `PUBLIC_GIT_SHA` is injected in CI (`.github/workflows/deploy.yml`). Local fallback via `execSync` still exists in `Footer.astro`.
-  - Remove fallback and default to `'UNKNOWN'` or `'LOCAL'` when env var is absent.
-  - File: `src/components/Footer.astro`
+*(All polish items completed)*
 
 ---
 
@@ -105,8 +102,7 @@ _Move fully completed items here. Partial completions are noted; reopened items 
 - [x] **Shrink personnel photo JPEG fallback** — completed 2026-06-17 _(source me.jpeg resized to 800x800 square and quality optimized, shrinking fallback JPEG from 1.56 MB to 117 KB)_
 - [x] **Fix `::highlight` CSS build warnings** — completed 2026-06-17 _(→ runtime injection via `registerHighlightStyles.ts`; build is clean)_
 - [x] **Migrate deprecated markdown config** — completed 2026-06-17 _(→ `unified()` in `astro.config.mjs`)_
-- [x] **Replace `execSync` in Footer with env var** — completed 2026-06-17 _(partial: `PUBLIC_GIT_SHA` in CI; execSync fallback remains — see P3)_
+- [x] **Replace `execSync` in Footer with env var** — completed 2026-06-17 _(removed execSync child process execution entirely from Footer.astro and defaulted to LOCAL when PUBLIC_GIT_SHA is absent)_
 - [x] **Keep `llms-full.txt` synced** — completed 2026-06-17
 - [x] **Complete open Conductor tracks** — completed 2026-06-17 _(all 5/5 tracks fully completed and archived)_
 - [x] **Complete Terminal Theme Customization track** — completed 2026-06-17 _(UX theme switcher with custom property overrides fully integrated and tested)_
-

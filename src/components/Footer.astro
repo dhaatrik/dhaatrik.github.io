@@ -26,18 +26,11 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog'))
 
 const today = new Date();
 
-let gitSha = '';
+let gitSha = 'LOCAL';
 if (import.meta.env.DEV) {
     gitSha = 'DEV';
 } else if (import.meta.env.PUBLIC_GIT_SHA) {
     gitSha = import.meta.env.PUBLIC_GIT_SHA.substring(0, 7).toUpperCase();
-} else {
-    try {
-        const { execSync } = await import('child_process');
-        gitSha = execSync('git rev-parse --short HEAD').toString().trim().toUpperCase();
-    } catch (e) {
-        gitSha = 'UNKNOWN';
-    }
 }
 
 const formatMarqueeDate = (date: Date) => {
