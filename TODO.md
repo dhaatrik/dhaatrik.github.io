@@ -55,10 +55,6 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 
 ## P2 — Medium impact (reopened / remaining)
 
-
-
-
-
 - [ ] **Reduce global CSS payload further** _(Performance)_ — _Partial; optional follow-up_
   - KaTeX is gated behind `hasMath` on blog posts and CDN-linked on personnel.
   - Global CSS bundle is still ~129 KB (`Header.*.css`). Audit unused Tailwind utilities if a meaningful reduction is possible.
