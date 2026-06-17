@@ -323,7 +323,7 @@ const postsWithReadingTime = posts.map((post: any) => {
             </div>
             <section class="layout-container mx-auto">
                 <div
-                    class="mb-2 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center"
+                    class="mb-2 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center reveal-on-scroll"
                 >
                     <h1
                         class="text-4xl leading-tight font-bold tracking-tight text-slate-900 md:text-5xl dark:text-white"
@@ -341,14 +341,14 @@ const postsWithReadingTime = posts.map((post: any) => {
                     </a>
                 </div>
                 <p
-                    class="mb-6 max-w-2xl font-mono text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+                    class="mb-6 max-w-2xl font-mono text-sm leading-relaxed text-slate-500 dark:text-slate-400 reveal-on-scroll"
                 >
                     Notes to future-me (and you, if you're wrestling with the same bugs). Honest
                     logs on teaching, building, and the fuckups in between.
                 </p>
 
                 <!-- Subsystem Domain Tabs -->
-                <div class="mb-10 flex flex-wrap gap-2.5 font-mono text-xs select-none">
+                <div class="mb-10 flex flex-wrap gap-2.5 font-mono text-xs select-none reveal-on-scroll">
                     <button
                         data-filter="all"
                         aria-pressed="true"
@@ -486,7 +486,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                         REF_GRID: 50.84.11
                     </div>
 
-                    <div class="grid gap-8 md:grid-cols-2" id="logs-grid">
+                    <div class="grid gap-8 md:grid-cols-2 reveal-stagger" id="logs-grid">
                         {
                             postsWithReadingTime.map((post: any, i: number) => (
                                 <a
