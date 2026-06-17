@@ -8,12 +8,14 @@ Completed tracks are archived under [`./tracks/completed/`](./tracks/completed/)
 
 ## Active
 
-- [ ] **Track: Terminal Theme Customization (Amber / Matrix / Cobalt)**
-      _Link: [./tracks/terminal_themes_20260524/](./tracks/terminal_themes_20260524/)_
+*(No active tracks)*
 
 ---
 
 ## Completed
+
+- [x] **Track: Terminal Theme Customization (Amber / Matrix / Cobalt)**
+      _Link: [./tracks/completed/terminal_themes_20260524/](./tracks/completed/terminal_themes_20260524/)_
 
 - [x] **Track: Enhance SEO and social sharing metadata** [f0135da]
       _Link: [./tracks/completed/enhance_seo_20260510/](./tracks/completed/enhance_seo_20260510/)_

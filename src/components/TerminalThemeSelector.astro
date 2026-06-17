@@ -1,0 +1,108 @@
+---
+// TerminalThemeSelector.astro — A dot-based picker for terminal themes.
+// Persists selection to localStorage('terminal-theme') and class-toggles <html>.
+---
+
+<div class="flex items-center gap-2 px-2 py-1 rounded-full bg-slate-100/50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5">
+    <button
+        type="button"
+        data-theme="default"
+        aria-label="Default Blue Theme"
+        title="Default Blue"
+        class="theme-dot relative h-3.5 w-3.5 rounded-full bg-blue-500 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 transition-all active:scale-95 dark:focus-visible:ring-offset-slate-900 active-theme"
+    >
+        <span class="sr-only">Default Blue</span>
+    </button>
+    <button
+        type="button"
+        data-theme="matrix"
+        aria-label="Matrix Green Theme"
+        title="Matrix Green"
+        class="theme-dot relative h-3.5 w-3.5 rounded-full bg-green-500 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-1 transition-all active:scale-95 dark:focus-visible:ring-offset-slate-900"
+    >
+        <span class="sr-only">Matrix Green</span>
+    </button>
+    <button
+        type="button"
+        data-theme="amber"
+        aria-label="Amber Terminal Theme"
+        title="Amber Terminal"
+        class="theme-dot relative h-3.5 w-3.5 rounded-full bg-amber-500 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-1 transition-all active:scale-95 dark:focus-visible:ring-offset-slate-900"
+    >
+        <span class="sr-only">Amber Terminal</span>
+    </button>
+    <button
+        type="button"
+        data-theme="cobalt"
+        aria-label="Cobalt Science Theme"
+        title="Cobalt Science"
+        class="theme-dot relative h-3.5 w-3.5 rounded-full bg-sky-400 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-1 transition-all active:scale-95 dark:focus-visible:ring-offset-slate-900"
+    >
+        <span class="sr-only">Cobalt Science</span>
+    </button>
+</div>
+
+<style>
+    /* Dot styling when active */
+    .theme-dot.active-theme {
+        box-shadow: 0 0 0 2px var(--bg-main), 0 0 0 3px var(--accent);
+    }
+    
+    /* Adjust button scaling for active dot */
+    .theme-dot.active-theme:hover {
+        transform: scale(1);
+    }
+</style>
+
+<script is:inline>
+    (function () {
+        // Prevent multiple initialization across transitions
+        if (window.__terminalThemeSelectorInit) return;
+        window.__terminalThemeSelectorInit = true;
+
+        function updateActiveDot() {
+            var activeTheme = localStorage.getItem('terminal-theme') || 'default';
+            var dots = document.querySelectorAll('.theme-dot');
+            dots.forEach(function (dot) {
+                var theme = dot.getAttribute('data-theme');
+                if (theme === activeTheme) {
+                    dot.classList.add('active-theme');
+                } else {
+                    dot.classList.remove('active-theme');
+                }
+            });
+        }
+
+        function setTheme(theme) {
+            localStorage.setItem('terminal-theme', theme);
+            
+            // Toggle classes on html element
+            document.documentElement.classList.remove('theme-matrix', 'theme-amber', 'theme-cobalt');
+            if (theme !== 'default') {
+                document.documentElement.classList.add('theme-' + theme);
+            }
+            updateActiveDot();
+        }
+
+        function handleDotClick(event) {
+            var theme = event.currentTarget.getAttribute('data-theme');
+            setTheme(theme);
+        }
+
+        function bindThemeSelector() {
+            var dots = document.querySelectorAll('.theme-dot');
+            dots.forEach(function (dot) {
+                // Remove first to prevent double binding
+                dot.removeEventListener('click', handleDotClick);
+                dot.addEventListener('click', handleDotClick);
+            });
+            updateActiveDot();
+        }
+
+        // Initial bind
+        bindThemeSelector();
+
+        // Re-bind after view transition navigation
+        document.addEventListener('astro:after-swap', bindThemeSelector);
+    })();
+</script>

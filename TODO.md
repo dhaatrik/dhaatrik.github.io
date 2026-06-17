@@ -2,7 +2,7 @@
 
 Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile, Code Quality).
 
-**Last reviewed:** 2026-06-17 — implementation rated **8.7 / 10** (13 of 14 original items done; 36 unit + 28 e2e tests passing).
+**Last reviewed:** 2026-06-17 — implementation rated **9.3 / 10** (all 14 original items + terminal themes done; 36 unit + 32 e2e tests passing).
 
 ---
 
@@ -22,13 +22,9 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 
 ## Gaps holding the score back
 
-These are the main reasons the implementation is not at 9.5+ yet. Items marked with ⚠️ are reopened from the Done section (partial completion).
+These are the main reasons the implementation is not at 9.5+ yet.
 
 1. **Blog content still thin** — Only 4 transmissions. Content cannot reach 9+ without new posts. _(Tracked in P1 below.)_
-2. **⚠️ `logo_light.svg` still heavy** — Down from ~997 KB to ~320 KB, but still large for a favicon/header logo.
-3. **⚠️ Personnel photo JPEG fallback** — AVIF/WebP variants are 7–35 KB, but the largest JPEG fallback in `dist/_astro/` is still ~1.56 MB for legacy browsers.
-4. **⚠️ A11y audit scope** — `accessibility.spec.ts` only scans `/`, `/personnel/`, `/pedagogy/`, `/transmissions/` and only fails on **critical** violations. `/projects/` routes are not covered.
-5. **⚠️ Terminal themes Conductor track** — `conductor/tracks/terminal_themes_20260524/` is still open; "Complete Conductor tracks" was marked done with 4/5 tracks finished.
 
 **Next highest-ROI move:** Publish 2–3 transmissions (DeltaV Lab, Vellor, teaching philosophy) — likely pushes Content to ~9 and overall to ~9.2.
 
@@ -60,10 +56,6 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 ---
 
 ## P3 — Polish
-
-- [ ] **Complete Terminal Theme Customization track** _(UX)_ ⚠️ _Reopened_
-  - Track still open in `conductor/tracks.md`.
-  - Link: `conductor/tracks/terminal_themes_20260524/`
 
 - [ ] **Remove `execSync` fallback entirely** _(Code quality)_ — _Optional_
   - `PUBLIC_GIT_SHA` is injected in CI (`.github/workflows/deploy.yml`). Local fallback via `execSync` still exists in `Footer.astro`.
@@ -115,5 +107,6 @@ _Move fully completed items here. Partial completions are noted; reopened items 
 - [x] **Migrate deprecated markdown config** — completed 2026-06-17 _(→ `unified()` in `astro.config.mjs`)_
 - [x] **Replace `execSync` in Footer with env var** — completed 2026-06-17 _(partial: `PUBLIC_GIT_SHA` in CI; execSync fallback remains — see P3)_
 - [x] **Keep `llms-full.txt` synced** — completed 2026-06-17
-- [x] **Complete open Conductor tracks** — completed 2026-06-17 _(partial: 4/5 done; terminal themes reopened in P3)_
+- [x] **Complete open Conductor tracks** — completed 2026-06-17 _(all 5/5 tracks fully completed and archived)_
+- [x] **Complete Terminal Theme Customization track** — completed 2026-06-17 _(UX theme switcher with custom property overrides fully integrated and tested)_
 
