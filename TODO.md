@@ -57,10 +57,6 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 
 
 
-- [ ] **Expand a11y audit coverage** _(Mobile, Code quality)_
-  - Add `/projects/` and at least one project detail route (e.g. `/projects/deltav-lab/`) to `accessibility.spec.ts`.
-  - Consider failing on `serious` impact violations, not only `critical`.
-  - File: `test/e2e/accessibility.spec.ts`
 
 - [ ] **Pass project `logo` as OG image on project pages** _(SEO)_
   - `CreativeWork` JSON-LD already includes `image`; `<BaseHead />` on project pages does not receive `logo`.
@@ -112,6 +108,7 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 
 _Move fully completed items here. Partial completions are noted; reopened items moved back to P2/P3._
 
+- [x] **Expand a11y audit coverage** — completed 2026-06-17 _(added /projects/ and /projects/deltav-lab/ routes to automated E2E audits, expanded check to fail on both critical and serious WCAG violations, and resolved all color contrast issues)_
 - [x] **Add dedicated project pages** — completed 2026-06-16 _(12 projects, case-study structure, JSON-LD, breadcrumbs)_
 - [x] **Further compress `logo_light.svg`** — completed 2026-06-17 _(matched size of logo_dark.svg at ~81 KB via path simplification and SVGO)_
 - [x] **Pass `heroImage` to `BaseHead` on blog posts** — completed 2026-06-17 _(photo OG image + Article schema `image` field)_

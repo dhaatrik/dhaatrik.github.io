@@ -179,9 +179,9 @@
         --text-secondary: #64748b;
         /* Light: muted slate */
 
-        --accent: #3b82f6;
-        /* Clean blue accent */
-        --accent-glow: rgba(59, 130, 246, 0.3);
+        --accent: #2563eb;
+        /* Clean blue accent (WCAG AA compliant in light mode) */
+        --accent-glow: rgba(37, 99, 235, 0.3);
 
         /* Bento Grid Constants (Mobile first) */
         --bento-gap: 1rem;
@@ -212,6 +212,8 @@
         --text-secondary: #9ca3af;
         /* Muted text */
 
+        --accent: #3b82f6;
+        /* Clean blue accent for dark mode */
         --accent-glow: rgba(59, 130, 246, 0.5);
     }
 
