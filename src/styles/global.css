@@ -653,7 +653,10 @@
 /* Global Focus Styles */
 @layer base {
     a:focus-visible,
-    button:focus-visible {
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
         outline: 2px solid var(--accent);
         outline-offset: 4px;
         border-radius: 0.25rem;
@@ -1521,6 +1524,10 @@ html.theme-transition::view-transition-old(root) {
     .parallax-hero-bg {
         animation: none !important;
         transform: none !important;
+    }
+
+    #flashlight-bg {
+        display: none !important;
     }
 
     .scrollytell-step-card {

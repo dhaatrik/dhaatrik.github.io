@@ -6,6 +6,8 @@ let progressInterval: number | undefined;
 function createIndicator() {
     if (progressBar && statusTag) return;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // Create progress bar element at the top of the viewport
     progressBar = document.createElement('div');
     progressBar.id = 'transition-progress-bar';
@@ -16,7 +18,7 @@ function createIndicator() {
     progressBar.style.width = '0%';
     progressBar.style.backgroundColor = 'var(--accent)';
     progressBar.style.zIndex = '99999';
-    progressBar.style.transition = 'width 0.3s ease-out, opacity 0.3s ease-in-out';
+    progressBar.style.transition = prefersReducedMotion ? 'none' : 'width 0.3s ease-out, opacity 0.3s ease-in-out';
     progressBar.style.pointerEvents = 'none';
     progressBar.style.opacity = '0';
 
@@ -30,8 +32,8 @@ function createIndicator() {
     statusTag.style.zIndex = '99999';
     statusTag.style.pointerEvents = 'none';
     statusTag.style.opacity = '0';
-    statusTag.style.transition = 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out';
-    statusTag.style.transform = 'translateY(10px)';
+    statusTag.style.transition = prefersReducedMotion ? 'none' : 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out';
+    statusTag.style.transform = prefersReducedMotion ? 'none' : 'translateY(10px)';
     statusTag.style.backgroundColor = 'rgba(11, 14, 20, 0.95)'; // Matches dark background
     statusTag.style.color = 'var(--accent)';
     statusTag.style.border = '1px solid color-mix(in srgb, var(--accent) 30%, transparent)';
@@ -50,16 +52,19 @@ function startProgress() {
     createIndicator();
     if (!progressBar || !statusTag) return;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // Clear any existing intervals and reset state
     clearInterval(progressInterval);
     transitionProgress = 0;
     progressBar.style.width = '0%';
     progressBar.style.opacity = '1';
-    progressBar.style.transition = 'width 0.3s ease-out, opacity 0.3s ease-in-out';
+    progressBar.style.transition = prefersReducedMotion ? 'none' : 'width 0.3s ease-out, opacity 0.3s ease-in-out';
 
-    statusTag.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-(--accent) animate-ping"></span> [ CONNECTING... ]`;
+    const animateClass = prefersReducedMotion ? '' : 'animate-ping';
+    statusTag.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-(--accent) ${animateClass}"></span> [ CONNECTING... ]`;
     statusTag.style.opacity = '1';
-    statusTag.style.transform = 'translateY(0)';
+    statusTag.style.transform = prefersReducedMotion ? 'none' : 'translateY(0)';
 
     // Simulate progress increments up to 85%
     progressInterval = window.setInterval(() => {
@@ -74,7 +79,9 @@ function startProgress() {
 
 function setSwapping() {
     if (!statusTag || !progressBar) return;
-    statusTag.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-(--accent) animate-pulse"></span> [ SWAPPING... ]`;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const animateClass = prefersReducedMotion ? '' : 'animate-pulse';
+    statusTag.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-(--accent) ${animateClass}"></span> [ SWAPPING... ]`;
     progressBar.style.width = '90%';
 }
 
@@ -82,7 +89,9 @@ function completeProgress() {
     clearInterval(progressInterval);
     if (!progressBar || !statusTag) return;
 
-    progressBar.style.transition = 'width 0.2s ease-out, opacity 0.3s ease-in-out';
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    progressBar.style.transition = prefersReducedMotion ? 'none' : 'width 0.2s ease-out, opacity 0.3s ease-in-out';
     progressBar.style.width = '100%';
 
     statusTag.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-green-500"></span> [ READY ]`;
@@ -92,7 +101,9 @@ function completeProgress() {
         if (progressBar) progressBar.style.opacity = '0';
         if (statusTag) {
             statusTag.style.opacity = '0';
-            statusTag.style.transform = 'translateY(10px)';
+            if (!prefersReducedMotion) {
+                statusTag.style.transform = 'translateY(10px)';
+            }
         }
     }, 400);
 }

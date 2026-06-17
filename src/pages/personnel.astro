@@ -1419,6 +1419,11 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                     let isTyping = false;
 
                     const typeWriter = () => {
+                        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                        if (prefersReducedMotion) {
+                            terminalSnippet.innerHTML = `<span class="text-[#bd93f9]">"</span>${rawText}<span class="text-[#bd93f9]">"</span>`;
+                            return;
+                        }
                         if (index <= rawText.length) {
                             let displayed = '<span class="text-[#bd93f9]">"</span>';
                             displayed += rawText.substring(0, index);
@@ -1477,7 +1482,10 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                     }
                 };
 
-                window.addEventListener('mousemove', handleReticleParallax);
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (!prefersReducedMotion) {
+                    window.addEventListener('mousemove', handleReticleParallax);
+                }
 
                 // 5. The "Offline-First" Easter Egg
                 const handleOffline = () => {
@@ -1515,7 +1523,9 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                         }
 
                         // Remove mousemove listener
-                        window.removeEventListener('mousemove', handleReticleParallax);
+                        if (!prefersReducedMotion) {
+                            window.removeEventListener('mousemove', handleReticleParallax);
+                        }
                         if (reticleRafId) {
                             window.cancelAnimationFrame(reticleRafId);
                         }

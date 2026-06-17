@@ -165,6 +165,9 @@ const handlePageShow = (e: PageTransitionEvent) => {
 
 // Check media query to only bind mouse listeners on capable devices
 const runMouseTracker = () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (!isFinePointer) return;
 

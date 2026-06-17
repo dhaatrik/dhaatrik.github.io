@@ -1082,15 +1082,31 @@ const webSiteSchema = JSON.stringify({
                         }
                     });
 
+                    let lastActiveElement = null;
                     const popoverId = card.getAttribute('data-popover-target');
                     if (popoverId) {
                         const popover = document.getElementById(popoverId);
                         if (popover) {
                             popover.addEventListener('toggle', (e) => {
+                                const isOpen = e.newState === 'open';
                                 card.setAttribute(
                                     'aria-expanded',
-                                    e.newState === 'open' ? 'true' : 'false'
+                                    isOpen ? 'true' : 'false'
                                 );
+                                if (isOpen) {
+                                    lastActiveElement = document.activeElement;
+                                    const closeBtn = popover.querySelector('button[aria-label], button[popovertarget]');
+                                    if (closeBtn) {
+                                        requestAnimationFrame(() => {
+                                            closeBtn.focus();
+                                        });
+                                    }
+                                } else {
+                                    if (lastActiveElement) {
+                                        lastActiveElement.focus();
+                                        lastActiveElement = null;
+                                    }
+                                }
                             });
                         }
                     }
@@ -1107,6 +1123,14 @@ const webSiteSchema = JSON.stringify({
                 function typeEffect() {
                     const target = document.getElementById('identity-rotator');
                     if (!target) return;
+
+                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    if (prefersReducedMotion) {
+                        currentIdx = (currentIdx + 1) % identities.length;
+                        target.textContent = identities[currentIdx];
+                        typewriterTimeout = setTimeout(typeEffect, 3000);
+                        return;
+                    }
 
                     const fullTxt = identities[currentIdx];
                     if (isDeleting) {
@@ -1157,6 +1181,13 @@ const webSiteSchema = JSON.stringify({
                     if (target) {
                         identities = JSON.parse(target.dataset.identities || '[]');
                         if (identities.length > 0) {
+                            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                            if (prefersReducedMotion) {
+                                currentIdx = 0;
+                                target.textContent = identities[0];
+                                typewriterTimeout = setTimeout(typeEffect, 3000);
+                                return;
+                            }
                             currentIdx = 0;
                             charIdx = identities[0].length;
                             currentText = identities[0];
