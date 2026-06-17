@@ -46,7 +46,7 @@ const webpageSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: `Projects Archive | ${SITE_TITLE}`,
-    description: "Browse Dhaatrik Chowdhury's complete archive of personal projects, case studies, and open-source software experiments.",
+    description: "My project workbench — things I've shipped, shelved, or am still patching at 2 AM.",
     url: new URL(Astro.url.pathname, Astro.site).href,
     mainEntity: {
         '@type': 'ItemList',
@@ -67,7 +67,7 @@ const jsonLd = JSON.stringify(webpageSchema);
     <head>
         <BaseHead
             title={`Projects | ${SITE_TITLE}`}
-            description="Browse Dhaatrik Chowdhury's complete archive of personal projects, case studies, and open-source software experiments."
+            description="My project workbench — things I've shipped, shelved, or am still patching at 2 AM."
         />
         <script type="application/ld+json" set:html={jsonLd} />
     </head>
@@ -173,11 +173,11 @@ const jsonLd = JSON.stringify(webpageSchema);
                     <h1
                         class="mb-4 text-4xl leading-tight font-bold tracking-tight text-slate-900 md:text-5xl dark:text-white"
                     >
-                        Case Studies <span class="text-slate-400 dark:text-slate-600">& Directory</span>
+                        Project Workbench <span class="text-slate-400 dark:text-slate-600">& Archive</span>
                     </h1>
                     <p class="max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                        A complete archive of software engineering solutions, responsive Web applications, 
-                        offline utilities, browser extensions, and sandbox research environments.
+                        Things I've shipped, abandoned, or am still fixing. Web apps, offline tools,
+                        browser extensions, and sandbox experiments — each with an honest mission log.
                     </p>
                 </div>
 

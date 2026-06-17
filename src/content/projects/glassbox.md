@@ -1,6 +1,6 @@
 ---
 title: 'Glassbox'
-description: 'A minimalist, high-transparency sandbox environment for executing and auditing untrusted JavaScript files locally.'
+description: 'Run untrusted JavaScript in an isolated Node sandbox and get a JSON audit log of what it tried to touch.'
 logo: '../../assets/glassbox.png'
 githubUrl: 'https://github.com/dhaatrik/glassbox'
 progress: 'v2.1.0 stable release, secure sandbox API'
@@ -8,20 +8,33 @@ order: 6
 tags: ['TypeScript', 'Node.js', 'VM2', 'Security']
 ---
 
-## What is Glassbox and why was it built?
+## SYS.STATUS: v2.1.0 stable — scripts run isolated, host stays clean, telemetry logs ship
 
-Running unverified npm packages, third-party scripts, or dynamic code snippets poses severe security risks to a developer's local machine, potentially exposing environment variables, credentials, and files. Dhaatrik built Glassbox to solve this isolation issue, providing a transparent sandbox to securely audit, execute, and monitor script actions.
+I needed to execute sketchy scripts without letting them read my `.env`. Glassbox is a transparent sandbox: run code, watch what it attempts, block what shouldn't leave the box.
 
-## How did Dhaatrik approach the implementation?
+## Why I started this
 
-Dhaatrik configured a secure context-isolation pipeline utilizing Node.js vm contexts and Proxy wrappers. Glassbox intercepts core system APIs (filesystem, network, process) and forces them to resolve inside a virtualized, read-only environment. By auditing API call telemetry, it generates a transparent behavior report detailing precisely what the script attempted to access.
+`npm install` and random GitHub gists are trust exercises. Running unverified JavaScript on your main Node process is how credentials leak. I wanted **isolation plus visibility** — not just "it didn't crash," but "here's every fs and network call it tried."
 
-## What technologies were used in the stack?
+## What I tried (and what broke)
 
-- **TypeScript**: Ensuring strict type safety and interface definitions across proxy boundaries.
-- **Node.js VM Module**: Creating isolated execution contexts separate from the host process.
-- **ES6 Proxies**: Intercepting and virtualization of globals and global namespace access.
+The pipeline uses Node's VM contexts with Proxy wrappers around sensitive globals. Filesystem, network, and process APIs resolve inside a virtualized, read-only environment. Calls get logged into a diagnostic JSON report.
 
-## What is the current progress and outcome?
+VM2 is in the stack tags; getting proxy boundaries typed cleanly in TypeScript took iteration. Early versions either over-blocked (scripts couldn't run at all) or under-logged (silent failures). v2.1.0 is the balance: stable API, consistent telemetry.
 
-Glassbox is currently at version 2.1.0, offering a stable and highly secure sandbox API. It successfully shields the host system from unauthorized file and socket accesses while generating a clean diagnostic JSON log of script attempts.
+The transparency angle matters: after a run you get a JSON report listing filesystem paths touched, network hosts attempted, and process calls intercepted. That report is what makes Glassbox useful for auditing — you're not guessing whether a script behaved, you're reading its attempt log.
+
+## Fuckups & learnings
+
+- **Sandbox escape research is humbling.** You ship boundaries; you don't assume perfection.
+- **Audit logs need structure**, not `console.log` soup — otherwise you can't diff two script runs.
+- **Security tools need boring APIs.** Fancy DSLs don't get adopted; `run(code) -> report` does.
+- **Read-only virtual FS still leaks intent.** Even blocked reads tell you what the script was hunting for.
+
+## Where it stands now
+
+Glassbox v2.1.0 exposes a stable sandbox API. Unauthorized file and socket access gets blocked; script behavior returns as clean JSON you can diff across runs or feed into CI checks before you trust a new dependency.
+
+## Closing transmission
+
+If you audit dependencies or run untrusted snippets, use it as a preflight check. Your main process will thank you.

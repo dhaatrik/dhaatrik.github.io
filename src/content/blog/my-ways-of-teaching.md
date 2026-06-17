@@ -1,6 +1,6 @@
 ---
-title: 'Pedagogy from First Principles: Cooking, Open Skies, and Bus Wheels'
-description: "A deep dive into Dhaatrik's non-traditional teaching philosophy, treating students like younger siblings, and using everyday observations to explain scientific phenomena."
+title: 'How I Teach: Bus Wheels, Kitchen Labs, and Open Skies'
+description: 'A mission log on my non-traditional teaching philosophy — sibling-centric tutoring, everyday observations, and why I stopped lecturing from a raised podium.'
 pubDate: 2026-06-16
 tags: ['pedagogy']
 clearance: 'PUBLIC'
@@ -20,27 +20,31 @@ clearance: 'PUBLIC'
 ====================================================================
 ```
 
-### What Was the Teaching Philosophy of DBS Classes?
+### Mission Report: The Bus Wheel That Changed Everything
 
-Teaching isn't about lecturing from a raised podium or reading slides off a screen; it is about engineering an environment where curiosity becomes inevitable. Throughout his nine years of tutoring, Dhaatrik moved away from standard, textbook-focused instructional models to design highly personalized learning paths.
+The best mechanics lecture I ever gave did not happen in a classroom. It happened on a crowded city street, waiting for a bus.
 
-His methods were built on the belief that traditional academic structures fail because they prioritize fear and authority over safety and play. To counter this, he structured his teaching around a few core, highly experimental methodologies:
+A student asked me why the wheels on a moving bus sometimes look like they are spinning backward in photographs, and sometimes frozen in place. Instead of reaching for a textbook diagram, I pointed at the actual wheel rolling past us. We talked about angular velocity, the relationship between linear and rotational motion, and why your eye samples reality at a finite frame rate. Abstract symbols on a page suddenly had rubber, asphalt, and sunlight attached to them.
 
-#### 1. The Sibling-Centric and Friend-Centric Relationship Model
-
-Dhaatrik never wanted to be a distant, intimidating authority figure. He purposefully treated his students as younger siblings and close friends. This relationship was reinforced by his students calling him **"Dhaatu Bhaiyaa"** (Big Brother Dhaatu), an affectionate name derived from his personal nickname.
-
-By removing the formal barrier of a traditional teacher-student hierarchy, he dismantled the fear of asking "dumb" questions—which is the absolute killer of learning. In his classes, failure was normalized, and curiosity was rewarded. He celebrated small breakthrough moments with tangible rewards, gifts, and food treats, building a high-energy, supportive environment where students felt secure enough to struggle through complex math and physics concepts.
+That moment crystallized something I had been building toward for years: **physics is already happening everywhere**. My job is not to import it into the classroom. My job is to help students notice it, question it, and then — only then — write the equations.
 
 ---
 
-### How Did Dhaatrik Teach Physics Using Everyday Objects?
+### Mission Report: The Kitchen as a Thermodynamics Lab
 
-To teach physics effectively, Dhaatrik believed that one must step outside the classroom and look at the universe. He routinely constructed experiments using the raw materials of daily life:
+If the street taught me kinematics, the kitchen taught me heat transfer.
 
-- **In the Kitchen:** He held practical demonstrations while cooking. A hot frying pan became a laboratory for studying conduction, convection, and thermal radiation. By watching water droplets dance on a hot skillet (the Leidenfrost effect) or observing oil viscosity change under heat, students learned thermodynamics through their senses, converting abstract variables into physical intuition.
-- **Under the Open Sky:** He moved classrooms outdoors. Under the sky, lectures on gravity, optics, and atmospheric science became tactile. Students estimated the height of trees using trigonometry and shadow lengths, studied light refraction and scattering in the atmosphere, and calculated the parabolic trajectory of thrown objects in real-time.
-- **On the Move:** Dhaatrik used the streets of India as a mechanics lab. To explain angular momentum, torque, and rolling resistance, he would have students observe a moving bus wheel. They discussed why wheels rotate the way they do, how kinematics play out during a soccer kick, and how torque acts on the joints of a bicycle. Abstract equations were constantly mapped back to visual, concrete observations.
+I held practical demonstrations while cooking with students. A hot frying pan became a laboratory for studying conduction, convection, and thermal radiation. By watching water droplets dance on a hot skillet — the Leidenfrost effect — or observing how oil viscosity changes under heat, students learned thermodynamics through their senses. Abstract variables like specific heat and thermal conductivity stopped being symbols and started being things you could _feel_.
+
+Cooking together also did something textbooks cannot: it removed the performance anxiety. When you are stirring dal and discussing entropy, nobody is afraid to ask a "dumb" question. The kitchen is a low-stakes environment where curiosity is the only prerequisite.
+
+---
+
+### Mission Report: Classrooms Under Open Skies
+
+I routinely moved lessons outdoors. Under the sky, lectures on gravity, optics, and atmospheric science became tactile. Students estimated the height of trees using trigonometry and shadow lengths. We studied light refraction and scattering in the atmosphere. We calculated the parabolic trajectory of thrown objects in real time — not as a problem set, but as a ball arcing through actual air.
+
+The streets of India became my mechanics lab beyond bus wheels, too. To explain angular momentum, torque, and rolling resistance, I had students observe moving vehicles, discuss why wheels rotate the way they do, trace how kinematics play out during a soccer kick, and map how torque acts on the joints of a bicycle. Every abstract equation was constantly mapped back to visual, concrete observations.
 
 ```
 ====================================================================
@@ -59,10 +63,24 @@ To teach physics effectively, Dhaatrik believed that one must step outside the c
 
 ---
 
-### What Did Tutoring Teach Dhaatrik About Student Psychology?
+### Mission Report: The Sibling-Centric Relationship Model
 
-Teaching mathematics and physics taught Dhaatrik lessons that went far beyond textbook equations. It was an exercise in cognitive and behavioral psychology:
+None of this works if students are afraid of you.
 
-- **Understanding Human Psychology:** He learned how students think, what triggers their focus, and what makes their minds drift. He realized that a student's attention is not a resource to be demanded, but a state of mind to be earned through narrative design.
-- **Attention Engineering:** To keep a classroom of 30 to 40 school students fully engaged, he had to structure every lesson like a story. Each mathematical derivation or physical law was introduced as a puzzle to be solved, complete with a narrative setup, a conflict (a counter-intuitive physical observation), and a resolution (the formula).
-- **Adapting Feedback Loops:** He mastered the art of code-switching between different developmental levels—translating the same physics concepts into intuitive metaphors for a Class 9 student, and then into rigorous, multi-variable calculus formulations for university B.Sc or B.Tech engineering candidates.
+I never wanted to be a distant, intimidating authority figure. I purposefully treated my students as younger siblings and close friends — a relationship reinforced when they called me **"Dhaatu Bhaiyaa"** (Big Brother Dhaatu), an affectionate name derived from my personal nickname.
+
+By removing the formal barrier of a traditional teacher-student hierarchy, I dismantled the fear of asking "dumb" questions — which is the absolute killer of learning. In my classes, failure was normalized, and curiosity was rewarded. I celebrated small breakthrough moments with tangible rewards, gifts, and food treats, building a high-energy, supportive environment where students felt secure enough to struggle through complex math and physics concepts.
+
+Teaching is not about lecturing from a raised podium or reading slides off a screen. It is about engineering an environment where curiosity becomes inevitable.
+
+---
+
+### Mission Report: What Tutoring Taught Me About Attention
+
+Nine years of tutoring taught me lessons that went far beyond textbook equations. It was an exercise in cognitive and behavioral psychology:
+
+- **Understanding Human Psychology:** I learned how students think, what triggers their focus, and what makes their minds drift. A student's attention is not a resource to be demanded — it is a state of mind to be earned through narrative design.
+- **Attention Engineering:** To keep a classroom of 30 to 40 school students fully engaged, I had to structure every lesson like a story. Each mathematical derivation or physical law was introduced as a puzzle to be solved, complete with a narrative setup, a conflict (a counter-intuitive physical observation), and a resolution (the formula).
+- **Adapting Feedback Loops:** I mastered the art of code-switching between different developmental levels — translating the same physics concepts into intuitive metaphors for a Class 9 student, and then into rigorous, multi-variable calculus formulations for university B.Sc or B.Tech engineering candidates.
+
+The bus wheel, the frying pan, the open sky — these were never gimmicks. They were my way of honoring a simple truth: if a student cannot connect an equation to something they have already seen, the equation will not survive the exam — let alone the rest of their life.

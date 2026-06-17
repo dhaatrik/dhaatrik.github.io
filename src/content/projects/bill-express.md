@@ -1,6 +1,6 @@
 ---
 title: 'Bill Express'
-description: 'A fast, browser-based invoice and receipt generator designed for small merchants and freelancers with PDF export.'
+description: 'Browser invoice builder with instant PDF export — no signup, no backend, your line items never leave the tab.'
 logo: '../../assets/bill-express.png'
 githubUrl: 'https://github.com/dhaatrik/bill-express'
 progress: 'Production build deployed, instant PDF export'
@@ -8,20 +8,33 @@ order: 10
 tags: ['JavaScript', 'HTML5', 'Tailwind CSS', 'jsPDF']
 ---
 
-## What is Bill Express and why was it built?
+## SYS.STATUS: Deployed — vector PDF export in under 50ms, zero server round-trips
 
-Invoice generation tools often lock basic PDF export behind signups, trial paywalls, or complex SaaS registrations. Dhaatrik built Bill Express to provide an immediate, client-side invoice compiler. It allows freelancers and small merchants to generate clean, professional invoices in seconds directly from their browsers.
+Freelancers shouldn't need a SaaS account to invoice a client once. Bill Express is a single-page editor that compiles a clean PDF entirely in the browser.
 
-## How did Dhaatrik approach the implementation?
+## Why I started this
 
-Dhaatrik designed a single-page interactive document editor. As the user completes the invoice form, the system renders a layout preview. Upon clicking export, a client-side generator reads the DOM nodes and compiles a structured vector PDF document using jsPDF. This ensures no invoice data is sent to a backend server.
+Every invoice tool I tried wanted an email, a trial, or a watermark until you paid. I needed **fill form → preview → PDF** in one sitting. Client-side only — merchant data is sensitive enough without me operating a storage layer.
 
-## What technologies were used in the stack?
+## What I tried (and what broke)
 
-- **HTML5 & Vanilla JS**: Providing lightweight, fast document compilation.
-- **jsPDF**: Directly generating vector PDF pages client-side.
-- **Tailwind CSS**: Providing print-friendly grid styling and interactive form modules.
+Interactive document editor: form fields update a live layout preview. Export reads the DOM structure and feeds **jsPDF** for vector output — not a screenshot, an actual PDF page. Vanilla JS + HTML5 keep the bundle light; Tailwind handles print-friendly grids.
 
-## What is the current progress and outcome?
+Early exports looked wrong on multi-page invoices because I underestimated line-item pagination. Tuning print CSS and jsPDF page breaks fixed the ugly splits. Tax line formatting and currency alignment were another round of pain — jsPDF doesn't forgive sloppy coordinate math.
 
-Bill Express is active and deployed. It exports print-accurate vector PDF invoices in under 50ms with zero login, user tracking, or backend processing.
+I also tested whether I needed a backend "for convenience." I didn't. Storing invoices server-side would make support easier and privacy worse. For freelancers invoicing five clients a month, browser-local is the right trade.
+
+## Fuckups & learnings
+
+- **DOM-to-PDF is fiddly.** Pixel-perfect preview ≠ perfect PDF without testing real printers.
+- **No backend is a privacy feature and a support limit.** No accounts also means no "we lost your invoice" — because we never had it.
+- **50ms export is achievable** if you don't round-trip through a server "for analytics."
+- **Form UX matters for repeat users.** Saved defaults in localStorage beat retyping your GST number every time.
+
+## Where it stands now
+
+Production build is live. Print-accurate vector PDFs, no login, no tracking pixel on export. Tailwind grids keep the form and preview aligned on desktop; mobile is usable for quick edits before you email the PDF yourself.
+
+## Closing transmission
+
+One page, one job. Open it, invoice someone, close the tab. That's the whole product.

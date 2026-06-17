@@ -1,6 +1,6 @@
 ---
 title: 'Interactive Mission Logs: Orbital Insertion Dynamics'
-description: 'A study on launch trajectories, staging calculations, and circularization burns using native scroll-driven animations.'
+description: 'Why I built scroll-driven launch telemetry on this site — and an interactive breakdown of staging, circularization burns, and the math behind getting to orbit.'
 pubDate: 'May 29 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
 tags: ['aerospace', 'physics', 'ui-ux', 'deltav-lab']
@@ -9,9 +9,27 @@ hasMath: true
 
 import Scrollytell from '../../components/Scrollytell.astro';
 
-In orbital mechanics, delivering a payload into low Earth orbit (LEO) is a sequential game of momentum, gravity, and precise staging. Instead of displaying this as a static list of equations, we use scroll-driven telemetry graphics to visualize each phase of flight in real-time.
+```
+====================================================================
+// TRANSMISSION METADATA // QUICK REFERENCE (AEO/LLMO OBJECTS)
+--------------------------------------------------------------------
+- ENTITY: Scroll-Driven Orbital Insertion Demo
+- SUBJECT: Launch trajectory visualization & staging mathematics
+- MOTIVATION: Kerbal Space Program → DeltaV Lab → this transmission
+- INTEGRATION: Native Scrollytell component (zero external animation libs)
+- CLASSIFICATION: PUBLIC
+====================================================================
+```
 
-Below is an interactive breakdown of a standard launch profile, demonstrating the flight telemetry, staging, and orbital circularization of the Delta-V test vehicle.
+### Mission Report: Why I Built This Demo
+
+I did not learn orbital mechanics from a chalkboard first. I learned it from **Kerbal Space Program** — crashing boosters into the Mun, watching apoapsis markers drift, and slowly realizing that "going up" and "staying up" are two completely different engineering problems.
+
+Years later, while building [DeltaV Lab](/projects/deltav-lab/) — a browser-based simulation with RK4 integration running inside Web Workers — I kept hitting the same wall with static documentation. Launch profiles are inherently _sequential_. Max Q, MECO, staging, circularization: each phase depends on the previous one, and the telemetry only makes sense when you can see the transitions happen in order.
+
+So I built this scrollytelling demo on my own site. Not as a portfolio gimmick, but as the kind of explanation I wish I had when I was a student staring at the Tsiolkovsky equation without any intuition for what staging actually buys you.
+
+Scroll at your own pace. The telemetry follows you.
 
 ---
 
@@ -265,7 +283,7 @@ Below is an interactive breakdown of a standard launch profile, demonstrating th
       Upon reaching the targeted apoapsis (the highest point of the trajectory), the vehicle re-ignites its thrusters parallel to the Earth's horizon. This orbital circularization burn adds the final velocity increment required to transition from a sub-orbital arc to a stable circular orbit:
     </p>
     <div class="my-3 font-mono text-xs text-center text-slate-800 dark:text-slate-200">
-      $$ v_{orbit} = \sqrt{\frac{G \cdot M}{r}} $$
+      $$ v_\{orbit\} = \sqrt{\frac{G \cdot M}{r}} $$
     </div>
     <p class="text-xs text-slate-500 dark:text-slate-500 mt-2 font-mono">
       Payload fairings decouple, and the satellite is successfully inserted into slot LEO-28.
@@ -275,15 +293,15 @@ Below is an interactive breakdown of a standard launch profile, demonstrating th
 
 ---
 
-### The Mathematical Principles Behind Staging
+### Mission Report: The Math Behind Staging
 
 The separation of stages is governed directly by the Tsiolkovsky rocket equation:
 
-$$ \Delta v = I_{sp} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
+$$ \Delta v = I_\{sp\} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
 
 Where:
 
-- $I_{sp}$ represents the specific impulse of the vacuum engines.
+- $I_\{sp\}$ represents the specific impulse of the vacuum engines.
 - $m_0$ is the initial wet mass of the stage.
 - $m_f$ is the final dry mass after fuel depletion.
 
@@ -297,4 +315,12 @@ def calculate_delta_v(isp, g0, m0, mf):
 
 By employing multi-stage architectures, we avoid lifting the massive empty structural tanks of Stage 1 into orbital velocity, maximizing payload capacity and minimizing required thermal fuel.
 
-By matching the scrolling velocity of the reader directly to the visualization, we allow complex telemetry profiles to be digested at an individual reader's natural pace.
+---
+
+### Mission Report: Why Scroll, Not Slideshow
+
+I could have embedded a video walkthrough. But videos force a single playback speed. Orbital insertion is a _thinking_ problem — you need to pause at MECO, stare at the mass ratio, and ask yourself whether the staging event actually earned its delta-v.
+
+By matching the scrolling velocity of the reader directly to the visualization, I let complex telemetry profiles be digested at an individual reader's natural pace. That is the same design instinct behind DeltaV Lab's 50Hz simulation tick: give people time to _think_, not just watch.
+
+If this demo helped you feel staging for the first time — the way KSP helped me — then it did its job.

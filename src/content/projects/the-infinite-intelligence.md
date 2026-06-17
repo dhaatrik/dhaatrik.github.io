@@ -1,6 +1,6 @@
 ---
 title: 'The Infinite Intelligence'
-description: "Transcend the limitations of single-model AI by simulating a collaborative 'council of experts' that debates, critiques, and synthesizes complex problems."
+description: "Multiple Gemini agents debate a problem before you get a final answer — not one model talking to itself in a mirror."
 logo: '../../assets/the-infinite-intelligence.png'
 githubUrl: 'https://github.com/dhaatrik/the-infinite-intelligence'
 progress: 'Parallel Collaboration, Sequential Workflows, and Round-Robin Debate'
@@ -8,20 +8,37 @@ order: 4
 tags: ['React 19', 'TypeScript 5.8', 'Google Gemini AI', 'Vite 6']
 ---
 
-## What is The Infinite Intelligence and why was it built?
+## SYS.STATUS: Council-of-agents pipeline works — Creator, Critic, Synthesizer all shipping
 
-Standard AI outputs often suffer from single-viewpoint bias and a lack of critical self-review. Dhaatrik built The Infinite Intelligence to solve this "hallucination of certainty" by forcing models to decompose problems into first principles and engage in multi-round peer-review cycles before providing a final answer. It is about moving from a single AI "assistant" to a professional-grade "council" that checks its own work.
+One model giving you a confident wrong answer is still one model. The Infinite Intelligence is my experiment in making AI argue with itself before you trust the output.
 
-## How did Dhaatrik approach the implementation?
+## Why I started this
 
-Dhaatrik modeled the system as a state machine where multiple specialized LLM agents (e.g., Creator, Critic, Synthesizer) run concurrently. The Creator generates the initial solution, the Critic evaluates it for flaws, and the Synthesizer refines it based on feedback. The workflows support both parallel collaboration and sequential round-robin debate.
+I kept hitting the same wall: single-shot LLM responses sound authoritative even when they're thin or biased. I wanted a workflow where specialized roles — generate, critique, refine — run in a structured loop, so the final answer survived at least one round of peer review.
 
-## What technologies were used in the stack?
+Not magic. Not "superintelligence." Just **process** applied to models that otherwise skip self-checking.
 
-- **Google Gemini AI**: Utilizes the Gen AI SDK and system instructions to roleplay different expert personalities.
-- **React 19 & Vite 6**: Renders the dynamic agent-interaction canvas with high performance.
-- **TypeScript 5.8**: Strongly types the state machine transitions and message passing protocols between agents.
+## What I tried (and what broke)
 
-## What is the current progress and outcome?
+I modeled the system as a **state machine**. Agents (Creator, Critic, Synthesizer) pass messages through typed transitions in TypeScript 5.8. Google Gemini handles the roleplay via system instructions — different personas, different jobs.
 
-The project successfully implements parallel collaboration, sequential workflows, and a full round-robin debate system. Users can input a prompt and watch the council debate and refine the answer live.
+Three workflow modes shipped from the build:
+- **Parallel collaboration** — agents work concurrently where independence helps
+- **Sequential workflows** — strict ordering when each step depends on the last
+- **Round-robin debate** — iterative critique until synthesis
+
+React 19 + Vite 6 render the interaction canvas — watching agents talk in real time is half the point. Getting the UI to stay smooth while multiple async completions land out of order took careful state design.
+
+## Fuckups & learnings
+
+- **More agents ≠ better answers.** Extra rounds can amplify noise if the Critic isn't constrained. Role prompts matter more than agent count.
+- **State machines pay off fast.** Ad-hoc promise chains became unmaintainable by week two.
+- **Debate is expensive.** Latency and token cost are real; the UI should show progress, not a spinner pretending it's thinking.
+
+## Where it stands now
+
+All three workflow modes are implemented. You input a prompt and watch the council debate, critique, and refine live before the synthesized output lands.
+
+## Closing transmission
+
+If you're skeptical of single-model certainty — good, me too. Clone it, break a workflow, and see if the council catches what one shot missed.

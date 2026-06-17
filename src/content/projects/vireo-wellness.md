@@ -1,6 +1,6 @@
 ---
 title: 'Vireo Wellness'
-description: 'A privacy-centric health journal and meditation timer that tracks habit patterns offline.'
+description: 'An offline-first health journal and meditation timer — your habits stay in your browser, not on my server.'
 logo: '../../assets/vireo-wellness.png'
 githubUrl: 'https://github.com/dhaatrik/vireo-wellness'
 progress: 'PWA ready, works offline with database caching'
@@ -8,21 +8,35 @@ order: 9
 tags: ['React', 'PWA', 'IndexedDB', 'Tailwind CSS']
 ---
 
-## What is Vireo Wellness and why was it built?
+## SYS.STATUS: PWA installable — 100% offline, IndexedDB persistence, export works
 
-Most modern fitness and wellness applications harvest sensitive biological and emotional telemetry, hosting it on centralized servers. Dhaatrik built Vireo Wellness to prove that self-tracking does not require sacrificing data sovereignty. It provides a health companion that keeps all personal logs exclusively in the user's browser.
+Wellness apps want your sleep data on their cloud. Vireo is the opposite: a private journal and meditation timer that never phones home.
 
-## How did Dhaatrik approach the implementation?
+## Why I started this
 
-Dhaatrik structured Vireo Wellness as a Progressive Web Application (PWA) with a local-first offline architecture. To ensure data safety, all entries are stored locally inside the browser's IndexedDB using a lightweight transactional layer. Service Workers cache assets for instant loading, allowing the application to remain functional without a network connection.
+I wanted to track habits and meditation without creating another account full of sensitive health notes. **Data sovereignty** wasn't a marketing angle — it was the requirement. If I'm logging mood and routines, that stays on my device.
 
-## What technologies were used in the stack?
+## What I tried (and what broke)
 
-- **React**: Powering the modular components of the meditation log and timers.
-- **Service Workers & PWA Manifest**: Enabling offline installs and instant asset caching.
-- **IndexedDB**: The underlying browser database providing persistent, local storage.
-- **Tailwind CSS**: Styling a soothing, dark mode-first user interface.
+Built as a PWA with service workers caching assets for instant load. Entries persist in IndexedDB through a thin transactional wrapper — same offline-first muscle memory as Vellor, applied to wellness instead of grades.
 
-## What is the current progress and outcome?
+Dark-mode-first Tailwind UI; meditation timers and log modules as React components. Offline install works; airplane-mode sessions work. Local backup export exists because **no server means you own disaster recovery**.
 
-Vireo Wellness is fully PWA-compliant. It functions 100% offline, handles entries safely through local database wrappers, and supports local-first backup export.
+IndexedDB schema changes mid-development broke early installs until I treated migrations seriously — lesson imported from other local-first projects.
+
+Meditation timer logic sounds trivial until you handle background tabs, missed intervals, and "I locked my phone mid-session." I kept timer state in memory with periodic IndexedDB checkpoints so a refresh doesn't erase a 20-minute sit.
+
+## Fuckups & learnings
+
+- **Wellness UI should be calm, not gamified streak hell.** I biased toward simple logs over dopamine traps.
+- **PWAs still fight iOS quirks.** Test on real devices, not just Chrome desktop.
+- **Export isn't optional** for local-only apps. Users will clear site data eventually.
+- **Habit streaks can guilt-trip.** I logged patterns without punishing broken streaks — wellness apps don't need rage-quit energy.
+
+## Where it stands now
+
+Vireo Wellness is PWA-ready: offline entry, cached assets, local database wrappers, backup export. Habit journal and meditation timer modules both run without network. No accounts, no sync service, no analytics pipeline on sensitive health notes.
+
+## Closing transmission
+
+Small, private, intentional. If you want a health journal that doesn't rent your data back to you, it's on GitHub.
