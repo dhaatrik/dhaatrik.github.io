@@ -1,4 +1,7 @@
 ---
+import { execSync } from 'child_process';
+import fs from 'fs';
+import path from 'path';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
@@ -39,6 +42,103 @@ const getProjectTelemetry = (id: string) => {
         default:
             return 'STATUS: OPERATIONAL // COMPILED: OK';
     }
+};
+
+const getGitLastModified = (projectId: string): Date => {
+    let filePath = path.join(process.cwd(), 'src', 'content', 'projects', projectId);
+    if (!fs.existsSync(filePath)) {
+        if (fs.existsSync(filePath + '.md')) {
+            filePath = filePath + '.md';
+        } else if (fs.existsSync(filePath + '.mdx')) {
+            filePath = filePath + '.mdx';
+        }
+    }
+    
+    // In development mode, avoid slow process spawning (execSync git log) to prevent CPU starvation
+    if (import.meta.env.DEV) {
+        try {
+            if (fs.existsSync(filePath)) {
+                return fs.statSync(filePath).mtime;
+            }
+        } catch (e) {}
+        return new Date();
+    }
+
+    try {
+        if (fs.existsSync(filePath)) {
+            const stdout = execSync(`git log -1 --format=%cI -- "${filePath}"`, {
+                encoding: 'utf-8',
+                stdio: ['ignore', 'pipe', 'ignore']
+            }).trim();
+            if (stdout) {
+                return new Date(stdout);
+            }
+        }
+    } catch (e) {}
+    try {
+        if (fs.existsSync(filePath)) {
+            return fs.statSync(filePath).mtime;
+        }
+    } catch (e) {}
+    return new Date();
+};
+
+const getRelativeTimeString = (date: Date): string => {
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    if (diffMs < 0) return 'just now';
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 7) {
+        if (diffDays === 0) {
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            if (diffHours === 0) {
+                const diffMins = Math.floor(diffMs / (1000 * 60));
+                if (diffMins <= 1) return 'just now';
+                return `${diffMins}m ago`;
+            }
+            return `${diffHours}h ago`;
+        }
+        return `${diffDays}d ago`;
+    }
+
+    const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+};
+
+const parseTelemetry = (telemetryStr: string) => {
+    const match = telemetryStr.match(/STATUS:\s*([A-Z0-9_]+)/i);
+    const status = match ? match[1].toUpperCase() : 'OPERATIONAL';
+
+    let colorClass = 'bg-emerald-500 animate-pulse-emerald';
+    let textClass = 'text-emerald-500 dark:text-emerald-400';
+    let badgeText = status.replace(/_/g, ' ');
+
+    const emeraldKeywords = ['RUNNING', 'OPERATIONAL', 'ACTIVE', 'LIVE'];
+    const amberKeywords = ['V4_IN_DEV', 'IN_DEV', 'PROTOTYPE', 'RESEARCH_ACTIVE'];
+    const cyanKeywords = ['SHIPPED', 'COMPLETED', 'STABLE', 'VERIFIED'];
+    const redKeywords = ['HALTED', 'OFFLINE', 'ERROR'];
+
+    if (emeraldKeywords.includes(status)) {
+        colorClass = 'bg-emerald-500 animate-pulse-emerald';
+        textClass = 'text-emerald-500 dark:text-emerald-400';
+    } else if (amberKeywords.includes(status)) {
+        colorClass = 'bg-amber-500 animate-pulse-amber';
+        textClass = 'text-amber-500 dark:text-amber-400';
+    } else if (cyanKeywords.includes(status)) {
+        colorClass = 'bg-cyan-500 animate-pulse-cyan';
+        textClass = 'text-cyan-500 dark:text-cyan-400';
+    } else if (redKeywords.includes(status)) {
+        colorClass = 'bg-red-500 animate-pulse-red';
+        textClass = 'text-red-500 dark:text-red-400';
+    }
+
+    return {
+        colorClass,
+        textClass,
+        badgeText: `[ ${badgeText} ]`,
+        status
+    };
 };
 
 // Generate WebPage & ItemList JSON-LD Schema
@@ -187,6 +287,9 @@ const jsonLd = JSON.stringify(webpageSchema);
                         projects.map((project) => {
                             const telemetryStr = getProjectTelemetry(project.id);
                             const projectIdClean = project.id.replace(/\.md$/, '');
+                            const lastModifiedDate = getGitLastModified(project.id);
+                            const relativeTime = getRelativeTimeString(lastModifiedDate);
+                            const parsed = parseTelemetry(telemetryStr);
                             return (
                                 <article
                                     class="bento-card group relative flex min-h-[320px] flex-col justify-between overflow-hidden p-6 transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
@@ -200,11 +303,13 @@ const jsonLd = JSON.stringify(webpageSchema);
                                         <div>
                                             <div class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
                                                 <div class="flex min-w-0 items-center gap-1.5">
-                                                    <span class="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-green-500" />
+                                                    <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`} />
                                                     <span class="truncate">{telemetryStr}</span>
+                                                    <span class="shrink-0 text-slate-300 dark:text-slate-700 mx-0.5 select-none">•</span>
+                                                    <span class="shrink-0 text-slate-400 dark:text-slate-600 font-medium">{relativeTime}</span>
                                                 </div>
-                                                <span class="shrink-0 font-bold text-(--accent)">
-                                                    [ OK ]
+                                                <span class={`shrink-0 font-bold whitespace-nowrap ${parsed.textClass}`}>
+                                                    {parsed.badgeText}
                                                 </span>
                                             </div>
 
