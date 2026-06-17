@@ -25,11 +25,10 @@ Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile,
 These are the main reasons the implementation is not at 9.5+ yet. Items marked with ⚠️ are reopened from the Done section (partial completion).
 
 1. **Blog content still thin** — Only 4 transmissions. Content cannot reach 9+ without new posts. _(Tracked in P1 below.)_
-2. **⚠️ `::highlight` CSS build warnings** — `::highlight(code-focus)` and `::highlight(search-match)` in `global.css` still warn on every build. Marked done prematurely on 2026-06-17.
-3. **⚠️ `logo_light.svg` still heavy** — Down from ~997 KB to ~320 KB, but still large for a favicon/header logo.
-4. **⚠️ Personnel photo JPEG fallback** — AVIF/WebP variants are 7–35 KB, but the largest JPEG fallback in `dist/_astro/` is still ~1.56 MB for legacy browsers.
-5. **⚠️ A11y audit scope** — `accessibility.spec.ts` only scans `/`, `/personnel/`, `/pedagogy/`, `/transmissions/` and only fails on **critical** violations. `/projects/` routes are not covered.
-6. **⚠️ Terminal themes Conductor track** — `conductor/tracks/terminal_themes_20260524/` is still open; "Complete Conductor tracks" was marked done with 4/5 tracks finished.
+2. **⚠️ `logo_light.svg` still heavy** — Down from ~997 KB to ~320 KB, but still large for a favicon/header logo.
+3. **⚠️ Personnel photo JPEG fallback** — AVIF/WebP variants are 7–35 KB, but the largest JPEG fallback in `dist/_astro/` is still ~1.56 MB for legacy browsers.
+4. **⚠️ A11y audit scope** — `accessibility.spec.ts` only scans `/`, `/personnel/`, `/pedagogy/`, `/transmissions/` and only fails on **critical** violations. `/projects/` routes are not covered.
+5. **⚠️ Terminal themes Conductor track** — `conductor/tracks/terminal_themes_20260524/` is still open; "Complete Conductor tracks" was marked done with 4/5 tracks finished.
 
 **Next highest-ROI move:** Publish 2–3 transmissions (DeltaV Lab, Vellor, teaching philosophy) — likely pushes Content to ~9 and overall to ~9.2.
 
@@ -38,7 +37,7 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 ## Suggested execution order
 
 1. **Now** — P1: Publish more transmissions _(ongoing; content takes time)_
-2. **Next sprint** — P2 reopened items (build warnings, logo, a11y scope)
+2. **Next sprint** — P2 remaining items (logo, a11y scope, OG images)
 3. **When ready** — P3 polish (terminal themes, optional execSync removal)
 
 ---
@@ -55,12 +54,6 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 ---
 
 ## P2 — Medium impact (reopened / remaining)
-
-- [ ] **Fix `::highlight` CSS build warnings** _(Code quality)_ ⚠️ _Reopened_
-  - `astro.config.mjs` unified migration is done; CSS pseudo-element warnings remain.
-  - Build still reports: `'highlight' is not recognized as a valid pseudo-element` for `::highlight(code-focus)` and `::highlight(search-match)`.
-  - Investigate Tailwind v4 / Lightning CSS compatibility with the CSS Custom Highlight API pseudo-elements.
-  - Files: `src/styles/global.css`, `src/scripts/blog/postSetup.ts`
 
 - [ ] **Further compress `logo_light.svg`** _(Performance)_
   - Current size: ~320 KB (was ~997 KB). `logo_dark.svg` is ~82 KB — use as reference target.
@@ -115,7 +108,8 @@ These are the main reasons the implementation is not at 9.5+ yet. Items marked w
 | `src/components/Footer.astro` | Prefetch ✓; `PUBLIC_GIT_SHA` ✓; execSync fallback remains |
 | `src/content/blog/` | **4 posts** — main content gap |
 | `src/content/projects/` | **12 projects** with routes ✓ |
-| `src/styles/global.css` | Mobile motion gate ✓; `::highlight` warnings remain |
+| `src/styles/global.css` | Mobile motion gate ✓ |
+| `src/scripts/registerHighlightStyles.ts` | Runtime `::highlight()` injection (bypasses Lightning CSS) |
 | `test/e2e/accessibility.spec.ts` | Critical-only; missing `/projects/` routes |
 | `astro.config.mjs` | `unified()` migration ✓ |
 | `conductor/tracks.md` | Terminal themes track still open |
@@ -136,11 +130,9 @@ _Move fully completed items here. Partial completions are noted; reopened items 
 - [x] **Reduce CSS payload** — completed 2026-06-17 _(partial: KaTeX gated; ~129 KB global CSS remains — see P2)_
 - [x] **Gate decorative motion on mobile** — completed 2026-06-17 _(CSS `pointer: coarse` + JS media query)_
 - [x] **Optimize hero images** — completed 2026-06-16 _(partial: AVIF/WebP ✓; logo_light + JPEG fallback remain — see P2)_
+- [x] **Fix `::highlight` CSS build warnings** — completed 2026-06-17 _(→ runtime injection via `registerHighlightStyles.ts`; build is clean)_
 - [x] **Migrate deprecated markdown config** — completed 2026-06-17 _(→ `unified()` in `astro.config.mjs`)_
 - [x] **Replace `execSync` in Footer with env var** — completed 2026-06-17 _(partial: `PUBLIC_GIT_SHA` in CI; execSync fallback remains — see P3)_
 - [x] **Keep `llms-full.txt` synced** — completed 2026-06-17
 - [x] **Complete open Conductor tracks** — completed 2026-06-17 _(partial: 4/5 done; terminal themes reopened in P3)_
 
-<!-- Removed from Done — reopened in P2:
-- [x] Fix build warnings — ::highlight CSS warnings NOT resolved
--->
