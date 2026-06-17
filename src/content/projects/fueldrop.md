@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/fueldrop'
 progress: 'v3.0.0 High-concurrency React 19 architecture'
 order: 3
 tags: ['React 19', 'TypeScript 5.8', 'Tailwind CSS 4', 'Vite 6']
+pain_level: 4
+fuckup_teaser: "Optimistic UI without a rollback story is just lying beautifully — learned that the hard way."
 ---
 
 ## SYS.STATUS: v3.0.0 live — real-time tracking works, route logic still earns its scars

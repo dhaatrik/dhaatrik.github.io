@@ -6,6 +6,8 @@ githubUrl: 'https://github.com/dhaatrik/professional-rocket-launch-simulation'
 progress: '50Hz deterministic RK4 integration, VAB'
 order: 2
 tags: ['TypeScript', 'Vanilla DOM', 'Web Workers', 'esbuild', 'Vitest']
+pain_level: 4
+fuckup_teaser: "Early worker message shapes were too chatty — batch comms killed determinism before I caught it."
 ---
 
 ## SYS.STATUS: Physics loop runs at 50Hz in a Web Worker — VAB works, orbit plots render, still not KSP
