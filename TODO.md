@@ -2,7 +2,6 @@
 
 Prioritized backlog from the portfolio audit (Performance, SEO, Content, Mobile, Code Quality).
 
-**Last reviewed:** 2026-06-17 — implementation rated **9.3 / 10** (all 14 original items + terminal themes done; 36 unit + 32 e2e tests passing).
 
 ---
 
