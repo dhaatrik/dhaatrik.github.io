@@ -670,6 +670,8 @@ const postsWithReadingTime = posts.map((post: any) => {
         </style>
 
         <script>
+            import { fuzzyMatchText } from '../../utils/fuzzyMatch.ts';
+
             // Client-side filtering logic with state retention & hotkey focus
             let searchAbortController: AbortController | null = null;
             let replaceStateTimeout: number | undefined;
@@ -822,13 +824,15 @@ const postsWithReadingTime = posts.map((post: any) => {
                     cachedCardsData.forEach(({ element, tags, text }) => {
                         let matchesSearch = true;
                         if (words.length > 0) {
-                            matchesSearch = words.every(word => {
-                                if (word.startsWith('#')) {
+                            const tagOnly = words.every((w) => w.startsWith('#'));
+                            if (tagOnly) {
+                                matchesSearch = words.every((word) => {
                                     const cleanWord = word.slice(1);
-                                    return tags.some(tag => tag.includes(cleanWord));
-                                }
-                                return text.includes(word);
-                            });
+                                    return tags.some((tag) => tag.includes(cleanWord));
+                                });
+                            } else {
+                                matchesSearch = fuzzyMatchText(term, text);
+                            }
                         }
                         const matchesTag = activeTag === 'all' || tags.includes(activeTag);
 

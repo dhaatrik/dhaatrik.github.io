@@ -133,6 +133,22 @@ test.describe('Portfolio UI Interactivity', () => {
         await expect(searchInput).toHaveValue('nonexistent');
     });
 
+    test('Transmission search keyboard navigation should focus first result', async ({
+        page,
+    }) => {
+        await page.goto('/transmissions/');
+        const searchInput = page.locator('#search-logs');
+        await searchInput.fill('teaching');
+
+        await searchInput.press('ArrowDown');
+
+        const focusedHref = await page.evaluate(() => {
+            const active = document.activeElement as HTMLAnchorElement | null;
+            return active?.getAttribute('href') ?? '';
+        });
+        expect(focusedHref).toContain('/transmissions/');
+    });
+
     test('BlogPost Table of Contents should highlight active sections on scroll', async ({
         page,
     }) => {
