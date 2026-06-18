@@ -269,6 +269,10 @@
         --bento-radius: 1.25rem;
         --bento-radius-inner: 0.75rem;
         --bento-padding: 1.25rem;
+
+        /* Section vertical spacing rhythm */
+        --section-gap-mobile: 3rem;
+        --section-gap-desktop: 5rem;
     }
 
     @media (min-width: 640px) {
