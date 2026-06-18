@@ -5,6 +5,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import TypographyStyles from '../../components/TypographyStyles.astro';
+import { getProjectTelemetry, parseTelemetry } from '../../data/status';
 
 export async function getStaticPaths() {
     const projects = await getCollection('projects');
@@ -17,6 +18,11 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { title, description, logo, githubUrl, progress, tags, transmissionTag: rawTransmissionTag, pain_level, fuckup_teaser } = project.data;
 const { Content } = await render(project);
+
+const telemetryStr = getProjectTelemetry(project.id);
+const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
+const telemetryRest = telemetryRestParts.join(' // ');
+const parsed = parseTelemetry(telemetryStr);
 
 const projectSlug = project.id.replace(/\.md$/, '');
 const transmissionTag = rawTransmissionTag || projectSlug;
@@ -188,6 +194,19 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                             </div>
                             <div class="font-bold text-green-600 uppercase dark:text-green-400">
                                 PUBLIC // OPEN
+                            </div>
+                        </div>
+                        <div class="space-y-1 col-span-2 sm:col-span-2">
+                            <div
+                                class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
+                            >
+                                // TELEMETRY
+                            </div>
+                            <div class="flex items-center gap-1.5 font-bold text-slate-900 dark:text-slate-200 select-none">
+                                <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`} />
+                                <span class="truncate">
+                                    <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
+                                </span>
                             </div>
                         </div>
                         {
