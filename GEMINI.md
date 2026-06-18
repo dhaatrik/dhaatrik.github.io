@@ -1,43 +1,25 @@
-# AI Assistant Rules for SEO, GEO, AEO, and LLM Visibility
+# AI Assistant Rules — SEO, GEO, AEO, and LLM Visibility
 
-When modifying code, writing content, or creating pages/sections, always adhere to the following optimization standards:
+> **Canonical agent instructions:** [`AGENTS.md`](AGENTS.md) and [`.agents/skills/dhaatrik-seo-legacy/SKILL.md`](.agents/skills/dhaatrik-seo-legacy/SKILL.md)
+>
+> This file is a quick reference for Gemini / Antigravity. Executable checklists, workflows, and voice rules live in the project skills below.
 
-## 1. LLM Visibility & Crawlability
-* **`llms.txt` and `llms-full.txt`**: Whenever you add/modify a page, section, or blog post, ensure that the index in `public/llms.txt` and the detailed content in `public/llms-full.txt` are updated to reflect the new addition.
-* **`robots.txt`**: Ensure AI crawlers (e.g., GPTBot, ClaudeBot, PerplexityBot, Applebot-Extended, etc.) are allowed to crawl the site.
-* **Global Meta Tags**:
-  * Ensure `<meta name="author" content="Dhaatrik Chowdhury" />` is set.
-  * Ensure `<meta name="keywords" ... />` is dynamically populated with relevant terms.
-  * Ensure OpenGraph `og:type` is set dynamically (`article` for blog posts, `website` for others).
+## Skill map (GEMINI rules → agent skills)
 
-## 2. AEO (Answer Engine Optimization) & GEO (Generative Engine Optimization)
-* **Semantic Headers**: Avoid generic subheadings (e.g., "About My Pedagogy"). Instead, use natural language questions that match real user search intent (e.g., "How does the DBS Pedagogy work?").
-* **Transmission Metadata Blocks**: For all blog posts or transmissions, include a structured, clean quick-reference metadata block at the very top (specifying standard metadata like `Transmission ID`, `Author`, `Subject`, `Classification`).
-* **First-Principles & Citation Authority**: Quote core philosophical principles, academic sources, or official documentation directly. Verification scores are highly weighted by LLM generative search engines.
-* **Data Structuring**:
-  * Use clear tables (e.g., comparison lists) instead of raw text.
-  * Use structured diagrams (Mermaid or styled ASCII charts) to map pipelines/architectures.
+| Topic | Skill |
+|-------|-------|
+| SEO, AEO, GEO, LLM visibility, `llms.txt`, robots, JSON-LD strategy | [`dhaatrik-seo-legacy`](.agents/skills/dhaatrik-seo-legacy/SKILL.md) |
+| Astro JSON-LD injection, `BaseHead`, sitemap, static files | [`dhaatrik-astro-site`](.agents/skills/dhaatrik-astro-site/SKILL.md) |
+| Transmission metadata blocks, Mission Report structure, tables/diagrams | [`dhaatrik-mission-report`](.agents/skills/dhaatrik-mission-report/SKILL.md) |
+| Honest voice in meta, schema prose, llms summaries | [`dhaatrik-writing-style`](.agents/skills/dhaatrik-writing-style/SKILL.md) |
 
-## 3. Structured Data (JSON-LD Schemas)
-* **Homepage**: Ensure the following schemas are injected inside `<head>`:
-  * `WebSite` (defining name, URL, search, and publisher info).
-  * `FAQPage` (using dynamic Q&A pairs matching key user queries).
-* **Blog Posts**: Inject `Article` schema (defining title, description, pubDate, author, and image).
-* **Astro-Specific Pattern**: In Astro files, construct the JSON object inside the frontmatter script and inject it safely in the template like this:
-  ```astro
-  ---
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    // ...
-  };
-  const jsonLd = JSON.stringify(schema);
-  ---
-  <script type="application/ld+json" set:html={jsonLd} />
-  ```
-  *(Do not use `define:vars` or inline string templates inside the `<script>` tag, as it breaks formatting).*
+## Quick rules (summary)
 
-## 4. Traditional SEO Best Practices
-* **HTML Semantic Structure**: Ensure proper hierarchical structure (exactly one `<h1>` per page, sequential `<h2>` to `<h6>` headings). Use semantic tags (`<article>`, `<section>`, `<nav>`, `<aside>`, `<main>`).
-* **Image Optimization**: Ensure all image elements have descriptive `alt` tags.
-* **Page-Specific Meta**: Ensure every route passes a relevant `title` and `description` to the `BaseHead` layout.
+1. **LLM files** — Update `public/llms.txt` and `public/llms-full.txt` when pages/posts/projects change.
+2. **robots.txt** — Keep AI crawlers allowed (`GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`, etc.).
+3. **Meta** — Every route: `title`, `description`, `keywords`, dynamic `og:type` via `BaseHead`.
+4. **AEO/GEO** — Question-style phrasing in JSON-LD / `llms-full.txt`; Mission Report H2s in body prose.
+5. **JSON-LD** — Homepage: `WebSite` + `FAQPage`; posts: `Article`; use `set:html` pattern in Astro.
+6. **Semantics** — One `h1`, proper heading order, semantic HTML, descriptive image `alt`.
+
+Full checklists and conflict resolution (FAQ headers vs Mission Report): see **`dhaatrik-seo-legacy`**.

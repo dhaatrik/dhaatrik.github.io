@@ -18,9 +18,10 @@ pnpm-debug.log*
 playwright-report/
 test-results/
 
-# Agent harness local config (keep project skills shareable)
+# Agent harness local config (keep project skills + docs shareable)
 .grok/
 .agents/*
+!.agents/README.md
 !.agents/skills/
 !.agents/skills/**
 

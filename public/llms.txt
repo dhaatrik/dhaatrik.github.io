@@ -56,3 +56,17 @@ The site footer includes a live system diagnostics block:
 
 - [RSS Feed](https://dhaatrik.github.io/rss.xml)
 - [Sitemap](https://dhaatrik.github.io/sitemap-index.xml)
+
+## Agent / coding-agent instructions
+
+This repository ships project-scoped skills for AI coding agents (Grok, Antigravity, Cursor-compatible harnesses). Start with [AGENTS.md](https://github.com/dhaatrik/dhaatrik.github.io/blob/main/AGENTS.md). SEO/AEO/GEO/LLM rules: [GEMINI.md](https://github.com/dhaatrik/dhaatrik.github.io/blob/main/GEMINI.md) → canonical skill `dhaatrik-seo-legacy`.
+
+| Skill | Scope |
+|-------|-------|
+| dhaatrik-writing-style | Voice and tone for all user-facing copy |
+| dhaatrik-mission-report | Mission Report structure for projects and transmissions |
+| dhaatrik-astro-site | Astro 6 architecture, components, tests, deployment |
+| dhaatrik-visual-system | Sci-fi mission-control UI and design tokens |
+| dhaatrik-seo-legacy | Honest SEO, JSON-LD, OG, sitemap/RSS |
+
+Skills path: `.agents/skills/<name>/SKILL.md`

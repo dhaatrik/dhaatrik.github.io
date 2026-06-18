@@ -212,3 +212,17 @@ A: Dhaatrik believes in first-principles teaching where students learn through o
 
 **Q: Why did Dhaatrik stop uploading on YouTube?**
 A: Dhaatrik stopped due to internal execution failures: solo production bottleneck, loss of focus from other projects, and relying on motivation rather than building systematic production workflows. He has publicly documented this as a personal failure and learning experience.
+
+---
+
+## Agent / coding-agent instructions
+
+Repository entry points: `AGENTS.md` (routing), `GEMINI.md` (SEO/AEO/GEO summary → `dhaatrik-seo-legacy` skill). Project skills live in `.agents/skills/`:
+
+- **dhaatrik-writing-style** — voice and tone for all user-facing copy
+- **dhaatrik-mission-report** — Mission Report structure for projects and transmissions
+- **dhaatrik-astro-site** — Astro 6 architecture, components, tests, deployment
+- **dhaatrik-visual-system** — sci-fi mission-control UI and design tokens
+- **dhaatrik-seo-legacy** — honest SEO, JSON-LD, OG, sitemap/RSS
+
+Index: `.agents/README.md`
