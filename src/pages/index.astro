@@ -245,7 +245,7 @@ const webSiteSchema = JSON.stringify({
                 class="layout-container relative flex min-h-[60vh] w-full flex-col justify-center overflow-hidden pt-24 pb-36 md:pt-32 md:pb-32"
             >
                 <!-- Parallax Background Element -->
-                <div class="parallax-hero-bg flex items-center justify-center">
+                <div class="parallax-hero-bg blueprint-reveal flex items-center justify-center">
                     <div
                         class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-25 select-none dark:opacity-20"
                     >
@@ -286,7 +286,7 @@ const webSiteSchema = JSON.stringify({
                 </div>
                 <div class="relative z-10 flex w-full max-w-3xl flex-col justify-center">
                     <div
-                        class="animate-fade-in-up mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-medium text-green-600 sm:text-sm dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400"
+                        class="reveal-on-scroll mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-medium text-green-600 sm:text-sm dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400"
                     >
                         <span class="relative flex h-2 w-2 shrink-0">
                             <span
@@ -299,7 +299,8 @@ const webSiteSchema = JSON.stringify({
                         FOCUS: AGTECH_R&D // CONFIDENCE: MIXED // STATUS: TRANSMITTING
                     </div>
                     <h1
-                        class="animate-fade-in-up mb-6 text-4xl leading-tight font-bold text-slate-900 delay-100 md:text-5xl lg:text-6xl dark:text-white"
+                        class="reveal-on-scroll mb-6 text-4xl leading-tight font-bold text-slate-900 md:text-5xl lg:text-6xl dark:text-white"
+                        data-reveal-delay="100"
                     >
                         <span id="dynamic-greeting">Hey!</span> Buddy. <br />
                         <span
@@ -321,7 +322,8 @@ const webSiteSchema = JSON.stringify({
                         if (el) el.innerText = greeting;
                     </script>
                     <p
-                        class="animate-fade-in-up mb-8 text-lg leading-relaxed text-slate-600 delay-200 md:text-xl dark:text-(--text-secondary)"
+                        class="reveal-on-scroll mb-8 text-lg leading-relaxed text-slate-600 md:text-xl dark:text-(--text-secondary)"
+                        data-reveal-delay="200"
                     >
                         I'm Dhaatrik — 26, building from India, and this site is my honest
                         engineering diary. Not a polished portfolio. A log of what I shipped, what
@@ -330,7 +332,7 @@ const webSiteSchema = JSON.stringify({
                     </p>
 
                     <!-- CTA Hierarchy -->
-                    <div class="animate-fade-in-up flex flex-wrap items-center gap-6 delay-300">
+                    <div class="reveal-on-scroll flex flex-wrap items-center gap-6" data-reveal-delay="300">
                         <a
                             href="/personnel"
                             data-astro-prefetch="hover"
@@ -421,7 +423,8 @@ const webSiteSchema = JSON.stringify({
 
                     <!-- Built With Badges -->
                     <div
-                        class="animate-fade-in-up mt-8 flex flex-col items-start gap-3 opacity-80 delay-400"
+                        class="reveal-on-scroll mt-8 flex flex-col items-start gap-3 opacity-80"
+                        data-reveal-delay="400"
                     >
                         <span
                             class="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400"

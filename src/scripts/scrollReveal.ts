@@ -21,13 +21,21 @@ const initScrollReveal = () => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     const el = entry.target as HTMLElement;
+
+                    // Support data-reveal-delay="N" for declarative per-element staggering
+                    const delay = parseInt(el.dataset.revealDelay || '0', 10);
+                    if (delay > 0) {
+                        el.style.transitionDelay = `${delay}ms`;
+                    }
+
                     el.classList.add('is-visible');
                     
-                    // Clean up transform on transitionend to prevent conflicts with hover lifts
+                    // Clean up transform and delay on transitionend to prevent conflicts with hover lifts
                     const handleTransitionEnd = (e: TransitionEvent) => {
                         if (e.propertyName === 'transform') {
                             el.classList.remove('reveal-on-scroll');
                             el.style.transform = '';
+                            el.style.transitionDelay = '';
                             el.removeEventListener('transitionend', handleTransitionEnd);
                         }
                     };
