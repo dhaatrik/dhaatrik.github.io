@@ -116,7 +116,7 @@ const jsonLd = JSON.stringify(webpageSchema);
         <main
             id="main-content"
             tabindex="-1"
-            class="relative grow overflow-x-hidden py-20 md:py-32"
+            class="relative flex grow flex-col gap-[var(--section-gap-mobile)] overflow-x-hidden py-[var(--section-gap-mobile)] md:gap-[var(--section-gap-desktop)] md:py-[var(--section-gap-desktop)]"
         >
             <div
                 id="reticle-bg"
@@ -207,11 +207,11 @@ const jsonLd = JSON.stringify(webpageSchema);
                         // projects_archive.db
                     </div>
                     <h1
-                        class="mb-4 text-4xl leading-tight font-bold tracking-tight text-slate-900 md:text-5xl dark:text-white"
+                        class="type-page-title mb-4 text-slate-900 dark:text-white"
                     >
                         Project Workbench <span class="text-slate-400 dark:text-slate-600">& Archive</span>
                     </h1>
-                    <p class="max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                    <p class="type-body-lg max-w-2xl text-slate-600 dark:text-(--text-secondary)">
                         Things I've shipped, abandoned, or am still fixing. Web apps, offline tools,
                         browser extensions, and sandbox experiments — each with an honest mission log.
                     </p>
@@ -239,7 +239,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                                         data-tilt-z
                                     >
                                         <div>
-                                            <div class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                                            <div class="type-telemetry mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 text-slate-400 dark:border-white/5 dark:text-slate-500">
                                                 <div class="flex min-w-0 items-center gap-1.5">
                                                     <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`} />
                                                     <span class="truncate">

@@ -473,6 +473,62 @@
         }
     }
 
+    /* Formal type scale — prefer these over ad-hoc text-* clusters */
+    .type-display {
+        font-family: var(--font-heading);
+        font-size: 2.25rem;
+        line-height: 1.15;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+    }
+    @media (min-width: 768px) {
+        .type-display {
+            font-size: 3rem;
+        }
+    }
+    @media (min-width: 1024px) {
+        .type-display {
+            font-size: 3.75rem;
+        }
+    }
+
+    .type-page-title {
+        font-family: var(--font-heading);
+        font-size: 2.25rem;
+        line-height: 1.15;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        text-wrap: balance;
+    }
+    @media (min-width: 768px) {
+        .type-page-title {
+            font-size: 3rem;
+        }
+    }
+
+    .type-body-lg {
+        font-size: 1.125rem;
+        line-height: 1.625;
+        text-wrap: pretty;
+    }
+    @media (min-width: 768px) {
+        .type-body-lg {
+            font-size: 1.25rem;
+        }
+    }
+
+    .type-telemetry {
+        font-family: ui-monospace, monospace;
+        font-size: 0.625rem;
+        line-height: 1.4;
+    }
+    @media (min-width: 640px) {
+        .type-telemetry {
+            font-size: 0.5625rem;
+        }
+    }
+
     /* Bento Grid Utility Classes */
     .bento-grid {
         display: grid;
