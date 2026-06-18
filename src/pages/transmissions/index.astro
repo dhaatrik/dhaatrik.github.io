@@ -662,6 +662,13 @@ const postsWithReadingTime = posts.map((post: any) => {
         </main>
         <Footer />
 
+        <style>
+            .blog-post-card {
+                content-visibility: auto;
+                contain-intrinsic-size: 0 140px;
+            }
+        </style>
+
         <script>
             // Client-side filtering logic with state retention & hotkey focus
             let searchAbortController: AbortController | null = null;

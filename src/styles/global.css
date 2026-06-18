@@ -569,6 +569,8 @@
         padding: var(--bento-padding);
         will-change: transform, opacity;
         transform-style: preserve-3d;
+        content-visibility: auto;
+        contain-intrinsic-size: 0 320px;
     }
 
     /* Mouse Spotlight Pseudo-element (Specific to Bento Cards) */
