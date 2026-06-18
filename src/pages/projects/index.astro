@@ -306,6 +306,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                     >
                                                         {[1, 2, 3, 4, 5].map((i) => (
                                                             <span
+                                                                aria-hidden="true"
                                                                 class={`h-1 w-5 rounded-sm transition-opacity duration-300 ${
                                                                     i <= (project.data.pain_level ?? 0)
                                                                         ? 'bg-(--accent) opacity-90'

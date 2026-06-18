@@ -225,6 +225,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                                     >
                                         {[1, 2, 3, 4, 5].map((i) => (
                                             <span
+                                                aria-hidden="true"
                                                 class={`h-1.5 w-3.5 rounded-xs transition-opacity duration-300 ${
                                                     i <= (pain_level ?? 0)
                                                         ? 'bg-(--accent) opacity-90'
