@@ -132,6 +132,61 @@ test.describe('Mobile Navigation Drawer', () => {
         await expect(backdrop).toHaveClass(/opacity-0/);
     });
 
+    test('should close drawer on swipe-right gesture', async ({ page }) => {
+        const toggle = page.locator('#mobile-nav-toggle');
+        const drawer = page.locator('#mobile-nav-drawer');
+
+        await toggle.click();
+        await expect(drawer).toHaveClass(/translate-x-0/);
+
+        await page.evaluate(() => {
+            const el = document.getElementById('mobile-nav-drawer');
+            if (!el) return;
+            const mkTouch = (x: number, y: number) =>
+                new Touch({
+                    identifier: 1,
+                    target: el,
+                    clientX: x,
+                    clientY: y,
+                    pageX: x,
+                    pageY: y,
+                    screenX: x,
+                    screenY: y,
+                    radiusX: 1,
+                    radiusY: 1,
+                    rotationAngle: 0,
+                    force: 1,
+                });
+            const y = 320;
+            el.dispatchEvent(
+                new TouchEvent('touchstart', {
+                    bubbles: true,
+                    touches: [mkTouch(40, y)],
+                    targetTouches: [mkTouch(40, y)],
+                    changedTouches: [mkTouch(40, y)],
+                })
+            );
+            el.dispatchEvent(
+                new TouchEvent('touchmove', {
+                    bubbles: true,
+                    touches: [mkTouch(180, y)],
+                    targetTouches: [mkTouch(180, y)],
+                    changedTouches: [mkTouch(180, y)],
+                })
+            );
+            el.dispatchEvent(
+                new TouchEvent('touchend', {
+                    bubbles: true,
+                    touches: [],
+                    targetTouches: [],
+                    changedTouches: [mkTouch(180, y)],
+                })
+            );
+        });
+
+        await expect(drawer).toHaveClass(/translate-x-full/);
+    });
+
     test('should close drawer on Escape key press', async ({ page }) => {
         const toggle = page.locator('#mobile-nav-toggle');
         const drawer = page.locator('#mobile-nav-drawer');
