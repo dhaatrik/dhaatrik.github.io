@@ -615,10 +615,13 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                     currentX = e.touches[0].clientX;
                     const diffX = currentX - startX;
                     if (diffX > 0) {
-                        drawer.style.transform = `translateX(${diffX}px)`;
                         const width = drawer.offsetWidth;
                         const progress = Math.min(1, Math.max(0, diffX / width));
-                        backdrop.style.opacity = (1 - progress).toString();
+                        // Exponential friction curve for luxurious damping
+                        const easedProgress = (1 - Math.exp(-3 * progress)) / (1 - Math.exp(-3));
+                        const translateX = easedProgress * width;
+                        drawer.style.transform = `translateX(${translateX}px)`;
+                        backdrop.style.opacity = (1 - easedProgress).toString();
                     }
                 },
                 { passive: true, signal }
