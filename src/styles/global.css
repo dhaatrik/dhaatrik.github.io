@@ -628,6 +628,24 @@
     color: color-mix(in srgb, var(--accent) 60%, white);
 }
 
+.mission-fuckup-teaser.expanded {
+    display: block;
+    -webkit-line-clamp: none;
+    overflow: visible;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(var(--neon-glow-2-rgb), 0.15) !important;
+    background-color: rgba(var(--neon-glow-2-rgb), 0.03) !important;
+    padding: 1rem;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: inherit;
+}
+
+.dark .mission-fuckup-teaser.expanded {
+    border-color: rgba(var(--neon-glow-2-rgb), 0.1) !important;
+    background-color: rgba(var(--neon-glow-2-rgb), 0.02) !important;
+}
+
 /* Telemetry alive animations */
 .telemetry-keyword {
     display: inline;
