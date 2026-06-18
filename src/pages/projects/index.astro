@@ -286,6 +286,8 @@ const jsonLd = JSON.stringify(webpageSchema);
                     {
                         projects.map((project) => {
                             const telemetryStr = getProjectTelemetry(project.id);
+                            const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
+                            const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const lastModifiedDate = getGitLastModified(project.id);
                             const relativeTime = getRelativeTimeString(lastModifiedDate);
@@ -304,9 +306,11 @@ const jsonLd = JSON.stringify(webpageSchema);
                                             <div class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
                                                 <div class="flex min-w-0 items-center gap-1.5">
                                                     <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`} />
-                                                    <span class="truncate">{telemetryStr}</span>
+                                                    <span class="truncate">
+                                                        <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
+                                                    </span>
                                                     <span class="shrink-0 text-slate-300 dark:text-slate-700 mx-0.5 select-none">•</span>
-                                                    <span class="shrink-0 text-slate-400 dark:text-slate-600 font-medium">{relativeTime}</span>
+                                                    <span class="last-updated-ts shrink-0 text-slate-400 dark:text-slate-600 font-medium">{relativeTime}</span>
                                                 </div>
                                                 <span class={`shrink-0 font-bold whitespace-nowrap ${parsed.textClass}`}>
                                                     {parsed.badgeText}

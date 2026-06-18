@@ -617,6 +617,34 @@
     color: color-mix(in srgb, var(--accent) 60%, white);
 }
 
+/* Telemetry alive animations */
+.telemetry-keyword {
+    display: inline;
+    color: var(--accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+    .telemetry-keyword {
+        animation: telemetry-pulse 2.4s ease-in-out infinite;
+    }
+}
+@keyframes telemetry-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+}
+
+.last-updated-ts {
+    opacity: 0.8;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .last-updated-ts {
+        animation: last-updated-fade 1.2s ease-out forwards;
+    }
+}
+@keyframes last-updated-fade {
+    from { opacity: 0; }
+    to { opacity: 0.8; }
+}
+
 /* Premium Terminal Search Custom Styles */
 #search-logs {
     caret-color: var(--accent);

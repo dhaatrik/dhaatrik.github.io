@@ -705,6 +705,8 @@ const webSiteSchema = JSON.stringify({
                     {
                         projects.map((project) => {
                             const telemetryStr = getProjectTelemetry(project.id);
+                            const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
+                            const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const lastModifiedDate = getGitLastModified(project.id);
                             const relativeTime = getRelativeTimeString(lastModifiedDate);
@@ -741,11 +743,13 @@ const webSiteSchema = JSON.stringify({
                                                     <span
                                                         class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
                                                     />
-                                                    <span class="truncate">{telemetryStr}</span>
+                                                    <span class="truncate">
+                                                        <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
+                                                    </span>
                                                     <span class="mx-0.5 shrink-0 text-slate-300 select-none dark:text-slate-700">
                                                         •
                                                     </span>
-                                                    <span class="shrink-0 font-medium text-slate-400 dark:text-slate-600">
+                                                    <span class="last-updated-ts shrink-0 font-medium text-slate-400 dark:text-slate-600">
                                                         {relativeTime}
                                                     </span>
                                                 </div>
