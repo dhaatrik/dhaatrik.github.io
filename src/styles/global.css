@@ -549,7 +549,10 @@
             linear-gradient(to bottom, var(--blueprint-color-minor) 1px, transparent 1px);
         background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
         opacity: var(--blueprint-opacity);
-        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        clip-path: inset(0 100% 0 0);
+        transition:
+            opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            clip-path 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .glass-surface:hover,
@@ -562,6 +565,15 @@
         --glass-border-opacity: 0.25;
         --neon-glow-opacity: 1;
         --blueprint-opacity: 0.08;
+    }
+
+    .glass-surface:hover::after,
+    .glass-surface:focus-within::after,
+    .premium-glass:hover::after,
+    .premium-glass:focus-within::after,
+    .bento-card:hover::after,
+    .bento-card:focus-within::after {
+        clip-path: inset(0 0 0 0);
     }
 
     .bento-card {
@@ -897,6 +909,12 @@
     .blueprint-reveal {
         opacity: 1 !important;
         transform: none !important;
+        transition: none !important;
+    }
+    .glass-surface::after,
+    .premium-glass::after,
+    .bento-card::after {
+        clip-path: inset(0 0 0 0) !important;
         transition: none !important;
     }
 }
