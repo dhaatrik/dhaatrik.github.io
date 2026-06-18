@@ -501,7 +501,7 @@
     .premium-glass,
     .bento-card {
         --glass-bg-opacity: 0.35;
-        --glass-border-opacity: 0.08;
+        --glass-border-opacity: 0.12;
         --neon-glow-opacity: 0;
         --blueprint-opacity: 0.02;
 
@@ -550,7 +550,7 @@
     .bento-card:hover,
     .bento-card:focus-within {
         --glass-bg-opacity: 0.55;
-        --glass-border-opacity: 0.2;
+        --glass-border-opacity: 0.25;
         --neon-glow-opacity: 1;
         --blueprint-opacity: 0.08;
     }
