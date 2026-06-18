@@ -7,6 +7,7 @@ progress: 'v1.0.0 released, features interactive portfolio charts'
 order: 7
 tags: ['React', 'Chart.js', 'Zustand', 'Tailwind CSS']
 pain_level: 2
+telemetry: 'STATUS: SHIPPED // VERSION: V1.0.0 // LEDGER: DUAL'
 fuckup_teaser: "Chart.js re-rendered on every filter change — 200ms flickers on older phones I didn't test until after shipping."
 ---
 

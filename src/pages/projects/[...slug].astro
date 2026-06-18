@@ -5,7 +5,8 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import TypographyStyles from '../../components/TypographyStyles.astro';
-import { getProjectTelemetry, parseTelemetry } from '../../data/status';
+import { getPainLevelLabel, parseTelemetry } from '../../data/status';
+import { getGitLastModified, getRelativeTimeString } from '../../utils/projectDates';
 
 export async function getStaticPaths() {
     const projects = await getCollection('projects');
@@ -16,13 +17,23 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, description, logo, githubUrl, progress, tags, transmissionTag: rawTransmissionTag, pain_level, fuckup_teaser } = project.data;
+const {
+    title,
+    description,
+    logo,
+    githubUrl,
+    progress,
+    tags,
+    transmissionTag: rawTransmissionTag,
+    pain_level,
+    fuckup_teaser,
+    telemetry: telemetryStr,
+} = project.data;
 const { Content } = await render(project);
-
-const telemetryStr = getProjectTelemetry(project.id);
 const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
 const telemetryRest = telemetryRestParts.join(' // ');
 const parsed = parseTelemetry(telemetryStr);
+const lastModifiedRelative = getRelativeTimeString(getGitLastModified(project.id));
 
 const projectSlug = project.id.replace(/\.md$/, '');
 const transmissionTag = rawTransmissionTag || projectSlug;
@@ -202,11 +213,13 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                             >
                                 // TELEMETRY
                             </div>
-                            <div class="flex items-center gap-1.5 font-bold text-slate-900 dark:text-slate-200 select-none">
+                            <div class="type-telemetry flex min-w-0 items-center gap-1.5 font-bold text-slate-900 select-none dark:text-slate-200">
                                 <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`} />
                                 <span class="truncate">
                                     <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
                                 </span>
+                                <span class="mx-0.5 shrink-0 text-slate-300 select-none dark:text-slate-700">•</span>
+                                <span class="last-updated-ts shrink-0 font-medium text-slate-500 dark:text-slate-500">{lastModifiedRelative}</span>
                             </div>
                         </div>
                         {

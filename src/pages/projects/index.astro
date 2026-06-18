@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { getCollection } from 'astro:content';
-import { getProjectTelemetry, parseTelemetry } from '../../data/status';
+import { parseTelemetry } from '../../data/status';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
@@ -221,7 +221,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 reveal-stagger">
                     {
                         projects.map((project) => {
-                            const telemetryStr = getProjectTelemetry(project.id);
+                            const telemetryStr = project.data.telemetry;
                             const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
                             const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');

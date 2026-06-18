@@ -7,6 +7,7 @@ progress: 'PWA ready, works offline with database caching'
 order: 9
 tags: ['React', 'PWA', 'IndexedDB', 'Tailwind CSS']
 pain_level: 2
+telemetry: 'STATUS: SHIPPED // PWA: INSTALLABLE // OFFLINE: 100PCT'
 fuckup_teaser: "IndexedDB in private browsing throws silently — health data just disappeared for those users and I shipped it anyway."
 ---
 

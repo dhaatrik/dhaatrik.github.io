@@ -7,6 +7,7 @@ progress: 'v1.1.0 stable, full KaTeX and highlight.js support'
 order: 11
 tags: ['TypeScript', 'Remark', 'KaTeX', 'jsPDF']
 pain_level: 2
+telemetry: 'STATUS: SHIPPED // VERSION: V1.1.0 // EXPORT: PDF'
 fuckup_teaser: "KaTeX in a headless print context had silent fallback failures — math rendered on screen but vanished in the exported PDF."
 ---
 

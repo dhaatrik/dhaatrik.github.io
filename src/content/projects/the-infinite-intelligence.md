@@ -7,6 +7,7 @@ progress: 'Parallel Collaboration, Sequential Workflows, and Round-Robin Debate'
 order: 4
 tags: ['React 19', 'TypeScript 5.8', 'Google Gemini AI', 'Vite 6']
 pain_level: 3
+telemetry: 'STATUS: OPERATIONAL // AGENTS: DEBATING // PARALLEL: TRUE'
 fuckup_teaser: "Agent loops without timeout guards hit rate limits and burned API credits before I added circuit breakers."
 ---
 

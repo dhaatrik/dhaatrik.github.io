@@ -7,6 +7,7 @@ progress: 'Prototype complete, WebSocket integration verified'
 order: 8
 tags: ['React', 'WebSockets', 'Tailwind CSS', 'Node.js']
 pain_level: 3
+telemetry: 'STATUS: PROTOTYPE // SYNC: VERIFIED // PROD: PENDING'
 fuckup_teaser: "WebSocket reconnection was an afterthought — real-time ordering failed silently when connections dropped under load."
 ---
 

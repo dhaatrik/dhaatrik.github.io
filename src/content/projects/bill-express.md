@@ -7,6 +7,7 @@ progress: 'Production build deployed, instant PDF export'
 order: 10
 tags: ['JavaScript', 'HTML5', 'Tailwind CSS', 'jsPDF']
 pain_level: 2
+telemetry: 'STATUS: SHIPPED // DEPLOY: LIVE // PDF: VECTOR'
 fuckup_teaser: "Print layout diverged between Firefox and Chrome after a CSS update — PDFs had surprise blank pages I only found after deploying."
 ---
 

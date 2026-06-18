@@ -10,7 +10,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
-import { getProjectTelemetry, parseTelemetry } from '../data/status';
+import { parseTelemetry } from '../data/status';
 
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
@@ -668,7 +668,7 @@ const webSiteSchema = JSON.stringify({
 
                     {
                         projects.map((project) => {
-                            const telemetryStr = getProjectTelemetry(project.id);
+                            const telemetryStr = project.data.telemetry;
                             const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
                             const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');

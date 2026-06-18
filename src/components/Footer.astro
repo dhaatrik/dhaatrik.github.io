@@ -204,8 +204,8 @@ const formatMarqueeDate = (date: Date) => {
                         </span>
                     </div>
                     <div>STYLE.SYS // TAILWIND CSS v4.0</div>
-                    <div id="footer-uptime">SYS.UPTIME // 00h 00m 00s</div>
-                    <div id="footer-cpu-register">SYS.LOAD // 0.04%</div>
+                    <div id="footer-uptime">SYS.SESSION // 00h 00m 00s</div>
+                    <div id="footer-link-type">SYS.LINK // —</div>
                     <div>BUILD.SHA // {gitSha}</div>
                     <div>PAGES.INDEXED // {totalPages}</div>
                     <div class="border-t border-dashed border-slate-200/50 dark:border-white/5 pt-2 mt-2 flex flex-col gap-1">
@@ -654,7 +654,7 @@ const formatMarqueeDate = (date: Date) => {
 
         // 3. Telemetry loop (Uptime and fluctuating CPU load)
         const uptimeEl = document.getElementById('footer-uptime');
-        const cpuEl = document.getElementById('footer-cpu-register');
+        const linkEl = document.getElementById('footer-link-type');
         const startTime = Date.now();
 
         const formatUptime = (ms: number) => {
@@ -668,12 +668,13 @@ const formatMarqueeDate = (date: Date) => {
         const updateTelemetry = () => {
             if (uptimeEl) {
                 const elapsed = Date.now() - startTime;
-                uptimeEl.textContent = `SYS.UPTIME // ${formatUptime(elapsed)}`;
+                uptimeEl.textContent = `SYS.SESSION // ${formatUptime(elapsed)}`;
             }
-            if (cpuEl) {
-                // Fluctuate randomly between 0.02% and 0.08%
-                const load = (0.02 + Math.random() * 0.06).toFixed(2);
-                cpuEl.textContent = `SYS.LOAD // ${load}%`;
+            if (linkEl) {
+                const conn = (navigator as Navigator & { connection?: { effectiveType?: string } })
+                    .connection;
+                const linkType = conn?.effectiveType?.toUpperCase() ?? 'STATIC_HOST';
+                linkEl.textContent = `SYS.LINK // ${linkType}`;
             }
         };
 
