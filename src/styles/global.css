@@ -255,6 +255,7 @@
         --accent-glow: rgba(37, 99, 235, 0.3);
         --accent-button-bg: var(--accent);
 
+        /* CANONICAL SOURCE: Glass design system tokens consumed across components */
         /* Glass Raw values for RGB colors */
         --glass-bg-raw: 255, 255, 255;
         --glass-border-raw: 15, 23, 42;
