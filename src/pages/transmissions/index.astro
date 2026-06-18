@@ -768,7 +768,7 @@ const postsWithReadingTime = posts.map((post: any) => {
 
                                     if (regex.test(text)) {
                                         const tempSpan = document.createElement('span');
-                                        tempSpan.innerHTML = text.replace(regex, '<mark class="search-match-fallback">$1</mark>');
+                                        tempSpan.innerHTML = text.replace(regex, '<mark class="search-highlight">$1</mark>');
 
                                         const parent = textNode.parentNode;
                                         if (parent) {

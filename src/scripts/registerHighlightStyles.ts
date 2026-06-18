@@ -9,7 +9,7 @@ const HIGHLIGHT_CSS = `
     background-color: rgba(59, 130, 246, 0.2);
 }
 ::highlight(search-match) {
-    background-color: color-mix(in srgb, var(--accent) 30%, transparent);
+    background-color: rgba(var(--neon-glow-1-rgb), 0.25);
 }
 `;
 

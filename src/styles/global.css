@@ -1237,9 +1237,13 @@
    Ranges are registered via CSS.highlights.set() in postSetup.ts and
    transmissions/index.astro. */
 
-mark.search-match-fallback {
-    background-color: color-mix(in srgb, var(--accent) 30%, transparent);
+mark.search-match-fallback,
+.search-highlight {
+    background: rgba(var(--neon-glow-1-rgb), 0.25);
     color: inherit;
+    border-radius: 2px;
+    padding: 0 2px;
+    font-weight: 600;
 }
 
 /* Phase IV: Native Scroll-Driven Animations */
