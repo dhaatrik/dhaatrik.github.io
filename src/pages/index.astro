@@ -10,6 +10,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
+import { getProjectTelemetry, parseTelemetry } from '../data/status';
 
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
@@ -43,21 +44,6 @@ const premiumLineup = lineupNames
     })
     .filter((t): t is TechIcon => t !== null);
 
-const getProjectTelemetry = (id: string) => {
-    const rawId = id.replace(/\.md$/, '');
-    switch (rawId) {
-        case 'vellor':
-            return 'STATUS: V4_IN_DEV // DB: OFF_LINE_FIRST // SYNC: LOCAL';
-        case 'deltav-lab':
-            return 'STATUS: RUNNING // SIM: RK4_50HZ_ACTIVE // ORBITS: OK';
-        case 'fueldrop':
-            return 'STATUS: SHIPPED // VERSION: V3.0.0 // CONCURRENCY: HIGH';
-        case 'the-infinite-intelligence':
-            return 'STATUS: OPERATIONAL // AGENTS: DEBATING // PARALLEL: TRUE';
-        default:
-            return 'STATUS: OPERATIONAL // SYSTEM: OK';
-    }
-};
 
 const getGitLastModified = (projectId: string): Date => {
     let filePath = path.join(process.cwd(), 'src', 'content', 'projects', projectId);
@@ -121,40 +107,6 @@ const getRelativeTimeString = (date: Date): string => {
     return date.toLocaleDateString('en-US', options);
 };
 
-const parseTelemetry = (telemetryStr: string) => {
-    const match = telemetryStr.match(/STATUS:\s*([A-Z0-9_]+)/i);
-    const status = match ? match[1].toUpperCase() : 'OPERATIONAL';
-
-    let colorClass = 'bg-emerald-500 animate-pulse-emerald';
-    let textClass = 'text-emerald-500 dark:text-emerald-400';
-    let badgeText = status.replace(/_/g, ' ');
-
-    const emeraldKeywords = ['RUNNING', 'OPERATIONAL', 'ACTIVE', 'LIVE'];
-    const amberKeywords = ['V4_IN_DEV', 'IN_DEV', 'PROTOTYPE', 'RESEARCH_ACTIVE'];
-    const cyanKeywords = ['SHIPPED', 'COMPLETED', 'STABLE', 'VERIFIED'];
-    const redKeywords = ['HALTED', 'OFFLINE', 'ERROR'];
-
-    if (emeraldKeywords.includes(status)) {
-        colorClass = 'bg-emerald-500 animate-pulse-emerald';
-        textClass = 'text-emerald-500 dark:text-emerald-400';
-    } else if (amberKeywords.includes(status)) {
-        colorClass = 'bg-amber-500 animate-pulse-amber';
-        textClass = 'text-amber-500 dark:text-amber-400';
-    } else if (cyanKeywords.includes(status)) {
-        colorClass = 'bg-cyan-500 animate-pulse-cyan';
-        textClass = 'text-cyan-500 dark:text-cyan-400';
-    } else if (redKeywords.includes(status)) {
-        colorClass = 'bg-red-500 animate-pulse-red';
-        textClass = 'text-red-500 dark:text-red-400';
-    }
-
-    return {
-        colorClass,
-        textClass,
-        badgeText: `[ ${badgeText} ]`,
-        status,
-    };
-};
 
 // FAQ and WebSite JSON-LD schemas for AEO/GEO
 const faqSchema = JSON.stringify({
