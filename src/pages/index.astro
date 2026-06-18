@@ -10,6 +10,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
+import { getProjectTelemetry, parseTelemetry } from '../data/status';
 
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
@@ -43,21 +44,6 @@ const premiumLineup = lineupNames
     })
     .filter((t): t is TechIcon => t !== null);
 
-const getProjectTelemetry = (id: string) => {
-    const rawId = id.replace(/\.md$/, '');
-    switch (rawId) {
-        case 'vellor':
-            return 'STATUS: V4_IN_DEV // DB: OFF_LINE_FIRST // SYNC: LOCAL';
-        case 'deltav-lab':
-            return 'STATUS: RUNNING // SIM: RK4_50HZ_ACTIVE // ORBITS: OK';
-        case 'fueldrop':
-            return 'STATUS: SHIPPED // VERSION: V3.0.0 // CONCURRENCY: HIGH';
-        case 'the-infinite-intelligence':
-            return 'STATUS: OPERATIONAL // AGENTS: DEBATING // PARALLEL: TRUE';
-        default:
-            return 'STATUS: OPERATIONAL // SYSTEM: OK';
-    }
-};
 
 const getGitLastModified = (projectId: string): Date => {
     let filePath = path.join(process.cwd(), 'src', 'content', 'projects', projectId);
@@ -121,40 +107,6 @@ const getRelativeTimeString = (date: Date): string => {
     return date.toLocaleDateString('en-US', options);
 };
 
-const parseTelemetry = (telemetryStr: string) => {
-    const match = telemetryStr.match(/STATUS:\s*([A-Z0-9_]+)/i);
-    const status = match ? match[1].toUpperCase() : 'OPERATIONAL';
-
-    let colorClass = 'bg-emerald-500 animate-pulse-emerald';
-    let textClass = 'text-emerald-500 dark:text-emerald-400';
-    let badgeText = status.replace(/_/g, ' ');
-
-    const emeraldKeywords = ['RUNNING', 'OPERATIONAL', 'ACTIVE', 'LIVE'];
-    const amberKeywords = ['V4_IN_DEV', 'IN_DEV', 'PROTOTYPE', 'RESEARCH_ACTIVE'];
-    const cyanKeywords = ['SHIPPED', 'COMPLETED', 'STABLE', 'VERIFIED'];
-    const redKeywords = ['HALTED', 'OFFLINE', 'ERROR'];
-
-    if (emeraldKeywords.includes(status)) {
-        colorClass = 'bg-emerald-500 animate-pulse-emerald';
-        textClass = 'text-emerald-500 dark:text-emerald-400';
-    } else if (amberKeywords.includes(status)) {
-        colorClass = 'bg-amber-500 animate-pulse-amber';
-        textClass = 'text-amber-500 dark:text-amber-400';
-    } else if (cyanKeywords.includes(status)) {
-        colorClass = 'bg-cyan-500 animate-pulse-cyan';
-        textClass = 'text-cyan-500 dark:text-cyan-400';
-    } else if (redKeywords.includes(status)) {
-        colorClass = 'bg-red-500 animate-pulse-red';
-        textClass = 'text-red-500 dark:text-red-400';
-    }
-
-    return {
-        colorClass,
-        textClass,
-        badgeText: `[ ${badgeText} ]`,
-        status,
-    };
-};
 
 // FAQ and WebSite JSON-LD schemas for AEO/GEO
 const faqSchema = JSON.stringify({
@@ -237,14 +189,15 @@ const webSiteSchema = JSON.stringify({
         <main
             id="main-content"
             tabindex="-1"
-            class="flex flex-col gap-36 py-16 md:gap-48 md:py-24 lg:gap-60"
+            class="flex flex-col gap-[var(--section-gap-mobile)] py-16 md:gap-[var(--section-gap-desktop)] md:py-24"
         >
             <!-- Hero Section: The Boring Section -->
             <section
+                id="hero-section"
                 class="layout-container relative flex min-h-[60vh] w-full flex-col justify-center overflow-hidden pt-24 pb-36 md:pt-32 md:pb-32"
             >
                 <!-- Parallax Background Element -->
-                <div class="parallax-hero-bg flex items-center justify-center">
+                <div class="parallax-hero-bg blueprint-reveal flex items-center justify-center">
                     <div
                         class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-25 select-none dark:opacity-20"
                     >
@@ -285,7 +238,8 @@ const webSiteSchema = JSON.stringify({
                 </div>
                 <div class="relative z-10 flex w-full max-w-3xl flex-col justify-center">
                     <div
-                        class="animate-fade-in-up mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-medium text-green-600 sm:text-sm dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400"
+                        class="reveal-on-scroll mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-medium text-green-600 sm:text-sm dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400"
+                        data-last-updated="2026-06-18"
                     >
                         <span class="relative flex h-2 w-2 shrink-0">
                             <span
@@ -295,16 +249,20 @@ const webSiteSchema = JSON.stringify({
                                 class="relative inline-flex h-2 w-2 rounded-full bg-green-500 dark:bg-green-400"
                             ></span>
                         </span>
-                        FOCUS: AGTECH_R&D // CONFIDENCE: MIXED // STATUS: TRANSMITTING
+                        FOCUS: RELEASE_V4.0 // CONFIDENCE: MAXIMUM // STATUS: ONLINE
                     </div>
                     <h1
-                        class="animate-fade-in-up mb-6 text-4xl leading-tight font-bold text-slate-900 delay-100 md:text-5xl lg:text-6xl dark:text-white"
+                        class="reveal-on-scroll mb-6 text-4xl leading-tight font-bold text-slate-900 md:text-5xl lg:text-6xl dark:text-white"
+                        data-reveal-delay="100"
                     >
                         <span id="dynamic-greeting">Hey!</span> Buddy. <br />
                         <span
                             id="identity-rotator"
+                            role="status"
+                            aria-label="Dhaatrik's professional identity"
+                            aria-live="off"
                             class="mt-2 block min-h-[1.5em] bg-linear-to-r from-blue-600 to-purple-500 bg-clip-text font-mono text-2xl font-bold text-transparent md:text-3xl dark:from-blue-400 dark:to-purple-400"
-                            data-identities='["First-Principles Thinker.", "AI Systems Architect.", "Aerospace Enthusiast.", "Open-Source Builder."]'
+                            data-identities='["First-Principles Thinker.", "AI Systems Architect.", "Physics Tutor to 200+ Students.", "Aerospace Enthusiast.", "Open-Source Builder."]'
                             >First-Principles Thinker.</span
                         >
                     </h1>
@@ -317,7 +275,8 @@ const webSiteSchema = JSON.stringify({
                         if (el) el.innerText = greeting;
                     </script>
                     <p
-                        class="animate-fade-in-up mb-8 text-lg leading-relaxed text-slate-600 delay-200 md:text-xl dark:text-(--text-secondary)"
+                        class="reveal-on-scroll mb-8 text-lg leading-relaxed text-slate-600 md:text-xl dark:text-(--text-secondary)"
+                        data-reveal-delay="200"
                     >
                         I'm Dhaatrik — 26, building from India, and this site is my honest
                         engineering diary. Not a polished portfolio. A log of what I shipped, what
@@ -326,7 +285,7 @@ const webSiteSchema = JSON.stringify({
                     </p>
 
                     <!-- CTA Hierarchy -->
-                    <div class="animate-fade-in-up flex flex-wrap items-center gap-6 delay-300">
+                    <div class="reveal-on-scroll flex flex-wrap items-center gap-6" data-reveal-delay="300">
                         <a
                             href="/personnel"
                             data-astro-prefetch="hover"
@@ -417,7 +376,8 @@ const webSiteSchema = JSON.stringify({
 
                     <!-- Built With Badges -->
                     <div
-                        class="animate-fade-in-up mt-8 flex flex-col items-start gap-3 opacity-80 delay-400"
+                        class="reveal-on-scroll mt-8 flex flex-col items-start gap-3 opacity-80"
+                        data-reveal-delay="400"
                     >
                         <span
                             class="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400"
@@ -496,6 +456,10 @@ const webSiteSchema = JSON.stringify({
                             <path d="M6 9l6 6 6-6"></path>
                         </svg>
                     </div>
+                </div>
+                <div class="scroll-cue" aria-hidden="true">
+                    <span class="scroll-cue-line"></span>
+                    <span class="scroll-cue-label">scroll</span>
                 </div>
             </section>
 
@@ -705,6 +669,8 @@ const webSiteSchema = JSON.stringify({
                     {
                         projects.map((project) => {
                             const telemetryStr = getProjectTelemetry(project.id);
+                            const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
+                            const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const lastModifiedDate = getGitLastModified(project.id);
                             const relativeTime = getRelativeTimeString(lastModifiedDate);
@@ -741,11 +707,13 @@ const webSiteSchema = JSON.stringify({
                                                     <span
                                                         class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
                                                     />
-                                                    <span class="truncate">{telemetryStr}</span>
+                                                    <span class="truncate">
+                                                        <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
+                                                    </span>
                                                     <span class="mx-0.5 shrink-0 text-slate-300 select-none dark:text-slate-700">
                                                         •
                                                     </span>
-                                                    <span class="shrink-0 font-medium text-slate-400 dark:text-slate-600">
+                                                    <span class="last-updated-ts shrink-0 font-medium text-slate-400 dark:text-slate-600">
                                                         {relativeTime}
                                                     </span>
                                                 </div>
@@ -799,9 +767,17 @@ const webSiteSchema = JSON.stringify({
                                                     <span class="block font-mono text-[9px] text-slate-400 dark:text-slate-600">
                                                         // IMPACT.LOG
                                                     </span>
-                                                    <div class="flex items-center gap-1">
+                                                    <div
+                                                        class="flex items-center gap-1"
+                                                        role="meter"
+                                                        aria-label={`Impact level: ${project.data.pain_level} out of 5`}
+                                                        aria-valuenow={project.data.pain_level}
+                                                        aria-valuemin={1}
+                                                        aria-valuemax={5}
+                                                    >
                                                         {[1, 2, 3, 4, 5].map((i) => (
                                                             <span
+                                                                aria-hidden="true"
                                                                 class={`h-1 w-5 rounded-sm transition-opacity duration-300 ${
                                                                     i <= (project.data.pain_level ?? 0)
                                                                         ? 'bg-(--accent) opacity-90'

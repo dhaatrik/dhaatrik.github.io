@@ -421,7 +421,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                 <div class="mb-10 font-mono">
                     <label for="search-logs" class="sr-only">Search Mission Logs</label>
                     <div
-                        class="group relative flex items-center premium-glass rounded-lg border border-slate-200 dark:border-slate-800 transition-all focus-within:border-(--accent)/50 focus-within:shadow-[0_0_15px_var(--accent-glow)]"
+                        class="group relative flex items-center glass-surface premium-glass rounded-lg transition-all focus-within:border-(--accent)/50 focus-within:shadow-[0_0_15px_var(--accent-glow)]"
                     >
                         <span
                             aria-hidden="true"
@@ -436,8 +436,13 @@ const postsWithReadingTime = posts.map((post: any) => {
                         <input
                             type="search"
                             id="search-logs"
-                            placeholder='"Search my diary: a concept, a bug, or a late-night thought..."'
+                            role="combobox"
+                            aria-label="Transmission search — type to filter by title or tag"
+                            aria-autocomplete="list"
+                            aria-expanded="false"
                             aria-controls="logs-grid"
+                            aria-activedescendant=""
+                            placeholder='"Search my diary: a concept, a bug, or a late-night thought..."'
                             class="w-full bg-transparent border-0 py-3 pr-4 pl-20 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:ring-0 focus:outline-none sm:pl-32 dark:text-white dark:placeholder:text-slate-600"
                         />
                     </div>
@@ -486,13 +491,16 @@ const postsWithReadingTime = posts.map((post: any) => {
                         REF_GRID: 50.84.11
                     </div>
 
-                    <div class="grid gap-8 md:grid-cols-2 reveal-stagger" id="logs-grid">
+                    <div class="grid gap-8 md:grid-cols-2 reveal-stagger" id="logs-grid" role="listbox" aria-label="Transmission search results">
                         {
                             postsWithReadingTime.map((post: any, i: number) => (
                                 <a
                                     href={`/transmissions/${post.id}/`}
                                     data-astro-prefetch="hover"
                                     data-tags={post.data.tags ? post.data.tags.join(',') : ''}
+                                    id={`search-result-${i}`}
+                                    role="option"
+                                    aria-selected="false"
                                     class:list={[
                                         'bento-card blog-post-card group relative block overflow-hidden transition-all active:scale-[0.99]',
                                         {
@@ -584,7 +592,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                                                     <div class="flex flex-wrap gap-1.5">
                                                         {post.data.tags.map((tag: string) => (
                                                             <span
-                                                                class="post-card-tag rounded bg-(--accent)/10 px-2 py-0.5 text-[10px] font-bold tracking-widest text-(--accent) uppercase transition-all duration-300"
+                                                                class="post-card-tag rounded bg-(--accent)/15 px-2 py-0.5 text-[10px] font-bold tracking-widest text-(--accent) uppercase transition-all duration-300"
                                                                 data-tag={tag.toLowerCase()}
                                                             >
                                                                 {tag}
@@ -653,6 +661,13 @@ const postsWithReadingTime = posts.map((post: any) => {
             </section>
         </main>
         <Footer />
+
+        <style>
+            .blog-post-card {
+                content-visibility: auto;
+                contain-intrinsic-size: 0 140px;
+            }
+        </style>
 
         <script>
             // Client-side filtering logic with state retention & hotkey focus
@@ -767,16 +782,30 @@ const postsWithReadingTime = posts.map((post: any) => {
                                     const regex = new RegExp(`(${escapedWords.join('|')})`, 'gi');
 
                                     if (regex.test(text)) {
-                                        const tempSpan = document.createElement('span');
-                                        tempSpan.innerHTML = text.replace(regex, '<mark class="search-match-fallback">$1</mark>');
-
-                                        const parent = textNode.parentNode;
-                                        if (parent) {
-                                            while (tempSpan.firstChild) {
-                                                parent.insertBefore(tempSpan.firstChild, textNode);
-                                            }
-                                            parent.removeChild(textNode);
-                                        }
+                                         const matches = Array.from(text.matchAll(regex));
+                                         if (matches.length > 0) {
+                                             const fragment = document.createDocumentFragment();
+                                             let lastIndex = 0;
+                                             for (const match of matches) {
+                                                 const index = match.index!;
+                                                 const matchText = match[0];
+                                                 if (index > lastIndex) {
+                                                     fragment.appendChild(document.createTextNode(text.substring(lastIndex, index)));
+                                                 }
+                                                 const mark = document.createElement('mark');
+                                                 mark.className = 'search-highlight';
+                                                 mark.textContent = matchText;
+                                                 fragment.appendChild(mark);
+                                                 lastIndex = index + matchText.length;
+                                             }
+                                             if (lastIndex < text.length) {
+                                                 fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+                                             }
+                                             const parent = textNode.parentNode;
+                                             if (parent) {
+                                                 parent.replaceChild(fragment, textNode);
+                                             }
+                                         }
                                     }
                                 });
                             });
@@ -868,6 +897,16 @@ const postsWithReadingTime = posts.map((post: any) => {
                             term || activeTag !== 'all'
                                 ? `Found ${visibleCount} transmission${visibleCount === 1 ? '' : 's'}.`
                                 : '';
+                    }
+
+                    // Update combobox expanded state
+                    const hasActiveFilter = !!(term || activeTag !== 'all');
+                    searchInput.setAttribute(
+                        'aria-expanded',
+                        hasActiveFilter ? (visibleCount > 0 ? 'true' : 'false') : 'false'
+                    );
+                    if (!hasActiveFilter) {
+                        searchInput.setAttribute('aria-activedescendant', '');
                     }
                 };
 
@@ -1108,12 +1147,16 @@ const postsWithReadingTime = posts.map((post: any) => {
                         if (firstVisible) {
                             e.preventDefault();
                             firstVisible.element.focus();
+                            firstVisible.element.setAttribute('aria-selected', 'true');
+                            searchInput.setAttribute('aria-activedescendant', firstVisible.element.id);
                         }
                     }
                     if (e.key === 'Escape') {
                         searchInput.value = '';
                         filterPosts();
                         updateSearchState('', activeTag);
+                        searchInput.setAttribute('aria-expanded', 'false');
+                        searchInput.setAttribute('aria-activedescendant', '');
                         searchInput.blur();
                     }
                 });
@@ -1127,17 +1170,28 @@ const postsWithReadingTime = posts.map((post: any) => {
                         if (e.key === 'ArrowDown') {
                             e.preventDefault();
                             const nextCard = visibleCards[currentIndex + 1];
-                            if (nextCard) nextCard.element.focus();
+                            if (nextCard) {
+                                nextCard.element.focus();
+                                element.setAttribute('aria-selected', 'false');
+                                nextCard.element.setAttribute('aria-selected', 'true');
+                                searchInput.setAttribute('aria-activedescendant', nextCard.element.id);
+                            }
                         } else if (e.key === 'ArrowUp') {
                             e.preventDefault();
                             const prevCard = visibleCards[currentIndex - 1];
+                            element.setAttribute('aria-selected', 'false');
                             if (prevCard) {
                                 prevCard.element.focus();
+                                prevCard.element.setAttribute('aria-selected', 'true');
+                                searchInput.setAttribute('aria-activedescendant', prevCard.element.id);
                             } else {
                                 searchInput.focus();
+                                searchInput.setAttribute('aria-activedescendant', '');
                             }
                         } else if (e.key === 'Escape') {
                             e.preventDefault();
+                            element.setAttribute('aria-selected', 'false');
+                            searchInput.setAttribute('aria-activedescendant', '');
                             searchInput.focus();
                         }
                     });

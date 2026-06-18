@@ -1,6 +1,6 @@
 # Dhaatrik Chowdhury — Full Site Content for LLM Indexing
 
-> This is the extended version of llms.txt containing detailed content summaries for each page and blog post on dhaatrik.github.io. This file is intended for LLM crawlers and AI agents seeking comprehensive context about the site's content.
+> This is the extended version of llms.txt containing detailed content summaries for each page and blog post on dhaatrik.github.io. This file is intended for LLM crawlers and AI agents seeking comprehensive context about the site's content. **Site version: v4.0.0.**
 
 ---
 
@@ -36,7 +36,13 @@ The landing page features a dynamic greeting based on time of day, a hero sectio
 A detailed personnel file covering Dhaatrik's background, education, work experience, and technical capabilities. Styled as a classified dossier with a technical/military aesthetic.
 
 ### Projects (https://dhaatrik.github.io/projects/)
-A dedicated archive displaying Dhaatrik Chowdhury's complete engineering directory. Displays card previews for all 12 projects, showing titles, descriptions, live telemetry states, tags, and progress logs.
+A dedicated archive displaying Dhaatrik Chowdhury's complete engineering directory. Displays card previews for all 12 projects.
+
+Each project card includes:
+- **IMPACT.LOG**: A 1–5 neon segment bar (`role="meter"`, `aria-label="Impact level: N out of 5"`, `aria-valuenow`, `aria-valuemin`, `aria-valuemax`) showing development difficulty/pain level.
+- **[ FUCKUP LOG ]**: An honest one-sentence teaser describing the biggest mistake or failure in the project.
+- **SYS.STATUS telemetry**: A live-animated monospace status line (e.g., `STATUS: V4_IN_DEV // DB: OFF_LINE_FIRST // SYNC: LOCAL`) with a pulsing `telemetry-keyword` class.
+- **Mission tags**: Tech stack and domain tags.
 
 ### Pedagogy (https://dhaatrik.github.io/pedagogy/)
 Dedicated to Dhaatrik's teaching philosophy and the DBS Classes YouTube channel. Contains:
@@ -47,6 +53,14 @@ Dedicated to Dhaatrik's teaching philosophy and the DBS Classes YouTube channel.
 
 ### Transmissions (https://dhaatrik.github.io/transmissions/)
 The blog index page listing all published articles ("transmissions") with reading times, dates, and tags.
+
+Features a terminal-style search widget implementing the **WAI-ARIA 1.2 Combobox pattern** (no-popup listbox variant):
+- Input: `role="combobox"`, `aria-autocomplete="list"`, `aria-expanded`, `aria-activedescendant`
+- Results container: `role="listbox"`  
+- Each result card: `role="option"`, unique `id="search-result-N"`, `aria-selected`
+- Keyboard nav: `/` to focus, ArrowDown to navigate results, ArrowUp to return to input, Escape to clear
+- Supports multi-term fuzzy matching (space-delimited) and `#tag` shorthand
+- Highlights matched text in result card titles and tags
 
 ---
 
@@ -152,6 +166,36 @@ First-person scrollytelling demo born from Kerbal Space Program intuition and De
 ### Read Aloud Chrome Extension
 - **URL**: https://dhaatrik.github.io/projects/readaloud_chromeextension/
 - **Description**: Manifest V3 Chrome extension wrapping the Web Speech API for custom text-to-speech with speech speed control and shortcut bindings.
+
+---
+
+## v4.0.0 Feature Additions
+
+### Design System
+- **Canonical `.glass-surface` base class**: All glassmorphic surfaces (bento cards, search bar, popover dialogs) now consume a single token system (`--glass-bg-raw`, `--glass-border-raw`, `--neon-glow-1-rgb`, `--neon-glow-2-rgb`). No component duplicates `rgba()` values — all update atomically when the theme changes.
+- **`--glass-border-opacity` increased**: Light-mode rest state 0.08 → 0.12, hover 0.2 → 0.25 to meet WCAG 1.4.11 non-text contrast on white backgrounds.
+
+### Scroll Reveal System
+- **`data-reveal-delay` attribute**: Any `.reveal-on-scroll` element can declare `data-reveal-delay="N"` (milliseconds) for declarative per-element staggering without a `.reveal-stagger` parent.
+- **`.blueprint-reveal` applied to hero parallax SVG**: The grid-background fades in on load, reinforcing mission-control aesthetics.
+- **Hero CTAs migrated**: The `animate-fade-in-up + delay-{N}` system is replaced with the unified `reveal-on-scroll + data-reveal-delay` approach, removing a parallel animation system from the codebase.
+
+### Accessibility (v4.0.0)
+- **Terminal search combobox**: Full WAI-ARIA 1.2 combobox pattern (role="combobox", role="listbox", role="option", aria-expanded, aria-activedescendant).
+- **IMPACT.LOG meter**: pain_level bar carries `role="meter"`, `aria-label="Impact level: N out of 5"`, `aria-valuenow`, `aria-valuemin`, `aria-valuemax`.
+- **Identity rotator**: `aria-live="off"` prevents screen readers from announcing every rotation.
+
+### Footer Diagnostics (v4.0.0)
+- `CURRENT_STUDY`: Hand-updated constant. Current topic: applied thermodynamics for FuelDrop v4 energy calculator.
+- `LATEST_INSIGHT`: Dynamically sourced from `posts[0].data.description` — auto-updates with every new transmission.
+- `PAGES.INDEXED`: Auto-computed as `posts.length + projects.length + 4`.
+- `SYS.LOAD`: From `navigator.hardwareConcurrency` (CPU core count).
+- `SYS.LATENCY`: From `PerformanceNavigationTiming.responseStart - requestStart`.
+
+### Reading List (v4.0.0)
+- Added: *The Design of Everyday Things* (Don Norman) — systems thinking applied to UX decisions.
+- Added: *Thinking, Fast and Slow* (Daniel Kahneman) — marked `IN_PROGRESS`.
+- All existing book hints rewritten as first-person personal reactions, not back-cover descriptions.
 
 ---
 
