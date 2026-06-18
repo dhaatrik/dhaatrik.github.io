@@ -1,6 +1,11 @@
 ---
 name: dhaatrik-astro-site
-description: Use this skill for any technical work on dhaatrik.github.io including Astro architecture, content collections, components, performance optimization, Tailwind v4 styling, MDX/LaTeX support, image optimization, GitHub Pages deployment, testing, and refactoring. Always respect the current stack (Astro 6 + Tailwind 4 + vanilla JS/CSS) and integrate with dhaatrik-writing-style and dhaatrik-mission-report skills.
+description: >
+  Use for Astro architecture, components, content collections, performance, Tailwind v4,
+  MDX/LaTeX, image optimization, GitHub Pages deployment, testing, JSON-LD injection,
+  BaseHead meta tags, llms.txt output, and robots.txt. Triggers: Astro, refactor, build,
+  BaseHead, JSON-LD, schema, og:type, sitemap, RSS. Pair with dhaatrik-seo-legacy for
+  SEO/AEO/GEO strategy and dhaatrik-writing-style for content.
 ---
 
 # Dhaatrik Astro Site Technical Skill
@@ -51,6 +56,42 @@ description: Use this skill for any technical work on dhaatrik.github.io includi
 2. Use the exact frontmatter template from `dhaatrik-mission-report` skill
 3. Update homepage `index.astro` to include it in the sorted projects list
 4. Optimize heroImage with Astro `<Image>`
+5. Update `public/llms.txt` and `public/llms-full.txt` (`dhaatrik-seo-legacy`)
+
+### SEO / AEO / LLM implementation (from GEMINI.md)
+
+**JSON-LD in Astro pages** — build in frontmatter, inject with `set:html`:
+
+```astro
+---
+const schema = { '@context': 'https://schema.org', '@type': 'Article', /* ... */ };
+const jsonLd = JSON.stringify(schema).replace(/</g, '\\u003c');
+---
+<script type="application/ld+json" set:html={jsonLd} />
+```
+
+- Do **not** use `define:vars` or raw string templates inside `<script>` tags — breaks formatting
+- Homepage: `WebSite` + `FAQPage` in [`index.astro`](../../../src/pages/index.astro)
+- Transmissions: `Article` + `BreadcrumbList` in [`BlogPost.astro`](../../../src/layouts/BlogPost.astro)
+- Project detail: pass `title`, `description`, `keywords` to `BaseHead`
+
+**`BaseHead.astro` props** — every route must supply:
+
+| Prop | Rule |
+|------|------|
+| `title` | Page-specific, honest |
+| `description` | 150–160 chars, diary voice |
+| `type` | `'article'` for transmissions; `'website'` for static pages |
+| `keywords` | Relevant terms array per page |
+| `pubDate` / `updatedDate` | On article types when available |
+
+**Static LLM files** — live in `public/`; copied to `dist/` on build:
+
+- `public/llms.txt` — short index
+- `public/llms-full.txt` — detailed summaries for AI crawlers
+- `public/robots.txt` — allow AI bots + sitemap URL
+
+**Semantic HTML** — one `<h1>` per page; use `<main>`, `<article>`, `<section>`, `<nav>`; descriptive `alt` on all images.
 
 ### Creating New Interactive Components
 - Place in `src/components/`

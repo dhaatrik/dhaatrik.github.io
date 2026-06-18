@@ -59,7 +59,7 @@ The site footer includes a live system diagnostics block:
 
 ## Agent / coding-agent instructions
 
-This repository ships project-scoped skills for AI coding agents (Grok, Antigravity, Cursor-compatible harnesses). Start with [AGENTS.md](https://github.com/dhaatrik/dhaatrik.github.io/blob/main/AGENTS.md).
+This repository ships project-scoped skills for AI coding agents (Grok, Antigravity, Cursor-compatible harnesses). Start with [AGENTS.md](https://github.com/dhaatrik/dhaatrik.github.io/blob/main/AGENTS.md). SEO/AEO/GEO/LLM rules: [GEMINI.md](https://github.com/dhaatrik/dhaatrik.github.io/blob/main/GEMINI.md) → canonical skill `dhaatrik-seo-legacy`.
 
 | Skill | Scope |
 |-------|-------|

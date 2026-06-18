@@ -5,11 +5,11 @@ description: >
   project mission logs, homepage/personnel/pedagogy copy, meta descriptions, 404 text,
   frontmatter descriptions, and JSON-LD prose. Triggers: write blog, draft transmission,
   create article, improve post, rewrite copy, content for website, mission log, mission report,
-  honest diary, project write-up, pedagogy content, SEO description, portfolio copy.
-  Apply brotherly-teacher tone, sci-fi mission-control framing, first-person diary voice,
-  and transparent reflections on fuckups and learnings. Use when /dhaatrik-writing-style is invoked.
-  Pair with dhaatrik-mission-report (structure), dhaatrik-seo-legacy (meta), dhaatrik-astro-site (code),
-  dhaatrik-visual-system (UI copy) as appropriate.
+  honest diary, project write-up, pedagogy content, SEO description, AEO, GEO, meta description,
+  FAQ schema prose, llms.txt summaries. Apply brotherly-teacher tone, sci-fi mission-control
+  framing, first-person diary voice, and transparent reflections on fuckups and learnings.
+  Use when /dhaatrik-writing-style is invoked. Pair with dhaatrik-mission-report (structure),
+  dhaatrik-seo-legacy (SEO/AEO/GEO/LLM), dhaatrik-astro-site (code), dhaatrik-visual-system (UI).
 ---
 
 # Dhaatrik Writing Style Guide — Personal Diary Transmissions
@@ -79,6 +79,13 @@ Every major post should feel like a **Transmission from Mission Control**:
 - Frontmatter: Follow existing Zod schema (title, description, pubDate, clearance, etc.).
 - SEO-friendly but honest: Meta description should hint at the real story ("How I completely fucked up the state management and what it taught me about building reliable systems").
 - Tags & Categories: Use meaningful ones that reflect learnings.
+
+## AEO / GEO voice guardrails (from GEMINI.md)
+
+- **Body copy:** Mission Report H2s — never turn the whole post into FAQ question headings
+- **Meta, llms.txt, JSON-LD FAQ answers:** Can use natural questions, but still sound like you — not Wikipedia or a marketing FAQ page
+- **Citations:** Quote sources in your voice; attribute clearly for generative search trust
+- **Third person:** Only in JSON-LD / schema / `llms-full.txt` entity blocks — visible prose stays **I/you**
 
 ## Examples of Good Openings
 - Bad: "Today I implemented a new feature..."

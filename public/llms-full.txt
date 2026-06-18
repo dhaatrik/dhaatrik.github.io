@@ -217,7 +217,7 @@ A: Dhaatrik stopped due to internal execution failures: solo production bottlene
 
 ## Agent / coding-agent instructions
 
-Repository entry point: `AGENTS.md`. Project skills live in `.agents/skills/`:
+Repository entry points: `AGENTS.md` (routing), `GEMINI.md` (SEO/AEO/GEO summary → `dhaatrik-seo-legacy` skill). Project skills live in `.agents/skills/`:
 
 - **dhaatrik-writing-style** — voice and tone for all user-facing copy
 - **dhaatrik-mission-report** — Mission Report structure for projects and transmissions

@@ -1,6 +1,10 @@
 ---
 name: dhaatrik-mission-report
-description: Use this skill for creating, editing, structuring, or updating any Mission Report, project write-up, Featured Engineering card, or Transmission about personal projects, builds, experiments, fuckups, or learnings on dhaatrik.github.io. Always follow the Mission Report format, integrate with dhaatrik-writing-style, enforce honest transparency, sci-fi terminal framing, and proper Astro frontmatter + component usage.
+description: >
+  Use for Mission Reports, project write-ups, transmissions, Featured Engineering cards,
+  transmission metadata blocks, tables, and Mermaid/ASCII diagrams. Triggers: mission log,
+  mission report, project page, transmission, fuckups, learnings. Pair with
+  dhaatrik-writing-style (voice) and dhaatrik-seo-legacy (llms.txt + AEO schema).
 ---
 
 # Dhaatrik Mission Report Skill — Honest Engineering Diaries
@@ -17,8 +21,27 @@ description: Use this skill for creating, editing, structuring, or updating any 
 ## Mandatory Integration
 **Always combine with `dhaatrik-writing-style` skill** for tone, voice, and storytelling flow. This skill provides the **structural skeleton**; the writing-style skill provides the **soul and voice**. Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 
+## Transmission metadata block (required for blog posts)
+
+Place at the **very top** of every transmission in `src/content/blog/` — before body prose. AEO/GEO quick-reference for humans and LLM parsers:
+
+````markdown
+```
+====================================================================
+// TRANSMISSION METADATA // QUICK REFERENCE (AEO/LLMO OBJECTS)
+--------------------------------------------------------------------
+- ENTITY: [What this transmission is about]
+- DATE / STATUS: [Key dates or current state]
+- ROOT_CAUSE or FOCUS: [Main problem or theme]
+- KEY LESSON: [One-line takeaway]
+====================================================================
+```
+````
+
+Use Mission Report **H2 headings** in the body — not FAQ-style question headings throughout. Question phrasing belongs in JSON-LD/FAQPage and `llms-full.txt` (`dhaatrik-seo-legacy`).
+
 ## Standard Mission Report Structure
-Every major report **must** follow this 6-part structure (use as H2/H3 headings):
+Every major report **must** follow this 6-part structure (use as **H2** headings):
 
 ### 1. Mission Log / Status Report (Opening Hook)
 - Start with a vivid, terminal-style status or scene from the journey.
@@ -100,13 +123,20 @@ order: 2   # For projects collection sorting
 - End with forward momentum — the diary continues.
 - Length guideline: 800–2500 words for deep reports. Shorter "status update" reports are fine for quick logs.
 
+## AEO-friendly structuring (inside Mission Report sections)
+
+- **Tables** — comparisons, before/after, metrics (preferred over dense prose for GEO)
+- **Mermaid or ASCII** — pipelines, architectures, decision flows in Journey or Learnings
+- **Citations** — quote principles, docs, or sources with links where checkable
+
 ## Workflow When Using This Skill
 1. Read existing related content (if updating).
-2. Gather key facts from user: what, why, major fuckups, learnings, current state.
-3. Draft using the 6-part structure + writing-style voice.
-4. Suggest proper frontmatter and image placements.
-5. Recommend any new components or design system updates needed.
-6. Validate against Astro content collection schema.
+2. Add transmission metadata block (blog posts only).
+3. Gather key facts: what, why, major fuckups, learnings, current state.
+4. Draft using the 6-part structure + writing-style voice.
+5. Suggest proper frontmatter and image placements.
+6. Update `public/llms.txt` + `llms-full.txt` (`dhaatrik-seo-legacy`).
+7. Validate against Astro content collection schema.
 
 ## Pro Tips for Agents
 - Ground every report in **real events** — never fabricate stories.
