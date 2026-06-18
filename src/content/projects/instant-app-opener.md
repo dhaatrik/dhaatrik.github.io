@@ -7,6 +7,7 @@ progress: 'v1.2.0 fully operational, local desktop application'
 order: 5
 tags: ['JavaScript', 'Electron', 'Node.js', 'CSS']
 pain_level: 2
+telemetry: 'STATUS: SHIPPED // VERSION: V1.2.0 // HOTKEYS: GLOBAL'
 fuckup_teaser: "Electron auto-launch on startup needed registry writes I hadn't tested on fresh Windows installs — first users hit a broken tray."
 ---
 

@@ -343,7 +343,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                 </svg>
             </div>
 
-            <section class="layout-container">
+            <section id="hero-section" class="layout-container relative pb-16">
                 <div
                     class="mb-16 flex flex-col items-center gap-8 md:flex-row-reverse md:items-start"
                 >
@@ -407,7 +407,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                     </div>
                     <div class="w-full md:w-[calc(100%-352px)]">
                         <h1
-                            class="mb-2 text-4xl leading-tight font-bold tracking-tight text-balance text-slate-900 md:text-5xl dark:text-white"
+                            class="type-page-title mb-2 text-slate-900 dark:text-white"
                         >
                             Mission Dossier
                         </h1>
@@ -438,6 +438,10 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="scroll-cue" aria-hidden="true">
+                    <span class="scroll-cue-line"></span>
+                    <span class="scroll-cue-label">scroll</span>
                 </div>
             </section>
 

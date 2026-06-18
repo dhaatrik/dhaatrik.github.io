@@ -1,0 +1,36 @@
+/* ═══════════════════════════════════════════════════════════════
+   CANONICAL DESIGN TOKENS — dhaatrik.github.io v4
+   ─────────────────────────────────────────────────────────────
+   Public aliases (spec / docs):     Implementation tokens:
+   --glass-bg                        --glass-bg-raw + --glass-bg-opacity
+   --neon-cyan                       --neon-glow-1-rgb
+   --neon-purple                     --neon-glow-2-rgb
+   --blueprint-grid                  --blueprint-color-major / -minor
+   ─────────────────────────────────────────────────────────────
+   Apply surfaces via .glass-surface (see glass.css). Legacy:
+   .premium-glass and .bento-card inherit the same rules.
+   ═══════════════════════════════════════════════════════════════ */
+
+@property --glass-bg-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.35;
+}
+
+@property --glass-border-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.08;
+}
+
+@property --neon-glow-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --blueprint-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.02;
+}

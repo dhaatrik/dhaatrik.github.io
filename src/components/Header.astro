@@ -136,7 +136,7 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
 
 <header
     id="main-header"
-    class="fixed top-0 z-50 w-full border-b border-slate-200/50 bg-white/70 backdrop-blur-lg dark:border-white/10 dark:bg-[#0b0e14]/70"
+    class="glass-surface glass-chrome fixed top-0 z-50 w-full"
 >
     <nav
         id="main-nav"
@@ -271,8 +271,7 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
 
 <nav
     id="mobile-nav-drawer"
-    class="fixed top-0 right-0 z-40 flex h-full w-72 translate-x-full flex-col gap-6 border-l border-slate-200/60 bg-white/[.90] p-6 pt-24 shadow-[-10px_0_30px_-10px_rgba(0,0,0,0.12)] transition-transform duration-300 md:hidden dark:border-white/[.08] dark:bg-[#0b0e14]/90 dark:shadow-[-10px_0_40px_-15px_var(--accent-glow)]"
-    style="backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%);"
+    class="glass-surface glass-drawer fixed top-0 right-0 z-40 flex h-full w-72 translate-x-full flex-col gap-6 p-6 pt-24 transition-transform duration-300 md:hidden"
     aria-label="Mobile navigation"
 >
     <!-- Decorative Grid Motif -->
@@ -393,12 +392,12 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
 
         <div class="grid grid-cols-2 gap-2 border-t border-dashed border-slate-200/60 pt-3 dark:border-white/5">
             <div class="flex flex-col gap-0.5">
-                <span class="text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500">SYS.LOAD</span>
-                <span id="drawer-sys-load" class="font-semibold text-slate-700 dark:text-slate-300">—</span>
+                <span class="text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500">SYS.CORES</span>
+                <span id="drawer-sys-cores" class="font-semibold text-slate-700 dark:text-slate-300">—</span>
             </div>
             <div class="flex flex-col gap-0.5">
-                <span class="text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500">SYS.LATENCY</span>
-                <span id="drawer-sys-latency" class="font-semibold text-slate-700 dark:text-slate-300">—</span>
+                <span class="text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500">SYS.RTT</span>
+                <span id="drawer-sys-rtt" class="font-semibold text-slate-700 dark:text-slate-300">—</span>
             </div>
         </div>
 
@@ -454,27 +453,15 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
             const currentScroll = window.scrollY;
 
             // Shrink header and add subtle shadow on scroll (JS fallback only)
-            if (!hasScrollTimeline) {
+                if (!hasScrollTimeline) {
                 if (currentScroll > 50) {
                     nav.classList.remove('py-4');
                     nav.classList.add('py-2');
-                    header.classList.add(
-                        'shadow-md',
-                        'dark:shadow-black/50',
-                        'bg-white/80',
-                        'dark:bg-[#0b0e14]/80'
-                    );
-                    header.classList.remove('bg-white/70', 'dark:bg-[#0b0e14]/70');
+                    header.classList.add('is-scrolled', 'shadow-md', 'dark:shadow-black/50');
                 } else {
                     nav.classList.add('py-4');
                     nav.classList.remove('py-2');
-                    header.classList.remove(
-                        'shadow-md',
-                        'dark:shadow-black/50',
-                        'bg-white/80',
-                        'dark:bg-[#0b0e14]/80'
-                    );
-                    header.classList.add('bg-white/70', 'dark:bg-[#0b0e14]/70');
+                    header.classList.remove('is-scrolled', 'shadow-md', 'dark:shadow-black/50');
                 }
             }
 
@@ -672,15 +659,15 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
 
             // Populate live SYS.LOAD and SYS.LATENCY from the Performance Navigation Timing API
             const updateDrawerTelemetry = () => {
-                const loadEl = document.getElementById('drawer-sys-load');
-                const latencyEl = document.getElementById('drawer-sys-latency');
+                const coresEl = document.getElementById('drawer-sys-cores');
+                const rttEl = document.getElementById('drawer-sys-rtt');
 
-                if (loadEl) {
+                if (coresEl) {
                     const cores = navigator.hardwareConcurrency ?? null;
-                    loadEl.textContent = cores ? `CORES: ${cores}` : '—';
+                    coresEl.textContent = cores ? `${cores}` : '—';
                 }
 
-                if (latencyEl) {
+                if (rttEl) {
                     try {
                         const entries = performance.getEntriesByType(
                             'navigation'
@@ -696,12 +683,12 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                                     : latencyMs < 200
                                       ? 'STABLE'
                                       : 'SLOW';
-                            latencyEl.textContent = `${latencyMs}ms // ${label}`;
+                            rttEl.textContent = `${latencyMs}ms // ${label}`;
                         } else {
-                            latencyEl.textContent = '—';
+                            rttEl.textContent = '—';
                         }
                     } catch {
-                        latencyEl.textContent = '—';
+                        rttEl.textContent = '—';
                     }
                 }
             };

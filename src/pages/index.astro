@@ -10,7 +10,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
-import { getProjectTelemetry, parseTelemetry } from '../data/status';
+import { getPainLevelLabel, parseTelemetry } from '../data/status';
 
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
@@ -252,7 +252,7 @@ const webSiteSchema = JSON.stringify({
                         FOCUS: RELEASE_V4.0 // CONFIDENCE: MAXIMUM // STATUS: ONLINE
                     </div>
                     <h1
-                        class="reveal-on-scroll mb-6 text-4xl leading-tight font-bold text-slate-900 md:text-5xl lg:text-6xl dark:text-white"
+                        class="type-display reveal-on-scroll mb-6 text-slate-900 dark:text-white"
                         data-reveal-delay="100"
                     >
                         <span id="dynamic-greeting">Hey!</span> Buddy. <br />
@@ -275,7 +275,7 @@ const webSiteSchema = JSON.stringify({
                         if (el) el.innerText = greeting;
                     </script>
                     <p
-                        class="reveal-on-scroll mb-8 text-lg leading-relaxed text-slate-600 md:text-xl dark:text-(--text-secondary)"
+                        class="type-body-lg reveal-on-scroll mb-8 text-slate-600 dark:text-(--text-secondary)"
                         data-reveal-delay="200"
                     >
                         I'm Dhaatrik — 26, building from India, and this site is my honest
@@ -291,7 +291,7 @@ const webSiteSchema = JSON.stringify({
                             data-astro-prefetch="hover"
                             class="magnetic-target group transition-spring inline-flex items-center gap-2 rounded-full bg-(--accent-button-bg) px-6 py-2.5 font-medium text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] focus-visible:scale-105 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                         >
-                            View Mission Dossier
+                            Read My Story
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
@@ -668,7 +668,7 @@ const webSiteSchema = JSON.stringify({
 
                     {
                         projects.map((project) => {
-                            const telemetryStr = getProjectTelemetry(project.id);
+                            const telemetryStr = project.data.telemetry;
                             const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
                             const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
@@ -676,7 +676,7 @@ const webSiteSchema = JSON.stringify({
                             const relativeTime = getRelativeTimeString(lastModifiedDate);
                             const parsed = parseTelemetry(telemetryStr);
                             return (
-                                <article class="bento-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
+                                <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
                                     <div class="hologram-overlay" />
 
                                     {/* Hologram WebM Video */}
@@ -702,7 +702,7 @@ const webSiteSchema = JSON.stringify({
                                     >
                                         <div>
                                             {/* Live Telemetry Badge */}
-                                            <div class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                                            <div class="type-telemetry mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 text-slate-400 dark:border-white/5 dark:text-slate-500">
                                                 <div class="flex min-w-0 items-center gap-1.5">
                                                     <span
                                                         class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
@@ -771,6 +771,7 @@ const webSiteSchema = JSON.stringify({
                                                         class="flex items-center gap-1"
                                                         role="meter"
                                                         aria-label={`Impact level: ${project.data.pain_level} out of 5`}
+                                                        aria-valuetext={getPainLevelLabel(project.data.pain_level)}
                                                         aria-valuenow={project.data.pain_level}
                                                         aria-valuemin={1}
                                                         aria-valuemax={5}

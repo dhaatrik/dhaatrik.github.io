@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { getCollection } from 'astro:content';
-import { getProjectTelemetry, parseTelemetry } from '../../data/status';
+import { getPainLevelLabel, parseTelemetry } from '../../data/status';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
@@ -116,7 +116,7 @@ const jsonLd = JSON.stringify(webpageSchema);
         <main
             id="main-content"
             tabindex="-1"
-            class="relative grow overflow-x-hidden py-20 md:py-32"
+            class="relative flex grow flex-col gap-[var(--section-gap-mobile)] overflow-x-hidden py-[var(--section-gap-mobile)] md:gap-[var(--section-gap-desktop)] md:py-[var(--section-gap-desktop)]"
         >
             <div
                 id="reticle-bg"
@@ -207,21 +207,22 @@ const jsonLd = JSON.stringify(webpageSchema);
                         // projects_archive.db
                     </div>
                     <h1
-                        class="mb-4 text-4xl leading-tight font-bold tracking-tight text-slate-900 md:text-5xl dark:text-white"
+                        class="type-page-title mb-4 text-slate-900 dark:text-white"
                     >
                         Project Workbench <span class="text-slate-400 dark:text-slate-600">& Archive</span>
                     </h1>
-                    <p class="max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                        Things I've shipped, abandoned, or am still fixing. Web apps, offline tools,
-                        browser extensions, and sandbox experiments — each with an honest mission log.
+                    <p class="type-body-lg max-w-2xl text-slate-600 dark:text-(--text-secondary)">
+                        Hey buddy — these are things I've shipped, abandoned, or am still patching at
+                        2 AM. If your repo looks like this too, you're in good company. Each one
+                        ships with an honest mission log: what broke, what I learned.
                     </p>
                 </div>
 
                 <!-- Bento-like grid listing all 12 projects -->
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 reveal-stagger">
+                <div class="bento-grid reveal-stagger">
                     {
                         projects.map((project) => {
-                            const telemetryStr = getProjectTelemetry(project.id);
+                            const telemetryStr = project.data.telemetry;
                             const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
                             const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
@@ -230,7 +231,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                             const parsed = parseTelemetry(telemetryStr);
                             return (
                                 <article
-                                    class="bento-card group relative flex min-h-[320px] flex-col justify-between overflow-hidden p-6 transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
+                                    class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
                                 >
                                     <div class="hologram-overlay" />
                                     
@@ -238,8 +239,8 @@ const jsonLd = JSON.stringify(webpageSchema);
                                         class="relative z-10 flex h-full flex-col justify-between"
                                         data-tilt-z
                                     >
-                                        <div>
-                                            <div class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                                        <div class="mission-report-body">
+                                            <div class="mission-report-telemetry type-telemetry flex min-w-0 items-center justify-between gap-4 text-slate-400 dark:text-slate-500">
                                                 <div class="flex min-w-0 items-center gap-1.5">
                                                     <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`} />
                                                     <span class="truncate">
@@ -300,6 +301,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                         class="flex items-center gap-1"
                                                         role="meter"
                                                         aria-label={`Impact level: ${project.data.pain_level} out of 5`}
+                                                        aria-valuetext={getPainLevelLabel(project.data.pain_level)}
                                                         aria-valuenow={project.data.pain_level}
                                                         aria-valuemin={1}
                                                         aria-valuemax={5}
@@ -340,7 +342,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                     ))}
                                                 </div>
                                             )}
-                                            <div class="flex items-center justify-between border-t border-slate-200/50 pt-3 font-mono text-[9px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                                            <div class="mission-report-footer type-telemetry flex items-center justify-between text-slate-400 dark:text-slate-500">
                                                 <span class="truncate">
                                                     PROGRESS: {project.data.progress}
                                                 </span>

@@ -7,6 +7,7 @@ progress: 'Manifest V3 extension, published locally'
 order: 12
 tags: ['JavaScript', 'Web Speech API', 'Chrome Extension']
 pain_level: 2
+telemetry: 'STATUS: SHIPPED // MV3: COMPLIANT // TTS: NATIVE'
 fuckup_teaser: "MV3's service worker lifecycle killed my persistent state — took three rewrites to understand it's not a background page."
 ---
 

@@ -7,6 +7,7 @@ progress: '50Hz deterministic RK4 integration, VAB'
 order: 2
 tags: ['TypeScript', 'Vanilla DOM', 'Web Workers', 'esbuild', 'Vitest']
 pain_level: 4
+telemetry: 'STATUS: OPERATIONAL // SIM: RK4_50HZ // ORBITS: OK'
 fuckup_teaser: "Early worker message shapes were too chatty — batch comms killed determinism before I caught it."
 ---
 

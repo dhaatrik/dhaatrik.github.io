@@ -1,0 +1,189 @@
+@layer components {
+    /* --- Canonical Glass Surface Base Class ---
+     * Prefer .glass-surface for all new chrome (header, drawer, panels).
+     * Modifiers: .glass-chrome (fixed header), .glass-drawer (mobile nav).
+     */
+    .glass-surface,
+    .premium-glass,
+    .bento-card {
+        --glass-bg-opacity: 0.35;
+        --glass-border-opacity: 0.12;
+        --neon-glow-opacity: 0;
+        --blueprint-opacity: 0.02;
+
+        position: relative;
+        background-color: rgba(var(--glass-bg-raw), var(--glass-bg-opacity)) !important;
+        backdrop-filter: blur(16px) saturate(120%);
+        -webkit-backdrop-filter: blur(16px) saturate(120%);
+        border: 1px solid rgba(var(--glass-border-raw), var(--glass-border-opacity)) !important;
+
+        box-shadow:
+            0 8px 32px 0 rgba(0, 0, 0, 0.06),
+            0 0 calc(var(--neon-glow-opacity) * 15px) rgba(var(--neon-glow-1-rgb), calc(var(--neon-glow-opacity) * 0.4)),
+            0 0 calc(var(--neon-glow-opacity) * 30px) rgba(var(--neon-glow-2-rgb), calc(var(--neon-glow-opacity) * 0.25));
+
+        transition:
+            --glass-bg-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            --glass-border-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            --neon-glow-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            --blueprint-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-surface::after,
+    .premium-glass::after,
+    .bento-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        border-radius: inherit;
+        background-image:
+            linear-gradient(to right, var(--blueprint-color-major) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--blueprint-color-major) 1px, transparent 1px),
+            linear-gradient(to right, var(--blueprint-color-minor) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--blueprint-color-minor) 1px, transparent 1px);
+        background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
+        opacity: var(--blueprint-opacity);
+        clip-path: inset(0 100% 0 0);
+        transition:
+            opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            clip-path 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-surface:hover,
+    .glass-surface:focus-within,
+    .premium-glass:hover,
+    .premium-glass:focus-within,
+    .bento-card:hover,
+    .bento-card:focus-within {
+        --glass-bg-opacity: 0.55;
+        --glass-border-opacity: 0.25;
+        --neon-glow-opacity: 1;
+        --blueprint-opacity: 0.08;
+    }
+
+    .glass-surface:hover::after,
+    .glass-surface:focus-within::after,
+    .premium-glass:hover::after,
+    .premium-glass:focus-within::after,
+    .bento-card:hover::after,
+    .bento-card:focus-within::after {
+        clip-path: inset(0 0 0 0);
+    }
+
+    /* Fixed chrome: site header */
+    .glass-chrome {
+        --glass-bg-opacity: 0.7;
+        --glass-border-opacity: 0.1;
+        --blueprint-opacity: 0.03;
+        backdrop-filter: blur(20px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        border-radius: 0;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+    }
+
+    .glass-chrome.is-scrolled {
+        --glass-bg-opacity: 0.82;
+        --glass-border-opacity: 0.14;
+    }
+
+    .dark .glass-chrome {
+        --glass-bg-opacity: 0.72;
+    }
+
+    .dark .glass-chrome.is-scrolled {
+        --glass-bg-opacity: 0.85;
+    }
+
+    /* Mobile navigation drawer */
+    .glass-drawer {
+        --glass-bg-opacity: 0.9;
+        --glass-border-opacity: 0.1;
+        --blueprint-opacity: 0.04;
+        backdrop-filter: blur(20px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        border-radius: 0;
+        border-top: none;
+        border-bottom: none;
+        box-shadow: -10px 0 30px -10px rgba(0, 0, 0, 0.12);
+    }
+
+    .dark .glass-drawer {
+        box-shadow: -10px 0 40px -15px var(--accent-glow);
+    }
+
+    .bento-card {
+        border-radius: var(--bento-radius);
+        padding: var(--bento-padding);
+        will-change: transform, opacity;
+        transform-style: preserve-3d;
+        content-visibility: auto;
+        contain-intrinsic-size: 0 320px;
+    }
+
+    .bento-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+            600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+            var(--accent-glow),
+            transparent 40%
+        );
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .bento-card:hover::before {
+        opacity: 1;
+    }
+
+    a.bento-card:hover,
+    button.bento-card:hover,
+    .bento-card:focus-within {
+        transform: translateY(-0.25rem);
+    }
+
+    .bento-card-inner {
+        border-radius: var(--bento-radius-inner);
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Mission Report card layout — telemetry / story / fuckup / CTA zones */
+    .mission-report-card {
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mission-report-card .mission-report-telemetry {
+        border-bottom: 1px solid rgba(var(--glass-border-raw), 0.12);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .mission-report-card .mission-report-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .mission-report-card .mission-report-footer {
+        border-top: 1px solid rgba(var(--glass-border-raw), 0.12);
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
+}
