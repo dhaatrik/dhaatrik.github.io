@@ -16,7 +16,7 @@ description: Use this skill for any technical work on dhaatrik.github.io includi
 - Implementing design system updates (glassmorphism, neon accents, blueprint grids)
 - Any task involving the Astro codebase, TypeScript, or Tailwind
 
-**Mandatory Pairing:** Always combine with `dhaatrik-writing-style` (tone) and `dhaatrik-mission-report` (structure) when touching content.
+**Mandatory Pairing:** Always combine with `dhaatrik-writing-style` (tone) and `dhaatrik-mission-report` (structure) when touching content. Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 
 ## Current Site Architecture (Know This)
 - **Framework**: Astro 6 (SSG with prefetch enabled)

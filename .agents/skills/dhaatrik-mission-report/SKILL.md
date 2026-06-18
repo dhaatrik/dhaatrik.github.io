@@ -15,7 +15,7 @@ description: Use this skill for creating, editing, structuring, or updating any 
 - Any task involving project storytelling
 
 ## Mandatory Integration
-**Always combine with `dhaatrik-writing-style` skill** for tone, voice, and storytelling flow. This skill provides the **structural skeleton**; the writing-style skill provides the **soul and voice**.
+**Always combine with `dhaatrik-writing-style` skill** for tone, voice, and storytelling flow. This skill provides the **structural skeleton**; the writing-style skill provides the **soul and voice**. Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 
 ## Standard Mission Report Structure
 Every major report **must** follow this 6-part structure (use as H2/H3 headings):

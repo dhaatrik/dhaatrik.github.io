@@ -22,6 +22,8 @@ description: Use this skill for honest, long-term SEO, structured data, meta des
 - `dhaatrik-astro-site` (technical implementation in Astro)
 - `dhaatrik-visual-system` (OG image design)
 
+Skill routing: [`AGENTS.md`](../../../AGENTS.md).
+
 ## Core Principles of "Legacy SEO"
 1. **Honest Over Optimized** — Meta descriptions should accurately reflect the real story (including struggles), not bait clicks.
 2. **Future-Proof Discoverability** — Focus on topics that will still matter: first-principles thinking, real engineering failures, aerospace simulations, offline tools, teaching philosophy, etc.

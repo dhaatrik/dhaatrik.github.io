@@ -20,6 +20,8 @@ description: Use this skill for designing, implementing, or refactoring any visu
 - `dhaatrik-mission-report` when styling project content
 - `dhaatrik-writing-style` for tone-consistent microcopy in UI
 
+Skill routing: [`AGENTS.md`](../../../AGENTS.md).
+
 ## Core Design Principles
 1. **Sci-Fi Mission Control First** — Every screen should feel like part of a high-tech engineering cockpit.
 2. **Glassmorphism as Foundation** — Semi-transparent backgrounds + backdrop-blur + subtle borders + soft inner glow.

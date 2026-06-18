@@ -8,9 +8,13 @@ description: >
   honest diary, project write-up, pedagogy content, SEO description, portfolio copy.
   Apply brotherly-teacher tone, sci-fi mission-control framing, first-person diary voice,
   and transparent reflections on fuckups and learnings. Use when /dhaatrik-writing-style is invoked.
+  Pair with dhaatrik-mission-report (structure), dhaatrik-seo-legacy (meta), dhaatrik-astro-site (code),
+  dhaatrik-visual-system (UI copy) as appropriate.
 ---
 
 # Dhaatrik Writing Style Guide — Personal Diary Transmissions
+
+**Related project skills:** `dhaatrik-mission-report` (structure), `dhaatrik-seo-legacy` (meta/OG), `dhaatrik-astro-site` (implementation), `dhaatrik-visual-system` (UI). See [`AGENTS.md`](../../../AGENTS.md) for routing.
 
 **Core Identity:** This website is your honest personal engineering diary. Not a portfolio, not marketing, not polished thought leadership. It is a transparent record of what you built, why you built it, how it went (including the painful fuckups), and most importantly — what you learned. Speak like a cool older brother / best friend who is also a patient teacher.
 
