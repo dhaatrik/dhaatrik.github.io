@@ -26,6 +26,14 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog'))
 
 const today = new Date();
 
+// Hand-updated: reflects what's currently on my desk/screen.
+const currentLearning =
+    'Applied thermodynamics — modelling heat loss and fuel efficiency curves for the FuelDrop v4 energy calculator.';
+
+const projects = await getCollection('projects');
+// 4 static routes: /, /personnel, /pedagogy, /transmissions
+const totalPages = posts.length + projects.length + 4;
+
 let gitSha = 'LOCAL';
 if (import.meta.env.DEV) {
     gitSha = 'DEV';
@@ -200,9 +208,14 @@ const formatMarqueeDate = (date: Date) => {
                     <div id="footer-uptime">SYS.UPTIME // 00h 00m 00s</div>
                     <div id="footer-cpu-register">SYS.LOAD // 0.04%</div>
                     <div>BUILD.SHA // {gitSha}</div>
+                    <div>PAGES.INDEXED // {totalPages}</div>
+                    <div class="border-t border-dashed border-slate-200/50 dark:border-white/5 pt-2 mt-2 flex flex-col gap-1">
+                        <span class="text-[8px] text-slate-400 uppercase tracking-widest dark:text-slate-500">// CURRENT_STUDY</span>
+                        <span class="text-slate-600 dark:text-slate-300 text-[10px] leading-relaxed">{currentLearning}</span>
+                    </div>
                     <div class="border-t border-dashed border-slate-200/50 dark:border-white/5 pt-2 mt-2 flex flex-col gap-1">
                         <span class="text-[8px] text-slate-400 uppercase tracking-widest dark:text-slate-500">// LATEST_INSIGHT</span>
-                        <span class="text-slate-700 dark:text-slate-300 italic">"Nailed the scroll reveal physics, but keeping it simple is the real work. Focus on fundamentals."</span>
+                        <span class="text-slate-700 dark:text-slate-300 italic">"{posts[0]?.data.description ?? 'See /transmissions for the latest signal.'}"</span>
                     </div>
                 </div>
             </div>
