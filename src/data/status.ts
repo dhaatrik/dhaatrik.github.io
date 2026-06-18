@@ -17,7 +17,7 @@ export const getProjectTelemetry = (id: string): string => {
 };
 
 export const parseTelemetry = (telemetryStr: string) => {
-    const match = telemetryStr.match(/STATUS:\s*([A-Z0-9_]+)/i);
+    const match = telemetryStr.match(/STATUS:\s*([A-Z0-9_.-]+)/i);
     const status = match ? match[1].toUpperCase() : 'OPERATIONAL';
 
     let colorClass = 'bg-emerald-500 animate-pulse-emerald';
@@ -29,16 +29,16 @@ export const parseTelemetry = (telemetryStr: string) => {
     const cyanKeywords = ['SHIPPED', 'COMPLETED', 'STABLE', 'VERIFIED'];
     const redKeywords = ['HALTED', 'OFFLINE', 'ERROR'];
 
-    if (emeraldKeywords.includes(status)) {
+    if (emeraldKeywords.some(kw => status.includes(kw))) {
         colorClass = 'bg-emerald-500 animate-pulse-emerald';
         textClass = 'text-emerald-500 dark:text-emerald-400';
-    } else if (amberKeywords.includes(status)) {
+    } else if (amberKeywords.some(kw => status.includes(kw))) {
         colorClass = 'bg-amber-500 animate-pulse-amber';
         textClass = 'text-amber-500 dark:text-amber-400';
-    } else if (cyanKeywords.includes(status)) {
+    } else if (cyanKeywords.some(kw => status.includes(kw))) {
         colorClass = 'bg-cyan-500 animate-pulse-cyan';
         textClass = 'text-cyan-500 dark:text-cyan-400';
-    } else if (redKeywords.includes(status)) {
+    } else if (redKeywords.some(kw => status.includes(kw))) {
         colorClass = 'bg-red-500 animate-pulse-red';
         textClass = 'text-red-500 dark:text-red-400';
     }
