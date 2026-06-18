@@ -782,16 +782,30 @@ const postsWithReadingTime = posts.map((post: any) => {
                                     const regex = new RegExp(`(${escapedWords.join('|')})`, 'gi');
 
                                     if (regex.test(text)) {
-                                        const tempSpan = document.createElement('span');
-                                        tempSpan.innerHTML = text.replace(regex, '<mark class="search-highlight">$1</mark>');
-
-                                        const parent = textNode.parentNode;
-                                        if (parent) {
-                                            while (tempSpan.firstChild) {
-                                                parent.insertBefore(tempSpan.firstChild, textNode);
-                                            }
-                                            parent.removeChild(textNode);
-                                        }
+                                         const matches = Array.from(text.matchAll(regex));
+                                         if (matches.length > 0) {
+                                             const fragment = document.createDocumentFragment();
+                                             let lastIndex = 0;
+                                             for (const match of matches) {
+                                                 const index = match.index!;
+                                                 const matchText = match[0];
+                                                 if (index > lastIndex) {
+                                                     fragment.appendChild(document.createTextNode(text.substring(lastIndex, index)));
+                                                 }
+                                                 const mark = document.createElement('mark');
+                                                 mark.className = 'search-highlight';
+                                                 mark.textContent = matchText;
+                                                 fragment.appendChild(mark);
+                                                 lastIndex = index + matchText.length;
+                                             }
+                                             if (lastIndex < text.length) {
+                                                 fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+                                             }
+                                             const parent = textNode.parentNode;
+                                             if (parent) {
+                                                 parent.replaceChild(fragment, textNode);
+                                             }
+                                         }
                                     }
                                 });
                             });
