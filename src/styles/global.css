@@ -1647,3 +1647,79 @@ html.theme-transition::view-transition-old(root) {
         transform-style: flat;
     }
 }
+
+/* Scroll initiation cue at hero bottom */
+.scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Delay fade-in to let the hero animations finish first */
+@media (prefers-reduced-motion: no-preference) {
+    .scroll-cue {
+        animation: scroll-cue-fadein 1s ease-out 2s forwards;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .scroll-cue {
+        opacity: 0.7;
+    }
+}
+
+.scroll-cue.is-hidden {
+    opacity: 0 !important;
+}
+
+.scroll-cue-line {
+    width: 2px;
+    height: 24px;
+    background-color: var(--accent);
+    transform-origin: top;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .scroll-cue-line {
+        animation: scroll-cue-pulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+}
+
+.scroll-cue-label {
+    font-family: monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    opacity: 0.7;
+}
+
+@keyframes scroll-cue-fadein {
+    to {
+        opacity: 0.85;
+    }
+}
+
+@keyframes scroll-cue-pulse {
+    0% {
+        transform: scaleY(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scaleY(0.1);
+        transform-origin: bottom;
+        opacity: 0;
+    }
+}

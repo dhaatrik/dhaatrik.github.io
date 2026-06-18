@@ -8,7 +8,7 @@ const initScrollReveal = () => {
         // Instantly show everything and exit
         singleReveals.forEach((el) => el.classList.add('is-visible'));
         staggers.forEach((parent) => {
-            Array.from(parent.children).forEach((child) => {
+            Array.from(parent.children).filter((c) => !c.hasAttribute('popover')).forEach((child) => {
                 (child as HTMLElement).classList.add('is-visible');
             });
         });
@@ -52,7 +52,7 @@ const initScrollReveal = () => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     const parent = entry.target as HTMLElement;
-                    const children = Array.from(parent.children);
+                    const children = Array.from(parent.children).filter((c) => !c.hasAttribute('popover'));
 
                     children.forEach((child, index) => {
                         const htmlChild = child as HTMLElement;
@@ -82,6 +82,31 @@ const initScrollReveal = () => {
     );
 
     staggers.forEach((parent) => staggerObserver.observe(parent));
+
+    // Observer for hero scroll cue auto-hide
+    const heroSection = document.getElementById('hero-section');
+    const scrollCue = document.querySelector('.scroll-cue');
+    if (heroSection && scrollCue) {
+        const heroObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) {
+                        scrollCue.classList.add('is-hidden');
+                    } else {
+                        if (entry.intersectionRatio > 0.5) {
+                            scrollCue.classList.remove('is-hidden');
+                        } else {
+                            scrollCue.classList.add('is-hidden');
+                        }
+                    }
+                });
+            },
+            {
+                threshold: [0, 0.5, 1.0],
+            }
+        );
+        heroObserver.observe(heroSection);
+    }
 };
 
 // Bind to Astro lifecycle
