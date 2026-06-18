@@ -1,4 +1,7 @@
 @import 'tailwindcss';
+@import './tokens.css';
+@import './glass.css';
+@import './motion.css';
 
 /* Scope utility generation to app source; typography lives in typography.css */
 @source "../**/*.{astro,ts,js,mjs}";
@@ -9,32 +12,6 @@
 
 /* Override Tailwind v4 default: use class-based dark mode instead of prefers-color-scheme */
 @custom-variant dark (&:where(.dark, .dark *));
-
-/* @property registrations for performant CSS transition animations */
-@property --glass-bg-opacity {
-    syntax: '<number>';
-    inherits: true;
-    initial-value: 0.35;
-}
-
-@property --glass-border-opacity {
-    syntax: '<number>';
-    inherits: true;
-    initial-value: 0.08;
-}
-
-@property --neon-glow-opacity {
-    syntax: '<number>';
-    inherits: true;
-    initial-value: 0;
-}
-
-@property --blueprint-opacity {
-    syntax: '<number>';
-    inherits: true;
-    initial-value: 0.02;
-}
-
 
 /* Global Motion Accessibility Safety Reset */
 @media (prefers-reduced-motion: reduce) {
@@ -263,6 +240,12 @@
         --blueprint-color-minor: rgba(37, 99, 235, 0.015);
         --neon-glow-1-rgb: 6, 182, 212;   /* cyan */
         --neon-glow-2-rgb: 139, 92, 246;  /* purple */
+
+        /* Public aliases — see tokens.css for canonical map */
+        --glass-bg: rgba(var(--glass-bg-raw), var(--glass-bg-opacity, 0.35));
+        --neon-cyan: rgb(var(--neon-glow-1-rgb));
+        --neon-purple: rgb(var(--neon-glow-2-rgb));
+        --blueprint-grid: var(--blueprint-color-major);
 
         /* Bento Grid Constants (Mobile first) */
         --bento-gap: 1rem;
@@ -497,127 +480,6 @@
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     }
 
-    /* --- Canonical Glass Surface Base Class ---
-     * Apply .glass-surface to any element that needs the glass treatment.
-     * .bento-card and .premium-glass are included below for backward compat.
-     * For NEW components, use .glass-surface directly instead of modifying
-     * the selector list below.
-     */
-    .glass-surface,
-    .premium-glass,
-    .bento-card {
-        --glass-bg-opacity: 0.35;
-        --glass-border-opacity: 0.12;
-        --neon-glow-opacity: 0;
-        --blueprint-opacity: 0.02;
-
-        position: relative;
-        background-color: rgba(var(--glass-bg-raw), var(--glass-bg-opacity)) !important;
-        backdrop-filter: blur(16px) saturate(120%);
-        -webkit-backdrop-filter: blur(16px) saturate(120%);
-        border: 1px solid rgba(var(--glass-border-raw), var(--glass-border-opacity)) !important;
-
-        box-shadow:
-            0 8px 32px 0 rgba(0, 0, 0, 0.06),
-            0 0 calc(var(--neon-glow-opacity) * 15px) rgba(var(--neon-glow-1-rgb), calc(var(--neon-glow-opacity) * 0.4)),
-            0 0 calc(var(--neon-glow-opacity) * 30px) rgba(var(--neon-glow-2-rgb), calc(var(--neon-glow-opacity) * 0.25));
-
-        transition:
-            --glass-bg-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-            --glass-border-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-            --neon-glow-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-            --blueprint-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-            background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-            transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .glass-surface::after,
-    .premium-glass::after,
-    .bento-card::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 1; /* raised from 0 so grid sits above the bg but below content (z-index:2) */
-        border-radius: inherit;
-        background-image:
-            linear-gradient(to right, var(--blueprint-color-major) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--blueprint-color-major) 1px, transparent 1px),
-            linear-gradient(to right, var(--blueprint-color-minor) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--blueprint-color-minor) 1px, transparent 1px);
-        background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
-        opacity: var(--blueprint-opacity);
-        clip-path: inset(0 100% 0 0);
-        transition:
-            opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-            clip-path 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .glass-surface:hover,
-    .glass-surface:focus-within,
-    .premium-glass:hover,
-    .premium-glass:focus-within,
-    .bento-card:hover,
-    .bento-card:focus-within {
-        --glass-bg-opacity: 0.55;
-        --glass-border-opacity: 0.25;
-        --neon-glow-opacity: 1;
-        --blueprint-opacity: 0.08;
-    }
-
-    .glass-surface:hover::after,
-    .glass-surface:focus-within::after,
-    .premium-glass:hover::after,
-    .premium-glass:focus-within::after,
-    .bento-card:hover::after,
-    .bento-card:focus-within::after {
-        clip-path: inset(0 0 0 0);
-    }
-
-    .bento-card {
-        border-radius: var(--bento-radius);
-        padding: var(--bento-padding);
-        will-change: transform, opacity;
-        transform-style: preserve-3d;
-        content-visibility: auto;
-        contain-intrinsic-size: 0 320px;
-    }
-
-    /* Mouse Spotlight Pseudo-element (Specific to Bento Cards) */
-    .bento-card::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        background: radial-gradient(
-            600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
-            var(--accent-glow),
-            transparent 40%
-        );
-        opacity: 0;
-        transition: opacity 0.5s;
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    .bento-card:hover::before {
-        opacity: 1;
-    }
-
-    a.bento-card:hover,
-    button.bento-card:hover,
-    .bento-card:focus-within {
-        transform: translateY(-0.25rem);
-    }
-
-    .bento-card-inner {
-        border-radius: var(--bento-radius-inner);
-        overflow: hidden;
-        position: relative;
-        z-index: 1;
-    }
 }
 
 /* Mission Report: Fuckup Teaser inset box on project cards */
@@ -869,54 +731,6 @@
 
 .scroll-telemetry-container {
     will-change: transform, opacity;
-}
-
-/* Scroll Reveal System */
-.reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, opacity;
-}
-.reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.reveal-stagger > * {
-    opacity: 0;
-    transform: translateY(25px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, opacity;
-}
-.reveal-stagger > *.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.blueprint-reveal {
-    opacity: 0;
-    transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity;
-}
-.blueprint-reveal.is-visible {
-    opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .reveal-on-scroll,
-    .reveal-stagger > *,
-    .blueprint-reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-    }
-    .glass-surface::after,
-    .premium-glass::after,
-    .bento-card::after {
-        clip-path: inset(0 0 0 0) !important;
-        transition: none !important;
-    }
 }
 
 /* Performance Optimizations: Content-visibility for heavy sections */
@@ -1695,78 +1509,4 @@ html.theme-transition::view-transition-old(root) {
     }
 }
 
-/* Scroll initiation cue at hero bottom */
-.scroll-cue {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    pointer-events: none;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
 
-/* Delay fade-in to let the hero animations finish first */
-@media (prefers-reduced-motion: no-preference) {
-    .scroll-cue {
-        animation: scroll-cue-fadein 1s ease-out 2s forwards;
-    }
-}
-@media (prefers-reduced-motion: reduce) {
-    .scroll-cue {
-        opacity: 0.7;
-    }
-}
-
-.scroll-cue.is-hidden {
-    opacity: 0 !important;
-}
-
-.scroll-cue-line {
-    width: 2px;
-    height: 24px;
-    background-color: var(--accent);
-    transform-origin: top;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .scroll-cue-line {
-        animation: scroll-cue-pulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-}
-
-.scroll-cue-label {
-    font-family: monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    opacity: 0.7;
-}
-
-@keyframes scroll-cue-fadein {
-    to {
-        opacity: 0.85;
-    }
-}
-
-@keyframes scroll-cue-pulse {
-    0% {
-        transform: scaleY(0);
-        opacity: 0;
-    }
-    50% {
-        transform: scaleY(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scaleY(0.1);
-        transform-origin: bottom;
-        opacity: 0;
-    }
-}
