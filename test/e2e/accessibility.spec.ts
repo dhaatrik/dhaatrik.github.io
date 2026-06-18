@@ -4,11 +4,13 @@ import AxeBuilder from '@axe-core/playwright';
 test.describe('Automated Accessibility (A11y) Audits', () => {
     const routes = [
         '/',
+        '/404',
         '/personnel/',
         '/pedagogy/',
         '/transmissions/',
+        '/transmissions/deltav-lab-mission-log/',
         '/projects/',
-        '/projects/deltav-lab/'
+        '/projects/deltav-lab/',
     ];
 
     for (const route of routes) {

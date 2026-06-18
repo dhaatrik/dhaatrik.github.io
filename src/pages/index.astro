@@ -10,7 +10,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
-import { parseTelemetry } from '../data/status';
+import { getPainLevelLabel, parseTelemetry } from '../data/status';
 
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
@@ -771,6 +771,7 @@ const webSiteSchema = JSON.stringify({
                                                         class="flex items-center gap-1"
                                                         role="meter"
                                                         aria-label={`Impact level: ${project.data.pain_level} out of 5`}
+                                                        aria-valuetext={getPainLevelLabel(project.data.pain_level)}
                                                         aria-valuenow={project.data.pain_level}
                                                         aria-valuemin={1}
                                                         aria-valuemax={5}

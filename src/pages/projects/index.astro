@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { getCollection } from 'astro:content';
-import { parseTelemetry } from '../../data/status';
+import { getPainLevelLabel, parseTelemetry } from '../../data/status';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
@@ -301,6 +301,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                         class="flex items-center gap-1"
                                                         role="meter"
                                                         aria-label={`Impact level: ${project.data.pain_level} out of 5`}
+                                                        aria-valuetext={getPainLevelLabel(project.data.pain_level)}
                                                         aria-valuenow={project.data.pain_level}
                                                         aria-valuemin={1}
                                                         aria-valuemax={5}

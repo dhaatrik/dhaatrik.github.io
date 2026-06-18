@@ -13,18 +13,34 @@
 /* Override Tailwind v4 default: use class-based dark mode instead of prefers-color-scheme */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Global Motion Accessibility Safety Reset */
+/* Reduced motion: disable decorative motion only; preserve opacity/color transitions */
 @media (prefers-reduced-motion: reduce) {
     *,
     ::before,
     ::after {
-        animation-delay: -1ms !important;
-        animation-duration: 1ms !important;
+        animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        background-attachment: initial !important;
         scroll-behavior: auto !important;
-        transition-duration: 0s !important;
-        transition-delay: 0s !important;
+    }
+
+    .reveal-on-scroll,
+    .reveal-stagger > *,
+    .blueprint-reveal,
+    .scroll-cue,
+    .scroll-cue-line,
+    .telemetry-keyword,
+    .last-updated-ts,
+    .animate-marquee,
+    .animate-fade-in-up,
+    .blog-reveal,
+    .parallax-hero-bg,
+    .bento-card,
+    .animate-pulse-emerald,
+    .animate-pulse-amber,
+    .animate-pulse-cyan,
+    .animate-pulse-red {
+        animation: none !important;
+        transition: none !important;
     }
 }
 
