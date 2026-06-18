@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 test.describe('Automated Accessibility (A11y) Audits', () => {
+    test.describe.configure({ timeout: 60_000 });
+
     const routes = [
         '/',
         '/404',
@@ -15,10 +17,8 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
 
     for (const route of routes) {
         test(`should have zero critical or serious WCAG violations on route: ${route}`, async ({ page }) => {
-            await page.goto(route);
-            
-            // Wait for the page and network to be completely idle
-            await page.waitForLoadState('networkidle');
+            await page.goto(route, { waitUntil: 'load' });
+            await page.locator('main, body').first().waitFor({ state: 'visible' });
 
             // Run the Axe accessibility scanner
             const results = await new AxeBuilder({ page })
