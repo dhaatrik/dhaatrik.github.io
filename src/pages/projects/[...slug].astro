@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, description, logo, githubUrl, progress, tags, transmissionTag: rawTransmissionTag } = project.data;
+const { title, description, logo, githubUrl, progress, tags, transmissionTag: rawTransmissionTag, pain_level, fuckup_teaser } = project.data;
 const { Content } = await render(project);
 
 const projectSlug = project.id.replace(/\.md$/, '');
@@ -151,7 +151,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                 <div
                     class="animate-fade-in-up mb-12 rounded-xl border border-slate-200/60 bg-slate-50/60 p-5 font-mono text-xs text-slate-500 shadow-xs backdrop-blur-md delay-100 dark:border-white/5 dark:bg-[#0f141f] dark:text-slate-400"
                 >
-                    <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+                    <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6">
                         <div class="space-y-1">
                             <div
                                 class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
@@ -190,16 +190,65 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                                 PUBLIC // OPEN
                             </div>
                         </div>
+                        {
+                            pain_level && (
+                                <div class="space-y-1">
+                                    <div class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400">
+                                        // IMPACT.LOG
+                                    </div>
+                                    <div
+                                        role="meter"
+                                        aria-label={`Impact level: ${pain_level} out of 5`}
+                                        aria-valuenow={pain_level}
+                                        aria-valuemin={1}
+                                        aria-valuemax={5}
+                                        class="flex items-center gap-1 mt-1"
+                                    >
+                                        {[1, 2, 3, 4, 5].map((i) => (
+                                            <span
+                                                class={`h-1.5 w-3.5 rounded-xs transition-opacity duration-300 ${
+                                                    i <= (pain_level ?? 0)
+                                                        ? 'bg-(--accent) opacity-90'
+                                                        : 'bg-slate-200 opacity-40 dark:bg-white/10'
+                                                }`}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            )
+                        }
+                        {
+                            fuckup_teaser && (
+                                <div class="space-y-1 col-span-2 sm:col-span-1">
+                                    <div class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400">
+                                        // FUCKUP_LOG
+                                    </div>
+                                    <div class="font-bold text-red-600 dark:text-red-400">
+                                        RECORDED
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
 
                 <!-- Main Content Area -->
                 <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_260px]">
                     <!-- Markdown Body -->
-                    <div
-                        class="prose prose-slate dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:text-slate-900 dark:prose-code:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 animate-fade-in-up delay-200"
-                    >
-                        <Content />
+                    <div class="w-full min-w-0">
+                        {
+                            fuckup_teaser && (
+                                <div class="mission-fuckup-teaser !line-clamp-none !block mb-6 rounded-lg border border-red-500/20 bg-red-500/5 p-4 font-mono text-xs leading-relaxed text-slate-800 dark:border-red-950/30 dark:bg-red-950/10 dark:text-slate-300" role="note" aria-label="Honest fuckup teaser">
+                                    <span class="text-slate-400 dark:text-slate-500 font-bold">[ FUCKUP LOG ]&nbsp;</span>
+                                    {fuckup_teaser}
+                                </div>
+                            )
+                        }
+                        <div
+                            class="prose prose-slate dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:text-slate-900 dark:prose-code:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 animate-fade-in-up delay-200"
+                        >
+                            <Content />
+                        </div>
                     </div>
 
                     <!-- Sidebar details -->
