@@ -36,6 +36,9 @@ const projectsSchema = z.object({
         .optional(),
     progress: z.string().optional(),
     order: z.number().default(0),
+    telemetry: z.string().regex(/^STATUS:\s*.+/i),
+    fuckup_teaser: z.string().min(10),
+    pain_level: z.number().min(1).max(5),
 });
 
 const validateDirectory = (dirPath, schema, collectionName) => {

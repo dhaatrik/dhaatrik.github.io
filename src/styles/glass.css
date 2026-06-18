@@ -160,4 +160,30 @@
         position: relative;
         z-index: 1;
     }
+
+    /* Mission Report card layout — telemetry / story / fuckup / CTA zones */
+    .mission-report-card {
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mission-report-card .mission-report-telemetry {
+        border-bottom: 1px solid rgba(var(--glass-border-raw), 0.12);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .mission-report-card .mission-report-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .mission-report-card .mission-report-footer {
+        border-top: 1px solid rgba(var(--glass-border-raw), 0.12);
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
 }
