@@ -44,7 +44,6 @@ const premiumLineup = lineupNames
     })
     .filter((t): t is TechIcon => t !== null);
 
-
 const getGitLastModified = (projectId: string): Date => {
     let filePath = path.join(process.cwd(), 'src', 'content', 'projects', projectId);
     if (!fs.existsSync(filePath)) {
@@ -106,7 +105,6 @@ const getRelativeTimeString = (date: Date): string => {
     const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
     return date.toLocaleDateString('en-US', options);
 };
-
 
 // FAQ and WebSite JSON-LD schemas for AEO/GEO
 const faqSchema = JSON.stringify({
@@ -285,7 +283,10 @@ const webSiteSchema = JSON.stringify({
                     </p>
 
                     <!-- CTA Hierarchy -->
-                    <div class="reveal-on-scroll flex flex-wrap items-center gap-6" data-reveal-delay="300">
+                    <div
+                        class="reveal-on-scroll flex flex-wrap items-center gap-6"
+                        data-reveal-delay="300"
+                    >
                         <a
                             href="/personnel"
                             data-astro-prefetch="hover"
@@ -468,7 +469,7 @@ const webSiteSchema = JSON.stringify({
                 id="projects"
                 class="layout-container content-visibility-auto-projects mb-0 pb-16"
             >
-                <div class="mb-10 reveal-on-scroll">
+                <div class="reveal-on-scroll mb-10">
                     <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                         Featured Engineering
                     </h2>
@@ -516,7 +517,10 @@ const webSiteSchema = JSON.stringify({
                                 <p
                                     class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    Investigating agricultural systems from first principles—soil chemistry, plant biology, and biotech (90%)—while allocating late-night cycles to quantum mechanics, rocketry, and Behcet's Syndrome literature.
+                                    Investigating agricultural systems from first principles—soil
+                                    chemistry, plant biology, and biotech (90%)—while allocating
+                                    time to quantum mechanics, rocketry, and Behçet's Syndrome
+                                    literature.
                                 </p>
                             </div>
                             <div
@@ -535,7 +539,7 @@ const webSiteSchema = JSON.stringify({
                         popover
                         id="project-popover-currently-exploring"
                         aria-labelledby="project-popover-title-currently-exploring"
-                        class="premium-glass m-auto w-[calc(100%-2rem)] max-w-xl rounded-2xl p-0 md:w-full max-h-[85vh]"
+                        class="premium-glass m-auto max-h-[85vh] w-[calc(100%-2rem)] max-w-xl rounded-2xl p-0 md:w-full"
                     >
                         <div
                             class="relative z-10 flex items-start justify-between border-b border-slate-100 p-5 sm:p-6 dark:border-white/5"
@@ -578,7 +582,7 @@ const webSiteSchema = JSON.stringify({
                             </button>
                         </div>
 
-                        <div class="relative z-10 space-y-6 p-5 sm:p-6 overflow-y-auto grow">
+                        <div class="relative z-10 grow space-y-6 overflow-y-auto p-5 sm:p-6">
                             <div class="space-y-3">
                                 <h4
                                     class="font-mono text-[10px] font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500"
@@ -588,7 +592,11 @@ const webSiteSchema = JSON.stringify({
                                 <p
                                     class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    Right now, my research time is divided into two distinct paths: 90% is focused on demystifying agricultural science from first principles, and the remaining 10% is split between quantum mechanics, rocket propulsion chemistry, and offline AI-driven medical literature analysis.
+                                    Right now, my research time is divided into two distinct paths:
+                                    90% is focused on demystifying agricultural science from first
+                                    principles, and the remaining 10% is split between quantum
+                                    mechanics, rocket propulsion chemistry, and offline AI-driven
+                                    medical literature analysis.
                                 </p>
                             </div>
 
@@ -603,7 +611,12 @@ const webSiteSchema = JSON.stringify({
                                 <p
                                     class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    I am analyzing existing agricultural solutions to get to the ground truth of soil microbiology, crop physiology, seed biotechnology, and climate interactions. This involves heavy deep-dives into organic chemistry, plant pathology, soil macronutrient cycles, and biotechnology to understand what actually drives crop yield and resilience.
+                                    I am analyzing existing agricultural solutions to get to the
+                                    ground truth of soil microbiology, crop physiology, seed
+                                    biotechnology, and climate interactions. This involves heavy
+                                    deep-dives into organic chemistry, plant pathology, soil
+                                    macronutrient cycles, and biotechnology to understand what
+                                    actually drives crop yield and resilience.
                                 </p>
                             </div>
 
@@ -613,12 +626,15 @@ const webSiteSchema = JSON.stringify({
                                 <h4
                                     class="font-mono text-[10px] font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500"
                                 >
-                                    // QUANTUM & SPACETECH (5%)
+                                    // QUANTUM & SPACETECH (7%)
                                 </h4>
                                 <p
                                     class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    Exploring quantum mechanics fundamentals and rocket science, specifically focusing on the chemistry of liquid propellants, combustion chamber heat transfer, and fuel formulations that govern orbital launch vehicle efficiency.
+                                    Exploring quantum mechanics fundamentals and rocket science,
+                                    specifically focusing on the chemistry of liquid propellants,
+                                    combustion chamber heat transfer, and fuel formulations that
+                                    govern orbital launch vehicle efficiency.
                                 </p>
                             </div>
 
@@ -628,12 +644,17 @@ const webSiteSchema = JSON.stringify({
                                 <h4
                                     class="font-mono text-[10px] font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500"
                                 >
-                                    // BEHCET'S SYNDROME RESEARCH (5%)
+                                    // BEHCET'S SYNDROME RESEARCH (3%)
                                 </h4>
                                 <p
                                     class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    I am running a local Gemma E4B model overnight (when I'm asleep and my PC is idle) to parse medical literature on Behçet's Syndrome—a chronic systemic vasculitis characterized by HLA-B*51 genetic susceptibility, MHC-I-opathy, and neutrophilic hyperactivation causing blood vessel inflammation. The goal is to cross-reference immunology papers for insights on chronic inflammation pathways.
+                                    Running Gemma E4B model locally, when my PC is idle (duh! I
+                                    sleep too) to parse medical literature on Behçet's Syndrome—a
+                                    chronic systemic vasculitis characterized by HLA-B*51 genetic
+                                    susceptibility, MHC-I-opathy, and neutrophilic hyperactivation
+                                    causing blood vessel inflammation. The goal is to develop an
+                                    early detection protocol and find a cure.
                                 </p>
                             </div>
 
@@ -682,7 +703,8 @@ const webSiteSchema = JSON.stringify({
                     {
                         projects.map((project) => {
                             const telemetryStr = project.data.telemetry;
-                            const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
+                            const [telemetryFirst, ...telemetryRestParts] =
+                                telemetryStr.split('//');
                             const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const lastModifiedDate = getGitLastModified(project.id);
@@ -721,7 +743,11 @@ const webSiteSchema = JSON.stringify({
                                                         class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
                                                     />
                                                     <span class="truncate">
-                                                        <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
+                                                        <span class="telemetry-keyword">
+                                                            {telemetryFirst.trim()}
+                                                        </span>
+                                                        {telemetryRest &&
+                                                            ` // ${telemetryRest.trim()}`}
                                                     </span>
                                                     <span class="mx-0.5 shrink-0 text-slate-300 select-none dark:text-slate-700">
                                                         •
@@ -784,7 +810,9 @@ const webSiteSchema = JSON.stringify({
                                                         class="flex items-center gap-1"
                                                         role="meter"
                                                         aria-label={`Impact level: ${project.data.pain_level} out of 5`}
-                                                        aria-valuetext={getPainLevelLabel(project.data.pain_level)}
+                                                        aria-valuetext={getPainLevelLabel(
+                                                            project.data.pain_level
+                                                        )}
                                                         aria-valuenow={project.data.pain_level}
                                                         aria-valuemin={1}
                                                         aria-valuemax={5}
@@ -793,7 +821,8 @@ const webSiteSchema = JSON.stringify({
                                                             <span
                                                                 aria-hidden="true"
                                                                 class={`h-1 w-5 rounded-sm transition-opacity duration-300 ${
-                                                                    i <= (project.data.pain_level ?? 0)
+                                                                    i <=
+                                                                    (project.data.pain_level ?? 0)
                                                                         ? 'bg-(--accent) opacity-90'
                                                                         : 'bg-slate-200 opacity-40 dark:bg-white/10'
                                                                 }`}
@@ -809,7 +838,9 @@ const webSiteSchema = JSON.stringify({
                                             {/* Fuckup Teaser */}
                                             {project.data.fuckup_teaser && (
                                                 <div class="mission-fuckup-teaser mb-4">
-                                                    <span class="text-slate-400 dark:text-slate-500">[ FUCKUP LOG ]&nbsp;</span>
+                                                    <span class="text-slate-400 dark:text-slate-500">
+                                                        [ FUCKUP LOG ]&nbsp;
+                                                    </span>
                                                     {project.data.fuckup_teaser}
                                                 </div>
                                             )}
@@ -821,7 +852,7 @@ const webSiteSchema = JSON.stringify({
                                             </span>
                                             <a
                                                 href={`/projects/${projectIdClean}`}
-                                                class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all hover:opacity-80 group-hover:translate-x-0.5"
+                                                class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all group-hover:translate-x-0.5 hover:opacity-80"
                                                 aria-label={`Read the full ${project.data.title} mission log`}
                                             >
                                                 Read the full story&nbsp;→
@@ -888,10 +919,8 @@ const webSiteSchema = JSON.stringify({
                 </div>
             </section>
 
-            <section
-                class="layout-container content-visibility-auto-blog mb-0 pb-16"
-            >
-                <div class="mb-10 flex items-end justify-between reveal-on-scroll">
+            <section class="layout-container content-visibility-auto-blog mb-0 pb-16">
+                <div class="reveal-on-scroll mb-10 flex items-end justify-between">
                     <div>
                         <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                             Latest Thinking
@@ -925,7 +954,7 @@ const webSiteSchema = JSON.stringify({
                     </a>
                 </div>
 
-                <div class="flex flex-col gap-6 reveal-stagger">
+                <div class="reveal-stagger flex flex-col gap-6">
                     {
                         posts.map((post, index) => {
                             const doiNum = `10.1012/DH.${post.id.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'POST'}`;
@@ -1080,13 +1109,16 @@ const webSiteSchema = JSON.stringify({
                         if (popover) {
                             popover.addEventListener('toggle', (e) => {
                                 const isOpen = /** @type {any} */ (e).newState === 'open';
-                                card.setAttribute(
-                                    'aria-expanded',
-                                    isOpen ? 'true' : 'false'
-                                );
+                                card.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
                                 if (isOpen) {
-                                    lastActiveElement = /** @type {HTMLElement | null} */ (document.activeElement);
-                                    const closeBtn = /** @type {HTMLElement | null} */ (popover.querySelector('button[aria-label], button[popovertarget]'));
+                                    lastActiveElement = /** @type {HTMLElement | null} */ (
+                                        document.activeElement
+                                    );
+                                    const closeBtn = /** @type {HTMLElement | null} */ (
+                                        popover.querySelector(
+                                            'button[aria-label], button[popovertarget]'
+                                        )
+                                    );
                                     if (closeBtn) {
                                         requestAnimationFrame(() => {
                                             closeBtn.focus();
@@ -1115,7 +1147,9 @@ const webSiteSchema = JSON.stringify({
                     const target = document.getElementById('identity-rotator');
                     if (!target) return;
 
-                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    const prefersReducedMotion = window.matchMedia(
+                        '(prefers-reduced-motion: reduce)'
+                    ).matches;
                     if (prefersReducedMotion) {
                         currentIdx = (currentIdx + 1) % identities.length;
                         target.textContent = identities[currentIdx];
@@ -1172,7 +1206,9 @@ const webSiteSchema = JSON.stringify({
                     if (target) {
                         identities = JSON.parse(target.dataset.identities || '[]');
                         if (identities.length > 0) {
-                            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                            const prefersReducedMotion = window.matchMedia(
+                                '(prefers-reduced-motion: reduce)'
+                            ).matches;
                             if (prefersReducedMotion) {
                                 currentIdx = 0;
                                 target.textContent = identities[0];
@@ -1235,15 +1271,18 @@ const webSiteSchema = JSON.stringify({
                                 const scrollY = window.scrollY;
                                 const opacity = Math.max(0, 1 - scrollY / 130);
                                 const translate = scrollY * 0.12;
-                                
+
                                 telemetry.style.opacity = opacity.toString();
                                 telemetry.style.transform = `translateY(${translate}px) scale(${0.95 + opacity * 0.05})`;
-                                
+
                                 if (telemetryText) {
                                     if (scrollY === 0) {
                                         telemetryText.textContent = 'SCROLL TO INITIATE';
                                     } else if (scrollY > 0 && scrollY < 120) {
-                                        const pct = Math.min(100, Math.round((scrollY / 120) * 100));
+                                        const pct = Math.min(
+                                            100,
+                                            Math.round((scrollY / 120) * 100)
+                                        );
                                         telemetryText.textContent = `LINKING TELEMETRY // ${pct}%`;
                                     } else {
                                         telemetryText.textContent = 'TELEMETRY ONLINE // 100%';
