@@ -8,7 +8,7 @@ order: 4
 tags: ['React 19', 'TypeScript 5.8', 'Google Gemini AI', 'Vite 6']
 pain_level: 3
 telemetry: 'STATUS: OPERATIONAL // AGENTS: DEBATING // PARALLEL: TRUE'
-fuckup_teaser: "Agent loops without timeout guards hit rate limits and burned API credits before I added circuit breakers."
+fuckup_teaser: "I kicked off a multi-agent debate test loop without a maximum recursion depth block, waking up to a rate-limited API key and a massive bill."
 ---
 
 ## SYS.STATUS: Council-of-agents pipeline works — Creator, Critic, Synthesizer all shipping

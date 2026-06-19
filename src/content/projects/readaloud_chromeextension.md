@@ -8,7 +8,7 @@ order: 12
 tags: ['JavaScript', 'Web Speech API', 'Chrome Extension']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // MV3: COMPLIANT // TTS: NATIVE'
-fuckup_teaser: "MV3's service worker lifecycle killed my persistent state — took three rewrites to understand it's not a background page."
+fuckup_teaser: "I tried to keep memory-based state inside a Manifest V3 service worker, completely forgetting that Chrome kills inactive background scripts every few minutes."
 ---
 
 ## SYS.STATUS: MV3 compliant — article parsing works, native TTS, no external API calls
