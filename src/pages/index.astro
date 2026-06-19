@@ -1,7 +1,4 @@
 ---
-import { execSync } from 'child_process';
-import fs from 'fs';
-import path from 'path';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -11,6 +8,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
 import { getPainLevelLabel, parseTelemetry } from '../data/status';
+import { getGitLastModified, getRelativeTimeString } from '../utils/projectDates';
 
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
@@ -43,70 +41,6 @@ const premiumLineup = lineupNames
         return null;
     })
     .filter((t): t is TechIcon => t !== null);
-
-
-const getGitLastModified = (projectId: string): Date => {
-    let filePath = path.join(process.cwd(), 'src', 'content', 'projects', projectId);
-    if (!fs.existsSync(filePath)) {
-        if (fs.existsSync(filePath + '.md')) {
-            filePath = filePath + '.md';
-        } else if (fs.existsSync(filePath + '.mdx')) {
-            filePath = filePath + '.mdx';
-        }
-    }
-
-    // In development mode, avoid slow process spawning (execSync git log) to prevent CPU starvation
-    if (import.meta.env.DEV) {
-        try {
-            if (fs.existsSync(filePath)) {
-                return fs.statSync(filePath).mtime;
-            }
-        } catch (e) {}
-        return new Date();
-    }
-
-    try {
-        if (fs.existsSync(filePath)) {
-            const stdout = execSync(`git log -1 --format=%cI -- "${filePath}"`, {
-                encoding: 'utf-8',
-                stdio: ['ignore', 'pipe', 'ignore'],
-            }).trim();
-            if (stdout) {
-                return new Date(stdout);
-            }
-        }
-    } catch (e) {}
-    try {
-        if (fs.existsSync(filePath)) {
-            return fs.statSync(filePath).mtime;
-        }
-    } catch (e) {}
-    return new Date();
-};
-
-const getRelativeTimeString = (date: Date): string => {
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    if (diffMs < 0) return 'just now';
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (diffDays < 7) {
-        if (diffDays === 0) {
-            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-            if (diffHours === 0) {
-                const diffMins = Math.floor(diffMs / (1000 * 60));
-                if (diffMins <= 1) return 'just now';
-                return `${diffMins}m ago`;
-            }
-            return `${diffHours}h ago`;
-        }
-        return `${diffDays}d ago`;
-    }
-
-    const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-};
-
 
 // FAQ and WebSite JSON-LD schemas for AEO/GEO
 const faqSchema = JSON.stringify({
@@ -285,7 +219,10 @@ const webSiteSchema = JSON.stringify({
                     </p>
 
                     <!-- CTA Hierarchy -->
-                    <div class="reveal-on-scroll flex flex-wrap items-center gap-6" data-reveal-delay="300">
+                    <div
+                        class="reveal-on-scroll flex flex-wrap items-center gap-6"
+                        data-reveal-delay="300"
+                    >
                         <a
                             href="/personnel"
                             data-astro-prefetch="hover"
@@ -468,7 +405,7 @@ const webSiteSchema = JSON.stringify({
                 id="projects"
                 class="layout-container content-visibility-auto-projects mb-0 pb-16"
             >
-                <div class="mb-10 reveal-on-scroll">
+                <div class="reveal-on-scroll mb-10">
                     <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                         Featured Engineering
                     </h2>
@@ -669,7 +606,8 @@ const webSiteSchema = JSON.stringify({
                     {
                         projects.map((project) => {
                             const telemetryStr = project.data.telemetry;
-                            const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
+                            const [telemetryFirst, ...telemetryRestParts] =
+                                telemetryStr.split('//');
                             const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const lastModifiedDate = getGitLastModified(project.id);
@@ -708,7 +646,11 @@ const webSiteSchema = JSON.stringify({
                                                         class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
                                                     />
                                                     <span class="truncate">
-                                                        <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
+                                                        <span class="telemetry-keyword">
+                                                            {telemetryFirst.trim()}
+                                                        </span>
+                                                        {telemetryRest &&
+                                                            ` // ${telemetryRest.trim()}`}
                                                     </span>
                                                     <span class="mx-0.5 shrink-0 text-slate-300 select-none dark:text-slate-700">
                                                         •
@@ -771,7 +713,9 @@ const webSiteSchema = JSON.stringify({
                                                         class="flex items-center gap-1"
                                                         role="meter"
                                                         aria-label={`Impact level: ${project.data.pain_level} out of 5`}
-                                                        aria-valuetext={getPainLevelLabel(project.data.pain_level)}
+                                                        aria-valuetext={getPainLevelLabel(
+                                                            project.data.pain_level
+                                                        )}
                                                         aria-valuenow={project.data.pain_level}
                                                         aria-valuemin={1}
                                                         aria-valuemax={5}
@@ -780,7 +724,8 @@ const webSiteSchema = JSON.stringify({
                                                             <span
                                                                 aria-hidden="true"
                                                                 class={`h-1 w-5 rounded-sm transition-opacity duration-300 ${
-                                                                    i <= (project.data.pain_level ?? 0)
+                                                                    i <=
+                                                                    (project.data.pain_level ?? 0)
                                                                         ? 'bg-(--accent) opacity-90'
                                                                         : 'bg-slate-200 opacity-40 dark:bg-white/10'
                                                                 }`}
@@ -796,7 +741,9 @@ const webSiteSchema = JSON.stringify({
                                             {/* Fuckup Teaser */}
                                             {project.data.fuckup_teaser && (
                                                 <div class="mission-fuckup-teaser mb-4">
-                                                    <span class="text-slate-400 dark:text-slate-500">[ FUCKUP LOG ]&nbsp;</span>
+                                                    <span class="text-slate-400 dark:text-slate-500">
+                                                        [ FUCKUP LOG ]&nbsp;
+                                                    </span>
                                                     {project.data.fuckup_teaser}
                                                 </div>
                                             )}
@@ -808,7 +755,7 @@ const webSiteSchema = JSON.stringify({
                                             </span>
                                             <a
                                                 href={`/projects/${projectIdClean}`}
-                                                class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all hover:opacity-80 group-hover:translate-x-0.5"
+                                                class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all group-hover:translate-x-0.5 hover:opacity-80"
                                                 aria-label={`Read the full ${project.data.title} mission log`}
                                             >
                                                 Read the full story&nbsp;→
@@ -875,10 +822,8 @@ const webSiteSchema = JSON.stringify({
                 </div>
             </section>
 
-            <section
-                class="layout-container content-visibility-auto-blog mb-0 pb-16"
-            >
-                <div class="mb-10 flex items-end justify-between reveal-on-scroll">
+            <section class="layout-container content-visibility-auto-blog mb-0 pb-16">
+                <div class="reveal-on-scroll mb-10 flex items-end justify-between">
                     <div>
                         <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                             Latest Thinking
@@ -912,7 +857,7 @@ const webSiteSchema = JSON.stringify({
                     </a>
                 </div>
 
-                <div class="flex flex-col gap-6 reveal-stagger">
+                <div class="reveal-stagger flex flex-col gap-6">
                     {
                         posts.map((post, index) => {
                             const doiNum = `10.1012/DH.${post.id.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'POST'}`;
@@ -1067,13 +1012,16 @@ const webSiteSchema = JSON.stringify({
                         if (popover) {
                             popover.addEventListener('toggle', (e) => {
                                 const isOpen = /** @type {any} */ (e).newState === 'open';
-                                card.setAttribute(
-                                    'aria-expanded',
-                                    isOpen ? 'true' : 'false'
-                                );
+                                card.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
                                 if (isOpen) {
-                                    lastActiveElement = /** @type {HTMLElement | null} */ (document.activeElement);
-                                    const closeBtn = /** @type {HTMLElement | null} */ (popover.querySelector('button[aria-label], button[popovertarget]'));
+                                    lastActiveElement = /** @type {HTMLElement | null} */ (
+                                        document.activeElement
+                                    );
+                                    const closeBtn = /** @type {HTMLElement | null} */ (
+                                        popover.querySelector(
+                                            'button[aria-label], button[popovertarget]'
+                                        )
+                                    );
                                     if (closeBtn) {
                                         requestAnimationFrame(() => {
                                             closeBtn.focus();
@@ -1102,7 +1050,9 @@ const webSiteSchema = JSON.stringify({
                     const target = document.getElementById('identity-rotator');
                     if (!target) return;
 
-                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    const prefersReducedMotion = window.matchMedia(
+                        '(prefers-reduced-motion: reduce)'
+                    ).matches;
                     if (prefersReducedMotion) {
                         currentIdx = (currentIdx + 1) % identities.length;
                         target.textContent = identities[currentIdx];
@@ -1159,7 +1109,9 @@ const webSiteSchema = JSON.stringify({
                     if (target) {
                         identities = JSON.parse(target.dataset.identities || '[]');
                         if (identities.length > 0) {
-                            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                            const prefersReducedMotion = window.matchMedia(
+                                '(prefers-reduced-motion: reduce)'
+                            ).matches;
                             if (prefersReducedMotion) {
                                 currentIdx = 0;
                                 target.textContent = identities[0];
@@ -1222,15 +1174,18 @@ const webSiteSchema = JSON.stringify({
                                 const scrollY = window.scrollY;
                                 const opacity = Math.max(0, 1 - scrollY / 130);
                                 const translate = scrollY * 0.12;
-                                
+
                                 telemetry.style.opacity = opacity.toString();
                                 telemetry.style.transform = `translateY(${translate}px) scale(${0.95 + opacity * 0.05})`;
-                                
+
                                 if (telemetryText) {
                                     if (scrollY === 0) {
                                         telemetryText.textContent = 'SCROLL TO INITIATE';
                                     } else if (scrollY > 0 && scrollY < 120) {
-                                        const pct = Math.min(100, Math.round((scrollY / 120) * 100));
+                                        const pct = Math.min(
+                                            100,
+                                            Math.round((scrollY / 120) * 100)
+                                        );
                                         telemetryText.textContent = `LINKING TELEMETRY // ${pct}%`;
                                     } else {
                                         telemetryText.textContent = 'TELEMETRY ONLINE // 100%';

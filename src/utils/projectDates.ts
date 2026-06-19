@@ -46,6 +46,12 @@ export const getGitLastModified = (projectId: string): Date => {
     return new Date();
 };
 
+// ⚡ Bolt: Cache Intl.DateTimeFormat to avoid costly re-instantiations during SSG loops
+const relativeDateFormatter = new Intl.DateTimeFormat('en-us', {
+    month: 'short',
+    year: 'numeric',
+});
+
 export const getRelativeTimeString = (date: Date): string => {
     const now = new Date();
     const diffMs = now.getTime() - date.getTime();
@@ -65,6 +71,5 @@ export const getRelativeTimeString = (date: Date): string => {
         return `${diffDays}d ago`;
     }
 
-    const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
+    return relativeDateFormatter.format(date);
 };

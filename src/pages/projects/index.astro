@@ -1,88 +1,21 @@
 ---
-import { execSync } from 'child_process';
-import fs from 'fs';
-import path from 'path';
 import { getCollection } from 'astro:content';
 import { getPainLevelLabel, parseTelemetry } from '../../data/status';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import { SITE_TITLE } from '../../consts';
+import { getGitLastModified, getRelativeTimeString } from '../../utils/projectDates';
 
-const projects = (await getCollection('projects')).sort(
-    (a, b) => a.data.order - b.data.order
-);
-
-
-const getGitLastModified = (projectId: string): Date => {
-    let filePath = path.join(process.cwd(), 'src', 'content', 'projects', projectId);
-    if (!fs.existsSync(filePath)) {
-        if (fs.existsSync(filePath + '.md')) {
-            filePath = filePath + '.md';
-        } else if (fs.existsSync(filePath + '.mdx')) {
-            filePath = filePath + '.mdx';
-        }
-    }
-    
-    // In development mode, avoid slow process spawning (execSync git log) to prevent CPU starvation
-    if (import.meta.env.DEV) {
-        try {
-            if (fs.existsSync(filePath)) {
-                return fs.statSync(filePath).mtime;
-            }
-        } catch (e) {}
-        return new Date();
-    }
-
-    try {
-        if (fs.existsSync(filePath)) {
-            const stdout = execSync(`git log -1 --format=%cI -- "${filePath}"`, {
-                encoding: 'utf-8',
-                stdio: ['ignore', 'pipe', 'ignore']
-            }).trim();
-            if (stdout) {
-                return new Date(stdout);
-            }
-        }
-    } catch (e) {}
-    try {
-        if (fs.existsSync(filePath)) {
-            return fs.statSync(filePath).mtime;
-        }
-    } catch (e) {}
-    return new Date();
-};
-
-const getRelativeTimeString = (date: Date): string => {
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    if (diffMs < 0) return 'just now';
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (diffDays < 7) {
-        if (diffDays === 0) {
-            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-            if (diffHours === 0) {
-                const diffMins = Math.floor(diffMs / (1000 * 60));
-                if (diffMins <= 1) return 'just now';
-                return `${diffMins}m ago`;
-            }
-            return `${diffHours}h ago`;
-        }
-        return `${diffDays}d ago`;
-    }
-
-    const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-};
-
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 
 // Generate WebPage & ItemList JSON-LD Schema
 const webpageSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: `Projects Archive | ${SITE_TITLE}`,
-    description: "My project workbench — things I've shipped, shelved, or am still patching at 2 AM.",
+    description:
+        "My project workbench — things I've shipped, shelved, or am still patching at 2 AM.",
     url: new URL(Astro.url.pathname, Astro.site).href,
     mainEntity: {
         '@type': 'ItemList',
@@ -112,7 +45,7 @@ const jsonLd = JSON.stringify(webpageSchema);
         <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
 
         <Header />
-        
+
         <main
             id="main-content"
             tabindex="-1"
@@ -134,24 +67,21 @@ const jsonLd = JSON.stringify(webpageSchema);
                         stroke="currentColor"
                         stroke-width="0.3"
                         stroke-dasharray="1 19"
-                        opacity="0.3"
-                    ></path>
+                        opacity="0.3"></path>
                     <path
                         d="M 40 20 L 40 180 M 60 20 L 60 180 M 80 20 L 80 180 M 120 20 L 120 180 M 140 20 L 140 180 M 160 20 L 160 180"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="0.3"
                         stroke-dasharray="1 9"
-                        opacity="0.15"
-                    ></path>
+                        opacity="0.15"></path>
                     <path
                         d="M 20 40 L 180 40 M 20 60 L 180 60 M 20 80 L 180 80 M 20 120 L 180 120 M 20 140 L 180 140 M 20 160 L 180 160"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="0.3"
                         stroke-dasharray="1 9"
-                        opacity="0.15"
-                    ></path>
+                        opacity="0.15"></path>
                     <circle
                         cx="100"
                         cy="100"
@@ -160,8 +90,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                         stroke="currentColor"
                         stroke-width="0.3"
                         stroke-dasharray="2 8"
-                        opacity="0.4"
-                    ></circle>
+                        opacity="0.4"></circle>
                     <circle
                         cx="100"
                         cy="100"
@@ -169,8 +98,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                         fill="none"
                         stroke="currentColor"
                         stroke-width="0.5"
-                        stroke-dasharray="3 3"
-                    ></circle>
+                        stroke-dasharray="3 3"></circle>
                     <circle
                         cx="100"
                         cy="100"
@@ -178,8 +106,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                         fill="none"
                         stroke="currentColor"
                         stroke-width="0.5"
-                        stroke-dasharray="6 6"
-                    ></circle>
+                        stroke-dasharray="6 6"></circle>
                     <line
                         x1="10"
                         y1="100"
@@ -187,8 +114,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                         y2="100"
                         stroke="currentColor"
                         stroke-width="0.5"
-                        stroke-dasharray="2 4"
-                    ></line>
+                        stroke-dasharray="2 4"></line>
                     <line
                         x1="100"
                         y1="10"
@@ -196,24 +122,25 @@ const jsonLd = JSON.stringify(webpageSchema);
                         y2="190"
                         stroke="currentColor"
                         stroke-width="0.5"
-                        stroke-dasharray="2 4"
-                    ></line>
+                        stroke-dasharray="2 4"></line>
                 </svg>
             </div>
 
             <section class="layout-container">
-                <div class="mb-12 border-b border-slate-200/60 pb-8 dark:border-white/5 reveal-on-scroll">
+                <div
+                    class="reveal-on-scroll mb-12 border-b border-slate-200/60 pb-8 dark:border-white/5"
+                >
                     <div class="mb-2 font-mono text-xs tracking-widest text-(--accent)">
                         // projects_archive.db
                     </div>
-                    <h1
-                        class="type-page-title mb-4 text-slate-900 dark:text-white"
-                    >
-                        Project Workbench <span class="text-slate-400 dark:text-slate-600">& Archive</span>
+                    <h1 class="type-page-title mb-4 text-slate-900 dark:text-white">
+                        Project Workbench <span class="text-slate-400 dark:text-slate-600"
+                            >& Archive</span
+                        >
                     </h1>
                     <p class="type-body-lg max-w-2xl text-slate-600 dark:text-(--text-secondary)">
-                        Hey buddy — these are things I've shipped, abandoned, or am still patching at
-                        2 AM. If your repo looks like this too, you're in good company. Each one
+                        Hey buddy — these are things I've shipped, abandoned, or am still patching
+                        at 2 AM. If your repo looks like this too, you're in good company. Each one
                         ships with an honest mission log: what broke, what I learned.
                     </p>
                 </div>
@@ -223,18 +150,17 @@ const jsonLd = JSON.stringify(webpageSchema);
                     {
                         projects.map((project) => {
                             const telemetryStr = project.data.telemetry;
-                            const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
+                            const [telemetryFirst, ...telemetryRestParts] =
+                                telemetryStr.split('//');
                             const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const lastModifiedDate = getGitLastModified(project.id);
                             const relativeTime = getRelativeTimeString(lastModifiedDate);
                             const parsed = parseTelemetry(telemetryStr);
                             return (
-                                <article
-                                    class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
-                                >
+                                <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
                                     <div class="hologram-overlay" />
-                                    
+
                                     <div
                                         class="relative z-10 flex h-full flex-col justify-between"
                                         data-tilt-z
@@ -242,20 +168,32 @@ const jsonLd = JSON.stringify(webpageSchema);
                                         <div class="mission-report-body">
                                             <div class="mission-report-telemetry type-telemetry flex min-w-0 items-center justify-between gap-4 text-slate-400 dark:text-slate-500">
                                                 <div class="flex min-w-0 items-center gap-1.5">
-                                                    <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`} />
+                                                    <span
+                                                        class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
+                                                    />
                                                     <span class="truncate">
-                                                        <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
+                                                        <span class="telemetry-keyword">
+                                                            {telemetryFirst.trim()}
+                                                        </span>
+                                                        {telemetryRest &&
+                                                            ` // ${telemetryRest.trim()}`}
                                                     </span>
-                                                    <span class="shrink-0 text-slate-300 dark:text-slate-700 mx-0.5 select-none">•</span>
-                                                    <span class="last-updated-ts shrink-0 text-slate-400 dark:text-slate-600 font-medium">{relativeTime}</span>
+                                                    <span class="mx-0.5 shrink-0 text-slate-300 select-none dark:text-slate-700">
+                                                        •
+                                                    </span>
+                                                    <span class="last-updated-ts shrink-0 font-medium text-slate-400 dark:text-slate-600">
+                                                        {relativeTime}
+                                                    </span>
                                                 </div>
-                                                <span class={`shrink-0 font-bold whitespace-nowrap ${parsed.textClass}`}>
+                                                <span
+                                                    class={`shrink-0 font-bold whitespace-nowrap ${parsed.textClass}`}
+                                                >
                                                     {parsed.badgeText}
                                                 </span>
                                             </div>
 
                                             <div class="mb-4 flex items-start justify-between gap-4">
-                                                <h3 class="text-2xl font-bold leading-tight text-slate-900 transition-colors dark:text-white">
+                                                <h3 class="text-2xl leading-tight font-bold text-slate-900 transition-colors dark:text-white">
                                                     <a
                                                         href={`/projects/${projectIdClean}`}
                                                         data-astro-prefetch="hover"
@@ -301,7 +239,9 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                         class="flex items-center gap-1"
                                                         role="meter"
                                                         aria-label={`Impact level: ${project.data.pain_level} out of 5`}
-                                                        aria-valuetext={getPainLevelLabel(project.data.pain_level)}
+                                                        aria-valuetext={getPainLevelLabel(
+                                                            project.data.pain_level
+                                                        )}
                                                         aria-valuenow={project.data.pain_level}
                                                         aria-valuemin={1}
                                                         aria-valuemax={5}
@@ -310,7 +250,8 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                             <span
                                                                 aria-hidden="true"
                                                                 class={`h-1 w-5 rounded-sm transition-opacity duration-300 ${
-                                                                    i <= (project.data.pain_level ?? 0)
+                                                                    i <=
+                                                                    (project.data.pain_level ?? 0)
                                                                         ? 'bg-(--accent) opacity-90'
                                                                         : 'bg-slate-200 opacity-40 dark:bg-white/10'
                                                                 }`}
@@ -326,7 +267,9 @@ const jsonLd = JSON.stringify(webpageSchema);
                                             {/* Fuckup Teaser */}
                                             {project.data.fuckup_teaser && (
                                                 <div class="mission-fuckup-teaser mb-4">
-                                                    <span class="text-slate-400 dark:text-slate-500">[ FUCKUP LOG ]&nbsp;</span>
+                                                    <span class="text-slate-400 dark:text-slate-500">
+                                                        [ FUCKUP LOG ]&nbsp;
+                                                    </span>
                                                     {project.data.fuckup_teaser}
                                                 </div>
                                             )}
@@ -348,7 +291,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                 </span>
                                                 <a
                                                     href={`/projects/${projectIdClean}`}
-                                                    class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all hover:opacity-80 group-hover:translate-x-0.5"
+                                                    class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all group-hover:translate-x-0.5 hover:opacity-80"
                                                     aria-label={`Read the full ${project.data.title} mission log`}
                                                 >
                                                     Read the full story&nbsp;→
@@ -363,7 +306,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                 </div>
             </section>
         </main>
-        
+
         <Footer />
     </body>
 </html>

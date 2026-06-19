@@ -127,3 +127,8 @@
 
 **Learning:** Using `String.prototype.split('')` chained with `.map()` and `.join('')` inside a high-frequency `setInterval` loop (e.g., a 30ms decode animation) for multiple elements simultaneously creates massive unnecessary garbage collection (GC) pressure. It forces the browser to rapidly allocate and discard arrays and closures every frame, which can cause micro-stutters.
 **Action:** Always replace array manipulation with simple string concatenation in continuous animation loops to minimize object allocations and keep the main thread smooth.
+
+## 2026-06-19 - Cache Intl.DateTimeFormat in relative time formatter
+
+**Learning:** Using `date.toLocaleDateString()` inside utility functions called within SSG mapping loops (like generating the projects list) forces Node to instantiate a new `Intl.DateTimeFormat` object for every single item, creating significant overhead during the build process.
+**Action:** Always extract `Intl.DateTimeFormat` to a cached constant outside of the utility function scope and use its `.format(date)` method to avoid repeated allocations.
