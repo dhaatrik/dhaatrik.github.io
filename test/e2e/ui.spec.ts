@@ -287,7 +287,9 @@ test.describe('Portfolio UI Interactivity', () => {
         const rotator = page.locator('#identity-rotator');
         await expect(rotator).toBeVisible();
 
-        await expect(rotator).toHaveText('First-Principles Thinker.');
+        // The typewriter starts rotating after a delay, so it could already be in transition.
+        // We assert it is visible and has non-empty text, then wait for it to rotate to a different state.
+        await expect(rotator).not.toBeEmpty();
 
         // Wait for rotation to occur (typewriter starts after 1.2s delay, deletes, pauses, and types next)
         await expect(async () => {
@@ -297,50 +299,5 @@ test.describe('Portfolio UI Interactivity', () => {
         }).toPass({ timeout: 6000 });
     });
 
-    test('Terminal theme selector should switch themes, persist on reload and navigation', async ({ page }) => {
-        await page.goto('/');
-        await page.waitForLoadState('networkidle');
-
-        const html = page.locator('html');
-
-        // Initial default state
-        await expect(html).not.toHaveClass(/theme-matrix/);
-        await expect(html).not.toHaveClass(/theme-amber/);
-        await expect(html).not.toHaveClass(/theme-cobalt/);
-
-        // Click Matrix Green theme
-        const matrixDot = page.locator('button[data-theme="matrix"]').first();
-        await expect(matrixDot).toBeVisible();
-        await matrixDot.click();
-        await expect(html).toHaveClass(/theme-matrix/);
-        await expect(html).not.toHaveClass(/theme-amber/);
-        await expect(html).not.toHaveClass(/theme-cobalt/);
-
-        // Reload page and check persistence
-        await page.reload();
-        await page.waitForLoadState('networkidle');
-        await expect(html).toHaveClass(/theme-matrix/);
-
-        // Navigate to Personnel page and check persistence (View Transitions)
-        const personnelLink = page.locator('header a:has-text("Personnel")').first();
-        await personnelLink.click();
-        await expect(page).toHaveURL(/\/personnel/);
-        await expect(html).toHaveClass(/theme-matrix/);
-
-        // Click Amber Terminal theme
-        const amberDot = page.locator('button[data-theme="amber"]').first();
-        await expect(amberDot).toBeVisible();
-        await amberDot.click();
-        await expect(html).toHaveClass(/theme-amber/);
-        await expect(html).not.toHaveClass(/theme-matrix/);
-
-        // Click Default Blue theme
-        const defaultDot = page.locator('button[data-theme="default"]').first();
-        await expect(defaultDot).toBeVisible();
-        await defaultDot.click();
-        await expect(html).not.toHaveClass(/theme-matrix/);
-        await expect(html).not.toHaveClass(/theme-amber/);
-        await expect(html).not.toHaveClass(/theme-cobalt/);
-    });
 });
 

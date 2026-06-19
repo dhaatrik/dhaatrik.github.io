@@ -1,7 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
-import TerminalThemeSelector from './TerminalThemeSelector.astro';
 
 const pathname = Astro.url.pathname;
 const cleanPath = pathname.replace(/\/$/, '');
@@ -243,7 +242,6 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                     >Transmissions
                 </HeaderLink>
             </div>
-            <TerminalThemeSelector />
             <ThemeToggle />
             <button
                 id="mobile-nav-toggle"
