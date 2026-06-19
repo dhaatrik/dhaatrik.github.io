@@ -654,10 +654,13 @@ const webSiteSchema = JSON.stringify({
                                         {project.data.video && (
                                             <video
                                                 src={project.data.video}
+                                                preload="none"
                                                 autoplay
                                                 loop
                                                 muted
                                                 playsinline
+                                                aria-hidden="true"
+                                                role="none"
                                                 class="h-full w-full object-cover opacity-12 mix-blend-screen transition-transform duration-500 group-hover:scale-110 dark:opacity-8 dark:mix-blend-lighten"
                                                 style="display: none;"
                                                 onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
@@ -1178,26 +1181,26 @@ const webSiteSchema = JSON.stringify({
                     window.addEventListener('pageshow', handlePageShow);
                 }
 
-                // --- 6. Pause/Resume Videos based on content-visibility ---
-                const projectsSection = document.querySelector('.content-visibility-auto-projects');
-                if (projectsSection) {
-                    projectsSection.addEventListener('contentvisibilityautostatechange', (e) => {
-                        const videos = projectsSection.getElementsByTagName('video');
-                        if (e.skipped) {
-                            Array.from(videos).forEach((v) => {
-                                try {
-                                    v.pause();
-                                } catch (err) {}
-                            });
+                // --- 6. Play/Pause Videos based on individual viewport intersection ---
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        const video = entry.target;
+                        if (entry.isIntersecting) {
+                            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                            if (!prefersReducedMotion) {
+                                video.play().catch(() => {});
+                            } else {
+                                video.pause();
+                            }
                         } else {
-                            Array.from(videos).forEach((v) => {
-                                try {
-                                    v.play();
-                                } catch (err) {}
-                            });
+                            video.pause();
                         }
                     });
-                }
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.mission-report-card video').forEach((v) => {
+                    videoObserver.observe(v);
+                });
 
                 // --- 7. Scroll Telemetry Indicator Connection Setup ---
                 const telemetry = document.querySelector('.scroll-telemetry-container');
