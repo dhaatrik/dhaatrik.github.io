@@ -1,6 +1,6 @@
 ---
-title: 'Read Aloud Chrome Extension'
-description: 'Manifest V3 extension that reads the main article text via Web Speech API — skips nav junk, adjustable speed.'
+title: 'Read Aloud'
+description: 'Manifest V3 chrome extension that reads the main article text via Web Speech API — skips nav junk, adjustable speed.'
 logo: '../../assets/read-aloud.png'
 githubUrl: 'https://github.com/dhaatrik/ReadAloud_ChromeExtension'
 progress: 'Manifest V3 extension, published locally'

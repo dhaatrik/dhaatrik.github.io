@@ -1,5 +1,5 @@
 ---
-title: 'The Infinite Intelligence'
+title: 'Infinite Intelligence'
 description: "Multiple Gemini agents debate a problem before you get a final answer — not one model talking to itself in a mirror."
 logo: '../../assets/the-infinite-intelligence.png'
 githubUrl: 'https://github.com/dhaatrik/the-infinite-intelligence'
