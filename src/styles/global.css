@@ -859,6 +859,11 @@
     transform: translate(-50%, -50%) scale(1);
 }
 
+#project-popover-currently-exploring:popover-open {
+    display: flex;
+    flex-direction: column;
+}
+
 @starting-style {
     #support-popover:popover-open,
     #books-popover:popover-open,

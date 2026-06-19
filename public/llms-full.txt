@@ -186,7 +186,7 @@ First-person scrollytelling demo born from Kerbal Space Program intuition and De
 - **Identity rotator**: `aria-live="off"` prevents screen readers from announcing every rotation.
 
 ### Footer Diagnostics (v4.0.0)
-- `CURRENT_STUDY`: Hand-updated constant. Current topic: applied thermodynamics for FuelDrop v4 energy calculator.
+- `CURRENT_STUDY`: Hand-updated constant. Current topic: soil chemistry & crop physiology from first principles.
 - `LATEST_INSIGHT`: Dynamically sourced from `posts[0].data.description` — auto-updates with every new transmission.
 - `PAGES.INDEXED`: Auto-computed as `posts.length + projects.length + 4`.
 - `SYS.LOAD`: From `navigator.hardwareConcurrency` (CPU core count).

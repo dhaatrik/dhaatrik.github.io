@@ -40,7 +40,7 @@ Each project page includes: IMPACT.LOG (1–5 neon pain-level bar with ARIA role
 ## Footer Diagnostics (v4.0.0)
 
 The site footer includes a live system diagnostics block:
-- CURRENT_STUDY: Current learning topic (hand-updated; v4.0.0: applied thermodynamics for FuelDrop v4 energy calculator)
+- CURRENT_STUDY: Current learning topic (hand-updated; v4.0.0: soil chemistry & crop physiology from first principles)
 - LATEST_INSIGHT: Dynamically sourced from the description of the most recently published transmission
 - PAGES.INDEXED: Auto-computed from posts + projects + static pages count
 - SYS.LOAD: Live CPU core count from navigator.hardwareConcurrency

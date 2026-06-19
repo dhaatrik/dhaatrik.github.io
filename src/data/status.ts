@@ -1,5 +1,5 @@
 export const currentLearning =
-    'Applied thermodynamics — modeling heat loss in closed systems for the FuelDrop v4 energy calculator.';
+    'Soil chemistry & crop physiology — understanding microbiology, climate variables, and seed biotechnology from first principles.';
 
 export const parseTelemetry = (telemetryStr: string) => {
     const match = telemetryStr.match(/STATUS:\s*([A-Z0-9_.-]+)/i);
