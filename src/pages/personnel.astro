@@ -14,7 +14,6 @@ import { techGroups } from '../data/techStack';
 // Library Tracking Data
 const booksRead = 7;
 const booksGoal = 52;
-const readingProgress = Math.min(Math.round((booksRead / booksGoal) * 100), 100);
 
 // Pre-render rocket equation using KaTeX
 const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0}{m_f}', {
@@ -37,7 +36,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
         <main
             id="main-content"
             tabindex="-1"
-            class="relative flex grow flex-col gap-[var(--section-gap-mobile)] py-[var(--section-gap-mobile)] overflow-x-hidden md:gap-[var(--section-gap-desktop)] md:py-[var(--section-gap-desktop)]"
+            class="relative flex grow flex-col gap-(--section-gap-mobile) py-(--section-gap-mobile) overflow-x-hidden md:gap-(--section-gap-desktop) md:py-(--section-gap-desktop)"
         >
             <div
                 id="reticle-bg"

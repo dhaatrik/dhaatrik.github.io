@@ -92,8 +92,8 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
     <head>
         <BaseHead title={`${title} | Projects`} description={description} image={logo} />
         <TypographyStyles />
-        <script type="application/ld+json" set:html={jsonLd} />
-        <script type="application/ld+json" set:html={breadcrumbLd} />
+        <script is:inline type="application/ld+json" set:html={jsonLd} />
+        <script is:inline type="application/ld+json" set:html={breadcrumbLd} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <!-- Flashlight Spotlight Background -->
@@ -104,7 +104,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
         <main
             id="main-content"
             tabindex="-1"
-            class="layout-container relative z-10 grow py-[var(--section-gap-mobile)] md:py-[var(--section-gap-desktop)]"
+            class="layout-container relative z-10 grow py-(--section-gap-mobile) md:py-(--section-gap-desktop)"
         >
             <!-- Back Navigation -->
             <div class="animate-fade-in mb-8">

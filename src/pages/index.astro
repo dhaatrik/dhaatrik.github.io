@@ -1,7 +1,4 @@
 ---
-import { execSync } from 'child_process';
-import fs from 'fs';
-import path from 'path';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -44,67 +41,7 @@ const premiumLineup = lineupNames
     })
     .filter((t): t is TechIcon => t !== null);
 
-const getGitLastModified = (projectId: string): Date => {
-    let filePath = path.join(process.cwd(), 'src', 'content', 'projects', projectId);
-    if (!fs.existsSync(filePath)) {
-        if (fs.existsSync(filePath + '.md')) {
-            filePath = filePath + '.md';
-        } else if (fs.existsSync(filePath + '.mdx')) {
-            filePath = filePath + '.mdx';
-        }
-    }
 
-    // In development mode, avoid slow process spawning (execSync git log) to prevent CPU starvation
-    if (import.meta.env.DEV) {
-        try {
-            if (fs.existsSync(filePath)) {
-                return fs.statSync(filePath).mtime;
-            }
-        } catch (e) {}
-        return new Date();
-    }
-
-    try {
-        if (fs.existsSync(filePath)) {
-            const stdout = execSync(`git log -1 --format=%cI -- "${filePath}"`, {
-                encoding: 'utf-8',
-                stdio: ['ignore', 'pipe', 'ignore'],
-            }).trim();
-            if (stdout) {
-                return new Date(stdout);
-            }
-        }
-    } catch (e) {}
-    try {
-        if (fs.existsSync(filePath)) {
-            return fs.statSync(filePath).mtime;
-        }
-    } catch (e) {}
-    return new Date();
-};
-
-const getRelativeTimeString = (date: Date): string => {
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    if (diffMs < 0) return 'just now';
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (diffDays < 7) {
-        if (diffDays === 0) {
-            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-            if (diffHours === 0) {
-                const diffMins = Math.floor(diffMs / (1000 * 60));
-                if (diffMins <= 1) return 'just now';
-                return `${diffMins}m ago`;
-            }
-            return `${diffHours}h ago`;
-        }
-        return `${diffDays}d ago`;
-    }
-
-    const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-};
 
 // FAQ and WebSite JSON-LD schemas for AEO/GEO
 const faqSchema = JSON.stringify({
@@ -178,16 +115,16 @@ const webSiteSchema = JSON.stringify({
             ]}
         />
         <!-- FAQ Structured Data for AEO/GEO -->
-        <script type="application/ld+json" set:html={faqSchema} />
+        <script is:inline type="application/ld+json" set:html={faqSchema} />
         <!-- WebSite Structured Data -->
-        <script type="application/ld+json" set:html={webSiteSchema} />
+        <script is:inline type="application/ld+json" set:html={webSiteSchema} />
     </head>
     <body class="bg-grid-motif relative pt-24">
         <Header />
         <main
             id="main-content"
             tabindex="-1"
-            class="flex flex-col gap-[var(--section-gap-mobile)] py-[var(--section-gap-mobile)] md:gap-[var(--section-gap-desktop)] md:py-[var(--section-gap-desktop)]"
+            class="flex flex-col gap-(--section-gap-mobile) py-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:py-(--section-gap-desktop)"
         >
             <!-- Hero Section: The Boring Section -->
             <section
@@ -707,8 +644,6 @@ const webSiteSchema = JSON.stringify({
                                 telemetryStr.split('//');
                             const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
-                            const lastModifiedDate = getGitLastModified(project.id);
-                            const relativeTime = getRelativeTimeString(lastModifiedDate);
                             const parsed = parseTelemetry(telemetryStr);
                             return (
                                 <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
@@ -812,7 +747,7 @@ const webSiteSchema = JSON.stringify({
                                                         aria-valuemax={5}
                                                     >
                                                         {[1, 2, 3, 4, 5].map((i) => {
-                                                            const colors = {
+                                                            const colors: {[key: number]: string} = {
                                                                 1: 'bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.5)]', // Violet
                                                                 2: 'bg-[#10b981] shadow-[0_0_6px_rgba(16,185,129,0.5)]', // Green
                                                                 3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]',  // Yellow

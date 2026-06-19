@@ -6,7 +6,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
     (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -36,7 +36,7 @@ const postsWithReadingTime = posts.map((post: any) => {
         <main
             id="main-content"
             tabindex="-1"
-            class="relative grow overflow-x-hidden py-[var(--section-gap-mobile)] md:py-[var(--section-gap-desktop)]"
+            class="relative grow overflow-x-hidden py-(--section-gap-mobile) md:py-(--section-gap-desktop)"
         >
             <div
                 id="reticle-bg"

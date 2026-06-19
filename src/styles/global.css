@@ -508,6 +508,7 @@
     border-radius: 0 0.25rem 0.25rem 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -519,6 +520,7 @@
 .mission-fuckup-teaser.expanded {
     display: block;
     -webkit-line-clamp: none;
+    line-clamp: none;
     overflow: visible;
     border-radius: 0.5rem;
     border: 1px solid rgba(var(--neon-glow-2-rgb), 0.15) !important;

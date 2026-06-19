@@ -129,7 +129,7 @@ const personSchema = JSON.stringify({
 <ClientRouter />
 
 <!-- Schema.org Script -->
-<script type="application/ld+json" set:html={personSchema} />
+<script is:inline type="application/ld+json" set:html={personSchema} />
 
 <script>
     import '../scripts/mouseTracker.ts';

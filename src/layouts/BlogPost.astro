@@ -25,7 +25,6 @@ const {
     pubDate,
     updatedDate,
     heroImage,
-    id,
     headings = [],
     prevPost,
     nextPost,
@@ -94,9 +93,9 @@ const breadcrumbSchema = JSON.stringify({
     <head>
         <BaseHead title={title} description={description} image={heroImage} type="article" pubDate={pubDate} updatedDate={updatedDate} keywords={tags} />
         <!-- Article-specific JSON-LD -->
-        <script type="application/ld+json" set:html={articleSchema} />
+        <script is:inline type="application/ld+json" set:html={articleSchema} />
         <!-- Breadcrumb JSON-LD -->
-        <script type="application/ld+json" set:html={breadcrumbSchema} />
+        <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
         <TypographyStyles />
         {hasMath && <KatexStyles />}
     </head>
@@ -115,7 +114,7 @@ const breadcrumbSchema = JSON.stringify({
         </div>
 
         <Header />
-        <main id="main-content" tabindex="-1" class="layout-container grow py-[var(--section-gap-mobile)] md:py-[var(--section-gap-desktop)]">
+        <main id="main-content" tabindex="-1" class="layout-container grow py-(--section-gap-mobile) md:py-(--section-gap-desktop)">
             <div class="blog-reveal blog-reveal-1 mb-8">
                 <a
                     href="/transmissions"
