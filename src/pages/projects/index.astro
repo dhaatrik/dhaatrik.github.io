@@ -246,8 +246,6 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                     <span class="truncate">
                                                         <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
                                                     </span>
-                                                    <span class="shrink-0 text-slate-300 dark:text-slate-700 mx-0.5 select-none">•</span>
-                                                    <span class="last-updated-ts shrink-0 text-slate-400 dark:text-slate-600 font-medium">{relativeTime}</span>
                                                 </div>
                                                 <span class={`shrink-0 font-bold whitespace-nowrap ${parsed.textClass}`}>
                                                     {parsed.badgeText}
@@ -306,16 +304,26 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                         aria-valuemin={1}
                                                         aria-valuemax={5}
                                                     >
-                                                        {[1, 2, 3, 4, 5].map((i) => (
-                                                            <span
-                                                                aria-hidden="true"
-                                                                class={`h-1 w-5 rounded-sm transition-opacity duration-300 ${
-                                                                    i <= (project.data.pain_level ?? 0)
-                                                                        ? 'bg-(--accent) opacity-90'
-                                                                        : 'bg-slate-200 opacity-40 dark:bg-white/10'
-                                                                }`}
-                                                            />
-                                                        ))}
+                                                        {[1, 2, 3, 4, 5].map((i) => {
+                                                            const colors = {
+                                                                1: 'bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.5)]', // Violet
+                                                                2: 'bg-[#10b981] shadow-[0_0_6px_rgba(16,185,129,0.5)]', // Green
+                                                                3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]',  // Yellow
+                                                                4: 'bg-[#f97316] shadow-[0_0_6px_rgba(249,115,22,0.5)]',  // Orange
+                                                                5: 'bg-[#ef4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]',  // Red
+                                                            };
+                                                            const activeColor = colors[project.data.pain_level ?? 1] ?? 'bg-(--accent)';
+                                                            return (
+                                                                <span
+                                                                    aria-hidden="true"
+                                                                    class={`h-1 w-5 rounded-sm transition-all duration-300 ${
+                                                                        i <= (project.data.pain_level ?? 0)
+                                                                            ? `${activeColor} opacity-90`
+                                                                            : 'bg-slate-200 opacity-20 dark:bg-white/5'
+                                                                    }`}
+                                                                />
+                                                            );
+                                                        })}
                                                         <span class="ml-1 font-mono text-[9px] text-slate-400 dark:text-slate-600">
                                                             {project.data.pain_level}/5
                                                         </span>
@@ -325,9 +333,13 @@ const jsonLd = JSON.stringify(webpageSchema);
 
                                             {/* Fuckup Teaser */}
                                             {project.data.fuckup_teaser && (
-                                                <div class="mission-fuckup-teaser mb-4">
-                                                    <span class="text-slate-400 dark:text-slate-500">[ FUCKUP LOG ]&nbsp;</span>
-                                                    {project.data.fuckup_teaser}
+                                                <div class="mb-4">
+                                                    <span class="block font-mono text-[9px] text-slate-400 dark:text-slate-600 uppercase tracking-wider mb-1.5">
+                                                        [ FUCKUP LOGS ]
+                                                    </span>
+                                                    <div class="mission-fuckup-teaser">
+                                                        {project.data.fuckup_teaser}
+                                                    </div>
                                                 </div>
                                             )}
                                         </div>
