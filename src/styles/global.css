@@ -28,7 +28,6 @@
     .blueprint-reveal,
     .scroll-cue,
     .scroll-cue-line,
-    .telemetry-keyword,
     .last-updated-ts,
     .animate-marquee,
     .animate-fade-in-up,
@@ -540,15 +539,6 @@
 .telemetry-keyword {
     display: inline;
     color: var(--accent);
-}
-@media (prefers-reduced-motion: no-preference) {
-    .telemetry-keyword {
-        animation: telemetry-pulse 2.4s ease-in-out infinite;
-    }
-}
-@keyframes telemetry-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.55; }
 }
 
 .last-updated-ts {

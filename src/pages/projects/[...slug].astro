@@ -219,7 +219,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                                     <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
                                 </span>
                                 <span class="mx-0.5 shrink-0 text-slate-300 select-none dark:text-slate-700">•</span>
-                                <span class="last-updated-ts shrink-0 font-medium text-slate-500 dark:text-slate-500">{lastModifiedRelative}</span>
+                                <span class="last-updated-ts shrink-0 font-medium text-slate-500 dark:text-slate-400">{lastModifiedRelative}</span>
                             </div>
                         </div>
                         {
@@ -273,13 +273,13 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                         {
                             fuckup_teaser && (
                                 <div class="mission-fuckup-teaser expanded mb-6 text-slate-800 dark:text-slate-300" role="note" aria-label="Honest fuckup teaser">
-                                    <span class="text-slate-400 dark:text-slate-500 font-bold">[ FUCKUP LOG ]&nbsp;</span>
+                                    <span class="text-slate-500 dark:text-slate-400 font-bold">[ FUCKUP LOG ]&nbsp;</span>
                                     {fuckup_teaser}
                                 </div>
                             )
                         }
                         <div
-                            class="prose prose-slate dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:text-slate-900 dark:prose-code:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 animate-fade-in-up delay-200"
+                            class="prose prose-slate dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 animate-fade-in-up delay-200"
                         >
                             <Content />
                         </div>

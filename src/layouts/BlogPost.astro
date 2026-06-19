@@ -252,7 +252,7 @@ const breadcrumbSchema = JSON.stringify({
 
                     <div id="rendered-content-container" class="blog-reveal blog-reveal-2">
                         <div
-                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 marker:text-(--accent)"
+                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 marker:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800"
                         >
                             <slot />
                         </div>
@@ -260,7 +260,7 @@ const breadcrumbSchema = JSON.stringify({
 
                     <div
                         id="raw-markdown-container"
-                        class="my-6 hidden overflow-x-auto rounded-lg border border-slate-700 bg-[#0d1117] p-2 font-mono text-sm leading-relaxed text-slate-800 dark:text-slate-300"
+                        class="my-6 hidden overflow-x-auto rounded-lg border border-slate-700 bg-[#0d1117] p-2 font-mono text-sm leading-relaxed text-slate-300"
                     >
                         <Code
                             code={rawContent}
