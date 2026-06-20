@@ -117,3 +117,6 @@
 
 **Learning:** Secondary or less prominent Call-To-Action buttons (like 'Dismiss Report' or 'Recommended Books') often lack default or explicit focus styling, making them invisible to keyboard navigation and failing basic accessibility requirements.
 **Action:** Always ensure that all interactive elements, including secondary and tertiary CTAs, have explicit `focus-visible` ring styles applied using the project's standard utility classes to maintain full keyboard accessibility.
+## 2024-06-20 - Add aria-pressed state to Terminal Theme Selector
+**Learning:** Custom UI theme toggles using visual cues (like an active ring or dot shadow) fail to communicate their selected state to screen readers if they only use CSS classes and lack `aria-pressed`.
+**Action:** Always ensure that state-toggling buttons (like theme selectors) explicitly manage an `aria-pressed` attribute via JavaScript to maintain accessibility parity with visual state changes.
