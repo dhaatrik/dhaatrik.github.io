@@ -44,8 +44,6 @@ const premiumLineup = lineupNames
     })
     .filter((t): t is TechIcon => t !== null);
 
-
-
 // FAQ and WebSite JSON-LD schemas for AEO/GEO
 const faqSchema = JSON.stringify({
     '@context': 'https://schema.org',
@@ -216,10 +214,10 @@ const webSiteSchema = JSON.stringify({
                         class="type-body-lg reveal-on-scroll mb-8 text-slate-600 dark:text-(--text-secondary)"
                         data-reveal-delay="200"
                     >
-                        I'm Dhaatrik — 26, building from India, and this site is my honest
-                        engineering diary. Not a polished portfolio. A log of what I shipped, what
-                        broke, and what I wish I'd known sooner. I build from first principles
-                        because shortcuts always come back to bite you.
+                        I'm Dhaatrik Chowdhury — just a human from India, building stuffs, and this
+                        site is my honest engineering diary. Not a polished portfolio. A log of what
+                        I shipped, what broke, and what I wish I'd known sooner. I build from first
+                        principles because shortcuts always come back to bite you.
                     </p>
 
                     <!-- CTA Hierarchy -->
@@ -731,7 +729,7 @@ const webSiteSchema = JSON.stringify({
                                                     </a>
                                                 )}
                                             </div>
-                                            <p class="line-clamp-3 mb-4 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                            <p class="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
                                                 {project.data.description}
                                             </p>
 
@@ -753,19 +751,26 @@ const webSiteSchema = JSON.stringify({
                                                         aria-valuemax={5}
                                                     >
                                                         {[1, 2, 3, 4, 5].map((i) => {
-                                                            const colors: {[key: number]: string} = {
+                                                            const colors: {
+                                                                [key: number]: string;
+                                                            } = {
                                                                 1: 'bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.5)]', // Violet
                                                                 2: 'bg-[#10b981] shadow-[0_0_6px_rgba(16,185,129,0.5)]', // Green
-                                                                3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]',  // Yellow
-                                                                4: 'bg-[#f97316] shadow-[0_0_6px_rgba(249,115,22,0.5)]',  // Orange
-                                                                5: 'bg-[#ef4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]',  // Red
+                                                                3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]', // Yellow
+                                                                4: 'bg-[#f97316] shadow-[0_0_6px_rgba(249,115,22,0.5)]', // Orange
+                                                                5: 'bg-[#ef4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]', // Red
                                                             };
-                                                            const activeColor = colors[project.data.pain_level ?? 1] ?? 'bg-(--accent)';
+                                                            const activeColor =
+                                                                colors[
+                                                                    project.data.pain_level ?? 1
+                                                                ] ?? 'bg-(--accent)';
                                                             return (
                                                                 <span
                                                                     aria-hidden="true"
                                                                     class={`h-1 w-5 rounded-sm transition-all duration-300 ${
-                                                                        i <= (project.data.pain_level ?? 0)
+                                                                        i <=
+                                                                        (project.data.pain_level ??
+                                                                            0)
                                                                             ? `${activeColor} opacity-90`
                                                                             : 'bg-slate-200 opacity-20 dark:bg-white/5'
                                                                     }`}
@@ -782,9 +787,9 @@ const webSiteSchema = JSON.stringify({
                                             {/* Fuckup Teaser */}
                                             {project.data.fuckup_teaser && (
                                                 <div class="mb-4">
-                                                    <div class="flex items-center gap-1.5 mb-1.5">
-                                                        <span class="h-1.5 w-1.5 rounded-full bg-red-500 dark:bg-red-400 animate-pulse" />
-                                                        <span class="block font-mono text-[9px] font-bold uppercase tracking-widest text-red-500 dark:text-red-400/90">
+                                                    <div class="mb-1.5 flex items-center gap-1.5">
+                                                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
+                                                        <span class="block font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
                                                             // FUCKUP.LOG
                                                         </span>
                                                     </div>
@@ -1190,21 +1195,26 @@ const webSiteSchema = JSON.stringify({
                 }
 
                 // --- 6. Play/Pause Videos based on individual viewport intersection ---
-                const videoObserver = new IntersectionObserver((entries) => {
-                    entries.forEach((entry) => {
-                        const video = entry.target;
-                        if (entry.isIntersecting) {
-                            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                            if (!prefersReducedMotion) {
-                                video.play().catch(() => {});
+                const videoObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            const video = entry.target;
+                            if (entry.isIntersecting) {
+                                const prefersReducedMotion = window.matchMedia(
+                                    '(prefers-reduced-motion: reduce)'
+                                ).matches;
+                                if (!prefersReducedMotion) {
+                                    video.play().catch(() => {});
+                                } else {
+                                    video.pause();
+                                }
                             } else {
                                 video.pause();
                             }
-                        } else {
-                            video.pause();
-                        }
-                    });
-                }, { threshold: 0.1 });
+                        });
+                    },
+                    { threshold: 0.1 }
+                );
 
                 document.querySelectorAll('.mission-report-card video').forEach((v) => {
                     videoObserver.observe(v);
