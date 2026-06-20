@@ -1,13 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPainLevelLabel, parseTelemetry } from '../../data/status';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import { SITE_TITLE } from '../../consts';
 
+type ProjectEntry = CollectionEntry<'projects'>;
+
 const projects = (await getCollection('projects')).sort(
-    (a, b) => a.data.order - b.data.order
+    (a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => a.data.order - b.data.order
 );
 
 
@@ -23,7 +25,7 @@ const webpageSchema = {
     url: new URL(Astro.url.pathname, Astro.site).href,
     mainEntity: {
         '@type': 'ItemList',
-        itemListElement: projects.map((project, idx) => ({
+        itemListElement: projects.map((project: CollectionEntry<'projects'>, idx: number) => ({
             '@type': 'ListItem',
             position: idx + 1,
             url: new URL(`/projects/${project.id.replace(/\.md$/, '')}/`, Astro.site).href,
@@ -158,7 +160,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                 <!-- Bento-like grid listing all 12 projects -->
                 <div class="bento-grid reveal-stagger">
                     {
-                        projects.map((project) => {
+                        projects.map((project: ProjectEntry) => {
                             const telemetryStr = project.data.telemetry;
                             const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
                             const telemetryRest = telemetryRestParts.join(' // ');
@@ -282,7 +284,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                                         <div class="space-y-4">
                                             {project.data.tags && project.data.tags.length > 0 && (
                                                 <div class="flex flex-wrap gap-1.5 font-mono text-[9px]">
-                                                    {project.data.tags.map((tag) => (
+                                                    {project.data.tags.map((tag: string) => (
                                                         <span class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400">
                                                             #{tag.toUpperCase()}
                                                         </span>

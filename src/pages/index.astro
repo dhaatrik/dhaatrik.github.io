@@ -9,9 +9,12 @@ import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
 import { getPainLevelLabel, parseTelemetry } from '../data/status';
 
+type ProjectEntry = CollectionEntry<'projects'>;
+type BlogEntry = CollectionEntry<'blog'>;
+
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
-    getCollection('projects').then((raw) =>
+    getCollection('projects').then((raw: CollectionEntry<'projects'>[]) =>
         raw
             .sort(
                 (a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) =>
@@ -19,7 +22,7 @@ const [projects, posts] = await Promise.all([
             )
             .slice(0, 4)
     ),
-    getCollection('blog').then((raw) =>
+    getCollection('blog').then((raw: CollectionEntry<'blog'>[]) =>
         raw
             .sort(
                 (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
@@ -638,7 +641,7 @@ const webSiteSchema = JSON.stringify({
                     </div>
 
                     {
-                        projects.map((project) => {
+                        projects.map((project: ProjectEntry) => {
                             const telemetryStr = project.data.telemetry;
                             const [telemetryFirst, ...telemetryRestParts] =
                                 telemetryStr.split('//');
@@ -899,7 +902,7 @@ const webSiteSchema = JSON.stringify({
 
                 <div class="reveal-stagger flex flex-col gap-6">
                     {
-                        posts.map((post, index) => {
+                        posts.map((post: BlogEntry, index: number) => {
                             const doiNum = `10.1012/DH.${post.id.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'POST'}`;
                             return (
                                 <a
