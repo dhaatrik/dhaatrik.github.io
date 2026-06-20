@@ -1,6 +1,6 @@
 # Dhaatrik Chowdhury — Full Site Content for LLM Indexing
 
-> This is the extended version of llms.txt containing detailed content summaries for each page and blog post on dhaatrik.github.io. This file is intended for LLM crawlers and AI agents seeking comprehensive context about the site's content. **Site version: v4.0.0.**
+> This is the extended version of llms.txt containing detailed content summaries for each page and blog post on dhaatrik.github.io. This file is intended for LLM crawlers and AI agents seeking comprehensive context about the site's content. **Site version: v4.0.1.**
 
 ---
 
