@@ -28,7 +28,6 @@
     .blueprint-reveal,
     .scroll-cue,
     .scroll-cue-line,
-    .last-updated-ts,
     .animate-marquee,
     .animate-fade-in-up,
     .blog-reveal,
@@ -558,18 +557,6 @@
     color: var(--accent);
 }
 
-.last-updated-ts {
-    opacity: 0.8;
-}
-@media (prefers-reduced-motion: no-preference) {
-    .last-updated-ts {
-        animation: last-updated-fade 1.2s ease-out forwards;
-    }
-}
-@keyframes last-updated-fade {
-    from { opacity: 0; }
-    to { opacity: 0.8; }
-}
 
 /* Premium Terminal Search Custom Styles */
 #search-logs {
