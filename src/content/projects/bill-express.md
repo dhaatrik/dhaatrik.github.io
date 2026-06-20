@@ -8,7 +8,7 @@ order: 10
 tags: ['JavaScript', 'HTML5', 'Tailwind CSS', 'jsPDF']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // DEPLOY: LIVE // PDF: VECTOR'
-fuckup_teaser: "Print layout diverged between Firefox and Chrome after a CSS update — PDFs had surprise blank pages I only found after deploying."
+fuckup_teaser: "I deployed a CSS update without checking Firefox, only to find the layout engine pushed the footer onto a second, blank page on print."
 ---
 
 ## SYS.STATUS: Deployed — vector PDF export in under 50ms, zero server round-trips

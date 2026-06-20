@@ -1,19 +1,22 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import TypographyStyles from '../../components/TypographyStyles.astro';
 import { getPainLevelLabel, parseTelemetry } from '../../data/status';
-import { getGitLastModified, getRelativeTimeString } from '../../utils/projectDates';
 
 export async function getStaticPaths() {
     const projects = await getCollection('projects');
-    return projects.map((project) => ({
+    return projects.map((project: CollectionEntry<'projects'>) => ({
         params: { slug: project.id.replace(/\.md$/, '') },
         props: { project },
     }));
+}
+
+interface Props {
+    project: CollectionEntry<'projects'>;
 }
 
 const { project } = Astro.props;
@@ -33,7 +36,6 @@ const { Content } = await render(project);
 const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
 const telemetryRest = telemetryRestParts.join(' // ');
 const parsed = parseTelemetry(telemetryStr);
-const lastModifiedRelative = getRelativeTimeString(getGitLastModified(project.id));
 
 const projectSlug = project.id.replace(/\.md$/, '');
 const transmissionTag = rawTransmissionTag || projectSlug;
@@ -92,8 +94,8 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
     <head>
         <BaseHead title={`${title} | Projects`} description={description} image={logo} />
         <TypographyStyles />
-        <script type="application/ld+json" set:html={jsonLd} />
-        <script type="application/ld+json" set:html={breadcrumbLd} />
+        <script is:inline type="application/ld+json" set:html={jsonLd} />
+        <script is:inline type="application/ld+json" set:html={breadcrumbLd} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <!-- Flashlight Spotlight Background -->
@@ -104,7 +106,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
         <main
             id="main-content"
             tabindex="-1"
-            class="layout-container relative z-10 grow py-12 md:py-20"
+            class="layout-container relative z-10 grow py-(--section-gap-mobile) md:py-(--section-gap-desktop)"
         >
             <!-- Back Navigation -->
             <div class="animate-fade-in mb-8">
@@ -218,8 +220,6 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                                 <span class="truncate">
                                     <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
                                 </span>
-                                <span class="mx-0.5 shrink-0 text-slate-300 select-none dark:text-slate-700">•</span>
-                                <span class="last-updated-ts shrink-0 font-medium text-slate-500 dark:text-slate-500">{lastModifiedRelative}</span>
                             </div>
                         </div>
                         {
@@ -237,16 +237,26 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                                         aria-valuemax={5}
                                         class="flex items-center gap-1 mt-1"
                                     >
-                                        {[1, 2, 3, 4, 5].map((i) => (
-                                            <span
-                                                aria-hidden="true"
-                                                class={`h-1.5 w-3.5 rounded-xs transition-opacity duration-300 ${
-                                                    i <= (pain_level ?? 0)
-                                                        ? 'bg-(--accent) opacity-90'
-                                                        : 'bg-slate-200 opacity-40 dark:bg-white/10'
-                                                }`}
-                                            />
-                                        ))}
+                                        {[1, 2, 3, 4, 5].map((i) => {
+                                            const colors: {[key: number]: string} = {
+                                                1: 'bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.5)]', // Violet
+                                                2: 'bg-[#10b981] shadow-[0_0_6px_rgba(16,185,129,0.5)]', // Green
+                                                3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]',  // Yellow
+                                                4: 'bg-[#f97316] shadow-[0_0_6px_rgba(249,115,22,0.5)]',  // Orange
+                                                5: 'bg-[#ef4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]',  // Red
+                                            };
+                                            const activeColor = colors[pain_level ?? 1] ?? 'bg-(--accent)';
+                                            return (
+                                                <span
+                                                    aria-hidden="true"
+                                                    class={`h-1.5 w-3.5 rounded-xs transition-all duration-300 ${
+                                                        i <= (pain_level ?? 0)
+                                                            ? `${activeColor} opacity-90`
+                                                            : 'bg-slate-200 opacity-40 dark:bg-white/10'
+                                                    }`}
+                                                />
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             )
@@ -273,13 +283,13 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                         {
                             fuckup_teaser && (
                                 <div class="mission-fuckup-teaser expanded mb-6 text-slate-800 dark:text-slate-300" role="note" aria-label="Honest fuckup teaser">
-                                    <span class="text-slate-400 dark:text-slate-500 font-bold">[ FUCKUP LOG ]&nbsp;</span>
+                                    <span class="text-slate-500 dark:text-slate-400 font-bold">[ FUCKUP LOG ]&nbsp;</span>
                                     {fuckup_teaser}
                                 </div>
                             )
                         }
                         <div
-                            class="prose prose-slate dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:text-slate-900 dark:prose-code:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 animate-fade-in-up delay-200"
+                            class="prose prose-slate dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 animate-fade-in-up delay-200"
                         >
                             <Content />
                         </div>
@@ -337,7 +347,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                                         // STACK
                                     </h3>
                                     <div class="flex flex-wrap gap-2">
-                                        {tags.map((tag) => (
+                                        {tags.map((tag: string) => (
                                             <span class="rounded-md border border-slate-200 bg-slate-100 px-2 py-1 font-mono text-[10px] text-slate-600 dark:border-white/5 dark:bg-white/5 dark:text-(--text-secondary)">
                                                 {tag}
                                             </span>

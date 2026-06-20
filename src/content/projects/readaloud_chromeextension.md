@@ -1,6 +1,6 @@
 ---
-title: 'Read Aloud Chrome Extension'
-description: 'Manifest V3 extension that reads the main article text via Web Speech API — skips nav junk, adjustable speed.'
+title: 'Read Aloud'
+description: 'Manifest V3 chrome extension that reads the main article text via Web Speech API — skips nav junk, adjustable speed.'
 logo: '../../assets/read-aloud.png'
 githubUrl: 'https://github.com/dhaatrik/ReadAloud_ChromeExtension'
 progress: 'Manifest V3 extension, published locally'
@@ -8,7 +8,7 @@ order: 12
 tags: ['JavaScript', 'Web Speech API', 'Chrome Extension']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // MV3: COMPLIANT // TTS: NATIVE'
-fuckup_teaser: "MV3's service worker lifecycle killed my persistent state — took three rewrites to understand it's not a background page."
+fuckup_teaser: "I tried to keep memory-based state inside a Manifest V3 service worker, completely forgetting that Chrome kills inactive background scripts every few minutes."
 ---
 
 ## SYS.STATUS: MV3 compliant — article parsing works, native TTS, no external API calls

@@ -8,7 +8,7 @@ order: 5
 tags: ['JavaScript', 'Electron', 'Node.js', 'CSS']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // VERSION: V1.2.0 // HOTKEYS: GLOBAL'
-fuckup_teaser: "Electron auto-launch on startup needed registry writes I hadn't tested on fresh Windows installs — first users hit a broken tray."
+fuckup_teaser: "I wrote registry keys for Electron's startup behavior without testing clean Windows environments, immediately bricking the tray launcher for first-time users."
 ---
 
 ## SYS.STATUS: v1.2.0 — sub-150ms popup, global hotkeys registered, lives in the tray

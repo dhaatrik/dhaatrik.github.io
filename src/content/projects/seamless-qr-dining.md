@@ -8,7 +8,7 @@ order: 8
 tags: ['React', 'WebSockets', 'Tailwind CSS', 'Node.js']
 pain_level: 3
 telemetry: 'STATUS: PROTOTYPE // SYNC: VERIFIED // PROD: PENDING'
-fuckup_teaser: "WebSocket reconnection was an afterthought — real-time ordering failed silently when connections dropped under load."
+fuckup_teaser: "I ignored WebSocket reconnection states entirely, meaning a customer's order would fail silently if the kitchen server suffered even a temporary connection drop."
 ---
 
 ## SYS.STATUS: Prototype done — table sockets verified, not production-hardened yet

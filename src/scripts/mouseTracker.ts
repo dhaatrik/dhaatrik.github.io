@@ -194,8 +194,9 @@ const runMouseTracker = () => {
             const xc = cachedRect.width / 2;
             const yc = cachedRect.height / 2;
 
-            const tiltX = (yc - y) / 30;
-            const tiltY = (x - xc) / 30;
+            const maxTilt = 4.5; // Maximum tilt angle in degrees
+            const tiltX = ((yc - y) / yc) * maxTilt;
+            const tiltY = ((x - xc) / xc) * maxTilt;
 
             card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.01, 1.01, 1.01)`;
             card.style.setProperty('--mouse-x', `${x}px`);

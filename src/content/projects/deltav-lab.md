@@ -8,7 +8,7 @@ order: 2
 tags: ['TypeScript', 'Vanilla DOM', 'Web Workers', 'esbuild', 'Vitest']
 pain_level: 4
 telemetry: 'STATUS: OPERATIONAL // SIM: RK4_50HZ // ORBITS: OK'
-fuckup_teaser: "Early worker message shapes were too chatty — batch comms killed determinism before I caught it."
+fuckup_teaser: "I initially passed hundreds of small coordinates to the Web Worker every frame, which clogged the thread and destroyed the physics loop's real-time accuracy."
 ---
 
 ## SYS.STATUS: Physics loop runs at 50Hz in a Web Worker — VAB works, orbit plots render, still not KSP

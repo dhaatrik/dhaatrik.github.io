@@ -76,14 +76,6 @@ const personSchema = JSON.stringify({
             // Sync favicon
             var link = document.getElementById('favicon');
             if (link) link.href = isDark ? '/logo_light.svg' : '/logo_dark.svg';
-
-            // Sync terminal theme
-            var terminalTheme = localStorage.getItem('terminal-theme') || 'default';
-            // Remove any existing theme classes
-            document.documentElement.classList.remove('theme-matrix', 'theme-amber', 'theme-cobalt');
-            if (terminalTheme !== 'default') {
-                document.documentElement.classList.add('theme-' + terminalTheme);
-            }
         }
         applyTheme();
         // Re-apply after Astro View Transitions swap
@@ -137,7 +129,7 @@ const personSchema = JSON.stringify({
 <ClientRouter />
 
 <!-- Schema.org Script -->
-<script type="application/ld+json" set:html={personSchema} />
+<script is:inline type="application/ld+json" set:html={personSchema} />
 
 <script>
     import '../scripts/mouseTracker.ts';
@@ -147,6 +139,19 @@ const personSchema = JSON.stringify({
 
     registerHighlightStyles();
     document.addEventListener('astro:page-load', registerHighlightStyles);
+
+    // Make scrollable code blocks keyboard-focusable for accessibility
+    const checkScrollableCodeBlocks = () => {
+        document.querySelectorAll('pre').forEach((block) => {
+            if (block.scrollWidth > block.clientWidth) {
+                block.setAttribute('tabindex', '0');
+                if (!block.hasAttribute('role')) block.setAttribute('role', 'region');
+                if (!block.hasAttribute('aria-label')) block.setAttribute('aria-label', 'Code snippet');
+            } else {
+                block.removeAttribute('tabindex');
+            }
+        });
+    };
 
     // Programmatic Accessibility Routing: Focus header or main container on page load/transition
     document.addEventListener('astro:page-load', () => {
@@ -165,5 +170,15 @@ const personSchema = JSON.stringify({
         ) as HTMLElement | null;
         if (activeTitle) activeTitle.style.removeProperty('view-transition-name');
         if (activeImg) activeImg.style.removeProperty('view-transition-name');
+
+        // Check code blocks accessibility
+        checkScrollableCodeBlocks();
+    });
+
+    // Resize event listener for responsive changes to scrollability
+    let resizeTimeout: number;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = window.setTimeout(checkScrollableCodeBlocks, 150);
     });
 </script>

@@ -205,35 +205,11 @@ const formatMarqueeDate = (date: Date) => {
                     </div>
                     <div>STYLE.SYS // TAILWIND CSS v4.0</div>
                     <div id="footer-uptime">SYS.SESSION // 00h 00m 00s</div>
-                    <div id="footer-link-type">SYS.LINK // —</div>
                     <div>BUILD.SHA // {gitSha}</div>
                     <div>PAGES.INDEXED // {totalPages}</div>
                     <div class="border-t border-dashed border-slate-200/50 dark:border-white/5 pt-2 mt-2 flex flex-col gap-1">
                         <span class="text-[8px] text-slate-400 uppercase tracking-widest dark:text-slate-500">// CURRENT_STUDY</span>
                         <span class="text-slate-600 dark:text-slate-300 text-[10px] leading-relaxed">{currentLearning}</span>
-                    </div>
-                    <div class="border-t border-dashed border-slate-200/50 dark:border-white/5 pt-2 mt-2 flex flex-col gap-1">
-                        <span class="text-[8px] text-slate-400 uppercase tracking-widest dark:text-slate-500">// LAST_HONEST_REFLECTION</span>
-                        {
-                            posts[0] ? (
-                                <a
-                                    href={`/transmissions/${posts[0].id}/`}
-                                    data-astro-prefetch="hover"
-                                    class="text-[10px] leading-snug font-semibold text-slate-700 transition-colors hover:text-(--accent) dark:text-slate-300"
-                                >
-                                    {posts[0].data.title}
-                                </a>
-                            ) : (
-                                <span class="text-[10px] text-slate-500 dark:text-slate-400">
-                                    See /transmissions for the latest signal.
-                                </span>
-                            )
-                        }
-                        {posts[0]?.data.description && (
-                            <span class="text-[9px] leading-relaxed text-slate-500 italic dark:text-slate-400 line-clamp-2">
-                                {posts[0].data.description}
-                            </span>
-                        )}
                     </div>
                 </div>
             </div>
@@ -677,7 +653,6 @@ const formatMarqueeDate = (date: Date) => {
 
         // 3. Telemetry loop (Uptime and fluctuating CPU load)
         const uptimeEl = document.getElementById('footer-uptime');
-        const linkEl = document.getElementById('footer-link-type');
         const startTime = Date.now();
 
         const formatUptime = (ms: number) => {
@@ -692,12 +667,6 @@ const formatMarqueeDate = (date: Date) => {
             if (uptimeEl) {
                 const elapsed = Date.now() - startTime;
                 uptimeEl.textContent = `SYS.SESSION // ${formatUptime(elapsed)}`;
-            }
-            if (linkEl) {
-                const conn = (navigator as Navigator & { connection?: { effectiveType?: string } })
-                    .connection;
-                const linkType = conn?.effectiveType?.toUpperCase() ?? 'STATIC_HOST';
-                linkEl.textContent = `SYS.LINK // ${linkType}`;
             }
         };
 

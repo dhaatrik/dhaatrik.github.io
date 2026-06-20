@@ -25,7 +25,6 @@ const {
     pubDate,
     updatedDate,
     heroImage,
-    id,
     headings = [],
     prevPost,
     nextPost,
@@ -94,9 +93,9 @@ const breadcrumbSchema = JSON.stringify({
     <head>
         <BaseHead title={title} description={description} image={heroImage} type="article" pubDate={pubDate} updatedDate={updatedDate} keywords={tags} />
         <!-- Article-specific JSON-LD -->
-        <script type="application/ld+json" set:html={articleSchema} />
+        <script is:inline type="application/ld+json" set:html={articleSchema} />
         <!-- Breadcrumb JSON-LD -->
-        <script type="application/ld+json" set:html={breadcrumbSchema} />
+        <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
         <TypographyStyles />
         {hasMath && <KatexStyles />}
     </head>
@@ -115,7 +114,7 @@ const breadcrumbSchema = JSON.stringify({
         </div>
 
         <Header />
-        <main id="main-content" tabindex="-1" class="layout-container grow py-12 md:py-20">
+        <main id="main-content" tabindex="-1" class="layout-container grow py-(--section-gap-mobile) md:py-(--section-gap-desktop)">
             <div class="blog-reveal blog-reveal-1 mb-8">
                 <a
                     href="/transmissions"
@@ -253,7 +252,7 @@ const breadcrumbSchema = JSON.stringify({
 
                     <div id="rendered-content-container" class="blog-reveal blog-reveal-2">
                         <div
-                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 marker:text-(--accent)"
+                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 marker:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800"
                         >
                             <slot />
                         </div>
@@ -261,7 +260,7 @@ const breadcrumbSchema = JSON.stringify({
 
                     <div
                         id="raw-markdown-container"
-                        class="my-6 hidden overflow-x-auto rounded-lg border border-slate-700 bg-[#0d1117] p-2 font-mono text-sm leading-relaxed text-slate-800 dark:text-slate-300"
+                        class="my-6 hidden overflow-x-auto rounded-lg border border-slate-700 bg-[#0d1117] p-2 font-mono text-sm leading-relaxed text-slate-300"
                     >
                         <Code
                             code={rawContent}

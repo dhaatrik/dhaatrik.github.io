@@ -1,7 +1,4 @@
 ---
-import { execSync } from 'child_process';
-import fs from 'fs';
-import path from 'path';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -12,9 +9,12 @@ import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
 import { getPainLevelLabel, parseTelemetry } from '../data/status';
 
+type ProjectEntry = CollectionEntry<'projects'>;
+type BlogEntry = CollectionEntry<'blog'>;
+
 // ⚡ Bolt: Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
-    getCollection('projects').then((raw) =>
+    getCollection('projects').then((raw: CollectionEntry<'projects'>[]) =>
         raw
             .sort(
                 (a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) =>
@@ -22,7 +22,7 @@ const [projects, posts] = await Promise.all([
             )
             .slice(0, 4)
     ),
-    getCollection('blog').then((raw) =>
+    getCollection('blog').then((raw: CollectionEntry<'blog'>[]) =>
         raw
             .sort(
                 (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
@@ -43,70 +43,6 @@ const premiumLineup = lineupNames
         return null;
     })
     .filter((t): t is TechIcon => t !== null);
-
-
-const getGitLastModified = (projectId: string): Date => {
-    let filePath = path.join(process.cwd(), 'src', 'content', 'projects', projectId);
-    if (!fs.existsSync(filePath)) {
-        if (fs.existsSync(filePath + '.md')) {
-            filePath = filePath + '.md';
-        } else if (fs.existsSync(filePath + '.mdx')) {
-            filePath = filePath + '.mdx';
-        }
-    }
-
-    // In development mode, avoid slow process spawning (execSync git log) to prevent CPU starvation
-    if (import.meta.env.DEV) {
-        try {
-            if (fs.existsSync(filePath)) {
-                return fs.statSync(filePath).mtime;
-            }
-        } catch (e) {}
-        return new Date();
-    }
-
-    try {
-        if (fs.existsSync(filePath)) {
-            const stdout = execSync(`git log -1 --format=%cI -- "${filePath}"`, {
-                encoding: 'utf-8',
-                stdio: ['ignore', 'pipe', 'ignore'],
-            }).trim();
-            if (stdout) {
-                return new Date(stdout);
-            }
-        }
-    } catch (e) {}
-    try {
-        if (fs.existsSync(filePath)) {
-            return fs.statSync(filePath).mtime;
-        }
-    } catch (e) {}
-    return new Date();
-};
-
-const getRelativeTimeString = (date: Date): string => {
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    if (diffMs < 0) return 'just now';
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (diffDays < 7) {
-        if (diffDays === 0) {
-            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-            if (diffHours === 0) {
-                const diffMins = Math.floor(diffMs / (1000 * 60));
-                if (diffMins <= 1) return 'just now';
-                return `${diffMins}m ago`;
-            }
-            return `${diffHours}h ago`;
-        }
-        return `${diffDays}d ago`;
-    }
-
-    const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-};
-
 
 // FAQ and WebSite JSON-LD schemas for AEO/GEO
 const faqSchema = JSON.stringify({
@@ -180,16 +116,16 @@ const webSiteSchema = JSON.stringify({
             ]}
         />
         <!-- FAQ Structured Data for AEO/GEO -->
-        <script type="application/ld+json" set:html={faqSchema} />
+        <script is:inline type="application/ld+json" set:html={faqSchema} />
         <!-- WebSite Structured Data -->
-        <script type="application/ld+json" set:html={webSiteSchema} />
+        <script is:inline type="application/ld+json" set:html={webSiteSchema} />
     </head>
     <body class="bg-grid-motif relative pt-24">
         <Header />
         <main
             id="main-content"
             tabindex="-1"
-            class="flex flex-col gap-[var(--section-gap-mobile)] py-16 md:gap-[var(--section-gap-desktop)] md:py-24"
+            class="flex flex-col gap-(--section-gap-mobile) py-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:py-(--section-gap-desktop)"
         >
             <!-- Hero Section: The Boring Section -->
             <section
@@ -278,14 +214,17 @@ const webSiteSchema = JSON.stringify({
                         class="type-body-lg reveal-on-scroll mb-8 text-slate-600 dark:text-(--text-secondary)"
                         data-reveal-delay="200"
                     >
-                        I'm Dhaatrik — 26, building from India, and this site is my honest
-                        engineering diary. Not a polished portfolio. A log of what I shipped, what
-                        broke, and what I wish I'd known sooner. I build from first principles
-                        because shortcuts always come back to bite you.
+                        I'm Dhaatrik Chowdhury — just a human from India, building stuffs, and this
+                        site is my honest engineering diary. Not a polished portfolio. A log of what
+                        I shipped, what broke, and what I wish I'd known sooner. I build from first
+                        principles because shortcuts always come back to bite you.
                     </p>
 
                     <!-- CTA Hierarchy -->
-                    <div class="reveal-on-scroll flex flex-wrap items-center gap-6" data-reveal-delay="300">
+                    <div
+                        class="reveal-on-scroll flex flex-wrap items-center gap-6"
+                        data-reveal-delay="300"
+                    >
                         <a
                             href="/personnel"
                             data-astro-prefetch="hover"
@@ -468,7 +407,7 @@ const webSiteSchema = JSON.stringify({
                 id="projects"
                 class="layout-container content-visibility-auto-projects mb-0 pb-16"
             >
-                <div class="mb-10 reveal-on-scroll">
+                <div class="reveal-on-scroll mb-10">
                     <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                         Featured Engineering
                     </h2>
@@ -498,7 +437,7 @@ const webSiteSchema = JSON.stringify({
                                             class="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-green-500"
                                         ></span>
                                         <span class="truncate"
-                                            >STATUS: RESEARCH_ACTIVE // CORE: RUST_WASM</span
+                                            >STATUS: RESEARCH_ACTIVE // CORE: AGRI_BIO_TECH</span
                                         >
                                     </div>
                                     <span
@@ -516,8 +455,10 @@ const webSiteSchema = JSON.stringify({
                                 <p
                                     class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    Transitioning to Rust/WASM for deterministic aerospace
-                                    simulations and deep-diving into quantum mechanics fundamentals.
+                                    Investigating agricultural systems from first principles—soil
+                                    chemistry, plant biology, and biotech (90%)—while allocating
+                                    time to quantum mechanics, rocketry, and Behçet's Syndrome
+                                    literature.
                                 </p>
                             </div>
                             <div
@@ -536,7 +477,7 @@ const webSiteSchema = JSON.stringify({
                         popover
                         id="project-popover-currently-exploring"
                         aria-labelledby="project-popover-title-currently-exploring"
-                        class="premium-glass m-auto w-[calc(100%-2rem)] max-w-xl rounded-2xl p-0 md:w-full"
+                        class="premium-glass m-auto max-h-[85vh] w-[calc(100%-2rem)] max-w-xl rounded-2xl p-0 md:w-full"
                     >
                         <div
                             class="relative z-10 flex items-start justify-between border-b border-slate-100 p-5 sm:p-6 dark:border-white/5"
@@ -558,7 +499,7 @@ const webSiteSchema = JSON.stringify({
                                 <p
                                     class="font-mono text-[9px] tracking-wider text-slate-400 uppercase sm:text-xs dark:text-slate-500"
                                 >
-                                    STATUS: RESEARCH_ACTIVE // CORE: RUST_WASM
+                                    STATUS: RESEARCH_ACTIVE // CORE: AGRI_BIO_TECH
                                 </p>
                             </div>
                             <button
@@ -579,18 +520,21 @@ const webSiteSchema = JSON.stringify({
                             </button>
                         </div>
 
-                        <div class="relative z-10 space-y-6 p-5 sm:p-6">
+                        <div class="relative z-10 grow space-y-6 overflow-y-auto p-5 sm:p-6">
                             <div class="space-y-3">
                                 <h4
                                     class="font-mono text-[10px] font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500"
                                 >
-                                    // RESEARCH DIRECTION
+                                    // CURRENT ALLOCATION
                                 </h4>
                                 <p
                                     class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    Transitioning to Rust/WASM for deterministic aerospace
-                                    simulations and deep-diving into quantum mechanics fundamentals.
+                                    Right now, my research time is divided into two distinct paths:
+                                    90% is focused on demystifying agricultural science from first
+                                    principles, and the remaining 10% is split between quantum
+                                    mechanics, rocket propulsion chemistry, and offline AI-driven
+                                    medical literature analysis.
                                 </p>
                             </div>
 
@@ -600,15 +544,17 @@ const webSiteSchema = JSON.stringify({
                                 <h4
                                     class="font-mono text-[10px] font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500"
                                 >
-                                    // RUST & WEBASSEMBLY
+                                    // AGRICULTURAL SCIENCE (90%)
                                 </h4>
                                 <p
                                     class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    Re-architecting physics models and numerical solvers in Rust to
-                                    run natively in the browser via WebAssembly. Targeting
-                                    sub-millisecond execution times for fluid dynamics and
-                                    trajectory predictions.
+                                    I am analyzing existing agricultural solutions to get to the
+                                    ground truth of soil microbiology, crop physiology, seed
+                                    biotechnology, and climate interactions. This involves heavy
+                                    deep-dives into organic chemistry, plant pathology, soil
+                                    macronutrient cycles, and biotechnology to understand what
+                                    actually drives crop yield and resilience.
                                 </p>
                             </div>
 
@@ -618,14 +564,35 @@ const webSiteSchema = JSON.stringify({
                                 <h4
                                     class="font-mono text-[10px] font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500"
                                 >
-                                    // QUANTUM COMPUTATION
+                                    // QUANTUM & SPACETECH (7%)
                                 </h4>
                                 <p
                                     class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    Exploring quantum computing simulation frameworks, linear
-                                    algebra representations of qubits, and the foundational
-                                    mathematics of quantum superposition and entanglement.
+                                    Exploring quantum mechanics fundamentals and rocket science,
+                                    specifically focusing on the chemistry of liquid propellants,
+                                    combustion chamber heat transfer, and fuel formulations that
+                                    govern orbital launch vehicle efficiency.
+                                </p>
+                            </div>
+
+                            <div
+                                class="space-y-3 border-t border-slate-100 pt-4 dark:border-white/5"
+                            >
+                                <h4
+                                    class="font-mono text-[10px] font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500"
+                                >
+                                    // BEHCET'S SYNDROME RESEARCH (3%)
+                                </h4>
+                                <p
+                                    class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
+                                >
+                                    Running Gemma E4B model locally, when my PC is idle (duh! I
+                                    sleep too) to parse medical literature on Behçet's Syndrome—a
+                                    chronic systemic vasculitis characterized by HLA-B*51 genetic
+                                    susceptibility, MHC-I-opathy, and neutrophilic hyperactivation
+                                    causing blood vessel inflammation. The goal is to develop an
+                                    early detection protocol and find a cure.
                                 </p>
                             </div>
 
@@ -633,22 +600,27 @@ const webSiteSchema = JSON.stringify({
                                 <span
                                     class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
                                 >
-                                    #RUST
+                                    #AGRISCIENCE
                                 </span>
                                 <span
                                     class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
                                 >
-                                    #WASM
-                                </span>
-                                <span
-                                    class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
-                                >
-                                    #AEROSPACE
+                                    #BIOTECH
                                 </span>
                                 <span
                                     class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
                                 >
                                     #QUANTUM-PHYSICS
+                                </span>
+                                <span
+                                    class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
+                                >
+                                    #BEHCETS-RESEARCH
+                                </span>
+                                <span
+                                    class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
+                                >
+                                    #SPACETECH
                                 </span>
                             </div>
 
@@ -667,13 +639,12 @@ const webSiteSchema = JSON.stringify({
                     </div>
 
                     {
-                        projects.map((project) => {
+                        projects.map((project: ProjectEntry) => {
                             const telemetryStr = project.data.telemetry;
-                            const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
+                            const [telemetryFirst, ...telemetryRestParts] =
+                                telemetryStr.split('//');
                             const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
-                            const lastModifiedDate = getGitLastModified(project.id);
-                            const relativeTime = getRelativeTimeString(lastModifiedDate);
                             const parsed = parseTelemetry(telemetryStr);
                             return (
                                 <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
@@ -684,10 +655,13 @@ const webSiteSchema = JSON.stringify({
                                         {project.data.video && (
                                             <video
                                                 src={project.data.video}
+                                                preload="none"
                                                 autoplay
                                                 loop
                                                 muted
                                                 playsinline
+                                                aria-hidden="true"
+                                                role="none"
                                                 class="h-full w-full object-cover opacity-12 mix-blend-screen transition-transform duration-500 group-hover:scale-110 dark:opacity-8 dark:mix-blend-lighten"
                                                 style="display: none;"
                                                 onplay="this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
@@ -708,13 +682,11 @@ const webSiteSchema = JSON.stringify({
                                                         class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
                                                     />
                                                     <span class="truncate">
-                                                        <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
-                                                    </span>
-                                                    <span class="mx-0.5 shrink-0 text-slate-300 select-none dark:text-slate-700">
-                                                        •
-                                                    </span>
-                                                    <span class="last-updated-ts shrink-0 font-medium text-slate-400 dark:text-slate-600">
-                                                        {relativeTime}
+                                                        <span class="telemetry-keyword">
+                                                            {telemetryFirst.trim()}
+                                                        </span>
+                                                        {telemetryRest &&
+                                                            ` // ${telemetryRest.trim()}`}
                                                     </span>
                                                 </div>
                                                 <span
@@ -757,7 +729,7 @@ const webSiteSchema = JSON.stringify({
                                                     </a>
                                                 )}
                                             </div>
-                                            <p class="mb-4 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                            <p class="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
                                                 {project.data.description}
                                             </p>
 
@@ -771,21 +743,40 @@ const webSiteSchema = JSON.stringify({
                                                         class="flex items-center gap-1"
                                                         role="meter"
                                                         aria-label={`Impact level: ${project.data.pain_level} out of 5`}
-                                                        aria-valuetext={getPainLevelLabel(project.data.pain_level)}
+                                                        aria-valuetext={getPainLevelLabel(
+                                                            project.data.pain_level
+                                                        )}
                                                         aria-valuenow={project.data.pain_level}
                                                         aria-valuemin={1}
                                                         aria-valuemax={5}
                                                     >
-                                                        {[1, 2, 3, 4, 5].map((i) => (
-                                                            <span
-                                                                aria-hidden="true"
-                                                                class={`h-1 w-5 rounded-sm transition-opacity duration-300 ${
-                                                                    i <= (project.data.pain_level ?? 0)
-                                                                        ? 'bg-(--accent) opacity-90'
-                                                                        : 'bg-slate-200 opacity-40 dark:bg-white/10'
-                                                                }`}
-                                                            />
-                                                        ))}
+                                                        {[1, 2, 3, 4, 5].map((i) => {
+                                                            const colors: {
+                                                                [key: number]: string;
+                                                            } = {
+                                                                1: 'bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.5)]', // Violet
+                                                                2: 'bg-[#10b981] shadow-[0_0_6px_rgba(16,185,129,0.5)]', // Green
+                                                                3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]', // Yellow
+                                                                4: 'bg-[#f97316] shadow-[0_0_6px_rgba(249,115,22,0.5)]', // Orange
+                                                                5: 'bg-[#ef4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]', // Red
+                                                            };
+                                                            const activeColor =
+                                                                colors[
+                                                                    project.data.pain_level ?? 1
+                                                                ] ?? 'bg-(--accent)';
+                                                            return (
+                                                                <span
+                                                                    aria-hidden="true"
+                                                                    class={`h-1 w-5 rounded-sm transition-all duration-300 ${
+                                                                        i <=
+                                                                        (project.data.pain_level ??
+                                                                            0)
+                                                                            ? `${activeColor} opacity-90`
+                                                                            : 'bg-slate-200 opacity-20 dark:bg-white/5'
+                                                                    }`}
+                                                                />
+                                                            );
+                                                        })}
                                                         <span class="ml-1 font-mono text-[9px] text-slate-400 dark:text-slate-600">
                                                             {project.data.pain_level}/5
                                                         </span>
@@ -795,9 +786,18 @@ const webSiteSchema = JSON.stringify({
 
                                             {/* Fuckup Teaser */}
                                             {project.data.fuckup_teaser && (
-                                                <div class="mission-fuckup-teaser mb-4">
-                                                    <span class="text-slate-400 dark:text-slate-500">[ FUCKUP LOG ]&nbsp;</span>
-                                                    {project.data.fuckup_teaser}
+                                                <div class="mb-4">
+                                                    <div class="mb-1.5 flex items-center gap-1.5">
+                                                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
+                                                        <span class="block font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
+                                                            // FUCKUP.LOG
+                                                        </span>
+                                                    </div>
+                                                    <div class="mission-fuckup-teaser">
+                                                        <div class="mission-fuckup-teaser-inner">
+                                                            {project.data.fuckup_teaser}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             )}
                                         </div>
@@ -808,7 +808,7 @@ const webSiteSchema = JSON.stringify({
                                             </span>
                                             <a
                                                 href={`/projects/${projectIdClean}`}
-                                                class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all hover:opacity-80 group-hover:translate-x-0.5"
+                                                class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all group-hover:translate-x-0.5 hover:opacity-80"
                                                 aria-label={`Read the full ${project.data.title} mission log`}
                                             >
                                                 Read the full story&nbsp;→
@@ -875,10 +875,8 @@ const webSiteSchema = JSON.stringify({
                 </div>
             </section>
 
-            <section
-                class="layout-container content-visibility-auto-blog mb-0 pb-16"
-            >
-                <div class="mb-10 flex items-end justify-between reveal-on-scroll">
+            <section class="layout-container content-visibility-auto-blog mb-0 pb-16">
+                <div class="reveal-on-scroll mb-10 flex items-end justify-between">
                     <div>
                         <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                             Latest Thinking
@@ -912,9 +910,9 @@ const webSiteSchema = JSON.stringify({
                     </a>
                 </div>
 
-                <div class="flex flex-col gap-6 reveal-stagger">
+                <div class="reveal-stagger flex flex-col gap-6">
                     {
-                        posts.map((post, index) => {
+                        posts.map((post: BlogEntry, index: number) => {
                             const doiNum = `10.1012/DH.${post.id.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'POST'}`;
                             return (
                                 <a
@@ -967,7 +965,7 @@ const webSiteSchema = JSON.stringify({
                                                 </p>
                                             </div>
                                             <div class="mt-4 flex items-center justify-between">
-                                                <div class="font-mono text-[9px] text-slate-400 dark:text-slate-500">
+                                                <div class="font-mono text-[9px] text-slate-500 dark:text-slate-400">
                                                     DOI:{' '}
                                                     <span class="text-slate-600 dark:text-slate-400">
                                                         {doiNum}
@@ -1067,13 +1065,16 @@ const webSiteSchema = JSON.stringify({
                         if (popover) {
                             popover.addEventListener('toggle', (e) => {
                                 const isOpen = /** @type {any} */ (e).newState === 'open';
-                                card.setAttribute(
-                                    'aria-expanded',
-                                    isOpen ? 'true' : 'false'
-                                );
+                                card.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
                                 if (isOpen) {
-                                    lastActiveElement = /** @type {HTMLElement | null} */ (document.activeElement);
-                                    const closeBtn = /** @type {HTMLElement | null} */ (popover.querySelector('button[aria-label], button[popovertarget]'));
+                                    lastActiveElement = /** @type {HTMLElement | null} */ (
+                                        document.activeElement
+                                    );
+                                    const closeBtn = /** @type {HTMLElement | null} */ (
+                                        popover.querySelector(
+                                            'button[aria-label], button[popovertarget]'
+                                        )
+                                    );
                                     if (closeBtn) {
                                         requestAnimationFrame(() => {
                                             closeBtn.focus();
@@ -1102,7 +1103,9 @@ const webSiteSchema = JSON.stringify({
                     const target = document.getElementById('identity-rotator');
                     if (!target) return;
 
-                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    const prefersReducedMotion = window.matchMedia(
+                        '(prefers-reduced-motion: reduce)'
+                    ).matches;
                     if (prefersReducedMotion) {
                         currentIdx = (currentIdx + 1) % identities.length;
                         target.textContent = identities[currentIdx];
@@ -1159,7 +1162,9 @@ const webSiteSchema = JSON.stringify({
                     if (target) {
                         identities = JSON.parse(target.dataset.identities || '[]');
                         if (identities.length > 0) {
-                            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                            const prefersReducedMotion = window.matchMedia(
+                                '(prefers-reduced-motion: reduce)'
+                            ).matches;
                             if (prefersReducedMotion) {
                                 currentIdx = 0;
                                 target.textContent = identities[0];
@@ -1189,26 +1194,31 @@ const webSiteSchema = JSON.stringify({
                     window.addEventListener('pageshow', handlePageShow);
                 }
 
-                // --- 6. Pause/Resume Videos based on content-visibility ---
-                const projectsSection = document.querySelector('.content-visibility-auto-projects');
-                if (projectsSection) {
-                    projectsSection.addEventListener('contentvisibilityautostatechange', (e) => {
-                        const videos = projectsSection.getElementsByTagName('video');
-                        if (e.skipped) {
-                            Array.from(videos).forEach((v) => {
-                                try {
-                                    v.pause();
-                                } catch (err) {}
-                            });
-                        } else {
-                            Array.from(videos).forEach((v) => {
-                                try {
-                                    v.play();
-                                } catch (err) {}
-                            });
-                        }
-                    });
-                }
+                // --- 6. Play/Pause Videos based on individual viewport intersection ---
+                const videoObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            const video = entry.target;
+                            if (entry.isIntersecting) {
+                                const prefersReducedMotion = window.matchMedia(
+                                    '(prefers-reduced-motion: reduce)'
+                                ).matches;
+                                if (!prefersReducedMotion) {
+                                    video.play().catch(() => {});
+                                } else {
+                                    video.pause();
+                                }
+                            } else {
+                                video.pause();
+                            }
+                        });
+                    },
+                    { threshold: 0.1 }
+                );
+
+                document.querySelectorAll('.mission-report-card video').forEach((v) => {
+                    videoObserver.observe(v);
+                });
 
                 // --- 7. Scroll Telemetry Indicator Connection Setup ---
                 const telemetry = document.querySelector('.scroll-telemetry-container');
@@ -1222,15 +1232,18 @@ const webSiteSchema = JSON.stringify({
                                 const scrollY = window.scrollY;
                                 const opacity = Math.max(0, 1 - scrollY / 130);
                                 const translate = scrollY * 0.12;
-                                
+
                                 telemetry.style.opacity = opacity.toString();
                                 telemetry.style.transform = `translateY(${translate}px) scale(${0.95 + opacity * 0.05})`;
-                                
+
                                 if (telemetryText) {
                                     if (scrollY === 0) {
                                         telemetryText.textContent = 'SCROLL TO INITIATE';
                                     } else if (scrollY > 0 && scrollY < 120) {
-                                        const pct = Math.min(100, Math.round((scrollY / 120) * 100));
+                                        const pct = Math.min(
+                                            100,
+                                            Math.round((scrollY / 120) * 100)
+                                        );
                                         telemetryText.textContent = `LINKING TELEMETRY // ${pct}%`;
                                     } else {
                                         telemetryText.textContent = 'TELEMETRY ONLINE // 100%';
