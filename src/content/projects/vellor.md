@@ -7,7 +7,7 @@ progress: "v4.0.0 'Power-Tutor' Update"
 order: 1
 tags: ['React 19', 'TypeScript 5.7', 'Zustand 5', 'Tailwind CSS 3']
 pain_level: 3
-telemetry: 'STATUS: V4_0_0_SHIPPED // DB: OFF_LINE_FIRST // SYNC: LOCAL'
+telemetry: 'STATUS: SHIPPED // DB: OFF_LINE_FIRST // SYNC: LOCAL'
 fuckup_teaser: "I got so obsessed with gamifying study schedules that I nearly buried Vellor's note-taking tool under a heavy, distracting RPG-style mobile-game interface."
 ---
 
