@@ -144,7 +144,10 @@ const initMouseTracker = () => {
     }
 
     cardsCollection = document.getElementsByClassName('bento-card');
-    magneticTargets = Array.from(document.querySelectorAll('.magnetic-target')) as HTMLElement[];
+    // ⚡ Bolt: Replace querySelectorAll with getElementsByClassName for faster DOM traversal
+    magneticTargets = Array.from(
+        document.getElementsByClassName('magnetic-target')
+    ) as HTMLElement[];
 
     cacheLayouts();
 
