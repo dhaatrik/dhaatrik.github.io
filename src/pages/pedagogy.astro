@@ -455,6 +455,8 @@ import dbImage from '../assets/DB.jpeg';
                         </p>
                     </div>
                     
+                    <div id="video-announcer" class="sr-only" aria-live="polite"></div>
+
                     <!-- Subject Filtering Buttons -->
                     <div class="flex gap-2 font-mono text-xs select-none">
                         <button
@@ -537,6 +539,26 @@ import dbImage from '../assets/DB.jpeg';
                         ))
                     }
                 </div>
+
+                <!-- Empty State -->
+                <div id="video-empty-state" class="hidden py-20 text-center" aria-hidden="true">
+                    <div class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                    </div>
+                    <h3 class="mb-2 text-lg font-bold text-slate-900 dark:text-white">
+                        No videos found in this category.
+                    </h3>
+                    <p class="mx-auto max-w-sm text-sm text-slate-500 dark:text-slate-400">
+                        Looks like I haven't uploaded any videos for this subject yet.
+                    </p>
+                    <button
+                        id="video-clear-filters-btn"
+                        aria-label="Clear video filters"
+                        class="mt-4 cursor-pointer rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
+                    >
+                        Clear Filters
+                    </button>
+                </div>
             </section>
         </main>
         <Footer />
@@ -550,32 +572,65 @@ import dbImage from '../assets/DB.jpeg';
 
                 if (tabs.length === 0) return;
 
-                tabs.forEach(tab => {
+                const applyFilter = (subject: string) => {
+                    // Update active styles on tabs
+                    tabs.forEach((t) => {
+                        const htmlT = t as HTMLElement;
+                        if (htmlT.dataset.subject === subject) {
+                            htmlT.classList.add('active');
+                            htmlT.setAttribute('aria-pressed', 'true');
+                        } else {
+                            htmlT.classList.remove('active');
+                            htmlT.setAttribute('aria-pressed', 'false');
+                        }
+                    });
+
+                    let visibleCount = 0;
+                    // Filter videos
+                    cards.forEach((card) => {
+                        const htmlCard = card as HTMLElement;
+                        const cardSubject = htmlCard.dataset.subject;
+
+                        if (subject === 'all' || cardSubject === subject || (subject === 'maths' && cardSubject === 'maths') || (subject === 'physics' && cardSubject === 'physics')) {
+                            htmlCard.style.display = '';
+                            visibleCount++;
+                        } else {
+                            htmlCard.style.display = 'none';
+                        }
+                    });
+
+                    if (emptyState) {
+                        if (visibleCount === 0) {
+                            emptyState.classList.remove('hidden');
+                            emptyState.setAttribute('aria-hidden', 'false');
+                        } else {
+                            emptyState.classList.add('hidden');
+                            emptyState.setAttribute('aria-hidden', 'true');
+                        }
+                    }
+
+                    if (announcer) {
+                        announcer.textContent = `Found ${visibleCount} video${visibleCount === 1 ? '' : 's'}.`;
+                    }
+                };
+
+                tabs.forEach((tab) => {
                     tab.addEventListener('click', (e) => {
                         const target = e.currentTarget as HTMLElement;
                         const subject = target.dataset.subject || 'all';
-
-                        // Update active styles on tabs
-                        tabs.forEach(t => {
-                            t.classList.remove('active');
-                            t.setAttribute('aria-pressed', 'false');
-                        });
-                        target.classList.add('active');
-                        target.setAttribute('aria-pressed', 'true');
-
-                        // Filter videos
-                        cards.forEach(card => {
-                            const htmlCard = card as HTMLElement;
-                            const cardSubject = htmlCard.dataset.subject;
-
-                            if (subject === 'all' || cardSubject === subject || (subject === 'maths' && cardSubject === 'maths') || (subject === 'physics' && cardSubject === 'physics')) {
-                                htmlCard.style.display = '';
-                            } else {
-                                htmlCard.style.display = 'none';
-                            }
-                        });
+                        applyFilter(subject);
                     });
                 });
+
+                if (clearFiltersBtn) {
+                    clearFiltersBtn.addEventListener('click', () => {
+                        applyFilter('all');
+                        const allTab = Array.from(tabs).find((t) => (t as HTMLElement).dataset.subject === 'all') as HTMLElement;
+                        if (allTab) {
+                            allTab.focus();
+                        }
+                    });
+                }
             };
 
             // Kinetic Reticle Mouse Tracking Parallax
