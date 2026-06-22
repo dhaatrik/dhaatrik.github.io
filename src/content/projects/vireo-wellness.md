@@ -8,7 +8,7 @@ order: 9
 tags: ['React', 'PWA', 'IndexedDB', 'Tailwind CSS']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // PWA: INSTALLABLE // OFFLINE: 100PCT'
-fuckup_teaser: "I assumed IndexedDB was always available, unaware that private browsers block storage access—meaning private tabs silently threw errors and lost user data."
+fuckup_teaser: 'I assumed IndexedDB was always available, unaware that private browsers block storage access—meaning private tabs silently threw errors and lost user data.'
 ---
 
 ## SYS.STATUS: PWA installable — 100% offline, IndexedDB persistence, export works

@@ -8,7 +8,7 @@ order: 7
 tags: ['React', 'Chart.js', 'Zustand', 'Tailwind CSS']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // VERSION: V1.0.0 // LEDGER: DUAL'
-fuckup_teaser: "I forgot to throttle filter triggers on mobile, causing the entire chart to tear and re-render on older hardware—a laggy 200ms lag I only noticed on actual phones."
+fuckup_teaser: 'I forgot to throttle filter triggers on mobile, causing the entire chart to tear and re-render on older hardware—a laggy 200ms lag I only noticed on actual phones.'
 ---
 
 ## SYS.STATUS: v1.0.0 — dual ledger live, charts render, all client-side

@@ -8,7 +8,7 @@ order: 3
 tags: ['React 19', 'TypeScript 5.8', 'Tailwind CSS 4', 'Vite 6']
 pain_level: 4
 telemetry: 'STATUS: SHIPPED // VERSION: V3.0.0 // CONCURRENCY: HIGH'
-fuckup_teaser: "I built a beautiful optimistic UI for orders but skipped the database rollback logic, which left users seeing successful orders that had failed on the server."
+fuckup_teaser: 'I built a beautiful optimistic UI for orders but skipped the database rollback logic, which left users seeing successful orders that had failed on the server.'
 ---
 
 ## SYS.STATUS: v3.0.0 live — real-time tracking works, route logic still earns its scars

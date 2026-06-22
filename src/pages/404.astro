@@ -8,7 +8,10 @@ import { SITE_TITLE } from '../consts';
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={`404 - Not Found | ${SITE_TITLE}`} description="This transmission drifted off course. DeltaV Lab's radar can't find it either." />
+        <BaseHead
+            title={`404 - Not Found | ${SITE_TITLE}`}
+            description="This transmission drifted off course. DeltaV Lab's radar can't find it either."
+        />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <Header />
@@ -27,7 +30,8 @@ import { SITE_TITLE } from '../consts';
                         class="mb-8 text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                     >
                         Looks like you've wandered off the track, buddy. I checked the logs —
-                        there's nothing out here. Not even DeltaV Lab's orbital tracking can find this page.
+                        there's nothing out here. Not even DeltaV Lab's orbital tracking can find
+                        this page.
                     </p>
                     {
                         /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */

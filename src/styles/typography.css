@@ -3,9 +3,9 @@
 @plugin '@tailwindcss/typography';
 
 /* Limit typography utility generation to files that use .prose */
-@source "../layouts/BlogPost.astro";
-@source "../pages/projects/[...slug].astro";
-@source "../scripts/blog/postSetup.ts";
+@source '../layouts/BlogPost.astro';
+@source '../pages/projects/[...slug].astro';
+@source '../scripts/blog/postSetup.ts';
 
 /* Responsive tables and lists inside blog / project prose */
 .prose table {
@@ -82,7 +82,7 @@
 /* Remove default backticks added by tailwind typography */
 .prose code::before,
 .prose code::after {
-    content: "" !important;
+    content: '' !important;
 }
 
 .prose blockquote {
@@ -97,5 +97,5 @@
 
 .prose blockquote p::before,
 .prose blockquote p::after {
-    content: "" !important;
+    content: '' !important;
 }

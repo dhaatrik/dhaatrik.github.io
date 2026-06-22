@@ -17,7 +17,7 @@ I love Kerbal Space Program. I also love checking math against analytical soluti
 
 ## Why I started this
 
-Spaceflight games teach intuition. Industry aerospace software teaches rigor. The gap between them is huge — and mostly filled with price tags. I wanted a tool I could open in a tab, build a staged vehicle, fire it, and *trust* the trajectory because the integrator is deterministic and testable, not because it looks right.
+Spaceflight games teach intuition. Industry aerospace software teaches rigor. The gap between them is huge — and mostly filled with price tags. I wanted a tool I could open in a tab, build a staged vehicle, fire it, and _trust_ the trajectory because the integrator is deterministic and testable, not because it looks right.
 
 The audience I had in mind: researchers prototyping maneuvers, students learning orbital mechanics, and the rest of us who just want to see if our ridiculous asparagus staging idea actually reaches orbit.
 

@@ -138,6 +138,6 @@ If you are a student trying to understand why staging matters, run a simulation.
 
 That is what KSP hinted at. DeltaV Lab is my attempt to make it provably true.
 
-$$ \Delta v = I_\{sp\} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
+$$ \Delta v = I\_\{sp\} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
 
 The equation was never the hard part. Building a system that respects it — in a browser, at 50Hz, without lying — that is the mission.

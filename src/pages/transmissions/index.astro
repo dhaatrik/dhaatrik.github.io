@@ -323,11 +323,9 @@ const postsWithReadingTime = posts.map((post: any) => {
             </div>
             <section class="layout-container mx-auto">
                 <div
-                    class="mb-2 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center reveal-on-scroll"
+                    class="reveal-on-scroll mb-2 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center"
                 >
-                    <h1
-                        class="type-page-title text-slate-900 dark:text-white"
-                    >
+                    <h1 class="type-page-title text-slate-900 dark:text-white">
                         Mission <span class="text-slate-400 dark:text-slate-600">Logs</span>
                     </h1>
                     <a
@@ -341,14 +339,16 @@ const postsWithReadingTime = posts.map((post: any) => {
                     </a>
                 </div>
                 <p
-                    class="mb-6 max-w-2xl font-mono text-sm leading-relaxed text-slate-500 dark:text-slate-400 reveal-on-scroll"
+                    class="reveal-on-scroll mb-6 max-w-2xl font-mono text-sm leading-relaxed text-slate-500 dark:text-slate-400"
                 >
-                    Notes to future-me — and you, if you're building something messy too. You're
-                    not alone. Honest logs on teaching, shipping, and the fuckups in between.
+                    Notes to future-me — and you, if you're building something messy too. You're not
+                    alone. Honest logs on teaching, shipping, and the fuckups in between.
                 </p>
 
                 <!-- Subsystem Domain Tabs -->
-                <div class="mb-10 flex flex-wrap gap-2.5 font-mono text-xs select-none reveal-on-scroll">
+                <div
+                    class="reveal-on-scroll mb-10 flex flex-wrap gap-2.5 font-mono text-xs select-none"
+                >
                     <button
                         data-filter="all"
                         aria-pressed="true"
@@ -418,10 +418,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                 </div>
 
                 <!-- Terminal-Style Search Bar -->
-                <search class="mb-10 font-mono block">
+                <search class="mb-10 block font-mono">
                     <label for="search-logs" class="sr-only">Search Mission Logs</label>
                     <div
-                        class="group relative flex items-center glass-surface premium-glass rounded-lg transition-all focus-within:border-(--accent)/50 focus-within:shadow-[0_0_15px_var(--accent-glow)]"
+                        class="group glass-surface premium-glass relative flex items-center rounded-lg transition-all focus-within:border-(--accent)/50 focus-within:shadow-[0_0_15px_var(--accent-glow)]"
                     >
                         <span
                             aria-hidden="true"
@@ -443,7 +443,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                             aria-controls="logs-grid"
                             aria-activedescendant=""
                             placeholder='"Search my diary: a concept, a bug, or a late-night thought..."'
-                            class="w-full bg-transparent border-0 py-3 pr-4 pl-20 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:ring-0 focus:outline-none sm:pl-32 dark:text-white dark:placeholder:text-slate-600"
+                            class="w-full border-0 bg-transparent py-3 pr-4 pl-20 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:ring-0 focus:outline-none sm:pl-32 dark:text-white dark:placeholder:text-slate-600"
                         />
                     </div>
                     <p class="mt-2 text-[11px] text-slate-400 select-none dark:text-slate-500">
@@ -491,7 +491,12 @@ const postsWithReadingTime = posts.map((post: any) => {
                         REF_GRID: 50.84.11
                     </div>
 
-                    <div class="grid gap-8 md:grid-cols-2 reveal-stagger" id="logs-grid" role="listbox" aria-label="Transmission search results">
+                    <div
+                        class="reveal-stagger grid gap-8 md:grid-cols-2"
+                        id="logs-grid"
+                        role="listbox"
+                        aria-label="Transmission search results"
+                    >
                         {
                             postsWithReadingTime.map((post: any, i: number) => (
                                 <a
@@ -644,11 +649,18 @@ const postsWithReadingTime = posts.map((post: any) => {
                             ></path></svg
                         >
                     </div>
-                    <h3 id="empty-state-title" class="mb-2 text-lg font-bold text-slate-900 dark:text-white">
+                    <h3
+                        id="empty-state-title"
+                        class="mb-2 text-lg font-bold text-slate-900 dark:text-white"
+                    >
                         Nothing in the archives, buddy.
                     </h3>
-                    <p id="empty-state-desc" class="mx-auto max-w-sm text-sm text-slate-500 dark:text-slate-400">
-                        I either haven't made that mistake yet, or I just haven't written it down. Try checking another keyword.
+                    <p
+                        id="empty-state-desc"
+                        class="mx-auto max-w-sm text-sm text-slate-500 dark:text-slate-400"
+                    >
+                        I either haven't made that mistake yet, or I just haven't written it down.
+                        Try checking another keyword.
                     </p>
                     <button
                         id="clear-filters-btn"
@@ -719,10 +731,17 @@ const postsWithReadingTime = posts.map((post: any) => {
                         (CSS as any).highlights.delete('search-match');
                     } else {
                         // Reset fallback elements
-                        cachedCardsData.forEach(({ titleElement, descElement, originalTitleHTML, originalDescHTML }) => {
-                            if (titleElement) titleElement.innerHTML = originalTitleHTML;
-                            if (descElement) descElement.innerHTML = originalDescHTML;
-                        });
+                        cachedCardsData.forEach(
+                            ({
+                                titleElement,
+                                descElement,
+                                originalTitleHTML,
+                                originalDescHTML,
+                            }) => {
+                                if (titleElement) titleElement.innerHTML = originalTitleHTML;
+                                if (descElement) descElement.innerHTML = originalDescHTML;
+                            }
+                        );
                     }
 
                     if (!term) return;
@@ -730,23 +749,36 @@ const postsWithReadingTime = posts.map((post: any) => {
                     const words = term.split(/\s+/).filter(Boolean);
                     if (words.length === 0) return;
 
-                    const visibleCards = cachedCardsData.filter(({ element }) => element.style.display !== 'none');
+                    const visibleCards = cachedCardsData.filter(
+                        ({ element }) => element.style.display !== 'none'
+                    );
 
                     if (hasHighlightAPI) {
                         const ranges: Range[] = [];
                         visibleCards.forEach(({ titleElement, descElement }) => {
-                            [titleElement, descElement].forEach(el => {
+                            [titleElement, descElement].forEach((el) => {
                                 if (!el) return;
-                                const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+                                const walk = document.createTreeWalker(
+                                    el,
+                                    NodeFilter.SHOW_TEXT,
+                                    null
+                                );
                                 let node: Node | null;
-                                while (node = walk.nextNode()) {
+                                while ((node = walk.nextNode())) {
                                     const textContent = node.textContent?.toLowerCase() || '';
-                                    words.forEach(word => {
+                                    words.forEach((word) => {
                                         // Ignore hashtags when highlighting text content
-                                        const cleanWord = word.startsWith('#') ? word.slice(1) : word;
+                                        const cleanWord = word.startsWith('#')
+                                            ? word.slice(1)
+                                            : word;
                                         if (!cleanWord) return;
                                         let startPos = 0;
-                                        while ((startPos = textContent.indexOf(cleanWord.toLowerCase(), startPos)) !== -1) {
+                                        while (
+                                            (startPos = textContent.indexOf(
+                                                cleanWord.toLowerCase(),
+                                                startPos
+                                            )) !== -1
+                                        ) {
                                             const range = new Range();
                                             range.setStart(node as Node, startPos);
                                             range.setEnd(node as Node, startPos + cleanWord.length);
@@ -765,49 +797,63 @@ const postsWithReadingTime = posts.map((post: any) => {
                     } else {
                         // Fallback for browsers that do not support the Custom Highlight API
                         visibleCards.forEach(({ titleElement, descElement }) => {
-                            [titleElement, descElement].forEach(el => {
+                            [titleElement, descElement].forEach((el) => {
                                 if (!el) return;
-                                const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+                                const walk = document.createTreeWalker(
+                                    el,
+                                    NodeFilter.SHOW_TEXT,
+                                    null
+                                );
                                 const textNodes: Node[] = [];
                                 let node: Node | null;
-                                while (node = walk.nextNode()) {
+                                while ((node = walk.nextNode())) {
                                     textNodes.push(node);
                                 }
 
-                                textNodes.forEach(textNode => {
+                                textNodes.forEach((textNode) => {
                                     const text = textNode.textContent || '';
-                                    const escapedWords = words.map(w => {
-                                        const clean = w.startsWith('#') ? w.slice(1) : w;
-                                        return clean.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                                    }).filter(Boolean);
+                                    const escapedWords = words
+                                        .map((w) => {
+                                            const clean = w.startsWith('#') ? w.slice(1) : w;
+                                            return clean.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                                        })
+                                        .filter(Boolean);
                                     if (escapedWords.length === 0) return;
                                     const regex = new RegExp(`(${escapedWords.join('|')})`, 'gi');
 
                                     if (regex.test(text)) {
-                                         const matches = Array.from(text.matchAll(regex));
-                                         if (matches.length > 0) {
-                                             const fragment = document.createDocumentFragment();
-                                             let lastIndex = 0;
-                                             for (const match of matches) {
-                                                 const index = match.index!;
-                                                 const matchText = match[0];
-                                                 if (index > lastIndex) {
-                                                     fragment.appendChild(document.createTextNode(text.substring(lastIndex, index)));
-                                                 }
-                                                 const mark = document.createElement('mark');
-                                                 mark.className = 'search-highlight';
-                                                 mark.textContent = matchText;
-                                                 fragment.appendChild(mark);
-                                                 lastIndex = index + matchText.length;
-                                             }
-                                             if (lastIndex < text.length) {
-                                                 fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
-                                             }
-                                             const parent = textNode.parentNode;
-                                             if (parent) {
-                                                 parent.replaceChild(fragment, textNode);
-                                             }
-                                         }
+                                        const matches = Array.from(text.matchAll(regex));
+                                        if (matches.length > 0) {
+                                            const fragment = document.createDocumentFragment();
+                                            let lastIndex = 0;
+                                            for (const match of matches) {
+                                                const index = match.index!;
+                                                const matchText = match[0];
+                                                if (index > lastIndex) {
+                                                    fragment.appendChild(
+                                                        document.createTextNode(
+                                                            text.substring(lastIndex, index)
+                                                        )
+                                                    );
+                                                }
+                                                const mark = document.createElement('mark');
+                                                mark.className = 'search-highlight';
+                                                mark.textContent = matchText;
+                                                fragment.appendChild(mark);
+                                                lastIndex = index + matchText.length;
+                                            }
+                                            if (lastIndex < text.length) {
+                                                fragment.appendChild(
+                                                    document.createTextNode(
+                                                        text.substring(lastIndex)
+                                                    )
+                                                );
+                                            }
+                                            const parent = textNode.parentNode;
+                                            if (parent) {
+                                                parent.replaceChild(fragment, textNode);
+                                            }
+                                        }
                                     }
                                 });
                             });
@@ -847,10 +893,11 @@ const postsWithReadingTime = posts.map((post: any) => {
                         const tagElements = element.querySelectorAll('.post-card-tag');
                         tagElements.forEach((tagEl) => {
                             const tagVal = tagEl.getAttribute('data-tag') || '';
-                            const isTagMatched = words.some(w => {
-                                const cleanW = w.startsWith('#') ? w.slice(1) : w;
-                                return tagVal.includes(cleanW);
-                            }) || activeTag === tagVal;
+                            const isTagMatched =
+                                words.some((w) => {
+                                    const cleanW = w.startsWith('#') ? w.slice(1) : w;
+                                    return tagVal.includes(cleanW);
+                                }) || activeTag === tagVal;
 
                             if (isTagMatched && (term || activeTag !== 'all')) {
                                 tagEl.classList.add('matched');
@@ -873,21 +920,44 @@ const postsWithReadingTime = posts.map((post: any) => {
 
                             if (emptyTitle && emptyDesc) {
                                 const q = term.trim().toLowerCase();
-                                if (q.includes('perfect') || q.includes('success') || q.includes('working')) {
-                                    emptyTitle.textContent = "Error: Success Not Found.";
-                                    emptyDesc.textContent = "We don't log easy wins here. Search for a bug, a crash, or a late-night lesson instead — that's where the real story is.";
-                                } else if (q.includes('rust') || q.includes('wasm') || q.includes('cpp')) {
-                                    emptyTitle.textContent = "Compiler was too fast, buddy.";
-                                    emptyDesc.textContent = "No compiler panic reports found matching that. Try searching for 'orbital' or 'mechanics' to see my Rust simulation!";
-                                } else if (q.includes('ai') || q.includes('gemini') || q.includes('agent') || q.includes('llm')) {
-                                    emptyTitle.textContent = "The agents are sleeping.";
-                                    emptyDesc.textContent = "No logs match that query. Try searching for 'intelligence' or 'debate' to see the multi-agent console!";
-                                } else if (q.includes('secret') || q.includes('admin') || q.includes('password') || q.includes('flag')) {
-                                    emptyTitle.textContent = "Access Denied.";
-                                    emptyDesc.textContent = "Nice try, buddy. No backdoors here, but you're welcome to audit the open-source code on GitHub.";
+                                if (
+                                    q.includes('perfect') ||
+                                    q.includes('success') ||
+                                    q.includes('working')
+                                ) {
+                                    emptyTitle.textContent = 'Error: Success Not Found.';
+                                    emptyDesc.textContent =
+                                        "We don't log easy wins here. Search for a bug, a crash, or a late-night lesson instead — that's where the real story is.";
+                                } else if (
+                                    q.includes('rust') ||
+                                    q.includes('wasm') ||
+                                    q.includes('cpp')
+                                ) {
+                                    emptyTitle.textContent = 'Compiler was too fast, buddy.';
+                                    emptyDesc.textContent =
+                                        "No compiler panic reports found matching that. Try searching for 'orbital' or 'mechanics' to see my Rust simulation!";
+                                } else if (
+                                    q.includes('ai') ||
+                                    q.includes('gemini') ||
+                                    q.includes('agent') ||
+                                    q.includes('llm')
+                                ) {
+                                    emptyTitle.textContent = 'The agents are sleeping.';
+                                    emptyDesc.textContent =
+                                        "No logs match that query. Try searching for 'intelligence' or 'debate' to see the multi-agent console!";
+                                } else if (
+                                    q.includes('secret') ||
+                                    q.includes('admin') ||
+                                    q.includes('password') ||
+                                    q.includes('flag')
+                                ) {
+                                    emptyTitle.textContent = 'Access Denied.';
+                                    emptyDesc.textContent =
+                                        "Nice try, buddy. No backdoors here, but you're welcome to audit the open-source code on GitHub.";
                                 } else {
-                                    emptyTitle.textContent = "Nothing in the archives, buddy.";
-                                    emptyDesc.textContent = "I either haven't made that mistake yet, or I just haven't written it down. Try checking another keyword.";
+                                    emptyTitle.textContent = 'Nothing in the archives, buddy.';
+                                    emptyDesc.textContent =
+                                        "I either haven't made that mistake yet, or I just haven't written it down. Try checking another keyword.";
                                 }
                             }
                         } else {
@@ -1087,7 +1157,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                     'grep "late-night coding" diary/',
                     'grep "how does pedagogy work?" pedagogy/',
                     'grep -r "state management bug" src/',
-                    'grep "what actually happened..." posts/'
+                    'grep "what actually happened..." posts/',
                 ];
                 let phraseIndex = 0;
                 let charIndex = 0;
@@ -1095,7 +1165,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                 let isFocused = false;
 
                 const typePlaceholder = () => {
-                    if (isFocused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    if (
+                        isFocused ||
+                        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                    ) {
                         return;
                     }
 
@@ -1125,7 +1198,8 @@ const postsWithReadingTime = posts.map((post: any) => {
                 searchInput.addEventListener('focus', () => {
                     isFocused = true;
                     clearTimeout(typingTimeoutId);
-                    searchInput.placeholder = "[ COMMAND CAPTURE ENGAGED // What are you looking for? ]";
+                    searchInput.placeholder =
+                        '[ COMMAND CAPTURE ENGAGED // What are you looking for? ]';
                 });
 
                 searchInput.addEventListener('blur', () => {
@@ -1135,7 +1209,8 @@ const postsWithReadingTime = posts.map((post: any) => {
                         isDeleting = false;
                         typePlaceholder();
                     } else {
-                        searchInput.placeholder = '"Search my diary: a concept, a bug, or a late-night thought..."';
+                        searchInput.placeholder =
+                            '"Search my diary: a concept, a bug, or a late-night thought..."';
                     }
                 });
 
@@ -1147,12 +1222,17 @@ const postsWithReadingTime = posts.map((post: any) => {
                 // Keyboard Navigation
                 searchInput.addEventListener('keydown', (e) => {
                     if (e.key === 'ArrowDown' || e.key === 'Enter') {
-                        const firstVisible = cachedCardsData.find(c => c.element.style.display !== 'none');
+                        const firstVisible = cachedCardsData.find(
+                            (c) => c.element.style.display !== 'none'
+                        );
                         if (firstVisible) {
                             e.preventDefault();
                             firstVisible.element.focus();
                             firstVisible.element.setAttribute('aria-selected', 'true');
-                            searchInput.setAttribute('aria-activedescendant', firstVisible.element.id);
+                            searchInput.setAttribute(
+                                'aria-activedescendant',
+                                firstVisible.element.id
+                            );
                         }
                     }
                     if (e.key === 'Escape') {
@@ -1168,8 +1248,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                 cachedCardsData.forEach(({ element }) => {
                     element.setAttribute('tabindex', '0');
                     element.addEventListener('keydown', (e) => {
-                        const visibleCards = cachedCardsData.filter(c => c.element.style.display !== 'none');
-                        const currentIndex = visibleCards.findIndex(c => c.element === element);
+                        const visibleCards = cachedCardsData.filter(
+                            (c) => c.element.style.display !== 'none'
+                        );
+                        const currentIndex = visibleCards.findIndex((c) => c.element === element);
 
                         if (e.key === 'ArrowDown') {
                             e.preventDefault();
@@ -1178,7 +1260,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                                 nextCard.element.focus();
                                 element.setAttribute('aria-selected', 'false');
                                 nextCard.element.setAttribute('aria-selected', 'true');
-                                searchInput.setAttribute('aria-activedescendant', nextCard.element.id);
+                                searchInput.setAttribute(
+                                    'aria-activedescendant',
+                                    nextCard.element.id
+                                );
                             }
                         } else if (e.key === 'ArrowUp') {
                             e.preventDefault();
@@ -1187,7 +1272,10 @@ const postsWithReadingTime = posts.map((post: any) => {
                             if (prevCard) {
                                 prevCard.element.focus();
                                 prevCard.element.setAttribute('aria-selected', 'true');
-                                searchInput.setAttribute('aria-activedescendant', prevCard.element.id);
+                                searchInput.setAttribute(
+                                    'aria-activedescendant',
+                                    prevCard.element.id
+                                );
                             } else {
                                 searchInput.focus();
                                 searchInput.setAttribute('aria-activedescendant', '');

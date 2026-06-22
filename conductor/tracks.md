@@ -8,7 +8,7 @@ Completed tracks are archived under [`./tracks/completed/`](./tracks/completed/)
 
 ## Active
 
-*(No active tracks)*
+_(No active tracks)_
 
 ---
 

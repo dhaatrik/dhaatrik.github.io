@@ -22,13 +22,13 @@ export const recommendedBooks: Book[] = [
         title: 'Marketing Management',
         author: 'Philip Kotler',
         link: 'https://www.amazon.in/Marketing-Management-17th-Philip-Kotler/dp/9367138199/',
-        hint: "I used to think marketing was just ads; this book made me understand that product design, pricing, and distribution are all marketing decisions I was already making — just badly.",
+        hint: 'I used to think marketing was just ads; this book made me understand that product design, pricing, and distribution are all marketing decisions I was already making — just badly.',
     },
     {
         title: 'Zero to One',
         author: 'Peter Thiel',
         link: 'https://www.amazon.in/Zero-One-Notes-Startups-Future/dp/0804139296',
-        hint: "The chapter on secrets hit me harder than most: every project I actually care about started with something I believed that the people around me thought was wrong.",
+        hint: 'The chapter on secrets hit me harder than most: every project I actually care about started with something I believed that the people around me thought was wrong.',
     },
     {
         title: 'The Pragmatic Programmer',
@@ -40,19 +40,19 @@ export const recommendedBooks: Book[] = [
         title: 'Deep Work',
         author: 'Cal Newport',
         link: 'https://www.amazon.in/Deep-Work-Rules-Focused-Success/dp/0349411905',
-        hint: "Gave me the vocabulary to explain why my best engineering sessions happen between 11pm and 2am — and then made me build a schedule to stop needing to do that.",
+        hint: 'Gave me the vocabulary to explain why my best engineering sessions happen between 11pm and 2am — and then made me build a schedule to stop needing to do that.',
     },
     {
         title: 'Atomic Habits',
         author: 'James Clear',
         link: 'https://www.amazon.in/Atomic-Habits-James-Clear/dp/1847941834',
-        hint: "The one that made me stop heroically working at midnight and start building 20-minute morning reading blocks instead — identity-based habits actually stuck.",
+        hint: 'The one that made me stop heroically working at midnight and start building 20-minute morning reading blocks instead — identity-based habits actually stuck.',
     },
     {
         title: 'Clean Code',
         author: 'Robert C. Martin',
         link: 'https://www.amazon.in/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882',
-        hint: "I disagree with about a third of the specific advice now, but reading it in my first year rewired how I think about naming things — worth it for that alone.",
+        hint: 'I disagree with about a third of the specific advice now, but reading it in my first year rewired how I think about naming things — worth it for that alone.',
     },
     {
         title: 'The Lean Startup',

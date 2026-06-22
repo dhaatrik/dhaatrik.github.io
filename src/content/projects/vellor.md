@@ -33,9 +33,9 @@ React 19 + Zustand 5 gave me fine-grained reactivity without dragging in a heavy
 
 ## Fuckups & learnings
 
-- **I underestimated how much tutors care about *feel*.** A tool can be technically offline-first and still feel broken if a sort takes 800ms. Performance isn't vanity here; it's trust.
+- **I underestimated how much tutors care about _feel_.** A tool can be technically offline-first and still feel broken if a sort takes 800ms. Performance isn't vanity here; it's trust.
 - **Gamification is easy to overdo.** I wanted the UI to feel alive — progress cues, satisfying micro-interactions — but not like a mobile game. Tailwind let me iterate fast; restraint took longer.
-- **Local-only means *you* own backups.** No server also means no safety net. From the build, I learned to treat export/restore as a first-class feature, not a v2 afterthought.
+- **Local-only means _you_ own backups.** No server also means no safety net. From the build, I learned to treat export/restore as a first-class feature, not a v2 afterthought.
 - **IndexedDB is powerful and annoying.** Transactions, schema migrations, and error handling in private browsing modes — I hit all of it. The lesson: wrap storage in one layer and never let components talk to the DB directly.
 
 ## Where it stands now

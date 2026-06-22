@@ -8,7 +8,7 @@ order: 11
 tags: ['TypeScript', 'Remark', 'KaTeX', 'jsPDF']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // VERSION: V1.1.0 // EXPORT: PDF'
-fuckup_teaser: "I trusted headless CSS layout rendering too much—my KaTeX equations looked clean in the DOM but completely vanished in the printed PDF export."
+fuckup_teaser: 'I trusted headless CSS layout rendering too much—my KaTeX equations looked clean in the DOM but completely vanished in the printed PDF export.'
 ---
 
 ## SYS.STATUS: v1.1.0 stable — Remark pipeline, KaTeX, highlight.js, PDF export all shipping

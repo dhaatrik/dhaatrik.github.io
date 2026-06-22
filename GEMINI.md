@@ -6,12 +6,12 @@
 
 ## Skill map (GEMINI rules → agent skills)
 
-| Topic | Skill |
-|-------|-------|
-| SEO, AEO, GEO, LLM visibility, `llms.txt`, robots, JSON-LD strategy | [`dhaatrik-seo-legacy`](.agents/skills/dhaatrik-seo-legacy/SKILL.md) |
-| Astro JSON-LD injection, `BaseHead`, sitemap, static files | [`dhaatrik-astro-site`](.agents/skills/dhaatrik-astro-site/SKILL.md) |
+| Topic                                                                   | Skill                                                                        |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| SEO, AEO, GEO, LLM visibility, `llms.txt`, robots, JSON-LD strategy     | [`dhaatrik-seo-legacy`](.agents/skills/dhaatrik-seo-legacy/SKILL.md)         |
+| Astro JSON-LD injection, `BaseHead`, sitemap, static files              | [`dhaatrik-astro-site`](.agents/skills/dhaatrik-astro-site/SKILL.md)         |
 | Transmission metadata blocks, Mission Report structure, tables/diagrams | [`dhaatrik-mission-report`](.agents/skills/dhaatrik-mission-report/SKILL.md) |
-| Honest voice in meta, schema prose, llms summaries | [`dhaatrik-writing-style`](.agents/skills/dhaatrik-writing-style/SKILL.md) |
+| Honest voice in meta, schema prose, llms summaries                      | [`dhaatrik-writing-style`](.agents/skills/dhaatrik-writing-style/SKILL.md)   |
 
 ## Quick rules (summary)
 

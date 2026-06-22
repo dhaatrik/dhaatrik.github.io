@@ -1,17 +1,17 @@
 ---
 name: dhaatrik-seo-legacy
 description: >
-  Use for SEO, AEO, GEO, and LLM visibility on dhaatrik.github.io — meta titles/descriptions,
-  JSON-LD, Open Graph, llms.txt, llms-full.txt, robots.txt, sitemap/RSS, semantic HTML,
-  FAQ schema, transmission discoverability, and honest long-term findability. Triggers: SEO,
-  AEO, GEO, meta tags, structured data, llms.txt, LLM visibility, answer engine, generative
-  search, robots.txt, JSON-LD, OG image, discoverability. Pair with dhaatrik-writing-style,
-  dhaatrik-mission-report, dhaatrik-astro-site, dhaatrik-visual-system.
+    Use for SEO, AEO, GEO, and LLM visibility on dhaatrik.github.io — meta titles/descriptions,
+    JSON-LD, Open Graph, llms.txt, llms-full.txt, robots.txt, sitemap/RSS, semantic HTML,
+    FAQ schema, transmission discoverability, and honest long-term findability. Triggers: SEO,
+    AEO, GEO, meta tags, structured data, llms.txt, LLM visibility, answer engine, generative
+    search, robots.txt, JSON-LD, OG image, discoverability. Pair with dhaatrik-writing-style,
+    dhaatrik-mission-report, dhaatrik-astro-site, dhaatrik-visual-system.
 ---
 
 # Dhaatrik SEO Legacy Skill — Honest Discoverability (SEO + AEO + GEO + LLM)
 
-**Core Purpose:** In 5–20 years, curious engineers should still find these honest transmissions via search engines *and* AI answer systems. Prioritize authentic discoverability over vanity metrics. Canonical rules also lived in [`GEMINI.md`](../../../GEMINI.md) — this skill is the agent-executable version.
+**Core Purpose:** In 5–20 years, curious engineers should still find these honest transmissions via search engines _and_ AI answer systems. Prioritize authentic discoverability over vanity metrics. Canonical rules also lived in [`GEMINI.md`](../../../GEMINI.md) — this skill is the agent-executable version.
 
 Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 
@@ -47,9 +47,9 @@ Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 
 Whenever you add or modify a **page, section, blog post, or project**:
 
-| File | Update |
-|------|--------|
-| [`public/llms.txt`](../../../public/llms.txt) | Short index entry (title + one-line honest description + URL) |
+| File                                                    | Update                                                             |
+| ------------------------------------------------------- | ------------------------------------------------------------------ |
+| [`public/llms.txt`](../../../public/llms.txt)           | Short index entry (title + one-line honest description + URL)      |
 | [`public/llms-full.txt`](../../../public/llms-full.txt) | Fuller summary: key sections, entities, learnings, technical notes |
 
 **Checklist after any new route or transmission:**
@@ -83,11 +83,11 @@ Every route must pass `title` and `description` to [`BaseHead`](../../../src/com
 
 ### The heading rule (resolves Mission Report vs FAQ conflict)
 
-| Layer | Format | Example |
-|-------|--------|---------|
-| **Body prose (H2/H3)** | Mission Report structure | `## Why I started this`, `## Fuckups & learnings` |
-| **JSON-LD / FAQPage / llms-full** | Natural-language Q&A | "Why did DBS Classes stop uploading?" |
-| **Transmission metadata block** | Terminal quick-reference at top | See `dhaatrik-mission-report` |
+| Layer                             | Format                          | Example                                           |
+| --------------------------------- | ------------------------------- | ------------------------------------------------- |
+| **Body prose (H2/H3)**            | Mission Report structure        | `## Why I started this`, `## Fuckups & learnings` |
+| **JSON-LD / FAQPage / llms-full** | Natural-language Q&A            | "Why did DBS Classes stop uploading?"             |
+| **Transmission metadata block**   | Terminal quick-reference at top | See `dhaatrik-mission-report`                     |
 
 **Do not** turn entire posts into FAQ-style H3 question headings. Use question phrasing in **schema and LLM index files**, not as the main narrative structure.
 
@@ -138,13 +138,14 @@ Build JSON in frontmatter script; inject safely — **never** use `define:vars` 
 ```astro
 ---
 const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Dhaatrik Chowdhury',
-  url: 'https://dhaatrik.github.io',
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Dhaatrik Chowdhury',
+    url: 'https://dhaatrik.github.io',
 };
 const jsonLd = JSON.stringify(schema).replace(/</g, '\\u003c');
 ---
+
 <script type="application/ld+json" set:html={jsonLd} />
 ```
 

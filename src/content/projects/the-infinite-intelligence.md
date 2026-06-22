@@ -1,6 +1,6 @@
 ---
 title: 'Infinite Intelligence'
-description: "Multiple Gemini agents debate a problem before you get a final answer — not one model talking to itself in a mirror."
+description: 'Multiple Gemini agents debate a problem before you get a final answer — not one model talking to itself in a mirror.'
 logo: '../../assets/the-infinite-intelligence.png'
 githubUrl: 'https://github.com/dhaatrik/the-infinite-intelligence'
 progress: 'Parallel Collaboration, Sequential Workflows, and Round-Robin Debate'
@@ -8,7 +8,7 @@ order: 4
 tags: ['React 19', 'TypeScript 5.8', 'Google Gemini AI', 'Vite 6']
 pain_level: 3
 telemetry: 'STATUS: OPERATIONAL // AGENTS: DEBATING // PARALLEL: TRUE'
-fuckup_teaser: "I kicked off a multi-agent debate test loop without a maximum recursion depth block, waking up to a rate-limited API key and a massive bill."
+fuckup_teaser: 'I kicked off a multi-agent debate test loop without a maximum recursion depth block, waking up to a rate-limited API key and a massive bill.'
 ---
 
 ## SYS.STATUS: Council-of-agents pipeline works — Creator, Critic, Synthesizer all shipping
@@ -26,6 +26,7 @@ Not magic. Not "superintelligence." Just **process** applied to models that othe
 I modeled the system as a **state machine**. Agents (Creator, Critic, Synthesizer) pass messages through typed transitions in TypeScript 5.8. Google Gemini handles the roleplay via system instructions — different personas, different jobs.
 
 Three workflow modes shipped from the build:
+
 - **Parallel collaboration** — agents work concurrently where independence helps
 - **Sequential workflows** — strict ordering when each step depends on the last
 - **Round-robin debate** — iterative critique until synthesis

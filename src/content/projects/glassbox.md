@@ -8,7 +8,7 @@ order: 6
 tags: ['TypeScript', 'Node.js', 'VM2', 'Security']
 pain_level: 3
 telemetry: 'STATUS: SHIPPED // VERSION: V2.1.0 // SANDBOX: ISOLATED'
-fuckup_teaser: "I thought my VM2 wrapper boundaries were solid, until I ran a test script that escaped back into my local node environment using prototype pollution."
+fuckup_teaser: 'I thought my VM2 wrapper boundaries were solid, until I ran a test script that escaped back into my local node environment using prototype pollution.'
 ---
 
 ## SYS.STATUS: v2.1.0 stable — scripts run isolated, host stays clean, telemetry logs ship

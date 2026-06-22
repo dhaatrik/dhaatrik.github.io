@@ -133,9 +133,7 @@ test.describe('Portfolio UI Interactivity', () => {
         await expect(searchInput).toHaveValue('nonexistent');
     });
 
-    test('Transmission search keyboard navigation should focus first result', async ({
-        page,
-    }) => {
+    test('Transmission search keyboard navigation should focus first result', async ({ page }) => {
         await page.goto('/transmissions/');
         const searchInput = page.locator('#search-logs');
         await searchInput.fill('teaching');
@@ -298,6 +296,4 @@ test.describe('Portfolio UI Interactivity', () => {
             expect(currentText.length).toBeGreaterThan(0);
         }).toPass({ timeout: 6000 });
     });
-
 });
-

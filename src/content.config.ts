@@ -46,9 +46,7 @@ const projects = defineCollection({
             order: z.number().default(0),
             transmissionTag: z.string().optional(),
             // Mission-control telemetry line (single source of truth for card + detail UI)
-            telemetry: z
-                .string()
-                .regex(/^STATUS:\s*.+/i, 'telemetry must start with STATUS:'),
+            telemetry: z.string().regex(/^STATUS:\s*.+/i, 'telemetry must start with STATUS:'),
             // Mission Report fields: honest fuckup teaser and build pain rating (1–5)
             fuckup_teaser: z.string().min(10),
             pain_level: z.number().min(1).max(5),

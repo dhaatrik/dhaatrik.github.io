@@ -91,7 +91,15 @@ const breadcrumbSchema = JSON.stringify({
 <!doctype html>
 <html lang="en" class="scroll-smooth">
     <head>
-        <BaseHead title={title} description={description} image={heroImage} type="article" pubDate={pubDate} updatedDate={updatedDate} keywords={tags} />
+        <BaseHead
+            title={title}
+            description={description}
+            image={heroImage}
+            type="article"
+            pubDate={pubDate}
+            updatedDate={updatedDate}
+            keywords={tags}
+        />
         <!-- Article-specific JSON-LD -->
         <script is:inline type="application/ld+json" set:html={articleSchema} />
         <!-- Breadcrumb JSON-LD -->
@@ -114,7 +122,11 @@ const breadcrumbSchema = JSON.stringify({
         </div>
 
         <Header />
-        <main id="main-content" tabindex="-1" class="layout-container grow py-(--section-gap-mobile) md:py-(--section-gap-desktop)">
+        <main
+            id="main-content"
+            tabindex="-1"
+            class="layout-container grow py-(--section-gap-mobile) md:py-(--section-gap-desktop)"
+        >
             <div class="blog-reveal blog-reveal-1 mb-8">
                 <a
                     href="/transmissions"
@@ -252,7 +264,7 @@ const breadcrumbSchema = JSON.stringify({
 
                     <div id="rendered-content-container" class="blog-reveal blog-reveal-2">
                         <div
-                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 marker:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800"
+                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 marker:text-(--accent)"
                         >
                             <slot />
                         </div>
@@ -499,7 +511,7 @@ const breadcrumbSchema = JSON.stringify({
                 {
                     headings.length > 0 ? (
                         <aside class="blog-reveal blog-reveal-4 sticky top-24 hidden max-h-[calc(100vh-8rem)] w-full overflow-y-auto pr-2 lg:block">
-                            <div class="rounded-xl p-4 premium-glass">
+                            <div class="premium-glass rounded-xl p-4">
                                 <h3 class="mb-4 flex items-center gap-2 font-mono text-[10px] tracking-widest text-slate-500 uppercase">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"

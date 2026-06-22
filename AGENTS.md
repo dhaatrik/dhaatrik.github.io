@@ -6,13 +6,13 @@ Quick reference for SEO/AEO/GEO/LLM rules: [`GEMINI.md`](GEMINI.md) → canonica
 
 ## Skill routing
 
-| Task | Skill(s) to load |
-|------|------------------|
-| Any user-facing copy (tone, voice, microcopy) | [`dhaatrik-writing-style`](.agents/skills/dhaatrik-writing-style/SKILL.md) |
-| Project pages, transmissions, Mission Report structure | [`dhaatrik-mission-report`](.agents/skills/dhaatrik-mission-report/SKILL.md) + `dhaatrik-writing-style` |
-| Astro code, components, builds, tests, performance | [`dhaatrik-astro-site`](.agents/skills/dhaatrik-astro-site/SKILL.md) |
-| UI polish, glassmorphism, tokens, animations | [`dhaatrik-visual-system`](.agents/skills/dhaatrik-visual-system/SKILL.md) + `dhaatrik-astro-site` |
-| SEO, AEO, GEO, LLM visibility, meta, JSON-LD, `llms.txt` | [`dhaatrik-seo-legacy`](.agents/skills/dhaatrik-seo-legacy/SKILL.md) + `dhaatrik-writing-style` |
+| Task                                                     | Skill(s) to load                                                                                        |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Any user-facing copy (tone, voice, microcopy)            | [`dhaatrik-writing-style`](.agents/skills/dhaatrik-writing-style/SKILL.md)                              |
+| Project pages, transmissions, Mission Report structure   | [`dhaatrik-mission-report`](.agents/skills/dhaatrik-mission-report/SKILL.md) + `dhaatrik-writing-style` |
+| Astro code, components, builds, tests, performance       | [`dhaatrik-astro-site`](.agents/skills/dhaatrik-astro-site/SKILL.md)                                    |
+| UI polish, glassmorphism, tokens, animations             | [`dhaatrik-visual-system`](.agents/skills/dhaatrik-visual-system/SKILL.md) + `dhaatrik-astro-site`      |
+| SEO, AEO, GEO, LLM visibility, meta, JSON-LD, `llms.txt` | [`dhaatrik-seo-legacy`](.agents/skills/dhaatrik-seo-legacy/SKILL.md) + `dhaatrik-writing-style`         |
 
 ### Combined workflows
 
@@ -26,13 +26,13 @@ Slash commands (Grok): `/dhaatrik-writing-style`, `/dhaatrik-mission-report`, `/
 
 ## Project skills (all)
 
-| Skill | Purpose |
-|-------|---------|
-| [`dhaatrik-writing-style`](.agents/skills/dhaatrik-writing-style/SKILL.md) | Brotherly-teacher voice, first-person diary, AEO voice guardrails |
-| [`dhaatrik-mission-report`](.agents/skills/dhaatrik-mission-report/SKILL.md) | Mission Report structure, metadata blocks, tables/diagrams |
-| [`dhaatrik-astro-site`](.agents/skills/dhaatrik-astro-site/SKILL.md) | Astro 6 architecture, JSON-LD injection, BaseHead, testing |
-| [`dhaatrik-visual-system`](.agents/skills/dhaatrik-visual-system/SKILL.md) | Sci-fi mission-control aesthetic, tokens, OG image design |
-| [`dhaatrik-seo-legacy`](.agents/skills/dhaatrik-seo-legacy/SKILL.md) | SEO + AEO + GEO + LLM visibility (`llms.txt`, robots, schema) |
+| Skill                                                                        | Purpose                                                           |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| [`dhaatrik-writing-style`](.agents/skills/dhaatrik-writing-style/SKILL.md)   | Brotherly-teacher voice, first-person diary, AEO voice guardrails |
+| [`dhaatrik-mission-report`](.agents/skills/dhaatrik-mission-report/SKILL.md) | Mission Report structure, metadata blocks, tables/diagrams        |
+| [`dhaatrik-astro-site`](.agents/skills/dhaatrik-astro-site/SKILL.md)         | Astro 6 architecture, JSON-LD injection, BaseHead, testing        |
+| [`dhaatrik-visual-system`](.agents/skills/dhaatrik-visual-system/SKILL.md)   | Sci-fi mission-control aesthetic, tokens, OG image design         |
+| [`dhaatrik-seo-legacy`](.agents/skills/dhaatrik-seo-legacy/SKILL.md)         | SEO + AEO + GEO + LLM visibility (`llms.txt`, robots, schema)     |
 
 Index: [`.agents/README.md`](.agents/README.md)
 
