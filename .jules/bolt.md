@@ -127,3 +127,8 @@
 
 **Learning:** Using `String.prototype.split('')` chained with `.map()` and `.join('')` inside a high-frequency `setInterval` loop (e.g., a 30ms decode animation) for multiple elements simultaneously creates massive unnecessary garbage collection (GC) pressure. It forces the browser to rapidly allocate and discard arrays and closures every frame, which can cause micro-stutters.
 **Action:** Always replace array manipulation with simple string concatenation in continuous animation loops to minimize object allocations and keep the main thread smooth.
+
+## 2025-02-14 - Concurrent Collection Fetching in global layouts
+
+**Learning:** Using sequential `await getCollection()` calls in global layouts (like `Footer.astro`) causes linear file I/O wait times during SSG for every single page that includes the layout, compounding the performance penalty.
+**Action:** Always fetch multiple independent collections concurrently using `Promise.all()` to parallelize file reads and improve overall page build speed, especially in highly-reused layout components.
