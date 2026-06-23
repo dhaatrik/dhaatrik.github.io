@@ -569,6 +569,9 @@ import dbImage from '../assets/DB.jpeg';
                 // ⚡ Bolt: Replace querySelectorAll with getElementsByClassName for faster DOM traversal
                 const tabs = Array.from(document.getElementsByClassName('subject-tab'));
                 const cards = Array.from(document.getElementsByClassName('video-card'));
+                const emptyState = document.getElementById('video-empty-state');
+                const announcer = document.getElementById('video-announcer');
+                const clearFiltersBtn = document.getElementById('video-clear-filters-btn');
 
                 if (tabs.length === 0) return;
 
