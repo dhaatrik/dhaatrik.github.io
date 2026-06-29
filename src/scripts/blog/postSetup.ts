@@ -104,11 +104,20 @@ export async function setupPost() {
                 const textSpan = exportJsonBtn.querySelector('span');
                 if (textSpan) {
                     const originalText = textSpan.innerText;
+                    const originalAriaLabel = exportJsonBtn.getAttribute('aria-label');
+
                     textSpan.innerText = '~ $ export_completed';
                     textSpan.classList.add('text-(--accent)');
+                    exportJsonBtn.setAttribute('aria-label', 'Export completed');
+
                     setTimeout(() => {
                         textSpan.innerText = originalText;
                         textSpan.classList.remove('text-(--accent)');
+                        if (originalAriaLabel) {
+                            exportJsonBtn.setAttribute('aria-label', originalAriaLabel);
+                        } else {
+                            exportJsonBtn.removeAttribute('aria-label');
+                        }
                     }, 2000);
                 }
             },
@@ -299,11 +308,20 @@ export async function setupPost() {
                 const textSpan = exportOfflineBtn.querySelector('span');
                 if (textSpan) {
                     const originalText = textSpan.innerText;
+                    const originalAriaLabel = exportOfflineBtn.getAttribute('aria-label');
+
                     textSpan.innerText = '~ $ export_archived';
                     textSpan.classList.add('text-(--accent)');
+                    exportOfflineBtn.setAttribute('aria-label', 'Export archived');
+
                     setTimeout(() => {
                         textSpan.innerText = originalText;
                         textSpan.classList.remove('text-(--accent)');
+                        if (originalAriaLabel) {
+                            exportOfflineBtn.setAttribute('aria-label', originalAriaLabel);
+                        } else {
+                            exportOfflineBtn.removeAttribute('aria-label');
+                        }
                     }, 2000);
                 }
             },
