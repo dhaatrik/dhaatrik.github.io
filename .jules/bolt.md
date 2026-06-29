@@ -105,3 +105,7 @@
 ## 2026-06-22 - Concurrent Collection Fetching in global layouts
 **Learning:** Using sequential `await getCollection()` calls in global layouts (like `Footer.astro`) causes linear file I/O wait times during SSG for every single page that includes the layout, compounding the performance penalty.
 **Action:** Always fetch multiple independent collections concurrently using `Promise.all()` to parallelize file reads and improve overall page build speed, especially in highly-reused layout components.
+
+## 2026-06-29 - Optimize telemetry string parsing in SSG loops
+**Learning:** Performing string splitting (`split`) inside `.map` loops during SSG causes unnecessary garbage collection (GC) overhead and redundant operations, especially when the same string is processed multiple times.
+**Action:** Move the splitting logic into a shared parser utility (`parseTelemetry`) to perform the operation once per string and return the cached parts, avoiding repetitive allocations.

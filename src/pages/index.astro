@@ -641,11 +641,9 @@ const webSiteSchema = JSON.stringify({
                     {
                         projects.map((project: ProjectEntry) => {
                             const telemetryStr = project.data.telemetry;
-                            const [telemetryFirst, ...telemetryRestParts] =
-                                telemetryStr.split('//');
-                            const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const parsed = parseTelemetry(telemetryStr);
+                            const { telemetryFirst, telemetryRest } = parsed;
                             return (
                                 <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
                                     <div class="hologram-overlay" />

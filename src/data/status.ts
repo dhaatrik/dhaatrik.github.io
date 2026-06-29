@@ -1,7 +1,13 @@
 export const currentLearning =
     'Soil chemistry & crop physiology — understanding microbiology, climate variables, and seed biotechnology from first principles.';
 
+const parseTelemetryCache = new Map();
+
 export const parseTelemetry = (telemetryStr: string) => {
+    if (parseTelemetryCache.has(telemetryStr)) {
+        return parseTelemetryCache.get(telemetryStr);
+    }
+
     const match = telemetryStr.match(/STATUS:\s*([A-Z0-9_.-]+)/i);
     const status = match ? match[1].toUpperCase() : 'OPERATIONAL';
 
@@ -28,12 +34,21 @@ export const parseTelemetry = (telemetryStr: string) => {
         textClass = 'text-red-500 dark:text-red-400';
     }
 
-    return {
+    const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
+    const telemetryRest = telemetryRestParts.join(' // ');
+
+    const result = {
         colorClass,
         textClass,
         badgeText: `[ ${badgeText} ]`,
         status,
+        telemetryFirst,
+        telemetryRest,
     };
+
+    parseTelemetryCache.set(telemetryStr, result);
+
+    return result;
 };
 
 export const getPainLevelLabel = (level: number): string => {
