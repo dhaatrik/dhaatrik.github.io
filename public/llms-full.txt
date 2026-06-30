@@ -240,7 +240,8 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### Vireo Wellness
 - **URL**: https://dhaatrik.github.io/projects/vireo-wellness/
-- **Description**: Client-side health tracker built with HTML/CSS, Vanilla JS, and IndexedDB, ensuring 100% privacy and local-only data persistence.
+- **Description**: Wellness UI demo (v2.0.0) — React 19.1 SPA with mock data: dashboard nutrition stats, meal logging, blood glucose charts (Recharts), simulated Bluetooth device pairing. Permanent dark theme. Not PWA, not IndexedDB persistence, not meditation timer.
+- **Transmission**: https://dhaatrik.github.io/transmissions/vireo-wellness-why-and-what/
 
 ### Bill Express
 - **URL**: https://dhaatrik.github.io/projects/bill-express/
@@ -249,7 +250,8 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### MarkPDF
 - **URL**: https://dhaatrik.github.io/projects/free-markdown-to-pdf-converter/
-- **Description**: Markdown-to-PDF document compiler featuring Remark markdown parsing, CSS formatting, and KaTeX mathematical rendering in the browser.
+- **Description**: Client-only markdown-to-PDF (v1.0.0) — react-markdown + remark-gfm preview, react-syntax-highlighter, typography/margin settings, export via browser print Save as PDF. MIT licensed. No KaTeX, no jsPDF, no server.
+- **Transmissions**: https://dhaatrik.github.io/transmissions/markpdf-why-and-what/ , https://dhaatrik.github.io/transmissions/markpdf-tech-stack/ , https://dhaatrik.github.io/transmissions/markpdf-free-browser-limits/
 
 ### Read Aloud Chrome Extension
 - **URL**: https://dhaatrik.github.io/projects/readaloud_chromeextension/

@@ -43,9 +43,9 @@ Each project page includes: IMPACT.LOG (1–5 neon pain-level bar with ARIA role
 - [Glassbox](https://dhaatrik.github.io/projects/glassbox/): Cyberpunk internal feedback terminal — signals, Kanban neural grid, MoM metrics, Gemini sentiment (v4.2.1). Not VM2 sandbox. Transmission: glassbox-why-and-what.
 - [FinTrack](https://dhaatrik.github.io/projects/expense-vs-investment-tracker/): Offline-first personal finance tracker visualizing expense-vs-investment ratios.
 - [Seamless QR Dining](https://dhaatrik.github.io/projects/seamless-qr-dining/): Real-time restaurant menu, ordering, and admin billing pipeline.
-- [Vireo Wellness](https://dhaatrik.github.io/projects/vireo-wellness/): Client-side health tracker built with HTML/CSS and IndexedDB.
+- [Vireo Wellness](https://dhaatrik.github.io/projects/vireo-wellness/): Wellness UI demo v2.0.0 — mock meals, glucose charts, simulated devices. Not offline PWA/IndexedDB yet. Transmission: vireo-wellness-why-and-what.
 - [Bill Express](https://dhaatrik.github.io/projects/bill-express/): Full-stack India-GST POS — Express + SQLite, inventory, customers, B2B/B2C invoices (v1.0.0). Transmission: bill-express-why-and-what.
-- [MarkPDF](https://dhaatrik.github.io/projects/free-markdown-to-pdf-converter/): Markdown-to-PDF document compiler featuring KaTeX mathematical rendering.
+- [MarkPDF](https://dhaatrik.github.io/projects/free-markdown-to-pdf-converter/): Browser markdown-to-PDF via react-markdown preview and native print export (v1.0.0). No KaTeX/jsPDF. Transmissions: markpdf-why-and-what, tech-stack, free-browser-limits.
 - [Read Aloud Chrome Extension](https://dhaatrik.github.io/projects/readaloud_chromeextension/): Manifest V3 extension wrapping the Web Speech API for custom text-to-speech.
 
 ## Footer Diagnostics (v4.0.1)
