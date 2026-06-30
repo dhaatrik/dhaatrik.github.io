@@ -39,12 +39,12 @@ Each project page includes: IMPACT.LOG (1–5 neon pain-level bar with ARIA role
 - [Vellor](https://dhaatrik.github.io/projects/vellor/): Free MIT-licensed offline tutoring-management PWA — students, lessons, payments, invoices, AES-GCM localStorage. Transmission series: vellor-why-and-what, tech-stack, free-zero-terms.
 - [FuelDrop](https://dhaatrik.github.io/projects/fueldrop/): High-concurrency fuel delivery platform.
 - [The Infinite Intelligence](https://dhaatrik.github.io/projects/the-infinite-intelligence/): Multi-agent AI debate system.
-- [Instant App Opener](https://dhaatrik.github.io/projects/instant-app-opener/): Electron-based local desktop launcher to bypass browser boot latency.
-- [Glassbox](https://dhaatrik.github.io/projects/glassbox/): Minimalist secure VM2-isolated Node.js proxy execution sandbox.
+- [Instant App Opener](https://dhaatrik.github.io/projects/instant-app-opener/): Next.js web app converting social URLs to mobile deep links — copy, Web Share, or QR handoff (v0.2.0). Transmission: instant-app-opener-why-and-what.
+- [Glassbox](https://dhaatrik.github.io/projects/glassbox/): Cyberpunk internal feedback terminal — signals, Kanban neural grid, MoM metrics, Gemini sentiment (v4.2.1). Not VM2 sandbox. Transmission: glassbox-why-and-what.
 - [FinTrack](https://dhaatrik.github.io/projects/expense-vs-investment-tracker/): Offline-first personal finance tracker visualizing expense-vs-investment ratios.
 - [Seamless QR Dining](https://dhaatrik.github.io/projects/seamless-qr-dining/): Real-time restaurant menu, ordering, and admin billing pipeline.
 - [Vireo Wellness](https://dhaatrik.github.io/projects/vireo-wellness/): Client-side health tracker built with HTML/CSS and IndexedDB.
-- [Bill Express](https://dhaatrik.github.io/projects/bill-express/): Fast local PDF billing invoice generator utilizing client-side print layout.
+- [Bill Express](https://dhaatrik.github.io/projects/bill-express/): Full-stack India-GST POS — Express + SQLite, inventory, customers, B2B/B2C invoices (v1.0.0). Transmission: bill-express-why-and-what.
 - [MarkPDF](https://dhaatrik.github.io/projects/free-markdown-to-pdf-converter/): Markdown-to-PDF document compiler featuring KaTeX mathematical rendering.
 - [Read Aloud Chrome Extension](https://dhaatrik.github.io/projects/readaloud_chromeextension/): Manifest V3 extension wrapping the Web Speech API for custom text-to-speech.
 
