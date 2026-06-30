@@ -219,7 +219,8 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### The Infinite Intelligence
 - **URL**: https://dhaatrik.github.io/projects/the-infinite-intelligence/
-- **Description**: Multi-agent AI debate system where multiple AI agents engage in structured parallel debates.
+- **Description**: Client-side BYOK multi-agent council (v4.0.0) — parallel/sequential/round-robin topologies, four-agent default squad, Beta Mode, first-principles phase, HITL steering, session branching, PDF/Markdown export via gemma-4-31b-it. No backend.
+- **Transmissions**: https://dhaatrik.github.io/transmissions/infinite-intelligence-why-and-what/ , https://dhaatrik.github.io/transmissions/infinite-intelligence-tech-stack/ , https://dhaatrik.github.io/transmissions/infinite-intelligence-byok-guardrails/
 
 ### Instant App Opener
 - **URL**: https://dhaatrik.github.io/projects/instant-app-opener/
@@ -233,7 +234,8 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### FinTrack
 - **URL**: https://dhaatrik.github.io/projects/expense-vs-investment-tracker/
-- **Description**: Offline-first personal finance tracker visualizing expense-vs-investment ratios using Chart.js, HTML/CSS, JavaScript, and localStorage.
+- **Description**: Mindful dual-ledger personal finance app (v1.0.0) — expenses vs personal investments, Recharts dashboards, Zustand 5, JSON export/import. Client-side, no bank sync. Not Chart.js.
+- **Transmission**: https://dhaatrik.github.io/transmissions/fintrack-why-and-what/
 
 ### Seamless QR Dining
 - **URL**: https://dhaatrik.github.io/projects/seamless-qr-dining/
@@ -257,7 +259,8 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### Read Aloud Chrome Extension
 - **URL**: https://dhaatrik.github.io/projects/readaloud_chromeextension/
-- **Description**: Manifest V3 Chrome extension wrapping the Web Speech API for custom text-to-speech with speech speed control and shortcut bindings.
+- **Description**: MV3 Chrome extension (v4.0.0) — chrome.tts article reading, Intl.Segmenter sentence split, CSS Custom Highlight API, skip keyboard shortcuts, session persistence across service worker restarts. 59 tests, 141 assertions, CI zip artifact. Not Web Store published.
+- **Transmission**: https://dhaatrik.github.io/transmissions/read-aloud-why-and-what/
 
 ---
 
