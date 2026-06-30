@@ -17,6 +17,7 @@ const blog = defineCollection({
             readingTime: z.string().optional(),
             tags: z.array(z.string()).optional(),
             series: z.string().optional(),
+            seriesOrder: z.number().optional(),
             author: z.string().default('DHAATRIK'),
             clearance: z
                 .enum(['PUBLIC', 'INTERNAL', 'RESTRICTED', 'CONFIDENTIAL', 'LEVEL_4'])

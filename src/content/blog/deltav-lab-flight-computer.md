@@ -9,6 +9,7 @@ clearance: 'PUBLIC'
 readingTime: '8 min'
 hasMath: false
 series: 'DeltaV Lab'
+seriesOrder: 5
 ---
 
 ```
