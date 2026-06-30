@@ -24,8 +24,18 @@ export const fuzzyScore = (query: string, target: string): number => {
     return hits / qGrams.length;
 };
 
+const queryCache = new Map<string, string[]>();
+
 export const fuzzyMatchText = (query: string, text: string, threshold = 0.45): boolean => {
-    const words = query.split(/\s+/).filter(Boolean);
+    // ⚡ Bolt: Cache parsed queries to prevent redundant string splitting and massive GC overhead during filtering loops
+    let words = queryCache.get(query);
+    if (!words) {
+        words = query.split(/\s+/).filter(Boolean);
+        // Keep cache size bounded to prevent memory leaks in edge cases
+        if (queryCache.size > 100) queryCache.clear();
+        queryCache.set(query, words);
+    }
+
     if (words.length === 0) return true;
     return words.every((word) => {
         if (word.startsWith('#')) {

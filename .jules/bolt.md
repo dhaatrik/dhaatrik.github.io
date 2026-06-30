@@ -105,3 +105,6 @@
 ## 2026-06-22 - Concurrent Collection Fetching in global layouts
 **Learning:** Using sequential `await getCollection()` calls in global layouts (like `Footer.astro`) causes linear file I/O wait times during SSG for every single page that includes the layout, compounding the performance penalty.
 **Action:** Always fetch multiple independent collections concurrently using `Promise.all()` to parallelize file reads and improve overall page build speed, especially in highly-reused layout components.
+## 2026-06-25 - Prevent redundant string parsing in client-side search loops
+**Learning:** During client-side filtering, applying a regular expression split (like `query.split(/\s+/)`) repeatedly inside a loop on the identical search query creates unnecessary garbage collection (GC) pressure and slows down filtering.
+**Action:** Always memoize or cache the parsed results of static query strings (e.g., using a bounded `Map`) so the expensive splitting operation is performed only once per unique query, rather than re-computing it on every DOM element evaluated.
