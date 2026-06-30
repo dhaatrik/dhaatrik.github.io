@@ -99,3 +99,29 @@
 .prose blockquote p::after {
     content: "" !important;
 }
+
+/* Client-rendered Mermaid diagrams (remark-mermaid.mjs + postSetup.ts) */
+.prose pre.mermaid,
+.prose .mermaid {
+    margin: 1.75rem 0;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    border-radius: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    background: color-mix(in srgb, var(--accent) 4%, #0b0e14);
+    text-align: center;
+}
+
+.prose pre.mermaid svg,
+.prose .mermaid svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-inline: auto;
+}
+
+/* Shiki github-dark comment tokens fail WCAG AA on #24292e — bump contrast */
+.prose pre.astro-code span[style*='color:#6A737D'],
+.prose pre.astro-code span[style*='color:#6a737d'] {
+    color: #9198a1 !important;
+}

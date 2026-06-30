@@ -2,6 +2,36 @@ import { glossary } from '../../data/glossary';
 
 let postAbortController: AbortController | null = null;
 let tocObserver: IntersectionObserver | null = null;
+let mermaidInitialized = false;
+
+async function setupMermaid(signal: AbortSignal) {
+    const container = document.getElementById('rendered-content-container');
+    if (!container) return;
+
+    const nodes = container.querySelectorAll<HTMLPreElement>(
+        'pre.mermaid:not([data-mermaid-processed])'
+    );
+    if (nodes.length === 0) return;
+
+    try {
+        const mermaid = (await import('mermaid')).default;
+        if (!mermaidInitialized) {
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: 'dark',
+                securityLevel: 'strict',
+                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                flowchart: { curve: 'basis' },
+            });
+            mermaidInitialized = true;
+        }
+        if (signal.aborted) return;
+        await mermaid.run({ nodes: Array.from(nodes) });
+        nodes.forEach((node) => node.setAttribute('data-mermaid-processed', 'true'));
+    } catch (err) {
+        console.warn('Mermaid render failed:', err);
+    }
+}
 
 export async function setupPost() {
     if (postAbortController) {
@@ -523,28 +553,33 @@ export async function setupPost() {
     // 4. Code Block Hacker Polish
     const codeBlocks = document.getElementsByTagName('pre');
     Array.from(codeBlocks).forEach((pre) => {
-        if (pre.parentElement?.classList.contains('code-wrapper-processed')) return;
+        if (pre.classList.contains('mermaid')) return;
 
-        const wrapper = document.createElement('div');
-        wrapper.className =
-            'code-wrapper-processed relative group rounded-lg overflow-hidden border border-slate-700 bg-[#0d1117] my-6 shadow-xl';
+        const existingWrapper = pre.parentElement?.classList.contains('code-wrapper-processed')
+            ? pre.parentElement
+            : null;
 
-        pre.parentNode?.insertBefore(wrapper, pre);
+        const wrapper = existingWrapper ?? document.createElement('div');
+        if (!existingWrapper) {
+            wrapper.className =
+                'code-wrapper-processed relative group rounded-lg overflow-hidden border border-slate-700 bg-[#0d1117] my-6 shadow-xl';
 
-        const codeBlock = pre.querySelector('code');
-        let lang = 'CODE';
-        if (pre.className.includes('language-')) {
-            const match = pre.className.match(/language-(\w+)/);
-            if (match) lang = match[1].toUpperCase();
-        } else if (codeBlock?.className.includes('language-')) {
-            const match = codeBlock.className.match(/language-(\w+)/);
-            if (match) lang = match[1].toUpperCase();
-        }
+            pre.parentNode?.insertBefore(wrapper, pre);
 
-        const header = document.createElement('div');
-        header.className =
-            'flex items-center justify-between px-4 py-2 bg-slate-800/80 border-b border-slate-700 backdrop-blur';
-        header.innerHTML = `
+            const codeBlock = pre.querySelector('code');
+            let lang = 'CODE';
+            if (pre.className.includes('language-')) {
+                const match = pre.className.match(/language-(\w+)/);
+                if (match) lang = match[1].toUpperCase();
+            } else if (codeBlock?.className.includes('language-')) {
+                const match = codeBlock.className.match(/language-(\w+)/);
+                if (match) lang = match[1].toUpperCase();
+            }
+
+            const header = document.createElement('div');
+            header.className =
+                'flex items-center justify-between px-4 py-2 bg-slate-800/80 border-b border-slate-700 backdrop-blur';
+            header.innerHTML = `
                         <div class="flex gap-2 items-center">
                             <div class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
                             <div class="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
@@ -560,11 +595,15 @@ export async function setupPost() {
                         </div>
                     `;
 
-        wrapper.appendChild(header);
-        pre.classList.add('!m-0', '!border-0', '!rounded-none');
-        wrapper.appendChild(pre);
+            wrapper.appendChild(header);
+            pre.classList.add('!m-0', '!border-0', '!rounded-none');
+            wrapper.appendChild(pre);
+        }
 
-        if (codeBlock) {
+        const codeBlock = pre.querySelector('code');
+        const header = wrapper.querySelector(':scope > div');
+
+        if (codeBlock && !existingWrapper) {
             // Fallback line-wrapper for code blocks that do not use Shiki line wrapping natively
             if (codeBlock.getElementsByClassName('line').length === 0) {
                 const rawHtml = codeBlock.innerHTML;
@@ -665,6 +704,9 @@ export async function setupPost() {
             { signal }
         );
     });
+
+    // 3.4 Mermaid diagrams (client-side; remark-mermaid emits <pre class="mermaid">)
+    await setupMermaid(signal);
 
     // 5. Global Glossary Popovers (wrapped in requestIdleCallback to safeguard main-thread responsiveness)
     const initializeGlossary = () => {

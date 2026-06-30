@@ -207,11 +207,23 @@ test.describe('Portfolio UI Interactivity', () => {
         page,
         context,
     }) => {
-        // Grant clipboard permissions for reading
-        await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+        // Headless Chromium may block clipboard APIs; stub for deterministic copy UX checks.
+        await context.addInitScript(() => {
+            let copied = '';
+            Object.defineProperty(navigator, 'clipboard', {
+                value: {
+                    writeText: async (text) => {
+                        copied = text;
+                    },
+                    readText: async () => copied,
+                },
+                configurable: true,
+            });
+        });
 
         // Navigate to a post known to have a code block
         await page.goto('/transmissions/deltav-lab-scrollytelling-demo/');
+        await page.waitForSelector('.code-wrapper-processed .copy-btn', { state: 'visible' });
 
         // Select the first copy button and its corresponding pre element
         const copyBtn = page.locator('.copy-btn').first();
