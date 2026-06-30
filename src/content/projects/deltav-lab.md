@@ -69,6 +69,8 @@ Read these in order if you want the full story:
 1. [Why DeltaV Lab exists and what it actually is](/transmissions/deltav-lab-why-and-what/) — motivation, audience, VAB + Mission Control scope, repo link
 2. [The science inside DeltaV Lab](/transmissions/deltav-lab-science/) — RK4, forces, atmosphere, Tsiolkovsky, DSL, worker architecture (sourced from the sim repo)
 3. [Why it is not professional-grade](/transmissions/deltav-lab-not-professional-grade/) — no published flight V&V, simplified environments, browser limits, gaps from `path_to_perfection.md`
+4. [What is next — roadmap to professional-grade](/transmissions/deltav-lab-whats-next/) — trust ladder, phased V&V/Monte Carlo/HIL plan, commercial requirements
+5. [Native physics core migration](/transmissions/deltav-lab-native-physics-core/) — React/TS UI stays; Rust/C++/Python owns integration and batch runs
 
 Supporting logs:
 

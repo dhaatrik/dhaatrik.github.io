@@ -158,6 +158,8 @@ From `path_to_perfection.md`, ranked implementation order (abridged):
 
 I am working on a browser teaching tool, not a funded space-grade program. The roadmap is aspirational. These transmissions document reality.
 
+For the expanded phased plan — trust ladder, flight V&V gates, Monte Carlo, native core migration, and what commercial teams actually require — read [what is next for DeltaV Lab](/transmissions/deltav-lab-whats-next/) and [native physics core](/transmissions/deltav-lab-native-physics-core/).
+
 ---
 
 ### Closing Transmission
