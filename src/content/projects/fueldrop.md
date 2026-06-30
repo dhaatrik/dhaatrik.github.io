@@ -1,49 +1,80 @@
 ---
 title: 'FuelDrop'
-description: 'A mobile-first fuel delivery app — order from your phone, track the driver live, skip the station detour.'
+description: 'Frontend-only fuel delivery UX demo v3.0.0 — customer ordering, captain dashboard, Leaflet map UI, PWA. Not WebSocket production logistics.'
 logo: '../../assets/fueldrop.png'
 githubUrl: 'https://github.com/dhaatrik/fueldrop'
-progress: 'v3.0.0 High-concurrency React 19 architecture'
+progress: 'v3.0.0 — polished client demo (customer + captain), no backend'
+transmissionTag: 'fueldrop'
 order: 3
-tags: ['React 19', 'TypeScript 5.8', 'Tailwind CSS 4', 'Vite 6']
-pain_level: 4
-telemetry: 'STATUS: SHIPPED // VERSION: V3.0.0 // CONCURRENCY: HIGH'
-fuckup_teaser: "I built a beautiful optimistic UI for orders but skipped the database rollback logic, which left users seeing successful orders that had failed on the server."
+tags: ['React 19', 'TypeScript 5.8', 'Vite 6', 'Tailwind CSS 4', 'Leaflet', 'PWA']
+pain_level: 3
+telemetry: 'STATUS: DEMO // BACKEND: NONE // OTP: SIMULATED_1234'
+fuckup_teaser: "I described WebSocket live tracking and server rollbacks on this site — the repo is a frontend-only demo where optimistic UI runs on mock state with no database to fail."
 ---
 
-## SYS.STATUS: v3.0.0 live — real-time tracking works, route logic still earns its scars
+## SYS.STATUS: v3.0.0 demo — dual-surface fuel UX, simulated auth, no dispatch backend
 
-Refueling is still a destination problem in a world that ships everything else to your door. FuelDrop is my attempt to flip that: treat fuel as a service, coordinate drivers and customers on mobile, and make the wait visible instead of silent.
+[FuelDrop](https://github.com/dhaatrik/fueldrop) is a **frontend-only** React SPA that prototypes on-demand fuel delivery: customer ordering (vehicle garage, liters/rupees, promos, 60s edit grace), **captain dashboard** at `/captain`, fleet mode at `/fleet`, and Leaflet map **presentation** — not live telematics.
 
-## Why I started this
+This page tones down portfolio copy that implied **WebSocket production logistics** and **high-concurrency server architecture**. The README markets boldly; `package.json` is a Vite client with `vite-plugin-pwa`.
 
-I've wasted time circling stations, sitting in queues, and guessing when a delivery would show up for other services — while fuel stayed stuck in the "drive there yourself" era. For fleet operators it's worse: opaque scheduling, no live map, no shared truth between dispatcher and driver.
+## What it is (scope)
 
-I didn't set out to "disrupt petroleum." I wanted a **transparent delivery flow** — order, assign, track, complete — with a UI that doesn't collapse the moment LTE gets flaky.
+| Surface | What you do there |
+|---------|-------------------|
+| **Customer app** | Simulated OTP (`1234`), garage, order flow, promos, emergency surge UI, favorites |
+| **Captain dashboard** | Accept orders, status pipeline, Google Maps navigate link |
+| **Fleet mode** | Bulk multi-vehicle checkout demo |
+| **Map UI** | Leaflet tracking states — client-side demo, not GPS ingest |
+| **PWA** | Installable via vite-plugin-pwa |
 
-## What I tried (and what broke)
+Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Leaflet, Motion, react-hook-form, Zod, Vitest.
 
-**v3.0.0** is built on a high-concurrency React 19 architecture with Vite 6 and TypeScript 5.8. The frontend bet is optimistic UI: when you tap an action, the interface moves immediately; the server catches up or rolls back. That matters on mobile networks where round-trips feel like centuries.
+## Who I built it for
 
-Live driver location runs over **WebSockets**. Getting this right meant more than opening a socket — I had to think about reconnect storms, stale coordinates, and what the map shows when the connection drops mid-route. Early versions either spammed the server or froze the marker; neither is acceptable when a user is staring at "where is my delivery?"
+- Developers studying customer + captain delivery UX in one repo
+- Designers exploring neo-brutalist mobile order flows
+- Forkers wanting MIT-licensed fuel-delivery **UI** starter code
 
-Route calculation and scheduling logic are typed strictly in TypeScript — mission-critical in the sense that a wrong ETA erodes trust fast. Tailwind CSS 4 handled responsive layout without me fighting breakpoint spaghetti on small screens.
-
-The hardest product tension: **fleet scale vs. individual orders**. Same codebase, different concurrency patterns. React 19's concurrent features helped keep the UI responsive when multiple order states update in the same tick.
+**Not for:** production fuel dispatch, WebSocket driver tracking, payments, or regulatory logistics operations.
 
 ## Fuckups & learnings
 
-- **Optimistic UI without a rollback story is just lying beautifully.** From the build, I learned to define failure states as carefully as success animations.
-- **WebSockets are state machines.** Connect, auth, subscribe, heartbeat, reconnect — skip one step and you get ghost drivers on the map.
-- **Mobile-first isn't a CSS prefix.** It's bandwidth assumptions, thumb reach, and what happens when the app resumes from background with a stale socket.
-- **"High-concurrency architecture" is a maintenance commitment**, not a launch headline. v3.0.0 is a structure I can extend; it wasn't free to get here.
+- **Infrastructure fiction on portfolio.** WebSockets, DB rollback, high-concurrency ops — not in repo. Honest pain: optimistic UI on **mock state** without saying "demo."
+- **README vs reality gap.** "Cutting-edge platform" copy outruns the no-backend truth.
+- **Simulated OTP must stay labeled.** `1234` is documented — do not ship unchanged to production.
+- **Captain earnings stub.** README says "Coming Soon" — better than fake ledgers.
 
-## Where it stands now
+## Honest limitations
 
-FuelDrop is at **version 3.0.0**. The platform coordinates real-time scheduling, location dispatch, and route optimization behind a mobile-first interface. Drivers can be tracked live; customers get a flow that feels immediate even when the network isn't.
+| Limitation | Reality |
+|------------|---------|
+| **No backend** | No server, WebSocket, or database in repository |
+| **Simulated auth** | OTP `1234` — not SMS gateway |
+| **No payments** | Checkout UI only |
+| **Map is demo-grade** | Leaflet UI states, not live telematics |
+| **Captain earnings** | Not implemented ("Coming Soon") |
 
-Stack: React 19, TypeScript 5.8, Tailwind CSS 4, Vite 6. It's the most operationally ambitious app in my portfolio — closer to a real logistics product than a weekend utility.
+## Deep-dive transmissions
+
+Read in order:
+
+1. [Why FuelDrop — UX prototype vs real logistics](/transmissions/fueldrop-why-and-what/)
+2. [Tech stack — client-only vs what needs a backend](/transmissions/fueldrop-tech-stack/)
+3. [Open demo, simulated OTP, MIT scope](/transmissions/fueldrop-free-demo-scope/)
+
+## Run it locally
+
+```bash
+git clone https://github.com/dhaatrik/fueldrop.git
+cd fueldrop
+npm install
+npm run dev
+# Customer: http://localhost:3000 — Captain: /captain
+```
+
+Tests: `npm run test` — Vitest. CI on push.
 
 ## Closing transmission
 
-FuelDrop is the project where product and infrastructure argue the loudest. If you care about real-time mobile logistics in the browser, dig into the repo — and tell me where the ETA logic breaks. I already have a list; yours is probably better.
+Polished fuel-delivery **interfaces**, honest mock backend. If you want the WebSocket story I used to tell, read [why-and-what](/transmissions/fueldrop-why-and-what/) for the correction.
