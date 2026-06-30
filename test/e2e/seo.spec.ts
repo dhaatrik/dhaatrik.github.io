@@ -67,12 +67,15 @@ test.describe('SEO and Metadata Verification', () => {
         await expect(ogImage).toHaveAttribute('content', /delta-v-lab/);
 
         await expect(page.locator('text=DeltaV Lab').first()).toBeVisible();
-        await expect(page.locator('a[href="/transmissions/deltav-lab-why-and-what/"]')).toBeVisible();
+        await expect(page.getByRole('link', { name: /PREVIOUS IN SERIES/i })).toBeVisible();
+        await expect(page.getByRole('link', { name: /NEXT IN SERIES/i })).toBeVisible();
         await expect(
-            page.locator('a[href="/transmissions/deltav-lab-not-professional-grade/"]')
-        ).toBeVisible();
-        await expect(page.locator('text=PREVIOUS IN SERIES')).toBeVisible();
-        await expect(page.locator('text=NEXT IN SERIES')).toBeVisible();
+            page.getByRole('link', { name: /PREVIOUS IN SERIES/i })
+        ).toHaveAttribute('href', '/transmissions/deltav-lab-why-and-what/');
+        await expect(page.getByRole('link', { name: /NEXT IN SERIES/i })).toHaveAttribute(
+            'href',
+            '/transmissions/deltav-lab-not-professional-grade/'
+        );
     });
 
     test('robots.txt and sitemap should be reachable and correctly structured', async ({ page }) => {
