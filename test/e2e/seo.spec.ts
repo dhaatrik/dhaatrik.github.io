@@ -34,7 +34,7 @@ test.describe('SEO and Metadata Verification', () => {
     });
 
     test('blog post page should contain article schema and open graph tags', async ({ page }) => {
-        await page.goto('/transmissions/scrollytelling-demo/');
+        await page.goto('/transmissions/deltav-lab-scrollytelling-demo/');
         await page.waitForLoadState('networkidle');
 
         // Check og:type is article
