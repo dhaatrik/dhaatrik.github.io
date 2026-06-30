@@ -1,45 +1,86 @@
 ---
 title: 'Vireo Wellness'
-description: 'An offline-first health journal and meditation timer — your habits stay in your browser, not on my server.'
+description: 'Wellness UI demo v2.0.0 — mock meals, glucose charts, simulated devices. Vision is private offline journal; shipped scope is frontend prototype.'
 logo: '../../assets/vireo-wellness.png'
 githubUrl: 'https://github.com/dhaatrik/vireo-wellness'
-progress: 'PWA ready, works offline with database caching'
+progress: 'v2.0.0 — UI demo with mock data (not offline PWA yet)'
+transmissionTag: 'vireo-wellness'
 order: 9
-tags: ['React', 'PWA', 'IndexedDB', 'Tailwind CSS']
+tags: ['React 19.1', 'TypeScript 5.8', 'Vite 6', 'Tailwind CSS 4', 'Recharts']
 pain_level: 2
-telemetry: 'STATUS: SHIPPED // PWA: INSTALLABLE // OFFLINE: 100PCT'
-fuckup_teaser: "I assumed IndexedDB was always available, unaware that private browsers block storage access—meaning private tabs silently threw errors and lost user data."
+telemetry: 'STATUS: DEMO // DATA: MOCK // PERSISTENCE: NOT_SHIPPED'
+fuckup_teaser: "I described Vireo as an offline PWA with IndexedDB and a meditation timer on this site — the repo ships mock-data UI with simulated Bluetooth and no persistence layer."
 ---
 
-## SYS.STATUS: PWA installable — 100% offline, IndexedDB persistence, export works
+## SYS.STATUS: v2.0.0 demo — polished wellness UI, mock data, simulated devices
 
-Wellness apps want your sleep data on their cloud. Vireo is the opposite: a private journal and meditation timer that never phones home.
+[Vireo Wellness](https://github.com/dhaatrik/vireo-wellness) is a React SPA that demonstrates a calm, mobile-optimized health tracking interface: dashboard nutrition stats, meal logging from a built-in food database, blood glucose charts, and **simulated** Bluetooth device pairing. The upstream README states it is **currently powered by comprehensive mock data**.
 
-## Why I started this
+This page splits **vision** from **shipped** because my portfolio previously claimed IndexedDB, PWA install, and meditation features that are not in the repo.
 
-I wanted to track habits and meditation without creating another account full of sensitive health notes. **Data sovereignty** wasn't a marketing angle — it was the requirement. If I'm logging mood and routines, that stays on my device.
+## Vision (where I want this to go)
 
-## What I tried (and what broke)
+- Private health journal with data on **your** device — no cloud rent on sensitive notes
+- Offline-first PWA after persistence is wired
+- Real device integrations when APIs exist
+- Calm UX without streak-guilt gamification
 
-Built as a PWA with service workers caching assets for instant load. Entries persist in IndexedDB through a thin transactional wrapper — same offline-first muscle memory as Vellor, applied to wellness instead of grades.
+## Shipped today (what v2.0.0 proves)
 
-Dark-mode-first Tailwind UI; meditation timers and log modules as React components. Offline install works; airplane-mode sessions work. Local backup export exists because **no server means you own disaster recovery**.
+| Surface | What you do there |
+|---------|-------------------|
+| **Dashboard** | "Eaten" nutrition summary, interactive blood glucose chart (mock-populated) |
+| **Daily Meals** | Log meals by category; search built-in food DB; view macros |
+| **Devices** | Simulated Bluetooth scan, pairing animation, battery/status display |
+| **Timeline** | Date picker for navigating logs and goals |
+| **Theme** | Permanent dark mode (Tailwind CSS v4) |
 
-IndexedDB schema changes mid-development broke early installs until I treated migrations seriously — lesson imported from other local-first projects.
+Stack: React 19.1, TypeScript 5.8, Vite 6, Tailwind 4, Recharts, Framer Motion, React Router 7, Vitest + Playwright.
 
-Meditation timer logic sounds trivial until you handle background tabs, missed intervals, and "I locked my phone mid-session." I kept timer state in memory with periodic IndexedDB checkpoints so a refresh doesn't erase a 20-minute sit.
+**Not shipped:** `vite-plugin-pwa`, IndexedDB/local persistence, meditation timer, Web Bluetooth, real health backend.
+
+## Who I built it for
+
+- Developers prototyping wellness UI before backend integration
+- Anyone evaluating meal-logging and chart layouts with realistic mock flows
+- Future-me when persistence and PWA plugins get wired
+
+**Not for:** users expecting offline journal persistence today, real CGM/device data, or meditation timer functionality.
 
 ## Fuckups & learnings
 
-- **Wellness UI should be calm, not gamified streak hell.** I biased toward simple logs over dopamine traps.
-- **PWAs still fight iOS quirks.** Test on real devices, not just Chrome desktop.
-- **Export isn't optional** for local-only apps. Users will clear site data eventually.
-- **Habit streaks can guilt-trip.** I logged patterns without punishing broken streaks — wellness apps don't need rage-quit energy.
+- **Portfolio ahead of repo.** IndexedDB, 100% offline, meditation timer — marketing fiction at v2.0.0. README correctly leads with mock data.
+- **Mock data is a design tool, not a privacy product.** Entries do not survive refresh until storage ships.
+- **Simulated Bluetooth teaches UX early.** Pairing flows and status chips without permission dialogs.
+- **Calm UI over streak hell.** Wellness surfaces should not punish broken habits.
 
-## Where it stands now
+## Honest limitations
 
-Vireo Wellness is PWA-ready: offline entry, cached assets, local database wrappers, backup export. Habit journal and meditation timer modules both run without network. No accounts, no sync service, no analytics pipeline on sensitive health notes.
+| Limitation | Reality |
+|------------|---------|
+| **Mock data** | Charts and meals demonstrate UI — not your real health records |
+| **No persistence** | No IndexedDB/localStorage journal in shipped deps |
+| **No PWA** | No `vite-plugin-pwa` in `package.json` |
+| **Simulated devices** | Bluetooth pairing is UI simulation, not Web Bluetooth |
+| **No meditation timer** | Not implemented in this repo |
+
+## Deep-dive transmissions
+
+Read in order for the full story:
+
+1. [Why Vireo — wellness UI today vs the private journal I advertised](/transmissions/vireo-wellness-why-and-what/) — vision vs shipped, mock-data honesty
+
+## Run it locally
+
+```bash
+git clone https://github.com/dhaatrik/vireo-wellness.git
+cd vireo-wellness
+npm install
+npm run dev
+```
+
+Tests: `npm run test` — Vitest. CI: lint → test → build.
 
 ## Closing transmission
 
-Small, private, intentional. If you want a health journal that doesn't rent your data back to you, it's on GitHub.
+Polished surface, honest mock data, simulated devices. The journal I want is coming; the demo I have is already useful for UI iteration. Start with [why-and-what](/transmissions/vireo-wellness-why-and-what/) if you want the full vision-vs-shipped confession.
