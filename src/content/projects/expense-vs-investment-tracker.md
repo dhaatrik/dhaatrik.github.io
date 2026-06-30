@@ -1,43 +1,76 @@
 ---
 title: 'FinTrack'
-description: "A client-side finance logger that splits everyday spending from actual investments — so your net worth isn't hiding in expenses."
+description: 'Client-side dual-ledger finance v1.0.0 — expenses vs personal investments, Recharts dashboards, Zustand, JSON backup. Not Chart.js, not bank sync.'
 logo: '../../assets/fintrack.png'
 githubUrl: 'https://github.com/dhaatrik/expense-vs-investment-tracker'
-progress: 'v1.0.0 released, features interactive portfolio charts'
+progress: 'v1.0.0 — mindful expense vs investment dashboard'
+transmissionTag: 'fintrack'
 order: 7
-tags: ['React', 'Chart.js', 'Zustand', 'Tailwind CSS']
+tags: ['React 19', 'TypeScript 5.8', 'Vite 6', 'Zustand 5', 'Recharts', 'Tailwind CSS 4']
 pain_level: 2
-telemetry: 'STATUS: SHIPPED // VERSION: V1.0.0 // LEDGER: DUAL'
-fuckup_teaser: "I forgot to throttle filter triggers on mobile, causing the entire chart to tear and re-render on older hardware—a laggy 200ms lag I only noticed on actual phones."
+telemetry: 'STATUS: SHIPPED // LEDGER: DUAL // SYNC: JSON_EXPORT'
+fuckup_teaser: "I tagged FinTrack with Chart.js on this site while the repo renders with Recharts — and unthrottled mobile filters once made the whole chart tear and lag 200ms on real phones."
 ---
 
-## SYS.STATUS: v1.0.0 — dual ledger live, charts render, all client-side
+## SYS.STATUS: v1.0.0 shipped — dual ledger, Recharts dashboards, local JSON backup
 
-Most budget apps treat your SIP and your coffee the same way: money out, done. FinTrack separates **depreciating spend** from **wealth-building positions** so you can see what you're actually accumulating.
+[FinTrack](https://github.com/dhaatrik/expense-vs-investment-tracker) separates everyday **expenses** from **personal investments** (courses, health, growth spending) and visualizes the ratio on a Recharts dashboard. Zustand holds app state; README emphasizes **local data ownership** with JSON export/import.
 
-## Why I started this
+This page fixes portfolio drift: tags previously said **Chart.js**; the repo uses **Recharts**.
 
-I was logging investments inside expense sheets because the app I used had one bucket. That made my portfolio invisible next to groceries. I wanted a first-principles view of capital flow — liabilities vs. assets — without exporting CSVs to a spreadsheet every month.
+## What it is (scope)
 
-## What I tried (and what broke)
+| Surface | What you do there |
+|---------|-------------------|
+| **Dashboard** | Expense/investment/income charts and ratios |
+| **Transactions** | Log income and expenses by category |
+| **Investments** | Track personal growth spending separately from burn |
+| **Savings goals** | Visual progress toward financial targets |
+| **Settings** | Currency, categories, themes, JSON backup/restore |
 
-Dual-ledger design: entries tagged by liquidity and appreciation potential. Zustand holds the transaction state with localStorage persistence; Chart.js renders allocation pies and growth curves on the dashboard. Everything recalculates client-side when you add a row.
+Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Zustand 5, Recharts, Motion, Vitest.
 
-Chart responsiveness on mobile was the main friction — default Chart.js configs assume desktop width. Tailwind helped layout; tuning aspect ratios and legend placement fixed the rest.
+Note: `package.json` includes `express` and `better-sqlite3` without README-documented server usage — shipped UX is client-side per upstream docs.
 
-The dashboard shows two stories side by side: what left your wallet this month as pure expense, and what's still working for you as investment principal. Net-worth projection curves are compound-interest math, not bank API magic — I kept assumptions visible so the chart doesn't lie quietly.
+## Who I built it for
+
+- People tired of guilt-based budgeting that lumps SIPs with takeout
+- Users who want finance clarity **without** linking bank accounts
+- Forkers wanting MIT-licensed local-first ledger patterns
+
+**Not for:** automatic bank sync, shared household accounts, or tax filing automation.
 
 ## Fuckups & learnings
 
-- **Categories need opinionated defaults.** Too many buckets and people stop logging.
-- **Client-side projection math must show assumptions**, or compound curves become wishful thinking.
-- **Zustand + localStorage is simple until migration day.** Version your persisted shape early.
-- **Investment tags need examples in the UI.** "Appreciation potential" is vague until you show SIP vs. rent vs. gadgets.
+- **Chart.js tag was wrong.** Repo uses Recharts — portfolio hygiene matters.
+- **Mobile chart lag from filter churn.** Recharts full re-renders hurt on older hardware until inputs were throttled.
+- **Category defaults need opinion.** Too many buckets → people stop logging.
+- **Persisted Zustand shape needs version keys** before schema migrations.
 
-## Where it stands now
+## Honest limitations
 
-v1.0.0 tracks investment-to-expense ratios, renders asset allocation pie charts, and projects net-worth curves entirely in the browser. No backend, no bank sync — intentional scope for people who want clarity without linking their accounts to another fintech.
+| Limitation | Reality |
+|------------|---------|
+| **No bank sync** | Manual entry + JSON import/export |
+| **Local-only** | You own backup discipline |
+| **Orphan server deps** | express/sqlite3 in package.json not documented as shipped |
+| **Projection math** | Client-side assumptions — must stay visible in UI |
+
+## Deep-dive transmissions
+
+1. [Why FinTrack — expenses vs growth spending](/transmissions/fintrack-why-and-what/)
+
+## Run it locally
+
+```bash
+git clone https://github.com/dhaatrik/expense-vs-investment-tracker.git
+cd expense-vs-investment-tracker
+npm install
+npm run dev
+```
+
+Tests: `npm run test` — Vitest.
 
 ## Closing transmission
 
-Not a fintech unicorn. A honest mirror for how you label your own money. Clone it if your budget app keeps swallowing your mutual funds.
+A honest mirror for how you label money — not a neobank. Start with [why-and-what](/transmissions/fintrack-why-and-what/).
