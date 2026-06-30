@@ -214,7 +214,8 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### FuelDrop
 - **URL**: https://dhaatrik.github.io/projects/fueldrop/
-- **Description**: High-concurrency fuel delivery platform. Version 3.0.0 shipped and operational.
+- **Description**: Frontend-only fuel delivery UX demo (v3.0.0) — React 19 SPA with customer ordering, captain dashboard (/captain), fleet mode, Leaflet map UI, vite-plugin-pwa, simulated OTP 1234. No backend, no WebSockets, no payments. MIT licensed.
+- **Transmissions**: https://dhaatrik.github.io/transmissions/fueldrop-why-and-what/ , https://dhaatrik.github.io/transmissions/fueldrop-tech-stack/ , https://dhaatrik.github.io/transmissions/fueldrop-free-demo-scope/
 
 ### The Infinite Intelligence
 - **URL**: https://dhaatrik.github.io/projects/the-infinite-intelligence/
@@ -236,7 +237,8 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### Seamless QR Dining
 - **URL**: https://dhaatrik.github.io/projects/seamless-qr-dining/
-- **Description**: Real-time restaurant menu, ordering, and billing pipeline utilizing WebSockets, Node.js, React, and Tailwind CSS.
+- **Description**: Next.js 16 restaurant ordering demo (v3.0.0) — QR table join (?table=N), customer menu/cart, kitchen dashboard (/kitchen), React Context order sync, simulated OTP, 77 Jest tests. Not WebSocket production infra, no payments, in-memory orders.
+- **Transmissions**: https://dhaatrik.github.io/transmissions/seamless-qr-dining-why-and-what/ , https://dhaatrik.github.io/transmissions/seamless-qr-dining-tech-stack/ , https://dhaatrik.github.io/transmissions/seamless-qr-dining-prototype-honesty/
 
 ### Vireo Wellness
 - **URL**: https://dhaatrik.github.io/projects/vireo-wellness/

@@ -37,12 +37,12 @@ Each project page includes: IMPACT.LOG (1–5 neon pain-level bar with ARIA role
 
 - [DeltaV Lab](https://dhaatrik.github.io/projects/deltav-lab/): Open-source browser rocket sim — VAB, Mission Control, 50Hz RK4 worker, DSL flight computer, FTS, telemetry export. Roadmap transmissions cover professional-grade evolution and native physics core migration.
 - [Vellor](https://dhaatrik.github.io/projects/vellor/): Free MIT-licensed offline tutoring-management PWA — students, lessons, payments, invoices, AES-GCM localStorage. Transmission series: vellor-why-and-what, tech-stack, free-zero-terms.
-- [FuelDrop](https://dhaatrik.github.io/projects/fueldrop/): High-concurrency fuel delivery platform.
+- [FuelDrop](https://dhaatrik.github.io/projects/fueldrop/): Frontend-only fuel delivery UX demo v3.0.0 — customer + captain, Leaflet, PWA, simulated OTP. Not WebSocket logistics. Transmissions: fueldrop-why-and-what, tech-stack, free-demo-scope.
 - [The Infinite Intelligence](https://dhaatrik.github.io/projects/the-infinite-intelligence/): Multi-agent AI debate system.
 - [Instant App Opener](https://dhaatrik.github.io/projects/instant-app-opener/): Next.js web app converting social URLs to mobile deep links — copy, Web Share, or QR handoff (v0.2.0). Transmission: instant-app-opener-why-and-what.
 - [Glassbox](https://dhaatrik.github.io/projects/glassbox/): Cyberpunk internal feedback terminal — signals, Kanban neural grid, MoM metrics, Gemini sentiment (v4.2.1). Not VM2 sandbox. Transmission: glassbox-why-and-what.
 - [FinTrack](https://dhaatrik.github.io/projects/expense-vs-investment-tracker/): Offline-first personal finance tracker visualizing expense-vs-investment ratios.
-- [Seamless QR Dining](https://dhaatrik.github.io/projects/seamless-qr-dining/): Real-time restaurant menu, ordering, and admin billing pipeline.
+- [Seamless QR Dining](https://dhaatrik.github.io/projects/seamless-qr-dining/): Next.js 16 restaurant demo v3.0.0 — QR table join, kitchen dashboard, Context sync (77 tests). Not WebSocket production. Transmissions: seamless-qr-dining-why-and-what, tech-stack, prototype-honesty.
 - [Vireo Wellness](https://dhaatrik.github.io/projects/vireo-wellness/): Wellness UI demo v2.0.0 — mock meals, glucose charts, simulated devices. Not offline PWA/IndexedDB yet. Transmission: vireo-wellness-why-and-what.
 - [Bill Express](https://dhaatrik.github.io/projects/bill-express/): Full-stack India-GST POS — Express + SQLite, inventory, customers, B2B/B2C invoices (v1.0.0). Transmission: bill-express-why-and-what.
 - [MarkPDF](https://dhaatrik.github.io/projects/free-markdown-to-pdf-converter/): Browser markdown-to-PDF via react-markdown preview and native print export (v1.0.0). No KaTeX/jsPDF. Transmissions: markpdf-why-and-what, tech-stack, free-browser-limits.
