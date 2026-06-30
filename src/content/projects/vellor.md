@@ -1,51 +1,99 @@
 ---
 title: 'Vellor'
-description: "A free, open-source tutoring tool that runs in the browser, stores everything locally, and doesn't need a server or a subscription."
+description: 'Free MIT-licensed tutoring-management PWA — students, lessons, payments, invoices, offline on your device. Not note-taking; not SaaS.'
 logo: '../../assets/vellor.png'
 githubUrl: 'https://github.com/dhaatrik/vellor'
-progress: "v4.0.0 'Power-Tutor' Update"
+progress: "v4.2.0 — Power-Tutor era (Tutor OS from v4.0)"
+transmissionTag: 'vellor'
 order: 1
-tags: ['React 19', 'TypeScript 5.7', 'Zustand 5', 'Tailwind CSS 3']
+tags: ['React 19', 'TypeScript 5.7', 'Zustand 5', 'Vite 6', 'Tailwind CSS 3', 'PWA']
 pain_level: 3
-telemetry: 'STATUS: SHIPPED // DB: OFF_LINE_FIRST // SYNC: LOCAL'
-fuckup_teaser: "I got so obsessed with gamifying study schedules that I nearly buried Vellor's note-taking tool under a heavy, distracting RPG-style mobile-game interface."
+telemetry: 'STATUS: SHIPPED // DB: LOCAL_ENCRYPTED // SYNC: MANUAL_EXPORT'
+fuckup_teaser: "I misdocumented Vellor as note-taking with IndexedDB on this site — the repo encrypts to localStorage with AES-GCM, and I nearly buried invoicing under RPG-style gamification chrome."
 ---
 
-## SYS.STATUS: v4.0.0 shipped — offline-first, no backend, still my daily driver for tutoring ops
+## SYS.STATUS: v4.2.0 shipped — offline-first tutoring OS, no backend, still my daily driver
 
-I kept watching independent tutors get squeezed between expensive SaaS platforms and spreadsheets that weren't built for teaching. Vellor is my answer: a browser-based operating system for running a tutoring business without handing student data to someone else's cloud.
+[Vellor](https://github.com/dhaatrik/vellor) is my free, open-source answer for independent tutors squeezed between expensive SaaS platforms and spreadsheets that were never built for teaching. It runs in a browser, installs as a PWA, and keeps student records on **your** machine — encrypted, exportable, deletable.
 
-## Why I started this
+This page is the honest counterweight to README marketing adjectives. Vellor is a **serious solo-tutor operations tool**, not a school LMS, not a note-taking app, and not a replacement for an accountant.
 
-I tutor. I've done it for years. The tools I kept reaching for were either overpriced, bloated with features I'd never use, or quietly shipping student records to remote servers I couldn't audit. I wanted something I could open in any browser, use immediately, and trust with names, grades, and session notes — without a signup wall or a monthly invoice.
+## What it is (scope)
 
-The constraint I set early: **zero server dependency**. If the network dies mid-session, the app should still work. If a tutor wants to run it on a cheap laptop with no internet, that should be fine too.
+Vellor manages the weekly rhythm of a private tutoring business:
 
-## What I tried (and what broke)
+| Surface | What you do there |
+|---------|-------------------|
+| **Dashboard** | Monthly income, unpaid fees, active students, overdue alerts, income charts |
+| **Students** | Roster with parents, rates, subjects, lesson + payment history |
+| **Transactions** | Quick-log lessons, payment statuses (Paid/Due/Partial/Overpaid), bulk actions |
+| **Calendar** | Drag-and-drop scheduling; reschedule prompts on absent/cancelled |
+| **Achievements** | Points, ranks, 25+ badges — optional motivation layer |
+| **Settings** | White-label logo/accent, theme, currency, export/import, secure reset |
 
-I went offline-first from day one. All persistence lives in IndexedDB; state flows through Zustand with local persistence middleware so the UI feels instant on reload.
+v4.0 was the **Tutor OS** pivot. **v4.2.0** adds WhatsApp payment reminders, PDF invoicing, client portals (read-only Base64 URLs), financial forecasting charts, CSV import, keyboard shortcuts (`Ctrl+K`, `Ctrl+L`, `Shift+P`), and proactive offline/backup UX.
 
-The first pain point was **syncing UI state with local writes without jank**. Early versions re-rendered too aggressively when filters or sorts ran on larger student lists. I profiled it, realized I was doing unnecessary work on every keystroke, and tightened the update path so filtering and sorting stay O(N) — which sounds obvious until you're watching a 200-student roster stutter on an old Chromebook.
+## Privacy model (accurate)
 
-The PWA layer was another fight. Service worker caching is great until you ship a breaking schema change and tutors are stuck on a stale bundle. I learned to version the cache aggressively and test cold-start behavior on slow devices, not just my dev machine.
+- **No server** — zero accounts, zero data harvesting, zero subscription
+- **AES-GCM encryption** before writes to `localStorage` (`src/crypto.ts`)
+- **Recovery Key** fallback + JSON export/import
+- **14-day backup reminders** — because local-only means **you** own disaster recovery
 
-React 19 + Zustand 5 gave me fine-grained reactivity without dragging in a heavy data layer. TypeScript 5.7 caught a lot of offline mutation edge cases early — nullable fields that only surface when you're merging partial records from IndexedDB.
+I previously claimed IndexedDB on this site. That was wrong. See the [Power-Tutor mission log](/transmissions/vellor-power-tutor-log/) for the correction.
+
+## Who I built it for
+
+- Independent tutors and private teachers who need rosters, payments, and invoices without SaaS lock-in
+- Educators who work offline or on unreliable Wi-Fi
+- Anyone who wants MIT-licensed code they can audit and fork
+
+**Not for:** multi-teacher franchises needing centralized payroll, or anyone requiring automatic multi-device sync today (roadmap item — manual export/import is the current answer).
 
 ## Fuckups & learnings
 
-- **I underestimated how much tutors care about *feel*.** A tool can be technically offline-first and still feel broken if a sort takes 800ms. Performance isn't vanity here; it's trust.
-- **Gamification is easy to overdo.** I wanted the UI to feel alive — progress cues, satisfying micro-interactions — but not like a mobile game. Tailwind let me iterate fast; restraint took longer.
-- **Local-only means *you* own backups.** No server also means no safety net. From the build, I learned to treat export/restore as a first-class feature, not a v2 afterthought.
-- **IndexedDB is powerful and annoying.** Transactions, schema migrations, and error handling in private browsing modes — I hit all of it. The lesson: wrap storage in one layer and never let components talk to the DB directly.
+- **Wrong storage story on my own portfolio.** IndexedDB sounded plausible; the repo uses encrypted `localStorage`. Dull truth beats gorgeous lies.
+- **Gamification almost ate invoicing.** Confetti and rank chrome crowded the payment path until I demoted celebrations to the Achievements page. Full story: [gamification trap](/transmissions/vellor-gamification-trap/).
+- **Performance is trust.** Virtualized rosters and O(N) filters exist because a stuttering search in front of a parent feels broken.
+- **PWA cache versioning hurts** when schema migrations meet stale service workers — cold-start testing on slow devices is mandatory.
 
-## Where it stands now
+## Honest limitations
 
-Vellor is at **v4.0.0 — the "Power-Tutor" update**. It's a fully usable suite for independent educators: student roster, session tracking, filtering, sorting — all running client-side with no network overhead for core workflows.
+| Limitation | Reality |
+|------------|---------|
+| **Multi-device sync** | Not shipped — export/import or wait for opt-in cloud sync on roadmap |
+| **localStorage size** | Large multi-year rosters need periodic export as archive |
+| **Private browsing** | Storage may not persist — not fixable in-app |
+| **Scope creep pressure** | Every tutor wants different features; OS discipline required |
 
-Stack in production: React 19, Zustand 5, TypeScript 5.7, Tailwind CSS 3. It installs as a PWA, boots fast, and keeps data in the browser where the tutor controls it.
+## Deep-dive transmissions
 
-I'm still iterating on polish and edge cases, but the core bet — **free, private, offline-capable tutoring OS** — holds up.
+Read these in order for the full story:
+
+1. [Why Vellor exists and what it actually is](/transmissions/vellor-why-and-what/) — origin, scope, audience, repo link
+2. [Tech stack rationale with honest tradeoffs](/transmissions/vellor-tech-stack/) — React/Zustand/Vite, localStorage + AES-GCM, what I refused to add
+3. [Why it is free and what "zero terms" means](/transmissions/vellor-free-zero-terms/) — MIT license, no SaaS lock-in, not "no legal text"
+4. [The gamification trap](/transmissions/vellor-gamification-trap/) — when RPG chrome almost buried core ops
+5. [Local-only backup reality](/transmissions/vellor-local-backup-reality/) — no server means you own disaster recovery
+
+Supporting log:
+
+- [Power-Tutor mission log](/transmissions/vellor-power-tutor-log/) — operational diary, storage correction, performance/PWA fights
+
+## Run it locally
+
+```bash
+git clone https://github.com/dhaatrik/vellor.git
+cd vellor
+npm install
+npm run dev
+# Opens http://localhost:5173
+```
+
+Tests: `npm run test` — **64 Vitest test files** at v4.2.0 (478 cases; 63 passed / 1 failed in `DashboardCharts.test.tsx` when I ran main on 2026-07-01). README badge still says 33 — stale. CI: lint → test → build on every push.
 
 ## Closing transmission
 
-If you're a solopreneur teacher tired of renting your own student data, clone the repo and run it locally. No account. No server bill. Just open the tab and teach.
+Clone it. Export your backups. Tell me where gamification still gets in your way. That is the point — free tooling with inspectable code and no tollbooth on student trust.
+
+If you want the origin story, start with [why-and-what](/transmissions/vellor-why-and-what/). If you want the uncomfortable "what happens if I lose my laptop?" answer, read [local backup reality](/transmissions/vellor-local-backup-reality/).
