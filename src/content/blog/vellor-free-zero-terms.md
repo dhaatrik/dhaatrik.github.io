@@ -88,7 +88,7 @@ Zero SaaS terms ≠ legal nothingness. It means **no rent-seeking gate** between
 
 - **"Free" confused people on storage.** Some assumed free = low quality or free = we sell your data. Vellor is free because the marginal cost of copying software is zero and the moral cost of charging tutors for privacy is high — not because I am laundering data.
 - **I once implied IndexedDB and note-taking on this site.** Wrong facts undermine trust faster than a price tag. Corrected in [why-and-what](/transmissions/vellor-why-and-what/) and the [mission log](/transmissions/vellor-power-tutor-log/).
-- **Open source needs tests.** MIT lets you fork; tests let you fork **safely**. The v4.2.0 tree ships **64 Vitest test files** — you can change payment math without guessing. (README badge says 33; actual `vitest run` count is higher — badge is stale.)
+- **Open source needs tests.** MIT lets you fork; tests let you fork **safely**. The v4.2.0 tree ships **64 Vitest test files** (478 cases; one pre-existing failure in `DashboardCharts.test.tsx` when I ran `vitest run` on main). You can change payment math without guessing — and see exactly what is red. (README badge says 33; actual file count is higher — badge is stale.)
 
 ---
 
