@@ -16,6 +16,7 @@ type Props = CollectionEntry<'blog'>['data'] & {
     headings?: { depth: number; slug: string; text: string }[];
     prevPost?: CollectionEntry<'blog'> | null;
     nextPost?: CollectionEntry<'blog'> | null;
+    isSeriesNav?: boolean;
     rawContent?: string;
 };
 
@@ -28,6 +29,7 @@ const {
     headings = [],
     prevPost,
     nextPost,
+    isSeriesNav = false,
     series,
     rawContent = '',
     author,
@@ -431,7 +433,7 @@ const breadcrumbSchema = JSON.stringify({
                                         <div class="bg-grid-motif absolute inset-0 opacity-10 dark:opacity-30" />
                                         <div class="relative z-10 flex h-full flex-col justify-between gap-4">
                                             <span class="font-mono text-[10px] tracking-widest text-slate-400">
-                                                &larr; PREVIOUS LOG
+                                                &larr; {isSeriesNav ? 'PREVIOUS IN SERIES' : 'PREVIOUS LOG'}
                                             </span>
                                             <span class="font-bold text-balance text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
                                                 {prevPost.data.title}
@@ -465,7 +467,7 @@ const breadcrumbSchema = JSON.stringify({
                                         <div class="bg-grid-motif absolute inset-0 opacity-10 dark:opacity-30" />
                                         <div class="relative z-10 flex h-full flex-col items-end justify-between gap-4">
                                             <span class="font-mono text-[10px] tracking-widest text-slate-400">
-                                                NEXT LOG &rarr;
+                                                {isSeriesNav ? 'NEXT IN SERIES' : 'NEXT LOG'} &rarr;
                                             </span>
                                             <span class="font-bold text-balance text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
                                                 {nextPost.data.title}
@@ -569,6 +571,8 @@ const breadcrumbSchema = JSON.stringify({
             import { setupPost, cleanupPost } from '../scripts/blog/postSetup';
             document.addEventListener('astro:page-load', setupPost);
             document.addEventListener('astro:before-preparation', cleanupPost);
+            // Direct loads and Playwright goto do not always receive astro:page-load
+            void setupPost();
         </script>
     </body>
 </html>

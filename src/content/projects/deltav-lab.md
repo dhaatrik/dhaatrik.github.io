@@ -1,51 +1,95 @@
 ---
 title: 'DeltaV Lab'
-description: 'An open-source browser rocket sim with real RK4 orbital mechanics — Kerbal creativity, engineering-grade math, no proprietary license.'
+description: 'Open-source browser rocket sim — VAB, Mission Control, RK4 physics in a Web Worker. Honest about what it teaches and what it cannot certify.'
 logo: '../../assets/delta-v-lab.png'
 githubUrl: 'https://github.com/dhaatrik/professional-rocket-launch-simulation'
-progress: '50Hz deterministic RK4 integration, VAB'
+progress: '50Hz RK4 worker, VAB, DSL flight computer, FTS, telemetry export'
+transmissionTag: 'deltav-lab'
 order: 2
-tags: ['TypeScript', 'Vanilla DOM', 'Web Workers', 'esbuild', 'Vitest']
+tags: ['TypeScript', 'Web Workers', 'SharedArrayBuffer', 'esbuild', 'Vitest']
 pain_level: 4
-telemetry: 'STATUS: OPERATIONAL // SIM: RK4_50HZ // ORBITS: OK'
+telemetry: 'STATUS: OPERATIONAL // SIM: RK4_50HZ // VAB: ONLINE'
 fuckup_teaser: "I initially passed hundreds of small coordinates to the Web Worker every frame, which clogged the thread and destroyed the physics loop's real-time accuracy."
 ---
 
-## SYS.STATUS: Physics loop runs at 50Hz in a Web Worker — VAB works, orbit plots render, still not KSP
+## SYS.STATUS: Browser sandbox with real integrators — not flight-certified software
 
-I love Kerbal Space Program. I also love checking math against analytical solutions. DeltaV Lab is where those two impulses collided: a browser-based launch simulator that doesn't hand-wave gravity or integration, built so students and hobbyists can experiment without STK-level licensing.
+[DeltaV Lab](https://github.com/dhaatrik/professional-rocket-launch-simulation) is my open-source attempt to sit between Kerbal Space Program and proprietary trajectory tools: build a staged rocket in a **Vehicle Assembly Building (VAB)**, launch it, watch telemetry update, and trust that the outcome came from integration — not a scripted success screen.
 
-## Why I started this
+The repo README calls it "engineering-grade." I wrote that README. This project page is the honest counterweight: it is a **serious teaching sandbox**, not something I would hand to a range-safety officer without a validation program I have not built yet.
 
-Spaceflight games teach intuition. Industry aerospace software teaches rigor. The gap between them is huge — and mostly filled with price tags. I wanted a tool I could open in a tab, build a staged vehicle, fire it, and *trust* the trajectory because the integrator is deterministic and testable, not because it looks right.
+## What it is (scope)
 
-The audience I had in mind: researchers prototyping maneuvers, students learning orbital mechanics, and the rest of us who just want to see if our ridiculous asparagus staging idea actually reaches orbit.
+DeltaV Lab splits into two primary experiences, matching the repo structure:
 
-## What I tried (and what broke)
+| Surface | What you do there |
+|---------|-------------------|
+| **VAB** | Stack engines (Merlin, Raptor, RL-10), tanks, avionics, fairings. Live **Δv** and **TWR** calculations as you build. |
+| **Mission Control** | Fly the vehicle: throttle, steer, stage, time-warp, map view. Optional second monitor via `telemetry.html`. |
 
-The core problem is simple and brutal: **heavy math on the browser's main thread kills the UI**. Frame drops during a 50Hz physics tick make the whole thing feel like a broken screensaver.
+Under the hood, physics runs in a **Web Worker** at a fixed **50 Hz** timestep (`FIXED_DT = 0.02` s in `PhysicsWorker.ts`). State sync uses **SharedArrayBuffer** so the main thread paints without blocking integration.
 
-My fix was architectural — offload the entire physics loop to a dedicated Web Worker. The main thread owns the DOM and paint; the worker owns gravity models, RK4 steps, and state propagation. A custom message protocol syncs UI state to the simulation clock at a steady **50Hz**, so the main thread never blocks on integration.
+Beyond raw flight, the repo ships instructor and ops tooling I rarely see in browser demos:
 
-I deliberately kept the main page loop dependency-light: **TypeScript + vanilla DOM**, no React in the hot path. Every framework kilobyte is a millisecond I don't have during orbit projection updates.
+- **DSL flight computer** — `WHEN <condition> THEN <action>` scripts for pitch, throttle, staging, SAS modes
+- **Pre-launch checklist** (`C`) — Go/No-Go validation panel
+- **Flight Termination System** (`T`) — FTS arm/disarm interlock
+- **Fault injector** (`Ctrl+I`) — engine flameouts, sensor glitches, fuel leaks for classroom scenarios
+- **Black box + CSV export** (`R` / `E`) — high-frequency telemetry recording for post-flight analysis
+- **Analysis view** (`analysis.html`) — parse exported flight data
 
-Validation mattered as much as rendering. I wired **Vitest** against analytical cases — standard Keplerian motion, known energy conservation checks — so I could catch integrator drift before it showed up as a pretty but wrong trajectory line. esbuild bundles the worker modules fast enough that iterating doesn't feel like punishment.
+Full keyboard map: [simulation_controls.md](https://github.com/dhaatrik/professional-rocket-launch-simulation/blob/main/simulation_controls.md) in the repo.
 
-The Vehicle Assembly Building (VAB) was its own rabbit hole. Staging logic, mass properties, thrust curves — getting a vehicle from "stack of parts" to "inputs the integrator understands" took more refactoring than the gravity code.
+## Who I built it for
+
+- **Students and hobbyists** who want KSP-style experimentation with math they can audit
+- **Myself** when I need to sanity-check staging logic, Tsiolkovsky budgets, or guidance scripts without STK licensing
+- **Anyone curious** about how browser threading, deterministic integrators, and flight-software-shaped tooling fit together
+
+It is **not** aimed at replacing GMAT, FreeFlyer, or internal corporate dispersion analysis — and [I wrote a whole transmission about why](/transmissions/deltav-lab-not-professional-grade/).
+
+## Physics snapshot (accurate, not marketing)
+
+The simulation is **2D** with inverse-square gravity, exponential atmosphere (scale height 7 km, density LUT up to 200 km), altitude-varying wind layers, simplified Dryden gusts, drag from dynamic pressure, thrust from variable mass with sea-level/vacuum **Isp**, thermal ablation on re-entry, and CP-vs-CoM aerodynamic stability checks.
+
+Integration is **RK4** at 50 Hz in the worker. Orbital elements use Vis-Viva and Keplerian math; orbit prediction reuses the same RK4 core.
+
+That is real physics work. It is also **not** 6DOF attitude dynamics, NRLMSISE-00 atmospheres, or Monte Carlo dispersion. The gap is intentional honesty, not false modesty — see the limitations transmission.
 
 ## Fuckups & learnings
 
-- **Worker communication is a protocol design problem, not a plumbing task.** Early message shapes were too chatty; I batch state updates and keep the tick cadence strict.
-- **Determinism is a feature.** Same inputs, same outputs, every run — that's what makes debugging possible. Non-deterministic "close enough" physics is fine for games; it fails you when you're comparing against textbook equations.
-- **Vanilla DOM scales until it doesn't.** For this scope it was the right call. The lesson from the build: put the framework where reactivity matters, not where you're painting SVG trajectories at fixed intervals.
-- **Tests saved me from elegant wrong math.** An RK4 implementation can look perfect in a blog post and still leak energy. Unit tests against closed-form solutions aren't optional here.
+- **Worker communication is protocol design.** Early versions spammed `postMessage` with chatty per-frame coordinates. Moving to SharedArrayBuffer and batched state snapshots fixed the stutter.
+- **README hype vs. repo reality.** Calling it "hyper-realistic" in marketing copy while `path_to_perfection.md` lists 16 missing professional features taught me to split **implemented rigor** from **industry trust requirements**.
+- **2D is a feature and a ceiling.** It keeps the integrator teachable. It also means roll, yaw coupling, and slosh are out of scope until I do a quaternion rewrite I have not shipped.
 
-## Where it stands now
+## Deep-dive transmissions
 
-DeltaV Lab runs a **50Hz deterministic Runge-Kutta 4th-order (RK4)** integration scheme in a worker thread. You can build stages in the VAB, launch, and see orbit projections and trajectory vectors on screen.
+Read these in order if you want the full story:
 
-It's not a full game. There's no career mode, no explosions with personality. It's a **high-fidelity sandbox** for vehicle design and orbital maneuvers — open source, browser-native, and honest about what the math is doing.
+1. [Why DeltaV Lab exists and what it actually is](/transmissions/deltav-lab-why-and-what/) — motivation, audience, VAB + Mission Control scope, repo link
+2. [The science inside DeltaV Lab](/transmissions/deltav-lab-science/) — RK4, forces, atmosphere, Tsiolkovsky, DSL, worker architecture (sourced from the sim repo)
+3. [Why it is not professional-grade](/transmissions/deltav-lab-not-professional-grade/) — no published flight V&V, simplified environments, browser limits, gaps from `path_to_perfection.md`
+
+Supporting logs:
+
+- [RK4, Web Workers, and the worker-protocol fuckup](/transmissions/deltav-lab-mission-log/) — engineering diary focused on threading, not duplicated physics lectures
+- [Flight computer DSL: teaching autopilot without faking physics](/transmissions/deltav-lab-flight-computer/) — the `WHEN/THEN` guidance language
+- [DeltaV Lab Scrollytelling Demo](/transmissions/deltav-lab-scrollytelling-demo/) — live `Scrollytell` component walkthrough with synced launch telemetry
+
+## Run it locally
+
+```bash
+git clone https://github.com/dhaatrik/professional-rocket-launch-simulation.git
+cd professional-rocket-launch-simulation
+npm install
+npm run dev
+# Open http://localhost:8080 — optional second screen at /telemetry.html
+```
+
+Tests: `npm run test` (Vitest). CI runs on every push.
 
 ## Closing transmission
 
-If you've ever wanted KSP's "what if I strap more fuel to it" energy with integrators you can actually audit, pull the repo. Break my gravity model. Open a PR. That's the point.
+Pull the repo. Break my drag model. Tell me where the 2D assumptions lie. That is the point — dull truth over gorgeous lies.
+
+If you want the threading war stories, start with the [mission log](/transmissions/deltav-lab-mission-log/). If you want the physics derivations, read [the science transmission](/transmissions/deltav-lab-science/). If you want the uncomfortable "would I bet a real launch on this?" answer, that is [the limitations post](/transmissions/deltav-lab-not-professional-grade/).

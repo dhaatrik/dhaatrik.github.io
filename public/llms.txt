@@ -12,19 +12,23 @@
 
 ## Blog Posts (Transmissions)
 
-- [DeltaV Lab Mission Log: RK4, Web Workers, and the KSP Problem](https://dhaatrik.github.io/transmissions/deltav-lab-mission-log/): Engineering diary on building a browser orbital mechanics simulator — Kerbal Space Program motivation, 50Hz RK4 integration, and Web Worker threading.
+- [Why DeltaV Lab Exists — and What It Actually Is](https://dhaatrik.github.io/transmissions/deltav-lab-why-and-what/): Honest origin story — KSP intuition vs. STK price tags, VAB + Mission Control scope, audience, and repo link.
+- [The Science Inside DeltaV Lab — Forces, Integration, and Flight Software](https://dhaatrik.github.io/transmissions/deltav-lab-science/): RK4 at 50Hz, gravity/thrust/drag/atmosphere, Tsiolkovsky, DSL flight computer, SharedArrayBuffer worker — sourced from the sim repo.
+- [Why DeltaV Lab Is Not Professional-Grade (Despite What the README Says)](https://dhaatrik.github.io/transmissions/deltav-lab-not-professional-grade/): No published flight V&V, 2D browser limits, simplified environments, gaps from path_to_perfection.md.
+- [DeltaV Lab Flight Computer — Teaching Autopilot Without Faking Physics](https://dhaatrik.github.io/transmissions/deltav-lab-flight-computer/): WHEN/THEN DSL guidance — parser, condition variables, worker integration.
+- [DeltaV Lab Mission Log: RK4, Web Workers, and the KSP Problem](https://dhaatrik.github.io/transmissions/deltav-lab-mission-log/): Threading diary — SharedArrayBuffer protocol, chatty postMessage fuckup, 50Hz worker contract (physics deep-dives in separate posts).
 - [Vellor Mission Log: Building an Offline OS for Tutors](https://dhaatrik.github.io/transmissions/vellor-power-tutor-log/): Why I built Vellor v4 Power-Tutor — offline-first IndexedDB storage, free tutoring operations, and data privacy for independent educators.
 - [Teaching From First Principles: A Mission Log on How I Actually Teach](https://dhaatrik.github.io/transmissions/teaching-from-first-principles/): First-person teaching philosophy — observation before equations, sibling-centric trust, and the axiom that knowledge must be free.
 - [Why I Started DBS Classes: The Physics of Curiosity](https://dhaatrik.github.io/transmissions/why-i-started-dbs-classes/): Origin story of the DBS Classes YouTube channel, founded October 31 2022, to combat rote learning with first-principles physics and mathematics education.
 - [How I Teach: Bus Wheels, Kitchen Labs, and Open Skies](https://dhaatrik.github.io/transmissions/my-ways-of-teaching/): Mission log on non-traditional teaching — sibling-centric tutoring, kitchen thermodynamics, street-side kinematics, and student psychology.
 - [Why I Stopped Uploading: An Honest Audit of Consistency and Flaws](https://dhaatrik.github.io/transmissions/why-i-stopped-youtube-classes/): Post-mortem on the DBS Classes YouTube channel cessation — solo production bottleneck, novelty fade, and motivation vs. systems thinking.
-- [Interactive Mission Logs: Orbital Insertion Dynamics](https://dhaatrik.github.io/transmissions/scrollytelling-demo/): Scroll-driven launch telemetry demo — staging, circularization burns, Tsiolkovsky equation, built from KSP intuition and DeltaV Lab engineering.
+- [DeltaV Lab Scrollytelling Demo — Orbital Insertion Walkthrough](https://dhaatrik.github.io/transmissions/deltav-lab-scrollytelling-demo/): Live Scrollytell component demo — four-step DeltaV Lab launch profile with sticky telemetry panels, DSL/control cross-refs, and Tsiolkovsky appendix.
 
 ## Projects
 
 Each project page includes: IMPACT.LOG (1–5 neon pain-level bar with ARIA role="meter"), [ FUCKUP LOG ] teaser, SYS.STATUS telemetry, and mission tags.
 
-- [DeltaV Lab](https://dhaatrik.github.io/projects/deltav-lab/): Real-time orbital mechanics simulation engine.
+- [DeltaV Lab](https://dhaatrik.github.io/projects/deltav-lab/): Open-source browser rocket sim — VAB, Mission Control, 50Hz RK4 worker, DSL flight computer, FTS, telemetry export. Honest limitations documented in linked transmissions.
 - [Vellor](https://dhaatrik.github.io/projects/vellor/): Offline-first note-taking application.
 - [FuelDrop](https://dhaatrik.github.io/projects/fueldrop/): High-concurrency fuel delivery platform.
 - [The Infinite Intelligence](https://dhaatrik.github.io/projects/the-infinite-intelligence/): Multi-agent AI debate system.

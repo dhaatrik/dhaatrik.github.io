@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('BlogPost Interactive Features', () => {
     test.beforeEach(async ({ page }) => {
         // Navigate to a post known to have interactive formulas and code blocks
-        await page.goto('/transmissions/scrollytelling-demo/');
+        await page.goto('/transmissions/deltav-lab-scrollytelling-demo/');
         await page.locator('#toggle-mode-btn').waitFor({ state: 'visible' });
     });
 
@@ -39,7 +39,9 @@ test.describe('BlogPost Interactive Features', () => {
     test('KaTeX formula inspector should trigger popover tooltip on click and dismiss on document click', async ({
         page,
     }) => {
-        const mathBlock = page.locator('p:has-text("Tsiolkovsky rocket equation") + p .katex').first();
+        const mathBlock = page
+            .locator('p:has-text("Tsiolkovsky rocket equation") + .katex-display .katex')
+            .first();
         await mathBlock.scrollIntoViewIfNeeded();
 
         // Initially no math inspector tooltip should exist

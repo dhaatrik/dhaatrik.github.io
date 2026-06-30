@@ -436,6 +436,10 @@ export async function setupPost() {
                 'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass',
             '\\Delta v = v_e \\ln \\frac{m_{0}}{m_{f}}':
                 'Δv: Velocity Delta // ve: Exhaust Velocity // m0: Initial Mass // mf: Final Mass',
+            '\\Delta v = I_{sp} \\cdot g_0 \\cdot \\ln \\left( \\frac{m_0}{m_f} \\right)':
+                'Δv: Velocity Delta // Isp: Specific Impulse // g0: Standard Gravity // m0: Initial Mass // mf: Final Mass',
+            '\\Delta v = I_{sp} \\cdot g_0 \\cdot \\ln \\left( \\frac{m_{0}}{m_{f}} \\right)':
+                'Δv: Velocity Delta // Isp: Specific Impulse // g0: Standard Gravity // m0: Initial Mass // mf: Final Mass',
             'F = G \\frac{m_1 m_2}{r^2}':
                 'F: Gravitational Force // G: Gravitational Constant // m1, m2: Masses // r: Distance',
             'F = G \\frac{m_{1} m_{2}}{r^{2}}':

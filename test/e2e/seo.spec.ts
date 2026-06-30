@@ -34,7 +34,7 @@ test.describe('SEO and Metadata Verification', () => {
     });
 
     test('blog post page should contain article schema and open graph tags', async ({ page }) => {
-        await page.goto('/transmissions/scrollytelling-demo/');
+        await page.goto('/transmissions/deltav-lab-scrollytelling-demo/');
         await page.waitForLoadState('networkidle');
 
         // Check og:type is article
@@ -52,6 +52,30 @@ test.describe('SEO and Metadata Verification', () => {
             }
         }
         expect(foundArticle).toBe(true);
+
+        const ogImage = page.locator('meta[property="og:image"]');
+        await expect(ogImage).toHaveAttribute('content', /delta-v-lab/);
+    });
+
+    test('DeltaV science post should use series hero in og:image and series navigation', async ({
+        page,
+    }) => {
+        await page.goto('/transmissions/deltav-lab-science/');
+        await page.waitForLoadState('networkidle');
+
+        const ogImage = page.locator('meta[property="og:image"]');
+        await expect(ogImage).toHaveAttribute('content', /delta-v-lab/);
+
+        await expect(page.locator('text=DeltaV Lab').first()).toBeVisible();
+        await expect(page.getByRole('link', { name: /PREVIOUS IN SERIES/i })).toBeVisible();
+        await expect(page.getByRole('link', { name: /NEXT IN SERIES/i })).toBeVisible();
+        await expect(
+            page.getByRole('link', { name: /PREVIOUS IN SERIES/i })
+        ).toHaveAttribute('href', '/transmissions/deltav-lab-why-and-what/');
+        await expect(page.getByRole('link', { name: /NEXT IN SERIES/i })).toHaveAttribute(
+            'href',
+            '/transmissions/deltav-lab-not-professional-grade/'
+        );
     });
 
     test('robots.txt and sitemap should be reachable and correctly structured', async ({ page }) => {

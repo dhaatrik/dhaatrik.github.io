@@ -12,6 +12,9 @@ import rehypeKatex from 'rehype-katex';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://dhaatrik.github.io',
+    redirects: {
+        '/transmissions/scrollytelling-demo': '/transmissions/deltav-lab-scrollytelling-demo/',
+    },
     integrations: [mdx(), sitemap()],
     markdown: {
         // Migrated from deprecated top-level remarkPlugins/rehypePlugins keys

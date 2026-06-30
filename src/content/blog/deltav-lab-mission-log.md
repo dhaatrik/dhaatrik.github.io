@@ -1,143 +1,129 @@
 ---
 title: 'DeltaV Lab Mission Log: RK4, Web Workers, and the KSP Problem'
-description: 'An honest engineering transmission on building a browser-based orbital mechanics simulator — Kerbal Space Program motivation, 4th-order Runge-Kutta integration, and why I moved physics off the main thread.'
+description: 'Engineering diary on threading — SharedArrayBuffer, the chatty postMessage fuckup, and why physics stays in the worker. Physics deep-dives live in separate transmissions.'
 pubDate: 2026-06-17
+updatedDate: 2026-06-30
+heroImage: '../../assets/og/delta-v-lab-transmissions.jpg'
 tags: ['aerospace', 'deltav-lab']
 clearance: 'PUBLIC'
+readingTime: '9 min'
 hasMath: true
+series: 'DeltaV Lab'
+seriesOrder: 4
 ---
 
 ```
 ====================================================================
 // TRANSMISSION METADATA // QUICK REFERENCE (AEO/LLMO OBJECTS)
 --------------------------------------------------------------------
-- ENTITY: DeltaV Lab (Browser Orbital Mechanics Simulator)
-- REPO: github.com/dhaatrik/professional-rocket-launch-simulation
-- INTEGRATION: 50Hz deterministic RK4 (Runge-Kutta 4th-order)
-- THREADING: Dedicated Web Worker physics loop
-- MOTIVATION: Kerbal Space Program creative freedom + engineering rigor
-- STATUS: VAB operational, orbit projection rendering live
+- ENTITY: DeltaV Lab threading & worker protocol
+- FOCUS: Web Worker isolation, SharedArrayBuffer, 50Hz tick contract
+- MOTIVATION: Main-thread physics stutter killed teachable sim loop
+- KEY LESSON: Worker comms is protocol design — not plumbing
+- SEE ALSO: deltav-lab-why-and-what, deltav-lab-science, deltav-lab-not-professional-grade
 ====================================================================
 ```
 
-### Mission Report: The Problem KSP Left Unsolved
+### Mission Report: Why This Log Exists (and What Moved Out)
 
-I owe a significant fraction of my intuition for orbital mechanics to **Kerbal Space Program**. There is no shame in admitting that. KSP taught me what apoapsis and periapsis _feel_ like, what a bad gravity turn looks like, and why staging is not optional if you want to reach orbit with anything resembling fuel margin.
+**SYS.STATUS:** THREADING // WORKER_ISOLATED
 
-But KSP is a game. Its physics are "good enough" for play, not validation. When I wanted to test actual staging math, compare integrators, or verify that a trajectory matched analytical Keplerian predictions, I kept bouncing between overkill proprietary tools and underpowered classroom applets.
+I owe orbital intuition to **Kerbal Space Program**. I also wanted integrators I could test. That motivation story now lives in **[Why DeltaV Lab Exists](/transmissions/deltav-lab-why-and-what/)** — read that first for audience, scope, and repo links.
 
-I wanted something in the middle: **the creative freedom of KSP with the mathematical honesty of a real simulation**. That gap is why I started building DeltaV Lab.
+The RK4 derivations, atmosphere models, and Tsiolkovsky walkthrough moved to **[The Science Inside DeltaV Lab](/transmissions/deltav-lab-science/)**.
 
----
+The uncomfortable professional-grade audit is in **[Why It Is Not Professional-Grade](/transmissions/deltav-lab-not-professional-grade/)**.
 
-### Mission Report: Design Constraints
-
-Before writing a single line of integration code, I set three non-negotiable constraints:
-
-1. **Run entirely in the browser.** No install step, no backend dependency, no subscription gate. Open the page, assemble a vehicle, simulate.
-2. **Deterministic integration.** Given the same initial conditions and timestep, the simulation must produce identical results every run. No frame-rate-dependent drift.
-3. **Keep the UI responsive.** Orbital mechanics math is not lightweight. A naive implementation on the main thread would stutter the moment I added drag, thrust vectoring, or multi-body gravity.
-
-The third constraint is what pushed me toward Web Workers.
+**This log stays focused on threading** — the architectural decision that made the sim usable, and the protocol fuckup that almost killed it.
 
 ---
 
-### Mission Report: Why RK4, Not Euler
+### Mission Report: Design Constraints (Threading Edition)
 
-First-order Euler integration is seductive because it is simple: compute acceleration, update velocity, update position, repeat. It is also wrong in exactly the ways that matter for rocketry.
+Three constraints drove the worker split:
 
-Euler accumulates error aggressively over long timesteps. Rockets change acceleration rapidly — thrust ramps, mass decreases as propellant burns, gravity weakens with altitude. A first-order method will systematically mis-predict apoapsis altitude and burn timing, which means your circularization maneuver will miss.
+1. **Deterministic integration** — fixed 50 Hz timestep (`FIXED_DT = 0.02` s in `PhysicsWorker.ts`), not frame-rate dependent
+2. **Responsive UI** — canvas paint and VAB input never block on force summation
+3. **Browser-only** — no backend to offload compute
 
-I chose **Runge-Kutta 4th-order (RK4)** integration because it balances accuracy and computational cost for smooth gravitational and thrust fields. RK4 samples the derivative at four points within each timestep and combines them with weighted averaging. For a fixed 50Hz tick, that gives me trajectory fidelity I can actually trust when I compare against analytical solutions.
-
-The governing pattern for each simulation step looks like this:
-
-```
-====================================================================
-                    RK4 INTEGRATION LOOP (50Hz)
---------------------------------------------------------------------
-  INPUT:  position r, velocity v, forces F(r,v,t), mass m(t)
-  STEP:   k1 = f(r, v)
-          k2 = f(r + dt/2 * k1, v + dt/2 * k1v)
-          k3 = f(r + dt/2 * k2, v + dt/2 * k2v)
-          k4 = f(r + dt * k3,   v + dt * k3v)
-  OUTPUT: r' = r + dt/6 * (k1 + 2*k2 + 2*k3 + k4)
-          v' = v + dt/6 * (k1v + 2*k2v + 2*k3v + k4v)
-  TICK:   20ms wall-clock target (50Hz deterministic)
-====================================================================
-```
-
-I validate this loop with Vitest unit tests against known analytical cases — standard Keplerian orbits, simple ballistic arcs — because an integrator you cannot test is an integrator you cannot teach with.
+The main thread paints. The worker integrates. Anything else is how you get janky orbit lines and missed keystrokes in the VAB.
 
 ---
 
-### Mission Report: Web Workers and the 50Hz Contract
+### Mission Report: The Big Fuckup — Chatty postMessage
 
-The browser's main thread has one job: paint the UI and respond to input. The physics loop has a different job: crunch vectors, update vehicle state, and advance the simulation clock. Mixing those responsibilities is how you get janky orbit renders and missed keystrokes in the Vehicle Assembly Building.
+Early builds sent **hundreds of small coordinate packets per frame** to the worker (and back). The serialization cost clogged both sides. Physics missed its 20 ms budget. The sim felt like a broken screensaver even when the math was correct.
 
-I offloaded the entire physics loop into a **dedicated Web Worker**. The main thread and worker communicate through a custom protocol that synchronizes UI state with the worker's simulation tick at a steady **50Hz**. The worker owns gravity equations, thrust application, atmospheric drag models, and the RK4 stepper. The main thread owns canvas rendering, telemetry displays, and user controls.
+**Root cause:** I treated the worker boundary like a remote API instead of a **shared memory contract**.
 
-This separation is not premature optimization. It is architectural hygiene. When I add a new force model — say, a more realistic drag curve — I modify the worker without touching the render path. When I improve the VAB UI, I do not risk destabilizing the integrator.
+**Fix:** `PhysicsBuffer.ts` + **SharedArrayBuffer** layout — header (mission time, wind, entity count) plus fixed-strides per entity (position, velocity, fuel, apoapsis, thermal state, etc.). The worker writes; the main thread reads for HUD paint. Control messages (`STEP`, `COMMAND`) stay small.
 
 ```
 ====================================================================
                   MAIN THREAD  <-->  WEB WORKER
 --------------------------------------------------------------------
-  UI / Canvas render          |    RK4 physics integrator
-  User input (throttle,       |    Gravity & thrust models
-  staging commands)           |    State vector propagation
-  Telemetry readout           |    50Hz tick clock
+  Read Float64Array HUD fields         |  RK4 @ 50Hz
+  Send STEP { dt, controls }         |  Environment + FTS + FC
+  Send COMMAND { FC_LOAD_SCRIPT }    |  Write entity strides
 --------------------------------------------------------------------
-  Protocol: structured state snapshots per tick (postMessage)
+  Hot path: SharedArrayBuffer (no per-tick postMessage for state)
 ====================================================================
 ```
 
----
-
-### Mission Report: The Vehicle Assembly Building
-
-A simulation without a build interface is just a trajectory viewer. I wanted students and hobbyists to _compose_ a vehicle — stages, engines, propellant fractions — and immediately see whether their design could reach orbit.
-
-The VAB (Vehicle Assembly Building) is intentionally minimal. No bloated part catalog from a AAA game. Just enough structure to define wet mass, dry mass, specific impulse, and staging events so the rocket equation has real numbers to work with.
-
-When you ignite, DeltaV Lab does not fake the result. It integrates. If your upper stage runs out of propellant 200 m/s short of circularization velocity, you see an elliptical orbit — not a success banner. That honesty is the whole point.
+That one refactor mattered more than tuning RK4 coefficients.
 
 ---
 
-### Mission Report: Stack Choices and Why They Matter
+### Mission Report: Why RK4 (Short Version)
 
-I kept the runtime lean on purpose:
+Euler lies about apoapsis when thrust and mass change fast. I chose **RK4** for smooth gravitational and thrust fields at 50 Hz. Full force breakdown: [science transmission](/transmissions/deltav-lab-science/).
 
-- **TypeScript & Vanilla DOM** for the main page loop — zero external runtime dependencies in the render hot path.
-- **Web Workers** for threaded orbital calculations.
-- **esbuild** for fast bundling of worker modules.
-- **Vitest** for integration tests that catch regressions before they corrupt a student's intuition.
-
-Every dependency is a liability in a physics engine. I added libraries only when they solved a problem I could not solve cleanly myself.
+Validation is Vitest against analytical Keplerian cases — not flight telemetry. [Limitations post](/transmissions/deltav-lab-not-professional-grade/) explains why that distinction blocks professional adoption.
 
 ---
 
-### Mission Report: Current Status and What Comes Next
+### Mission Report: Stack Choices
 
-As of this transmission, DeltaV Lab implements:
+- **TypeScript + vanilla DOM** on the main loop — no React in the paint hot path
+- **esbuild** for fast worker bundles during iteration
+- **Vitest** to catch integrator regressions before they corrupt student intuition
 
-- 50Hz deterministic RK4 integration
-- A functional Vehicle Assembly Building for multi-stage vehicle design
-- Orbit projection and trajectory vector rendering
-- Worker-threaded physics with main-thread telemetry sync
-
-What is still ahead: more force models, better atmospheric tables, maneuver node planning, and tighter validation against published launch vehicle data. The engine works. The product around it is what I am building now.
+Every dependency is a liability in a physics engine. I added libraries only when I could not solve the problem cleanly myself.
 
 ---
 
-### Mission Report: Why I Am Logging This Publicly
+### Mission Report: Fuckups & Learnings
 
-I stopped uploading YouTube lectures because I failed to build sustainable systems around content production. DeltaV Lab is my attempt to apply the opposite lesson: build the system first, then teach from it.
+| Fuckup | Learning |
+|--------|----------|
+| Chatty per-frame messages | Batch state in SharedArrayBuffer; strict 50 Hz contract |
+| Mixing UI refactors with integrator edits | Worker boundary lets you change HUD without touching RK4 |
+| README "engineering-grade" before V&V | Implemented rigor ≠ industry trust — [audit](/transmissions/deltav-lab-not-professional-grade/) |
 
-If you are a student trying to understand why staging matters, run a simulation. Change the mass ratio. Watch the apoapsis move. The Tsiolkovsky equation is not a memorization exercise — it is a contract between propellant mass and velocity budget.
+---
 
-That is what KSP hinted at. DeltaV Lab is my attempt to make it provably true.
+### Mission Report: Current Status
 
-$$ \Delta v = I_\{sp\} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
+Worker-threaded physics, VAB, DSL flight computer, FTS, telemetry export — live in [the repo](https://github.com/dhaatrik/professional-rocket-launch-simulation).
 
-The equation was never the hard part. Building a system that respects it — in a browser, at 50Hz, without lying — that is the mission.
+What is next for _me_: flight-telemetry validation (not more adjectives). What is next for _you_: clone it, break my worker protocol, open a PR.
+
+---
+
+### Closing Transmission
+
+I stopped uploading YouTube lectures because I failed to build sustainable systems around content. DeltaV Lab is the opposite lesson — build the system first, then teach from it.
+
+If staging math is what you care about, run a sim and watch apoapsis move when you change mass ratio:
+
+$$ \Delta v = I_{sp} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
+
+If threading is what you care about, study `PhysicsWorker.ts` and `PhysicsBuffer.ts`.
+
+Full map of transmissions:
+
+- [Why and what](/transmissions/deltav-lab-why-and-what/)
+- [Science](/transmissions/deltav-lab-science/)
+- [Not professional-grade](/transmissions/deltav-lab-not-professional-grade/)
+- [Flight computer DSL](/transmissions/deltav-lab-flight-computer/)
+- [Scrollytelling demo](/transmissions/deltav-lab-scrollytelling-demo/)

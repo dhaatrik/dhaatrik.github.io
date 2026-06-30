@@ -18,6 +18,9 @@ pnpm-debug.log*
 playwright-report/
 test-results/
 
+# Local agent/IDE terminal session output (not project source)
+terminals/
+
 # Agent harness local config (keep project skills + docs shareable)
 .grok/
 .agents/*

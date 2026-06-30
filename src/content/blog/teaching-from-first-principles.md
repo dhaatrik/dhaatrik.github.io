@@ -4,6 +4,7 @@ description: 'My teaching philosophy in plain language — observation before eq
 pubDate: 2026-06-17
 tags: ['pedagogy']
 clearance: 'PUBLIC'
+hasMath: true
 ---
 
 ```
