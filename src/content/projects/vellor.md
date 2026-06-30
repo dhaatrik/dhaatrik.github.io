@@ -90,7 +90,7 @@ npm run dev
 # Opens http://localhost:5173
 ```
 
-Tests: `npm run test` (28 Vitest suites). CI: lint → test → build on every push.
+Tests: `npm run test` — **64 Vitest test files** at v4.2.0 (README badge still says 33; run `vitest run` to verify). CI: lint → test → build on every push.
 
 ## Closing transmission
 

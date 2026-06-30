@@ -81,7 +81,7 @@ From the repo README and `package.json` at **v4.2.0**:
 | **Recharts 3** | Charts | Income trends and forecasting visuals on the dashboard |
 | **jsPDF + autotable** | PDFs | Client-side invoices — no server render farm |
 | **@tanstack/react-virtual** | Lists | Long rosters without mounting 300 DOM nodes |
-| **Vitest 4 + RTL** | Tests | 28 suites — store slices, crypto, PDF, pages — CI runs lint → test → build |
+| **Vitest 4 + RTL** | Tests | 64 test files at v4.2.0 (`vitest run`) — store slices, crypto, PDF, pages, hooks, UI — CI runs lint → test → build |
 | **vite-plugin-pwa** | Offline | Service worker + install prompt; cache versioning is still a footgun |
 
 ---

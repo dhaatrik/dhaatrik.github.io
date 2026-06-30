@@ -102,7 +102,7 @@ It is **not** a learning management system for schools. It is **not** a note-tak
 
 ### Mission Report: Current State & Key Artifacts
 
-Vellor **v4.2.0** is functional and tested — **28 Vitest suites** in the repo covering store slices, pages, forms, crypto, PDF generation, and hooks.
+Vellor **v4.2.0** is functional and tested — **`vitest run` reports 64 test files** (478 cases) across store slices, pages, forms, crypto, PDF generation, hooks, and UI components. The README badge still says 33 — it lags the repo; I counted by running tests, not by reading shields.
 
 ```bash
 git clone https://github.com/dhaatrik/vellor.git
