@@ -222,11 +222,13 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### Instant App Opener
 - **URL**: https://dhaatrik.github.io/projects/instant-app-opener/
-- **Description**: Electron-based local desktop launcher built with JavaScript, Node.js, and CSS. Summons productivity utilities via system-tray global keyboard listeners under 150ms.
+- **Description**: Next.js 15 web app (v0.2.0) that parses YouTube, X, LinkedIn, Instagram, Facebook, TikTok, and Spotify URLs into mobile deep-link URIs. Outputs copy, Web Share, and QR handoff. Not Electron, not a tray launcher.
+- **Transmission**: https://dhaatrik.github.io/transmissions/instant-app-opener-why-and-what/
 
 ### Glassbox
 - **URL**: https://dhaatrik.github.io/projects/glassbox/
-- **Description**: Secure Node.js proxy execution sandbox built with TypeScript, Node.js, VM2, and ES6 Proxies. Intercepts core system APIs to audit untrusted scripts locally.
+- **Description**: Cyberpunk organizational feedback terminal (v4.2.1) — employee signals, drag-and-drop Kanban neural grid, MoM Recharts metrics, Gemini sentiment and AI insight reports. BYOK API key. Not VM2, not a code sandbox.
+- **Transmission**: https://dhaatrik.github.io/transmissions/glassbox-why-and-what/
 
 ### FinTrack
 - **URL**: https://dhaatrik.github.io/projects/expense-vs-investment-tracker/
@@ -242,7 +244,8 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### Bill Express
 - **URL**: https://dhaatrik.github.io/projects/bill-express/
-- **Description**: Local PDF billing invoice generator utilizing client-side print layout and JavaScript to format print grids and produce downloadable PDFs instantly.
+- **Description**: Full-stack India-GST Point of Sale (v1.0.0) — React 19 + Vite 6 frontend, Express + SQLite backend, product inventory (HSN/GST), customer GSTIN directory, B2B/B2C invoices with SGST/CGST/IGST splits. Not client-only jsPDF.
+- **Transmission**: https://dhaatrik.github.io/transmissions/bill-express-why-and-what/
 
 ### MarkPDF
 - **URL**: https://dhaatrik.github.io/projects/free-markdown-to-pdf-converter/
