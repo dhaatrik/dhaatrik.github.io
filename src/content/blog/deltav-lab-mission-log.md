@@ -3,10 +3,12 @@ title: 'DeltaV Lab Mission Log: RK4, Web Workers, and the KSP Problem'
 description: 'Engineering diary on threading — SharedArrayBuffer, the chatty postMessage fuckup, and why physics stays in the worker. Physics deep-dives live in separate transmissions.'
 pubDate: 2026-06-17
 updatedDate: 2026-06-30
+heroImage: '../../assets/og/deltav-lab-transmissions.jpg'
 tags: ['aerospace', 'deltav-lab']
 clearance: 'PUBLIC'
 readingTime: '9 min'
 hasMath: true
+series: 'DeltaV Lab'
 ---
 
 ```

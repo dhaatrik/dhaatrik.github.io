@@ -2,10 +2,13 @@
 title: 'Why DeltaV Lab Exists — and What It Actually Is'
 description: 'Honest origin story for my browser rocket simulator: KSP intuition, STK price tags, VAB + Mission Control scope, and who should (and should not) trust it.'
 pubDate: 2026-06-28
+updatedDate: 2026-06-30
+heroImage: '../../assets/og/deltav-lab-transmissions.jpg'
 tags: ['aerospace', 'deltav-lab', 'simulation']
 clearance: 'PUBLIC'
 readingTime: '11 min'
 hasMath: false
+series: 'DeltaV Lab'
 ---
 
 ```
