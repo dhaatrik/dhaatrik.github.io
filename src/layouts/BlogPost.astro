@@ -569,6 +569,8 @@ const breadcrumbSchema = JSON.stringify({
             import { setupPost, cleanupPost } from '../scripts/blog/postSetup';
             document.addEventListener('astro:page-load', setupPost);
             document.addEventListener('astro:before-preparation', cleanupPost);
+            // Direct loads and Playwright goto do not always receive astro:page-load
+            void setupPost();
         </script>
     </body>
 </html>
