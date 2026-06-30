@@ -115,12 +115,53 @@ DSL guidance system in FlightScript.ts / FlightComputer.ts. Syntax: WHEN conditi
 
 Threading-focused engineering diary. SharedArrayBuffer replaces chatty per-frame postMessage fuckup. 50Hz worker contract, vanilla DOM + esbuild + Vitest stack. Physics derivations and professional-grade audit moved to dedicated transmissions (deltav-lab-why-and-what, deltav-lab-science, deltav-lab-not-professional-grade). Includes Tsiolkovsky equation as teaching anchor.
 
-### Vellor Mission Log: Building an Offline OS for Tutors
-**URL:** https://dhaatrik.github.io/transmissions/vellor-power-tutor-log/
-**Published:** 2026-06-17
-**Tags:** pedagogy, vellor
+### Why Vellor Exists — and What It Actually Is
+**URL:** https://dhaatrik.github.io/transmissions/vellor-why-and-what/
+**Published:** 2026-07-01
+**Tags:** pedagogy, vellor, pwa, offline-first
+**Series:** Vellor (order 1)
 
-First-person mission log on Vellor v4.0.0 "Power-Tutor" — a free offline-first PWA for independent tutors. Written after 9 years of tutoring experience witnessing overpriced, invasive tutoring software. Architecture: 100% client-side IndexedDB storage, Zustand persistence, zero server dependency, O(N) filter/sort operations. Covers v4 operational features (roster management, attendance tracking, gamified UI), honest tradeoffs (multi-device sync, onboarding friction, feature scope), and connection to DBS Classes philosophy ("Education Is Not Free BUT KNOWLEDGE IS FREE").
+Honest origin story for the free tutoring-management PWA at v4.2.0. Nine years of tutoring exposed overpriced/invasive SaaS and spreadsheets not built for teaching. Scope: dashboard, students, transactions, calendar, achievements, settings — AES-GCM encrypted localStorage, zero server. Corrects prior site error calling Vellor "note-taking" or IndexedDB-based.
+
+### Why I Chose This Tech Stack for Vellor — Honest Tradeoffs
+**URL:** https://dhaatrik.github.io/transmissions/vellor-tech-stack/
+**Published:** 2026-07-01
+**Tags:** vellor, react, typescript, pwa, offline-first
+**Series:** Vellor (order 2)
+
+Stack rationale from github.com/dhaatrik/vellor v4.2.0: React 19, TypeScript 5.7, Vite 6, Zustand 5 slices, Zod 4, React Hook Form 7, Tailwind 3, Framer Motion 11, Radix UI, Recharts 3, jsPDF, @tanstack/react-virtual, Vitest 4, vite-plugin-pwa. Constraints: zero server, solo maintainer, offline-first. Rejected Next.js/Electron as primary paths. Honest limits: localStorage size, PWA cache invalidation, bundle weight.
+
+### Why Vellor Is Free — and What "Zero Terms" Actually Means
+**URL:** https://dhaatrik.github.io/transmissions/vellor-free-zero-terms/
+**Published:** 2026-07-01
+**Tags:** vellor, open-source, pedagogy, privacy
+**Series:** Vellor (order 3)
+
+MIT license (Copyright 2026 Dhaatrik Chowdhury), no subscriptions, no data harvesting. "Zero terms" = no SaaS ToS/account lock-in — NOT absence of MIT license or maintenance reality. Comparison table vs typical tutoring SaaS. Connection to DBS Classes axiom: knowledge must be free.
+
+### The Gamification Trap — When Vellor Almost Became a Mobile Game
+**URL:** https://dhaatrik.github.io/transmissions/vellor-gamification-trap/
+**Published:** 2026-07-01
+**Tags:** vellor, ui-ux, pedagogy
+**Series:** Vellor (order 4)
+
+Honest fuckup log: points, ranks, 25+ achievements, confetti (canvas-confetti) nearly buried invoicing/quick-log paths. Lesson: gamification is seasoning on Achievements page, not the payment critical path.
+
+### Local-Only Backup Reality — No Server Means You Own Disaster Recovery
+**URL:** https://dhaatrik.github.io/transmissions/vellor-local-backup-reality/
+**Published:** 2026-07-01
+**Tags:** vellor, privacy, offline-first, pwa
+**Series:** Vellor (order 5)
+
+AES-GCM localStorage, Recovery Key, JSON export/import, 14-day BackupPromptModal, reconnect backup nudges, secure reset. Tradeoff: privacy without vendor safety net — tutors must export or lose data on device failure.
+
+### Vellor Mission Log: Power-Tutor Ops and the Storage Correction
+**URL:** https://dhaatrik.github.io/transmissions/vellor-power-tutor-log/
+**Published:** 2026-06-17 (updated 2026-07-01)
+**Tags:** pedagogy, vellor, pwa, offline-first
+**Series:** Vellor (order 6)
+
+Operational engineering diary for Power-Tutor era (v4.2.0). Corrects prior IndexedDB claim — repo uses AES-GCM encrypted localStorage. Covers roster virtualization, O(N) filters, PWA cache versioning, feature scope discipline, DBS Classes philosophy link. Supporting log — origin/stack/licensing in dedicated series posts.
 
 ### Teaching From First Principles: A Mission Log on How I Actually Teach
 **URL:** https://dhaatrik.github.io/transmissions/teaching-from-first-principles/
@@ -168,7 +209,8 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### Vellor
 - **URL**: https://dhaatrik.github.io/projects/vellor/
-- **Description**: Offline-first note-taking application with local database synchronization. Currently in V4 development.
+- **GitHub**: https://github.com/dhaatrik/vellor
+- **Description**: Free MIT-licensed offline tutoring-management PWA at v4.2.0 (Power-Tutor era). Students, lessons, payments, PDF invoices, calendar, gamification, white-label branding. 100% client-side AES-GCM encrypted localStorage — no server, no subscription. transmissionTag: vellor. Key transmissions: vellor-why-and-what, vellor-tech-stack, vellor-free-zero-terms, vellor-gamification-trap, vellor-local-backup-reality, vellor-power-tutor-log.
 
 ### FuelDrop
 - **URL**: https://dhaatrik.github.io/projects/fueldrop/

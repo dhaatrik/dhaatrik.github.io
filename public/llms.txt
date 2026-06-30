@@ -19,7 +19,12 @@
 - [DeltaV Lab Native Physics Core — Escaping the React/TypeScript Ceiling](https://dhaatrik.github.io/transmissions/deltav-lab-native-physics-core/): Rust/C++/Python migration plan — WASM for browser UI, native binaries for batch dispersion, strangler-pattern worker rewrite.
 - [DeltaV Lab Flight Computer — Teaching Autopilot Without Faking Physics](https://dhaatrik.github.io/transmissions/deltav-lab-flight-computer/): WHEN/THEN DSL guidance — parser, condition variables, worker integration.
 - [DeltaV Lab Mission Log: RK4, Web Workers, and the KSP Problem](https://dhaatrik.github.io/transmissions/deltav-lab-mission-log/): Threading diary — SharedArrayBuffer protocol, chatty postMessage fuckup, 50Hz worker contract (physics deep-dives in separate posts).
-- [Vellor Mission Log: Building an Offline OS for Tutors](https://dhaatrik.github.io/transmissions/vellor-power-tutor-log/): Why I built Vellor v4 Power-Tutor — offline-first IndexedDB storage, free tutoring operations, and data privacy for independent educators.
+- [Why Vellor Exists — and What It Actually Is](https://dhaatrik.github.io/transmissions/vellor-why-and-what/): Honest origin — nine years of tutoring, SaaS pain, tutoring-management PWA scope at v4.2.0, not note-taking.
+- [Why I Chose This Tech Stack for Vellor — Honest Tradeoffs](https://dhaatrik.github.io/transmissions/vellor-tech-stack/): React 19, Zustand 5, Vite 6, AES-GCM localStorage — solo-maintainer constraints and rejected alternatives.
+- [Why Vellor Is Free — and What "Zero Terms" Actually Means](https://dhaatrik.github.io/transmissions/vellor-free-zero-terms/): MIT license, no subscriptions, no data harvesting — zero SaaS terms is not zero legal text.
+- [The Gamification Trap — When Vellor Almost Became a Mobile Game](https://dhaatrik.github.io/transmissions/vellor-gamification-trap/): Confetti and ranks vs. invoicing — seasoning, not the meal.
+- [Local-Only Backup Reality — No Server Means You Own Disaster Recovery](https://dhaatrik.github.io/transmissions/vellor-local-backup-reality/): Export/import, 14-day nudges, encryption without a vendor safety net.
+- [Vellor Mission Log: Power-Tutor Ops and the Storage Correction](https://dhaatrik.github.io/transmissions/vellor-power-tutor-log/): Operational diary — PWA cache fights, roster performance, admitting IndexedDB was wrong (repo uses encrypted localStorage).
 - [Teaching From First Principles: A Mission Log on How I Actually Teach](https://dhaatrik.github.io/transmissions/teaching-from-first-principles/): First-person teaching philosophy — observation before equations, sibling-centric trust, and the axiom that knowledge must be free.
 - [Why I Started DBS Classes: The Physics of Curiosity](https://dhaatrik.github.io/transmissions/why-i-started-dbs-classes/): Origin story of the DBS Classes YouTube channel, founded October 31 2022, to combat rote learning with first-principles physics and mathematics education.
 - [How I Teach: Bus Wheels, Kitchen Labs, and Open Skies](https://dhaatrik.github.io/transmissions/my-ways-of-teaching/): Mission log on non-traditional teaching — sibling-centric tutoring, kitchen thermodynamics, street-side kinematics, and student psychology.
@@ -31,7 +36,7 @@
 Each project page includes: IMPACT.LOG (1–5 neon pain-level bar with ARIA role="meter"), [ FUCKUP LOG ] teaser, SYS.STATUS telemetry, and mission tags.
 
 - [DeltaV Lab](https://dhaatrik.github.io/projects/deltav-lab/): Open-source browser rocket sim — VAB, Mission Control, 50Hz RK4 worker, DSL flight computer, FTS, telemetry export. Roadmap transmissions cover professional-grade evolution and native physics core migration.
-- [Vellor](https://dhaatrik.github.io/projects/vellor/): Offline-first note-taking application.
+- [Vellor](https://dhaatrik.github.io/projects/vellor/): Free MIT-licensed offline tutoring-management PWA — students, lessons, payments, invoices, AES-GCM localStorage. Transmission series: vellor-why-and-what, tech-stack, free-zero-terms.
 - [FuelDrop](https://dhaatrik.github.io/projects/fueldrop/): High-concurrency fuel delivery platform.
 - [The Infinite Intelligence](https://dhaatrik.github.io/projects/the-infinite-intelligence/): Multi-agent AI debate system.
 - [Instant App Opener](https://dhaatrik.github.io/projects/instant-app-opener/): Electron-based local desktop launcher to bypass browser boot latency.
