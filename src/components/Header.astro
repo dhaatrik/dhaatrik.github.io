@@ -5,6 +5,20 @@ import ThemeToggle from './ThemeToggle.astro';
 const pathname = Astro.url.pathname;
 const cleanPath = pathname.replace(/\/$/, '');
 const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
+
+/** Compact breadcrumb for tight header slots — keeps terminal vibe without wrapping nav. */
+function formatHeaderPath(path: string): string {
+    if (path.length <= 34) return path;
+
+    const segments = path.replace(/^~\/home\/?/, '').split('/').filter(Boolean);
+    if (segments.length === 0) return '~/home';
+    if (segments.length === 1) return `~/home/${segments[0]}`;
+
+    const tail = segments[segments.length - 1];
+    const compact = `~/…/${tail}`;
+    return compact.length <= 34 ? compact : `~/…/${tail.slice(0, 22)}…`;
+}
+const displayPathShort = formatHeaderPath(displayPath);
 ---
 
 <style>
@@ -168,6 +182,37 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
         }
     }
 
+    /* Prevent long route breadcrumbs from pushing nav controls to a new line */
+    #main-nav {
+        flex-wrap: nowrap;
+    }
+
+    #header-brand {
+        min-width: 0;
+    }
+
+    #header-brand-path {
+        max-width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        #header-brand-path {
+            max-width: min(28vw, 16rem);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        #header-brand-path {
+            max-width: min(22vw, 18rem);
+        }
+    }
+
+    @media (min-width: 1280px) {
+        #header-brand-path {
+            max-width: min(26vw, 22rem);
+        }
+    }
+
     @supports (anchor-name: --x) {
         .desktop-nav-links {
             position: relative;
@@ -247,18 +292,19 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
 >
     <nav
         id="main-nav"
-        class="layout-container flex items-center justify-between py-4 transition-colors duration-300 ease-in-out"
+        class="layout-container flex items-center justify-between gap-3 py-4 transition-colors duration-300 ease-in-out"
     >
         {
             /* ⚡ Bolt: Enable hover prefetching for isolated internal links to provide instant page transitions */
         }
         <a
+            id="header-brand"
             href="/"
             data-astro-prefetch="hover"
-            class="sonar-trigger group flex items-center transition-opacity hover:opacity-80 focus-visible:opacity-80"
+            class="sonar-trigger group flex min-w-0 items-center overflow-hidden transition-opacity hover:opacity-80 focus-visible:opacity-80"
             aria-label="Dhaatrik — Home"
         >
-            <div class="sonar-icon rounded-full">
+            <div class="sonar-icon shrink-0 rounded-full">
                 <img
                     src="/logo_dark.svg"
                     alt="Dhaatrik Logo"
@@ -275,14 +321,14 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                 />
             </div>
 
-            <div class="flex items-center">
+            <div class="flex min-w-0 items-center">
                 <div
-                    class="mx-3 h-6 border-l border-slate-300 transition-colors group-hover:border-(--accent)/50 dark:border-white/20"
+                    class="mx-3 h-6 shrink-0 border-l border-slate-300 transition-colors group-hover:border-(--accent)/50 dark:border-white/20"
                 >
                 </div>
-                <div class="flex flex-col justify-center">
+                <div class="flex min-w-0 flex-col justify-center overflow-hidden">
                     <span
-                        class="flex items-center gap-1.5 leading-none font-bold tracking-tight text-slate-900 dark:text-white"
+                        class="flex shrink-0 items-center gap-1.5 leading-none font-bold tracking-tight whitespace-nowrap text-slate-900 dark:text-white"
                     >
                         DHAATRIK
                         <span class="relative flex h-1.5 w-1.5">
@@ -291,13 +337,15 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
                         </span>
                     </span>
                     <span
-                        class="mt-1 hidden font-mono text-[10px] leading-none tracking-widest text-(--accent) opacity-80 sm:block"
-                        >{displayPath}</span
+                        id="header-brand-path"
+                        class="mt-1 hidden truncate font-mono text-[10px] leading-none tracking-widest text-(--accent) opacity-80 sm:block"
+                        title={displayPath}
+                        >{displayPathShort}</span
                     >
                 </div>
             </div>
         </a>
-        <div class="flex items-center gap-2.5 sm:gap-4 md:gap-6">
+        <div class="flex shrink-0 items-center gap-2.5 sm:gap-4 md:gap-6">
             <div class="desktop-nav-links hidden items-center gap-6 md:flex">
                 <HeaderLink
                     href="/"
