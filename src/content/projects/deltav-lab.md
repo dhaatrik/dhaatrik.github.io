@@ -74,7 +74,7 @@ Supporting logs:
 
 - [RK4, Web Workers, and the worker-protocol fuckup](/transmissions/deltav-lab-mission-log/) — engineering diary focused on threading, not duplicated physics lectures
 - [Flight computer DSL: teaching autopilot without faking physics](/transmissions/deltav-lab-flight-computer/) — the `WHEN/THEN` guidance language
-- [Interactive Mission Logs: Orbital Insertion Dynamics](/transmissions/scrollytelling-demo/) — scroll-driven launch telemetry on this site
+- [DeltaV Lab Scrollytelling Demo](/transmissions/deltav-lab-scrollytelling-demo/) — live `Scrollytell` component walkthrough with synced launch telemetry
 
 ## Run it locally
 

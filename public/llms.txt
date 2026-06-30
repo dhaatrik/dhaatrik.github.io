@@ -22,7 +22,7 @@
 - [Why I Started DBS Classes: The Physics of Curiosity](https://dhaatrik.github.io/transmissions/why-i-started-dbs-classes/): Origin story of the DBS Classes YouTube channel, founded October 31 2022, to combat rote learning with first-principles physics and mathematics education.
 - [How I Teach: Bus Wheels, Kitchen Labs, and Open Skies](https://dhaatrik.github.io/transmissions/my-ways-of-teaching/): Mission log on non-traditional teaching — sibling-centric tutoring, kitchen thermodynamics, street-side kinematics, and student psychology.
 - [Why I Stopped Uploading: An Honest Audit of Consistency and Flaws](https://dhaatrik.github.io/transmissions/why-i-stopped-youtube-classes/): Post-mortem on the DBS Classes YouTube channel cessation — solo production bottleneck, novelty fade, and motivation vs. systems thinking.
-- [Interactive Mission Logs: Orbital Insertion Dynamics](https://dhaatrik.github.io/transmissions/scrollytelling-demo/): Scroll-driven launch telemetry demo — staging, circularization burns, Tsiolkovsky equation, built from KSP intuition and DeltaV Lab engineering.
+- [DeltaV Lab Scrollytelling Demo — Orbital Insertion Walkthrough](https://dhaatrik.github.io/transmissions/deltav-lab-scrollytelling-demo/): Live Scrollytell component demo — four-step DeltaV Lab launch profile with sticky telemetry panels, DSL/control cross-refs, and Tsiolkovsky appendix.
 
 ## Projects
 

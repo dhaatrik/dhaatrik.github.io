@@ -136,12 +136,12 @@ First-person mission log on teaching methodology, led by the bus wheel observati
 
 First-person post-mortem. Final upload "Point Mass is a Myth" on September 15, 2023 became the tombstone of active production after 20 videos. Root causes: (1) solo production bottleneck and novelty fade, (2) illusion of "next week" compounding into years, (3) relying on motivation instead of systems. Includes Motivation vs. Systems comparison table. Lessons applied to engineering: reduce friction, lower cognitive load, sustainable pace. Channel remains as archive and reminder of structural discipline.
 
-### Interactive Mission Logs: Orbital Insertion Dynamics
-**URL:** https://dhaatrik.github.io/transmissions/scrollytelling-demo/
-**Published:** 2026-05-29
-**Tags:** aerospace, physics, ui-ux, deltav-lab
+### DeltaV Lab Scrollytelling Demo — Orbital Insertion Walkthrough
+**URL:** https://dhaatrik.github.io/transmissions/deltav-lab-scrollytelling-demo/
+**Published:** 2026-05-29 (updated 2026-06-30)
+**Tags:** aerospace, physics, ui-ux, deltav-lab, scrollytell
 
-First-person scrollytelling demo born from Kerbal Space Program intuition and DeltaV Lab engineering. Explains why launch profiles need sequential visualization (Max Q, MECO, staging, circularization). Interactive Scrollytell component with three flight phases and telemetry graphics. Mathematical appendix covers Tsiolkovsky rocket equation with MDX-escaped KaTeX ($I_{sp}$, $v_{orbit}$). Argues scroll-driven pacing beats video for thinking through orbital insertion problems.
+Working demo of the site Scrollytell component (src/components/Scrollytell.astro) — four scroll steps with sticky telemetry visuals (pad/checklist, Max Q, MECO/staging, circularization). Tied to DeltaV Lab flight vocabulary: DSL variables (ALTITUDE, DYNAMIC_PRESSURE, APOGEE), keyboard controls (C, SPACE, M, E), 50Hz worker physics, honest label that HUD numbers are teaching graphics not live sim export. Includes author API table (stepCount, visual-N/step-N slots, IntersectionObserver behavior). Tsiolkovsky appendix + Python snippet. Cross-links to deltav-lab-why-and-what, science, limitations transmissions.
 
 ---
 

@@ -134,7 +134,7 @@ Honesty cuts both ways. This project **excels** at:
 - Instructor scenarios: FTS, fault injection, checklist culture
 - Open-source auditability — read `src/physics/` yourself
 
-Pair it with my [scrollytelling demo](/transmissions/scrollytelling-demo/) for sequential launch intuition. Use [the science transmission](/transmissions/deltav-lab-science/) for equation references.
+Pair it with my [scrollytelling demo](/transmissions/deltav-lab-scrollytelling-demo/) for sequential launch intuition. Use [the science transmission](/transmissions/deltav-lab-science/) for equation references.
 
 Do **not** use it for range safety sign-off, launch-window dispersion, or replacing STK in a corporate study — until the gaps in `path_to_perfection.md` close with evidence, not promises.
 

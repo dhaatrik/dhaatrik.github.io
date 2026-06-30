@@ -123,4 +123,4 @@ Full map of transmissions:
 - [Science](/transmissions/deltav-lab-science/)
 - [Not professional-grade](/transmissions/deltav-lab-not-professional-grade/)
 - [Flight computer DSL](/transmissions/deltav-lab-flight-computer/)
-- [Scrollytelling demo](/transmissions/scrollytelling-demo/)
+- [Scrollytelling demo](/transmissions/deltav-lab-scrollytelling-demo/)
