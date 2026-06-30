@@ -20,6 +20,9 @@ const blogSchema = z.object({
     updatedDate: z.coerce.date().optional(),
     heroImage: imageMock(),
     readingTime: z.string().optional(),
+    series: z.string().optional(),
+    seriesOrder: z.number().optional(),
+    hasMath: z.boolean().default(false),
 });
 
 const projectsSchema = z.object({
@@ -73,6 +76,14 @@ const validateDirectory = (dirPath, schema, collectionName) => {
                         .map((e) => `${e.path.join('.')}: ${e.message}`)
                         .join(', ');
                     assert.fail(`${file} frontmatter is invalid: ${errors}`);
+                }
+
+                const body = content.slice(match[0].length);
+                const hasMathMarkers = /\$\$[\s\S]+?\$\$|\$[^$\n]+\$|<Math\s/.test(body);
+                const hasMath = result.data.hasMath ?? false;
+
+                if (hasMathMarkers && !hasMath) {
+                    assert.fail(`${file}: contains math but hasMath is false`);
                 }
             });
         });

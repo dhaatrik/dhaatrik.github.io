@@ -4,6 +4,7 @@ description: 'An engineering diary on Vellor v4 Power-Tutor — why I built a fr
 pubDate: 2026-06-17
 tags: ['pedagogy', 'vellor']
 clearance: 'PUBLIC'
+hasMath: true
 ---
 
 ```
