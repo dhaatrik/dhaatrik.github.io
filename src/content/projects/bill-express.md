@@ -1,43 +1,79 @@
 ---
 title: 'Bill Express'
-description: 'Browser invoice builder with instant PDF export — no signup, no backend, your line items never leave the tab.'
+description: 'Full-stack India-GST POS — Express + SQLite, inventory, customers, B2B/B2C invoices. Not a browser-only jsPDF freelancer tool.'
 logo: '../../assets/bill-express.png'
 githubUrl: 'https://github.com/dhaatrik/bill-express'
-progress: 'Production build deployed, instant PDF export'
+progress: 'v1.0.0 — local retail POS with GST invoicing'
+transmissionTag: 'bill-express'
 order: 10
-tags: ['JavaScript', 'HTML5', 'Tailwind CSS', 'jsPDF']
-pain_level: 2
-telemetry: 'STATUS: SHIPPED // DEPLOY: LIVE // PDF: VECTOR'
-fuckup_teaser: "I deployed a CSS update without checking Firefox, only to find the layout engine pushed the footer onto a second, blank page on print."
+tags: ['React 19', 'TypeScript 5.8', 'Vite 6', 'Express', 'SQLite', 'GST']
+pain_level: 3
+telemetry: 'STATUS: SHIPPED // DB: SQLITE_LOCAL // TAX: GST_INTRA_INTER'
+fuckup_teaser: "I described Bill Express as client-only jsPDF on this site while the repo ships Express + SQLite — and canceled invoices initially forgot to restore stock."
 ---
 
-## SYS.STATUS: Deployed — vector PDF export in under 50ms, zero server round-trips
+## SYS.STATUS: v1.0.0 shipped — local GST POS with inventory, customers, REST API
 
-Freelancers shouldn't need a SaaS account to invoice a client once. Bill Express is a single-page editor that compiles a clean PDF entirely in the browser.
+[Bill Express](https://github.com/dhaatrik/bill-express) is a **full-stack Point of Sale** for small retail: dashboard analytics, product inventory with **HSN codes and GST rates**, customer directory with **GSTIN**, and **B2B/B2C invoice generation** with SGST/CGST/IGST splits. Canceled invoices restore product stock.
 
-## Why I started this
+This page replaces portfolio copy that wrongly described a **browser-only jsPDF freelancer invoice** with zero backend.
 
-Every invoice tool I tried wanted an email, a trial, or a watermark until you paid. I needed **fill form → preview → PDF** in one sitting. Client-side only — merchant data is sensitive enough without me operating a storage layer.
+## What it is (scope)
 
-## What I tried (and what broke)
+| Surface | What you do there |
+|---------|-------------------|
+| **Dashboard** | Gross sales, top products, low-stock alerts (Recharts) |
+| **Products** | CRUD — HSN, ex-GST pricing, GST %, stock levels |
+| **Customers** | Directory with GSTIN, lifetime value metrics |
+| **Invoices** | B2B/B2C billing, discounts, tax split, print/save |
+| **REST API** | `/api/products`, `/api/dashboard/analytics`, and related routes |
 
-Interactive document editor: form fields update a live layout preview. Export reads the DOM structure and feeds **jsPDF** for vector output — not a screenshot, an actual PDF page. Vanilla JS + HTML5 keep the bundle light; Tailwind handles print-friendly grids.
+Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Express, `better-sqlite3`, react-hook-form, Recharts, Pino, express-rate-limit, Vitest + supertest.
 
-Early exports looked wrong on multi-page invoices because I underestimated line-item pagination. Tuning print CSS and jsPDF page breaks fixed the ugly splits. Tax line formatting and currency alignment were another round of pain — jsPDF doesn't forgive sloppy coordinate math.
+`npm run dev` runs Express + Vite together on port 3000.
 
-I also tested whether I needed a backend "for convenience." I didn't. Storing invoices server-side would make support easier and privacy worse. For freelancers invoicing five clients a month, browser-local is the right trade.
+## Who I built it for
+
+- Small retail shops in India needing local POS with honest GST modeling
+- Developers wanting a forkable full-stack POS reference (MIT licensed)
+- Single-location operators — not multi-branch cloud franchises
+
+**Not for:** one-off freelancer PDF invoices in the browser, multi-store sync without custom infra, or production deploy with the dev auth bypass file still present.
 
 ## Fuckups & learnings
 
-- **DOM-to-PDF is fiddly.** Pixel-perfect preview ≠ perfect PDF without testing real printers.
-- **No backend is a privacy feature and a support limit.** No accounts also means no "we lost your invoice" — because we never had it.
-- **50ms export is achievable** if you don't round-trip through a server "for analytics."
-- **Form UX matters for repeat users.** Saved defaults in localStorage beat retyping your GST number every time.
+- **Wrong product story on my portfolio.** jsPDF, 50ms vector export, zero server — stale fiction. The repo has Express, SQLite, and REST endpoints.
+- **`testingcredentials` is a deployment hazard.** Repo ships a dev auth bypass file for local evaluation. README requires deletion before production; use `ADMIN_USERNAME` / `ADMIN_PASSWORD` instead.
+- **Stock restore on cancel was missing early.** POS inventory must roll back when invoices cancel — caught by API tests.
+- **GST split needs automated tests.** Intra-state CGST+SGST vs inter-state IGST rounding errors show up in audits, not demos.
 
-## Where it stands now
+## Honest limitations
 
-Production build is live. Print-accurate vector PDFs, no login, no tracking pixel on export. Tailwind grids keep the form and preview aligned on desktop; mobile is usable for quick edits before you email the PDF yourself.
+| Limitation | Reality |
+|------------|---------|
+| **Single-node SQLite** | One machine; no built-in multi-store cloud sync |
+| **India-GST focus** | HSN/SGST/CGST/IGST modeled; not generic global tax |
+| **Dev auth bypass file** | Delete `testingcredentials` before any real deployment |
+| **Not jsPDF-in-browser** | Full-stack invoice flow, not a static PDF toy |
+
+## Deep-dive transmissions
+
+Read in order for the full story:
+
+1. [Why Bill Express — local POS for small retail, not a freelancer PDF toy](/transmissions/bill-express-why-and-what/) — origin, scope, portfolio drift confession
+
+## Run it locally
+
+```bash
+git clone https://github.com/dhaatrik/bill-express.git
+cd bill-express
+npm install
+npm run dev
+# http://localhost:3000 — delete testingcredentials before production
+```
+
+Tests: `npm run test` — Vitest + supertest. CI on push.
 
 ## Closing transmission
 
-One page, one job. Open it, invoice someone, close the tab. That's the whole product.
+Products, customers, GST lines, stock movement — daily shop ops in one local stack. If you want the jsPDF lie I had to unwind, start with [why-and-what](/transmissions/bill-express-why-and-what/).
