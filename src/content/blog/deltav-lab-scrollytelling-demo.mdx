@@ -11,6 +11,7 @@ hasMath: true
 series: 'DeltaV Lab'
 ---
 
+import Math from '../../components/Math.astro';
 import Scrollytell from '../../components/Scrollytell.astro';
 
 ```
@@ -178,7 +179,7 @@ The block below is the live instance. Four steps, four visual slots, one launch 
   <div slot="step-2">
     <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-white">Step 2 — Gravity Turn &amp; Max Q</h3>
     <p class="text-sm text-slate-600 dark:text-slate-400">
-      Dynamic pressure peaks when atmosphere is still thick and velocity is climbing. DeltaV Lab exposes `DYNAMIC_PRESSURE` as a flight-computer variable — the worker integrates drag from $q = \frac{1}{2}\rho v^2$ at 50&nbsp;Hz, not a cinematic throttle hack.
+      Dynamic pressure peaks when atmosphere is still thick and velocity is climbing. DeltaV Lab exposes `DYNAMIC_PRESSURE` as a flight-computer variable — the worker integrates drag from <Math expr="q = \frac{1}{2}\rho v^2" /> at 50&nbsp;Hz, not a cinematic throttle hack.
     </p>
     <p class="mt-2 font-mono text-xs text-slate-500">
       This is where I throttle back in the sim before pitching harder — structure matters.
@@ -203,7 +204,7 @@ The block below is the live instance. Four steps, four visual slots, one launch 
       Coast to apoapsis, burn prograde, circularize. DeltaV Lab reads `APOGEE` from the integrator — if you are 200&nbsp;m/s short, you get an ellipse, not a success banner. Export CSV (`E`) and open `analysis.html` if you want the post-flight plot.
     </p>
     <div class="my-3 text-center font-mono text-xs text-slate-800 dark:text-slate-200">
-      $$ v_\{orbit\} = \sqrt{\frac{G \cdot M}{r}} $$
+      <Math expr="v_{\mathrm{orbit}} = \sqrt{\frac{G \cdot M}{r}}" display />
     </div>
     <p class="mt-2 font-mono text-xs text-slate-500">
       Circular LEO at ~251&nbsp;km — teaching profile, not Falcon 9 replay data.
@@ -217,11 +218,11 @@ The block below is the live instance. Four steps, four visual slots, one launch 
 
 The Tsiolkovsky rocket equation is the contract every staging event must respect:
 
-$$ \Delta v = I_\{sp\} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
+<Math expr="\Delta v = I_{sp} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right)" display />
 
 Where:
 
-- $I_\{sp\}$ is specific impulse (seconds) — DeltaV Lab uses separate sea-level and vacuum values per engine.
+- <Math expr="I_{sp}" /> is specific impulse (seconds) — DeltaV Lab uses separate sea-level and vacuum values per engine.
 - $m_0$ is wet mass before the burn; $m_f$ is mass after propellant depletion.
 - Each stage drops dry mass you no longer need to accelerate — that is why asparagus staging memes exist, and why KSP taught us the intuition before the integral did.
 

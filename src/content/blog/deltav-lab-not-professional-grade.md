@@ -5,7 +5,7 @@ pubDate: 2026-06-30
 tags: ['aerospace', 'deltav-lab', 'fuckups', 'simulation']
 clearance: 'PUBLIC'
 readingTime: '12 min'
-hasMath: false
+hasMath: true
 ---
 
 ```

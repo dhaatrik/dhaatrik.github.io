@@ -1,0 +1,19 @@
+---
+import katex from 'katex';
+
+interface Props {
+    /** LaTeX expression (without $ delimiters) */
+    expr: string;
+    /** Render as a centered display equation */
+    display?: boolean;
+}
+
+const { expr, display = false } = Astro.props;
+
+const html = katex.renderToString(expr, {
+    displayMode: display,
+    throwOnError: false,
+});
+---
+
+<Fragment set:html={html} />
