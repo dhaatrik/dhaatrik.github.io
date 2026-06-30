@@ -87,6 +87,20 @@ Technical transmission grounded in professional-rocket-launch-simulation repo so
 
 Honest audit distinguishing implemented rigor from industry trust. verification/ folder contains UI/tooltip tests — no Falcon 9 or Electron flight-telemetry V&V. Gaps from path_to_perfection.md: no Monte Carlo dispersion, no 6DOF/slosh/TVC dynamics, no NRLMSISE-00/ECMWF wind, no Rust/WASM batch backend, no HIL/CCSDS, no pip-install API, no hosted zero-install demo. Browser 50Hz worker cannot scale to 10k-run ensembles. README "hyper-realistic" vs. repo roadmap admitted openly. Teaching sandbox excels; range-safety sign-off does not.
 
+### What Is Next for DeltaV Lab — A Roadmap to Professional-Grade Launch Simulation
+**URL:** https://dhaatrik.github.io/transmissions/deltav-lab-whats-next/
+**Published:** 2026-07-01
+**Tags:** aerospace, deltav-lab, simulation, roadmap
+
+Phased evolution plan from browser teaching sandbox toward commercial trajectory tooling. Trust ladder R0–R7 (runnable → documented → unit-validated → flight-validated → Monte Carlo → toolchain APIs → SIL/HIL → governance). Five implementation phases sourced from path_to_perfection.md: hosted demo + SW hygiene, flight telemetry V&V PDF, Rust/WASM native core + 6DOF + NRLMSISE/ECMWF environments, batch dispersion + public benchmark vs RocketPy/GMAT, 3D viz + GNC/SIL + Python API + optimization + reusability, HIL + dual licensing. NASA-STD-7009 M&S V&V framing. Honest disclaimer: not claiming SpaceX internal replacement — credible validation methodology overlap. Cross-links to limitations, science, native-core migration.
+
+### DeltaV Lab Native Physics Core — Escaping the React/TypeScript Ceiling
+**URL:** https://dhaatrik.github.io/transmissions/deltav-lab-native-physics-core/
+**Published:** 2026-07-01
+**Tags:** aerospace, deltav-lab, rust, wasm, simulation
+
+Technical migration plan: keep React/TypeScript Mission Control and VAB; extract RK4, atmosphere, drag, Monte Carlo, and future 6DOF into Rust crate (deltav-core) with WASM for browser worker and native/Python CLI for batch runs. Strangler-pattern steps: golden JSON fixtures from TS worker, parity tests, WASM drop-in preserving SharedArrayBuffer layout, pyo3 bindings. Language split table (Rust integrator, Python orchestration, C++ FFI for legacy kernels). Commercial scrutiny: determinism, f64 policy, reproducible Docker builds, coverage gates.
+
 ### DeltaV Lab Flight Computer — Teaching Autopilot Without Faking Physics
 **URL:** https://dhaatrik.github.io/transmissions/deltav-lab-flight-computer/
 **Published:** 2026-06-27
@@ -150,7 +164,7 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 ### DeltaV Lab
 - **URL**: https://dhaatrik.github.io/projects/deltav-lab/
 - **GitHub**: https://github.com/dhaatrik/professional-rocket-launch-simulation
-- **Description**: Open-source browser rocket simulation — VAB multi-stage assembly (Merlin/Raptor/RL-10), Mission Control flight with 50Hz RK4 Web Worker physics, SharedArrayBuffer telemetry, DSL flight computer, FTS, instructor fault injector, black box CSV export, analysis.html post-flight view. 2D teaching sandbox — not flight-certified. Key transmissions: deltav-lab-why-and-what, deltav-lab-science, deltav-lab-not-professional-grade.
+- **Description**: Open-source browser rocket simulation — VAB multi-stage assembly (Merlin/Raptor/RL-10), Mission Control flight with 50Hz RK4 Web Worker physics, SharedArrayBuffer telemetry, DSL flight computer, FTS, instructor fault injector, black box CSV export, analysis.html post-flight view. 2D teaching sandbox — not flight-certified. Key transmissions: deltav-lab-why-and-what, deltav-lab-science, deltav-lab-not-professional-grade, deltav-lab-whats-next (professional roadmap), deltav-lab-native-physics-core (Rust/WASM migration).
 
 ### Vellor
 - **URL**: https://dhaatrik.github.io/projects/vellor/

@@ -1,5 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
+/** Dedicated port so e2e does not collide with `npm run dev` / `preview` on 4321. */
+const E2E_PORT = 4325;
+const E2E_BASE_URL = `http://localhost:${E2E_PORT}`;
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -18,7 +22,7 @@ export default defineConfig({
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Base URL to use in actions like `await page.goto('/')`. */
-        baseURL: 'http://localhost:4321',
+        baseURL: E2E_BASE_URL,
 
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
@@ -34,8 +38,8 @@ export default defineConfig({
 
     /* Run your local dev server before starting the tests */
     webServer: {
-        command: 'npm run dev',
-        url: 'http://localhost:4321',
+        command: `npm run dev -- --port ${E2E_PORT}`,
+        url: E2E_BASE_URL,
         reuseExistingServer: !process.env.CI,
         stdout: 'ignore',
         stderr: 'pipe',

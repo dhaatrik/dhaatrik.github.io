@@ -15,6 +15,8 @@
 - [Why DeltaV Lab Exists — and What It Actually Is](https://dhaatrik.github.io/transmissions/deltav-lab-why-and-what/): Honest origin story — KSP intuition vs. STK price tags, VAB + Mission Control scope, audience, and repo link.
 - [The Science Inside DeltaV Lab — Forces, Integration, and Flight Software](https://dhaatrik.github.io/transmissions/deltav-lab-science/): RK4 at 50Hz, gravity/thrust/drag/atmosphere, Tsiolkovsky, DSL flight computer, SharedArrayBuffer worker — sourced from the sim repo.
 - [Why DeltaV Lab Is Not Professional-Grade (Despite What the README Says)](https://dhaatrik.github.io/transmissions/deltav-lab-not-professional-grade/): No published flight V&V, 2D browser limits, simplified environments, gaps from path_to_perfection.md.
+- [What Is Next for DeltaV Lab — A Roadmap to Professional-Grade Launch Simulation](https://dhaatrik.github.io/transmissions/deltav-lab-whats-next/): Trust ladder, phased V&V/Monte Carlo/HIL plan, NASA M&S V&V framing, commercial toolchain requirements — sourced from path_to_perfection.md.
+- [DeltaV Lab Native Physics Core — Escaping the React/TypeScript Ceiling](https://dhaatrik.github.io/transmissions/deltav-lab-native-physics-core/): Rust/C++/Python migration plan — WASM for browser UI, native binaries for batch dispersion, strangler-pattern worker rewrite.
 - [DeltaV Lab Flight Computer — Teaching Autopilot Without Faking Physics](https://dhaatrik.github.io/transmissions/deltav-lab-flight-computer/): WHEN/THEN DSL guidance — parser, condition variables, worker integration.
 - [DeltaV Lab Mission Log: RK4, Web Workers, and the KSP Problem](https://dhaatrik.github.io/transmissions/deltav-lab-mission-log/): Threading diary — SharedArrayBuffer protocol, chatty postMessage fuckup, 50Hz worker contract (physics deep-dives in separate posts).
 - [Vellor Mission Log: Building an Offline OS for Tutors](https://dhaatrik.github.io/transmissions/vellor-power-tutor-log/): Why I built Vellor v4 Power-Tutor — offline-first IndexedDB storage, free tutoring operations, and data privacy for independent educators.
@@ -28,7 +30,7 @@
 
 Each project page includes: IMPACT.LOG (1–5 neon pain-level bar with ARIA role="meter"), [ FUCKUP LOG ] teaser, SYS.STATUS telemetry, and mission tags.
 
-- [DeltaV Lab](https://dhaatrik.github.io/projects/deltav-lab/): Open-source browser rocket sim — VAB, Mission Control, 50Hz RK4 worker, DSL flight computer, FTS, telemetry export. Honest limitations documented in linked transmissions.
+- [DeltaV Lab](https://dhaatrik.github.io/projects/deltav-lab/): Open-source browser rocket sim — VAB, Mission Control, 50Hz RK4 worker, DSL flight computer, FTS, telemetry export. Roadmap transmissions cover professional-grade evolution and native physics core migration.
 - [Vellor](https://dhaatrik.github.io/projects/vellor/): Offline-first note-taking application.
 - [FuelDrop](https://dhaatrik.github.io/projects/fueldrop/): High-concurrency fuel delivery platform.
 - [The Infinite Intelligence](https://dhaatrik.github.io/projects/the-infinite-intelligence/): Multi-agent AI debate system.
