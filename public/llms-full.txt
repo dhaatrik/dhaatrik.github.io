@@ -66,12 +66,40 @@ Features a terminal-style search widget implementing the **WAI-ARIA 1.2 Combobox
 
 ## Blog Posts (Full Summaries)
 
+### Why DeltaV Lab Exists — and What It Actually Is
+**URL:** https://dhaatrik.github.io/transmissions/deltav-lab-why-and-what/
+**Published:** 2026-06-28
+**Tags:** aerospace, deltav-lab, simulation
+
+First-person origin story for DeltaV Lab (github.com/dhaatrik/professional-rocket-launch-simulation). Motivation: bridge Kerbal Space Program intuition and engineering auditability without STK licensing. Defines concrete scope — VAB vehicle assembly, Mission Control flight sim, optional telemetry.html second screen, 50Hz Web Worker physics with SharedArrayBuffer. Audience: students, hobbyists, self — explicitly not range-safety certification. Features: DSL flight computer, FTS, fault injector, checklist, black box CSV export. Honest contrast between README "engineering-grade" marketing and site diary truth. Cross-links to science and limitations transmissions.
+
+### The Science Inside DeltaV Lab — Forces, Integration, and Flight Software
+**URL:** https://dhaatrik.github.io/transmissions/deltav-lab-science/
+**Published:** 2026-06-29
+**Tags:** aerospace, deltav-lab, physics, simulation
+
+Technical transmission grounded in professional-rocket-launch-simulation repo source. Architecture: RK4 integration at FIXED_DT=0.02s (50Hz) in PhysicsWorker.ts, SharedArrayBuffer telemetry, main-thread paint only. Physics: inverse-square gravity, variable-mass thrust with sea-level/vacuum Isp, exponential atmosphere (7km scale height, density LUT to 200km), dynamic pressure drag, layered wind + Dryden gusts, CP-vs-CoM aero stability, thermal ablation. Orbital mechanics: Vis-Viva, Keplerian elements, Hohmann transfers, ground track with Earth rotation. DSL flight computer (WHEN/THEN) with ALTITUDE, VELOCITY, APOGEE, DYNAMIC_PRESSURE conditions. Safety: FTS, checklist, fault injector. Vitest validates analytical cases — not flight telemetry. Notes 2D scope ceiling.
+
+### Why DeltaV Lab Is Not Professional-Grade (Despite What the README Says)
+**URL:** https://dhaatrik.github.io/transmissions/deltav-lab-not-professional-grade/
+**Published:** 2026-06-30
+**Tags:** aerospace, deltav-lab, fuckups, simulation
+
+Honest audit distinguishing implemented rigor from industry trust. verification/ folder contains UI/tooltip tests — no Falcon 9 or Electron flight-telemetry V&V. Gaps from path_to_perfection.md: no Monte Carlo dispersion, no 6DOF/slosh/TVC dynamics, no NRLMSISE-00/ECMWF wind, no Rust/WASM batch backend, no HIL/CCSDS, no pip-install API, no hosted zero-install demo. Browser 50Hz worker cannot scale to 10k-run ensembles. README "hyper-realistic" vs. repo roadmap admitted openly. Teaching sandbox excels; range-safety sign-off does not.
+
+### DeltaV Lab Flight Computer — Teaching Autopilot Without Faking Physics
+**URL:** https://dhaatrik.github.io/transmissions/deltav-lab-flight-computer/
+**Published:** 2026-06-27
+**Tags:** aerospace, deltav-lab, guidance
+
+DSL guidance system in FlightScript.ts / FlightComputer.ts. Syntax: WHEN condition THEN action. Variables: ALTITUDE, VELOCITY, APOGEE, FUEL, TIME, DYNAMIC_PRESSURE, etc. Actions: PITCH, THROTTLE, STAGE, SAS modes, ABORT. Runs in physics worker — same integrator as manual flight. F key editor, G key arm. Educational GNC shape, not SIL/HIL certifiable.
+
 ### DeltaV Lab Mission Log: RK4, Web Workers, and the KSP Problem
 **URL:** https://dhaatrik.github.io/transmissions/deltav-lab-mission-log/
-**Published:** 2026-06-17
+**Published:** 2026-06-17 (updated 2026-06-30)
 **Tags:** aerospace, deltav-lab
 
-First-person engineering mission log on building DeltaV Lab — a browser-based orbital mechanics simulator motivated by Kerbal Space Program's intuitive teaching and the need for mathematically rigorous validation. Covers design constraints (browser-only, deterministic integration, responsive UI), why RK4 was chosen over Euler integration, the 50Hz physics tick contract, Web Worker threading architecture separating UI from physics loop, Vehicle Assembly Building (VAB) design, and stack choices (TypeScript, Vanilla DOM, esbuild, Vitest). Includes Tsiolkovsky rocket equation and validation against analytical Keplerian solutions. Over 1100 words.
+Threading-focused engineering diary. SharedArrayBuffer replaces chatty per-frame postMessage fuckup. 50Hz worker contract, vanilla DOM + esbuild + Vitest stack. Physics derivations and professional-grade audit moved to dedicated transmissions (deltav-lab-why-and-what, deltav-lab-science, deltav-lab-not-professional-grade). Includes Tsiolkovsky equation as teaching anchor.
 
 ### Vellor Mission Log: Building an Offline OS for Tutors
 **URL:** https://dhaatrik.github.io/transmissions/vellor-power-tutor-log/
@@ -121,7 +149,8 @@ First-person scrollytelling demo born from Kerbal Space Program intuition and De
 
 ### DeltaV Lab
 - **URL**: https://dhaatrik.github.io/projects/deltav-lab/
-- **Description**: Real-time orbital mechanics simulation engine using RK4 integration at 50Hz. Simulates gravitational dynamics, orbital transfers, and spacecraft trajectories.
+- **GitHub**: https://github.com/dhaatrik/professional-rocket-launch-simulation
+- **Description**: Open-source browser rocket simulation — VAB multi-stage assembly (Merlin/Raptor/RL-10), Mission Control flight with 50Hz RK4 Web Worker physics, SharedArrayBuffer telemetry, DSL flight computer, FTS, instructor fault injector, black box CSV export, analysis.html post-flight view. 2D teaching sandbox — not flight-certified. Key transmissions: deltav-lab-why-and-what, deltav-lab-science, deltav-lab-not-professional-grade.
 
 ### Vellor
 - **URL**: https://dhaatrik.github.io/projects/vellor/
