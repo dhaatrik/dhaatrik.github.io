@@ -1,43 +1,80 @@
 ---
 title: 'Seamless QR Dining'
-description: 'Scan a table QR, order from your phone, watch kitchen status update live — no waiter relay for every change.'
+description: 'Next.js 16 restaurant demo v3.0.0 — QR table join, customer ordering, kitchen dashboard. Context sync, not WebSocket production infra.'
 logo: '../../assets/seamless-qr-dining.png'
 githubUrl: 'https://github.com/dhaatrik/seamless-qr-dining'
-progress: 'Prototype complete, WebSocket integration verified'
+progress: 'v3.0.0 — demo complete, 77 Jest tests, not production-hardened'
+transmissionTag: 'seamless-qr-dining'
 order: 8
-tags: ['React', 'WebSockets', 'Tailwind CSS', 'Node.js']
+tags: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS 3', 'Framer Motion']
 pain_level: 3
-telemetry: 'STATUS: PROTOTYPE // SYNC: VERIFIED // PROD: PENDING'
-fuckup_teaser: "I ignored WebSocket reconnection states entirely, meaning a customer's order would fail silently if the kitchen server suffered even a temporary connection drop."
+telemetry: 'STATUS: DEMO // SYNC: CONTEXT_IN_MEMORY // TESTS: 77'
+fuckup_teaser: "I described WebSocket reconnect failures on this site — the repo syncs orders via React Context in one Next process, and the real demo bug class is wrong-table identity, not socket drops."
 ---
 
-## SYS.STATUS: Prototype done — table sockets verified, not production-hardened yet
+## SYS.STATUS: v3.0.0 demo — customer + kitchen surfaces, Context order bus, 77 tests
 
-Restaurant ordering still runs on paper tickets and shouted updates. Seamless QR Dining is my prototype for table-side digital ordering with a kitchen dashboard that actually stays in sync.
+[Seamless QR Dining](https://github.com/dhaatrik/seamless-qr-dining) is a **Next.js 16 demo** for contactless table ordering: customers join via `?table=N`, browse a digital menu, customize items, and track order status; kitchen staff use `/kitchen` with a three-column board and audio alerts on new orders.
 
-## Why I started this
+**Real-time** here means **React Context** (`OrderContext`, `AuthContext`) in a single Next process — not a distributed WebSocket server. My portfolio previously claimed WebSockets and a generic Node.js backend; the repo is Next.js end-to-end.
 
-I've watched orders get lost between the table and the kitchen — wrong items, delayed checks, menus that don't update. QR codes get a bad rap as gimmicks, but the underlying idea is sound: **join the customer and kitchen on one channel** without installing an app.
+## What it is (scope)
 
-## What I tried (and what broke)
+| Surface | What you do there |
+|---------|-------------------|
+| **Customer** | Guest menu, cart, item customization, virtual waiter, order tracking |
+| **Kitchen** | New → Active → Completed pipeline, status transitions, audio alerts |
+| **Auth** | Simulated OTP (phone `1234567890`, OTP `1234`) |
+| **Menu** | Static categorized data (starters, mains, desserts, drinks) |
+| **API** | `verify-otp` route for demo authentication |
 
-Scan a table QR → join a table-specific WebSocket channel. Customer submits from a mobile-first React UI; kitchen sees the order on a dashboard. Status changes ("In Prep", "Served") push back instantly — no polling loop burning battery.
+Stack: Next.js 16, React 19, TypeScript, Tailwind CSS 3, Framer Motion, Jest (**77 tests, 18 suites**), GitHub Actions CI.
 
-Node.js coordinates the socket server; Tailwind keeps the customer view readable on small screens. Menu customization hooks exist in the data model — modifiers, quantities — even if the admin UI is still rough.
+## Who I built it for
 
-The verified part from the build: **bidirectional sync between ordering client and kitchen display**. The unverified part: peak-hour load, payment integration, multi-branch menu admin — all still out of scope for this prototype. I'm honest about that gap.
+- Developers exploring dual-surface restaurant UX (customer + kitchen) in one repo
+- Teams evaluating QR table-order flows before investing in socket infra
+- Forkers wanting MIT-licensed ordering **demo** with test coverage
+
+**Not for:** production restaurant ops, payments, multi-branch menu CMS, or multi-instance realtime without additional backend work.
 
 ## Fuckups & learnings
 
-- **WebSockets need room/session identity baked in early**, or you broadcast orders to the wrong table. Ask me how I know.
-- **Kitchen UX is as important as customer UX.** A pretty menu means nothing if the expo screen is unreadable during rush.
-- **Prototype ≠ deployable.** Socket proof is step one; auth, menu CMS, and ops tooling are the long road.
-- **Reconnect handling matters at restaurants.** Wi-Fi in dining rooms is not laboratory conditions.
+- **WebSocket fiction on portfolio.** Reconnect-drop story did not match repo — Context sync replaced sockets for the demo spine.
+- **Table identity matters early.** `?table=N` simulates QR join; without it, orders bleed across tables in demos.
+- **Kitchen UX equals customer UX.** Expo readability during rush is part of the product, not an afterthought.
+- **77 tests ≠ production certification.** They help refactors; they do not replace durable storage or load testing.
 
-## Where it stands now
+## Honest limitations
 
-Core prototype is complete. Socket coordination between customer ordering screens and kitchen control displays is verified end-to-end. Real-time order tracking from submit to served status works in test runs; production hardening is the next chapter if this ever leaves the lab.
+| Limitation | Reality |
+|------------|---------|
+| **In-memory orders** | Context state — not production database |
+| **No payments** | Checkout UI only |
+| **Static menu** | No admin CMS for branches |
+| **Single-instance sync** | Not distributed WebSocket rooms |
+| **Simulated OTP** | Documented test credentials only |
+
+## Deep-dive transmissions
+
+Read in order:
+
+1. [Why QR table ordering — customer + kitchen in one demo](/transmissions/seamless-qr-dining-why-and-what/)
+2. [Tech stack — Next.js 16 and Context order bus](/transmissions/seamless-qr-dining-tech-stack/)
+3. [Prototype honesty — simulated vs real restaurant needs](/transmissions/seamless-qr-dining-prototype-honesty/)
+
+## Run it locally
+
+```bash
+git clone https://github.com/dhaatrik/seamless-qr-dining.git
+cd seamless-qr-dining
+npm install
+npm run dev
+# Customer: http://localhost:3000/?table=1 — Kitchen: /kitchen
+```
+
+Tests: `npm run test` — **77 tests, 18 suites**. CI: lint → test → build.
 
 ## Closing transmission
 
-If you're exploring contactless dining infra, the repo shows the real-time spine. Everything else is homework I'm not pretending is done.
+The demo proves the UX spine — table join, order, kitchen board. Everything ops-heavy is homework I am not pretending is done. Start with [why-and-what](/transmissions/seamless-qr-dining-why-and-what/).
