@@ -1,8 +1,8 @@
 ---
 title: 'Why a Council of Models — Multi-Agent Process vs Single-Shot Certainty'
 description: 'Honest origin story for The Infinite Intelligence v4.0.0: BYOK multi-agent orchestration with HITL, branching, and synthesis — not three generic Gemini roles.'
-pubDate: 2026-07-01
-updatedDate: 2026-07-01
+pubDate: 2026-07-13
+updatedDate: 2026-07-13
 tags: ['infinite-intelligence', 'gemini', 'multi-agent', 'byok']
 clearance: 'PUBLIC'
 readingTime: '11 min'

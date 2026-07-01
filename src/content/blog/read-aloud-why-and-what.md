@@ -1,8 +1,8 @@
 ---
 title: 'Why Read Aloud — Article TTS Without Cloud APIs or Page Noise'
 description: 'Honest origin story for Read Aloud v4.0.0: MV3 chrome.tts extension with article extraction, CSS Highlight API, 59 tests — not Web Speech API.'
-pubDate: 2026-07-01
-updatedDate: 2026-07-01
+pubDate: 2026-07-12
+updatedDate: 2026-07-12
 tags: ['read-aloud', 'chrome-extension', 'mv3', 'accessibility']
 clearance: 'PUBLIC'
 readingTime: '11 min'

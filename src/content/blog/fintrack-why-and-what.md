@@ -1,8 +1,8 @@
 ---
 title: 'Why FinTrack — Expenses vs Growth Spending, Not Guilt-Based Budgeting'
 description: 'Honest origin story for FinTrack v1.0.0: dual-ledger personal finance with Recharts dashboards, Zustand state, JSON backup — not Chart.js, not bank sync.'
-pubDate: 2026-07-01
-updatedDate: 2026-07-01
+pubDate: 2026-07-11
+updatedDate: 2026-07-11
 tags: ['fintrack', 'react', 'zustand', 'recharts']
 clearance: 'PUBLIC'
 readingTime: '10 min'
