@@ -60,13 +60,13 @@ Stack: MV3 service worker, vanilla JS, QUnit + Playwright, ESLint 9, GitHub Acti
 
 1. [Why Read Aloud — article TTS without cloud APIs](/transmissions/read-aloud-why-and-what/)
 
-## Install locally
+## Run it locally
 
 ```bash
 git clone https://github.com/dhaatrik/ReadAloud_ChromeExtension.git
 cd ReadAloud_ChromeExtension
-# chrome://extensions → Developer mode → Load unpacked
 npm install && npm test
+# chrome://extensions → Developer mode → Load unpacked (select repo folder)
 ```
 
 ## Closing transmission

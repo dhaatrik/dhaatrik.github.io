@@ -18,14 +18,16 @@ fuckup_teaser: "I described Vireo as an offline PWA with IndexedDB and a meditat
 
 This page splits **vision** from **shipped** because my portfolio previously claimed IndexedDB, PWA install, and meditation features that are not in the repo.
 
-## Vision (where I want this to go)
+## What it is (scope)
+
+### Vision (where I want this to go)
 
 - Private health journal with data on **your** device — no cloud rent on sensitive notes
 - Offline-first PWA after persistence is wired
 - Real device integrations when APIs exist
 - Calm UX without streak-guilt gamification
 
-## Shipped today (what v2.0.0 proves)
+### Shipped today (what v2.0.0 proves)
 
 | Surface | What you do there |
 |---------|-------------------|
