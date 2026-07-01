@@ -1,8 +1,8 @@
 ---
 title: 'Why QR Table Ordering — Customer + Kitchen Surfaces in One Demo'
 description: 'Honest origin story for Seamless QR Dining v3.0.0: Next.js 16 demo with customer menu and kitchen dashboard — real-time via React Context, not WebSockets.'
-pubDate: 2026-07-01
-updatedDate: 2026-07-01
+pubDate: 2026-07-08
+updatedDate: 2026-07-08
 tags: ['seamless-qr-dining', 'nextjs', 'restaurant', 'demo']
 clearance: 'PUBLIC'
 readingTime: '11 min'

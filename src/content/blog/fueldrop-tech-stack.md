@@ -1,8 +1,8 @@
 ---
 title: 'FuelDrop Tech Stack — React 19, Leaflet, PWA, and What Needs a Backend'
 description: 'Why FuelDrop v3.0.0 is a Vite SPA with Leaflet and vite-plugin-pwa — and what client-only cannot ship for real fuel logistics.'
-pubDate: 2026-07-01
-updatedDate: 2026-07-01
+pubDate: 2026-07-06
+updatedDate: 2026-07-06
 tags: ['fueldrop', 'react', 'leaflet', 'pwa']
 clearance: 'PUBLIC'
 readingTime: '10 min'

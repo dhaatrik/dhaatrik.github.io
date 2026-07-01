@@ -1,8 +1,8 @@
 ---
 title: 'Seamless QR Dining Tech Stack — Next.js 16, Context Order Bus, Component Architecture'
 description: 'Why Seamless QR Dining v3.0.0 uses Next.js App Router and React Context for order sync — not WebSockets or a separate Node socket server.'
-pubDate: 2026-07-01
-updatedDate: 2026-07-01
+pubDate: 2026-07-09
+updatedDate: 2026-07-09
 tags: ['seamless-qr-dining', 'nextjs', 'react', 'context']
 clearance: 'PUBLIC'
 readingTime: '10 min'

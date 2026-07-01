@@ -1,8 +1,8 @@
 ---
 title: 'Why I Built a Deep-Link Handoff Tool — and What It Actually Is (Not Electron)'
 description: 'Honest origin story for Instant App Opener v0.2.0: a Next.js web app that turns social URLs into mobile deep links, QR codes, and Web Share — not a tray launcher.'
-pubDate: 2026-07-01
-updatedDate: 2026-07-01
+pubDate: 2026-06-28
+updatedDate: 2026-06-28
 tags: ['instant-app-opener', 'nextjs', 'deep-links', 'pwa']
 clearance: 'PUBLIC'
 readingTime: '10 min'

@@ -1,8 +1,8 @@
 ---
 title: 'Why FuelDrop — On-Demand Fuel UX Prototype vs Real Logistics'
 description: 'Honest origin story for FuelDrop v3.0.0: frontend-only fuel delivery UX demo with customer + captain surfaces — not WebSocket production logistics.'
-pubDate: 2026-07-01
-updatedDate: 2026-07-01
+pubDate: 2026-07-05
+updatedDate: 2026-07-05
 tags: ['fueldrop', 'react', 'pwa', 'ux-demo']
 clearance: 'PUBLIC'
 readingTime: '11 min'

@@ -1,8 +1,8 @@
 ---
 title: 'MarkPDF Tech Stack — react-markdown, Print CSS, and Syntax Highlighting Tradeoffs'
 description: 'Why MarkPDF v1.0.0 uses react-markdown + remark-gfm + react-syntax-highlighter and exports via browser print — not jsPDF or KaTeX.'
-pubDate: 2026-07-01
-updatedDate: 2026-07-01
+pubDate: 2026-07-03
+updatedDate: 2026-07-03
 tags: ['markpdf', 'react', 'markdown', 'print-css']
 clearance: 'PUBLIC'
 readingTime: '10 min'
