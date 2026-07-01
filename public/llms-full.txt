@@ -214,51 +214,61 @@ Working demo of the site Scrollytell component (src/components/Scrollytell.astro
 
 ### FuelDrop
 - **URL**: https://dhaatrik.github.io/projects/fueldrop/
+- **GitHub**: https://github.com/dhaatrik/fueldrop
 - **Description**: Frontend-only fuel delivery UX demo (v3.0.0) — React 19 SPA with customer ordering, captain dashboard (/captain), fleet mode, Leaflet map UI, vite-plugin-pwa, simulated OTP 1234. No backend, no WebSockets, no payments. MIT licensed.
 - **Transmissions**: https://dhaatrik.github.io/transmissions/fueldrop-why-and-what/ , https://dhaatrik.github.io/transmissions/fueldrop-tech-stack/ , https://dhaatrik.github.io/transmissions/fueldrop-free-demo-scope/
 
 ### The Infinite Intelligence
 - **URL**: https://dhaatrik.github.io/projects/the-infinite-intelligence/
+- **GitHub**: https://github.com/dhaatrik/the-infinite-intelligence
 - **Description**: Client-side BYOK multi-agent council (v4.0.0) — parallel/sequential/round-robin topologies, four-agent default squad, Beta Mode, first-principles phase, HITL steering, session branching, PDF/Markdown export via gemma-4-31b-it. No backend.
 - **Transmissions**: https://dhaatrik.github.io/transmissions/infinite-intelligence-why-and-what/ , https://dhaatrik.github.io/transmissions/infinite-intelligence-tech-stack/ , https://dhaatrik.github.io/transmissions/infinite-intelligence-byok-guardrails/
 
 ### Instant App Opener
 - **URL**: https://dhaatrik.github.io/projects/instant-app-opener/
+- **GitHub**: https://github.com/dhaatrik/instant-app-opener
 - **Description**: Next.js 15 web app (v0.2.0) that parses YouTube, X, LinkedIn, Instagram, Facebook, TikTok, and Spotify URLs into mobile deep-link URIs. Outputs copy, Web Share, and QR handoff. Not Electron, not a tray launcher.
 - **Transmission**: https://dhaatrik.github.io/transmissions/instant-app-opener-why-and-what/
 
 ### Glassbox
 - **URL**: https://dhaatrik.github.io/projects/glassbox/
+- **GitHub**: https://github.com/dhaatrik/glassbox
 - **Description**: Cyberpunk organizational feedback terminal (v4.2.1) — employee signals, drag-and-drop Kanban neural grid, MoM Recharts metrics, Gemini sentiment and AI insight reports. BYOK API key. Not VM2, not a code sandbox.
 - **Transmission**: https://dhaatrik.github.io/transmissions/glassbox-why-and-what/
 
 ### FinTrack
 - **URL**: https://dhaatrik.github.io/projects/expense-vs-investment-tracker/
+- **GitHub**: https://github.com/dhaatrik/expense-vs-investment-tracker
 - **Description**: Mindful dual-ledger personal finance app (v1.0.0) — expenses vs personal investments, Recharts dashboards, Zustand 5, JSON export/import. Client-side, no bank sync. Not Chart.js.
 - **Transmission**: https://dhaatrik.github.io/transmissions/fintrack-why-and-what/
 
 ### Seamless QR Dining
 - **URL**: https://dhaatrik.github.io/projects/seamless-qr-dining/
+- **GitHub**: https://github.com/dhaatrik/seamless-qr-dining
 - **Description**: Next.js 16 restaurant ordering demo (v3.0.0) — QR table join (?table=N), customer menu/cart, kitchen dashboard (/kitchen), React Context order sync, simulated OTP, 77 Jest tests. Not WebSocket production infra, no payments, in-memory orders.
 - **Transmissions**: https://dhaatrik.github.io/transmissions/seamless-qr-dining-why-and-what/ , https://dhaatrik.github.io/transmissions/seamless-qr-dining-tech-stack/ , https://dhaatrik.github.io/transmissions/seamless-qr-dining-prototype-honesty/
 
 ### Vireo Wellness
 - **URL**: https://dhaatrik.github.io/projects/vireo-wellness/
+- **GitHub**: https://github.com/dhaatrik/vireo-wellness
 - **Description**: Wellness UI demo (v2.0.0) — React 19.1 SPA with mock data: dashboard nutrition stats, meal logging, blood glucose charts (Recharts), simulated Bluetooth device pairing. Permanent dark theme. Not PWA, not IndexedDB persistence, not meditation timer.
 - **Transmission**: https://dhaatrik.github.io/transmissions/vireo-wellness-why-and-what/
 
 ### Bill Express
 - **URL**: https://dhaatrik.github.io/projects/bill-express/
+- **GitHub**: https://github.com/dhaatrik/bill-express
 - **Description**: Full-stack India-GST Point of Sale (v1.0.0) — React 19 + Vite 6 frontend, Express + SQLite backend, product inventory (HSN/GST), customer GSTIN directory, B2B/B2C invoices with SGST/CGST/IGST splits. Not client-only jsPDF.
 - **Transmission**: https://dhaatrik.github.io/transmissions/bill-express-why-and-what/
 
 ### MarkPDF
 - **URL**: https://dhaatrik.github.io/projects/free-markdown-to-pdf-converter/
+- **GitHub**: https://github.com/dhaatrik/free-markdown-to-pdf-converter
 - **Description**: Client-only markdown-to-PDF (v1.0.0) — react-markdown + remark-gfm preview, react-syntax-highlighter, typography/margin settings, export via browser print Save as PDF. MIT licensed. No KaTeX, no jsPDF, no server.
 - **Transmissions**: https://dhaatrik.github.io/transmissions/markpdf-why-and-what/ , https://dhaatrik.github.io/transmissions/markpdf-tech-stack/ , https://dhaatrik.github.io/transmissions/markpdf-free-browser-limits/
 
 ### Read Aloud Chrome Extension
 - **URL**: https://dhaatrik.github.io/projects/readaloud_chromeextension/
+- **GitHub**: https://github.com/dhaatrik/ReadAloud_ChromeExtension
 - **Description**: MV3 Chrome extension (v4.0.0) — chrome.tts article reading, Intl.Segmenter sentence split, CSS Custom Highlight API, skip keyboard shortcuts, session persistence across service worker restarts. 59 tests, 141 assertions, CI zip artifact. Not Web Store published.
 - **Transmission**: https://dhaatrik.github.io/transmissions/read-aloud-why-and-what/
 
