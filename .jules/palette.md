@@ -117,3 +117,7 @@
 
 **Learning:** Secondary or less prominent Call-To-Action buttons (like 'Dismiss Report' or 'Recommended Books') often lack default or explicit focus styling, making them invisible to keyboard navigation and failing basic accessibility requirements.
 **Action:** Always ensure that all interactive elements, including secondary and tertiary CTAs, have explicit `focus-visible` ring styles applied using the project's standard utility classes to maintain full keyboard accessibility.
+
+## 2024-07-06 - Improve accessibility for success states
+**Learning:** Button text changes for success states (like "Copied!") are not always reliably announced to screen readers if the element itself lacks `aria-live` or if the text is wrapped in complex DOM structures alongside SVGs.
+**Action:** For interactive buttons that provide feedback by changing text, always ensure a dedicated, visually hidden `aria-live="polite"` region is updated, or apply the attribute directly to the text container, to guarantee reliable announcements.
