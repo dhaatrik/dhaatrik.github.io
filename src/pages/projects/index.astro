@@ -153,9 +153,6 @@ const jsonLd = JSON.stringify(webpageSchema);
                     {
                         projects.map((project: ProjectEntry) => {
                             const telemetryStr = project.data.telemetry;
-                            const [telemetryFirst, ...telemetryRestParts] =
-                                telemetryStr.split('//');
-                            const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const parsed = parseTelemetry(telemetryStr);
                             return (
@@ -174,10 +171,10 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                     />
                                                     <span class="truncate">
                                                         <span class="telemetry-keyword">
-                                                            {telemetryFirst.trim()}
+                                                            {parsed.telemetryFirst.trim()}
                                                         </span>
-                                                        {telemetryRest &&
-                                                            ` // ${telemetryRest.trim()}`}
+                                                        {parsed.telemetryRest &&
+                                                            ` // ${parsed.telemetryRest.trim()}`}
                                                     </span>
                                                 </div>
                                                 <span

@@ -33,8 +33,6 @@ const {
     telemetry: telemetryStr,
 } = project.data;
 const { Content } = await render(project);
-const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
-const telemetryRest = telemetryRestParts.join(' // ');
 const parsed = parseTelemetry(telemetryStr);
 
 const projectSlug = project.id.replace(/\.md$/, '');
@@ -218,7 +216,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                             <div class="type-telemetry flex min-w-0 items-center gap-1.5 font-bold text-slate-900 select-none dark:text-slate-200">
                                 <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`} />
                                 <span class="truncate">
-                                    <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{telemetryRest && ` // ${telemetryRest.trim()}`}
+                                    <span class="telemetry-keyword">{parsed.telemetryFirst.trim()}</span>{parsed.telemetryRest && ` // ${parsed.telemetryRest.trim()}`}
                                 </span>
                             </div>
                         </div>

@@ -1,18 +1,26 @@
 export const currentLearning =
     'Soil chemistry & crop physiology — understanding microbiology, climate variables, and seed biotechnology from first principles.';
 
+const telemetryCache = new Map();
+const emeraldKeywords = ['RUNNING', 'OPERATIONAL', 'ACTIVE', 'LIVE'];
+const amberKeywords = ['V4_IN_DEV', 'IN_DEV', 'PROTOTYPE', 'RESEARCH_ACTIVE', 'PENDING'];
+const cyanKeywords = ['SHIPPED', 'COMPLETED', 'STABLE', 'VERIFIED', 'V4_0_0_SHIPPED'];
+const redKeywords = ['HALTED', 'OFFLINE', 'ERROR'];
+
 export const parseTelemetry = (telemetryStr: string) => {
+    if (telemetryCache.has(telemetryStr)) {
+        return telemetryCache.get(telemetryStr);
+    }
+
+    const [telemetryFirst, ...telemetryRestParts] = telemetryStr.split('//');
+    const telemetryRest = telemetryRestParts.join(' // ');
+
     const match = telemetryStr.match(/STATUS:\s*([A-Z0-9_.-]+)/i);
     const status = match ? match[1].toUpperCase() : 'OPERATIONAL';
 
     let colorClass = 'bg-emerald-500 animate-pulse-emerald';
     let textClass = 'text-emerald-500 dark:text-emerald-400';
     let badgeText = status.replace(/_/g, ' ');
-
-    const emeraldKeywords = ['RUNNING', 'OPERATIONAL', 'ACTIVE', 'LIVE'];
-    const amberKeywords = ['V4_IN_DEV', 'IN_DEV', 'PROTOTYPE', 'RESEARCH_ACTIVE', 'PENDING'];
-    const cyanKeywords = ['SHIPPED', 'COMPLETED', 'STABLE', 'VERIFIED', 'V4_0_0_SHIPPED'];
-    const redKeywords = ['HALTED', 'OFFLINE', 'ERROR'];
 
     if (emeraldKeywords.some((kw) => status.includes(kw))) {
         colorClass = 'bg-emerald-500 animate-pulse-emerald';
@@ -28,12 +36,17 @@ export const parseTelemetry = (telemetryStr: string) => {
         textClass = 'text-red-500 dark:text-red-400';
     }
 
-    return {
+    const result = {
         colorClass,
         textClass,
         badgeText: `[ ${badgeText} ]`,
         status,
+        telemetryFirst,
+        telemetryRest,
     };
+
+    telemetryCache.set(telemetryStr, result);
+    return result;
 };
 
 export const getPainLevelLabel = (level: number): string => {
