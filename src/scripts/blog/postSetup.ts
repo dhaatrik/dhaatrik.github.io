@@ -131,14 +131,17 @@ export async function setupPost() {
                 a.click();
                 URL.revokeObjectURL(blobUrl);
 
-                const textSpan = exportJsonBtn.querySelector('span');
+                const textSpan = exportJsonBtn.querySelector('span[aria-hidden="true"]');
+                const liveRegion = exportJsonBtn.querySelector('.sr-only');
                 if (textSpan) {
                     const originalText = textSpan.innerText;
                     textSpan.innerText = '~ $ export_completed';
                     textSpan.classList.add('text-(--accent)');
+                    if (liveRegion) liveRegion.textContent = 'Export completed';
                     setTimeout(() => {
                         textSpan.innerText = originalText;
                         textSpan.classList.remove('text-(--accent)');
+                        if (liveRegion) liveRegion.textContent = '';
                     }, 2000);
                 }
             },
@@ -153,14 +156,17 @@ export async function setupPost() {
             async () => {
                 try {
                     await navigator.clipboard.writeText(window.location.href);
-                    const textSpan = copyLinkBtn.querySelector('span');
+                    const textSpan = copyLinkBtn.querySelector('span[aria-hidden="true"]');
+                    const liveRegion = copyLinkBtn.querySelector('.sr-only');
                     if (textSpan) {
                         const originalText = textSpan.innerText;
                         textSpan.innerText = '~ $ copied_to_clipboard';
                         textSpan.classList.add('text-(--accent)');
+                        if (liveRegion) liveRegion.textContent = 'Copied to clipboard';
                         setTimeout(() => {
                             textSpan.innerText = originalText;
                             textSpan.classList.remove('text-(--accent)');
+                            if (liveRegion) liveRegion.textContent = '';
                         }, 2000);
                     }
                 } catch (err) {
@@ -326,14 +332,17 @@ export async function setupPost() {
                 a.click();
                 URL.revokeObjectURL(url);
 
-                const textSpan = exportOfflineBtn.querySelector('span');
+                const textSpan = exportOfflineBtn.querySelector('span[aria-hidden="true"]');
+                const liveRegion = exportOfflineBtn.querySelector('.sr-only');
                 if (textSpan) {
                     const originalText = textSpan.innerText;
                     textSpan.innerText = '~ $ export_archived';
                     textSpan.classList.add('text-(--accent)');
+                    if (liveRegion) liveRegion.textContent = 'Export completed';
                     setTimeout(() => {
                         textSpan.innerText = originalText;
                         textSpan.classList.remove('text-(--accent)');
+                        if (liveRegion) liveRegion.textContent = '';
                     }, 2000);
                 }
             },
@@ -588,9 +597,12 @@ export async function setupPost() {
                         </div>
                         <div class="flex items-center gap-4">
                             <div aria-hidden="true" class="font-mono text-[10px] tracking-widest text-slate-400">${lang}</div>
-                            <button class="copy-btn opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-(--accent) cursor-pointer" aria-label="Copy code" aria-live="polite">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                COPY
+                            <button class="copy-btn opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-(--accent) cursor-pointer" aria-label="Copy code">
+                                <span class="sr-only" aria-live="polite"></span>
+                                <span aria-hidden="true" class="copy-btn-content flex items-center gap-1.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                    COPY
+                                </span>
                             </button>
                         </div>
                     `;
@@ -687,17 +699,25 @@ export async function setupPost() {
             async () => {
                 try {
                     await navigator.clipboard.writeText(pre.innerText);
-                    copyBtn.innerHTML = `
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                                OK
-                            `;
+                    const contentSpan = copyBtn.querySelector('.copy-btn-content');
+                    const liveRegion = copyBtn.querySelector('.sr-only');
+                    if (contentSpan) {
+                        contentSpan.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            OK
+                        `;
+                    }
                     copyBtn.classList.add('!text-green-400');
+                    if (liveRegion) liveRegion.textContent = 'Copied code';
                     setTimeout(() => {
-                        copyBtn.innerHTML = `
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                    COPY
-                                    `;
+                        if (contentSpan) {
+                            contentSpan.innerHTML = `
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                COPY
+                                `;
+                        }
                         copyBtn.classList.remove('!text-green-400');
+                        if (liveRegion) liveRegion.textContent = '';
                     }, 2000);
                 } catch (e) {}
             },

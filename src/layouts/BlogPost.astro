@@ -93,7 +93,15 @@ const breadcrumbSchema = JSON.stringify({
 <!doctype html>
 <html lang="en" class="scroll-smooth">
     <head>
-        <BaseHead title={title} description={description} image={heroImage} type="article" pubDate={pubDate} updatedDate={updatedDate} keywords={tags} />
+        <BaseHead
+            title={title}
+            description={description}
+            image={heroImage}
+            type="article"
+            pubDate={pubDate}
+            updatedDate={updatedDate}
+            keywords={tags}
+        />
         <!-- Article-specific JSON-LD -->
         <script is:inline type="application/ld+json" set:html={articleSchema} />
         <!-- Breadcrumb JSON-LD -->
@@ -116,7 +124,11 @@ const breadcrumbSchema = JSON.stringify({
         </div>
 
         <Header />
-        <main id="main-content" tabindex="-1" class="layout-container grow py-(--section-gap-mobile) md:py-(--section-gap-desktop)">
+        <main
+            id="main-content"
+            tabindex="-1"
+            class="layout-container grow py-(--section-gap-mobile) md:py-(--section-gap-desktop)"
+        >
             <div class="blog-reveal blog-reveal-1 mb-8">
                 <a
                     href="/transmissions"
@@ -254,7 +266,7 @@ const breadcrumbSchema = JSON.stringify({
 
                     <div id="rendered-content-container" class="blog-reveal blog-reveal-2">
                         <div
-                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 marker:text-(--accent) prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800"
+                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 marker:text-(--accent)"
                         >
                             <slot />
                         </div>
@@ -353,6 +365,7 @@ const breadcrumbSchema = JSON.stringify({
                                 aria-label="Copy post link"
                                 class="flex w-full cursor-pointer items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-(--bg-main)"
                             >
+                                <span class="sr-only" aria-live="polite"></span>
                                 <span aria-hidden="true">~ $ copy --link</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -375,6 +388,7 @@ const breadcrumbSchema = JSON.stringify({
                                 aria-label="Export to JSON metadata"
                                 class="flex w-full cursor-pointer items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-(--bg-main)"
                             >
+                                <span class="sr-only" aria-live="polite"></span>
                                 <span aria-hidden="true">~ $ export --to-json-metadata</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -399,6 +413,7 @@ const breadcrumbSchema = JSON.stringify({
                                 aria-label="Export offline transmission"
                                 class="flex w-full cursor-pointer items-center justify-between rounded bg-slate-100 p-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-(--bg-main)"
                             >
+                                <span class="sr-only" aria-live="polite"></span>
                                 <span aria-hidden="true">~ $ export --offline-transmission</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -433,7 +448,10 @@ const breadcrumbSchema = JSON.stringify({
                                         <div class="bg-grid-motif absolute inset-0 opacity-10 dark:opacity-30" />
                                         <div class="relative z-10 flex h-full flex-col justify-between gap-4">
                                             <span class="font-mono text-[10px] tracking-widest text-slate-400">
-                                                &larr; {isSeriesNav ? 'PREVIOUS IN SERIES' : 'PREVIOUS LOG'}
+                                                &larr;{' '}
+                                                {isSeriesNav
+                                                    ? 'PREVIOUS IN SERIES'
+                                                    : 'PREVIOUS LOG'}
                                             </span>
                                             <span class="font-bold text-balance text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
                                                 {prevPost.data.title}
@@ -501,7 +519,7 @@ const breadcrumbSchema = JSON.stringify({
                 {
                     headings.length > 0 ? (
                         <aside class="blog-reveal blog-reveal-4 sticky top-24 hidden max-h-[calc(100vh-8rem)] w-full overflow-y-auto pr-2 lg:block">
-                            <div class="rounded-xl p-4 premium-glass">
+                            <div class="premium-glass rounded-xl p-4">
                                 <h3 class="mb-4 flex items-center gap-2 font-mono text-[10px] tracking-widest text-slate-500 uppercase">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
