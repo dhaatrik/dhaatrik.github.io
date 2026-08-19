@@ -38,7 +38,7 @@ I am fixing that gap here. The vision is not fake; the **shipped scope** was mis
 
 Three frustrations stacked:
 
-1. **Health tracking UIs feel fragmented.** Calories in one app, glucose in another, device pairing screens that look like afterthoughts. I wanted one calm, mobile-optimized surface that *feels* like a native wellness app.
+1. **Health tracking UIs feel fragmented.** Calories in one app, glucose in another, device pairing screens that look like afterthoughts. I wanted one calm, mobile-optimized surface that _feels_ like a native wellness app.
 
 2. **Privacy matters for health data.** I still believe sensitive notes belong on **your** device, not my server. That intent shaped the design — dark theme, no accounts in the demo, no analytics pipeline. But intent without persistence wiring is **vision**, not **shipped product**.
 
@@ -52,13 +52,13 @@ Vireo today is a **UI prototype**, not the private offline journal I advertised.
 
 As of **v2.0.0**, the repo delivers:
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Dashboard** | Nutrition "Eaten" stats, interactive blood glucose chart (mock-populated) |
-| **Daily Meals** | Log Breakfast/Lunch/Dinner/Snack from built-in food DB with macros |
-| **Devices** | Simulated Bluetooth scan, pairing animation, battery/status UI |
-| **Timeline** | Date picker to navigate past logs and future goals |
-| **Theme** | Permanent dark mode via Tailwind CSS v4 |
+| Surface         | What you do there                                                         |
+| --------------- | ------------------------------------------------------------------------- |
+| **Dashboard**   | Nutrition "Eaten" stats, interactive blood glucose chart (mock-populated) |
+| **Daily Meals** | Log Breakfast/Lunch/Dinner/Snack from built-in food DB with macros        |
+| **Devices**     | Simulated Bluetooth scan, pairing animation, battery/status UI            |
+| **Timeline**    | Date picker to navigate past logs and future goals                        |
+| **Theme**       | Permanent dark mode via Tailwind CSS v4                                   |
 
 Stack: React 19.1, TypeScript 5.8, Vite 6, Tailwind 4, Recharts, Framer Motion, React Router 7, Vitest + Playwright in devDependencies.
 
@@ -68,13 +68,13 @@ Stack: React 19.1, TypeScript 5.8, Vite 6, Tailwind 4, Recharts, Framer Motion, 
 
 ### Mission Report: Vision vs Shipped (Be Explicit)
 
-| Vision (why I care) | Shipped (what the repo proves today) |
-|---------------------|--------------------------------------|
-| Offline-first private journal | Client-side SPA; **no PWA install path wired** |
-| Data stays on your device | **Mock data** — nothing persists across refresh unless you add storage |
-| Meditation timer | **Not implemented** in this repo |
-| Real device pairing | **Simulated** pairing UX only |
-| IndexedDB persistence | **Not shipped** — my portfolio claimed it; README does not |
+| Vision (why I care)           | Shipped (what the repo proves today)                                   |
+| ----------------------------- | ---------------------------------------------------------------------- |
+| Offline-first private journal | Client-side SPA; **no PWA install path wired**                         |
+| Data stays on your device     | **Mock data** — nothing persists across refresh unless you add storage |
+| Meditation timer              | **Not implemented** in this repo                                       |
+| Real device pairing           | **Simulated** pairing UX only                                          |
+| IndexedDB persistence         | **Not shipped** — my portfolio claimed it; README does not             |
 
 I am not abandoning the vision. I am stopping the lie that v2.0.0 already is the journal.
 

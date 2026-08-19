@@ -52,13 +52,13 @@ FuelDrop is a **UX prototype** for on-demand fuel flows — not a production dis
 
 As of **v3.0.0**:
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Customer app** | OTP login (simulated `1234`), vehicle garage, order by liters/rupees, promo codes, 60s edit grace period |
-| **Captain dashboard** (`/captain`) | Accept orders, status pipeline, Google Maps deep link navigate |
-| **Fleet mode** (`/fleet`) | Bulk multi-vehicle checkout demo |
-| **Map UI** | Leaflet-based tracking presentation — client state, not live telematics |
-| **PWA** | `vite-plugin-pwa` for installable demo |
+| Surface                            | What you do there                                                                                        |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Customer app**                   | OTP login (simulated `1234`), vehicle garage, order by liters/rupees, promo codes, 60s edit grace period |
+| **Captain dashboard** (`/captain`) | Accept orders, status pipeline, Google Maps deep link navigate                                           |
+| **Fleet mode** (`/fleet`)          | Bulk multi-vehicle checkout demo                                                                         |
+| **Map UI**                         | Leaflet-based tracking presentation — client state, not live telematics                                  |
+| **PWA**                            | `vite-plugin-pwa` for installable demo                                                                   |
 
 Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Leaflet, Motion, react-hook-form + Zod, Vitest.
 

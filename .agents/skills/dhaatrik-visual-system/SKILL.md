@@ -8,6 +8,7 @@ description: Use this skill for designing, implementing, or refactoring any visu
 **Core Purpose:** This skill maintains and evolves the premium sci-fi terminal / mission-control visual language of the site. It ensures every element feels like part of a cohesive, high-fidelity "engineering headquarters" while staying performant and true to the honest, brotherly diary tone.
 
 ## When to Activate This Skill
+
 - Creating or updating any UI component (cards, drawers, headers, footers, status badges, search, telemetry)
 - Implementing glassmorphism, neon glows, or blueprint effects
 - Refining typography, spacing, or visual hierarchy
@@ -16,6 +17,7 @@ description: Use this skill for designing, implementing, or refactoring any visu
 - Any visual polish task (especially when following the 10 premium improvements)
 
 **Mandatory Pairing:** Combine with:
+
 - `dhaatrik-astro-site` for technical implementation
 - `dhaatrik-mission-report` when styling project content
 - `dhaatrik-writing-style` for tone-consistent microcopy in UI
@@ -23,6 +25,7 @@ description: Use this skill for designing, implementing, or refactoring any visu
 Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 
 ## Core Design Principles
+
 1. **Sci-Fi Mission Control First** — Every screen should feel like part of a high-tech engineering cockpit.
 2. **Glassmorphism as Foundation** — Semi-transparent backgrounds + backdrop-blur + subtle borders + soft inner glow.
 3. **Neon Accents** — Cyan (#67e8f9) and blue-purple (#a5b4fc) glows on interactive elements, status, and highlights. Use sparingly for impact.
@@ -31,67 +34,98 @@ Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 6. **Premium but Restrained** — High visual quality without sacrificing performance or readability. Respect `prefers-reduced-motion`.
 7. **Honest & Human** — Visuals support the transparent, brotherly voice — nothing feels corporate or overly polished.
 
-## Design Tokens (Define Once, Use Everywhere)
-Use CSS custom properties in `src/styles/global.css` or a dedicated design-tokens file:
+## Design Tokens & Architecture (Tailwind v4 + CSS Properties)
+
+Styles are organized modularly in `src/styles/`:
+
+- `src/styles/tokens.css` — Animated CSS properties (`@property`) and color variables
+- `src/styles/glass.css` — Canonical `.glass-surface`, `.glass-chrome`, `.bento-card` components
+- `src/styles/motion.css` — Scroll cues, blueprint reveal, and keyframe animations
+- `src/styles/typography.css` — Prose typography and code styling
+- `src/styles/global.css` — Tailwind v4 imports (`@import 'tailwindcss'`), `@custom-variant dark`, and custom utilities
+
+### CSS Custom Properties & Tokens
 
 ```css
-:root {
-  /* Glassmorphism */
-  --glass-bg: rgba(15, 23, 42, 0.75);
-  --glass-border: rgba(148, 163, 184, 0.2);
-  --glass-blur: 16px;
-
-  /* Neon Accents */
-  --neon-cyan: #67e8f9;
-  --neon-purple: #a5b4fc;
-  --neon-glow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-
-  /* Blueprint */
-  --blueprint-grid: rgba(148, 163, 184, 0.08);
-  --blueprint-line: rgba(148, 163, 184, 0.15);
-
-  /* Status Colors */
-  --status-running: #22c55e;
-  --status-dev: #eab308;
-  --status-shipped: #3b82f6;
-
-  /* Typography & Spacing */
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+/* Animated CSS properties in tokens.css */
+@property --glass-bg-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.35;
 }
+@property --glass-border-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.08;
+}
+@property --neon-glow-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+@property --blueprint-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.02;
+}
+
+/* Theme colors in global.css */
+--neon-cyan: #67e8f9;
+--neon-purple: #a5b4fc;
+--status-running: #22c55e;
+--status-dev: #eab308;
+--status-shipped: #3b82f6;
 ```
 
-**Dark/Light Mode:** Use Tailwind `dark:` variants + CSS variables that change in dark mode.
+### Tailwind v4 Custom GPU Utilities
+
+Use these hardware-accelerated utilities from `global.css`:
+
+- `transition-gpu` — 300ms cubic-bezier transition on transform, opacity, filter, backdrop-filter.
+- `promote-gpu` — will-change: transform, opacity.
+- `transition-bento` — 300ms cubic-bezier transition on transform, opacity, background, border, shadow.
+- `transition-spring` — spring-bounce easing (`--ease-spring-bounce`) for tactile feedback.
+
+**Dark/Light Mode:** Uses class-based dark mode (`@custom-variant dark (&:where(.dark, .dark *));`) toggled via `ThemeToggle.astro`.
 
 ## Component Patterns
 
 ### Glassmorphic Cards & Panels
-- Background: `bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)]`
-- Border: `border border-[var(--glass-border)]`
-- Subtle inner glow on hover/focus
+
+- Base class: `.glass-surface` or `.bento-card`
+- Header variant: `.glass-chrome`
+- Drawer variant: `.glass-drawer`
+- Background & Blur: driven by `--glass-bg-opacity` and `--glass-border-opacity` with backdrop-filter blur
+- Blueprint grid overlay: injected automatically via `::after` pseudo-element with clip-path wipe
 - Rounded corners: `rounded-2xl` or `rounded-3xl`
 
 ### Status Telemetry Badges
+
 - Monospace font
 - Small pulsing animation (CSS keyframes, respect reduced-motion)
 - Color-coded by status (running = green, in-dev = yellow, shipped = blue)
 - Example: `STATUS: V4_IN_DEV // DB: OFF_LINE_FIRST`
 
 ### Interactive Elements
+
 - Subtle lift on hover (`transition-transform hover:-translate-y-0.5`)
 - Neon glow on focus/active for primary actions
 - Smooth color transitions
 
 ### Hero & Section Backgrounds
+
 - Blueprint grid overlay (light SVG or CSS repeating-linear-gradient)
 - Parallax or subtle movement only if performant
 - Large centered logo watermark (low opacity)
 
 ### Mobile Drawer
+
 - Same glassmorphism treatment as desktop panels
 - Smooth slide + backdrop
 - Clear close affordance with terminal-style text
 
 ## Animation & Micro-Interaction Rules
+
 - **Preferred Method**: Pure CSS transitions + keyframes (fastest, most reliable on GitHub Pages)
 - Use `transition-all`, `transition-colors`, `transition-transform`
 - Subtle scale, lift, or glow changes on hover/focus
@@ -100,6 +134,7 @@ Use CSS custom properties in `src/styles/global.css` or a dedicated design-token
 - Never use heavy libraries (Framer Motion etc.) unless absolutely necessary
 
 ## Typography & Hierarchy
+
 - Headings: Poppins (bold, good weight range)
 - Body: Nunito (excellent readability)
 - Status / Terminal text: Monospace
@@ -107,6 +142,7 @@ Use CSS custom properties in `src/styles/global.css` or a dedicated design-token
 - Optical sizing and text-balance where supported
 
 ## Implementation Workflow
+
 1. Define or extend tokens in CSS custom properties
 2. Build component in `src/components/` using Tailwind + the tokens
 3. Add subtle interactions with CSS
@@ -115,6 +151,7 @@ Use CSS custom properties in `src/styles/global.css` or a dedicated design-token
 6. Ensure it works inside Mission Reports and general pages
 
 ## Pro Tips for Agents
+
 - When the user says “make it more premium”, default to deeper glassmorphism + better neon restraint + tighter spacing.
 - Always ask: “Does this feel like Mission Control?” before finalizing visuals.
 - Prioritize readability and emotional tone over pure aesthetics.

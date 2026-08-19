@@ -94,12 +94,12 @@ Earth radius $R_\oplus = 6{,}371{,}000\,\mathrm{m}$. Gravitational parameter $\m
 
 The `OrbitalMechanics.ts` module computes:
 
-| Quantity | Method |
-|----------|--------|
-| Apoapsis / periapsis | Keplerian elements from $\mathbf{r}$, $\mathbf{v}$ |
-| Circularization Δv | Vis-Viva: $v^2 = \mu\left(\frac{2}{r} - \frac{1}{a}\right)$ |
-| Hohmann transfer | Two-burn plan with transfer time $T/2$ |
-| Ground track | Spherical trig from downrange + Earth rotation ($\Omega_\oplus \approx 7.29\times10^{-5}\,\mathrm{rad/s}$) |
+| Quantity             | Method                                                                                                     |
+| -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Apoapsis / periapsis | Keplerian elements from $\mathbf{r}$, $\mathbf{v}$                                                         |
+| Circularization Δv   | Vis-Viva: $v^2 = \mu\left(\frac{2}{r} - \frac{1}{a}\right)$                                                |
+| Hohmann transfer     | Two-burn plan with transfer time $T/2$                                                                     |
+| Ground track         | Spherical trig from downrange + Earth rotation ($\Omega_\oplus \approx 7.29\times10^{-5}\,\mathrm{rad/s}$) |
 
 Launch site defaults to Cape Canaveral-ish coordinates in the module. The sim is **2D in the flight plane** — out-of-plane inclination is modeled through ground-track math, not full 3D attitude.
 
@@ -111,7 +111,7 @@ Thrust comes from staged engines with sea-level and vacuum **specific impulse** 
 
 The rocket equation — the contract every staging event must respect:
 
-$$ \Delta v = I_{sp} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
+$$ \Delta v = I\_{sp} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
 
 The VAB computes Δv and TWR live so you see whether your stack can reach orbit **before** you ignite. When you launch, the sim integrates. If you come up 200 m/s short, you get an ellipse. No fake success banner.
 
@@ -170,12 +170,12 @@ The worker's `FlightComputer` evaluates scripts each tick; outputs override thro
 
 These are not cosmetic — they exercise the same worker command bus:
 
-| System | Role |
-|--------|------|
-| **Flight Termination System** | Corridor monitoring, arm timers, violation states |
-| **Launch Checklist** | Pre-launch Go/No-Go gates |
-| **Fault Injector** | Engine failures, leaks, sensor noise for training scenarios |
-| **Black Box / CSV Export** | High-rate telemetry for `analysis.html` post-processing |
+| System                        | Role                                                        |
+| ----------------------------- | ----------------------------------------------------------- |
+| **Flight Termination System** | Corridor monitoring, arm timers, violation states           |
+| **Launch Checklist**          | Pre-launch Go/No-Go gates                                   |
+| **Fault Injector**            | Engine failures, leaks, sensor noise for training scenarios |
+| **Black Box / CSV Export**    | High-rate telemetry for `analysis.html` post-processing     |
 
 ---
 

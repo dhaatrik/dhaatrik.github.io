@@ -54,13 +54,13 @@ Bill Express is **not** "invoice once and close the tab." It is a **daily operat
 
 As of **v1.0.0**, Bill Express ships:
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Dashboard** | Gross sales, top products, low-stock alerts (Recharts) |
-| **Products** | CRUD with HSN, GST rates, stock tracking |
-| **Customers** | Directory with GSTIN and lifetime metrics |
-| **Invoices** | B2B/B2C billing, discounts, SGST/CGST/IGST split, canceled invoices restore stock |
-| **REST API** | Programmatic product/analytics endpoints |
+| Surface       | What you do there                                                                 |
+| ------------- | --------------------------------------------------------------------------------- |
+| **Dashboard** | Gross sales, top products, low-stock alerts (Recharts)                            |
+| **Products**  | CRUD with HSN, GST rates, stock tracking                                          |
+| **Customers** | Directory with GSTIN and lifetime metrics                                         |
+| **Invoices**  | B2B/B2C billing, discounts, SGST/CGST/IGST split, canceled invoices restore stock |
+| **REST API**  | Programmatic product/analytics endpoints                                          |
 
 Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Express, `better-sqlite3`, react-hook-form, Recharts, Pino logging, express-rate-limit, Vitest + supertest.
 

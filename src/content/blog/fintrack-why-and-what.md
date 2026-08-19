@@ -27,7 +27,7 @@ seriesOrder: 1
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
-Hey. My portfolio tagged FinTrack with **Chart.js**. The repo at **v1.0.0** uses **Recharts** for area and pie charts. Small drift, easy fix — the bigger story is *why* I split ledgers at all.
+Hey. My portfolio tagged FinTrack with **Chart.js**. The repo at **v1.0.0** uses **Recharts** for area and pie charts. Small drift, easy fix — the bigger story is _why_ I split ledgers at all.
 
 Most budget apps treat your gym membership, course fee, and mutual fund SIP the same way: money out, guilt in. FinTrack separates **depreciating spend** from **growth-oriented spending** — including personal investments in yourself — so your dashboard tells two stories, not one blurred bucket.
 
@@ -51,13 +51,13 @@ FinTrack is a mindful finance **mirror**, not a unicorn neobank.
 
 As of **v1.0.0**:
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Dashboard** | Expense vs investment ratios, income/expense area charts (Recharts) |
-| **Transactions** | Log income and expenses by category |
-| **Personal investments** | Track growth spending (courses, health, skills) separately |
-| **Savings goals** | Progress bars toward targets |
-| **Settings** | Currency, categories, light/dark mode, **JSON export/import** |
+| Surface                  | What you do there                                                   |
+| ------------------------ | ------------------------------------------------------------------- |
+| **Dashboard**            | Expense vs investment ratios, income/expense area charts (Recharts) |
+| **Transactions**         | Log income and expenses by category                                 |
+| **Personal investments** | Track growth spending (courses, health, skills) separately          |
+| **Savings goals**        | Progress bars toward targets                                        |
+| **Settings**             | Currency, categories, light/dark mode, **JSON export/import**       |
 
 Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Zustand 5, Recharts, Motion, Vitest.
 

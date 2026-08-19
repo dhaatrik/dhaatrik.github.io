@@ -39,15 +39,15 @@ I am writing this update because I need to correct something embarrassing: an ea
 
 Version 4.0 was the **Tutor OS** pivot — Vellor stopped being "a roster with vibes" and became daily ops tooling for private tutors. As of **v4.2.0**, that includes:
 
-| Capability | What it does for a tutor |
-|------------|--------------------------|
-| Student roster + search | Names, parents, rates, subjects — filter in real time |
-| Lesson + payment logging | Quick-log modal, floating action button, status badges |
-| Calendar | Drag-and-drop scheduling with absent/cancelled reschedule prompts |
-| Invoicing | PDF statements, WhatsApp share links, overdue reminders |
-| Client portals | Read-only Base64 URL snapshots for parents |
-| Gamification | Points, ranks, 25+ achievements — optional motivation layer |
-| Offline PWA | Installable, works without network after first load |
+| Capability               | What it does for a tutor                                          |
+| ------------------------ | ----------------------------------------------------------------- |
+| Student roster + search  | Names, parents, rates, subjects — filter in real time             |
+| Lesson + payment logging | Quick-log modal, floating action button, status badges            |
+| Calendar                 | Drag-and-drop scheduling with absent/cancelled reschedule prompts |
+| Invoicing                | PDF statements, WhatsApp share links, overdue reminders           |
+| Client portals           | Read-only Base64 URL snapshots for parents                        |
+| Gamification             | Points, ranks, 25+ achievements — optional motivation layer       |
+| Offline PWA              | Installable, works without network after first load               |
 
 The [why-and-what transmission](/transmissions/vellor-why-and-what/) explains who this is for. The [tech-stack transmission](/transmissions/vellor-tech-stack/) explains why React + Zustand + Vite instead of a heavier framework. This log is what broke while shipping.
 

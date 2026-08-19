@@ -52,12 +52,12 @@ Seamless QR Dining is a **restaurant ordering demo** — proof that customer and
 
 As of **v3.0.0**:
 
-| Surface | What you do there |
-|---------|-------------------|
+| Surface                    | What you do there                                               |
+| -------------------------- | --------------------------------------------------------------- |
 | **Customer** (`/?table=1`) | Guest menu, cart, customization, virtual waiter, order tracking |
-| **Kitchen** (`/kitchen`) | Three-column pipeline (New → Active → Completed), audio alerts |
-| **Auth** | Optional simulated OTP (phone `1234567890`, OTP `1234`) |
-| **Order bus** | `OrderContext` + `AuthContext` — in-memory sync |
+| **Kitchen** (`/kitchen`)   | Three-column pipeline (New → Active → Completed), audio alerts  |
+| **Auth**                   | Optional simulated OTP (phone `1234567890`, OTP `1234`)         |
+| **Order bus**              | `OrderContext` + `AuthContext` — in-memory sync                 |
 
 Stack: Next.js 16, React 19, TypeScript, Tailwind CSS 3, Framer Motion, Jest (77 tests, 18 suites), GitHub Actions CI.
 

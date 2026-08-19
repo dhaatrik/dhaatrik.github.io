@@ -45,13 +45,13 @@ This transmission is the dull-truth companion to [why-and-what](/transmissions/i
 
 ### Mission Report: Cost Drivers
 
-| Knob | Effect |
-|------|--------|
-| **Agent count** | Four defaults (+ Beta-generated squad) multiplies calls |
-| **Topology** | Parallel fires simultaneously; round-robin iterates |
-| **Critique rounds** | Up to 5 configured — each round re-spends tokens |
-| **Prompt size** | First-principles + synthesis context grows fast |
-| **Export** | PDF generation is local; API cost already sunk |
+| Knob                | Effect                                                  |
+| ------------------- | ------------------------------------------------------- |
+| **Agent count**     | Four defaults (+ Beta-generated squad) multiplies calls |
+| **Topology**        | Parallel fires simultaneously; round-robin iterates     |
+| **Critique rounds** | Up to 5 configured — each round re-spends tokens        |
+| **Prompt size**     | First-principles + synthesis context grows fast         |
+| **Export**          | PDF generation is local; API cost already sunk          |
 
 v4 shows **token and cost metrics** in UI — visibility, not automatic caps.
 
@@ -72,12 +72,12 @@ Lessons baked into how I talk about v4:
 
 ### Mission Report: Honest Limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **No persistence server** | Refresh loses in-tab session unless you export |
-| **Debate can amplify noise** | Bad Critic prompts worsen answers |
-| **Model string drift** | README model id must match code config |
-| **Latency stacks** | Council feels slow — honesty in UI progress matters |
+| Limitation                   | Reality                                             |
+| ---------------------------- | --------------------------------------------------- |
+| **No persistence server**    | Refresh loses in-tab session unless you export      |
+| **Debate can amplify noise** | Bad Critic prompts worsen answers                   |
+| **Model string drift**       | README model id must match code config              |
+| **Latency stacks**           | Council feels slow — honesty in UI progress matters |
 
 ---
 

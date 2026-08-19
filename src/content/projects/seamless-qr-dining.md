@@ -9,7 +9,7 @@ order: 8
 tags: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS 3', 'Framer Motion']
 pain_level: 3
 telemetry: 'STATUS: DEMO // SYNC: CONTEXT_IN_MEMORY // TESTS: 77'
-fuckup_teaser: "I described WebSocket reconnect failures on this site — the repo syncs orders via React Context in one Next process, and the real demo bug class is wrong-table identity, not socket drops."
+fuckup_teaser: 'I described WebSocket reconnect failures on this site — the repo syncs orders via React Context in one Next process, and the real demo bug class is wrong-table identity, not socket drops.'
 ---
 
 ## SYS.STATUS: v3.0.0 demo — customer + kitchen surfaces, Context order bus, 77 tests
@@ -20,13 +20,13 @@ fuckup_teaser: "I described WebSocket reconnect failures on this site — the re
 
 ## What it is (scope)
 
-| Surface | What you do there |
-|---------|-------------------|
+| Surface      | What you do there                                                    |
+| ------------ | -------------------------------------------------------------------- |
 | **Customer** | Guest menu, cart, item customization, virtual waiter, order tracking |
-| **Kitchen** | New → Active → Completed pipeline, status transitions, audio alerts |
-| **Auth** | Simulated OTP (phone `1234567890`, OTP `1234`) |
-| **Menu** | Static categorized data (starters, mains, desserts, drinks) |
-| **API** | `verify-otp` route for demo authentication |
+| **Kitchen**  | New → Active → Completed pipeline, status transitions, audio alerts  |
+| **Auth**     | Simulated OTP (phone `1234567890`, OTP `1234`)                       |
+| **Menu**     | Static categorized data (starters, mains, desserts, drinks)          |
+| **API**      | `verify-otp` route for demo authentication                           |
 
 Stack: Next.js 16, React 19, TypeScript, Tailwind CSS 3, Framer Motion, Jest (**77 tests, 18 suites**), GitHub Actions CI.
 
@@ -47,13 +47,13 @@ Stack: Next.js 16, React 19, TypeScript, Tailwind CSS 3, Framer Motion, Jest (**
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **In-memory orders** | Context state — not production database |
-| **No payments** | Checkout UI only |
-| **Static menu** | No admin CMS for branches |
-| **Single-instance sync** | Not distributed WebSocket rooms |
-| **Simulated OTP** | Documented test credentials only |
+| Limitation               | Reality                                 |
+| ------------------------ | --------------------------------------- |
+| **In-memory orders**     | Context state — not production database |
+| **No payments**          | Checkout UI only                        |
+| **Static menu**          | No admin CMS for branches               |
+| **Single-instance sync** | Not distributed WebSocket rooms         |
+| **Simulated OTP**        | Documented test credentials only        |
 
 ## Deep-dive transmissions
 

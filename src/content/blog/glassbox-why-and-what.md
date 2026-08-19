@@ -54,12 +54,12 @@ Glassbox is **not** a security product. It does not run untrusted JavaScript in 
 
 As of **v4.2.1**, Glassbox is a React + Vite internal feedback management demo:
 
-| Surface | What you do there |
-|---------|-------------------|
-| **New Signal** | Submit feedback by department; Gemini classifies sentiment at intake |
+| Surface         | What you do there                                                                 |
+| --------------- | --------------------------------------------------------------------------------- |
+| **New Signal**  | Submit feedback by department; Gemini classifies sentiment at intake              |
 | **Neural Grid** | Drag-and-drop Kanban (`@hello-pangea/dnd`); filter by department, status, keyword |
-| **Metrics** | MoM volume trends via Recharts; AI Insight button for executive summaries |
-| **Terminal UI** | Cyberpunk aesthetic with Motion animations |
+| **Metrics**     | MoM volume trends via Recharts; AI Insight button for executive summaries         |
+| **Terminal UI** | Cyberpunk aesthetic with Motion animations                                        |
 
 Under the hood:
 

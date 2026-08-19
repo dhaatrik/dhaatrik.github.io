@@ -51,14 +51,14 @@ Read Aloud is minimal: extract primary content, speak sentences, highlight the a
 
 As of **v4.0.0**:
 
-| Surface | What you do there |
-|---------|-------------------|
+| Surface        | What you do there                                               |
+| -------------- | --------------------------------------------------------------- |
 | **Extraction** | `<article>`, `<main>`, role=main heuristics; selection override |
-| **Playback** | Play/pause/stop via `chrome.tts`; survives popup close |
-| **Highlight** | CSS Custom Highlight API (graceful fallback) |
-| **Navigation** | Alt+Shift+Left/Right skip sentences; Alt+Shift+P toggle |
-| **Settings** | Voice + speed (0.5×–2.0×) via `chrome.storage.sync` |
-| **Resilience** | Session state backup for MV3 worker restarts |
+| **Playback**   | Play/pause/stop via `chrome.tts`; survives popup close          |
+| **Highlight**  | CSS Custom Highlight API (graceful fallback)                    |
+| **Navigation** | Alt+Shift+Left/Right skip sentences; Alt+Shift+P toggle         |
+| **Settings**   | Voice + speed (0.5×–2.0×) via `chrome.storage.sync`             |
+| **Resilience** | Session state backup for MV3 worker restarts                    |
 
 Stack: Manifest V3, vanilla JavaScript, `chrome.tts`, Intl.Segmenter, QUnit + Playwright, ESLint 9, GitHub Actions (lint → test → zip artifact).
 

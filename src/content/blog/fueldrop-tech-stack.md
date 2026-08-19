@@ -33,15 +33,15 @@ FuelDrop's stack is chosen to **move pixels fast** on mobile — not to run a di
 
 ### Mission Report: What I Picked (Client-Side)
 
-| Layer | Choice | Why |
-|-------|--------|-----|
-| **UI** | React 19 + Vite 6 | Concurrent-friendly UI for multi-step order flows |
-| **Forms** | react-hook-form + Zod | Typed checkout, fleet mode, promo validation |
-| **Maps** | Leaflet + react-leaflet | Familiar map tiles for tracking **presentation** |
-| **Motion** | Motion | Status transitions, sheets, neo-brutalist delight |
-| **Routing** | react-router-dom | Customer routes + `/captain` + `/fleet` |
-| **PWA** | vite-plugin-pwa | Installable demo on phones |
-| **Tests** | Vitest + RTL | Order flow and component regressions |
+| Layer       | Choice                  | Why                                               |
+| ----------- | ----------------------- | ------------------------------------------------- |
+| **UI**      | React 19 + Vite 6       | Concurrent-friendly UI for multi-step order flows |
+| **Forms**   | react-hook-form + Zod   | Typed checkout, fleet mode, promo validation      |
+| **Maps**    | Leaflet + react-leaflet | Familiar map tiles for tracking **presentation**  |
+| **Motion**  | Motion                  | Status transitions, sheets, neo-brutalist delight |
+| **Routing** | react-router-dom        | Customer routes + `/captain` + `/fleet`           |
+| **PWA**     | vite-plugin-pwa         | Installable demo on phones                        |
+| **Tests**   | Vitest + RTL            | Order flow and component regressions              |
 
 No Express. No Socket.io. No database driver. That is the point.
 
@@ -49,14 +49,14 @@ No Express. No Socket.io. No database driver. That is the point.
 
 ### Mission Report: What Needs a Backend (Not Shipped)
 
-| Capability | Why client-only is not enough |
-|------------|------------------------------|
-| **Real dispatch** | Captain assignment must be authoritative server-side |
-| **Live GPS** | Telematics ingest + fan-out to customers |
-| **Payments** | PCI, refunds, surge pricing settlement |
-| **Auth** | Real OTP via SMS gateway — demo uses hardcoded `1234` |
-| **Order persistence** | Multi-device truth, audit logs, dispute resolution |
-| **WebSockets** | Stale marker problem needs server-coordinated state |
+| Capability            | Why client-only is not enough                         |
+| --------------------- | ----------------------------------------------------- |
+| **Real dispatch**     | Captain assignment must be authoritative server-side  |
+| **Live GPS**          | Telematics ingest + fan-out to customers              |
+| **Payments**          | PCI, refunds, surge pricing settlement                |
+| **Auth**              | Real OTP via SMS gateway — demo uses hardcoded `1234` |
+| **Order persistence** | Multi-device truth, audit logs, dispute resolution    |
+| **WebSockets**        | Stale marker problem needs server-coordinated state   |
 
 My portfolio claimed WebSocket tracking. The repo demonstrates **map UI states** — different layer.
 

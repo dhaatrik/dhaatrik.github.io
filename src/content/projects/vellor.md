@@ -3,13 +3,13 @@ title: 'Vellor'
 description: 'Free MIT-licensed tutoring-management PWA — students, lessons, payments, invoices, offline on your device. Not note-taking; not SaaS.'
 logo: '../../assets/vellor.png'
 githubUrl: 'https://github.com/dhaatrik/vellor'
-progress: "v4.2.0 — Power-Tutor era (Tutor OS from v4.0)"
+progress: 'v4.2.0 — Power-Tutor era (Tutor OS from v4.0)'
 transmissionTag: 'vellor'
 order: 1
 tags: ['React 19', 'TypeScript 5.7', 'Zustand 5', 'Vite 6', 'Tailwind CSS 3', 'PWA']
 pain_level: 3
 telemetry: 'STATUS: SHIPPED // DB: LOCAL_ENCRYPTED // SYNC: MANUAL_EXPORT'
-fuckup_teaser: "I misdocumented Vellor as note-taking with IndexedDB on this site — the repo encrypts to localStorage with AES-GCM, and I nearly buried invoicing under RPG-style gamification chrome."
+fuckup_teaser: 'I misdocumented Vellor as note-taking with IndexedDB on this site — the repo encrypts to localStorage with AES-GCM, and I nearly buried invoicing under RPG-style gamification chrome.'
 ---
 
 ## SYS.STATUS: v4.2.0 shipped — offline-first tutoring OS, no backend, still my daily driver
@@ -22,14 +22,14 @@ This page is the honest counterweight to README marketing adjectives. Vellor is 
 
 Vellor manages the weekly rhythm of a private tutoring business:
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Dashboard** | Monthly income, unpaid fees, active students, overdue alerts, income charts |
-| **Students** | Roster with parents, rates, subjects, lesson + payment history |
+| Surface          | What you do there                                                             |
+| ---------------- | ----------------------------------------------------------------------------- |
+| **Dashboard**    | Monthly income, unpaid fees, active students, overdue alerts, income charts   |
+| **Students**     | Roster with parents, rates, subjects, lesson + payment history                |
 | **Transactions** | Quick-log lessons, payment statuses (Paid/Due/Partial/Overpaid), bulk actions |
-| **Calendar** | Drag-and-drop scheduling; reschedule prompts on absent/cancelled |
-| **Achievements** | Points, ranks, 25+ badges — optional motivation layer |
-| **Settings** | White-label logo/accent, theme, currency, export/import, secure reset |
+| **Calendar**     | Drag-and-drop scheduling; reschedule prompts on absent/cancelled              |
+| **Achievements** | Points, ranks, 25+ badges — optional motivation layer                         |
+| **Settings**     | White-label logo/accent, theme, currency, export/import, secure reset         |
 
 v4.0 was the **Tutor OS** pivot. **v4.2.0** adds WhatsApp payment reminders, PDF invoicing, client portals (read-only Base64 URLs), financial forecasting charts, CSV import, keyboard shortcuts (`Ctrl+K`, `Ctrl+L`, `Shift+P`), and proactive offline/backup UX.
 
@@ -59,12 +59,12 @@ I previously claimed IndexedDB on this site. That was wrong. See the [Power-Tuto
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **Multi-device sync** | Not shipped — export/import or wait for opt-in cloud sync on roadmap |
-| **localStorage size** | Large multi-year rosters need periodic export as archive |
-| **Private browsing** | Storage may not persist — not fixable in-app |
-| **Scope creep pressure** | Every tutor wants different features; OS discipline required |
+| Limitation               | Reality                                                              |
+| ------------------------ | -------------------------------------------------------------------- |
+| **Multi-device sync**    | Not shipped — export/import or wait for opt-in cloud sync on roadmap |
+| **localStorage size**    | Large multi-year rosters need periodic export as archive             |
+| **Private browsing**     | Storage may not persist — not fixable in-app                         |
+| **Scope creep pressure** | Every tutor wants different features; OS discipline required         |
 
 ## Deep-dive transmissions
 

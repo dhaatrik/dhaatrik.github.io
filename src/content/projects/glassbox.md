@@ -20,12 +20,12 @@ This page replaces stale portfolio copy that wrongly described a **VM2-isolated 
 
 ## What it is (scope)
 
-| Surface | What you do there |
-|---------|-------------------|
-| **New Signal** | Submit department feedback; AI classifies POSITIVE/NEGATIVE/NEUTRAL at intake |
-| **Neural Grid** | Kanban board with drag-and-drop; filter by department, status, keyword |
-| **Metrics** | MoM volume trends (Recharts); trigger AI insight synthesis |
-| **Terminal UI** | Cyberpunk mission-control aesthetic with Motion animations |
+| Surface         | What you do there                                                             |
+| --------------- | ----------------------------------------------------------------------------- |
+| **New Signal**  | Submit department feedback; AI classifies POSITIVE/NEGATIVE/NEUTRAL at intake |
+| **Neural Grid** | Kanban board with drag-and-drop; filter by department, status, keyword        |
+| **Metrics**     | MoM volume trends (Recharts); trigger AI insight synthesis                    |
+| **Terminal UI** | Cyberpunk mission-control aesthetic with Motion animations                    |
 
 Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Recharts, `@hello-pangea/dnd`, `@google/genai`, Express, better-sqlite3, Vitest.
 
@@ -48,11 +48,11 @@ Requires **`VITE_GEMINI_API_KEY`** — BYOK inference costs apply.
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **Not a security sandbox** | No VM2, no untrusted script execution, no fs/network audit |
-| **BYOK Gemini** | You supply API key and pay inference costs |
-| **Demo/internal shape** | Not multi-tenant SaaS or production HRIS out of the box |
+| Limitation                 | Reality                                                            |
+| -------------------------- | ------------------------------------------------------------------ |
+| **Not a security sandbox** | No VM2, no untrusted script execution, no fs/network audit         |
+| **BYOK Gemini**            | You supply API key and pay inference costs                         |
+| **Demo/internal shape**    | Not multi-tenant SaaS or production HRIS out of the box            |
 | **Sentiment trust limits** | Sarcasm, coded language, and cultural context can fool classifiers |
 
 ## Deep-dive transmissions

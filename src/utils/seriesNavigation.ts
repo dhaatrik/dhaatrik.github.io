@@ -7,9 +7,7 @@ function sortByPubDate(posts: BlogPostEntry[]): BlogPostEntry[] {
 }
 
 function sortBySeriesOrder(posts: BlogPostEntry[]): BlogPostEntry[] {
-    return [...posts].sort(
-        (a, b) => (a.data.seriesOrder ?? 999) - (b.data.seriesOrder ?? 999)
-    );
+    return [...posts].sort((a, b) => (a.data.seriesOrder ?? 999) - (b.data.seriesOrder ?? 999));
 }
 
 export function resolvePrevNext(

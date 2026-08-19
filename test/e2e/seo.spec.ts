@@ -21,7 +21,7 @@ test.describe('SEO and Metadata Verification', () => {
         // Check schema.org JSON-LD
         const schemas = await page.locator('script[type="application/ld+json"]').all();
         expect(schemas.length).toBeGreaterThan(0);
-        
+
         let foundPerson = false;
         for (const schema of schemas) {
             const content = await schema.innerText();
@@ -69,16 +69,19 @@ test.describe('SEO and Metadata Verification', () => {
         await expect(page.locator('text=DeltaV Lab').first()).toBeVisible();
         await expect(page.getByRole('link', { name: /PREVIOUS IN SERIES/i })).toBeVisible();
         await expect(page.getByRole('link', { name: /NEXT IN SERIES/i })).toBeVisible();
-        await expect(
-            page.getByRole('link', { name: /PREVIOUS IN SERIES/i })
-        ).toHaveAttribute('href', '/transmissions/deltav-lab-why-and-what/');
+        await expect(page.getByRole('link', { name: /PREVIOUS IN SERIES/i })).toHaveAttribute(
+            'href',
+            '/transmissions/deltav-lab-why-and-what/'
+        );
         await expect(page.getByRole('link', { name: /NEXT IN SERIES/i })).toHaveAttribute(
             'href',
             '/transmissions/deltav-lab-not-professional-grade/'
         );
     });
 
-    test('robots.txt and sitemap should be reachable and correctly structured', async ({ page }) => {
+    test('robots.txt and sitemap should be reachable and correctly structured', async ({
+        page,
+    }) => {
         const robotsResponse = await page.goto('/robots.txt');
         expect(robotsResponse?.status()).toBe(200);
         const robotsText = await robotsResponse?.text();
@@ -94,7 +97,9 @@ test.describe('SEO and Metadata Verification', () => {
         }
     });
 
-    test('project detail page should contain project logo as OpenGraph and Twitter images', async ({ page }) => {
+    test('project detail page should contain project logo as OpenGraph and Twitter images', async ({
+        page,
+    }) => {
         await page.goto('/projects/deltav-lab/');
         await page.waitForLoadState('networkidle');
 

@@ -1,5 +1,5 @@
 ---
-title: 'Seamless QR Dining — What''s Simulated vs What a Real Restaurant Would Need'
+title: "Seamless QR Dining — What's Simulated vs What a Real Restaurant Would Need"
 description: 'Honest limits of Seamless QR Dining v3.0.0: in-memory orders, simulated OTP, no payments — and what production contactless dining actually requires.'
 pubDate: 2026-07-10
 updatedDate: 2026-07-10
@@ -34,28 +34,28 @@ Seamless QR Dining v3.0.0 is **demo v3** — not "production pending" in the sen
 
 ### Mission Report: What's Simulated Today
 
-| Area | Demo behavior |
-|------|---------------|
-| **Table join** | URL param `?table=N` stands in for QR scan |
-| **Orders** | In-memory via React Context — lost on server restart |
-| **Menu** | Static data files — not admin CMS |
-| **OTP auth** | Phone `1234567890`, OTP `1234` |
-| **Payments** | UI selection only — no gateway |
-| **Real-time** | Same-process Context — not WebSocket rooms across instances |
+| Area           | Demo behavior                                               |
+| -------------- | ----------------------------------------------------------- |
+| **Table join** | URL param `?table=N` stands in for QR scan                  |
+| **Orders**     | In-memory via React Context — lost on server restart        |
+| **Menu**       | Static data files — not admin CMS                           |
+| **OTP auth**   | Phone `1234567890`, OTP `1234`                              |
+| **Payments**   | UI selection only — no gateway                              |
+| **Real-time**  | Same-process Context — not WebSocket rooms across instances |
 
 ---
 
 ### Mission Report: What a Real Restaurant Would Need
 
-| Capability | Why the demo stops short |
-|------------|-------------------------|
-| **Durable order store** | Postgres/Firestore + idempotent writes |
-| **Multi-device sync** | WebSockets/SSE or poll with authoritative server |
-| **Payments** | PCI, refunds, split bills, tips |
-| **Menu CMS** | Branch-specific items, 86'd dishes, modifiers |
-| **Staff roles** | AuthZ for kitchen vs manager vs corporate |
-| **Uptime & monitoring** | Rush-hour Friday is not `npm run dev` |
-| **Compliance** | Tax receipts, local regulations — locale-specific |
+| Capability              | Why the demo stops short                          |
+| ----------------------- | ------------------------------------------------- |
+| **Durable order store** | Postgres/Firestore + idempotent writes            |
+| **Multi-device sync**   | WebSockets/SSE or poll with authoritative server  |
+| **Payments**            | PCI, refunds, split bills, tips                   |
+| **Menu CMS**            | Branch-specific items, 86'd dishes, modifiers     |
+| **Staff roles**         | AuthZ for kitchen vs manager vs corporate         |
+| **Uptime & monitoring** | Rush-hour Friday is not `npm run dev`             |
+| **Compliance**          | Tax receipts, local regulations — locale-specific |
 
 77 tests prove **the demo spine is tested** — not that Friday rush at scale is solved.
 

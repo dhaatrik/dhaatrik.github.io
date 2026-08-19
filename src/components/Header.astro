@@ -10,7 +10,10 @@ const displayPath = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
 function formatHeaderPath(path: string): string {
     if (path.length <= 34) return path;
 
-    const segments = path.replace(/^~\/home\/?/, '').split('/').filter(Boolean);
+    const segments = path
+        .replace(/^~\/home\/?/, '')
+        .split('/')
+        .filter(Boolean);
     if (segments.length === 0) return '~/home';
     if (segments.length === 1) return `~/home/${segments[0]}`;
 
@@ -69,7 +72,10 @@ const displayPathShort = formatHeaderPath(displayPath);
 
     /* Hamburger Line Animations */
     .hamburger-line {
-        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+        transition:
+            transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+            opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+            background-color 0.3s ease;
     }
     #mobile-nav-toggle.open .hamburger-line:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
@@ -86,13 +92,13 @@ const displayPathShort = formatHeaderPath(displayPath);
     #mobile-nav-drawer {
         display: none;
         opacity: 0;
-        transition: 
+        transition:
             transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
             opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
             display 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         transition-behavior: allow-discrete;
     }
-    
+
     #mobile-nav-drawer.translate-x-0 {
         display: flex;
         opacity: 1;
@@ -104,11 +110,11 @@ const displayPathShort = formatHeaderPath(displayPath);
             opacity: 0;
         }
     }
-    
+
     #mobile-nav-backdrop {
         display: none;
         opacity: 0;
-        transition: 
+        transition:
             opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
             display 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         transition-behavior: allow-discrete;
@@ -125,13 +131,12 @@ const displayPathShort = formatHeaderPath(displayPath);
         }
     }
 
-
     /* Staggered items animation when drawer is open */
     #mobile-nav-drawer .drawer-item {
         opacity: 0;
         transform: translateX(16px);
-        transition: 
-            opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+        transition:
+            opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
             transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
             background-color 0.3s ease,
             color 0.3s ease;
@@ -142,18 +147,30 @@ const displayPathShort = formatHeaderPath(displayPath);
         transform: translateX(0);
     }
 
-    #mobile-nav-drawer.open .drawer-item:nth-child(1) { transition-delay: 0.08s; }
-    #mobile-nav-drawer.open .drawer-item:nth-child(2) { transition-delay: 0.12s; }
-    #mobile-nav-drawer.open .drawer-item:nth-child(3) { transition-delay: 0.16s; }
-    #mobile-nav-drawer.open .drawer-item:nth-child(4) { transition-delay: 0.20s; }
-    #mobile-nav-drawer.open .drawer-item:nth-child(5) { transition-delay: 0.24s; }
-    #mobile-nav-drawer.open .drawer-item:nth-child(6) { transition-delay: 0.28s; }
+    #mobile-nav-drawer.open .drawer-item:nth-child(1) {
+        transition-delay: 0.08s;
+    }
+    #mobile-nav-drawer.open .drawer-item:nth-child(2) {
+        transition-delay: 0.12s;
+    }
+    #mobile-nav-drawer.open .drawer-item:nth-child(3) {
+        transition-delay: 0.16s;
+    }
+    #mobile-nav-drawer.open .drawer-item:nth-child(4) {
+        transition-delay: 0.2s;
+    }
+    #mobile-nav-drawer.open .drawer-item:nth-child(5) {
+        transition-delay: 0.24s;
+    }
+    #mobile-nav-drawer.open .drawer-item:nth-child(6) {
+        transition-delay: 0.28s;
+    }
 
     #mobile-nav-drawer .drawer-telemetry {
         opacity: 0;
         transform: translateY(12px);
-        transition: 
-            opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+        transition:
+            opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
             transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -301,10 +318,7 @@ const displayPathShort = formatHeaderPath(displayPath);
     Skip to content
 </a>
 
-<header
-    id="main-header"
-    class="glass-surface glass-chrome fixed top-0 z-50 w-full"
->
+<header id="main-header" class="glass-surface glass-chrome fixed top-0 z-50 w-full">
     <nav
         id="main-nav"
         class="layout-container flex items-center justify-between gap-3 py-4 transition-colors duration-300 ease-in-out"
@@ -347,15 +361,18 @@ const displayPathShort = formatHeaderPath(displayPath);
                     >
                         DHAATRIK
                         <span class="relative flex h-1.5 w-1.5">
-                            <span class="absolute inline-flex h-full w-full animate-pulse-emerald rounded-full bg-emerald-500 opacity-75"></span>
-                            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                            <span
+                                class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
+                            ></span>
+                            <span
+                                class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+                            ></span>
                         </span>
                     </span>
                     <span
                         id="header-brand-path"
                         class="mt-1 hidden font-mono text-[10px] leading-none tracking-widest text-(--accent) opacity-80 sm:block"
-                        title={displayPath}
-                        >{displayPathShort}</span
+                        title={displayPath}>{displayPathShort}</span
                     >
                 </div>
             </div>
@@ -428,7 +445,7 @@ const displayPathShort = formatHeaderPath(displayPath);
         </div>
     </nav>
 </header>
- 
+
 <div
     id="mobile-nav-backdrop"
     class="pointer-events-none fixed inset-0 z-40 bg-slate-950/40 opacity-0 backdrop-blur-md md:hidden"
@@ -499,7 +516,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     {item.isActive && (
                         <span class="absolute top-2 bottom-2 left-0 w-1 rounded-r-md bg-(--accent) shadow-[0_0_8px_var(--accent)]" />
                     )}
-                    <div class="flex items-center gap-3 group-hover/link:translate-x-1 group-focus-visible/link:translate-x-1 transition-transform duration-300">
+                    <div class="flex items-center gap-3 transition-transform duration-300 group-hover/link:translate-x-1 group-focus-visible/link:translate-x-1">
                         <span
                             class:list={[
                                 'text-[10px] transition-colors',
@@ -545,25 +562,39 @@ const displayPathShort = formatHeaderPath(displayPath);
             <span class="text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
                 >SYS.STATUS</span
             >
-            <div class="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
+            <div
+                class="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400"
+            >
                 <span class="relative flex h-1.5 w-1.5">
                     <span
-                        class="absolute inline-flex h-full w-full animate-pulse-emerald rounded-full bg-emerald-500 opacity-75"
+                        class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
                     ></span>
-                    <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                    <span
+                        class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+                    ></span>
                 </span>
                 <span class="text-[9px] tracking-widest uppercase">ACTIVE</span>
             </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-2 border-t border-dashed border-slate-200/60 pt-3 dark:border-white/5">
+        <div
+            class="grid grid-cols-2 gap-2 border-t border-dashed border-slate-200/60 pt-3 dark:border-white/5"
+        >
             <div class="flex flex-col gap-0.5">
-                <span class="text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500">SYS.CORES</span>
-                <span id="drawer-sys-cores" class="font-semibold text-slate-700 dark:text-slate-300">—</span>
+                <span class="text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
+                    >SYS.CORES</span
+                >
+                <span id="drawer-sys-cores" class="font-semibold text-slate-700 dark:text-slate-300"
+                    >—</span
+                >
             </div>
             <div class="flex flex-col gap-0.5">
-                <span class="text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500">SYS.RTT</span>
-                <span id="drawer-sys-rtt" class="font-semibold text-slate-700 dark:text-slate-300">—</span>
+                <span class="text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
+                    >SYS.RTT</span
+                >
+                <span id="drawer-sys-rtt" class="font-semibold text-slate-700 dark:text-slate-300"
+                    >—</span
+                >
             </div>
         </div>
 
@@ -619,7 +650,7 @@ const displayPathShort = formatHeaderPath(displayPath);
             const currentScroll = window.scrollY;
 
             // Shrink header and add subtle shadow on scroll (JS fallback only)
-                if (!hasScrollTimeline) {
+            if (!hasScrollTimeline) {
                 if (currentScroll > 50) {
                     nav.classList.remove('py-4');
                     nav.classList.add('py-2');
@@ -722,7 +753,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                 toggleBtn.classList.remove('open');
                 toggleBtn.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
-                
+
                 // Clear inline style overrides immediately so the transition runs smoothly
                 drawer.style.transform = '';
                 backdrop.style.opacity = '';
@@ -844,11 +875,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                                 navEntry.responseStart - navEntry.requestStart
                             );
                             const label =
-                                latencyMs < 50
-                                    ? 'FAST'
-                                    : latencyMs < 200
-                                      ? 'STABLE'
-                                      : 'SLOW';
+                                latencyMs < 50 ? 'FAST' : latencyMs < 200 ? 'STABLE' : 'SLOW';
                             rttEl.textContent = `${latencyMs}ms // ${label}`;
                         } else {
                             rttEl.textContent = '—';

@@ -56,14 +56,14 @@ Vellor is not a venture pitch. It is the tool I wanted when I was the tutor squi
 
 Vellor is a **free, open-source Progressive Web App** for managing a private tutoring business. As of **v4.2.0**, the README lists seven major capability areas from the v4 "Tutor OS" update plus Power-Tutor essentials.
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Dashboard** | Monthly income, unpaid fees, active students, overdue alerts, 6-month income charts |
-| **Students** | Roster with contact info, parent details, rates, subjects, full lesson/payment history |
-| **Transactions** | Log lessons, track Paid/Due/Partially Paid/Overpaid, bulk actions |
-| **Calendar** | Drag-and-drop scheduling; smart reschedule prompts on absent/cancelled |
-| **Achievements** | Points, ranks, 25+ badges — optional motivation (see [gamification trap](/transmissions/vellor-gamification-trap/)) |
-| **Settings / Profile** | Theme, currency, white-label logo/accent, data export/import, secure reset |
+| Surface                | What you do there                                                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Dashboard**          | Monthly income, unpaid fees, active students, overdue alerts, 6-month income charts                                 |
+| **Students**           | Roster with contact info, parent details, rates, subjects, full lesson/payment history                              |
+| **Transactions**       | Log lessons, track Paid/Due/Partially Paid/Overpaid, bulk actions                                                   |
+| **Calendar**           | Drag-and-drop scheduling; smart reschedule prompts on absent/cancelled                                              |
+| **Achievements**       | Points, ranks, 25+ badges — optional motivation (see [gamification trap](/transmissions/vellor-gamification-trap/)) |
+| **Settings / Profile** | Theme, currency, white-label logo/accent, data export/import, secure reset                                          |
 
 Under the hood:
 

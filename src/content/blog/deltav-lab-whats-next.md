@@ -32,7 +32,7 @@ You read [why DeltaV Lab is not professional-grade](/transmissions/deltav-lab-no
 
 This one is the engineering plan: **what would have to exist** for a trajectory analyst at a serious launch company — think SpaceX-adjacent flight dynamics, not literal "I work on Falcon 9" name-dropping — to open DeltaV Lab without laughing me out of the room.
 
-I am not promising I will finish all of this alone. I am documenting the gap between [what we built](/transmissions/deltav-lab-why-and-what/) and what the industry calls *validated, operational, toolchain-integrated simulation*. My repo already sketches this in [`path_to_perfection.md`](https://github.com/dhaatrik/professional-rocket-launch-simulation/blob/main/path_to_perfection.md). This transmission turns that doc into a teachable arc you can challenge.
+I am not promising I will finish all of this alone. I am documenting the gap between [what we built](/transmissions/deltav-lab-why-and-what/) and what the industry calls _validated, operational, toolchain-integrated simulation_. My repo already sketches this in [`path_to_perfection.md`](https://github.com/dhaatrik/professional-rocket-launch-simulation/blob/main/path_to_perfection.md). This transmission turns that doc into a teachable arc you can challenge.
 
 Pair with [the science post](/transmissions/deltav-lab-science/) for current physics, [limitations](/transmissions/deltav-lab-not-professional-grade/) for today's gaps, and [native physics core migration](/transmissions/deltav-lab-native-physics-core/) for the React/TypeScript → Rust/C++/Python rewrite I think is non-negotiable.
 
@@ -42,16 +42,16 @@ Pair with [the science post](/transmissions/deltav-lab-science/) for current phy
 
 Professional-grade here does **not** mean "pretty 3D rocket." It means a **verification story** a responsible engineer can sign:
 
-| Rung | What the team asks | DeltaV Lab today | Target state |
-|------|-------------------|------------------|--------------|
-| **R0 — Runnable** | Does it launch without cheating? | Yes — RK4 worker, no scripted orbit wins | Keep |
-| **R1 — Documented** | Are assumptions written down? | Partial — code + transmissions, no Theory Manual | 100+ page theory manual + requirements matrix |
-| **R2 — Unit-validated** | Do analytical cases pass? | Vitest Kepler/staging checks | Expand + **CI fails** on regression |
-| **R3 — Flight-validated** | Does it match flown telemetry? | **No** published overlays | Falcon 9 / Electron / Starship public data, <2% error tables |
-| **R4 — Statistical** | What is dispersion? | Single deterministic runs | Monte Carlo 100–10,000 cases, impact ellipses |
-| **R5 — Integrated** | Does it plug into our toolchain? | Browser-only | Python API, FMU, MATLAB, REST |
-| **R6 — Real-time** | Can avionics talk to it? | No HIL | UDP/CCSDS, wall-clock sync, SIL/HIL benches |
-| **R7 — Governed** | Can we certify or license it? | MIT hobby project | Traceability, FMEA, signed vehicle DBs, commercial license path |
+| Rung                      | What the team asks               | DeltaV Lab today                                 | Target state                                                    |
+| ------------------------- | -------------------------------- | ------------------------------------------------ | --------------------------------------------------------------- |
+| **R0 — Runnable**         | Does it launch without cheating? | Yes — RK4 worker, no scripted orbit wins         | Keep                                                            |
+| **R1 — Documented**       | Are assumptions written down?    | Partial — code + transmissions, no Theory Manual | 100+ page theory manual + requirements matrix                   |
+| **R2 — Unit-validated**   | Do analytical cases pass?        | Vitest Kepler/staging checks                     | Expand + **CI fails** on regression                             |
+| **R3 — Flight-validated** | Does it match flown telemetry?   | **No** published overlays                        | Falcon 9 / Electron / Starship public data, <2% error tables    |
+| **R4 — Statistical**      | What is dispersion?              | Single deterministic runs                        | Monte Carlo 100–10,000 cases, impact ellipses                   |
+| **R5 — Integrated**       | Does it plug into our toolchain? | Browser-only                                     | Python API, FMU, MATLAB, REST                                   |
+| **R6 — Real-time**        | Can avionics talk to it?         | No HIL                                           | UDP/CCSDS, wall-clock sync, SIL/HIL benches                     |
+| **R7 — Governed**         | Can we certify or license it?    | MIT hobby project                                | Traceability, FMEA, signed vehicle DBs, commercial license path |
 
 **Implemented rigor (R0–R2 partial) got us a teaching sandbox. Industry trust starts at R3.** NASA's modeling and simulation V&V framework ([NASA-STD-7009](https://standards.nasa.gov/standard/NASA/NASA-STD-7009)) is the mental model: credibility evidence, validation against reality, uncertainty quantification — not just "we use RK4."
 
@@ -76,13 +76,13 @@ DeltaV Lab is ~92% TypeScript ([repo language stats](https://github.com/dhaatrik
 
 It is the wrong long-term home for **batch dispersion, 6DOF attitude, and cert-shaped cores**:
 
-| Constraint | Browser TS worker | Native Rust / C++ / Fortran-class core |
-|------------|-------------------|----------------------------------------|
-| Throughput | One 50 Hz trajectory | 10,000 dispersed cases overnight |
-| Numerics | JS double precision, GC pauses | SIMD, fixed alloc, optional `f64`/`f128` policies |
-| Ecosystem | Vitest, esbuild | BLAS, SUNDIALS, CasADi, GMAT heritage algorithms |
-| HIL | No hard real-time guarantees | POSIX RT, UDP to Speedgoat / lab avionics |
-| Audit culture | ESLint | MISRA-adjacent rules, Coverity, requirements traceability |
+| Constraint    | Browser TS worker              | Native Rust / C++ / Fortran-class core                    |
+| ------------- | ------------------------------ | --------------------------------------------------------- |
+| Throughput    | One 50 Hz trajectory           | 10,000 dispersed cases overnight                          |
+| Numerics      | JS double precision, GC pauses | SIMD, fixed alloc, optional `f64`/`f128` policies         |
+| Ecosystem     | Vitest, esbuild                | BLAS, SUNDIALS, CasADi, GMAT heritage algorithms          |
+| HIL           | No hard real-time guarantees   | POSIX RT, UDP to Speedgoat / lab avionics                 |
+| Audit culture | ESLint                         | MISRA-adjacent rules, Coverity, requirements traceability |
 
 **React stays.** The UI, VAB, telemetry dashboards, instructor tooling — keep TypeScript. **Physics, guidance kernels, and dispersion engines move out** into Rust (my preference) or C++ with Python bindings. Browser loads WASM for interactive mode; servers run native binaries for ensembles.
 
@@ -129,16 +129,16 @@ This is the order I would actually execute. Visibility and V&V before rewriting 
 
 ### Mission Report: Physics & Model Upgrades (What Changes in the Equations)
 
-| Domain | Today ([science post](/transmissions/deltav-lab-science/)) | Professional target |
-|--------|--------------------------------------------------------------|---------------------|
-| State | 2D position/velocity in plane | 6DOF: translational + quaternion attitude + rates |
-| Propellant | Variable mass thrust | Slosh pendulum + feed-line dynamics |
-| Aero | $C_D$, CP/CoM stability | Mach/Reynolds/attitude tables; optional CFD-informed increments |
-| Atmosphere | Exponential $\rho(h)$ LUT | NRLMSISE-00 + space weather |
-| Gravity | Inverse-square | EGM2008 + J2–J4 + third-body |
-| Wind | Synthetic layers | Balloon/ECMWF launch-day profiles |
-| Integration | Fixed 50 Hz RK4 in JS | Adaptive RK45/Dormand–Prince in native core; fixed-step for RT/HIL |
-| Outputs | Single trajectory CSV | Dispersion clouds, range safety footprints |
+| Domain      | Today ([science post](/transmissions/deltav-lab-science/)) | Professional target                                                |
+| ----------- | ---------------------------------------------------------- | ------------------------------------------------------------------ |
+| State       | 2D position/velocity in plane                              | 6DOF: translational + quaternion attitude + rates                  |
+| Propellant  | Variable mass thrust                                       | Slosh pendulum + feed-line dynamics                                |
+| Aero        | $C_D$, CP/CoM stability                                    | Mach/Reynolds/attitude tables; optional CFD-informed increments    |
+| Atmosphere  | Exponential $\rho(h)$ LUT                                  | NRLMSISE-00 + space weather                                        |
+| Gravity     | Inverse-square                                             | EGM2008 + J2–J4 + third-body                                       |
+| Wind        | Synthetic layers                                           | Balloon/ECMWF launch-day profiles                                  |
+| Integration | Fixed 50 Hz RK4 in JS                                      | Adaptive RK45/Dormand–Prince in native core; fixed-step for RT/HIL |
+| Outputs     | Single trajectory CSV                                      | Dispersion clouds, range safety footprints                         |
 
 None of this is secret sauce. GMAT, FreeFlyer, STK Astrogator, and RocketPy exist. The differentiation is **transparent open source + browser instructor mode + published V&V** — not mystery physics.
 

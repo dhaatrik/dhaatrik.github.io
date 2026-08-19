@@ -16,7 +16,9 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
     ];
 
     for (const route of routes) {
-        test(`should have zero critical or serious WCAG violations on route: ${route}`, async ({ page }) => {
+        test(`should have zero critical or serious WCAG violations on route: ${route}`, async ({
+            page,
+        }) => {
             await page.goto(route, { waitUntil: 'load' });
             await page.locator('main, body').first().waitFor({ state: 'visible' });
 
@@ -32,9 +34,13 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
 
             // Log details of violations if any exist
             if (violations.length > 0) {
-                console.error(`\n[A11Y ERROR] ${violations.length} critical/serious accessibility violation(s) found on route: ${route}`);
+                console.error(
+                    `\n[A11Y ERROR] ${violations.length} critical/serious accessibility violation(s) found on route: ${route}`
+                );
                 violations.forEach((violation, index) => {
-                    console.error(`\nViolation #${index + 1}: [${violation.id}] (${violation.impact}) ${violation.help}`);
+                    console.error(
+                        `\nViolation #${index + 1}: [${violation.id}] (${violation.impact}) ${violation.help}`
+                    );
                     console.error(`Help URL: ${violation.helpUrl}`);
                     violation.nodes.forEach((node) => {
                         console.error(`- Target Element HTML: ${node.html}`);
@@ -48,4 +54,3 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
         });
     }
 });
-
