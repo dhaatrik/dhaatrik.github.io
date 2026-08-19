@@ -55,7 +55,7 @@ Whenever you add or modify a **page, section, blog post, or project**:
 **Checklist after any new route or transmission:**
 
 - [ ] Entry in `llms.txt` under correct section (Core Pages / Transmissions / Projects)
-- [ ] Matching expanded block in `llms-full.txt`
+- [ ] Matching expanded block in `llms-full.txt` (written with unembellished, factual honesty — no AI buzzwords)
 - [ ] Agent skills section still accurate if skills changed
 - [ ] `npm run build` — files copy to `dist/`
 
