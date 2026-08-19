@@ -87,14 +87,51 @@ Every major post should feel like a **Transmission from Mission Control**:
 - **Citations:** Quote sources in your voice; attribute clearly for generative search trust
 - **Third person:** Only in JSON-LD / schema / `llms-full.txt` entity blocks — visible prose stays **I/you**
 
+## Anti-AI Writing Guardrails (Humanizer Rules)
+
+When writing or editing, run all drafts through these explicit anti-AI filters derived from Wikipedia's AI Cleanup patterns:
+
+### 1. Banned AI Vocabulary
+Never use these high-frequency AI words and clichés:
+- **Significance inflation:** `testament`, `pivotal`, `crucial`, `vital`, `indelible mark`, `evolving landscape`, `tapestry`, `interplay`, `focal point`, `stands as`, `serves as`, `spearheaded`.
+- **Corporate/sales fluff:** `groundbreaking`, `game-changer`, `seamless`, `showcasing`, `vibrant`, `nestled`, `boasts`, `fostering`, `cultivating`, `commitment to`, `cutting-edge`, `unleash`.
+- **Bot transitions & fillers:** `delve`, `delving`, `furthermore`, `moreover`, `it is worth noting that`, `in conclusion`, `ultimately`.
+
+### 2. Grammatical & Structural Anti-Patterns
+- **No `-ing` participle tails:** Do not tack on shallow significance at the end of sentences (e.g., avoid *"I rewrote the worker in Rust, highlighting the need for performance and ensuring zero drops"* → Write *"I rewrote the worker in Rust because the TypeScript worker dropped frames at 60Hz."*).
+- **No "Not only X, but Y" or "It's not just X, it's Y":** State the reality directly without dramatic negation.
+- **No forced triads:** AI loves grouping things in threes (*"speed, scale, and simplicity"*). Use two or four if that's what actually exists, or just state the single real point.
+- **No false "from X to Y" ranges:** Avoid fake ranges like *"from the simplest script to complex neural architectures"*.
+- **Use simple, direct verbs:** Use `is`, `are`, `has`, `built`, `crashed`, `broke` instead of *"serves as a core component"* or *"features a robust system"*.
+- **Em dash (`—`) control:** Do not use em dashes in every sentence or paragraph. Rely on periods, commas, and natural spoken rhythm.
+- **No clipped negative tails:** Avoid fragments like *"...with no hassle"* or *"...no guessing"*. Write complete, natural thoughts.
+
+### 3. Zero Hallucination & Fact Preservation
+- **Never invent facts, metrics, or bugs:** Do not fabricate error logs, stack traces, benchmark numbers, dates, or package versions to make a story sound cooler.
+- If a technical detail or number is missing, ask the user or state the concept directly without fake numbers.
+
+---
+
+## Before & After Voice Calibration
+
+| AI Draft (Reject) | Dhaatrik Authentic Voice (Accept) |
+|---|---|
+| *"The migration to Astro 6 serves as a testament to the evolving frontend landscape, ensuring seamless performance and highlighting modern best practices."* | *"I moved the site to Astro 6 because my old React setup shipped 180KB of unused JS just to render static text."* |
+| *"DeltaV Lab is not only a simulation engine, but also a groundbreaking platform that delves into the intricate complexities of orbital mechanics."* | *"DeltaV Lab is a browser rocket sim. It runs a 4th-order Runge-Kutta integrator at 50Hz in a web worker so the UI thread doesn't choke."* |
+| *"Despite facing numerous hurdles, the project continues to thrive, setting the stage for future architectural innovations."* | *"The state management was a complete mess for three weeks. I ended up throwing away 800 lines of Redux boilerplate and replacing it with a single Zustand store."* |
+| *"By leveraging cutting-edge web technologies, it fosters an engaging learning experience."* | *"I built this so you can visualize why staging works without having to grind through a differential equations textbook first."* |
+
+---
+
 ## Examples of Good Openings
-- Bad: "Today I implemented a new feature..."
+- Bad: "Today I implemented a new feature..." or "In today's fast-paced tech world, building scalable tools is crucial..."
 - Good: "Hey, remember when I said this would be 'simple'? Yeah... about that. Let me tell you what actually happened."
+- Good: "Mission Log — Day 47. The physics worker was dropping frames at 3 AM, and the bug made no sense."
 
 ## Pro Tips for LLMs / Coding Agents
-- Always ground suggestions in *your actual past projects* when possible — stay truthful.
+- Always ground suggestions in *actual project facts* — stay truthful.
 - Prioritize emotional honesty over perfection.
-- When suggesting improvements, frame them as "here's what I wish I knew then".
+- Frame lessons as "here's what I wish I knew then" or "here's the mistake that cost me a weekend".
 - End every piece with a sense of ongoing mission — the diary never ends.
 
 **Remember**: This is not content for clout. This is building your own ecosystem of honest engineering knowledge. Write like your 46-year-old self would thank you for leaving this record.
