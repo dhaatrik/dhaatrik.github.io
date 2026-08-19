@@ -84,28 +84,51 @@
 
     /* Fixed chrome: site header */
     .glass-chrome {
-        --glass-bg-opacity: 0.7;
-        --glass-border-opacity: 0.1;
-        --blueprint-opacity: 0.03;
-        backdrop-filter: blur(20px) saturate(140%);
-        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        --glass-bg-opacity: 0;
+        --glass-border-opacity: 0;
+        --blueprint-opacity: 0;
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        background-color: transparent !important;
         border-radius: 0;
         border-top: none;
         border-left: none;
         border-right: none;
+        border-bottom: 1px solid transparent !important;
+        box-shadow: none !important;
+    }
+
+    .glass-chrome::after {
+        opacity: 0;
     }
 
     .glass-chrome.is-scrolled {
-        --glass-bg-opacity: 0.82;
-        --glass-border-opacity: 0.14;
+        --glass-bg-opacity: 0.8;
+        --glass-border-opacity: 0.08;
+        --blueprint-opacity: 0.02;
+        backdrop-filter: blur(16px) saturate(140%);
+        -webkit-backdrop-filter: blur(16px) saturate(140%);
+        background-color: rgba(var(--glass-bg-raw), var(--glass-bg-opacity)) !important;
+        border-bottom: 1px solid rgba(var(--glass-border-raw), var(--glass-border-opacity)) !important;
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .glass-chrome.is-scrolled::after {
+        opacity: var(--blueprint-opacity);
     }
 
     .dark .glass-chrome {
-        --glass-bg-opacity: 0.72;
+        background-color: transparent !important;
+        border-bottom-color: transparent !important;
+        box-shadow: none !important;
     }
 
     .dark .glass-chrome.is-scrolled {
         --glass-bg-opacity: 0.85;
+        --glass-border-opacity: 0.08;
+        background-color: rgba(11, 14, 20, var(--glass-bg-opacity)) !important;
+        border-bottom-color: rgba(255, 255, 255, var(--glass-border-opacity)) !important;
+        box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.4) !important;
     }
 
     /* Mobile navigation drawer */

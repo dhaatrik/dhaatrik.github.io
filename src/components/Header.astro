@@ -67,6 +67,8 @@ const displayPathShort = formatHeaderPath(displayPath);
             transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
             background-color 0.3s ease,
             border-color 0.3s ease,
+            backdrop-filter 0.3s ease,
+            -webkit-backdrop-filter 0.3s ease,
             box-shadow 0.3s ease;
     }
 
@@ -649,16 +651,16 @@ const displayPathShort = formatHeaderPath(displayPath);
             if (signal.aborted) return;
             const currentScroll = window.scrollY;
 
-            // Shrink header and add subtle shadow on scroll (JS fallback only)
+            // Shrink header and toggle glass canopy on scroll (JS fallback)
             if (!hasScrollTimeline) {
-                if (currentScroll > 50) {
+                if (currentScroll > 30) {
                     nav.classList.remove('py-4');
                     nav.classList.add('py-2');
-                    header.classList.add('is-scrolled', 'shadow-md', 'dark:shadow-black/50');
+                    header.classList.add('is-scrolled');
                 } else {
                     nav.classList.add('py-4');
                     nav.classList.remove('py-2');
-                    header.classList.remove('is-scrolled', 'shadow-md', 'dark:shadow-black/50');
+                    header.classList.remove('is-scrolled');
                 }
             }
 
