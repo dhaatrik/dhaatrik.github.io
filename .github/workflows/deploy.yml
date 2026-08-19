@@ -98,3 +98,20 @@ jobs:
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v4
+
+    release:
+        name: Manage Versioning & Changelog
+        needs: [verify, build, deploy]
+        # Strict assurance that versioning/release only runs after successful deployment on main
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            pull-requests: write
+        steps:
+            - name: Run Google Release Please
+              id: release
+              uses: googleapis/release-please-action@v4
+              with:
+                  config-file: release-please-config.json
+                  manifest-file: .release-please-manifest.json
