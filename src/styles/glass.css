@@ -148,6 +148,30 @@
         box-shadow: -10px 0 40px -15px var(--accent-glow);
     }
 
+    /* Glass Docking Deck: Site Footer */
+    .glass-footer {
+        --glass-bg-opacity: 0.65;
+        --glass-border-opacity: 0.12;
+        --blueprint-opacity: 0.03;
+        backdrop-filter: blur(20px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        background-color: rgba(var(--glass-bg-raw), var(--glass-bg-opacity));
+        border-radius: 0;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid rgba(var(--glass-border-raw), var(--glass-border-opacity));
+        box-shadow: 0 -4px 24px -2px rgba(0, 0, 0, 0.04);
+    }
+
+    .dark .glass-footer {
+        --glass-bg-opacity: 0.75;
+        --glass-border-opacity: 0.08;
+        background-color: rgba(11, 14, 20, var(--glass-bg-opacity));
+        border-top-color: rgba(255, 255, 255, var(--glass-border-opacity));
+        box-shadow: 0 -8px 32px -4px rgba(0, 0, 0, 0.35);
+    }
+
     .bento-card {
         border-radius: var(--bento-radius);
         padding: var(--bento-padding);

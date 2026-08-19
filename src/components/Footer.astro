@@ -52,10 +52,14 @@ const formatMarqueeDate = (date: Date) => {
 
 <footer
     data-build-sha={gitSha}
-    class="relative mt-12 w-full overflow-hidden border-t border-slate-200 bg-slate-50/50 pt-12 pb-12 text-slate-500 dark:border-white/5 dark:bg-[#0b0e14] dark:text-slate-400"
+    class="glass-footer relative mt-16 w-full overflow-hidden pt-12 pb-12 text-slate-500 dark:text-slate-400"
 >
-    <!-- Subtle Grid Background -->
-    <div class="bg-grid-motif pointer-events-none absolute inset-0 opacity-5"></div>
+    <!-- Horizon Light Beacon & Subtle Grid Motif -->
+    <div
+        class="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-(--accent)/8 via-(--accent)/2 to-transparent"
+    >
+    </div>
+    <div class="bg-grid-motif pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"></div>
 
     <div class="layout-container relative z-10 grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
         <!-- Column 1: Base Ops -->
