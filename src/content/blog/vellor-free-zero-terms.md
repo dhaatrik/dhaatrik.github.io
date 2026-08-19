@@ -24,7 +24,7 @@ seriesOrder: 3
 ====================================================================
 ```
 
-### Mission Report: Free Is a Design Choice, Not a Stunt
+## Mission Log: Free Is a Design Choice, Not a Stunt
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -40,7 +40,7 @@ This transmission is the dull-truth version: **why Vellor costs nothing**, what 
 
 ---
 
-### Mission Report: The Why — Why Charge Nothing?
+## The Why — Why Charge Nothing?
 
 Three reasons — not one noble sentence.
 
@@ -52,7 +52,7 @@ Three reasons — not one noble sentence.
 
 ---
 
-### Mission Report: What "Zero Terms and Conditions" Means Here
+## What "Zero Terms and Conditions" Means Here
 
 On DBS Classes and this site, I use "zero terms and conditions" to mean:
 
@@ -74,7 +74,7 @@ Zero SaaS terms ≠ legal nothingness. It means **no rent-seeking gate** between
 
 ---
 
-### Mission Report: The Journey — Pricing Paths I Refused
+## The Journey — Pricing Paths I Refused
 
 **The "freemium with Pro invoices" idea.** Tempting. PDF invoices are high-value. I killed it because tutors already distrust platforms that hold data hostage behind paywalls. If invoicing works in the free build, it stays in the free build.
 
@@ -84,7 +84,7 @@ Zero SaaS terms ≠ legal nothingness. It means **no rent-seeking gate** between
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **"Free" confused people on storage.** Some assumed free = low quality or free = we sell your data. Vellor is free because the marginal cost of copying software is zero and the moral cost of charging tutors for privacy is high — not because I am laundering data.
 - **I once implied IndexedDB and note-taking on this site.** Wrong facts undermine trust faster than a price tag. Corrected in [why-and-what](/transmissions/vellor-why-and-what/) and the [mission log](/transmissions/vellor-power-tutor-log/).
@@ -92,7 +92,7 @@ Zero SaaS terms ≠ legal nothingness. It means **no rent-seeking gate** between
 
 ---
 
-### Mission Report: Comparison — Vellor vs. Typical Tutoring SaaS
+## Comparison — Vellor vs. Typical Tutoring SaaS
 
 | Dimension             | Typical tutoring SaaS  | Vellor                                  |
 | --------------------- | ---------------------- | --------------------------------------- |
@@ -108,7 +108,7 @@ The trade is real: you get privacy and zero rent, you lose automatic sync until 
 
 ---
 
-### Mission Report: Current State
+## Current State & Key Artifacts
 
 - **License:** MIT, Copyright 2026 Dhaatrik Chowdhury
 - **Repo:** [github.com/dhaatrik/vellor](https://github.com/dhaatrik/vellor)
@@ -117,7 +117,7 @@ The trade is real: you get privacy and zero rent, you lose automatic sync until 
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 If you are waiting for permission to use free tooling without surrendering student records — you already have it. Clone Vellor. Read the MIT notice. Export backups. Fork if I vanish.
 

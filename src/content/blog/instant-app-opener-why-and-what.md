@@ -24,7 +24,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: The Link That Opened in Safari Instead of YouTube
+## Mission Log: The Link That Opened in Safari Instead of YouTube
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -36,7 +36,7 @@ I built **[Instant App Opener](https://github.com/dhaatrik/instant-app-opener)**
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -50,7 +50,7 @@ Instant App Opener is **not** an Alfred replacement. It is a **frictionless brid
 
 ---
 
-### Mission Report: What Instant App Opener Is — Concrete Scope
+## What Instant App Opener Is — Concrete Scope
 
 As of **v0.2.0**, the app is a client-side Next.js utility:
 
@@ -72,7 +72,7 @@ It is **web-only**. No Electron. No global hotkeys. No system tray. Semver **0.2
 
 ---
 
-### Mission Report: Who I Built It For (and Who Should Skip It)
+## Who I Built It For (and Who Should Skip It)
 
 **Built for:**
 
@@ -88,7 +88,7 @@ It is **web-only**. No Electron. No global hotkeys. No system tray. Semver **0.2
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **My portfolio described a different app.** Electron v1.2.0, sub-150ms tray popup, Windows registry keys — that was an old direction. The repo README now says "Instant App Opener V2" as a Next.js deep-link converter. Lesson: **grep your own site** before someone else does.
 - **Deep links are not contracts.** iOS and Android handle `youtube://`, `twitter://`, and friends differently. App-not-installed cases fall back to web or fail silently. I document the generated URI; I cannot promise the OS honors it.
@@ -97,7 +97,7 @@ It is **web-only**. No Electron. No global hotkeys. No system tray. Semver **0.2
 
 ---
 
-### Mission Report: Current State & Key Artifacts
+## Current State & Key Artifacts
 
 Instant App Opener **v0.2.0** ships with Vitest coverage and CI. README enforces 100% test pass on PRs.
 
@@ -116,7 +116,7 @@ npm run lint
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Paste a link. Get a deep link. Copy, share, or QR it to your phone. That is the whole product — small, honest, and **not** a desktop launcher.
 

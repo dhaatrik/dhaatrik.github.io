@@ -23,7 +23,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: Two Ledgers, One Honest Mirror
+## Mission Log: Two Ledgers, One Honest Mirror
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -33,7 +33,7 @@ Most budget apps treat your gym membership, course fee, and mutual fund SIP the 
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -47,7 +47,7 @@ FinTrack is a mindful finance **mirror**, not a unicorn neobank.
 
 ---
 
-### Mission Report: What FinTrack Ships — Concrete Scope
+## What FinTrack Ships — Concrete Scope
 
 As of **v1.0.0**:
 
@@ -67,7 +67,7 @@ Persistence: **client-side** — README emphasizes local data ownership with JSO
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Wrong chart library on portfolio.** Chart.js → Recharts. Lesson: grep imports before tagging projects.
 - **Recharts re-render lag on mobile** — my site fuckup referenced Chart.js; the real pain was filter triggers firing full chart tears on older phones. Throttle and memoize chart inputs.
@@ -76,7 +76,7 @@ Persistence: **client-side** — README emphasizes local data ownership with JSO
 
 ---
 
-### Mission Report: Current State & Key Artifacts
+## Current State & Key Artifacts
 
 ```bash
 git clone https://github.com/dhaatrik/expense-vs-investment-tracker.git
@@ -96,7 +96,7 @@ MIT licensed.
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Log expenses. Log growth spend separately. Export JSON when you care about backups. Not a fintech pitch — a clearer vocabulary for your own money.
 

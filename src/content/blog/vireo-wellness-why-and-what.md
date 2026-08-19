@@ -24,7 +24,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: The Journal I Promised vs the Demo I Shipped
+## Mission Log: The Journal I Promised vs the Demo I Shipped
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -34,7 +34,7 @@ I am fixing that gap here. The vision is not fake; the **shipped scope** was mis
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -48,7 +48,7 @@ Vireo today is a **UI prototype**, not the private offline journal I advertised.
 
 ---
 
-### Mission Report: What Vireo Ships Today — Concrete Scope
+## What Vireo Ships Today — Concrete Scope
 
 As of **v2.0.0**, the repo delivers:
 
@@ -66,7 +66,7 @@ Stack: React 19.1, TypeScript 5.8, Vite 6, Tailwind 4, Recharts, Framer Motion, 
 
 ---
 
-### Mission Report: Vision vs Shipped (Be Explicit)
+## Vision vs Shipped (Be Explicit)
 
 | Vision (why I care)           | Shipped (what the repo proves today)                                   |
 | ----------------------------- | ---------------------------------------------------------------------- |
@@ -80,7 +80,7 @@ I am not abandoning the vision. I am stopping the lie that v2.0.0 already is the
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **I marketed persistence I had not built.** IndexedDB, 100% offline, meditation timer — portfolio copy from an earlier mental model. The upstream README correctly leads with mock data. Lesson: **grep `package.json` before claiming PWA or storage**.
 - **Mock data vs privacy marketing is a credibility trap.** Saying "your data never leaves your device" sounds great until users realize entries do not survive a reload. Honest label: **UI demo**.
@@ -89,7 +89,7 @@ I am not abandoning the vision. I am stopping the lie that v2.0.0 already is the
 
 ---
 
-### Mission Report: Current State & Key Artifacts
+## Current State & Key Artifacts
 
 Vireo Wellness **v2.0.0** runs locally with Vitest and Playwright available.
 
@@ -111,7 +111,7 @@ MIT licensed. No backend required — because there is no backend yet.
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Explore the dashboard. Log a mock meal. Watch the glucose chart animate. Pair a simulated device. That is Vireo today — a polished wellness **surface** waiting for persistence and real data pipes.
 

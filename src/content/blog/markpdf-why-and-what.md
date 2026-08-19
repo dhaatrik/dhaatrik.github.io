@@ -23,7 +23,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: The PDF Path That Does Not Need TeX Live
+## Mission Log: The PDF Path That Does Not Need TeX Live
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -33,7 +33,7 @@ No server. No Pandoc install. No jsPDF coordinate math. I am fixing the portfoli
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -47,7 +47,7 @@ MarkPDF is a **zero-install handoff tool**: write markdown, preview styled outpu
 
 ---
 
-### Mission Report: What MarkPDF Is — Concrete Scope
+## What MarkPDF Is — Concrete Scope
 
 As of **v1.0.0**:
 
@@ -66,7 +66,7 @@ It is **not** a Pandoc replacement. It is **not** a LaTeX math renderer today.
 
 ---
 
-### Mission Report: Who I Built It For (and Who Should Skip It)
+## Who I Built It For (and Who Should Skip It)
 
 **Built for:**
 
@@ -82,7 +82,7 @@ It is **not** a Pandoc replacement. It is **not** a LaTeX math renderer today.
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **My portfolio invented KaTeX and jsPDF.** I described equations vanishing in jsPDF exports — that story belonged to a different architecture. This repo never shipped KaTeX; the fuckup to document is **print CSS pagination**, not math macros.
 - **Site version drift.** Portfolio said v1.1.0; `package.json` says **1.0.0**. Semver wins.
@@ -91,7 +91,7 @@ It is **not** a Pandoc replacement. It is **not** a LaTeX math renderer today.
 
 ---
 
-### Mission Report: Current State & Key Artifacts
+## Current State & Key Artifacts
 
 MarkPDF **v1.0.0** ships with Vitest coverage and CI.
 
@@ -113,7 +113,7 @@ MIT licensed. Static `dist/` deployable to any host.
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Write markdown. Preview it. Hit Export PDF. Choose Save as PDF in the print dialog. That is MarkPDF — small, client-only, honest about browser variance.
 

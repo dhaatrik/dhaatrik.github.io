@@ -24,7 +24,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: The Quiet Injustice in Tutoring Software
+## Mission Log: The Quiet Injustice in Tutoring Software
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -38,7 +38,7 @@ I built **[Vellor](https://github.com/dhaatrik/vellor)** because I wanted an ope
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -52,7 +52,7 @@ Vellor is not a venture pitch. It is the tool I wanted when I was the tutor squi
 
 ---
 
-### Mission Report: What Vellor Is — Concrete Scope
+## What Vellor Is — Concrete Scope
 
 Vellor is a **free, open-source Progressive Web App** for managing a private tutoring business. As of **v4.2.0**, the README lists seven major capability areas from the v4 "Tutor OS" update plus Power-Tutor essentials.
 
@@ -76,7 +76,7 @@ It is **not** a learning management system for schools. It is **not** a note-tak
 
 ---
 
-### Mission Report: Who I Built It For (and Who Should Skip It)
+## Who I Built It For (and Who Should Skip It)
 
 **Built for:**
 
@@ -92,7 +92,7 @@ It is **not** a learning management system for schools. It is **not** a note-tak
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **I mislabeled Vellor on my own portfolio.** "Note-taking" and "IndexedDB" were lazy assumptions. The repo README is explicit: tutoring management, `localStorage`, AES-GCM. Lesson: read your README before your personal site quotes it.
 - **Feature envy is real.** Every tutor asks for something different — WhatsApp bots, curriculum planners, tax integrations. Vellor must stay an OS, not a junk drawer. I ship workflows I personally repeat every week.
@@ -100,7 +100,7 @@ It is **not** a learning management system for schools. It is **not** a note-tak
 
 ---
 
-### Mission Report: Current State & Key Artifacts
+## Current State & Key Artifacts
 
 Vellor **v4.2.0** is functional and tested — **`vitest run` reports 64 test files** (478 cases) across store slices, pages, forms, crypto, PDF generation, hooks, and UI components. When I cloned main and ran it (2026-07-01), **63 files passed and 1 failed** — a pre-existing `DashboardCharts.test.tsx` income-assertion mismatch, not something I am hiding. The README badge still says 33 — it lags the repo; I counted by running tests, not by reading shields.
 
@@ -116,7 +116,7 @@ Stack summary (full rationale in [tech-stack transmission](/transmissions/vellor
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 If you are a solopreneur tutor tired of renting your own student data, clone the repo and run it locally. No account. No server bill. Open the tab and teach.
 

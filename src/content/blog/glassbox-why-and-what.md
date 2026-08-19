@@ -24,7 +24,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: The Sandbox That Wasn't
+## Mission Log: The Sandbox That Wasn't
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -36,7 +36,7 @@ Traditional employee feedback systems feel like homework: dull forms, delayed su
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -50,7 +50,7 @@ Glassbox is **not** a security product. It does not run untrusted JavaScript in 
 
 ---
 
-### Mission Report: What Glassbox Is — Concrete Scope
+## What Glassbox Is — Concrete Scope
 
 As of **v4.2.1**, Glassbox is a React + Vite internal feedback management demo:
 
@@ -75,7 +75,7 @@ It is **not** production HRIS. It is **not** multi-tenant SaaS. It is **not** a 
 
 ---
 
-### Mission Report: Who I Built It For (and Who Should Skip It)
+## Who I Built It For (and Who Should Skip It)
 
 **Built for:**
 
@@ -91,7 +91,7 @@ It is **not** production HRIS. It is **not** multi-tenant SaaS. It is **not** a 
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **My portfolio lied about VM2.** I described sandbox escapes and prototype pollution while the repo shipped a feedback terminal. Lesson: **read `package.json` dependencies** before tagging a project "Security."
 - **Sentiment AI misreads sarcasm.** "Oh great, another mandatory fun Friday" scored POSITIVE once because Gemini latched onto "great." HR context needs human review — AI labels are triage hints, not verdicts.
@@ -100,7 +100,7 @@ It is **not** production HRIS. It is **not** multi-tenant SaaS. It is **not** a 
 
 ---
 
-### Mission Report: Current State & Key Artifacts
+## Current State & Key Artifacts
 
 Glassbox **v4.2.1** runs locally with Vitest coverage.
 
@@ -121,7 +121,7 @@ MIT licensed. AI features require your own Gemini API key.
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Submit a signal. Drag it on the grid. Watch metrics move. Generate an AI insight report if you have a key configured. That is Glassbox — org feedback terminal, not sandbox security.
 

@@ -24,7 +24,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: One Model Talking to Itself Is Still One Model
+## Mission Log: One Model Talking to Itself Is Still One Model
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -34,7 +34,7 @@ Not superintelligence. **Process** applied to models that otherwise skip peer re
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -48,7 +48,7 @@ The Infinite Intelligence is a **council-of-models workspace**, not a chat wrapp
 
 ---
 
-### Mission Report: What v4.0.0 Ships — Concrete Scope
+## What v4.0.0 Ships — Concrete Scope
 
 | Capability           | What it does                                                       |
 | -------------------- | ------------------------------------------------------------------ |
@@ -68,7 +68,7 @@ Model string per README: **`gemma-4-31b-it`** via `@google/genai`. Requires `VIT
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Undersold my own v4 on the portfolio.** Three agents was stale; four defaults + Beta + HITL is the real story.
 - **Unbounded debate loops cost money.** Rate-limit bill fuckup is real — depth guardrails belong in product, not hope.
@@ -77,7 +77,7 @@ Model string per README: **`gemma-4-31b-it`** via `@google/genai`. Requires `VIT
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Input a hard prompt. Watch the council argue. Steer it. Export the synthesis. Skepticism encouraged.
 

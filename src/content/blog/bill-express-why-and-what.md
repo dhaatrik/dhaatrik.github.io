@@ -24,7 +24,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: The Invoice Tool That Grew a Database
+## Mission Log: The Invoice Tool That Grew a Database
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -36,7 +36,7 @@ Small retail shops in India do not need another freelancer PDF toy. They need **
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -50,7 +50,7 @@ Bill Express is **not** "invoice once and close the tab." It is a **daily operat
 
 ---
 
-### Mission Report: What Bill Express Is — Concrete Scope
+## What Bill Express Is — Concrete Scope
 
 As of **v1.0.0**, Bill Express ships:
 
@@ -70,7 +70,7 @@ It is **India-GST-focused**. It is **single-node SQLite**. It is **not** multi-s
 
 ---
 
-### Mission Report: Who I Built It For (and Who Should Skip It)
+## Who I Built It For (and Who Should Skip It)
 
 **Built for:**
 
@@ -86,7 +86,7 @@ It is **India-GST-focused**. It is **single-node SQLite**. It is **not** multi-s
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **My portfolio described jsPDF in the browser.** Vector PDF export in 50ms with zero server round-trips — fiction. Bill Express prints/saves invoices through a full-stack flow with SQLite persistence.
 - **The `testingcredentials` footgun is real.** The repo ships a file to bypass auth during local evaluation. README warns you must delete it before production. I treat that as a deployment hazard, not a feature — lesson: **dev convenience files need loud README warnings and grep checks in CI**.
@@ -95,7 +95,7 @@ It is **India-GST-focused**. It is **single-node SQLite**. It is **not** multi-s
 
 ---
 
-### Mission Report: Current State & Key Artifacts
+## Current State & Key Artifacts
 
 Bill Express **v1.0.0** includes Vitest + supertest coverage and CI.
 
@@ -116,7 +116,7 @@ Configure `ADMIN_USERNAME` and `ADMIN_PASSWORD` securely for production. **Delet
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Log in. Add products with HSN. Pick a customer with GSTIN. Generate a bill with correct tax splits. Watch stock move. That is Bill Express — local POS, not a freelancer PDF bookmark.
 

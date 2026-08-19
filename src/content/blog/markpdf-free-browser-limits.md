@@ -24,7 +24,7 @@ seriesOrder: 3
 ====================================================================
 ```
 
-### Mission Report: Free, Private, and Not Magic
+## Mission Log: Free, Private, and Not Magic
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -34,7 +34,7 @@ This transmission is the dull-truth companion to [why-and-what](/transmissions/m
 
 ---
 
-### Mission Report: Why It Is Free (MIT)
+## Why It Is Free (MIT)
 
 1. **I am the user.** I write markdown notes and occasionally need PDFs. Renting a converter for my own homework felt silly.
 
@@ -46,7 +46,7 @@ MIT is not "no legal text." You keep copyright notices. You accept software as-i
 
 ---
 
-### Mission Report: Privacy Model (Accurate)
+## Privacy Model (Accurate)
 
 - **No backend** in the repo — static Vite build
 - **No accounts** — nothing to breach
@@ -57,7 +57,7 @@ If you self-host, you control the host. If you use a demo deployment, treat it l
 
 ---
 
-### Mission Report: Honest PDF Limits (Read Before You Submit)
+## Honest PDF Limits (Read Before You Submit)
 
 | Limitation                 | Reality                                                      |
 | -------------------------- | ------------------------------------------------------------ |
@@ -72,7 +72,7 @@ MarkPDF targets **notes, lab reports, internal docs** — not camera-ready confe
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Portfolio KaTeX story was wrong.** The real pain is print CSS — margins that look fine on screen but clip in Save as PDF.
 - **"Professional PDF" is user-dependent.** Identical markdown can export differently based on print dialog choices.
@@ -81,7 +81,7 @@ MarkPDF targets **notes, lab reports, internal docs** — not camera-ready confe
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Clone it. Host it. Fork it. Export your notes. Just do not expect LaTeX journals or pixel-perfect parity across every browser.
 

@@ -24,7 +24,7 @@ seriesOrder: 2
 ====================================================================
 ```
 
-### Mission Report: Orchestration in the Browser Tab
+## Mission Log: Orchestration in the Browser Tab
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -32,7 +32,7 @@ Read [why the council exists](/transmissions/infinite-intelligence-why-and-what/
 
 ---
 
-### Mission Report: Stack Table (from package.json)
+## Stack Table (from package.json)
 
 | Layer        | Choice                      | Role                                                   |
 | ------------ | --------------------------- | ------------------------------------------------------ |
@@ -50,7 +50,7 @@ Note: upstream README mentions Tailwind CSS; **v4.0.0 `package.json` does not li
 
 ---
 
-### Mission Report: Orchestration Shape
+## Orchestration Shape
 
 1. **State machine** — typed phases: first principles → squad deploy → topology run → critique → HITL checkpoints → synthesis
 2. **Parallel mode** — independent agent calls with out-of-order completion handling in React state
@@ -62,7 +62,7 @@ Async completion landing out of order was the UI fight — concurrent React upda
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Promise-chain orchestration collapsed by week two.** State machine paid back immediately.
 - **Export stack is heavy.** html2canvas + jsPDF bundles matter — acceptable for executive export feature, not for landing page weight.
@@ -71,7 +71,7 @@ Async completion landing out of order was the UI fight — concurrent React upda
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Client-only council. Direct API calls. Export in-tab. Backend is intentionally absent.
 

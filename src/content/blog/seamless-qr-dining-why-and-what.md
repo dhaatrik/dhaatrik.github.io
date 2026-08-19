@@ -24,7 +24,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: One Channel for Table and Kitchen — Demo Spine
+## Mission Log: One Channel for Table and Kitchen — Demo Spine
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -34,7 +34,7 @@ I am fixing that here.
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -48,7 +48,7 @@ Seamless QR Dining is a **restaurant ordering demo** — proof that customer and
 
 ---
 
-### Mission Report: What Ships Today — Concrete Scope
+## What Ships Today — Concrete Scope
 
 As of **v3.0.0**:
 
@@ -65,7 +65,7 @@ Stack: Next.js 16, React 19, TypeScript, Tailwind CSS 3, Framer Motion, Jest (77
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **WebSocket story was portfolio fiction.** I described reconnect drops killing orders; the repo never shipped a socket server. Real lesson: **Context sync works for single-tab demos** but wrong-table identity must be designed early (`?table=N`).
 - **"Prototype complete, sync verified"** meant **kitchen tab sees customer orders in dev** — not production-hardened real-time infra.
@@ -74,7 +74,7 @@ Stack: Next.js 16, React 19, TypeScript, Tailwind CSS 3, Framer Motion, Jest (77
 
 ---
 
-### Mission Report: Current State & Key Artifacts
+## Current State & Key Artifacts
 
 ```bash
 git clone https://github.com/dhaatrik/seamless-qr-dining.git
@@ -94,7 +94,7 @@ MIT licensed.
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Scan table QR (simulated via URL). Order from your phone. Watch the kitchen board update. That is the demo spine — honest about Context, not sockets.
 

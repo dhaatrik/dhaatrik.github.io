@@ -23,7 +23,7 @@ seriesOrder: 2
 ====================================================================
 ```
 
-### Mission Report: The Stack Serves the Demo, Not the Fleet
+## Mission Log: The Stack Serves the Demo, Not the Fleet
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -31,7 +31,7 @@ FuelDrop's stack is chosen to **move pixels fast** on mobile — not to run a di
 
 ---
 
-### Mission Report: What I Picked (Client-Side)
+## What I Picked (Client-Side)
 
 | Layer       | Choice                  | Why                                               |
 | ----------- | ----------------------- | ------------------------------------------------- |
@@ -47,7 +47,7 @@ No Express. No Socket.io. No database driver. That is the point.
 
 ---
 
-### Mission Report: What Needs a Backend (Not Shipped)
+## What Needs a Backend (Not Shipped)
 
 | Capability            | Why client-only is not enough                         |
 | --------------------- | ----------------------------------------------------- |
@@ -62,7 +62,7 @@ My portfolio claimed WebSocket tracking. The repo demonstrates **map UI states**
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Leaflet without telematics is theater** — useful theater for UX iteration, not operations.
 - **PWA helps demos, not compliance.** Installable ≠ regulated fuel transport.
@@ -71,7 +71,7 @@ My portfolio claimed WebSocket tracking. The repo demonstrates **map UI states**
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 React for surfaces. Leaflet for map chrome. PWA for pocket demos. Backend is homework.
 
