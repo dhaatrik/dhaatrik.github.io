@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.2.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.1.0...v4.2.0) (2026-08-19)
+
+
+### Features
+
+* **content:** align aerospace and pedagogy transmissions with mission-report skills ([82b939a](https://github.com/dhaatrik/dhaatrik.github.io/commit/82b939a9f538ca4eb3c4b8968c1e3166dcca17ed))
+* **content:** align product and tool transmissions with mission-report standards ([86c3e81](https://github.com/dhaatrik/dhaatrik.github.io/commit/86c3e819fed36ac2c970abcba1b25f7e2d72da85))
+* **seo:** update llms.txt and llms-full.txt with complete transmission directory ([b73ee78](https://github.com/dhaatrik/dhaatrik.github.io/commit/b73ee78fa965d687abc02db9445c3d48dad41e1c))
+
+
+### Bug Fixes
+
+* **content:** replace banned phrase in vellor-local-backup-reality ([feb4cf0](https://github.com/dhaatrik/dhaatrik.github.io/commit/feb4cf071dd0466ca181f98a5b27d8be4ae76bbc))
+
 ## [4.1.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.0.1...v4.1.0) (2026-08-19)
 
 
