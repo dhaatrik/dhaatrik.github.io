@@ -120,17 +120,17 @@ const webSiteSchema = JSON.stringify({
         <!-- WebSite Structured Data -->
         <script is:inline type="application/ld+json" set:html={webSiteSchema} />
     </head>
-    <body class="bg-grid-motif relative pt-24">
+    <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <Header />
         <main
             id="main-content"
             tabindex="-1"
-            class="flex flex-col gap-(--section-gap-mobile) py-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:py-(--section-gap-desktop)"
+            class="flex flex-col gap-(--section-gap-mobile) pt-6 pb-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:pt-10 md:pb-(--section-gap-desktop)"
         >
             <!-- Hero Section: The Boring Section -->
             <section
                 id="hero-section"
-                class="layout-container relative flex min-h-[60vh] w-full flex-col justify-center overflow-hidden pt-24 pb-36 md:pt-32 md:pb-32"
+                class="layout-container relative flex min-h-[60vh] w-full flex-col justify-center overflow-hidden pt-4 pb-16 md:pt-8 md:pb-24"
             >
                 <!-- Parallax Background Element -->
                 <div class="parallax-hero-bg blueprint-reveal flex items-center justify-center">
