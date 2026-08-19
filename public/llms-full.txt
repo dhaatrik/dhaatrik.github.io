@@ -198,6 +198,144 @@ First-person post-mortem. Final upload "Point Mass is a Myth" on September 15, 2
 
 Working demo of the site Scrollytell component (src/components/Scrollytell.astro) — four scroll steps with sticky telemetry visuals (pad/checklist, Max Q, MECO/staging, circularization). Tied to DeltaV Lab flight vocabulary: DSL variables (ALTITUDE, DYNAMIC_PRESSURE, APOGEE), keyboard controls (C, SPACE, M, E), 50Hz worker physics, honest label that HUD numbers are teaching graphics not live sim export. Includes author API table (stepCount, visual-N/step-N slots, IntersectionObserver behavior). Tsiolkovsky appendix + Python snippet. Cross-links to deltav-lab-why-and-what, science, limitations transmissions.
 
+### Why Bill Express — Local POS for Small Retail, Not a Freelancer PDF Toy
+**URL:** https://dhaatrik.github.io/transmissions/bill-express-why-and-what/
+**Published:** 2026-07-06
+**Tags:** bill-express, pos, retail, sqlite
+
+Honest origin story for Bill Express v1.0.0 (github.com/dhaatrik/bill-express). Full-stack India-GST Point of Sale: product inventory with HSN codes and GST rates, customer directory with GSTIN, B2B/B2C invoice generation with SGST/CGST/IGST splits, and REST API. Corrects stale portfolio copy that claimed a browser-only jsPDF invoice generator with zero server. Notes inventory rollback on canceled invoices and security hazard of the dev auth bypass file (testingcredentials).
+
+### Why FinTrack — Mindful Expense vs Personal Investment Tracking
+**URL:** https://dhaatrik.github.io/transmissions/fintrack-why-and-what/
+**Published:** 2026-07-05
+**Tags:** fintrack, finance, privacy, recharts
+
+Mindful dual-ledger personal finance app v1.0.0 (github.com/dhaatrik/expense-vs-investment-tracker). Separates daily expenses from personal growth investments (courses, health) with Recharts visualizations, Zustand state management, and local JSON backup/restore. Corrects portfolio tag from Chart.js to Recharts. Notes throttling of mobile filter inputs to prevent re-render jank.
+
+### Why FuelDrop — On-Demand Fuel Delivery UX Prototype vs Real Logistics
+**URL:** https://dhaatrik.github.io/transmissions/fueldrop-why-and-what/
+**Published:** 2026-07-11
+**Tags:** fueldrop, react, vite, pwa
+**Series:** FuelDrop (order 1)
+
+First-person origin story for FuelDrop v3.0.0 (github.com/dhaatrik/fueldrop). Polished frontend-only React SPA prototyping on-demand fuel delivery: customer ordering, captain dashboard (/captain), fleet mode, Leaflet map presentation, and simulated OTP (1234). Corrects portfolio copy that claimed WebSocket real-time fleet telematics and high-concurrency server rollbacks.
+
+### FuelDrop Tech Stack — Client-Only React SPA vs What Needs a Backend
+**URL:** https://dhaatrik.github.io/transmissions/fueldrop-tech-stack/
+**Published:** 2026-07-12
+**Tags:** fueldrop, react, vite, leaflet
+**Series:** FuelDrop (order 2)
+
+Stack breakdown for FuelDrop v3.0.0: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Leaflet, Motion, Zod, and vite-plugin-pwa. Analyzes why a client-only prototype was chosen to validate mobile-first UX, and details the infrastructure required for real fuel logistics: telemetry ingest, route optimization, payment gateways, and regulatory compliance.
+
+### FuelDrop Free Demo Scope — Simulated OTP, MIT License, and Real Ops Gaps
+**URL:** https://dhaatrik.github.io/transmissions/fueldrop-free-demo-scope/
+**Published:** 2026-07-13
+**Tags:** fueldrop, demo, mit, pwa
+**Series:** FuelDrop (order 3)
+
+Licensing and limitation details for FuelDrop v3.0.0. Explains MIT terms for the open-source UI prototype, documented simulated credentials (1234), and the strict boundary between an interface demo and hazmat/fuel dispatch legal operations.
+
+### Why Glassbox Exists — Organizational Feedback Terminal, Not a VM2 Sandbox
+**URL:** https://dhaatrik.github.io/transmissions/glassbox-why-and-what/
+**Published:** 2026-07-07
+**Tags:** glassbox, cyberpunk, feedback, gemini
+
+Honest identity correction for Glassbox v4.2.1 (github.com/dhaatrik/glassbox). Cyberpunk internal organizational feedback terminal: employee signal submission with AI sentiment classification, drag-and-drop Kanban neural grid (@hello-pangea/dnd), month-over-month Recharts metrics, and Gemini-powered insight reports. Unwinds portfolio fiction describing a VM2-isolated Node code sandbox.
+
+### Why The Infinite Intelligence — Multi-Agent Debate with First-Principles and HITL
+**URL:** https://dhaatrik.github.io/transmissions/infinite-intelligence-why-and-what/
+**Published:** 2026-07-13
+**Tags:** infinite-intelligence, ai, agents, gemini
+**Series:** Infinite Intelligence (order 1)
+
+Origin story for The Infinite Intelligence v4.0.0 (github.com/dhaatrik/the-infinite-intelligence). Client-side council-of-models workspace: four-agent squad (DEFAULT_AGENTS), Beta Mode dynamic personas, first-principles prompt deconstruction, parallel/sequential/round-robin debate topologies, human-in-the-loop steering, session branching, and PDF/Markdown executive export using @google/genai with gemma-4-31b-it. Corrects outdated portfolio description of a 3-agent chat wrapper.
+
+### Infinite Intelligence Tech Stack — Client Orchestration, @google/genai, Export, Zero Backend
+**URL:** https://dhaatrik.github.io/transmissions/infinite-intelligence-tech-stack/
+**Published:** 2026-07-14
+**Tags:** infinite-intelligence, react, vite, genai
+**Series:** Infinite Intelligence (order 2)
+
+Architecture analysis of v4.0.0: React 19.2, TypeScript 5.8, Vite 6, @google/genai, Motion 12, html2canvas + jsPDF, react-markdown. Explains state-machine-driven agent orchestration in the browser tab, handling out-of-order async streams, and why no backend server is used.
+
+### Infinite Intelligence — API Keys, Rate Limits, and Recursion Depth Guardrails
+**URL:** https://dhaatrik.github.io/transmissions/infinite-intelligence-byok-guardrails/
+**Published:** 2026-07-15
+**Tags:** infinite-intelligence, byok, mit, gemini
+**Series:** Infinite Intelligence (order 3)
+
+BYOK economics and risk management for multi-agent LLM orchestration. Details token cost drivers across agent counts and critique rounds, documents the real rate-limit bill fuckup from unbounded debate loops, and emphasizes client-side recursion depth guardrails.
+
+### Why I Built a Deep-Link Handoff Tool — and What It Actually Is
+**URL:** https://dhaatrik.github.io/transmissions/instant-app-opener-why-and-what/
+**Published:** 2026-07-16
+**Tags:** instant-app-opener, deep-link, web, handoff
+
+Origin and architecture for Instant App Opener v0.2.0 (github.com/dhaatrik/instant-app-opener). Next.js 15 web app that converts standard social media URLs into mobile deep links with copy, Web Share API, and QR handoff. Replaces stale portfolio copy describing an Electron system-tray app with registry hooks.
+
+### Why MarkPDF — Zero-Install Markdown to PDF via Browser Print, Not jsPDF
+**URL:** https://dhaatrik.github.io/transmissions/markpdf-why-and-what/
+**Published:** 2026-07-02
+**Tags:** markpdf, markdown, print, privacy
+**Series:** MarkPDF (order 1)
+
+Origin story for MarkPDF v1.0.0 (github.com/dhaatrik/free-markdown-to-pdf-converter). Split-pane GFM editor, live react-markdown + remark-gfm preview, syntax highlighting, and PDF export via the browser's native print engine. Corrects portfolio claims of KaTeX math, unified Remark/Rehype pipelines, and jsPDF export.
+
+### MarkPDF Tech Stack — react-markdown, Print CSS, and Syntax Highlighting Tradeoffs
+**URL:** https://dhaatrik.github.io/transmissions/markpdf-tech-stack/
+**Published:** 2026-07-03
+**Tags:** markpdf, react, markdown, print-css
+**Series:** MarkPDF (order 2)
+
+Engineering tradeoffs in MarkPDF v1.0.0: React 19.2, Tailwind CSS 4 typography, react-markdown, react-syntax-highlighter, and @media print CSS. Explains why native print engine export was chosen over jsPDF coordinate math and why KaTeX was excluded.
+
+### MarkPDF — No Server, No Math (Yet), Browser-Dependent PDF Output
+**URL:** https://dhaatrik.github.io/transmissions/markpdf-free-browser-limits/
+**Published:** 2026-07-04
+**Tags:** markpdf, open-source, mit, privacy
+**Series:** MarkPDF (order 3)
+
+Licensing, privacy model, and honest limitations for MarkPDF v1.0.0. Explains MIT license terms, zero-server privacy, browser-dependent print engine margins, and GFM table pagination challenges.
+
+### Why Read Aloud — Article TTS via chrome.tts, Not Cloud Speech APIs
+**URL:** https://dhaatrik.github.io/transmissions/read-aloud-why-and-what/
+**Published:** 2026-07-17
+**Tags:** read-aloud, chrome-extension, tts, privacy
+
+Origin and architecture for Read Aloud v4.0.0 (github.com/dhaatrik/ReadAloud_ChromeExtension). Manifest V3 Chrome extension reading web articles using Chromium's chrome.tts engine and CSS Custom Highlight API. Corrects portfolio copy citing Web Speech API; details MV3 service worker lifecycle persistence via chrome.storage.session and 59 automated QUnit/Playwright tests.
+
+### Why QR Table Ordering — Customer + Kitchen Surfaces in One Demo
+**URL:** https://dhaatrik.github.io/transmissions/seamless-qr-dining-why-and-what/
+**Published:** 2026-07-08
+**Tags:** seamless-qr-dining, nextjs, restaurant, demo
+**Series:** Seamless QR Dining (order 1)
+
+Origin story for Seamless QR Dining v3.0.0 (github.com/dhaatrik/seamless-qr-dining). Next.js 16 full-stack demo: customer menu (?table=N), kitchen dashboard (/kitchen), simulated OTP, and in-memory React Context order sync (77 Jest tests). Corrects portfolio fiction of a distributed WebSocket server.
+
+### Seamless QR Dining Tech Stack — Next.js 16, Context Order Bus, Component Architecture
+**URL:** https://dhaatrik.github.io/transmissions/seamless-qr-dining-tech-stack/
+**Published:** 2026-07-09
+**Tags:** seamless-qr-dining, nextjs, react, context
+**Series:** Seamless QR Dining (order 2)
+
+Stack breakdown of Seamless QR Dining v3.0.0: Next.js 16 App Router, React 19, Tailwind CSS 3, Framer Motion, and React Context order bus. Explains why Context was chosen for the demo spine and outlines future WebSocket and database requirements for multi-device production.
+
+### Seamless QR Dining — What's Simulated vs What a Real Restaurant Would Need
+**URL:** https://dhaatrik.github.io/transmissions/seamless-qr-dining-prototype-honesty/
+**Published:** 2026-07-10
+**Tags:** seamless-qr-dining, demo, mit, restaurant
+**Series:** Seamless QR Dining (order 3)
+
+Honest audit of prototype limits in Seamless QR Dining v3.0.0: in-memory orders, simulated OTP (1234), static menu data, and what real restaurant operations require (PostgreSQL, distributed pub/sub, payment gateways, tax compliance).
+
+### Why Vireo — Wellness UI Today vs the Private Journal I Advertised
+**URL:** https://dhaatrik.github.io/transmissions/vireo-wellness-why-and-what/
+**Published:** 2026-07-18
+**Tags:** vireo-wellness, react, ui-ux, mock-data
+
+Honest distinction between vision and shipped scope for Vireo Wellness v2.0.0 (github.com/dhaatrik/vireo-wellness). Polished React 19.1 SPA demonstrating nutrition tracking, meal logging, and glucose charts using mock data with simulated Bluetooth pairing. Unwinds portfolio claims of IndexedDB persistence and a meditation timer.
+
 ---
 
 ## Projects
