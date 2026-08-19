@@ -2,7 +2,7 @@
 
 First off, thank you for considering contributing to Mission Control (`dhaatrik.github.io`). Whether you are fixing a bug, proposing a feature, or improving documentation, your help is appreciated.
 
-This document serves as a set of guidelines for contributing to this project.
+This document outlines the guidelines for contributing to this project.
 
 ## Code of Conduct
 
@@ -21,7 +21,7 @@ Following these guidelines helps maintainers understand your report, reproduce t
 
 ### Suggesting Enhancements
 
-If you have an idea to improve the "Premium Founder" aesthetic, the offline capabilities, or the general architecture:
+If you have an idea to improve the sci-fi mission-control aesthetic, the offline capabilities, or the general architecture:
 
 - **Check existing issues** to see if the enhancement has already been suggested.
 - **Use a clear and descriptive title** for the issue.
