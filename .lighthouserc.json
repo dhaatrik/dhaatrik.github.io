@@ -1,7 +1,17 @@
-﻿{
+{
     "ci": {
         "collect": {
             "numberOfRuns": 1,
+            "startServerCommand": "npm run preview",
+            "startServerReadyPattern": "http://localhost:4321",
+            "startServerReadyTimeout": 30000,
+            "url": [
+                "http://localhost:4321/",
+                "http://localhost:4321/projects/",
+                "http://localhost:4321/transmissions/",
+                "http://localhost:4321/pedagogy/",
+                "http://localhost:4321/personnel/"
+            ],
             "settings": {
                 "preset": "desktop",
                 "chromeFlags": "--no-sandbox --headless --disable-gpu"
