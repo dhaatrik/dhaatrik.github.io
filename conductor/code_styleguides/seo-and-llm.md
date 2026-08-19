@@ -12,7 +12,7 @@ This document outlines standard guidelines for ensuring all content and pages ar
 ## 2. LLM Visibility & Crawlability (LLMO)
 
 - **`llms.txt`**: Keep the site map/index in `public/llms.txt` updated whenever new pages or articles are added.
-- **`llms-full.txt`**: Add full-text content of new pages or articles to `public/llms-full.txt` to serve as a comprehensive raw reading source for LLMs.
+- **`llms-full.txt`**: Add full-text content of new pages or articles to `public/llms-full.txt` to provide a complete raw reading source for LLMs.
 - **`robots.txt`**: Ensure that AI crawlers are explicitly allowed to crawl the site. The standard allowed bots include:
     - `GPTBot` (OpenAI)
     - `ClaudeBot` (Anthropic)

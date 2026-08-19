@@ -1,19 +1,19 @@
 # Product Guidelines
-
+ 
 ## Tone & Voice
-
-- **Visionary & Clear**: Clear, concise, confident, and forward-looking. Emphasize deep tech, innovation, and first-principles thinking. Avoid fluff; focus on technical substance and impact.
-
+ 
+- **Brotherly-Teacher & Honest Engineering Diary**: First-person ("I/you"), direct, humble, and pedagogically grounded. Focus on derivations over assertions, process over bravado, and transparent admissions of fuckups and learnings. Avoid corporate fluff, hype adjectives, and marketing clichés.
+ 
 ## Visual Style
-
-- **Glassmorphic Dark Mode**: Maintain a sleek, modern aesthetic using dark backgrounds, subtle transparencies (glassmorphism), and neon or vibrant accents to highlight key elements.
-
+ 
+- **Sci-Fi Mission Control**: Dark-mode glassmorphic surfaces (`.glass-surface`), blueprint grid frames, tactical telemetry lines, subtle cyan/amber glows, and terminal-style monospace accents.
+ 
 ## UX Principles
-
-- **Speed & Performance**: Prioritize blazing-fast page loads. Leverage Astro's static site generation and zero-JS where possible.
-- **Seamless Navigation**: Ensure smooth transitions between pages and an accessible, intuitive routing structure.
-- **Interactive Elements**: Include engaging hover states and micro-interactions that make the portfolio feel alive without compromising performance.
-
+ 
+- **Speed & Performance**: Zero-JS by default via Astro SSG, hardware-accelerated animations, and minimal client-side runtime weight.
+- **Fluid & Accessible Navigation**: Semantic heading structures, WAI-ARIA 1.2 compliant search combobox, keyboard shortcuts (`/` for search), and accessible contrast tokens across light/dark themes.
+- **Micro-Interactions**: Blueprint reveals, telemetry state indicators, and subtle hover cues that reinforce the mission-control framing without visual noise.
+ 
 ## Content Formatting
-
-- **Bento Grid Layout**: Organize information using a modular, Bento-style grid format for a clean, scannable, and modern presentation.
+ 
+- **Mission Report Structure**: Standardized 6-part format for project logs and transmissions (SYS.STATUS metadata, The Why, Scope/Architecture Table, Who It Is For, Fuckups & Learnings, Closing Transmission).
