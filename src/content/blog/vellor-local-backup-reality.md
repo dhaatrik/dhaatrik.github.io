@@ -66,7 +66,7 @@ I treat export/import as **first-class**, not v2. That was a lesson from early b
 
 ## Fuckups & Learnings
 
-- **localStorage limits exist.** Years of transactions across hundreds of students can get heavy. Export also serves as archive — not just disaster recovery.
+- **localStorage limits exist.** Years of transactions across hundreds of students can get heavy. Export is also an archive — not just disaster recovery.
 - **Private browsing modes.** Storage can evaporate between sessions. Vellor cannot fix browser policy; I can warn in onboarding.
 - **PWA reinstall ≠ data loss** — usually — but OS cleans and browser resets happen. Backups are religion.
 - **Encryption without backup is performance theater.** AES-GCM protects against casual snooping on a shared laptop; it does not protect against a drowned phone.
