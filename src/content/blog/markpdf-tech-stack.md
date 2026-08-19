@@ -24,7 +24,7 @@ seriesOrder: 2
 ====================================================================
 ```
 
-### Mission Report: The Stack Serves the Export Path
+## Mission Log: The Stack Serves the Export Path
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -34,7 +34,7 @@ If you have not read [why MarkPDF exists](/transmissions/markpdf-why-and-what/),
 
 ---
 
-### Mission Report: Constraints Before Libraries
+## Constraints Before Libraries
 
 | Constraint               | What it eliminated                                              |
 | ------------------------ | --------------------------------------------------------------- |
@@ -46,7 +46,7 @@ If you have not read [why MarkPDF exists](/transmissions/markpdf-why-and-what/),
 
 ---
 
-### Mission Report: What I Picked (and Why)
+## What I Picked (and Why)
 
 | Layer           | Choice                                     | Honest reason                                                          |
 | --------------- | ------------------------------------------ | ---------------------------------------------------------------------- |
@@ -61,7 +61,7 @@ react-markdown already sits on remark under the hood. I did **not** add a separa
 
 ---
 
-### Mission Report: What I Rejected
+## What I Rejected
 
 **jsPDF for body content.** jsPDF excels at programmatic invoices and forms. Turning arbitrary HTML/markdown into multi-page prose means fighting coordinates, line wraps, and table splits. Browser print delegates that to the engine users already trust.
 
@@ -73,7 +73,7 @@ react-markdown already sits on remark under the hood. I did **not** add a separa
 
 ---
 
-### Mission Report: Print CSS — Where the Real Work Lives
+## Print CSS — Where the Real Work Lives
 
 The preview pane uses screen typography. Export applies `@media print` rules:
 
@@ -86,7 +86,7 @@ My honest fuckup category here is **pagination**: GFM tables and long code fence
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Do not describe the stack you wish you had.** KaTeX/jsPDF on the portfolio were aspirational ghosts.
 - **Two theme tracks.** Screen dark mode ≠ print contrast requirements.
@@ -95,7 +95,7 @@ My honest fuckup category here is **pagination**: GFM tables and long code fence
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 react-markdown for GFM. Syntax highlighter for code. Print CSS for export. Boring on purpose.
 

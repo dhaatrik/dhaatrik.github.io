@@ -23,7 +23,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: Read the Article, Not the Chrome
+## Mission Log: Read the Article, Not the Chrome
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -33,7 +33,7 @@ I am fixing that drift here, and giving v4 the credit it deserves: skip controls
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -47,7 +47,7 @@ Read Aloud is minimal: extract primary content, speak sentences, highlight the a
 
 ---
 
-### Mission Report: What Read Aloud Ships — Concrete Scope
+## What Read Aloud Ships — Concrete Scope
 
 As of **v4.0.0**:
 
@@ -66,7 +66,7 @@ Stack: Manifest V3, vanilla JavaScript, `chrome.tts`, Intl.Segmenter, QUnit + Pl
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Web Speech API label was wrong.** Content scripts use extension TTS orchestration — different lifecycle, different voice lists.
 - **MV3 memory-only state failed.** Service worker kills mid-article taught me **session storage backup** — upgraded from the old fuckup story.
@@ -75,7 +75,7 @@ Stack: Manifest V3, vanilla JavaScript, `chrome.tts`, Intl.Segmenter, QUnit + Pl
 
 ---
 
-### Mission Report: Current State & Key Artifacts
+## Current State & Key Artifacts
 
 ```bash
 git clone https://github.com/dhaatrik/ReadAloud_ChromeExtension.git
@@ -88,7 +88,7 @@ CI builds `read-aloud-extension-v4.0.0.zip` artifact. MIT licensed.
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Load unpacked. Open a noisy news article. Press play. If it reads your footer, tell me — that is the heuristic game.
 

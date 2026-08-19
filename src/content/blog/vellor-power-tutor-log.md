@@ -25,7 +25,7 @@ seriesOrder: 6
 ====================================================================
 ```
 
-### Mission Report: Day 47 of Power-Tutor — and a Correction I Owe You
+## Mission Log: Day 47 of Power-Tutor — and a Correction I Owe You
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -35,7 +35,7 @@ I am writing this update because I need to correct something embarrassing: an ea
 
 ---
 
-### Mission Report: What Power-Tutor Actually Shipped
+## What Power-Tutor Actually Shipped
 
 Version 4.0 was the **Tutor OS** pivot — Vellor stopped being "a roster with vibes" and became daily ops tooling for private tutors. As of **v4.2.0**, that includes:
 
@@ -53,7 +53,7 @@ The [why-and-what transmission](/transmissions/vellor-why-and-what/) explains wh
 
 ---
 
-### Mission Report: The Journey — Performance and Trust
+## The Journey — Performance and Trust
 
 **The roster stutter.** Early Power-Tutor builds re-rendered the entire student list on every keystroke in the search box. On a 200-student roster and a cheap Chromebook, that felt like the app was broken — even though the data model was fine. I profiled it, tightened Zustand selectors, leaned on `@tanstack/react-virtual` for long lists, and kept filter/sort passes at **O(N)**. Performance is trust for tutors showing the app to parents.
 
@@ -76,7 +76,7 @@ The [why-and-what transmission](/transmissions/vellor-why-and-what/) explains wh
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **I misdocumented my own storage layer.** IndexedDB is a reasonable guess for an offline PWA — but it was wrong for Vellor. Lesson: before I publish architecture claims on this site, I grep the repo I am describing.
 - **Gamification almost ate the product.** I wanted the UI to feel alive — progress cues, confetti on achievements — but early builds flirted with mobile-game chrome that buried the invoice button. Restraint took longer than Tailwind classes. Full story: [gamification trap](/transmissions/vellor-gamification-trap/).
@@ -85,7 +85,7 @@ The [why-and-what transmission](/transmissions/vellor-why-and-what/) explains wh
 
 ---
 
-### Mission Report: Connection to DBS Classes
+## Connection to DBS Classes
 
 Vellor and DBS Classes share one root conviction:
 
@@ -99,9 +99,13 @@ I failed to maintain consistency on YouTube. I am not failing quietly on Vellor.
 
 ---
 
-### Mission Report: Current Status
+## Current Status & Key Artifacts
 
 Vellor **v4.2.0** is live on GitHub. Independent educators can manage rosters, log lessons, track payments, generate invoices, and operate offline with data they own.
+
+---
+
+## Closing Transmission
 
 If you are a solopreneur tutor running batches from your living room — this tool is for you. Not for a venture-backed edtech platform. For you.
 

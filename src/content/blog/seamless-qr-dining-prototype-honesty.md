@@ -24,7 +24,7 @@ seriesOrder: 3
 ====================================================================
 ```
 
-### Mission Report: Prototype Honesty Is a Feature
+## Mission Log: Prototype Honesty Is a Feature
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -32,7 +32,7 @@ Seamless QR Dining v3.0.0 is **demo v3** — not "production pending" in the sen
 
 ---
 
-### Mission Report: What's Simulated Today
+## What's Simulated Today
 
 | Area           | Demo behavior                                               |
 | -------------- | ----------------------------------------------------------- |
@@ -45,7 +45,7 @@ Seamless QR Dining v3.0.0 is **demo v3** — not "production pending" in the sen
 
 ---
 
-### Mission Report: What a Real Restaurant Would Need
+## What a Real Restaurant Would Need
 
 | Capability              | Why the demo stops short                          |
 | ----------------------- | ------------------------------------------------- |
@@ -61,7 +61,7 @@ Seamless QR Dining v3.0.0 is **demo v3** — not "production pending" in the sen
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **I once claimed WebSocket reconnect bugs** — the honest bug class is **wrong-table Context** or **stale kitchen tab** in dev.
 - **"Production pending" telemetry lied.** Status should read **demo / not production-hardened**.
@@ -70,7 +70,7 @@ Seamless QR Dining v3.0.0 is **demo v3** — not "production pending" in the sen
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Use the repo to study customer + kitchen UX in one codebase. Do not point a live restaurant at in-memory orders and call it done.
 

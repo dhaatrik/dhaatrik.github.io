@@ -24,7 +24,7 @@ seriesOrder: 2
 ====================================================================
 ```
 
-### Mission Report: The Order Bus Lives in Context, Not a Socket Room
+## Mission Log: The Order Bus Lives in Context, Not a Socket Room
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -32,7 +32,7 @@ Read [why this demo exists](/transmissions/seamless-qr-dining-why-and-what/) fir
 
 ---
 
-### Mission Report: Stack Choices
+## Stack Choices
 
 | Layer         | Choice                     | Why                                                    |
 | ------------- | -------------------------- | ------------------------------------------------------ |
@@ -48,7 +48,7 @@ No `ws` package. No standalone Node socket server. "Real-time" = **shared in-mem
 
 ---
 
-### Mission Report: Order Flow Architecture
+## Order Flow Architecture
 
 1. Customer at `/?table=N` adds items → `OrderContext` appends order with table id
 2. Kitchen at `/kitchen` subscribes to same context provider tree
@@ -60,7 +60,7 @@ No `ws` package. No standalone Node socket server. "Real-time" = **shared in-mem
 
 ---
 
-### Mission Report: What I Rejected (For This Demo)
+## What I Rejected (For This Demo)
 
 **WebSocket server early.** Faster to prove UX with Context; sockets add reconnect state, room identity, and deploy complexity before the menu UI is legible.
 
@@ -70,7 +70,7 @@ No `ws` package. No standalone Node socket server. "Real-time" = **shared in-mem
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Table identity in URL is non-negotiable.** `?table=N` simulates QR join — skip it and orders bleed across tables in demos.
 - **Context tests matter.** `OrderContext` and `AuthContext` suites catch lifecycle bugs before kitchen UI glitches.
@@ -79,7 +79,7 @@ No `ws` package. No standalone Node socket server. "Real-time" = **shared in-mem
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Next.js routes for surfaces. Context for the order bus. Jest for trust. WebSockets remain future homework.
 

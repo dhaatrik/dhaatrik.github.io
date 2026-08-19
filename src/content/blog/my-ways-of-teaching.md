@@ -4,6 +4,7 @@ description: 'A mission log on my non-traditional teaching philosophy — siblin
 pubDate: 2026-06-16
 tags: ['pedagogy']
 clearance: 'PUBLIC'
+readingTime: '8 min'
 ---
 
 ```
@@ -20,7 +21,7 @@ clearance: 'PUBLIC'
 ====================================================================
 ```
 
-### Mission Report: The Bus Wheel That Changed Everything
+## Mission Log: The Bus Wheel That Changed Everything
 
 The best mechanics lecture I ever gave did not happen in a classroom. It happened on a crowded city street, waiting for a bus.
 
@@ -30,7 +31,7 @@ That moment crystallized something I had been building toward for years: **physi
 
 ---
 
-### Mission Report: The Kitchen as a Thermodynamics Lab
+## The Kitchen as a Thermodynamics Lab
 
 If the street taught me kinematics, the kitchen taught me heat transfer.
 
@@ -40,7 +41,7 @@ Cooking together also did something textbooks cannot: it removed the performance
 
 ---
 
-### Mission Report: Classrooms Under Open Skies
+## Classrooms Under Open Skies
 
 I routinely moved lessons outdoors. Under the sky, lectures on gravity, optics, and atmospheric science became tactile. Students estimated the height of trees using trigonometry and shadow lengths. We studied light refraction and scattering in the atmosphere. We calculated the parabolic trajectory of thrown objects in real time — not as a problem set, but as a ball arcing through actual air.
 
@@ -63,7 +64,7 @@ The streets of India became my mechanics lab beyond bus wheels, too. To explain 
 
 ---
 
-### Mission Report: The Sibling-Centric Relationship Model
+## The Sibling-Centric Relationship Model
 
 None of this works if students are afraid of you.
 
@@ -75,12 +76,16 @@ Teaching is not about lecturing from a raised podium or reading slides off a scr
 
 ---
 
-### Mission Report: What Tutoring Taught Me About Attention
+## What Tutoring Taught Me About Attention (Fuckups & Learnings)
 
 Nine years of tutoring taught me lessons that went far beyond textbook equations. It was an exercise in cognitive and behavioral psychology:
 
 - **Understanding Human Psychology:** I learned how students think, what triggers their focus, and what makes their minds drift. A student's attention is not a resource to be demanded — it is a state of mind to be earned through narrative design.
 - **Attention Engineering:** To keep a classroom of 30 to 40 school students fully engaged, I had to structure every lesson like a story. Each mathematical derivation or physical law was introduced as a puzzle to be solved, complete with a narrative setup, a conflict (a counter-intuitive physical observation), and a resolution (the formula).
 - **Adapting Feedback Loops:** I mastered the art of code-switching between different developmental levels — translating the same physics concepts into intuitive metaphors for a Class 9 student, and then into rigorous, multi-variable calculus formulations for university B.Sc or B.Tech engineering candidates.
+
+---
+
+## Closing Transmission
 
 The bus wheel, the frying pan, the open sky — these were never gimmicks. They were my way of honoring a simple truth: if a student cannot connect an equation to something they have already seen, the equation will not survive the exam — let alone the rest of their life.

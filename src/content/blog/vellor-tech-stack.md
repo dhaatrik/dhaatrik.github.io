@@ -24,7 +24,7 @@ seriesOrder: 2
 ====================================================================
 ```
 
-### Mission Report: The Stack Is Not the Product
+## Mission Log: The Stack Is Not the Product
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -36,7 +36,7 @@ If you have not read [why Vellor exists](/transmissions/vellor-why-and-what/), s
 
 ---
 
-### Mission Report: The Constraints That Picked the Stack
+## The Constraints That Picked the Stack
 
 Before naming libraries, I wrote non-negotiables on a sticky note:
 
@@ -52,7 +52,7 @@ Vellor's enemies are **complexity**, **data leakage**, and **maintenance burden*
 
 ---
 
-### Mission Report: The Journey — What I Considered
+## The Journey — What I Considered
 
 **The "just use Next.js" phase.** Tempting. Great DX, huge community. But Vellor does not need SSR, edge functions, or API routes. Adding a server-shaped framework to a client-only app felt like buying a cargo plane to deliver a letter.
 
@@ -62,7 +62,7 @@ Vellor's enemies are **complexity**, **data leakage**, and **maintenance burden*
 
 ---
 
-### Mission Report: What I Shipped — Stack Table
+## What I Shipped — Stack Table
 
 From the repo README and `package.json` at **v4.2.0**:
 
@@ -86,7 +86,7 @@ From the repo README and `package.json` at **v4.2.0**:
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **localStorage is not infinite.** Large rosters + transaction history + achievement state must be watched. Export reminders every 14 days are not UX decoration — they are disaster-awareness.
 - **PWA cache invalidation hurts.** `vite-plugin-pwa` is great until a schema migration meets a stale service worker. I version caches aggressively and test cold starts on slow Android browsers.
@@ -95,7 +95,7 @@ From the repo README and `package.json` at **v4.2.0**:
 
 ---
 
-### Mission Report: What I Would Not Add (Yet)
+## What I Would Not Add (Yet)
 
 | Temptation                    | Why I am waiting                                                                          |
 | ----------------------------- | ----------------------------------------------------------------------------------------- |
@@ -106,7 +106,7 @@ From the repo README and `package.json` at **v4.2.0**:
 
 ---
 
-### Mission Report: Current State
+## Current State & Key Artifacts
 
 The CI pipeline in `.github/workflows/ci.yml` is boring on purpose:
 
@@ -118,7 +118,7 @@ That is the stack proving it works — not a architecture diagram in a slide dec
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Pick tools that match the **actual** threat model: offline tutors, local encryption, solo maintenance, zero rent-seeking infrastructure.
 

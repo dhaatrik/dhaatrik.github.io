@@ -23,7 +23,7 @@ seriesOrder: 5
 ====================================================================
 ```
 
-### Mission Report: Why a DSL Instead of a Magic "Go to Orbit" Button
+## Why a DSL Instead of a Magic "Go to Orbit" Button
 
 **SYS.STATUS:** FC_MODULE: ONLINE // SCRIPT_PARSER: ARMED
 
@@ -35,7 +35,7 @@ Context: [why DeltaV Lab exists](/transmissions/deltav-lab-why-and-what/) · [ph
 
 ---
 
-### Mission Report: The Language
+## The Language
 
 Scripts use one command per line:
 
@@ -55,7 +55,7 @@ Press **`F`** to open the script editor, **`G`** to arm the computer before lift
 
 ---
 
-### Mission Report: What Happens Each Tick
+## What Happens Each Tick
 
 When the flight computer is active (`PhysicsWorker.ts`):
 
@@ -67,13 +67,13 @@ There is no separate physics path for autopilot. If your script stages too early
 
 ---
 
-### Mission Report: SAS Modes
+## SAS Modes
 
 `SAS OFF | STABILITY | PROGRADE | RETROGRADE` gives students a taste of attitude-hold logic without implementing full 6DOF — another scope honesty moment. SAS modes inform gimbal targeting; they do not replace the [2D limitations](/transmissions/deltav-lab-not-professional-grade/) of the sim.
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Parser strictness is a feature.** Invalid lines return line-numbered errors at load time — better than silent failure at Max-Q.
 - **One-shot commands** (`STAGE`, `ABORT`) prevent infinite restaging loops. Obvious in hindsight; painful before I added state flags.
@@ -81,7 +81,7 @@ There is no separate physics path for autopilot. If your script stages too early
 
 ---
 
-### Closing Transmission
+## Closing Transmission
 
 The flight computer exists so you can _program_ a gravity turn, watch it fail, fix the script, and rerun — same deterministic physics every time.
 

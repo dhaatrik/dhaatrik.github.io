@@ -23,7 +23,7 @@ seriesOrder: 4
 ====================================================================
 ```
 
-### Mission Report: Achievement Unlocked — Distraction
+## Mission Log: Achievement Unlocked — Distraction
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -33,7 +33,7 @@ This is the honest log of that trap.
 
 ---
 
-### Mission Report: The Why — Why Gamify at All?
+## The Why — Why Gamify at All?
 
 Tutoring is lonely ops work. Log lesson. Chase payment. Repeat. No manager cheering you on. SaaS tools feel like tax software — correct, soul-crushing.
 
@@ -47,7 +47,7 @@ The repo's `createGamificationSlice.ts` and `constants.ts` achievement definitio
 
 ---
 
-### Mission Report: The Journey — How It Got Too Heavy
+## The Journey — How It Got Too Heavy
 
 Early Power-Tutor mocks stacked:
 
@@ -62,7 +62,7 @@ I watched myself reach for Framer Motion the way junior devs reach for libraries
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **What went wrong:** Core workflows competed with celebration UI for attention.
 - **Why:** I conflated "not boring" with "visually loud."
@@ -77,7 +77,7 @@ I watched myself reach for Framer Motion the way junior devs reach for libraries
 
 ---
 
-### Mission Report: Current State
+## Current State & Key Artifacts
 
 Gamification remains a **first-class feature** — monthly goal tracker, customizable rank titles, 25+ achievements. It is also **optional motivation**, not the product definition.
 
@@ -85,7 +85,7 @@ Vellor is still a tutoring OS. The [project page fuckup teaser](/projects/vellor
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 If you are building ops software for solo professionals, ask: **what action pays their rent?** Optimize that path until it is boring-fast. Then — only then — add confetti one room over.
 

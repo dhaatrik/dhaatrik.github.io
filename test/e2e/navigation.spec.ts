@@ -78,6 +78,8 @@ test.describe('Mobile Navigation Drawer', () => {
         const toggle = page.locator('#mobile-nav-toggle');
         const drawer = page.locator('#mobile-nav-drawer');
 
+        await expect(drawer).toHaveClass(/translate-x-full/);
+
         // Open drawer
         await toggle.click();
         await expect(drawer).toHaveClass(/translate-x-0/);
@@ -120,9 +122,13 @@ test.describe('Mobile Navigation Drawer', () => {
         const drawer = page.locator('#mobile-nav-drawer');
         const backdrop = page.locator('#mobile-nav-backdrop');
 
+        await expect(drawer).toHaveClass(/translate-x-full/);
+        await expect(backdrop).toHaveClass(/opacity-0/);
+
         // Open drawer
         await toggle.click();
         await expect(drawer).toHaveClass(/translate-x-0/);
+        await expect(backdrop).toHaveClass(/opacity-100/);
 
         // Click on the left side of the screen (x = 40, y = 300) which represents the visible backdrop
         await page.mouse.click(40, 300);
@@ -135,6 +141,8 @@ test.describe('Mobile Navigation Drawer', () => {
     test('should close drawer on swipe-right gesture', async ({ page }) => {
         const toggle = page.locator('#mobile-nav-toggle');
         const drawer = page.locator('#mobile-nav-drawer');
+
+        await expect(drawer).toHaveClass(/translate-x-full/);
 
         await toggle.click();
         await expect(drawer).toHaveClass(/translate-x-0/);
@@ -190,6 +198,8 @@ test.describe('Mobile Navigation Drawer', () => {
     test('should close drawer on Escape key press', async ({ page }) => {
         const toggle = page.locator('#mobile-nav-toggle');
         const drawer = page.locator('#mobile-nav-drawer');
+
+        await expect(drawer).toHaveClass(/translate-x-full/);
 
         // Open drawer
         await toggle.click();

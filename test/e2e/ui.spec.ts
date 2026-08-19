@@ -136,15 +136,17 @@ test.describe('Portfolio UI Interactivity', () => {
     test('Transmission search keyboard navigation should focus first result', async ({ page }) => {
         await page.goto('/transmissions/');
         const searchInput = page.locator('#search-logs');
+        await expect(searchInput).toBeVisible();
         await searchInput.fill('teaching');
 
-        await searchInput.press('ArrowDown');
-
-        const focusedHref = await page.evaluate(() => {
-            const active = document.activeElement as HTMLAnchorElement | null;
-            return active?.getAttribute('href') ?? '';
-        });
-        expect(focusedHref).toContain('/transmissions/');
+        await expect(async () => {
+            await searchInput.press('ArrowDown');
+            const focusedHref = await page.evaluate(() => {
+                const active = document.activeElement as HTMLAnchorElement | null;
+                return active?.getAttribute('href') ?? '';
+            });
+            expect(focusedHref).toContain('/transmissions/');
+        }).toPass();
     });
 
     test('BlogPost Table of Contents should highlight active sections on scroll', async ({
@@ -160,13 +162,13 @@ test.describe('Portfolio UI Interactivity', () => {
         await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
         await page.waitForLoadState('networkidle');
 
-        const tocLink = page.locator('#toc a[href="#mission-report-the-math-behind-staging"]');
+        const tocLink = page.locator('#toc a[href="#the-math-behind-staging"]');
 
         // Check initial state (should not have active classes if we are at the top)
         await expect(tocLink).not.toHaveClass(/!text-\(--accent\)/);
 
         // Scroll the headings section to be perfectly within the active region (Y = 200)
-        const headingsHeader = page.locator('#mission-report-the-math-behind-staging');
+        const headingsHeader = page.locator('#the-math-behind-staging');
         await headingsHeader.evaluate((el) => {
             const rect = el.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;

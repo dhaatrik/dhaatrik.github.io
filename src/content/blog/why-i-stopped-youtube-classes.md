@@ -4,6 +4,7 @@ description: 'A candid mission log on why I halted the DBS Classes YouTube chann
 pubDate: 2026-06-16
 tags: ['pedagogy', 'youtube']
 clearance: 'PUBLIC'
+readingTime: '7 min'
 ---
 
 ```
@@ -19,7 +20,7 @@ clearance: 'PUBLIC'
 ====================================================================
 ```
 
-### Mission Report: The Last Upload
+## Mission Log: The Last Upload
 
 On September 15, 2023, I uploaded a video titled _Point Mass is a Myth_. It was the 20th video log on the DBS Classes channel — meant to open a deep-dive series on classical mechanics and kinematics. The lecture was structured to explain how representing physical objects as infinitesimal points fails to account for real-world phenomena like rotation, drag, and rolling friction.
 
@@ -31,7 +32,7 @@ To document this retrospective with integrity, I have to catalog my failures wit
 
 ---
 
-### Mission Report: Root Cause Analysis
+## Root Cause Analysis
 
 When I trace the drop-off honestly, three internal bottlenecks stand out:
 
@@ -53,7 +54,7 @@ I relied heavily on creative motivation rather than operational discipline. Moti
 
 ---
 
-### Mission Report: Motivation vs. Systems
+## Motivation vs. Systems
 
 The collapse of my upload schedule highlights the difference between relying on temporary inspiration versus building a sustainable workflow:
 
@@ -75,7 +76,7 @@ I ran DBS Classes entirely on the _Motivation-Driven_ side of this comparison. W
 
 ---
 
-### Mission Report: What I Took From the Failure
+## Fuckups & Learnings: What I Took From the Failure
 
 This cessation was not a waste of effort; it was a calibration phase. The primary lesson I took from the experience is that good intentions and high-minded philosophies mean very little without the discipline to execute them consistently.
 
@@ -85,6 +86,10 @@ Today, I apply this systems-first perspective to my engineering and development 
 - **Lowering Cognitive Load:** I design pipelines that make starting a task as low-friction as possible, relying on automation rather than willpower.
 - **Sustainable Pace:** I prioritize consistency and reliable pacing over exhausting sprints.
 
-The DBS Classes YouTube channel remains online as an archive of 20 high-fidelity lectures. It serves as both a proof of concept for my sibling-centric teaching model ("Dhaatu Bhaiyaa") and an open reminder — to me and to anyone reading this log — that structural discipline matters in all creative and technical work.
+The DBS Classes YouTube channel remains online as an archive of 20 high-fidelity lectures. It is both a proof of concept for my sibling-centric teaching model ("Dhaatu Bhaiyaa") and an open reminder — to me and to anyone reading this log — that structural discipline matters in all creative and technical work.
+
+---
+
+## Closing Transmission
 
 _End of transmission. The archive stays live. The lesson stays current._

@@ -24,7 +24,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: Fuel to Your Door — UI First, Infrastructure Later
+## Mission Log: Fuel to Your Door — UI First, Infrastructure Later
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -34,7 +34,7 @@ I am fixing that tone mismatch here.
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked:
 
@@ -48,7 +48,7 @@ FuelDrop is a **UX prototype** for on-demand fuel flows — not a production dis
 
 ---
 
-### Mission Report: What FuelDrop Ships Today — Concrete Scope
+## What FuelDrop Ships Today — Concrete Scope
 
 As of **v3.0.0**:
 
@@ -66,7 +66,7 @@ Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Leaflet, Motion, react-
 
 ---
 
-### Mission Report: Who I Built It For (and Who Should Skip It)
+## Who I Built It For (and Who Should Skip It)
 
 **Built for:**
 
@@ -82,7 +82,7 @@ Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Leaflet, Motion, react-
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Portfolio overstated infrastructure.** WebSockets, high-concurrency server architecture, database rollback — fiction for this repo. The honest fuckup is **optimistic UI on mock state** without clarifying there is no server to fail.
 - **README marketing vs demo reality.** "Cutting-edge platform" copy sells ambition; `package.json` is a Vite SPA. Label the demo honestly.
@@ -91,7 +91,7 @@ Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Leaflet, Motion, react-
 
 ---
 
-### Mission Report: Current State & Key Artifacts
+## Current State & Key Artifacts
 
 ```bash
 git clone https://github.com/dhaatrik/fueldrop.git
@@ -111,7 +111,7 @@ MIT licensed. PWA-capable via vite-plugin-pwa.
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Order fuel in the UI. Accept it on the captain screen. Watch demo map states move. That is FuelDrop today — polished **prototype**, not production ops.
 

@@ -4,6 +4,7 @@ description: 'My teaching philosophy in plain language — observation before eq
 pubDate: 2026-06-17
 tags: ['pedagogy']
 clearance: 'PUBLIC'
+readingTime: '9 min'
 hasMath: true
 ---
 
@@ -19,7 +20,7 @@ hasMath: true
 ====================================================================
 ```
 
-### Mission Report: The Axiom I Will Not Compromise
+## Mission Log: The Axiom I Will Not Compromise
 
 Every teaching decision I make returns to one sentence:
 
@@ -34,7 +35,7 @@ First-principles teaching is how I honor that axiom. If a student understands th
 
 ---
 
-### Mission Report: Observation Before Equations
+## Observation Before Equations
 
 Most classrooms I sat in — and later taught in — ran the pipeline backward. Here is the formula. Here are three worked examples. Now solve twenty problems. Memorize what you cannot derive.
 
@@ -59,7 +60,7 @@ This is not slow teaching. It is _efficient_ teaching. Rote learning looks fast 
 
 ---
 
-### Mission Report: Trust Before Authority
+## Trust Before Authority
 
 You cannot ask "dumb questions" in an environment that punishes ignorance. I learned that in crowded school classrooms where students would rather stay silent than risk humiliation.
 
@@ -71,7 +72,7 @@ Rewards, food, small celebrations — these are not bribes. They are feedback si
 
 ---
 
-### Mission Report: Context Is Not Decoration
+## Context Is Not Decoration
 
 I teach thermodynamics in kitchens. Trigonometry under open skies. Kinematics on city streets watching bus wheels and football kicks. This is not gimmickry. It is epistemology.
 
@@ -83,7 +84,7 @@ The real world is messy, multi-variable, and imprecise — which is exactly why 
 
 ---
 
-### Mission Report: Attention Is Earned, Not Demanded
+## Attention Is Earned, Not Demanded
 
 A classroom of thirty-five students does not owe me their focus. I owe them a reason to give it.
 
@@ -93,7 +94,7 @@ This is attention engineering, and it is the same instinct I apply when building
 
 ---
 
-### Mission Report: Code-Switching Across Levels
+## Code-Switching Across Levels
 
 The same concept must be taught differently to a Class 9 student and a B.Tech engineering candidate. Not because the truth changes — because the vocabulary and tolerance for abstraction change.
 
@@ -107,7 +108,7 @@ The first-principles root stays identical. Only the compression level changes.
 
 ---
 
-### Mission Report: What I Got Wrong
+## Fuckups & Learnings: What I Got Wrong
 
 A mission log without failure is propaganda.
 
@@ -117,7 +118,7 @@ That failure is part of my teaching philosophy now. I tell students: **talent an
 
 ---
 
-### Mission Report: The Goal
+## Closing Transmission: The Goal
 
 I do not measure success by how many students memorize a formula on the first attempt. I measure it by whether they still recognize the physics six months later — in a kitchen, on a street, in a game, in an engineering problem they have never seen before.
 

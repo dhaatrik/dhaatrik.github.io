@@ -24,7 +24,7 @@ seriesOrder: 3
 ====================================================================
 ```
 
-### Mission Report: Free to Fork, Not Free to Operate a Fuel Business
+## Mission Log: Free to Fork, Not Free to Operate a Fuel Business
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -34,7 +34,7 @@ It does **not** mean you can operate real fuel delivery without backends, regula
 
 ---
 
-### Mission Report: What MIT Free Covers
+## What MIT Free Covers
 
 - Use, modify, distribute, commercial fork — with copyright notice preserved
 - Self-host the static/Vite build on your own infra
@@ -44,7 +44,7 @@ MIT is not zero legal text. Software provided as-is.
 
 ---
 
-### Mission Report: Demo Scope — Simulated vs Real
+## Demo Scope — Simulated vs Real
 
 | Feature              | Demo reality                                     |
 | -------------------- | ------------------------------------------------ |
@@ -57,7 +57,7 @@ MIT is not zero legal text. Software provided as-is.
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Do not ship demo OTP to production.** Replace with real auth before any public launch.
 - **"High-concurrency" was portfolio poetry.** Concurrency here means React concurrent rendering — not 10k dispatch events/sec.
@@ -66,7 +66,7 @@ MIT is not zero legal text. Software provided as-is.
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Clone it. Run captain mode. Break the ETA UX. Just do not point a real fleet at mock state and call it shipped.
 

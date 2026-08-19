@@ -24,7 +24,7 @@ seriesOrder: 3
 ====================================================================
 ```
 
-### Mission Report: Your Key, Your Bill, Your Guardrails
+## Mission Log: Your Key, Your Bill, Your Guardrails
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -34,7 +34,7 @@ This transmission is the dull-truth companion to [why-and-what](/transmissions/i
 
 ---
 
-### Mission Report: What MIT Free Means Here
+## What MIT Free Means Here
 
 - Use, modify, distribute the orchestration UI — MIT terms apply
 - No hosted SaaS margin — I do not bill per debate
@@ -43,7 +43,7 @@ This transmission is the dull-truth companion to [why-and-what](/transmissions/i
 
 ---
 
-### Mission Report: Cost Drivers
+## Cost Drivers
 
 | Knob                | Effect                                                  |
 | ------------------- | ------------------------------------------------------- |
@@ -52,12 +52,13 @@ This transmission is the dull-truth companion to [why-and-what](/transmissions/i
 | **Critique rounds** | Up to 5 configured — each round re-spends tokens        |
 | **Prompt size**     | First-principles + synthesis context grows fast         |
 | **Export**          | PDF generation is local; API cost already sunk          |
+| **Latency**         | Async calls take real seconds                           |
 
 v4 shows **token and cost metrics** in UI — visibility, not automatic caps.
 
 ---
 
-### Mission Report: The Rate-Limit Bill Fuckup (Real)
+## Fuckups & Learnings: The Rate-Limit Bill Fuckup
 
 I kicked off a multi-agent test loop **without a maximum recursion depth block**. Woke up to a **rate-limited API key** and a bill I could have predicted.
 
@@ -70,7 +71,7 @@ Lessons baked into how I talk about v4:
 
 ---
 
-### Mission Report: Honest Limitations
+## Honest Limitations
 
 | Limitation                   | Reality                                             |
 | ---------------------------- | --------------------------------------------------- |
@@ -81,7 +82,7 @@ Lessons baked into how I talk about v4:
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Clone free. Debate carefully. Export the report. Sleep with your API dashboard open if you leave round-robin unattended.
 

@@ -59,7 +59,7 @@ It is designed to act as an interactive "Engineering Journal" for zero-to-one st
 ## ⚡ Key Features
 
 - **Premium Glassmorphic Aesthetics**: Modern dark mode/light mode themes integrated with smooth gradients, blueprint frames, custom mouse spotlights, and custom scrollbars.
-- **Science-Ready Blog Layouts**: Complete LaTeX inline and block math support (`$$ \Delta v $$`) rendered locally via rehype-katex to ensure seamless rendering for technical articles.
+- **Science-Ready Blog Layouts**: Complete LaTeX inline and block math support (`$$ \Delta v $$`) rendered locally via rehype-katex to ensure reliable rendering for technical articles.
 - **Smart Mobile Hamburger Drawer**: Positioned outside the header context to prevent layout clipping, featuring glassmorphism, dynamic path logging, and full touch-swipe gesture support to close.
 - **Recent Transmissions Footer**: Displays the 4 most recently published research logs, integrated with client-side script trackers that automatically show human-readable relative time (e.g. `// 3d ago`).
 - **Interactive Terminal Search**: An instant search utility under "Mission Logs" featuring:
@@ -155,7 +155,7 @@ Use the following npm scripts to work on the project:
 
 ## 🧪 Testing Instructions
 
-This codebase has robust testing coverage divided into unit and integration boundaries to prevent build failures during deployment.
+This codebase has thorough testing coverage divided into unit and integration boundaries to prevent build failures during deployment.
 
 ### 1. Data Unit Tests
 

@@ -23,7 +23,7 @@ seriesOrder: 5
 ====================================================================
 ```
 
-### Mission Report: The Safety Net You Do Not Get
+## Mission Log: The Safety Net You Do Not Get
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -33,7 +33,7 @@ The corollary nobody markets: **if you lose the device and never exported, the d
 
 ---
 
-### Mission Report: The Why — Why Accept That Trade?
+## The Why — Why Accept That Trade?
 
 Because the alternative is student rosters on a vendor server under terms you did not write, recoverable by support tickets you do not control.
 
@@ -47,7 +47,7 @@ If you need automatic multi-device sync today, Vellor is **incomplete** for you 
 
 ---
 
-### Mission Report: The Journey — Building Backup UX
+## The Journey — Building Backup UX
 
 The repo ships:
 
@@ -64,16 +64,16 @@ I treat export/import as **first-class**, not v2. That was a lesson from early b
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
-- **localStorage limits exist.** Years of transactions across hundreds of students can get heavy. Export also serves as archive — not just disaster recovery.
+- **localStorage limits exist.** Years of transactions across hundreds of students can get heavy. Export is also an archive — not just disaster recovery.
 - **Private browsing modes.** Storage can evaporate between sessions. Vellor cannot fix browser policy; I can warn in onboarding.
 - **PWA reinstall ≠ data loss** — usually — but OS cleans and browser resets happen. Backups are religion.
 - **Encryption without backup is performance theater.** AES-GCM protects against casual snooping on a shared laptop; it does not protect against a drowned phone.
 
 ---
 
-### Mission Report: What I Tell Tutors (and You)
+## What I Tell Tutors (and You)
 
 1. Export JSON after your first real roster import.
 2. Export again on the 1st of every month — put it next to tax folders.
@@ -82,7 +82,7 @@ I treat export/import as **first-class**, not v2. That was a lesson from early b
 
 ---
 
-### Mission Report: Closing Transmission
+## Closing Transmission
 
 Privacy without a server is **freedom with responsibility**. I built Vellor for tutors who want that deal explicitly — not for teachers who assumed Google would save them.
 

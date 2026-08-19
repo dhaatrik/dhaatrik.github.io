@@ -25,7 +25,7 @@ seriesOrder: 2
 ====================================================================
 ```
 
-### Mission Report: Status — Physics Loop Online
+## Mission Log: Status — Physics Loop Online
 
 **SYS.STATUS:** RK4_50HZ_ACTIVE // WORKER: ISOLATED // MAIN_THREAD: PAINT_ONLY
 
@@ -35,7 +35,7 @@ If you want the "would I certify this?" answer, that lives in [the limitations t
 
 ---
 
-### Mission Report: Architecture — Why the Worker Owns Physics
+## Architecture — Why the Worker Owns Physics
 
 The browser main thread has one job: paint UI and read input. Integration has a different job: advance state under thrust, drag, and gravity without stuttering the canvas.
 
@@ -63,7 +63,7 @@ I chose RK4 over Euler because rocket acceleration changes fast — mass drops, 
 
 ---
 
-### Mission Report: The Integration Step (RK4)
+## The Integration Step (RK4)
 
 Each entity's `applyPhysics` advances position and velocity with **4th-order Runge-Kutta**. The orbit predictor in `OrbitalMechanics.ts` uses the same pattern — four derivative samples per step, combined with the classic $1/6$ weighting.
 
@@ -82,7 +82,7 @@ At 50 Hz, $dt = 0.02$ s. That is coarse for hypersonic transient aerodynamics �
 
 ---
 
-### Mission Report: Gravity and Orbital Mechanics
+## Gravity and Orbital Mechanics
 
 Surface gravity uses $g_0 = 9.8\,\mathrm{m/s^2}$ with inverse-square attenuation:
 
@@ -105,7 +105,7 @@ Launch site defaults to Cape Canaveral-ish coordinates in the module. The sim is
 
 ---
 
-### Mission Report: Propulsion and Tsiolkovsky
+## Propulsion and Tsiolkovsky
 
 Thrust comes from staged engines with sea-level and vacuum **specific impulse** values in `Constants.ts` (e.g. booster $I_{sp,\mathrm{vac}} = 311$ s, $I_{sp,\mathrm{SL}} = 282$ s). Mass decreases as propellant burns; thrust magnitude follows throttle and atmosphere pressure.
 
@@ -117,7 +117,7 @@ The VAB computes Δv and TWR live so you see whether your stack can reach orbit 
 
 ---
 
-### Mission Report: Atmosphere, Drag, and Max-Q
+## Atmosphere, Drag, and Max-Q
 
 **Density** uses an exponential atmosphere with scale height $H = 7000\,\mathrm{m}$ and sea-level $\rho_0 = 1.225\,\mathrm{kg/m^3}$. For performance, `getAtmosphericDensity` uses a **precomputed LUT** with linear interpolation (50 m steps up to 200 km, then vacuum).
 
@@ -133,7 +133,7 @@ Drag force ties to $C_D$, reference area, and relative wind (vehicle velocity mi
 
 ---
 
-### Mission Report: Environment — Wind and Go/No-Go
+## Environment — Wind and Go/No-Go
 
 `Environment.ts` implements **altitude-layered wind profiles** (surface through stratosphere), **sinusoidal Dryden-style gusts**, optional **day/night density variation** ($\pm 2\%$), and **launch wind limits** (default 15 m/s surface).
 
@@ -141,13 +141,13 @@ Default layers are inspired by Cape Canaveral-ish shear — including a strong b
 
 ---
 
-### Mission Report: Thermal Protection
+## Thermal Protection
 
 `ThermalProtection.ts` models **skin heating and heat-shield ablation** on re-entry — tied to shared-buffer telemetry fields (`SKIN_TEMP`, `HEAT_SHIELD`, `ABLATING`). This is thermodynamic flavor for teaching, not a material-science-grade TPS design tool.
 
 ---
 
-### Mission Report: Flight Computer DSL
+## Flight Computer DSL
 
 The guidance layer is a custom **domain-specific language** parsed in `FlightScript.ts`:
 
@@ -166,7 +166,7 @@ The worker's `FlightComputer` evaluates scripts each tick; outputs override thro
 
 ---
 
-### Mission Report: Safety and Instructor Systems
+## Safety and Instructor Systems
 
 These are not cosmetic — they exercise the same worker command bus:
 
@@ -179,13 +179,13 @@ These are not cosmetic — they exercise the same worker command bus:
 
 ---
 
-### Mission Report: What We Validate in Vitest
+## What We Validate in Vitest
 
 The repo enforces `npm run test` in CI. Tests cover analytical sanity — Keplerian orbits, staging math, parser edge cases — not side-by-side Falcon 9 flight telemetry. That distinction matters for professional-grade claims; see [limitations](/transmissions/deltav-lab-not-professional-grade/).
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **Constants.ts says `FPS = 60` but physics uses 50 Hz.** Display and simulation timesteps are not the same thing. Document both or people audit the wrong number.
 - **2D physics simplifies the teaching story** but hides roll-yaw coupling, slosh, and TVC actuator dynamics — all listed in `path_to_perfection.md` as future 6DOF work.
@@ -193,7 +193,7 @@ The repo enforces `npm run test` in CI. Tests cover analytical sanity — Kepler
 
 ---
 
-### Closing Transmission
+## Closing Transmission
 
 DeltaV Lab's science stack is real: RK4 integration, variable-mass thrust, drag from dynamic pressure, layered wind, orbital element math, and a scriptable flight computer — all in a worker at 50 Hz.
 
