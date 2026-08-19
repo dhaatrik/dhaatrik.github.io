@@ -900,22 +900,57 @@
     }
 }
 
-/* Books Grid & Flex Row Layout */
+/* Books Grid & Interactive Dossier Cards */
 .books-grid-container {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-}
-
-.book-card-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 0.625rem;
 }
 
 @media (min-width: 640px) {
     .books-grid-container {
         gap: 0.75rem;
+    }
+}
+
+.book-card-row {
+    will-change: transform, border-color, box-shadow;
+}
+
+/* Butter-smooth CSS Grid accordion expansion for Book Insight Drawers */
+.book-hint-accordion {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    margin-top: 0;
+    transition:
+        grid-template-rows 360ms cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 260ms cubic-bezier(0.16, 1, 0.3, 1),
+        margin-top 360ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: grid-template-rows, opacity, margin-top;
+}
+
+.group\/book:hover .book-hint-accordion,
+.group\/book:focus-within .book-hint-accordion {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 0.75rem;
+}
+
+.book-hint-inner {
+    overflow: hidden;
+    min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .book-hint-accordion {
+        transition: none !important;
+    }
+    .group\/book:hover .book-hint-accordion,
+    .group\/book:focus-within .book-hint-accordion {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        margin-top: 0.75rem;
     }
 }
 

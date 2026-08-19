@@ -339,35 +339,85 @@ const formatMarqueeDate = (date: Date) => {
         </div>
 
         <div
-            class="content-visibility-auto-books relative z-10 max-h-[60vh] overflow-y-auto p-5 sm:p-6"
+            class="content-visibility-auto-books relative z-10 max-h-[65vh] overflow-y-auto p-5 sm:p-6"
         >
             <div class="books-grid-container">
                 {
-                    recommendedBooks.map((book) => {
+                    recommendedBooks.map((book, index) => {
                         const telemetry = bookTelemetry[book.title] || {
                             status: 'COMPLETED',
                             focus: 'SYS_ENG',
                         };
+                        const formattedIndex = String(index + 1).padStart(2, '0');
                         return (
-                            <div class="book-card-row group/book transition-spring items-center gap-4 rounded-lg border border-slate-100 bg-slate-50 p-3.5 hover:scale-[1.01] hover:shadow-[0_0_12px_var(--accent-glow)] sm:p-4 dark:border-white/5 dark:bg-white/5 dark:hover:border-white/20">
-                                <div class="min-w-0">
-                                    <h4 class="text-sm leading-snug font-bold text-slate-900 dark:text-white">
-                                        {book.title}
-                                    </h4>
-                                    <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-                                        {book.author}
-                                    </p>
-                                    {book.hint && (
-                                        <p class="mt-1.5 line-clamp-2 max-h-0 overflow-hidden text-xs leading-relaxed text-slate-400 opacity-0 transition-all duration-300 ease-out group-hover/book:max-h-12 group-hover/book:opacity-100 dark:text-slate-500">
-                                            {book.hint}
-                                        </p>
-                                    )}
+                            <a
+                                href={book.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`Read more about ${book.title} by ${book.author} (opens in a new tab)`}
+                                class="book-card-row group/book relative block overflow-hidden rounded-xl border border-slate-200/80 bg-white/70 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-(--accent)/40 hover:bg-white hover:shadow-[0_4px_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-(--accent)/40 dark:hover:bg-[#151a22]"
+                            >
+                                <!-- Left Neon Horizon Accent (Fades in on Hover) -->
+                                <div class="pointer-events-none absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b from-(--accent) to-blue-500 opacity-0 transition-opacity duration-300 group-hover/book:opacity-100 group-hover/book:shadow-[0_0_10px_var(--accent-glow)]" />
+
+                                <!-- Main Header Row -->
+                                <div class="flex items-start justify-between gap-4">
+                                    <div class="flex min-w-0 items-start gap-3">
+                                        <span class="mt-0.5 font-mono text-[10px] font-bold tracking-wider text-slate-400 select-none transition-colors duration-200 group-hover/book:text-(--accent) dark:text-slate-500">
+                                            {formattedIndex}
+                                        </span>
+                                        <div class="min-w-0">
+                                            <h4 class="text-sm font-bold leading-snug text-slate-900 transition-colors duration-200 group-hover/book:text-(--accent) dark:text-white">
+                                                {book.title}
+                                            </h4>
+                                            <p class="mt-0.5 font-mono text-xs text-slate-500 dark:text-slate-400">
+                                                {book.author}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex shrink-0 items-center gap-2">
+                                        <div class="flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white/80 px-2.5 py-0.5 font-mono text-[9px] font-semibold tracking-wider text-(--accent) transition-all duration-300 group-hover/book:border-(--accent)/40 group-hover/book:bg-(--accent)/10 group-hover/book:shadow-[0_0_8px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-(--accent) animate-pulse" />
+                                            <span>FOCUS: {telemetry.focus}</span>
+                                        </div>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="14"
+                                            height="14"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="text-slate-400 transition-all duration-300 group-hover/book:translate-x-0.5 group-hover/book:text-(--accent) dark:text-slate-500"
+                                            aria-hidden="true"
+                                        >
+                                            <path d="M7 17l9.2-9.2M17 17V7H7" />
+                                        </svg>
+                                    </div>
                                 </div>
 
-                                <div class="shrink-0 font-mono text-[9px] tracking-tight text-(--accent) opacity-80 select-none">
-                                    FOCUS: {telemetry.focus}
-                                </div>
-                            </div>
+                                <!-- Accordion Drawer (Smooth 0fr -> 1fr CSS Grid Animation) -->
+                                {book.hint && (
+                                    <div class="book-hint-accordion">
+                                        <div class="book-hint-inner">
+                                            <div class="rounded-lg border-l-2 border-(--accent) bg-(--accent)/5 p-3 text-xs leading-relaxed text-slate-700 dark:bg-white/[0.04] dark:text-slate-300">
+                                                <div class="mb-1 flex items-center gap-1.5 font-mono text-[9px] font-bold tracking-wider text-(--accent) uppercase">
+                                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                                    </svg>
+                                                    <span>WHY IT SHAPED MY THINKING</span>
+                                                </div>
+                                                <p class="font-sans text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+                                                    {book.hint}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </a>
                         );
                     })
                 }
