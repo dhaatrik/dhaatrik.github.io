@@ -24,7 +24,7 @@ seriesOrder: 7
 ====================================================================
 ```
 
-### Mission Log: The Question After the Audit
+## Mission Log: The Question After the Audit
 
 **SYS.STATUS:** ROADMAP_MODE // HYPE: DISABLED // EVIDENCE: REQUIRED
 
@@ -38,7 +38,7 @@ Pair with [the science post](/transmissions/deltav-lab-science/) for current phy
 
 ---
 
-### Mission Report: The Trust Ladder (What "Professional" Actually Means)
+## The Trust Ladder (What "Professional" Actually Means)
 
 Professional-grade here does **not** mean "pretty 3D rocket." It means a **verification story** a responsible engineer can sign:
 
@@ -70,7 +70,7 @@ flowchart BT
 
 ---
 
-### Mission Report: Why React + TypeScript Physics Hits a Ceiling
+## Why React + TypeScript Physics Hits a Ceiling
 
 DeltaV Lab is ~92% TypeScript ([repo language stats](https://github.com/dhaatrik/professional-rocket-launch-simulation)). React drives Mission Control UI; the integrator lives in `PhysicsWorker.ts`. That was the right call for a **zero-install teaching demo**.
 
@@ -90,7 +90,7 @@ I unpack the migration architecture in [native physics core](/transmissions/delt
 
 ---
 
-### Mission Report: Phase Plan (Ranked — From `path_to_perfection.md`)
+## Phase Plan (Ranked — From `path_to_perfection.md`)
 
 This is the order I would actually execute. Visibility and V&V before rewriting everything.
 
@@ -127,7 +127,7 @@ This is the order I would actually execute. Visibility and V&V before rewriting 
 
 ---
 
-### Mission Report: Physics & Model Upgrades (What Changes in the Equations)
+## Physics & Model Upgrades (What Changes in the Equations)
 
 | Domain      | Today ([science post](/transmissions/deltav-lab-science/)) | Professional target                                                |
 | ----------- | ---------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -144,7 +144,7 @@ None of this is secret sauce. GMAT, FreeFlyer, STK Astrogator, and RocketPy exis
 
 ---
 
-### Mission Report: Software & Organizational Requirements
+## Software & Organizational Requirements
 
 SpaceX-adjacent teams (and primes, ranges, insurers) implicitly expect:
 
@@ -158,7 +158,7 @@ DeltaV Lab's fault injector and FTS teach **culture**. They are not substitutes 
 
 ---
 
-### Mission Report: What I Will Not Pretend
+## What I Will Not Pretend (Fuckups & Learnings)
 
 - **"SpaceX people will use this next quarter"** — No. They have internal tools, decades of telemetry, and dedicated V&V staff. The goal is **credible overlap** on validation methodology, not replacement.
 - **Browser-only forever** — Professional workflows need servers, Python glue, and HIL clocks.
@@ -168,7 +168,7 @@ DeltaV Lab's fault injector and FTS teach **culture**. They are not substitutes 
 
 ---
 
-### Mission Report: How You Can Pressure-Test This Plan
+## How You Can Pressure-Test This Plan
 
 If you work in flight dynamics, ask:
 
@@ -180,7 +180,7 @@ I do not have funding for a full V&V program. I do have an open repo and a willi
 
 ---
 
-### Closing Transmission
+## Closing Transmission
 
 DeltaV Lab's next chapter is not more README hype. It is **evidence, native compute, and toolchain hooks** — climbed in that order.
 

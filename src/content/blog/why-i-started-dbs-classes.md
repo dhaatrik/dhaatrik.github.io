@@ -4,6 +4,7 @@ description: 'An honest mission log on why I launched a YouTube channel for math
 pubDate: 2026-06-16
 tags: ['pedagogy', 'youtube']
 clearance: 'PUBLIC'
+readingTime: '6 min'
 ---
 
 ```
@@ -20,7 +21,7 @@ clearance: 'PUBLIC'
 ====================================================================
 ```
 
-### Mission Report: Nine Years Before the Camera
+## Mission Log: Nine Years Before the Camera
 
 Before I launched DBS Classes on YouTube, I had already spent nearly nine years in the trenches of tutoring. Over that near-decade, I guided roughly 200 students. My classroom sizes varied significantly — crowded local school environments with 30 to 40 eager pupils, intimate offline coaching centers with batches of 20 to 25, one-on-one personal coaching mentorships, and online groups for NRI and international students.
 
@@ -30,7 +31,7 @@ That pattern is what pushed me to hit record.
 
 ---
 
-### Mission Report: Launch Parameters
+## Launch Parameters
 
 I founded **DBS Classes** on October 31, 2022. The abbreviation stands for **"Dhaatu Bhaiyaa's Classes"** — where "Dhaatu" is my nickname among close companions, and "Bhaiyaa" is the Hindi honorific for big brother, which is how my students affectionately addressed me. I established the platform on a non-negotiable axiom:
 
@@ -43,7 +44,7 @@ I believed — and still believe — that premium, high-quality, concept-first e
 
 ---
 
-### Mission Report: Bridging Theory and Observation
+## Bridging Theory and Observation
 
 With that philosophical compass guiding the channel, my target was straightforward: replace mechanical compliance with genuine scientific intuition. I structured the curriculum around three main pillars:
 
@@ -57,7 +58,7 @@ I did not just want to help students pass exams. I wanted to build a repository 
 
 ---
 
-### Mission Report: Status and Continuation
+## Closing Transmission: Status and Continuation
 
 Twenty video logs made it to the archive before consistency broke down — a failure I document separately and without excuse. But the _why_ behind DBS Classes has not changed. The channel was never about views or algorithms. It was about giving every student the kind of explanation I wished I had received when I was sitting in a classroom, memorizing formulas I did not understand.
 

@@ -24,7 +24,7 @@ seriesOrder: 4
 ====================================================================
 ```
 
-### Mission Report: Why This Log Exists (and What Moved Out)
+## Mission Log: Why This Log Exists (and What Moved Out)
 
 **SYS.STATUS:** THREADING // WORKER_ISOLATED
 
@@ -38,7 +38,7 @@ The uncomfortable professional-grade audit is in **[Why It Is Not Professional-G
 
 ---
 
-### Mission Report: Design Constraints (Threading Edition)
+## Design Constraints (Threading Edition)
 
 Three constraints drove the worker split:
 
@@ -50,7 +50,7 @@ The main thread paints. The worker integrates. Anything else is how you get jank
 
 ---
 
-### Mission Report: The Big Fuckup — Chatty postMessage
+## The Big Fuckup — Chatty postMessage
 
 Early builds sent **hundreds of small coordinate packets per frame** to the worker (and back). The serialization cost clogged both sides. Physics missed its 20 ms budget. The sim felt like a broken screensaver even when the math was correct.
 
@@ -74,7 +74,7 @@ That one refactor mattered more than tuning RK4 coefficients.
 
 ---
 
-### Mission Report: Why RK4 (Short Version)
+## Why RK4 (Short Version)
 
 Euler lies about apoapsis when thrust and mass change fast. I chose **RK4** for smooth gravitational and thrust fields at 50 Hz. Full force breakdown: [science transmission](/transmissions/deltav-lab-science/).
 
@@ -82,7 +82,7 @@ Validation is Vitest against analytical Keplerian cases — not flight telemetry
 
 ---
 
-### Mission Report: Stack Choices
+## Stack Choices
 
 - **TypeScript + vanilla DOM** on the main loop — no React in the paint hot path
 - **esbuild** for fast worker bundles during iteration
@@ -92,7 +92,7 @@ Every dependency is a liability in a physics engine. I added libraries only when
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 | Fuckup                                    | Learning                                                                                        |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -102,7 +102,7 @@ Every dependency is a liability in a physics engine. I added libraries only when
 
 ---
 
-### Mission Report: Current Status
+## Current Status & Key Artifacts
 
 Worker-threaded physics, VAB, DSL flight computer, FTS, telemetry export — live in [the repo](https://github.com/dhaatrik/professional-rocket-launch-simulation).
 
@@ -110,7 +110,7 @@ What is next for _me_: flight-telemetry validation (not more adjectives). What i
 
 ---
 
-### Closing Transmission
+## Closing Transmission
 
 I stopped uploading YouTube lectures because I failed to build sustainable systems around content. DeltaV Lab is the opposite lesson — build the system first, then teach from it.
 

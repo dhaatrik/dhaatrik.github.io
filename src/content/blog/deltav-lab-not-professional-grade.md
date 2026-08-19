@@ -24,7 +24,7 @@ seriesOrder: 3
 ====================================================================
 ```
 
-### Mission Report: The Uncomfortable Title
+## Mission Log: The Uncomfortable Title
 
 **SYS.STATUS:** HONESTY_MODE // README_MARKETING: OVERRIDE_DISABLED
 
@@ -36,7 +36,7 @@ If you have not read [what DeltaV Lab is](/transmissions/deltav-lab-why-and-what
 
 ---
 
-### Mission Report: Implemented Rigor vs. Industry Trust
+## Implemented Rigor vs. Industry Trust
 
 | Implemented rigor (what we actually built)    | Industry trust (what companies need)                                                         |
 | --------------------------------------------- | -------------------------------------------------------------------------------------------- |
@@ -52,7 +52,7 @@ That document is my own roadmap. I am quoting myself against myself. Good.
 
 ---
 
-### Mission Report: What the verification/ Folder Actually Contains
+## What the verification/ Folder Actually Contains
 
 I checked the repo. The `verification/` directory holds:
 
@@ -72,7 +72,7 @@ So when the README implies aerodynamic integrity enforced by tests, read careful
 
 ---
 
-### Mission Report: Physics and Environment Simplifications
+## Physics and Environment Simplifications
 
 Even when the integrator is honest, the **models** are teaching-grade:
 
@@ -89,7 +89,7 @@ The repo's `path_to_perfection.md` Phase 2–3 lists 6DOF, Monte Carlo, Rust/WAS
 
 ---
 
-### Mission Report: Browser and Performance Ceilings
+## Browser and Performance Ceilings
 
 DeltaV Lab runs entirely client-side. That is a feature for accessibility and a blocker for professional workflows:
 
@@ -103,7 +103,7 @@ The roadmap's first suggestion is literally "deploy a zero-install demo." As of 
 
 ---
 
-### Mission Report: Software Engineering Trust Gaps
+## Software Engineering Trust Gaps
 
 `path_to_perfection.md` Suggestion #7 lists practices aerospace orgs expect:
 
@@ -116,7 +116,7 @@ We have Vitest, ESLint, CI — solid for an open-source teaching project. We do 
 
 ---
 
-### Mission Report: The README Marketing Problem (My Fuckup)
+## The README Marketing Problem (My Fuckup)
 
 **What went wrong:** I used "engineering-grade" because I was proud of RK4 and worker isolation. A friend could run it and see real elliptical orbits. I conflated that pride with professional certification language.
 
@@ -128,7 +128,7 @@ We have Vitest, ESLint, CI — solid for an open-source teaching project. We do 
 
 ---
 
-### Mission Report: What DeltaV Lab IS Good For
+## What DeltaV Lab IS Good For
 
 Honesty cuts both ways. This project **excels** at:
 
@@ -144,7 +144,7 @@ Do **not** use it for range safety sign-off, launch-window dispersion, or replac
 
 ---
 
-### Mission Report: The Roadmap I Am Not Pretending Is Done
+## The Roadmap I Am Not Pretending Is Done
 
 From `path_to_perfection.md`, ranked implementation order (abridged):
 
@@ -162,7 +162,7 @@ For the expanded phased plan — trust ladder, flight V&V gates, Monte Carlo, na
 
 ---
 
-### Closing Transmission
+## Closing Transmission
 
 DeltaV Lab is the most serious rocket sim I have built. It is also not professional-grade in the sense aerospace companies define that term: published validation, dispersion analysis, 6DOF fidelity, toolchain APIs, and HIL paths.
 

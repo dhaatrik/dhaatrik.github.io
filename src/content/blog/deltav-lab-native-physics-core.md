@@ -23,7 +23,7 @@ seriesOrder: 8
 ====================================================================
 ```
 
-### Mission Log: Same UI, Different Engine Room
+## Mission Log: Same UI, Different Engine Room
 
 **SYS.STATUS:** ARCHITECTURE_REVIEW // WORKER: TS_LEGACY // TARGET: RUST_CORE + WASM
 
@@ -35,7 +35,7 @@ Read [the science transmission](/transmissions/deltav-lab-science/) first if you
 
 ---
 
-### Mission Report: What Stays in TypeScript / React
+## What Stays in TypeScript / React
 
 | Layer                        | Keep in TS?       | Why                                         |
 | ---------------------------- | ----------------- | ------------------------------------------- |
@@ -52,7 +52,7 @@ React was never the problem. **Co-locating cert-shaped physics with UI bundling*
 
 ---
 
-### Mission Report: Target Architecture
+## Target Architecture
 
 ```mermaid
 flowchart LR
@@ -85,7 +85,7 @@ flowchart LR
 
 ---
 
-### Mission Report: Language Split (Rust vs C++ vs Python)
+## Language Split (Rust vs C++ vs Python)
 
 | Role                  | Rust                                                  | C++                                 | Python                                 |
 | --------------------- | ----------------------------------------------------- | ----------------------------------- | -------------------------------------- |
@@ -111,7 +111,7 @@ That is the difference between "cool GitHub project" and "runs in our Jupyter pi
 
 ---
 
-### Mission Report: Migration Phases (Strangler Pattern)
+## Migration Phases (Strangler Pattern)
 
 Do **not** big-bang rewrite `src/physics/` over a weekend. Strangle the worker:
 
@@ -137,7 +137,7 @@ Extend state vector; TS UI gains attitude telemetry channels. Golden tests **re-
 
 ---
 
-### Mission Report: Worker Memory Contract (Keep What Worked)
+## Worker Memory Contract (Keep What Worked)
 
 The [mission log](/transmissions/deltav-lab-mission-log/) documents why SharedArrayBuffer beat chatty `postMessage`. Keep that design:
 
@@ -153,7 +153,7 @@ WASM writes into the same buffer the Canvas reads. **Only the writer changes** �
 
 ---
 
-### Mission Report: What Commercial Teams Will Scrutinize
+## What Commercial Teams Will Scrutinize
 
 1. **Determinism** — Same seed → bit-identical results on Linux CI (WASM may differ slightly; native is source of truth).
 2. **FP policy** — Document use of `f64`; flag known JS/WASM divergence points if any remain in browser path.
@@ -164,7 +164,7 @@ This is the same bar described in [limitations](/transmissions/deltav-lab-not-pr
 
 ---
 
-### Mission Report: C++ Interop (When You Must)
+## C++ Interop (When You Must)
 
 Some labs will hand you a C++ guidance kernel or legacy aerodynamic table generator. Plan for:
 
@@ -176,7 +176,7 @@ I prefer minimizing this surface. But pretending aerospace is Rust-only is fanta
 
 ---
 
-### Mission Report: Fuckups I Am Preparing For
+## Fuckups & Learnings: What I Am Preparing For
 
 **Big-bang rewrite:** I will be tempted to rewrite VAB in Rust too. Wrong. UI stays TS until physics parity is proven.
 
@@ -188,7 +188,7 @@ I prefer minimizing this surface. But pretending aerospace is Rust-only is fanta
 
 ---
 
-### Closing Transmission
+## Closing Transmission
 
 The professional version of DeltaV Lab is **not** "rewrite everything in Rust because Rust is cool." It is:
 

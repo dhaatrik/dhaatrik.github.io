@@ -25,7 +25,7 @@ seriesOrder: 1
 ====================================================================
 ```
 
-### Mission Report: The Gap Between KSP and a $50k License
+## Mission Log: The Gap Between KSP and a $50k License
 
 **SYS.STATUS:** TRANSMISSION LIVE // CLEARANCE: PUBLIC
 
@@ -42,7 +42,7 @@ I wanted something in the middle. That itch became **[DeltaV Lab](https://github
 
 ---
 
-### Mission Report: The Why — What Problem Was I Actually Solving?
+## The Why — What Problem Was I Actually Solving?
 
 Three frustrations stacked on top of each other:
 
@@ -56,7 +56,7 @@ The repo's `conductor/product.md` states the audience plainly: aerospace student
 
 ---
 
-### Mission Report: What DeltaV Lab Is — Concrete Scope
+## What DeltaV Lab Is — Concrete Scope
 
 DeltaV Lab is a **browser-native launch simulation** split into two primary experiences, exactly as the README describes:
 
@@ -75,7 +75,7 @@ It is a **2D** simulation. You fly in a plane. That is a deliberate scope choice
 
 ---
 
-### Mission Report: Features I Am Proud Of (Because They Teach Real Ops)
+## Features I Built (Teaching Real Ops)
 
 Beyond "press space to launch," the repo ships tooling that mirrors how flight software teams think — scaled down for a laptop:
 
@@ -90,7 +90,7 @@ Full key map: [simulation_controls.md](https://github.com/dhaatrik/professional-
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 **What went wrong:** I let the README call DeltaV Lab "hyper-realistic" and "engineering-grade" before I had published validation against real flight telemetry. The repo's own `path_to_perfection.md` lists sixteen gaps to reach "space-grade credibility," starting with "zero published validation is the #1 reason no company will touch it yet."
 
@@ -102,7 +102,7 @@ Full key map: [simulation_controls.md](https://github.com/dhaatrik/professional-
 
 ---
 
-### Mission Report: Who Should Use This
+## Who Should Use This
 
 | You are…                                               | DeltaV Lab is…                                                                                                    |
 | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
@@ -113,7 +113,7 @@ Full key map: [simulation_controls.md](https://github.com/dhaatrik/professional-
 
 ---
 
-### Mission Report: Current State
+## Current State & Key Artifacts
 
 As of this transmission (June 2026):
 
@@ -125,7 +125,7 @@ The engine works for teaching. The trust layer for industry adoption does not �
 
 ---
 
-### Closing Transmission
+## Closing Transmission
 
 DeltaV Lab exists because I wanted KSP's "what if I strap more fuel to it" energy with integrators I can actually test in Vitest. It is open source, browser-native, and honest about what the math is doing — as long as you read the right docs.
 

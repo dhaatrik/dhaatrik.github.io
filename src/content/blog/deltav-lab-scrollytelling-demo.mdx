@@ -27,7 +27,7 @@ import Scrollytell from '../../components/Scrollytell.astro';
 ====================================================================
 ```
 
-### Mission Report: What This Transmission Is
+## Mission Log: What This Transmission Is
 
 **SYS.STATUS:** SCROLLYTELL_DEMO // CLEARANCE: PUBLIC
 
@@ -41,7 +41,7 @@ The telemetry panels below are **simplified teaching graphics**, not live sim ou
 
 ---
 
-### Mission Report: How Scrollytell Works (For Authors)
+## How Scrollytell Works (For Authors)
 
 If you want to build one of these on this site, the API is intentionally small:
 
@@ -338,7 +338,7 @@ The block below is the live instance. Four steps, four visual slots, one launch 
 
 ---
 
-### Mission Report: The Math Behind Staging
+## The Math Behind Staging
 
 The Tsiolkovsky rocket equation is the contract every staging event must respect:
 
@@ -363,7 +363,7 @@ Run the numbers, then run the [sim](https://github.com/dhaatrik/professional-roc
 
 ---
 
-### Mission Report: Why I Chose Scroll Over Video
+## Why I Chose Scroll Over Video
 
 Videos pick one pace. Orbital insertion is a _thinking_ problem — pause at MECO, check fuel percent, ask whether staging earned its Δv. Scrollytell exists so **you** control that pace while the sticky telemetry stays in view.
 
@@ -377,7 +377,7 @@ That is the same instinct behind DeltaV Lab's 50&nbsp;Hz worker tick and black-b
 
 ---
 
-### Mission Report: Fuckups & Learnings
+## Fuckups & Learnings
 
 - **First draft was only three steps.** Fine for a blog post, weak as a component demo. Four steps show multi-layer handoff without exhausting readers.
 - **I almost faked telemetry.** These HUD numbers are illustrative; the sim's SharedArrayBuffer fields are real but uglier. Label the difference or you lie by accident.
@@ -385,7 +385,7 @@ That is the same instinct behind DeltaV Lab's 50&nbsp;Hz worker tick and black-b
 
 ---
 
-### Closing Transmission
+## Closing Transmission
 
 Scroll back up and run through the dossier again. Watch when the active card border lights up — that is IntersectionObserver doing the only job that matters.
 
