@@ -14,7 +14,11 @@ function post(id, { pubDate, series, seriesOrder } = {}) {
 }
 
 const deltavPosts = [
-    post('deltav-lab-why-and-what', { pubDate: '2026-06-28', series: 'DeltaV Lab', seriesOrder: 1 }),
+    post('deltav-lab-why-and-what', {
+        pubDate: '2026-06-28',
+        series: 'DeltaV Lab',
+        seriesOrder: 1,
+    }),
     post('deltav-lab-science', { pubDate: '2026-06-29', series: 'DeltaV Lab', seriesOrder: 2 }),
     post('deltav-lab-not-professional-grade', {
         pubDate: '2026-06-30',

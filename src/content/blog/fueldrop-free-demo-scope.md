@@ -46,14 +46,14 @@ MIT is not zero legal text. Software provided as-is.
 
 ### Mission Report: Demo Scope — Simulated vs Real
 
-| Feature | Demo reality |
-|---------|--------------|
-| **OTP login** | Test OTP `1234` — README documents it |
-| **Tracking** | UI states + Leaflet — not live driver telematics |
-| **Payments** | Not implemented |
-| **Captain earnings** | README: "Coming Soon" |
-| **Emergency surge** | UI pricing toggle — no settlement backend |
-| **Promo codes** | Client-side validation (e.g., `FIRST50`) |
+| Feature              | Demo reality                                     |
+| -------------------- | ------------------------------------------------ |
+| **OTP login**        | Test OTP `1234` — README documents it            |
+| **Tracking**         | UI states + Leaflet — not live driver telematics |
+| **Payments**         | Not implemented                                  |
+| **Captain earnings** | README: "Coming Soon"                            |
+| **Emergency surge**  | UI pricing toggle — no settlement backend        |
+| **Promo codes**      | Client-side validation (e.g., `FIRST50`)         |
 
 ---
 

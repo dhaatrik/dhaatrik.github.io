@@ -9,7 +9,7 @@ order: 11
 tags: ['React 19.2', 'TypeScript 5.8', 'Vite 6', 'react-markdown', 'remark-gfm']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // EXPORT: BROWSER_PRINT // MATH: NOT_SHIPPED'
-fuckup_teaser: "I described MarkPDF with KaTeX and jsPDF on this site — the repo exports through browser print and has no LaTeX math deps; my real pain was print CSS pagination, not vanished equations."
+fuckup_teaser: 'I described MarkPDF with KaTeX and jsPDF on this site — the repo exports through browser print and has no LaTeX math deps; my real pain was print CSS pagination, not vanished equations.'
 ---
 
 ## SYS.STATUS: v1.0.0 shipped — GFM markdown preview, browser print to PDF
@@ -20,12 +20,12 @@ This page replaces portfolio copy that wrongly claimed **KaTeX**, **Remark/Rehyp
 
 ## What it is (scope)
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Editor** | Write GFM with toolbar inserts and line numbers |
-| **Preview** | Live rendered markdown as you type |
-| **Settings** | Typography, margins (mm), text/background colors, code theme |
-| **Export** | Browser print → Save as PDF (enable background graphics, 100% scale) |
+| Surface      | What you do there                                                    |
+| ------------ | -------------------------------------------------------------------- |
+| **Editor**   | Write GFM with toolbar inserts and line numbers                      |
+| **Preview**  | Live rendered markdown as you type                                   |
+| **Settings** | Typography, margins (mm), text/background colors, code theme         |
+| **Export**   | Browser print → Save as PDF (enable background graphics, 100% scale) |
 
 Stack: React 19.2, TypeScript 5.8, Vite 6, Tailwind CSS 4, react-markdown, remark-gfm, react-syntax-highlighter, Vitest.
 
@@ -48,13 +48,13 @@ MIT licensed. Static `dist/` deployable anywhere.
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **No LaTeX math** | KaTeX not in dependencies |
-| **Browser-dependent PDF** | Chrome/Firefox/Safari print margins differ |
-| **Not Pandoc** | No bibtex, cross-refs, journal templates |
-| **Large documents** | Very long markdown can stress preview memory |
-| **Print settings required** | Background graphics and scale affect output |
+| Limitation                  | Reality                                      |
+| --------------------------- | -------------------------------------------- |
+| **No LaTeX math**           | KaTeX not in dependencies                    |
+| **Browser-dependent PDF**   | Chrome/Firefox/Safari print margins differ   |
+| **Not Pandoc**              | No bibtex, cross-refs, journal templates     |
+| **Large documents**         | Very long markdown can stress preview memory |
+| **Print settings required** | Background graphics and scale affect output  |
 
 ## Deep-dive transmissions
 

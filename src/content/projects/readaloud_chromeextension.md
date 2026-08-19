@@ -9,7 +9,7 @@ order: 12
 tags: ['Chrome Extension', 'Manifest V3', 'chrome.tts', 'JavaScript']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // MV3: COMPLIANT // TESTS: 59_141'
-fuckup_teaser: "I tried memory-only state in an MV3 service worker until Chrome killed it mid-article — v4 backs playback up to chrome.storage.session and the test suite caught regressions."
+fuckup_teaser: 'I tried memory-only state in an MV3 service worker until Chrome killed it mid-article — v4 backs playback up to chrome.storage.session and the test suite caught regressions.'
 ---
 
 ## SYS.STATUS: v4.0.0 shipped — chrome.tts, smart extraction, highlight + skip, CI tested
@@ -20,13 +20,13 @@ This page corrects portfolio copy that said **Web Speech API**. The extension us
 
 ## What it is (scope)
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Extraction** | Article/main heuristics; read selected text only |
-| **Playback** | Play/pause/stop; continues after popup closes |
-| **Highlight** | Non-destructive sentence highlight (with fallback) |
-| **Shortcuts** | Alt+Shift+P play/pause; Left/Right skip sentences |
-| **Storage** | `chrome.storage.sync` preferences; `session` playback backup |
+| Surface        | What you do there                                            |
+| -------------- | ------------------------------------------------------------ |
+| **Extraction** | Article/main heuristics; read selected text only             |
+| **Playback**   | Play/pause/stop; continues after popup closes                |
+| **Highlight**  | Non-destructive sentence highlight (with fallback)           |
+| **Shortcuts**  | Alt+Shift+P play/pause; Left/Right skip sentences            |
+| **Storage**    | `chrome.storage.sync` preferences; `session` playback backup |
 
 Stack: MV3 service worker, vanilla JS, QUnit + Playwright, ESLint 9, GitHub Actions CI.
 
@@ -49,12 +49,12 @@ Stack: MV3 service worker, vanilla JS, QUnit + Playwright, ESLint 9, GitHub Acti
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **Chromium-only** | Chrome extension APIs |
-| **No Web Store yet** | Unpack install from repo / CI zip |
-| **Heuristic extraction** | Odd CMS layouts can fool selectors |
-| **Restricted pages** | `chrome://` and similar blocked with error UI |
+| Limitation               | Reality                                       |
+| ------------------------ | --------------------------------------------- |
+| **Chromium-only**        | Chrome extension APIs                         |
+| **No Web Store yet**     | Unpack install from repo / CI zip             |
+| **Heuristic extraction** | Odd CMS layouts can fool selectors            |
+| **Restricted pages**     | `chrome://` and similar blocked with error UI |
 
 ## Deep-dive transmissions
 

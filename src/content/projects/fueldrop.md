@@ -9,7 +9,7 @@ order: 3
 tags: ['React 19', 'TypeScript 5.8', 'Vite 6', 'Tailwind CSS 4', 'Leaflet', 'PWA']
 pain_level: 3
 telemetry: 'STATUS: DEMO // BACKEND: NONE // OTP: SIMULATED_1234'
-fuckup_teaser: "I described WebSocket live tracking and server rollbacks on this site — the repo is a frontend-only demo where optimistic UI runs on mock state with no database to fail."
+fuckup_teaser: 'I described WebSocket live tracking and server rollbacks on this site — the repo is a frontend-only demo where optimistic UI runs on mock state with no database to fail.'
 ---
 
 ## SYS.STATUS: v3.0.0 demo — dual-surface fuel UX, simulated auth, no dispatch backend
@@ -20,13 +20,13 @@ This page tones down portfolio copy that implied **WebSocket production logistic
 
 ## What it is (scope)
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Customer app** | Simulated OTP (`1234`), garage, order flow, promos, emergency surge UI, favorites |
-| **Captain dashboard** | Accept orders, status pipeline, Google Maps navigate link |
-| **Fleet mode** | Bulk multi-vehicle checkout demo |
-| **Map UI** | Leaflet tracking states — client-side demo, not GPS ingest |
-| **PWA** | Installable via vite-plugin-pwa |
+| Surface               | What you do there                                                                 |
+| --------------------- | --------------------------------------------------------------------------------- |
+| **Customer app**      | Simulated OTP (`1234`), garage, order flow, promos, emergency surge UI, favorites |
+| **Captain dashboard** | Accept orders, status pipeline, Google Maps navigate link                         |
+| **Fleet mode**        | Bulk multi-vehicle checkout demo                                                  |
+| **Map UI**            | Leaflet tracking states — client-side demo, not GPS ingest                        |
+| **PWA**               | Installable via vite-plugin-pwa                                                   |
 
 Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Leaflet, Motion, react-hook-form, Zod, Vitest.
 
@@ -47,13 +47,13 @@ Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Leaflet, Motion, react-
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **No backend** | No server, WebSocket, or database in repository |
-| **Simulated auth** | OTP `1234` — not SMS gateway |
-| **No payments** | Checkout UI only |
-| **Map is demo-grade** | Leaflet UI states, not live telematics |
-| **Captain earnings** | Not implemented ("Coming Soon") |
+| Limitation            | Reality                                         |
+| --------------------- | ----------------------------------------------- |
+| **No backend**        | No server, WebSocket, or database in repository |
+| **Simulated auth**    | OTP `1234` — not SMS gateway                    |
+| **No payments**       | Checkout UI only                                |
+| **Map is demo-grade** | Leaflet UI states, not live telematics          |
+| **Captain earnings**  | Not implemented ("Coming Soon")                 |
 
 ## Deep-dive transmissions
 

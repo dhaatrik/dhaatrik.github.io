@@ -50,17 +50,17 @@ The Infinite Intelligence is a **council-of-models workspace**, not a chat wrapp
 
 ### Mission Report: What v4.0.0 Ships — Concrete Scope
 
-| Capability | What it does |
-|------------|--------------|
-| **Topologies** | Parallel, sequential, round-robin debate (up to 5 critique rounds) |
-| **First principles** | Deconstruct prompt into goals/constraints before agent work |
-| **Default squad** | Four specialized personas in `DEFAULT_AGENTS` |
-| **Beta Mode** | Dynamically generated squad for the task |
-| **HITL** | Approve/reject/redirect agent outputs mid-run |
-| **Branching** | Fork conversation history at any node |
-| **Artifacts** | Side panel for code/JSON extractions |
-| **Export** | PDF (html2canvas + jsPDF) and Markdown reports |
-| **Metrics** | Token and cost estimates in UI |
+| Capability           | What it does                                                       |
+| -------------------- | ------------------------------------------------------------------ |
+| **Topologies**       | Parallel, sequential, round-robin debate (up to 5 critique rounds) |
+| **First principles** | Deconstruct prompt into goals/constraints before agent work        |
+| **Default squad**    | Four specialized personas in `DEFAULT_AGENTS`                      |
+| **Beta Mode**        | Dynamically generated squad for the task                           |
+| **HITL**             | Approve/reject/redirect agent outputs mid-run                      |
+| **Branching**        | Fork conversation history at any node                              |
+| **Artifacts**        | Side panel for code/JSON extractions                               |
+| **Export**           | PDF (html2canvas + jsPDF) and Markdown reports                     |
+| **Metrics**          | Token and cost estimates in UI                                     |
 
 Model string per README: **`gemma-4-31b-it`** via `@google/genai`. Requires `VITE_GEMINI_API_KEY`.
 

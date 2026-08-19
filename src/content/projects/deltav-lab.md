@@ -22,10 +22,10 @@ The repo README calls it "engineering-grade." I wrote that README. This project 
 
 DeltaV Lab splits into two primary experiences, matching the repo structure:
 
-| Surface | What you do there |
-|---------|-------------------|
-| **VAB** | Stack engines (Merlin, Raptor, RL-10), tanks, avionics, fairings. Live **Δv** and **TWR** calculations as you build. |
-| **Mission Control** | Fly the vehicle: throttle, steer, stage, time-warp, map view. Optional second monitor via `telemetry.html`. |
+| Surface             | What you do there                                                                                                    |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **VAB**             | Stack engines (Merlin, Raptor, RL-10), tanks, avionics, fairings. Live **Δv** and **TWR** calculations as you build. |
+| **Mission Control** | Fly the vehicle: throttle, steer, stage, time-warp, map view. Optional second monitor via `telemetry.html`.          |
 
 Under the hood, physics runs in a **Web Worker** at a fixed **50 Hz** timestep (`FIXED_DT = 0.02` s in `PhysicsWorker.ts`). State sync uses **SharedArrayBuffer** so the main thread paints without blocking integration.
 

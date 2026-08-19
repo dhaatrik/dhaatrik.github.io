@@ -56,13 +56,13 @@ Three reasons — not one noble sentence.
 
 On DBS Classes and this site, I use "zero terms and conditions" to mean:
 
-| Included | Excluded |
-|----------|----------|
-| No account contract | No "by using this SaaS you grant us..." |
-| No subscription tier | No freemium bait-and-switch |
+| Included             | Excluded                                  |
+| -------------------- | ----------------------------------------- |
+| No account contract  | No "by using this SaaS you grant us..."   |
+| No subscription tier | No freemium bait-and-switch               |
 | No forced cloud sync | No "we store your roster for convenience" |
-| No data harvesting | No analytics SDK phoning home |
-| No lock-in | Export JSON anytime; leave with your data |
+| No data harvesting   | No analytics SDK phoning home             |
+| No lock-in           | Export JSON anytime; leave with your data |
 
 **What it does NOT mean:**
 
@@ -94,15 +94,15 @@ Zero SaaS terms ≠ legal nothingness. It means **no rent-seeking gate** between
 
 ### Mission Report: Comparison — Vellor vs. Typical Tutoring SaaS
 
-| Dimension | Typical tutoring SaaS | Vellor |
-|-----------|----------------------|--------|
-| **Price** | Monthly per seat | $0 (MIT) |
-| **Data location** | Vendor cloud | Encrypted `localStorage` on your device |
-| **Account required** | Yes | No |
-| **Export** | Sometimes gated | JSON export built-in |
-| **Terms of Service** | Long, vendor-favorable | MIT license only |
-| **Offline** | Often broken | PWA-first |
-| **Multi-device sync** | Usually yes | Not yet (manual export/import today) |
+| Dimension             | Typical tutoring SaaS  | Vellor                                  |
+| --------------------- | ---------------------- | --------------------------------------- |
+| **Price**             | Monthly per seat       | $0 (MIT)                                |
+| **Data location**     | Vendor cloud           | Encrypted `localStorage` on your device |
+| **Account required**  | Yes                    | No                                      |
+| **Export**            | Sometimes gated        | JSON export built-in                    |
+| **Terms of Service**  | Long, vendor-favorable | MIT license only                        |
+| **Offline**           | Often broken           | PWA-first                               |
+| **Multi-device sync** | Usually yes            | Not yet (manual export/import today)    |
 
 The trade is real: you get privacy and zero rent, you lose automatic sync until I ship it responsibly.
 

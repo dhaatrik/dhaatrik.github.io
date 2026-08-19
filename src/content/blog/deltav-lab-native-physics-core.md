@@ -37,16 +37,16 @@ Read [the science transmission](/transmissions/deltav-lab-science/) first if you
 
 ### Mission Report: What Stays in TypeScript / React
 
-| Layer | Keep in TS? | Why |
-|-------|-------------|-----|
-| VAB drag-and-drop | Yes | DOM UX, asset loading, live Δv/TWR displays |
-| Mission Control HUD | Yes | Canvas/WebGL, input, time-warp UI |
-| DSL editor + checklist | Yes | Instructor workflows |
-| Telemetry export / black box | Yes | CSV client download, `analysis.html` |
-| **RK4 integrator** | **No** (move out) | Hot loop, batch scaling, numeric policy |
-| **Atmosphere / drag tables** | **No** | Large LUTs, SIMD-friendly |
-| **Monte Carlo orchestrator** | **No** | Parallelism, cluster jobs |
-| **6DOF state propagation** | **No** | Quaternion math, coupling stiffness |
+| Layer                        | Keep in TS?       | Why                                         |
+| ---------------------------- | ----------------- | ------------------------------------------- |
+| VAB drag-and-drop            | Yes               | DOM UX, asset loading, live Δv/TWR displays |
+| Mission Control HUD          | Yes               | Canvas/WebGL, input, time-warp UI           |
+| DSL editor + checklist       | Yes               | Instructor workflows                        |
+| Telemetry export / black box | Yes               | CSV client download, `analysis.html`        |
+| **RK4 integrator**           | **No** (move out) | Hot loop, batch scaling, numeric policy     |
+| **Atmosphere / drag tables** | **No**            | Large LUTs, SIMD-friendly                   |
+| **Monte Carlo orchestrator** | **No**            | Parallelism, cluster jobs                   |
+| **6DOF state propagation**   | **No**            | Quaternion math, coupling stiffness         |
 
 React was never the problem. **Co-locating cert-shaped physics with UI bundling** is the problem.
 
@@ -87,12 +87,12 @@ flowchart LR
 
 ### Mission Report: Language Split (Rust vs C++ vs Python)
 
-| Role | Rust | C++ | Python |
-|------|------|-----|--------|
-| Real-time integrator | **Primary choice** — memory safety, Rayon, WASM story | Legacy GNC shops often expect C++17 | Too slow for inner loop |
-| Batch Monte Carlo | **Rayon** parallelism | OpenMP teams already on STK glue | Orchestration layer only |
-| Optimization (CasADi) | FFI bridge | Mature in aerospace grad labs | **Primary** for mission design scripts |
-| Legacy algorithm port | Rewrite with tests | Import Fortran/C++ GMAT heritage | Prototype only |
+| Role                  | Rust                                                  | C++                                 | Python                                 |
+| --------------------- | ----------------------------------------------------- | ----------------------------------- | -------------------------------------- |
+| Real-time integrator  | **Primary choice** — memory safety, Rayon, WASM story | Legacy GNC shops often expect C++17 | Too slow for inner loop                |
+| Batch Monte Carlo     | **Rayon** parallelism                                 | OpenMP teams already on STK glue    | Orchestration layer only               |
+| Optimization (CasADi) | FFI bridge                                            | Mature in aerospace grad labs       | **Primary** for mission design scripts |
+| Legacy algorithm port | Rewrite with tests                                    | Import Fortran/C++ GMAT heritage    | Prototype only                         |
 
 **Why I lean Rust over C++ for the core:** One codebase → WASM + native + Python via `pyo3`. `cargo fuzz` and `#[cfg(test)]` on the same functions that ship. C++ wins if you are hiring from a pool that already maintains a 200k-line GNC library — I am not there yet.
 
@@ -141,13 +141,13 @@ Extend state vector; TS UI gains attitude telemetry channels. Golden tests **re-
 
 The [mission log](/transmissions/deltav-lab-mission-log/) documents why SharedArrayBuffer beat chatty `postMessage`. Keep that design:
 
-| Offset | Field | Type |
-|--------|-------|------|
-| 0 | `time` | f64 |
-| 8 | `pos_x`, `pos_y` | f64 × 2 |
-| 24 | `vel_x`, `vel_y` | f64 × 2 |
-| … | attitude quaternion (6DOF future) | f64 × 4 |
-| … | thrust, mass, q_bar | f64 |
+| Offset | Field                             | Type    |
+| ------ | --------------------------------- | ------- |
+| 0      | `time`                            | f64     |
+| 8      | `pos_x`, `pos_y`                  | f64 × 2 |
+| 24     | `vel_x`, `vel_y`                  | f64 × 2 |
+| …      | attitude quaternion (6DOF future) | f64 × 4 |
+| …      | thrust, mass, q_bar               | f64     |
 
 WASM writes into the same buffer the Canvas reads. **Only the writer changes** — TS integrator out, Rust in.
 

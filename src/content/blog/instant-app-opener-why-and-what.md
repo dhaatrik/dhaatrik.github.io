@@ -40,7 +40,7 @@ I built **[Instant App Opener](https://github.com/dhaatrik/instant-app-opener)**
 
 Three frustrations stacked:
 
-1. **Web URLs default to the browser.** Platform share sheets and SMS clients ship the canonical HTTPS link. Mobile OSes *can* route to native apps, but parsing is inconsistent and users cannot easily preview or edit the handoff.
+1. **Web URLs default to the browser.** Platform share sheets and SMS clients ship the canonical HTTPS link. Mobile OSes _can_ route to native apps, but parsing is inconsistent and users cannot easily preview or edit the handoff.
 
 2. **Desktop→phone sharing is awkward.** I often find a link on a laptop and want it on my phone. Typing `youtube://` schemes by hand is not a workflow — QR + copy is.
 
@@ -54,11 +54,11 @@ Instant App Opener is **not** an Alfred replacement. It is a **frictionless brid
 
 As of **v0.2.0**, the app is a client-side Next.js utility:
 
-| Input | Output |
-|-------|--------|
-| YouTube, X, LinkedIn, Instagram, Facebook, TikTok, Spotify URLs | Platform-specific deep-link URI |
-| Validated preview card | **Copy Link**, **Web Share**, **QR Code** |
-| Desktop session | Scannable QR for phone handoff |
+| Input                                                           | Output                                    |
+| --------------------------------------------------------------- | ----------------------------------------- |
+| YouTube, X, LinkedIn, Instagram, Facebook, TikTok, Spotify URLs | Platform-specific deep-link URI           |
+| Validated preview card                                          | **Copy Link**, **Web Share**, **QR Code** |
+| Desktop session                                                 | Scannable QR for phone handoff            |
 
 Supported flow:
 

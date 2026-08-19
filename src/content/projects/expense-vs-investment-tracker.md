@@ -9,7 +9,7 @@ order: 7
 tags: ['React 19', 'TypeScript 5.8', 'Vite 6', 'Zustand 5', 'Recharts', 'Tailwind CSS 4']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // LEDGER: DUAL // SYNC: JSON_EXPORT'
-fuckup_teaser: "I tagged FinTrack with Chart.js on this site while the repo renders with Recharts — and unthrottled mobile filters once made the whole chart tear and lag 200ms on real phones."
+fuckup_teaser: 'I tagged FinTrack with Chart.js on this site while the repo renders with Recharts — and unthrottled mobile filters once made the whole chart tear and lag 200ms on real phones.'
 ---
 
 ## SYS.STATUS: v1.0.0 shipped — dual ledger, Recharts dashboards, local JSON backup
@@ -20,13 +20,13 @@ This page fixes portfolio drift: tags previously said **Chart.js**; the repo use
 
 ## What it is (scope)
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Dashboard** | Expense/investment/income charts and ratios |
-| **Transactions** | Log income and expenses by category |
-| **Investments** | Track personal growth spending separately from burn |
-| **Savings goals** | Visual progress toward financial targets |
-| **Settings** | Currency, categories, themes, JSON backup/restore |
+| Surface           | What you do there                                   |
+| ----------------- | --------------------------------------------------- |
+| **Dashboard**     | Expense/investment/income charts and ratios         |
+| **Transactions**  | Log income and expenses by category                 |
+| **Investments**   | Track personal growth spending separately from burn |
+| **Savings goals** | Visual progress toward financial targets            |
+| **Settings**      | Currency, categories, themes, JSON backup/restore   |
 
 Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Zustand 5, Recharts, Motion, Vitest.
 
@@ -49,12 +49,12 @@ Note: `package.json` includes `express` and `better-sqlite3` without README-docu
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **No bank sync** | Manual entry + JSON import/export |
-| **Local-only** | You own backup discipline |
+| Limitation             | Reality                                                   |
+| ---------------------- | --------------------------------------------------------- |
+| **No bank sync**       | Manual entry + JSON import/export                         |
+| **Local-only**         | You own backup discipline                                 |
 | **Orphan server deps** | express/sqlite3 in package.json not documented as shipped |
-| **Projection math** | Client-side assumptions — must stay visible in UI |
+| **Projection math**    | Client-side assumptions — must stay visible in UI         |
 
 ## Deep-dive transmissions
 

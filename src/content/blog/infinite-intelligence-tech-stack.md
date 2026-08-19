@@ -34,15 +34,15 @@ Read [why the council exists](/transmissions/infinite-intelligence-why-and-what/
 
 ### Mission Report: Stack Table (from package.json)
 
-| Layer | Choice | Role |
-|-------|--------|------|
-| **UI** | React 19.2 + Vite 6 | Streaming agent panels, sidebars, modals |
-| **Types** | TypeScript 5.8 | Agent configs, transitions, HITL events |
-| **AI** | `@google/genai` | Streaming completions, system instructions per agent |
-| **Markdown** | react-markdown + remark-gfm | Synthesizer reports in UI |
-| **Motion** | Motion 12 | Panel transitions without jank during parallel streams |
-| **Export** | html2canvas + jsPDF | Client-side PDF executive reports |
-| **Tests** | Vitest + RTL | Settings, sidebars, constants |
+| Layer        | Choice                      | Role                                                   |
+| ------------ | --------------------------- | ------------------------------------------------------ |
+| **UI**       | React 19.2 + Vite 6         | Streaming agent panels, sidebars, modals               |
+| **Types**    | TypeScript 5.8              | Agent configs, transitions, HITL events                |
+| **AI**       | `@google/genai`             | Streaming completions, system instructions per agent   |
+| **Markdown** | react-markdown + remark-gfm | Synthesizer reports in UI                              |
+| **Motion**   | Motion 12                   | Panel transitions without jank during parallel streams |
+| **Export**   | html2canvas + jsPDF         | Client-side PDF executive reports                      |
+| **Tests**    | Vitest + RTL                | Settings, sidebars, constants                          |
 
 No Express. No WebSocket fan-out server. API key in `.env` as `VITE_GEMINI_API_KEY`.
 

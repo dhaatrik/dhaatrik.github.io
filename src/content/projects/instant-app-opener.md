@@ -9,7 +9,7 @@ order: 5
 tags: ['Next.js 15', 'React 19', 'TypeScript 5.9', 'Tailwind CSS 4', 'Vitest']
 pain_level: 2
 telemetry: 'STATUS: SHIPPED // PLATFORM: WEB // HANDOFF: DEEP_LINK_QR_SHARE'
-fuckup_teaser: "My portfolio still described an Electron tray launcher with registry hotkeys while the repo had pivoted to a Next.js deep-link converter — and I learned deep links are hints, not OS guarantees."
+fuckup_teaser: 'My portfolio still described an Electron tray launcher with registry hotkeys while the repo had pivoted to a Next.js deep-link converter — and I learned deep links are hints, not OS guarantees.'
 ---
 
 ## SYS.STATUS: v0.2.0 shipped — social URL → deep link + QR + share, web-only
@@ -20,12 +20,12 @@ This page is the honest counterweight to my old portfolio copy, which wrongly de
 
 ## What it is (scope)
 
-| Surface | What you do there |
-|---------|-------------------|
-| **URL input** | Paste a standard `https://` social link |
+| Surface                | What you do there                                                        |
+| ---------------------- | ------------------------------------------------------------------------ |
+| **URL input**          | Paste a standard `https://` social link                                  |
 | **Platform detection** | Auto-identify YouTube, X, LinkedIn, Instagram, Facebook, TikTok, Spotify |
-| **Deep-link output** | Generate platform-specific mobile URI scheme |
-| **Copy / Share / QR** | Clipboard copy, native Web Share API, scannable QR for another device |
+| **Deep-link output**   | Generate platform-specific mobile URI scheme                             |
+| **Copy / Share / QR**  | Clipboard copy, native Web Share API, scannable QR for another device    |
 
 Stack: Next.js 15.4, React 19, TypeScript 5.9, Tailwind CSS 4, Motion, `qrcode.react`, Cheerio, Vitest.
 
@@ -46,12 +46,12 @@ Stack: Next.js 15.4, React 19, TypeScript 5.9, Tailwind CSS 4, Motion, `qrcode.r
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **Web-only** | No Electron, no tray, no global hotkeys |
-| **Deep-link reliability** | Target app must exist; OS may still open browser |
-| **Platform variance** | iOS/Android URI rules differ; semver 0.2.0 = early |
-| **Not a native launcher** | Does not spawn local binaries or replace Raycast |
+| Limitation                | Reality                                            |
+| ------------------------- | -------------------------------------------------- |
+| **Web-only**              | No Electron, no tray, no global hotkeys            |
+| **Deep-link reliability** | Target app must exist; OS may still open browser   |
+| **Platform variance**     | iOS/Android URI rules differ; semver 0.2.0 = early |
+| **Not a native launcher** | Does not spawn local binaries or replace Raycast   |
 
 ## Deep-dive transmissions
 

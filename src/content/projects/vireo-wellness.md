@@ -9,7 +9,7 @@ order: 9
 tags: ['React 19.1', 'TypeScript 5.8', 'Vite 6', 'Tailwind CSS 4', 'Recharts']
 pain_level: 2
 telemetry: 'STATUS: DEMO // DATA: MOCK // PERSISTENCE: NOT_SHIPPED'
-fuckup_teaser: "I described Vireo as an offline PWA with IndexedDB and a meditation timer on this site — the repo ships mock-data UI with simulated Bluetooth and no persistence layer."
+fuckup_teaser: 'I described Vireo as an offline PWA with IndexedDB and a meditation timer on this site — the repo ships mock-data UI with simulated Bluetooth and no persistence layer.'
 ---
 
 ## SYS.STATUS: v2.0.0 demo — polished wellness UI, mock data, simulated devices
@@ -29,13 +29,13 @@ This page splits **vision** from **shipped** because my portfolio previously cla
 
 ### Shipped today (what v2.0.0 proves)
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Dashboard** | "Eaten" nutrition summary, interactive blood glucose chart (mock-populated) |
-| **Daily Meals** | Log meals by category; search built-in food DB; view macros |
-| **Devices** | Simulated Bluetooth scan, pairing animation, battery/status display |
-| **Timeline** | Date picker for navigating logs and goals |
-| **Theme** | Permanent dark mode (Tailwind CSS v4) |
+| Surface         | What you do there                                                           |
+| --------------- | --------------------------------------------------------------------------- |
+| **Dashboard**   | "Eaten" nutrition summary, interactive blood glucose chart (mock-populated) |
+| **Daily Meals** | Log meals by category; search built-in food DB; view macros                 |
+| **Devices**     | Simulated Bluetooth scan, pairing animation, battery/status display         |
+| **Timeline**    | Date picker for navigating logs and goals                                   |
+| **Theme**       | Permanent dark mode (Tailwind CSS v4)                                       |
 
 Stack: React 19.1, TypeScript 5.8, Vite 6, Tailwind 4, Recharts, Framer Motion, React Router 7, Vitest + Playwright.
 
@@ -58,13 +58,13 @@ Stack: React 19.1, TypeScript 5.8, Vite 6, Tailwind 4, Recharts, Framer Motion, 
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **Mock data** | Charts and meals demonstrate UI — not your real health records |
-| **No persistence** | No IndexedDB/localStorage journal in shipped deps |
-| **No PWA** | No `vite-plugin-pwa` in `package.json` |
-| **Simulated devices** | Bluetooth pairing is UI simulation, not Web Bluetooth |
-| **No meditation timer** | Not implemented in this repo |
+| Limitation              | Reality                                                        |
+| ----------------------- | -------------------------------------------------------------- |
+| **Mock data**           | Charts and meals demonstrate UI — not your real health records |
+| **No persistence**      | No IndexedDB/localStorage journal in shipped deps              |
+| **No PWA**              | No `vite-plugin-pwa` in `package.json`                         |
+| **Simulated devices**   | Bluetooth pairing is UI simulation, not Web Bluetooth          |
+| **No meditation timer** | Not implemented in this repo                                   |
 
 ## Deep-dive transmissions
 

@@ -18,7 +18,9 @@ function createIndicator() {
     progressBar.style.width = '0%';
     progressBar.style.backgroundColor = 'var(--accent)';
     progressBar.style.zIndex = '99999';
-    progressBar.style.transition = prefersReducedMotion ? 'none' : 'width 0.3s ease-out, opacity 0.3s ease-in-out';
+    progressBar.style.transition = prefersReducedMotion
+        ? 'none'
+        : 'width 0.3s ease-out, opacity 0.3s ease-in-out';
     progressBar.style.pointerEvents = 'none';
     progressBar.style.opacity = '0';
 
@@ -32,7 +34,9 @@ function createIndicator() {
     statusTag.style.zIndex = '99999';
     statusTag.style.pointerEvents = 'none';
     statusTag.style.opacity = '0';
-    statusTag.style.transition = prefersReducedMotion ? 'none' : 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out';
+    statusTag.style.transition = prefersReducedMotion
+        ? 'none'
+        : 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out';
     statusTag.style.transform = prefersReducedMotion ? 'none' : 'translateY(10px)';
     statusTag.style.backgroundColor = 'rgba(11, 14, 20, 0.95)'; // Matches dark background
     statusTag.style.color = 'var(--accent)';
@@ -59,7 +63,9 @@ function startProgress() {
     transitionProgress = 0;
     progressBar.style.width = '0%';
     progressBar.style.opacity = '1';
-    progressBar.style.transition = prefersReducedMotion ? 'none' : 'width 0.3s ease-out, opacity 0.3s ease-in-out';
+    progressBar.style.transition = prefersReducedMotion
+        ? 'none'
+        : 'width 0.3s ease-out, opacity 0.3s ease-in-out';
 
     const animateClass = prefersReducedMotion ? '' : 'animate-ping';
     statusTag.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-(--accent) ${animateClass}"></span> [ CONNECTING... ]`;
@@ -91,7 +97,9 @@ function completeProgress() {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    progressBar.style.transition = prefersReducedMotion ? 'none' : 'width 0.2s ease-out, opacity 0.3s ease-in-out';
+    progressBar.style.transition = prefersReducedMotion
+        ? 'none'
+        : 'width 0.2s ease-out, opacity 0.3s ease-in-out';
     progressBar.style.width = '100%';
 
     statusTag.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-green-500"></span> [ READY ]`;

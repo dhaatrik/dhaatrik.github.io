@@ -59,14 +59,14 @@ If you self-host, you control the host. If you use a demo deployment, treat it l
 
 ### Mission Report: Honest PDF Limits (Read Before You Submit)
 
-| Limitation | Reality |
-|------------|---------|
-| **No LaTeX math** | KaTeX not in `package.json` — equations do not render |
-| **Browser variance** | Chrome vs Firefox vs Safari print margins differ |
+| Limitation                 | Reality                                                      |
+| -------------------------- | ------------------------------------------------------------ |
+| **No LaTeX math**          | KaTeX not in `package.json` — equations do not render        |
+| **Browser variance**       | Chrome vs Firefox vs Safari print margins differ             |
 | **Tables and code fences** | Page breaks can split awkwardly — manual edits may be needed |
-| **Large documents** | Very long markdown stresses preview memory |
-| **Not Pandoc** | No bibtex, cross-refs, or journal templates |
-| **Print settings matter** | Background graphics, scale 100%, correct destination |
+| **Large documents**        | Very long markdown stresses preview memory                   |
+| **Not Pandoc**             | No bibtex, cross-refs, or journal templates                  |
+| **Print settings matter**  | Background graphics, scale 100%, correct destination         |
 
 MarkPDF targets **notes, lab reports, internal docs** — not camera-ready conference proceedings.
 

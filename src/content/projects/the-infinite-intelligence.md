@@ -9,7 +9,7 @@ order: 4
 tags: ['React 19.2', 'TypeScript 5.8', 'Vite 6', '@google/genai', 'Motion']
 pain_level: 3
 telemetry: 'STATUS: OPERATIONAL // MODEL: GEMMA_4_31B // BACKEND: NONE'
-fuckup_teaser: "I ran an unbounded multi-agent debate test without depth caps and woke up to a rate-limited API key — v4 adds token/cost visibility but you still own the guardrails."
+fuckup_teaser: 'I ran an unbounded multi-agent debate test without depth caps and woke up to a rate-limited API key — v4 adds token/cost visibility but you still own the guardrails.'
 ---
 
 ## SYS.STATUS: v4.0.0 operational — council orchestration, HITL steering, executive export
@@ -22,17 +22,17 @@ This page updates portfolio copy that undersold v4 as "three agents" and tagged 
 
 ## What it is (scope)
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Modes** | Parallel, sequential, round-robin (up to 5 critique rounds) |
-| **First principles** | Pre-phase deconstructs prompt into constraints |
-| **Default squad** | Four configured expert personas |
-| **Beta Mode** | Task-tailored dynamic agent generation |
-| **HITL** | Thumbs up/down, steering comments mid-run |
-| **Branching** | Fork history at any node |
-| **Artifacts** | Side panel for code/JSON snippets |
-| **Export** | PDF (html2canvas + jsPDF) + Markdown reports |
-| **Metrics** | Token and estimated cost display |
+| Surface              | What you do there                                           |
+| -------------------- | ----------------------------------------------------------- |
+| **Modes**            | Parallel, sequential, round-robin (up to 5 critique rounds) |
+| **First principles** | Pre-phase deconstructs prompt into constraints              |
+| **Default squad**    | Four configured expert personas                             |
+| **Beta Mode**        | Task-tailored dynamic agent generation                      |
+| **HITL**             | Thumbs up/down, steering comments mid-run                   |
+| **Branching**        | Fork history at any node                                    |
+| **Artifacts**        | Side panel for code/JSON snippets                           |
+| **Export**           | PDF (html2canvas + jsPDF) + Markdown reports                |
+| **Metrics**          | Token and estimated cost display                            |
 
 Stack: React 19.2, TypeScript 5.8, Vite 6, `@google/genai`, react-markdown, remark-gfm, Motion, html2canvas, jsPDF, Vitest.
 
@@ -55,12 +55,12 @@ Requires **`VITE_GEMINI_API_KEY`**. MIT licensed.
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **BYOK costs** | Token usage scales with agents × rounds × prompt size |
-| **No server persistence** | Export reports; refresh clears in-tab session |
-| **Model id drift** | Keep README and `constants.ts` aligned |
-| **Latency** | Council modes are slower than single-shot chat |
+| Limitation                | Reality                                               |
+| ------------------------- | ----------------------------------------------------- |
+| **BYOK costs**            | Token usage scales with agents × rounds × prompt size |
+| **No server persistence** | Export reports; refresh clears in-tab session         |
+| **Model id drift**        | Keep README and `constants.ts` aligned                |
+| **Latency**               | Council modes are slower than single-shot chat        |
 
 ## Deep-dive transmissions
 

@@ -51,12 +51,12 @@ MarkPDF is a **zero-install handoff tool**: write markdown, preview styled outpu
 
 As of **v1.0.0**:
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Editor pane** | Write GFM with toolbar quick-inserts and line numbers |
-| **Live preview** | react-markdown renders as you type |
-| **Settings** | Typography, margins (mm), colors, code theme (light/dark) |
-| **Export** | Triggers browser print → user selects "Save as PDF" |
+| Surface          | What you do there                                         |
+| ---------------- | --------------------------------------------------------- |
+| **Editor pane**  | Write GFM with toolbar quick-inserts and line numbers     |
+| **Live preview** | react-markdown renders as you type                        |
+| **Settings**     | Typography, margins (mm), colors, code theme (light/dark) |
+| **Export**       | Triggers browser print → user selects "Save as PDF"       |
 
 Stack: React 19.2, TypeScript 5.8, Vite 6, Tailwind CSS 4, react-markdown, remark-gfm, react-syntax-highlighter, Vitest.
 

@@ -60,10 +60,10 @@ The repo's `conductor/product.md` states the audience plainly: aerospace student
 
 DeltaV Lab is a **browser-native launch simulation** split into two primary experiences, exactly as the README describes:
 
-| Experience | URL (local dev) | What you do |
-|------------|-----------------|-------------|
-| **Vehicle Assembly Building** | `http://localhost:8080` | Stack engines (Merlin, Raptor, RL-10), tanks, avionics, fairings. Live **Δv** and **TWR** as you build. |
-| **Mission Control** | Same page + optional `telemetry.html` on a second monitor | Launch, throttle, steer, stage, time-warp, map view, export telemetry. |
+| Experience                    | URL (local dev)                                           | What you do                                                                                             |
+| ----------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Vehicle Assembly Building** | `http://localhost:8080`                                   | Stack engines (Merlin, Raptor, RL-10), tanks, avionics, fairings. Live **Δv** and **TWR** as you build. |
+| **Mission Control**           | Same page + optional `telemetry.html` on a second monitor | Launch, throttle, steer, stage, time-warp, map view, export telemetry.                                  |
 
 Under the hood:
 
@@ -104,12 +104,12 @@ Full key map: [simulation_controls.md](https://github.com/dhaatrik/professional-
 
 ### Mission Report: Who Should Use This
 
-| You are… | DeltaV Lab is… |
-|----------|----------------|
-| A student learning staging and Δv budgets | A great sandbox — pair it with [scrollytelling demo](/transmissions/deltav-lab-scrollytelling-demo/) on this site |
-| A hobbyist who loves KSP but wants auditability | Pull the repo and break my drag model |
-| A flight dynamics engineer needing dispersion analysis | Wrong tool — read [limitations post](/transmissions/deltav-lab-not-professional-grade/) |
-| Me, at 2 AM, checking a guidance script | Exactly what I built it for |
+| You are…                                               | DeltaV Lab is…                                                                                                    |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| A student learning staging and Δv budgets              | A great sandbox — pair it with [scrollytelling demo](/transmissions/deltav-lab-scrollytelling-demo/) on this site |
+| A hobbyist who loves KSP but wants auditability        | Pull the repo and break my drag model                                                                             |
+| A flight dynamics engineer needing dispersion analysis | Wrong tool — read [limitations post](/transmissions/deltav-lab-not-professional-grade/)                           |
+| Me, at 2 AM, checking a guidance script                | Exactly what I built it for                                                                                       |
 
 ---
 

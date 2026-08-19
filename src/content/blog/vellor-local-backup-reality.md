@@ -51,14 +51,14 @@ If you need automatic multi-device sync today, Vellor is **incomplete** for you 
 
 The repo ships:
 
-| Mechanism | Purpose |
-|-----------|---------|
-| **AES-GCM encryption** (`src/crypto.ts`) | Data at rest in `localStorage` is not plain text |
-| **Recovery Key** | Fallback if encryption envelope needs recovery |
-| **JSON export/import** | Profile & Settings → Data Management |
-| **14-day backup alerts** | `BackupPromptModal` — gentle, not ransomware vibes |
-| **Reconnect reminder** | Offline engine nudges backup after network returns |
-| **Secure reset** | One-click wipe — scary, necessary |
+| Mechanism                                | Purpose                                            |
+| ---------------------------------------- | -------------------------------------------------- |
+| **AES-GCM encryption** (`src/crypto.ts`) | Data at rest in `localStorage` is not plain text   |
+| **Recovery Key**                         | Fallback if encryption envelope needs recovery     |
+| **JSON export/import**                   | Profile & Settings → Data Management               |
+| **14-day backup alerts**                 | `BackupPromptModal` — gentle, not ransomware vibes |
+| **Reconnect reminder**                   | Offline engine nudges backup after network returns |
+| **Secure reset**                         | One-click wipe — scary, necessary                  |
 
 I treat export/import as **first-class**, not v2. That was a lesson from early builds where I assumed tutors would "figure out backups." They will not. Neither would I.
 

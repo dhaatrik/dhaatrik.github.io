@@ -9,7 +9,7 @@ order: 10
 tags: ['React 19', 'TypeScript 5.8', 'Vite 6', 'Express', 'SQLite', 'GST']
 pain_level: 3
 telemetry: 'STATUS: SHIPPED // DB: SQLITE_LOCAL // TAX: GST_INTRA_INTER'
-fuckup_teaser: "I described Bill Express as client-only jsPDF on this site while the repo ships Express + SQLite — and canceled invoices initially forgot to restore stock."
+fuckup_teaser: 'I described Bill Express as client-only jsPDF on this site while the repo ships Express + SQLite — and canceled invoices initially forgot to restore stock.'
 ---
 
 ## SYS.STATUS: v1.0.0 shipped — local GST POS with inventory, customers, REST API
@@ -20,13 +20,13 @@ This page replaces portfolio copy that wrongly described a **browser-only jsPDF 
 
 ## What it is (scope)
 
-| Surface | What you do there |
-|---------|-------------------|
-| **Dashboard** | Gross sales, top products, low-stock alerts (Recharts) |
-| **Products** | CRUD — HSN, ex-GST pricing, GST %, stock levels |
-| **Customers** | Directory with GSTIN, lifetime value metrics |
-| **Invoices** | B2B/B2C billing, discounts, tax split, print/save |
-| **REST API** | `/api/products`, `/api/dashboard/analytics`, and related routes |
+| Surface       | What you do there                                               |
+| ------------- | --------------------------------------------------------------- |
+| **Dashboard** | Gross sales, top products, low-stock alerts (Recharts)          |
+| **Products**  | CRUD — HSN, ex-GST pricing, GST %, stock levels                 |
+| **Customers** | Directory with GSTIN, lifetime value metrics                    |
+| **Invoices**  | B2B/B2C billing, discounts, tax split, print/save               |
+| **REST API**  | `/api/products`, `/api/dashboard/analytics`, and related routes |
 
 Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Express, `better-sqlite3`, react-hook-form, Recharts, Pino, express-rate-limit, Vitest + supertest.
 
@@ -49,12 +49,12 @@ Stack: React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Express, `better-sqlite
 
 ## Honest limitations
 
-| Limitation | Reality |
-|------------|---------|
-| **Single-node SQLite** | One machine; no built-in multi-store cloud sync |
-| **India-GST focus** | HSN/SGST/CGST/IGST modeled; not generic global tax |
+| Limitation               | Reality                                                |
+| ------------------------ | ------------------------------------------------------ |
+| **Single-node SQLite**   | One machine; no built-in multi-store cloud sync        |
+| **India-GST focus**      | HSN/SGST/CGST/IGST modeled; not generic global tax     |
 | **Dev auth bypass file** | Delete `testingcredentials` before any real deployment |
-| **Not jsPDF-in-browser** | Full-stack invoice flow, not a static PDF toy |
+| **Not jsPDF-in-browser** | Full-stack invoice flow, not a static PDF toy          |
 
 ## Deep-dive transmissions
 

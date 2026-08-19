@@ -38,15 +38,15 @@ If you have not read [what DeltaV Lab is](/transmissions/deltav-lab-why-and-what
 
 ### Mission Report: Implemented Rigor vs. Industry Trust
 
-| Implemented rigor (what we actually built) | Industry trust (what companies need) |
-|-------------------------------------------|--------------------------------------|
-| 50 Hz RK4 in an isolated Web Worker | Published V&V against flight telemetry (<2% error targets) |
+| Implemented rigor (what we actually built)    | Industry trust (what companies need)                                                         |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| 50 Hz RK4 in an isolated Web Worker           | Published V&V against flight telemetry (<2% error targets)                                   |
 | Vitest analytical checks (Keplerian, staging) | Automated regression that **fails CI** when accuracy drifts vs. Falcon 9 / Electron profiles |
-| Deterministic reruns from same inputs | Monte Carlo dispersion (100–10,000 cases) with impact ellipses |
-| DSL flight computer for teaching GNC shape | SIL/HIL with real avionics binaries and CCSDS telemetry |
-| Simplified Cape-inspired wind layers | ECMWF/GFS GRIB wind import + NRLMSISE-00 atmosphere |
+| Deterministic reruns from same inputs         | Monte Carlo dispersion (100–10,000 cases) with impact ellipses                               |
+| DSL flight computer for teaching GNC shape    | SIL/HIL with real avionics binaries and CCSDS telemetry                                      |
+| Simplified Cape-inspired wind layers          | ECMWF/GFS GRIB wind import + NRLMSISE-00 atmosphere                                          |
 
-**Implemented rigor is necessary. It is not sufficient.** I confused the two when I wrote marketing copy. `path_to_perfection.md` in the repo says it bluntly: *"Zero published validation is the #1 reason no company will touch it yet."*
+**Implemented rigor is necessary. It is not sufficient.** I confused the two when I wrote marketing copy. `path_to_perfection.md` in the repo says it bluntly: _"Zero published validation is the #1 reason no company will touch it yet."_
 
 That document is my own roadmap. I am quoting myself against myself. Good.
 
@@ -76,14 +76,14 @@ So when the README implies aerodynamic integrity enforced by tests, read careful
 
 Even when the integrator is honest, the **models** are teaching-grade:
 
-| Model area | DeltaV Lab today | Professional-grade expectation |
-|------------|------------------|--------------------------------|
-| Degrees of freedom | **2D** flight plane | 6DOF quaternion attitude, slosh, flex modes |
-| Atmosphere | Exponential $\rho(h)$, LUT to 200 km | NRLMSISE-00 / Jacchia-77 + space weather |
-| Gravity | Inverse-square $g(h)$ | EGM2008 harmonics + third-body |
-| Wind | Layered analytic profile + synthetic gusts | Balloon/ECMWF launch-day profiles |
-| Aerodynamics | $C_D$ + CP/CoM stability | Tables vs. Mach, attitude, Reynolds; CFD validation |
-| Timestep | Fixed 50 Hz in JavaScript worker | Adaptive RK, SIMD Rust/C++ core for batch runs |
+| Model area         | DeltaV Lab today                           | Professional-grade expectation                      |
+| ------------------ | ------------------------------------------ | --------------------------------------------------- |
+| Degrees of freedom | **2D** flight plane                        | 6DOF quaternion attitude, slosh, flex modes         |
+| Atmosphere         | Exponential $\rho(h)$, LUT to 200 km       | NRLMSISE-00 / Jacchia-77 + space weather            |
+| Gravity            | Inverse-square $g(h)$                      | EGM2008 harmonics + third-body                      |
+| Wind               | Layered analytic profile + synthetic gusts | Balloon/ECMWF launch-day profiles                   |
+| Aerodynamics       | $C_D$ + CP/CoM stability                   | Tables vs. Mach, attitude, Reynolds; CFD validation |
+| Timestep           | Fixed 50 Hz in JavaScript worker           | Adaptive RK, SIMD Rust/C++ core for batch runs      |
 
 The repo's `path_to_perfection.md` Phase 2–3 lists 6DOF, Monte Carlo, Rust/WASM rewrite, and benchmarking against RocketPy/OpenRocket/GMAT. **None of that is shipped.** It is a plan, not a product claim.
 
@@ -108,7 +108,7 @@ The roadmap's first suggestion is literally "deploy a zero-install demo." As of 
 `path_to_perfection.md` Suggestion #7 lists practices aerospace orgs expect:
 
 - Requirements traceability matrix (equation → documented source)
-- >90% unit-test coverage with static analysis (Coverity/SonarQube)
+- > 90% unit-test coverage with static analysis (Coverity/SonarQube)
 - Version-controlled vehicle databases with digital signatures
 - FMEA for every injected fault mode
 

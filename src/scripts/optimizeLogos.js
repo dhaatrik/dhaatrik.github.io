@@ -5,7 +5,7 @@ import path from 'path';
 const assetsDir = './src/assets';
 
 const files = fs.readdirSync(assetsDir);
-const pngFiles = files.filter(f => f.endsWith('.png'));
+const pngFiles = files.filter((f) => f.endsWith('.png'));
 
 console.log(`Found ${pngFiles.length} PNG files in ${assetsDir}. Starting optimization...\n`);
 
@@ -22,23 +22,25 @@ for (const file of pngFiles) {
                 width: 512,
                 height: 512,
                 fit: 'inside',
-                withoutEnlargement: true
+                withoutEnlargement: true,
             })
             .png({
                 quality: 85,
                 palette: true,
-                compressionLevel: 9
+                compressionLevel: 9,
             })
             .toFile(tempPath);
 
         const statsAfter = fs.statSync(tempPath);
         const sizeAfterKB = (statsAfter.size / 1024).toFixed(2);
-        
+
         if (statsAfter.size < statsBefore.size) {
             // Overwrite original file
             fs.unlinkSync(filePath);
             fs.renameSync(tempPath, filePath);
-            console.log(`✓ Optimized ${file}: ${sizeBeforeKB} KB -> ${sizeAfterKB} KB (Reduced by ${((1 - statsAfter.size / statsBefore.size) * 100).toFixed(1)}%)`);
+            console.log(
+                `✓ Optimized ${file}: ${sizeBeforeKB} KB -> ${sizeAfterKB} KB (Reduced by ${((1 - statsAfter.size / statsBefore.size) * 100).toFixed(1)}%)`
+            );
         } else {
             // Keep original if somehow temp is larger
             fs.unlinkSync(tempPath);

@@ -8,6 +8,7 @@ description: Use this skill for designing, implementing, or refactoring any visu
 **Core Purpose:** This skill maintains and evolves the premium sci-fi terminal / mission-control visual language of the site. It ensures every element feels like part of a cohesive, high-fidelity "engineering headquarters" while staying performant and true to the honest, brotherly diary tone.
 
 ## When to Activate This Skill
+
 - Creating or updating any UI component (cards, drawers, headers, footers, status badges, search, telemetry)
 - Implementing glassmorphism, neon glows, or blueprint effects
 - Refining typography, spacing, or visual hierarchy
@@ -16,6 +17,7 @@ description: Use this skill for designing, implementing, or refactoring any visu
 - Any visual polish task (especially when following the 10 premium improvements)
 
 **Mandatory Pairing:** Combine with:
+
 - `dhaatrik-astro-site` for technical implementation
 - `dhaatrik-mission-report` when styling project content
 - `dhaatrik-writing-style` for tone-consistent microcopy in UI
@@ -23,6 +25,7 @@ description: Use this skill for designing, implementing, or refactoring any visu
 Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 
 ## Core Design Principles
+
 1. **Sci-Fi Mission Control First** — Every screen should feel like part of a high-tech engineering cockpit.
 2. **Glassmorphism as Foundation** — Semi-transparent backgrounds + backdrop-blur + subtle borders + soft inner glow.
 3. **Neon Accents** — Cyan (#67e8f9) and blue-purple (#a5b4fc) glows on interactive elements, status, and highlights. Use sparingly for impact.
@@ -34,6 +37,7 @@ Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 ## Design Tokens & Architecture (Tailwind v4 + CSS Properties)
 
 Styles are organized modularly in `src/styles/`:
+
 - `src/styles/tokens.css` — Animated CSS properties (`@property`) and color variables
 - `src/styles/glass.css` — Canonical `.glass-surface`, `.glass-chrome`, `.bento-card` components
 - `src/styles/motion.css` — Scroll cues, blueprint reveal, and keyframe animations
@@ -41,12 +45,29 @@ Styles are organized modularly in `src/styles/`:
 - `src/styles/global.css` — Tailwind v4 imports (`@import 'tailwindcss'`), `@custom-variant dark`, and custom utilities
 
 ### CSS Custom Properties & Tokens
+
 ```css
 /* Animated CSS properties in tokens.css */
-@property --glass-bg-opacity { syntax: '<number>'; inherits: true; initial-value: 0.35; }
-@property --glass-border-opacity { syntax: '<number>'; inherits: true; initial-value: 0.08; }
-@property --neon-glow-opacity { syntax: '<number>'; inherits: true; initial-value: 0; }
-@property --blueprint-opacity { syntax: '<number>'; inherits: true; initial-value: 0.02; }
+@property --glass-bg-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.35;
+}
+@property --glass-border-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.08;
+}
+@property --neon-glow-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+@property --blueprint-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.02;
+}
 
 /* Theme colors in global.css */
 --neon-cyan: #67e8f9;
@@ -57,7 +78,9 @@ Styles are organized modularly in `src/styles/`:
 ```
 
 ### Tailwind v4 Custom GPU Utilities
+
 Use these hardware-accelerated utilities from `global.css`:
+
 - `transition-gpu` — 300ms cubic-bezier transition on transform, opacity, filter, backdrop-filter.
 - `promote-gpu` — will-change: transform, opacity.
 - `transition-bento` — 300ms cubic-bezier transition on transform, opacity, background, border, shadow.
@@ -68,6 +91,7 @@ Use these hardware-accelerated utilities from `global.css`:
 ## Component Patterns
 
 ### Glassmorphic Cards & Panels
+
 - Base class: `.glass-surface` or `.bento-card`
 - Header variant: `.glass-chrome`
 - Drawer variant: `.glass-drawer`
@@ -76,27 +100,32 @@ Use these hardware-accelerated utilities from `global.css`:
 - Rounded corners: `rounded-2xl` or `rounded-3xl`
 
 ### Status Telemetry Badges
+
 - Monospace font
 - Small pulsing animation (CSS keyframes, respect reduced-motion)
 - Color-coded by status (running = green, in-dev = yellow, shipped = blue)
 - Example: `STATUS: V4_IN_DEV // DB: OFF_LINE_FIRST`
 
 ### Interactive Elements
+
 - Subtle lift on hover (`transition-transform hover:-translate-y-0.5`)
 - Neon glow on focus/active for primary actions
 - Smooth color transitions
 
 ### Hero & Section Backgrounds
+
 - Blueprint grid overlay (light SVG or CSS repeating-linear-gradient)
 - Parallax or subtle movement only if performant
 - Large centered logo watermark (low opacity)
 
 ### Mobile Drawer
+
 - Same glassmorphism treatment as desktop panels
 - Smooth slide + backdrop
 - Clear close affordance with terminal-style text
 
 ## Animation & Micro-Interaction Rules
+
 - **Preferred Method**: Pure CSS transitions + keyframes (fastest, most reliable on GitHub Pages)
 - Use `transition-all`, `transition-colors`, `transition-transform`
 - Subtle scale, lift, or glow changes on hover/focus
@@ -105,6 +134,7 @@ Use these hardware-accelerated utilities from `global.css`:
 - Never use heavy libraries (Framer Motion etc.) unless absolutely necessary
 
 ## Typography & Hierarchy
+
 - Headings: Poppins (bold, good weight range)
 - Body: Nunito (excellent readability)
 - Status / Terminal text: Monospace
@@ -112,6 +142,7 @@ Use these hardware-accelerated utilities from `global.css`:
 - Optical sizing and text-balance where supported
 
 ## Implementation Workflow
+
 1. Define or extend tokens in CSS custom properties
 2. Build component in `src/components/` using Tailwind + the tokens
 3. Add subtle interactions with CSS
@@ -120,6 +151,7 @@ Use these hardware-accelerated utilities from `global.css`:
 6. Ensure it works inside Mission Reports and general pages
 
 ## Pro Tips for Agents
+
 - When the user says “make it more premium”, default to deeper glassmorphism + better neon restraint + tighter spacing.
 - Always ask: “Does this feel like Mission Control?” before finalizing visuals.
 - Prioritize readability and emotional tone over pure aesthetics.

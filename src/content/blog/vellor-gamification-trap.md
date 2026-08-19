@@ -69,11 +69,11 @@ I watched myself reach for Framer Motion the way junior devs reach for libraries
 - **What I learned:** Gamification belongs in **Achievements** page and subtle cues — not on the payment critical path.
 - **What I'd do differently:** Define a **focus corridor** — Dashboard → Students → Quick Log → Invoice — zero confetti in that path.
 
-| Before | After |
-|--------|-------|
-| Confetti on every payment log | Confetti on achievement milestones only |
-| Rank banner on dashboard header | Rank visible in Achievements + profile |
-| RPG borders on list items | Clean cards; accent color from white-label settings |
+| Before                          | After                                               |
+| ------------------------------- | --------------------------------------------------- |
+| Confetti on every payment log   | Confetti on achievement milestones only             |
+| Rank banner on dashboard header | Rank visible in Achievements + profile              |
+| RPG borders on list items       | Clean cards; accent color from white-label settings |
 
 ---
 

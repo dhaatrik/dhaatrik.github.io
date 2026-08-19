@@ -34,15 +34,15 @@ Read [why this demo exists](/transmissions/seamless-qr-dining-why-and-what/) fir
 
 ### Mission Report: Stack Choices
 
-| Layer | Choice | Why |
-|-------|--------|-----|
-| **Framework** | Next.js 16 (App Router) | Customer + kitchen routes, API route for OTP verify |
-| **UI** | React 19 + Tailwind 3 | Mobile-first menu, kitchen board layout |
-| **Motion** | Framer Motion | Drawer/modal transitions, status animations |
-| **State** | React Context | Global order list + auth + toasts without Redux weight |
-| **Data** | Static menu in `src/data/` | Demo menu — not CMS-backed |
-| **Tests** | Jest + RTL | 77 tests across contexts, components, API, benchmarks |
-| **CI** | GitHub Actions | lint → test → build on push |
+| Layer         | Choice                     | Why                                                    |
+| ------------- | -------------------------- | ------------------------------------------------------ |
+| **Framework** | Next.js 16 (App Router)    | Customer + kitchen routes, API route for OTP verify    |
+| **UI**        | React 19 + Tailwind 3      | Mobile-first menu, kitchen board layout                |
+| **Motion**    | Framer Motion              | Drawer/modal transitions, status animations            |
+| **State**     | React Context              | Global order list + auth + toasts without Redux weight |
+| **Data**      | Static menu in `src/data/` | Demo menu — not CMS-backed                             |
+| **Tests**     | Jest + RTL                 | 77 tests across contexts, components, API, benchmarks  |
+| **CI**        | GitHub Actions             | lint → test → build on push                            |
 
 No `ws` package. No standalone Node socket server. "Real-time" = **shared in-memory Context** while one Next dev server runs.
 

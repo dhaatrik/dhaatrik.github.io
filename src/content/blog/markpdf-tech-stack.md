@@ -36,26 +36,26 @@ If you have not read [why MarkPDF exists](/transmissions/markpdf-why-and-what/),
 
 ### Mission Report: Constraints Before Libraries
 
-| Constraint | What it eliminated |
-|------------|-------------------|
-| **Zero server** | Cloud Pandoc APIs, headless Chrome farms, paid conversion SaaS |
-| **Zero native installs** | Local TeX, wkhtmltopdf, groff pipelines |
-| **Solo maintainer** | Custom unified/remark plugin zoo I cannot regression-test alone |
-| **Privacy** | Uploading documents to third-party converters |
-| **Good-enough PDF** | Journal submission quality — out of scope |
+| Constraint               | What it eliminated                                              |
+| ------------------------ | --------------------------------------------------------------- |
+| **Zero server**          | Cloud Pandoc APIs, headless Chrome farms, paid conversion SaaS  |
+| **Zero native installs** | Local TeX, wkhtmltopdf, groff pipelines                         |
+| **Solo maintainer**      | Custom unified/remark plugin zoo I cannot regression-test alone |
+| **Privacy**              | Uploading documents to third-party converters                   |
+| **Good-enough PDF**      | Journal submission quality — out of scope                       |
 
 ---
 
 ### Mission Report: What I Picked (and Why)
 
-| Layer | Choice | Honest reason |
-|-------|--------|---------------|
-| **UI** | React 19.2 + Vite 6 | Fast HMR, familiar component model for split-pane editor |
-| **Styling** | Tailwind CSS 4 + `@tailwindcss/typography` | Rapid prose styling for preview pane |
-| **Markdown** | react-markdown + remark-gfm | Safe GFM rendering (tables, task lists) without hand-rolling AST walks |
-| **Code blocks** | react-syntax-highlighter | Themeable highlighting; separate light/dark code themes for print |
-| **Export** | `window.print()` + print CSS | Vector PDF via browser engine — no jsPDF page-break math |
-| **Tests** | Vitest + React Testing Library | Component and settings flows stay honest in CI |
+| Layer           | Choice                                     | Honest reason                                                          |
+| --------------- | ------------------------------------------ | ---------------------------------------------------------------------- |
+| **UI**          | React 19.2 + Vite 6                        | Fast HMR, familiar component model for split-pane editor               |
+| **Styling**     | Tailwind CSS 4 + `@tailwindcss/typography` | Rapid prose styling for preview pane                                   |
+| **Markdown**    | react-markdown + remark-gfm                | Safe GFM rendering (tables, task lists) without hand-rolling AST walks |
+| **Code blocks** | react-syntax-highlighter                   | Themeable highlighting; separate light/dark code themes for print      |
+| **Export**      | `window.print()` + print CSS               | Vector PDF via browser engine — no jsPDF page-break math               |
+| **Tests**       | Vitest + React Testing Library             | Component and settings flows stay honest in CI                         |
 
 react-markdown already sits on remark under the hood. I did **not** add a separate Remark/Rehype pipeline in `package.json` because the component abstraction covers my scope.
 

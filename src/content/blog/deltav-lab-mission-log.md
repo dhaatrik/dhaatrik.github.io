@@ -94,11 +94,11 @@ Every dependency is a liability in a physics engine. I added libraries only when
 
 ### Mission Report: Fuckups & Learnings
 
-| Fuckup | Learning |
-|--------|----------|
-| Chatty per-frame messages | Batch state in SharedArrayBuffer; strict 50 Hz contract |
-| Mixing UI refactors with integrator edits | Worker boundary lets you change HUD without touching RK4 |
-| README "engineering-grade" before V&V | Implemented rigor ≠ industry trust — [audit](/transmissions/deltav-lab-not-professional-grade/) |
+| Fuckup                                    | Learning                                                                                        |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Chatty per-frame messages                 | Batch state in SharedArrayBuffer; strict 50 Hz contract                                         |
+| Mixing UI refactors with integrator edits | Worker boundary lets you change HUD without touching RK4                                        |
+| README "engineering-grade" before V&V     | Implemented rigor ≠ industry trust — [audit](/transmissions/deltav-lab-not-professional-grade/) |
 
 ---
 
@@ -116,7 +116,7 @@ I stopped uploading YouTube lectures because I failed to build sustainable syste
 
 If staging math is what you care about, run a sim and watch apoapsis move when you change mass ratio:
 
-$$ \Delta v = I_{sp} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
+$$ \Delta v = I\_{sp} \cdot g_0 \cdot \ln \left( \frac{m_0}{m_f} \right) $$
 
 If threading is what you care about, study `PhysicsWorker.ts` and `PhysicsBuffer.ts`.
 
