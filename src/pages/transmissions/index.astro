@@ -530,9 +530,7 @@ const postsWithReadingTime = posts.map((post: any) => {
                                                 alt=""
                                                 class:list={[
                                                     'w-full object-cover transition-transform duration-300 group-hover:scale-105 group-focus-visible:scale-105',
-                                                    i === 0
-                                                        ? 'h-48 md:h-full md:min-h-75'
-                                                        : 'h-48',
+                                                    i === 0 ? 'h-48 md:h-full md:min-h-75' : 'h-48',
                                                 ]}
                                                 loading={i === 0 ? 'eager' : 'lazy'}
                                                 fetchpriority={i === 0 ? 'high' : 'auto'}
