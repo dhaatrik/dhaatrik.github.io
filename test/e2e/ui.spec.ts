@@ -210,7 +210,7 @@ test.describe('Portfolio UI Interactivity', () => {
             let copied = '';
             Object.defineProperty(navigator, 'clipboard', {
                 value: {
-                    writeText: async (text) => {
+                    writeText: async (text: string) => {
                         copied = text;
                     },
                     readText: async () => copied,

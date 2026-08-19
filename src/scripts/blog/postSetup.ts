@@ -616,7 +616,7 @@ export async function setupPost() {
                     .join('\n');
             }
 
-            const telemetry = header.querySelector('.code-telemetry');
+            const telemetry = header?.querySelector('.code-telemetry');
 
             codeBlock.addEventListener('click', (e) => {
                 const target = e.target as HTMLElement;
@@ -681,7 +681,7 @@ export async function setupPost() {
             });
         }
 
-        const copyBtn = header.querySelector('.copy-btn');
+        const copyBtn = header?.querySelector('.copy-btn');
         copyBtn?.addEventListener(
             'click',
             async () => {
