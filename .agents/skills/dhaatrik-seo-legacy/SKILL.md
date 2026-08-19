@@ -11,7 +11,7 @@ description: >
 
 # Dhaatrik SEO Legacy Skill — Honest Discoverability (SEO + AEO + GEO + LLM)
 
-**Core Purpose:** In 5–20 years, curious engineers should still find these honest transmissions via search engines *and* AI answer systems. Prioritize authentic discoverability over vanity metrics. Canonical rules also lived in [`GEMINI.md`](../../../GEMINI.md) — this skill is the agent-executable version.
+**Core Purpose:** In 5–20 years, curious engineers should still find these honest transmissions via search engines *and* AI answer systems. Prioritize authentic discoverability over vanity metrics. This skill is the canonical, agent-executable guide.
 
 Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 

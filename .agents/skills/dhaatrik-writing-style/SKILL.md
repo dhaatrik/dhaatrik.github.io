@@ -80,7 +80,7 @@ Every major post should feel like a **Transmission from Mission Control**:
 - SEO-friendly but honest: Meta description should hint at the real story ("How I completely fucked up the state management and what it taught me about building reliable systems").
 - Tags & Categories: Use meaningful ones that reflect learnings.
 
-## AEO / GEO voice guardrails (from GEMINI.md)
+## AEO / GEO voice guardrails
 
 - **Body copy:** Mission Report H2s — never turn the whole post into FAQ question headings
 - **Meta, llms.txt, JSON-LD FAQ answers:** Can use natural questions, but still sound like you — not Wikipedia or a marketing FAQ page

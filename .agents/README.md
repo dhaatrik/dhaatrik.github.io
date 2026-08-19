@@ -12,7 +12,7 @@ Skills in this directory are **repo-scoped**: they apply only to this website. C
 | [`skills/dhaatrik-visual-system/`](skills/dhaatrik-visual-system/SKILL.md) | `/dhaatrik-visual-system` | UI, design tokens, mission-control aesthetic |
 | [`skills/dhaatrik-seo-legacy/`](skills/dhaatrik-seo-legacy/SKILL.md) | `/dhaatrik-seo-legacy` | SEO, AEO, GEO, LLM visibility, `llms.txt`, JSON-LD, robots |
 
-[`GEMINI.md`](../GEMINI.md) is a short pointer — full rules live in `dhaatrik-seo-legacy`.
+Full SEO/AEO/GEO rules live in [`skills/dhaatrik-seo-legacy/`](skills/dhaatrik-seo-legacy/SKILL.md).
 
 Entry point for agents: [`../AGENTS.md`](../AGENTS.md)
 

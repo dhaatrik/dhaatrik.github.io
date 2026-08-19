@@ -2,7 +2,7 @@
 
 Astro 6 static site (GitHub Pages). Project-scoped skills live in [`.agents/skills/`](.agents/skills/). **Read the relevant skill(s) before starting work** — Grok, Antigravity, and Cursor-compatible harnesses discover them automatically when not gitignored.
 
-Quick reference for SEO/AEO/GEO/LLM rules: [`GEMINI.md`](GEMINI.md) → canonical detail in **`dhaatrik-seo-legacy`**.
+Canonical detail for SEO/AEO/GEO/LLM rules lives in **[`dhaatrik-seo-legacy`](.agents/skills/dhaatrik-seo-legacy/SKILL.md)**.
 
 ## Skill routing
 
@@ -35,6 +35,15 @@ Slash commands (Grok): `/dhaatrik-writing-style`, `/dhaatrik-mission-report`, `/
 | [`dhaatrik-seo-legacy`](.agents/skills/dhaatrik-seo-legacy/SKILL.md) | SEO + AEO + GEO + LLM visibility (`llms.txt`, robots, schema) |
 
 Index: [`.agents/README.md`](.agents/README.md)
+
+## SEO, GEO, AEO & LLM Visibility Defaults
+ 
+1. **LLM files** — Update `public/llms.txt` and `public/llms-full.txt` when pages, posts, or projects change.
+2. **robots.txt** — Keep AI crawlers allowed (`GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`, etc.).
+3. **Meta** — Every route: `title`, `description`, `keywords`, dynamic `og:type` via `BaseHead`.
+4. **AEO/GEO** — Question-style phrasing in JSON-LD / `llms-full.txt`; Mission Report H2s in body prose.
+5. **JSON-LD** — Homepage: `WebSite` + `FAQPage`; posts: `Article`; use `set:html` pattern in Astro.
+6. **Semantics** — One `h1`, proper heading order, semantic HTML, descriptive image `alt`.
 
 ## Engineering defaults
 

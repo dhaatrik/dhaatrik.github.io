@@ -58,7 +58,7 @@ description: >
 4. Optimize heroImage with Astro `<Image>`
 5. Update `public/llms.txt` and `public/llms-full.txt` (`dhaatrik-seo-legacy`)
 
-### SEO / AEO / LLM implementation (from GEMINI.md)
+### SEO / AEO / LLM implementation (Astro patterns)
 
 **JSON-LD in Astro pages** — build in frontmatter, inject with `set:html`:
 
