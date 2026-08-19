@@ -31,43 +31,48 @@ Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 6. **Premium but Restrained** — High visual quality without sacrificing performance or readability. Respect `prefers-reduced-motion`.
 7. **Honest & Human** — Visuals support the transparent, brotherly voice — nothing feels corporate or overly polished.
 
-## Design Tokens (Define Once, Use Everywhere)
-Use CSS custom properties in `src/styles/global.css` or a dedicated design-tokens file:
+## Design Tokens & Architecture (Tailwind v4 + CSS Properties)
 
+Styles are organized modularly in `src/styles/`:
+- `src/styles/tokens.css` — Animated CSS properties (`@property`) and color variables
+- `src/styles/glass.css` — Canonical `.glass-surface`, `.glass-chrome`, `.bento-card` components
+- `src/styles/motion.css` — Scroll cues, blueprint reveal, and keyframe animations
+- `src/styles/typography.css` — Prose typography and code styling
+- `src/styles/global.css` — Tailwind v4 imports (`@import 'tailwindcss'`), `@custom-variant dark`, and custom utilities
+
+### CSS Custom Properties & Tokens
 ```css
-:root {
-  /* Glassmorphism */
-  --glass-bg: rgba(15, 23, 42, 0.75);
-  --glass-border: rgba(148, 163, 184, 0.2);
-  --glass-blur: 16px;
+/* Animated CSS properties in tokens.css */
+@property --glass-bg-opacity { syntax: '<number>'; inherits: true; initial-value: 0.35; }
+@property --glass-border-opacity { syntax: '<number>'; inherits: true; initial-value: 0.08; }
+@property --neon-glow-opacity { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --blueprint-opacity { syntax: '<number>'; inherits: true; initial-value: 0.02; }
 
-  /* Neon Accents */
-  --neon-cyan: #67e8f9;
-  --neon-purple: #a5b4fc;
-  --neon-glow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-
-  /* Blueprint */
-  --blueprint-grid: rgba(148, 163, 184, 0.08);
-  --blueprint-line: rgba(148, 163, 184, 0.15);
-
-  /* Status Colors */
-  --status-running: #22c55e;
-  --status-dev: #eab308;
-  --status-shipped: #3b82f6;
-
-  /* Typography & Spacing */
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
+/* Theme colors in global.css */
+--neon-cyan: #67e8f9;
+--neon-purple: #a5b4fc;
+--status-running: #22c55e;
+--status-dev: #eab308;
+--status-shipped: #3b82f6;
 ```
 
-**Dark/Light Mode:** Use Tailwind `dark:` variants + CSS variables that change in dark mode.
+### Tailwind v4 Custom GPU Utilities
+Use these hardware-accelerated utilities from `global.css`:
+- `transition-gpu` — 300ms cubic-bezier transition on transform, opacity, filter, backdrop-filter.
+- `promote-gpu` — will-change: transform, opacity.
+- `transition-bento` — 300ms cubic-bezier transition on transform, opacity, background, border, shadow.
+- `transition-spring` — spring-bounce easing (`--ease-spring-bounce`) for tactile feedback.
+
+**Dark/Light Mode:** Uses class-based dark mode (`@custom-variant dark (&:where(.dark, .dark *));`) toggled via `ThemeToggle.astro`.
 
 ## Component Patterns
 
 ### Glassmorphic Cards & Panels
-- Background: `bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)]`
-- Border: `border border-[var(--glass-border)]`
-- Subtle inner glow on hover/focus
+- Base class: `.glass-surface` or `.bento-card`
+- Header variant: `.glass-chrome`
+- Drawer variant: `.glass-drawer`
+- Background & Blur: driven by `--glass-bg-opacity` and `--glass-border-opacity` with backdrop-filter blur
+- Blueprint grid overlay: injected automatically via `::after` pseudo-element with clip-path wipe
 - Rounded corners: `rounded-2xl` or `rounded-3xl`
 
 ### Status Telemetry Badges
