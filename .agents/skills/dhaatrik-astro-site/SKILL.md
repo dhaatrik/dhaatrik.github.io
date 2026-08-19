@@ -24,30 +24,35 @@ description: >
 **Mandatory Pairing:** Always combine with `dhaatrik-writing-style` (tone) and `dhaatrik-mission-report` (structure) when touching content. Skill routing: [`AGENTS.md`](../../../AGENTS.md).
 
 ## Current Site Architecture (Know This)
-- **Framework**: Astro 6 (SSG with prefetch enabled)
-- **Styling**: Tailwind CSS v4 + Vite plugin + custom CSS properties
-- **Content**: Astro Content Collections (blog + projects) with Zod schemas + MDX + remark-math + rehype-katex
-- **Images**: Astro `<Image>` component + sharp
-- **Typography**: @fontsource/nunito + poppins
-- **Testing**: Playwright (E2E) + Node native test runner
-- **Deployment**: GitHub Pages via GitHub Actions (withastro/action recommended)
+- **Framework**: Astro 6 (SSG with `prefetch: true` enabled for instant client transitions)
+- **Markdown & Math Processor**: Unified processor pattern (`markdown.processor: unified({ remarkPlugins: [remarkMath, remarkMermaid], rehypePlugins: [rehypeKatex] })`)
+- **Styling**: Tailwind CSS v4 + `@tailwindcss/vite` plugin + modular CSS tokens in `src/styles/`
+- **Content Collections**: `src/content.config.ts` using Astro `glob()` loader + Zod schema validation
+  - `blog`: `pubDate`, `updatedDate`, `heroImage`, `readingTime`, `tags`, `series`, `seriesOrder`, `clearance`, `hasMath`
+  - `projects`: `title`, `description`, `logo`, `video`, `tags`, `githubUrl`, `progress`, `order`, `transmissionTag`, `telemetry`, `fuckup_teaser`, `pain_level`
+- **Images**: Astro `<Image>` component powered by `sharp`
+- **Typography**: `@fontsource/nunito` (body) + `@fontsource/poppins` (headings)
+- **Testing**:
+  - Unit / content validation: `npm test` (Native Node `--test` runner with type-stripping loader)
+  - E2E / accessibility: `npm run test:e2e` (Playwright test suite)
+- **Deployment**: GitHub Pages via GitHub Actions (`deploy.yml`)
 - **Key Folders**:
-  - `src/pages/` — Routing (index.astro, personnel.astro, pedagogy.astro, transmissions/, 404.astro, rss.xml.js)
-  - `src/content/` — Collections (blog/, projects/)
-  - `src/components/` — Reusable UI (Header, Footer, ThemeToggle, Scrollytell, TechMarquee, etc.)
-  - `src/layouts/` — Page shells (BlogPost.astro)
-  - `src/styles/` — Global tokens, glassmorphism, custom scrollbars
-  - `src/data/` — Tech stack, etc.
-  - `src/utils/` — Helpers (readingTime, etc.)
+  - `src/pages/` — Routing (`index.astro`, `personnel.astro`, `pedagogy.astro`, `projects/`, `transmissions/`, `404.astro`, `rss.xml.js`)
+  - `src/content/` — Collections (`blog/`, `projects/`)
+  - `src/components/` — Reusable UI (`Header`, `Footer`, `ThemeToggle`, `Scrollytell`, `Math`, `KatexStyles`, etc.)
+  - `src/layouts/` — Page shells (`BlogPost.astro`)
+  - `src/styles/` — `global.css`, `tokens.css`, `glass.css`, `motion.css`, `typography.css`
+  - `src/data/` — Static datasets (`glossary.ts`, `readingList.ts`, `status.ts`, `techStack.ts`, `videos.ts`)
+  - `src/utils/` — Helpers (`dateFormatter.ts`, `fuzzyMatch.ts`, `readingTime.ts`, `seriesNavigation.ts`)
 - **Design Language**: Sci-fi terminal / mission-control with glassmorphism, neon accents, blueprint grids
 
 ## Core Rules for All Changes
-1. **Performance First**: Zero unnecessary JS. Use Astro islands (`client:load`, `client:visible`) only when truly interactive. Prefer CSS transitions and vanilla IntersectionObserver.
-2. **Static Only**: No server-side rendering unless absolutely required. GitHub Pages is static.
-3. **Design System Consistency**: All new components must follow existing glassmorphism, neon, and terminal styling patterns.
+1. **Performance First**: Zero unnecessary JS. Use Astro islands only when truly interactive. Prefer CSS transitions and vanilla IntersectionObserver.
+2. **Static Only**: No server-side rendering. GitHub Pages is static.
+3. **Design System Consistency**: All new components must follow `.glass-surface` and mission-control styling patterns.
 4. **Content Schema Respect**: Never break existing Zod schemas in `src/content.config.ts`.
-5. **Accessibility & Motion**: Respect `prefers-reduced-motion`. Good keyboard/focus states.
-6. **GitHub Pages Quirks**: Handle base path correctly if ever needed. Use relative paths where possible.
+5. **Accessibility & Motion**: Respect `prefers-reduced-motion`. Ensure keyboard focus states and ARIA semantics.
+6. **Testing Verification**: Always run `npm test` and `npm run build` after structural changes.
 
 ## Common Workflows
 
