@@ -173,19 +173,35 @@ const webSiteSchema = JSON.stringify({
                     </svg>
                 </div>
                 <div class="relative z-10 flex w-full max-w-3xl flex-col justify-center">
+                    <!-- Segmented Cockpit HUD Capsule -->
                     <div
-                        class="reveal-on-scroll mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-medium text-green-600 sm:text-sm dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400"
+                        class="reveal-on-scroll mb-5 inline-flex flex-wrap items-center gap-2 rounded-full border border-slate-200/80 bg-white/70 p-1 font-mono text-[11px] shadow-xs backdrop-blur-md sm:gap-2.5 dark:border-white/10 dark:bg-slate-900/60"
                         data-last-updated="2026-06-18"
                     >
-                        <span class="relative flex h-2 w-2 shrink-0">
-                            <span
-                                class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75 dark:bg-green-400"
-                            ></span>
-                            <span
-                                class="relative inline-flex h-2 w-2 rounded-full bg-green-500 dark:bg-green-400"
-                            ></span>
-                        </span>
-                        FOCUS: RELEASE_V4.0 // CONFIDENCE: MAXIMUM // STATUS: ONLINE
+                        <!-- Status Beacon Chip -->
+                        <div
+                            class="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-semibold text-emerald-600 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-400"
+                        >
+                            <span class="relative flex h-2 w-2 shrink-0">
+                                <span
+                                    class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75 dark:bg-emerald-400"
+                                ></span>
+                                <span
+                                    class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.6)] dark:bg-emerald-400"
+                                ></span>
+                            </span>
+                            <span>SYS.ONLINE</span>
+                            <span class="text-emerald-600/70 dark:text-emerald-400/70">[v4.2.0]</span>
+                        </div>
+
+                        <!-- Divider / Separator -->
+                        <span class="hidden text-slate-300 sm:inline dark:text-white/20" aria-hidden="true">|</span>
+
+                        <!-- Mission Telemetry Segment -->
+                        <div class="flex items-center gap-1.5 px-2 py-0.5 tracking-wider text-slate-600 sm:px-0 dark:text-slate-300">
+                            <span class="font-bold text-(--accent)">MISSION:</span>
+                            <span class="font-medium text-slate-700 dark:text-slate-200">FIRST-PRINCIPLES ENGINEERING</span>
+                        </div>
                     </div>
                     <h1
                         class="type-display reveal-on-scroll mb-6 text-slate-900 dark:text-white"
