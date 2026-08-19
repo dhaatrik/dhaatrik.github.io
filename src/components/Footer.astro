@@ -191,57 +191,55 @@ const formatMarqueeDate = (date: Date) => {
         </div>
 
         <!-- Column 3: System Diagnostics -->
-        <div class="flex flex-col space-y-6">
-            <div class="flex flex-col space-y-4">
-                <h3
-                    class="mb-2 flex items-center gap-2 font-mono text-[10px] tracking-widest text-slate-900 uppercase dark:text-white"
-                >
-                    <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
-                    System Diagnostics
-                </h3>
-                <div
-                    class="premium-glass space-y-1.5 rounded-lg p-4 font-mono text-[11px] leading-relaxed text-slate-500 select-none dark:text-slate-400"
-                >
-                    <div class="flex items-center justify-between">
-                        <span>SYS.CORE // ASTRO v6.1.7</span>
-                        <span class="relative flex h-1.5 w-1.5 shrink-0">
-                            <span
-                                class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
-                            ></span>
-                            <span
-                                class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
-                            ></span>
-                        </span>
-                    </div>
-                    <div>STYLE.SYS // TAILWIND CSS v4.0</div>
-                    <div id="footer-uptime">SYS.SESSION // 00h 00m 00s</div>
-                    <div>BUILD.SHA // {gitSha}</div>
-                    <div>PAGES.INDEXED // {totalPages}</div>
-                    <div
-                        class="mt-2 flex flex-col gap-1 border-t border-dashed border-slate-200/50 pt-2 dark:border-white/5"
-                    >
+        <div class="flex flex-col space-y-4">
+            <h3
+                class="mb-2 flex items-center gap-2 font-mono text-[10px] tracking-widest text-slate-900 uppercase dark:text-white"
+            >
+                <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
+                System Diagnostics
+            </h3>
+            <div
+                class="premium-glass space-y-1.5 rounded-lg p-4 font-mono text-[11px] leading-relaxed text-slate-500 select-none dark:text-slate-400"
+            >
+                <div class="flex items-center justify-between">
+                    <span>SYS.CORE // ASTRO v6.1.7</span>
+                    <span class="relative flex h-1.5 w-1.5 shrink-0">
                         <span
-                            class="text-[8px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                            >// CURRENT_STUDY</span
-                        >
-                        <span class="text-[10px] leading-relaxed text-slate-600 dark:text-slate-300"
-                            >{currentLearning}</span
-                        >
-                    </div>
+                            class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
+                        ></span>
+                        <span
+                            class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+                        ></span>
+                    </span>
+                </div>
+                <div>STYLE.SYS // TAILWIND CSS v4.0</div>
+                <div id="footer-uptime">SYS.SESSION // 00h 00m 00s</div>
+                <div>BUILD.SHA // {gitSha}</div>
+                <div>PAGES.INDEXED // {totalPages}</div>
+                <div
+                    class="mt-2 flex flex-col gap-1 border-t border-dashed border-slate-200/50 pt-2 dark:border-white/5"
+                >
+                    <span
+                        class="text-[8px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                        >// CURRENT_STUDY</span
+                    >
+                    <span class="text-[10px] leading-relaxed text-slate-600 dark:text-slate-300"
+                        >{currentLearning}</span
+                    >
                 </div>
             </div>
-
-            </div>
+        </div>
+    </div>
 
     <div
-        class="layout-container mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 md:flex-row dark:border-white/5"
+        class="layout-container mt-12 flex flex-col-reverse items-center justify-between gap-4 border-t border-slate-200/60 pt-8 sm:flex-row dark:border-white/5"
     >
-        <p class="font-mono text-xs">
+        <p class="font-mono text-xs text-slate-500 dark:text-slate-400">
             &copy; {today.getFullYear()} Dhaatrik Chowdhury. All rights reserved.
         </p>
 
         <!-- Social Icons with Cyber Micro-interaction -->
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3">
             <a
                 href={SOCIAL_LINKS.twitter}
                 target="_blank"
