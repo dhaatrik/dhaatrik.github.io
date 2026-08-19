@@ -1,0 +1,8 @@
+dist
+.astro
+node_modules
+CHANGELOG.md
+package-lock.json
+.lycheecache
+playwright-report
+test-results
