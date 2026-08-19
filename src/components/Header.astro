@@ -383,6 +383,8 @@ const displayPathShort = formatHeaderPath(displayPath);
             <div class="desktop-nav-links hidden items-center gap-5 md:flex lg:gap-6">
                 <HeaderLink
                     href="/"
+                    data-nav-key="1"
+                    title="Home [Press 1]"
                     class="group/link flex items-center text-xs font-semibold tracking-widest uppercase text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
@@ -393,6 +395,8 @@ const displayPathShort = formatHeaderPath(displayPath);
                 </HeaderLink>
                 <HeaderLink
                     href="/personnel"
+                    data-nav-key="2"
+                    title="Personnel [Press 2]"
                     class="group/link flex items-center text-xs font-semibold tracking-widest uppercase text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
@@ -403,6 +407,8 @@ const displayPathShort = formatHeaderPath(displayPath);
                 </HeaderLink>
                 <HeaderLink
                     href="/projects"
+                    data-nav-key="3"
+                    title="Projects [Press 3]"
                     class="group/link flex items-center text-xs font-semibold tracking-widest uppercase text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
@@ -413,6 +419,8 @@ const displayPathShort = formatHeaderPath(displayPath);
                 </HeaderLink>
                 <HeaderLink
                     href="/pedagogy"
+                    data-nav-key="4"
+                    title="Pedagogy [Press 4]"
                     class="group/link flex items-center text-xs font-semibold tracking-widest uppercase text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
@@ -423,6 +431,8 @@ const displayPathShort = formatHeaderPath(displayPath);
                 </HeaderLink>
                 <HeaderLink
                     href="/transmissions"
+                    data-nav-key="5"
+                    title="Transmissions [Press 5]"
                     class="group/link flex items-center text-xs font-semibold tracking-widest uppercase text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
@@ -478,36 +488,42 @@ const displayPathShort = formatHeaderPath(displayPath);
                 {
                     href: '/',
                     label: 'Home',
+                    key: '1',
                     index: '[ 01 ]',
                     isActive: cleanPath === '' || cleanPath === '/',
                 },
                 {
                     href: '/personnel',
                     label: 'Personnel',
+                    key: '2',
                     index: '[ 02 ]',
                     isActive: cleanPath.startsWith('/personnel'),
                 },
                 {
                     href: '/projects',
                     label: 'Projects',
+                    key: '3',
                     index: '[ 03 ]',
                     isActive: cleanPath.startsWith('/projects'),
                 },
                 {
                     href: '/pedagogy',
                     label: 'Pedagogy',
+                    key: '4',
                     index: '[ 04 ]',
                     isActive: cleanPath.startsWith('/pedagogy'),
                 },
                 {
                     href: '/transmissions',
                     label: 'Transmissions',
+                    key: '5',
                     index: '[ 05 ]',
                     isActive: cleanPath.startsWith('/transmissions'),
                 },
             ].map((item) => (
                 <a
                     href={item.href}
+                    data-nav-key={item.key}
                     data-astro-prefetch="hover"
                     class:list={[
                         'drawer-item group/link relative flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm outline-none focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#0b0e14]',
@@ -903,6 +919,56 @@ const displayPathShort = formatHeaderPath(displayPath);
             updateDrawerTelemetry();
         }
     };
+
+    // Global Direct Hotkeys (1 -> Home, 2 -> Personnel, 3 -> Projects, 4 -> Pedagogy, 5 -> Transmissions)
+    const navKeyRoutes: Record<string, string> = {
+        '1': '/',
+        '2': '/personnel',
+        '3': '/projects',
+        '4': '/pedagogy',
+        '5': '/transmissions',
+    };
+
+    if (!(window as any).__hasGlobalNavHotkeys) {
+        (window as any).__hasGlobalNavHotkeys = true;
+        window.addEventListener('keydown', (e: KeyboardEvent) => {
+            // Ignore if modifier keys are pressed (e.g. Cmd+1, Ctrl+1, Alt+1)
+            if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+
+            // Ignore when typing inside any interactive input element or open search dialog
+            const activeEl = document.activeElement;
+            const isTyping =
+                activeEl instanceof HTMLInputElement ||
+                activeEl instanceof HTMLTextAreaElement ||
+                activeEl instanceof HTMLSelectElement ||
+                activeEl?.getAttribute('contenteditable') === 'true' ||
+                activeEl?.closest('search, [popover], dialog');
+
+            if (isTyping) return;
+
+            const targetPath = navKeyRoutes[e.key];
+            if (targetPath) {
+                const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+                const cleanTarget = targetPath.replace(/\/$/, '') || '/';
+                if (currentPath === cleanTarget) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetLink =
+                        document.querySelector<HTMLAnchorElement>(
+                            `.desktop-nav-links a[data-nav-key="${e.key}"]`
+                        ) ||
+                        document.querySelector<HTMLAnchorElement>(
+                            `#mobile-nav-drawer a[data-nav-key="${e.key}"]`
+                        );
+                    if (targetLink) {
+                        e.preventDefault();
+                        targetLink.click();
+                    }
+                }
+            }
+        });
+    }
 
     document.addEventListener('astro:page-load', setupHeader);
 
