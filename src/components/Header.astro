@@ -438,7 +438,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                 aria-label="Toggle navigation menu"
                 aria-expanded="false"
                 aria-controls="mobile-nav-drawer"
-                class="magnetic-target relative z-50 flex h-9 w-9 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full border border-transparent transition-colors hover:bg-slate-200/60 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 md:hidden dark:hover:bg-white/10 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
+                class="magnetic-target relative z-50 flex h-11 w-11 min-h-[44px] min-w-[44px] cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full border border-transparent transition-colors hover:bg-slate-200/60 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 md:hidden dark:hover:bg-white/10 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
             >
                 <span class="hamburger-line h-0.5 w-5 bg-current"></span>
                 <span class="hamburger-line h-0.5 w-5 bg-current"></span>
@@ -451,12 +451,13 @@ const displayPathShort = formatHeaderPath(displayPath);
 <div
     id="mobile-nav-backdrop"
     class="pointer-events-none fixed inset-0 z-40 bg-slate-950/40 opacity-0 backdrop-blur-md md:hidden"
+    aria-hidden="true"
 >
 </div>
 
 <nav
     id="mobile-nav-drawer"
-    class="glass-surface glass-drawer fixed top-0 right-0 z-40 flex h-full w-72 translate-x-full flex-col gap-6 p-6 pt-24 md:hidden"
+    class="glass-surface glass-drawer overscroll-contain fixed top-0 right-0 z-40 flex h-full w-72 translate-x-full flex-col gap-6 p-6 pt-[calc(5.5rem+env(safe-area-inset-top,0px))] pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] md:hidden"
     aria-label="Mobile navigation"
 >
     <!-- Decorative Grid Motif -->
@@ -735,6 +736,12 @@ const displayPathShort = formatHeaderPath(displayPath);
                 toggleBtn.setAttribute('aria-expanded', 'true');
                 document.body.style.overflow = 'hidden';
 
+                // Mark background inert for accessibility (Modern Web Guidance)
+                const mainEl = document.querySelector('main');
+                const footerEl = document.querySelector('footer');
+                if (mainEl) mainEl.setAttribute('inert', '');
+                if (footerEl) footerEl.setAttribute('inert', '');
+
                 // Clear inline style overrides
                 drawer.style.transform = '';
                 backdrop.style.opacity = '';
@@ -755,6 +762,12 @@ const displayPathShort = formatHeaderPath(displayPath);
                 toggleBtn.classList.remove('open');
                 toggleBtn.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
+
+                // Restore background interactivity
+                const mainEl = document.querySelector('main');
+                const footerEl = document.querySelector('footer');
+                if (mainEl) mainEl.removeAttribute('inert');
+                if (footerEl) footerEl.removeAttribute('inert');
 
                 // Clear inline style overrides immediately so the transition runs smoothly
                 drawer.style.transform = '';
@@ -906,6 +919,8 @@ const displayPathShort = formatHeaderPath(displayPath);
             backdrop?.classList.remove('opacity-100', 'pointer-events-auto');
             toggleBtn.classList.remove('open');
             document.body.style.overflow = '';
+            document.querySelector('main')?.removeAttribute('inert');
+            document.querySelector('footer')?.removeAttribute('inert');
         }
 
         if (headerAbortController) {
