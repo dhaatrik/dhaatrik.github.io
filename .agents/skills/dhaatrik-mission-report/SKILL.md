@@ -123,6 +123,12 @@ order: 2   # For projects collection sorting
 - End with forward momentum — the diary continues.
 - Length guideline: 800–2500 words for deep reports. Shorter "status update" reports are fine for quick logs.
 
+## Structural Anti-AI Guardrails (Humanizer Rules)
+- **No boilerplate "Challenges & Outlook" summaries:** Never close a report with synthetic corporate cheerleading (e.g. *"Despite these hurdles, the future remains bright..."*). State real unresolved questions or the immediate next commit.
+- **No artificial drama:** Do not describe minor typos or routine config changes as "catastrophic disasters". Keep the stakes proportional and grounded.
+- **Concrete Root Cause over Vague Handwaving:** In the *Fuckups & Learnings* section, state the exact failure mechanism (e.g. memory leak, race condition, bad schema) rather than abstract phrases like *"we faced architectural challenges"*.
+- **Direct comparisons over wordy fluff:** Use tables or code diffs when comparing approaches instead of multi-paragraph AI explanations.
+
 ## AEO-friendly structuring (inside Mission Report sections)
 
 - **Tables** — comparisons, before/after, metrics (preferred over dense prose for GEO)
