@@ -168,8 +168,26 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
 
                 <!-- Classification / Telemetry Metadata Block -->
                 <div
-                    class="animate-fade-in-up mb-12 rounded-xl border border-slate-200/60 bg-slate-50/60 p-5 font-mono text-xs text-slate-500 shadow-xs backdrop-blur-md delay-100 dark:border-white/5 dark:bg-[#0f141f] dark:text-slate-400"
+                    class="animate-fade-in-up relative mb-12 rounded-xl border border-slate-200/60 bg-slate-50/60 p-5 font-mono text-xs text-slate-500 shadow-xs backdrop-blur-md delay-100 dark:border-white/5 dark:bg-[#0f141f] dark:text-slate-400"
                 >
+                    {/* Corner Target Accents */}
+                    <span
+                        class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                        >+</span
+                    >
+                    <span
+                        class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
+                        >+</span
+                    >
+                    <span
+                        class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                        >+</span
+                    >
+                    <span
+                        class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
+                        >+</span
+                    >
+
                     <div
                         class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6"
                     >
@@ -297,7 +315,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
                                     aria-label="Honest fuckup teaser"
                                 >
                                     <span class="font-bold text-slate-500 dark:text-slate-400">
-                                        [ FUCKUP LOG ]&nbsp;
+                                        FUCKUP LOG //&nbsp;
                                     </span>
                                     {fuckup_teaser}
                                 </div>

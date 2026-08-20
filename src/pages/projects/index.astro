@@ -290,7 +290,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                                             {project.data.tags && project.data.tags.length > 0 && (
                                                 <div class="flex flex-wrap gap-1.5 font-mono text-[9px]">
                                                     {project.data.tags.map((tag: string) => (
-                                                        <span class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400">
+                                                        <span class="rounded-md border border-slate-200/80 bg-slate-100/80 px-2 py-0.5 text-slate-600 dark:border-white/5 dark:bg-white/5 dark:text-slate-400">
                                                             #{tag.toUpperCase()}
                                                         </span>
                                                     ))}
@@ -302,10 +302,10 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                 </span>
                                                 <a
                                                     href={`/projects/${projectIdClean}`}
-                                                    class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all group-hover:translate-x-0.5 hover:opacity-80"
+                                                    class="relative z-20 shrink-0 font-mono text-[10px] font-semibold tracking-wider text-(--accent) transition-all group-hover:translate-x-1 hover:opacity-80"
                                                     aria-label={`Read the full ${project.data.title} mission log`}
                                                 >
-                                                    Read the full story&nbsp;→
+                                                    Read mission log&nbsp;→
                                                 </a>
                                             </div>
                                         </div>
