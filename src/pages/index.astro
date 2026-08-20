@@ -442,30 +442,30 @@ const webSiteSchema = JSON.stringify({
                         <div class="relative z-10 flex h-full flex-col justify-between" data-tilt-z>
                             <div>
                                 <div
-                                    class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-500 dark:border-white/5 dark:text-slate-400"
+                                    class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400"
                                 >
                                     <div class="flex min-w-0 items-center gap-1.5">
                                         <span
-                                            class="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-green-500"
+                                            class="h-2 w-2 shrink-0 animate-pulse rounded-full bg-emerald-500"
                                         ></span>
-                                        <span class="truncate"
-                                            >STATUS: RESEARCH_ACTIVE // CORE: AGRI_BIO_TECH</span
+                                        <span class="font-bold tracking-wider text-emerald-500 dark:text-emerald-400"
+                                            >[ R&D_ACTIVE ]</span
                                         >
                                     </div>
                                     <span
-                                        class="shrink-0 font-bold whitespace-nowrap text-(--accent)"
-                                        >[ CORE ]</span
+                                        class="text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
+                                        >CORE: AGRI_BIO_TECH</span
                                     >
                                 </div>
-                                <div class="mb-4 flex items-start justify-between">
+                                <div class="mb-3 flex items-start justify-between">
                                     <h3
-                                        class="text-2xl font-bold text-slate-900 transition-colors dark:text-white"
+                                        class="text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white"
                                     >
                                         Currently Exploring
                                     </h3>
                                 </div>
                                 <p
-                                    class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
+                                    class="mb-5 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
                                     Investigating agricultural systems from first principles—soil
                                     chemistry, plant biology, and biotech (90%)—while allocating
@@ -474,11 +474,11 @@ const webSiteSchema = JSON.stringify({
                                 </p>
                             </div>
                             <div
-                                class="flex items-center justify-between border-t border-slate-200/50 pt-4 font-mono text-[9px] text-slate-500 dark:border-white/5 dark:text-slate-400"
+                                class="flex items-center justify-between border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400"
                             >
-                                <span class="truncate">PROGRESS: ACTIVE_EXPLORATION</span>
-                                <span class="text-xs transition-transform group-hover:translate-x-1"
-                                    >→</span
+                                <span class="text-[9.5px] text-slate-500 dark:text-slate-400">STAGE: ACTIVE_EXPLORATION</span>
+                                <span class="font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
+                                    >READ NOTES&nbsp;&rarr;</span
                                 >
                             </div>
                         </div>
@@ -518,122 +518,109 @@ const webSiteSchema = JSON.stringify({
                                 aria-label="Close project description"
                                 popovertarget="project-popover-currently-exploring"
                                 popovertargetaction="hide"
-                                class="mt-0.5 shrink-0 cursor-pointer rounded-sm p-1 text-slate-500 transition-colors hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none sm:mt-1 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
+                                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-slate-200/80 bg-slate-50/80 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white"
                             >
                                 <svg
-                                    width="24"
-                                    height="24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
                                     fill="none"
                                     stroke="currentColor"
                                     stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
                                 >
-                                    <path d="M18 6L6 18M6 6l12 12"></path>
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
                                 </svg>
                             </button>
                         </div>
 
-                        <div class="relative z-10 grow space-y-6 overflow-y-auto p-5 sm:p-6">
+                        <div class="space-y-6 p-5 sm:p-6">
+                            <div class="space-y-2">
+                                <span
+                                    class="font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase sm:text-xs dark:text-slate-500"
+                                >
+                                    // MISSION LOG DETAILS
+                                </span>
+                                <p
+                                    class="text-xs leading-relaxed text-slate-600 sm:text-sm dark:text-slate-300"
+                                >
+                                    I am breaking down agricultural workflows to fundamental
+                                    principles. Most commercial tools optimize for corporate
+                                    dashboards rather than actual ground truth. I am studying soil
+                                    microbiology, chemical balance, and local weather patterns to
+                                    engineer tools that solve real operational friction for farmers.
+                                </p>
+                            </div>
+
                             <div class="space-y-3">
-                                <h4
-                                    class="font-mono text-[10px] font-bold tracking-wider text-slate-500 uppercase dark:text-slate-400"
-                                >
-                                    // CURRENT ALLOCATION
-                                </h4>
-                                <p
-                                    class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
-                                >
-                                    Right now, my research time is divided into two distinct paths:
-                                    90% is focused on demystifying agricultural science from first
-                                    principles, and the remaining 10% is split between quantum
-                                    mechanics, rocket propulsion chemistry, and offline AI-driven
-                                    medical literature analysis.
-                                </p>
-                            </div>
-
-                            <div
-                                class="space-y-3 border-t border-slate-100 pt-4 dark:border-white/5"
-                            >
-                                <h4
-                                    class="font-mono text-[10px] font-bold tracking-wider text-slate-500 uppercase dark:text-slate-400"
-                                >
-                                    // AGRICULTURAL SCIENCE (90%)
-                                </h4>
-                                <p
-                                    class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
-                                >
-                                    I am analyzing existing agricultural solutions to get to the
-                                    ground truth of soil microbiology, crop physiology, seed
-                                    biotechnology, and climate interactions. This involves heavy
-                                    deep-dives into organic chemistry, plant pathology, soil
-                                    macronutrient cycles, and biotechnology to understand what
-                                    actually drives crop yield and resilience.
-                                </p>
-                            </div>
-
-                            <div
-                                class="space-y-3 border-t border-slate-100 pt-4 dark:border-white/5"
-                            >
-                                <h4
-                                    class="font-mono text-[10px] font-bold tracking-wider text-slate-500 uppercase dark:text-slate-400"
-                                >
-                                    // QUANTUM & SPACETECH (7%)
-                                </h4>
-                                <p
-                                    class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
-                                >
-                                    Exploring quantum mechanics fundamentals and rocket science,
-                                    specifically focusing on the chemistry of liquid propellants,
-                                    combustion chamber heat transfer, and fuel formulations that
-                                    govern orbital launch vehicle efficiency.
-                                </p>
-                            </div>
-
-                            <div
-                                class="space-y-3 border-t border-slate-100 pt-4 dark:border-white/5"
-                            >
-                                <h4
-                                    class="font-mono text-[10px] font-bold tracking-wider text-slate-500 uppercase dark:text-slate-400"
-                                >
-                                    // BEHCET'S SYNDROME RESEARCH (3%)
-                                </h4>
-                                <p
-                                    class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
-                                >
-                                    Running Gemma E4B model locally, when my PC is idle (duh! I
-                                    sleep too) to parse medical literature on Behçet's Syndrome—a
-                                    chronic systemic vasculitis characterized by HLA-B*51 genetic
-                                    susceptibility, MHC-I-opathy, and neutrophilic hyperactivation
-                                    causing blood vessel inflammation. The goal is to develop an
-                                    early detection protocol and find a cure.
-                                </p>
-                            </div>
-
-                            <div class="flex flex-wrap gap-1.5 pt-4 font-mono text-[9px]">
                                 <span
-                                    class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
+                                    class="font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase sm:text-xs dark:text-slate-500"
                                 >
-                                    #AGRISCIENCE
+                                    // ACTIVE RESEARCH TRACKS
                                 </span>
-                                <span
-                                    class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
-                                >
-                                    #BIOTECH
-                                </span>
-                                <span
-                                    class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
-                                >
-                                    #QUANTUM-PHYSICS
-                                </span>
-                                <span
-                                    class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
-                                >
-                                    #BEHCETS-RESEARCH
-                                </span>
-                                <span
-                                    class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400"
-                                >
-                                    #SPACETECH
-                                </span>
+                                <div class="space-y-2">
+                                    <div
+                                        class="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 dark:border-white/5 dark:bg-white/5"
+                                    >
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span class="font-bold text-slate-800 dark:text-white"
+                                                >Agritech & Soil Biology</span
+                                            >
+                                            <span
+                                                class="font-mono text-[10px] text-emerald-600 dark:text-emerald-400"
+                                                >[ 90% ]</span
+                                            >
+                                        </div>
+                                        <p
+                                            class="mt-1 text-[11px] text-slate-500 dark:text-slate-400"
+                                        >
+                                            Investigating crop health telemetry, sensor networks,
+                                            and offline sync.
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 dark:border-white/5 dark:bg-white/5"
+                                    >
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span class="font-bold text-slate-800 dark:text-white"
+                                                >Rocket Physics & Simulation</span
+                                            >
+                                            <span
+                                                class="font-mono text-[10px] text-blue-600 dark:text-blue-400"
+                                                >[ 75% ]</span
+                                            >
+                                        </div>
+                                        <p
+                                            class="mt-1 text-[11px] text-slate-500 dark:text-slate-400"
+                                        >
+                                            DeltaV Lab mathematical modeling, multi-stage
+                                            trajectories, and Web Workers.
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 dark:border-white/5 dark:bg-white/5"
+                                    >
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span class="font-bold text-slate-800 dark:text-white"
+                                                >Behçet's Syndrome Research</span
+                                            >
+                                            <span
+                                                class="font-mono text-[10px] text-purple-600 dark:text-purple-400"
+                                                >[ 40% ]</span
+                                            >
+                                        </div>
+                                        <p
+                                            class="mt-1 text-[11px] text-slate-500 dark:text-slate-400"
+                                        >
+                                            Reviewing open clinical literature and immunology
+                                            pathways.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
 
                             <div
@@ -653,9 +640,9 @@ const webSiteSchema = JSON.stringify({
                     {
                         projects.map((project: ProjectEntry) => {
                             const telemetryStr = project.data.telemetry;
-                            const [telemetryFirst, ...telemetryRestParts] =
-                                telemetryStr.split('//');
-                            const telemetryRest = telemetryRestParts.join(' // ');
+                            const parts = telemetryStr.split('//').map((s: string) => s.trim());
+                            const subSystemPart =
+                                parts.slice(1).join(' // ') || project.data.tags?.[0] || 'CORE';
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const parsed = parseTelemetry(telemetryStr);
                             return (
@@ -685,29 +672,25 @@ const webSiteSchema = JSON.stringify({
                                         data-tilt-z
                                     >
                                         <div>
-                                            {/* Live Telemetry Badge */}
-                                            <div class="type-telemetry mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 text-slate-500 dark:border-white/5 dark:text-slate-400">
+                                            {/* Live Telemetry Cockpit Header */}
+                                            <div class="mb-4 flex min-w-0 items-center justify-between gap-3 border-b border-slate-200/50 pb-2.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400">
                                                 <div class="flex min-w-0 items-center gap-1.5">
                                                     <span
-                                                        class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
+                                                        class={`h-2 w-2 shrink-0 rounded-full ${parsed.colorClass}`}
                                                     />
-                                                    <span class="truncate">
-                                                        <span class="telemetry-keyword">
-                                                            {telemetryFirst.trim()}
-                                                        </span>
-                                                        {telemetryRest &&
-                                                            ` // ${telemetryRest.trim()}`}
+                                                    <span
+                                                        class={`font-bold tracking-wider ${parsed.textClass}`}
+                                                    >
+                                                        {parsed.badgeText}
                                                     </span>
                                                 </div>
-                                                <span
-                                                    class={`shrink-0 font-bold whitespace-nowrap ${parsed.textClass}`}
-                                                >
-                                                    {parsed.badgeText}
+                                                <span class="truncate text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500">
+                                                    {subSystemPart}
                                                 </span>
                                             </div>
 
-                                            <div class="mb-4 flex items-start justify-between">
-                                                <h3 class="text-2xl font-bold text-slate-900 transition-colors dark:text-white">
+                                            <div class="mb-3 flex items-start justify-between">
+                                                <h3 class="text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
                                                     <a
                                                         href={`/projects/${projectIdClean}`}
                                                         data-astro-prefetch="hover"
@@ -723,13 +706,13 @@ const webSiteSchema = JSON.stringify({
                                                         rel="noopener noreferrer"
                                                         aria-label={`View ${project.data.title} on GitHub (opens in a new tab)`}
                                                         title={`View ${project.data.title} on GitHub`}
-                                                        class="github-link relative z-20 text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-(--text-secondary) dark:hover:text-white dark:focus-visible:text-white"
+                                                        class="github-link relative z-20 text-slate-400 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-slate-500 dark:hover:text-white dark:focus-visible:text-white"
                                                     >
                                                         <svg
                                                             viewBox="0 0 16 16"
                                                             aria-hidden="true"
-                                                            width="24"
-                                                            height="24"
+                                                            width="20"
+                                                            height="20"
                                                         >
                                                             <path
                                                                 fill="currentColor"
@@ -777,7 +760,7 @@ const webSiteSchema = JSON.stringify({
                                                             return (
                                                                 <span
                                                                     aria-hidden="true"
-                                                                    class={`h-1 w-5 rounded-sm transition-all duration-300 ${
+                                                                    class={`h-1 w-5 rounded-xs transition-all duration-300 ${
                                                                         i <=
                                                                         (project.data.pain_level ??
                                                                             0)
@@ -797,32 +780,34 @@ const webSiteSchema = JSON.stringify({
                                             {/* Fuckup Teaser */}
                                             {project.data.fuckup_teaser && (
                                                 <div class="mb-4">
-                                                    <div class="mb-1.5 flex items-center gap-1.5">
-                                                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
-                                                        <span class="block font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
-                                                            // FUCKUP.LOG
-                                                        </span>
-                                                    </div>
-                                                    <div class="mission-fuckup-teaser">
-                                                        <div class="mission-fuckup-teaser-inner">
-                                                            {project.data.fuckup_teaser}
+                                                    <div class="rounded-lg border border-red-500/20 bg-red-500/5 p-2.5 dark:border-red-500/20 dark:bg-red-950/20">
+                                                        <div class="mb-1 flex items-center gap-1.5">
+                                                            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
+                                                            <span class="font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
+                                                                // FAULT_ANALYSIS
+                                                            </span>
                                                         </div>
+                                                        <p class="line-clamp-2 font-mono text-[10.5px] leading-relaxed text-red-700/90 dark:text-red-300/90">
+                                                            "{project.data.fuckup_teaser}"
+                                                        </p>
                                                     </div>
                                                 </div>
                                             )}
                                         </div>
 
-                                        <div class="flex items-center justify-between border-t border-slate-200/50 pt-4 font-mono text-[9px] text-slate-500 dark:border-white/5 dark:text-slate-400">
-                                            <span class="truncate">
-                                                PROGRESS: {project.data.progress}
+                                        <div class="flex items-center justify-between border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400">
+                                            <span class="truncate text-[9.5px] text-slate-500 dark:text-slate-400">
+                                                STAGE:{' '}
+                                                <span class="text-slate-700 dark:text-slate-300">
+                                                    {project.data.progress}
+                                                </span>
                                             </span>
-                                            <a
-                                                href={`/projects/${projectIdClean}`}
-                                                class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all group-hover:translate-x-0.5 hover:opacity-80"
+                                            <span
+                                                class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
                                                 aria-label={`Read the full ${project.data.title} mission log`}
                                             >
-                                                Read the full story&nbsp;→
-                                            </a>
+                                                EXPLORE LOG&nbsp;&rarr;
+                                            </span>
                                         </div>
                                     </div>
                                 </article>
@@ -837,21 +822,23 @@ const webSiteSchema = JSON.stringify({
                         <div class="relative z-10 flex h-full flex-col justify-between" data-tilt-z>
                             <div>
                                 <div
-                                    class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2 font-mono text-[9px] text-slate-500 dark:border-white/5 dark:text-slate-400"
+                                    class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400"
                                 >
                                     <div class="flex min-w-0 items-center gap-1.5">
-                                        <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500"
+                                        <span class="h-2 w-2 shrink-0 rounded-full bg-blue-500"
                                         ></span>
-                                        <span class="truncate"
-                                            >DIRECTORY: 12_ITEMS // ACTIVE_LOGS</span
+                                        <span class="font-bold tracking-wider text-(--accent)"
+                                            >[ ARCHIVE ]</span
                                         >
                                     </div>
-                                    <span class="shrink-0 font-bold text-(--accent)">
-                                        [ MORE ]
+                                    <span
+                                        class="text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
+                                    >
+                                        DIRECTORY: 12_ITEMS
                                     </span>
                                 </div>
                                 <h3
-                                    class="mb-4 text-2xl font-bold text-slate-900 transition-colors dark:text-white"
+                                    class="mb-3 text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white"
                                 >
                                     <a
                                         href="/projects"
@@ -864,19 +851,21 @@ const webSiteSchema = JSON.stringify({
                                 <p
                                     class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    The full workbench — deep-link handoffs, feedback terminals, POS
-                                    demos, dining prototypes, and client-side compilers I've
-                                    shipped, shelved, or am still patching.
+                                    The full engineering workbench — deep-link handoffs, feedback
+                                    terminals, POS demos, dining prototypes, and client-side
+                                    compilers I've shipped, shelved, or am still patching.
                                 </p>
                             </div>
                             <div
-                                class="flex items-center justify-between border-t border-slate-200/50 pt-4 font-mono text-[9px] text-slate-500 dark:border-white/5 dark:text-slate-400"
+                                class="flex items-center justify-between border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400"
                             >
-                                <span>SHOWCASE ARCHIVE</span>
-                                <span
-                                    class="text-xs transition-transform group-hover:translate-x-1"
+                                <span class="text-[9.5px] text-slate-500 dark:text-slate-400"
+                                    >INDEX: 12 REPOSITORIES</span
                                 >
-                                    →
+                                <span
+                                    class="relative z-20 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
+                                >
+                                    SHOWCASE ARCHIVE&nbsp;&rarr;
                                 </span>
                             </div>
                         </div>
@@ -923,70 +912,69 @@ const webSiteSchema = JSON.stringify({
                     {
                         posts.map((post: BlogEntry, index: number) => {
                             const doiNum = `10.1012/DH.${post.id.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'POST'}`;
+                            const readingTime = getReadingTime(post.body || '');
                             return (
                                 <a
                                     href={`/transmissions/${post.id}/`}
                                     data-astro-prefetch="hover"
-                                    class="bento-card group block transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
+                                    class="bento-card group block p-5 sm:p-6 transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
                                 >
-                                    <article class="grid grid-cols-1 gap-6 p-2 md:grid-cols-12">
-                                        {/* Left Side: Journal Metadata */}
-                                        <div class="flex flex-col justify-between border-b border-slate-200 pb-4 md:col-span-4 md:border-r md:border-b-0 md:pr-6 md:pb-0 dark:border-white/5">
-                                            <div>
-                                                <div class="mb-1 font-mono text-[9px] tracking-widest text-slate-400 uppercase dark:text-slate-500">
-                                                    [ TRANSMISSION 0{index + 1} ]
-                                                </div>
-                                                <div class="mb-2 font-mono text-xs font-bold text-(--accent)">
-                                                    <FormattedDate
-                                                        date={post.data.pubDate}
-                                                        format="technical"
-                                                    />
-                                                </div>
-                                                <div class="mb-4 inline-block rounded-xs border border-(--accent)/30 bg-(--accent)/5 px-2 py-0.5 font-mono text-[9px] font-semibold text-(--accent) uppercase">
-                                                    ABSTRACT
-                                                </div>
+                                    <article class="flex flex-col justify-between gap-4">
+                                        {/* Top Signal Ribbon */}
+                                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/60 pb-3 font-mono text-[10px] text-slate-400 dark:border-white/5 dark:text-slate-500">
+                                            <div class="flex items-center gap-2">
+                                                <span class="inline-flex items-center gap-1.5 font-bold tracking-wider text-(--accent)">
+                                                    <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)"></span>
+                                                    TRANSMISSION 0{index + 1}
+                                                </span>
+                                                <span class="text-slate-300 dark:text-white/10" aria-hidden="true">//</span>
+                                                <span class="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-600 uppercase dark:bg-white/5 dark:text-slate-400">
+                                                    DECLASSIFIED
+                                                </span>
                                             </div>
-                                            {/* Tags */}
-                                            {post.data.tags && post.data.tags.length > 0 && (
-                                                <div class="mt-2 flex flex-wrap gap-1.5">
-                                                    {post.data.tags
-                                                        .slice(0, 3)
-                                                        .map((tag: string) => (
-                                                            <span class="rounded-xs bg-slate-100 px-1.5 py-0.5 font-mono text-[9px] text-slate-500 dark:bg-white/5 dark:text-slate-400">
-                                                                #
-                                                                {tag
-                                                                    .replace(/\s+/g, '')
-                                                                    .toLowerCase()}
-                                                            </span>
-                                                        ))}
-                                                </div>
-                                            )}
+                                            <div class="flex items-center gap-3 font-mono text-[11px] text-slate-500 dark:text-slate-400">
+                                                <FormattedDate
+                                                    date={post.data.pubDate}
+                                                    format="technical"
+                                                />
+                                                <span class="text-slate-300 dark:text-white/10" aria-hidden="true">•</span>
+                                                <span class="text-slate-600 dark:text-slate-300 font-medium">
+                                                    {readingTime} min read
+                                                </span>
+                                            </div>
                                         </div>
 
-                                        {/* Right Side: Content & DOI */}
-                                        <div class="flex flex-col justify-between md:col-span-8">
-                                            <div>
-                                                <h3 class="mb-2 text-xl leading-tight font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
-                                                    {post.data.title}
-                                                </h3>
-                                                <p class="mb-4 line-clamp-2 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                                                    {post.data.description}
-                                                </p>
+                                        {/* Main Content Area */}
+                                        <div class="py-1">
+                                            <h3 class="mb-2 text-xl leading-tight font-bold text-slate-900 transition-colors group-hover:text-(--accent) sm:text-2xl dark:text-white">
+                                                {post.data.title}
+                                            </h3>
+                                            <p class="line-clamp-2 text-sm leading-relaxed text-slate-600 sm:text-[15px] dark:text-(--text-secondary)">
+                                                {post.data.description}
+                                            </p>
+                                        </div>
+
+                                        {/* Footer Metadata & Action Prompt */}
+                                        <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/60 pt-3 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400">
+                                            <div class="flex flex-wrap items-center gap-2">
+                                                <span class="text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500">
+                                                    DOI: <span class="text-slate-600 dark:text-slate-400">{doiNum}</span>
+                                                </span>
+                                                {post.data.tags && post.data.tags.length > 0 && (
+                                                    <div class="hidden sm:flex items-center gap-1.5 pl-2">
+                                                        {post.data.tags.slice(0, 3).map((tag: string) => (
+                                                            <span class="rounded bg-slate-100/80 px-1.5 py-0.5 text-[9px] text-slate-500 dark:bg-white/5 dark:text-slate-400">
+                                                                #{tag.replace(/\s+/g, '').toLowerCase()}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                )}
                                             </div>
-                                            <div class="mt-4 flex items-center justify-between">
-                                                <div class="font-mono text-[9px] text-slate-500 dark:text-slate-400">
-                                                    DOI:{' '}
-                                                    <span class="text-slate-600 dark:text-slate-400">
-                                                        {doiNum}
-                                                    </span>
-                                                    <span class="mx-1.5">•</span>
-                                                    <span class="text-slate-600 dark:text-slate-400">
-                                                        {getReadingTime(post.body || '')} min read
-                                                    </span>
-                                                </div>
+
+                                            <div class="flex items-center gap-4">
                                                 {/* Simulated Barcode */}
                                                 <div
-                                                    class="hidden h-6 items-center gap-0.5 opacity-40 transition-opacity group-hover:opacity-75 sm:flex"
+                                                    class="hidden h-5 items-center gap-0.5 opacity-30 transition-opacity group-hover:opacity-70 sm:flex"
                                                     aria-hidden="true"
                                                 >
                                                     <div class="h-full w-px bg-slate-800 dark:bg-white" />
@@ -994,11 +982,13 @@ const webSiteSchema = JSON.stringify({
                                                     <div class="h-full w-px bg-slate-800 dark:bg-white" />
                                                     <div class="h-full w-0.75 bg-slate-800 dark:bg-white" />
                                                     <div class="h-full w-px bg-slate-800 dark:bg-white" />
-                                                    <div class="h-full w-px bg-slate-800 dark:bg-white" />
                                                     <div class="h-full w-0.5 bg-slate-800 dark:bg-white" />
                                                     <div class="h-full w-1 bg-slate-800 dark:bg-white" />
                                                     <div class="h-full w-px bg-slate-800 dark:bg-white" />
                                                 </div>
+                                                <span class="font-mono text-[10.5px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1">
+                                                    READ TRANSMISSION <span aria-hidden="true">&rarr;</span>
+                                                </span>
                                             </div>
                                         </div>
                                     </article>
