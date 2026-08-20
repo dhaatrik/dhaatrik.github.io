@@ -7,7 +7,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
-import { getPainLevelLabel, parseTelemetry } from '../data/status';
+import { getPainLevelLabel } from '../data/status';
 
 type ProjectEntry = CollectionEntry<'projects'>;
 type BlogEntry = CollectionEntry<'blog'>;
@@ -441,23 +441,6 @@ const webSiteSchema = JSON.stringify({
                     >
                         <div class="relative z-10 flex h-full flex-col justify-between" data-tilt-z>
                             <div>
-                                <div
-                                    class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400"
-                                >
-                                    <div class="flex min-w-0 items-center gap-2">
-                                        <span
-                                            class="h-2 w-2 shrink-0 animate-pulse rounded-full bg-emerald-500"
-                                        ></span>
-                                        <span
-                                            class="font-mono text-[10.5px] font-semibold tracking-wider text-slate-700 uppercase dark:text-slate-200"
-                                            >AGRI_BIO_TECH</span
-                                        >
-                                    </div>
-                                    <span
-                                        class="text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
-                                        >// ACTIVE RESEARCH</span
-                                    >
-                                </div>
                                 <div class="mb-3 flex items-start justify-between">
                                     <h3
                                         class="text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white"
@@ -639,13 +622,8 @@ const webSiteSchema = JSON.stringify({
                     </div>
 
                     {
-                        projects.map((project: ProjectEntry, index: number) => {
-                            const telemetryStr = project.data.telemetry;
-                            const parts = telemetryStr.split('//').map((s: string) => s.trim());
-                            const subSystemPart =
-                                parts.slice(1).join(' // ') || project.data.tags?.[0] || 'CORE';
+                        projects.map((project: ProjectEntry) => {
                             const projectIdClean = project.id.replace(/\.md$/, '');
-                            const parsed = parseTelemetry(telemetryStr);
                             return (
                                 <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
                                     {/* Hologram WebM Video */}
@@ -673,23 +651,6 @@ const webSiteSchema = JSON.stringify({
                                         data-tilt-z
                                     >
                                         <div>
-                                            {/* Live Telemetry Cockpit Header */}
-                                            <div class="mb-4 flex min-w-0 items-center justify-between gap-3 border-b border-slate-200/50 pb-2.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400">
-                                                <div class="flex min-w-0 items-center gap-2">
-                                                    <span
-                                                        class={`h-2 w-2 shrink-0 rounded-full ${parsed.colorClass}`}
-                                                    />
-                                                    <span
-                                                        class="font-mono text-[10.5px] font-semibold tracking-wider text-slate-700 uppercase dark:text-slate-200"
-                                                    >
-                                                        {subSystemPart}
-                                                    </span>
-                                                </div>
-                                                <span class="truncate text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500">
-                                                    // 0{index + 1}
-                                                </span>
-                                            </div>
-
                                             <div class="mb-3 flex items-start justify-between">
                                                 <h3 class="text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
                                                     <a
@@ -822,22 +783,6 @@ const webSiteSchema = JSON.stringify({
                     >
                         <div class="relative z-10 flex h-full flex-col justify-between" data-tilt-z>
                             <div>
-                                <div
-                                    class="mb-4 flex min-w-0 items-center justify-between gap-4 border-b border-slate-200/50 pb-2.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400"
-                                >
-                                    <div class="flex min-w-0 items-center gap-2">
-                                        <span class="h-2 w-2 shrink-0 rounded-full bg-blue-500"
-                                        ></span>
-                                        <span class="font-mono text-[10.5px] font-semibold tracking-wider text-slate-700 uppercase dark:text-slate-200"
-                                            >DIRECTORY</span
-                                        >
-                                    </div>
-                                    <span
-                                        class="text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
-                                    >
-                                        // 12 REPOSITORIES
-                                    </span>
-                                </div>
                                 <h3
                                     class="mb-3 text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white"
                                 >
