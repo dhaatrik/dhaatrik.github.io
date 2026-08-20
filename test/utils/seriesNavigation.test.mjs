@@ -31,8 +31,8 @@ const deltavPosts = [
         series: 'DeltaV Lab',
         seriesOrder: 5,
     }),
-    post('deltav-lab-scrollytelling-demo', {
-        pubDate: '2026-05-29',
+    post('deltav-lab-whats-next', {
+        pubDate: '2026-07-02',
         series: 'DeltaV Lab',
         seriesOrder: 6,
     }),
