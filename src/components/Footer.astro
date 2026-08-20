@@ -56,122 +56,149 @@ const formatMarqueeDate = (date: Date) => {
 >
     <!-- Horizon Light Beacon & Subtle Grid Motif -->
     <div
-        class="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-(--accent)/8 via-(--accent)/2 to-transparent"
+        class="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-(--accent)/10 via-(--accent)/2 to-transparent"
     >
     </div>
     <div class="bg-grid-motif pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"></div>
 
-    <div class="layout-container relative z-10 grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
-        <!-- Column 1: Base Ops -->
-        <div class="flex flex-col space-y-4">
-            <h3
-                class="mb-2 flex items-center gap-2 font-mono text-[10px] tracking-widest text-slate-900 uppercase dark:text-white"
-            >
-                <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
-                Base Ops
+    <!-- Horizon Telemetry Ribbon & Return to Orbit Anchor -->
+    <div class="layout-container relative z-10 mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-slate-200/80 pb-6 dark:border-white/10">
+        <div class="flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-wider text-slate-500 dark:text-slate-400">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-bold text-emerald-600 dark:text-emerald-400">
+                <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500"></span>
+                STATION: ORBITAL_01
+            </span>
+            <span class="hidden text-slate-300 sm:inline dark:text-slate-700">//</span>
+            <span class="hidden sm:inline">SECURITY: TLS_1.3</span>
+            <span class="hidden text-slate-300 md:inline dark:text-slate-700">//</span>
+            <span class="hidden md:inline">NODE: GITHUB_PAGES_SSG</span>
+        </div>
+
+        <button
+            id="return-to-orbit-btn"
+            type="button"
+            aria-label="Return to top of page"
+            class="magnetic-target group inline-flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200/80 bg-slate-100/70 px-3 py-1.5 font-mono text-[11px] font-semibold text-slate-700 shadow-2xs backdrop-blur-md transition-all hover:border-(--accent)/50 hover:bg-(--accent)/10 hover:text-(--accent) focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-(--accent)/10 dark:hover:text-(--accent)"
+        >
+            <span>RETURN TO ORBIT</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-y-0.5">
+                <path d="m18 15-6-6-6 6"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Main Cockpit Deck Bento Grid -->
+    <div class="layout-container relative z-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <!-- Deck Module 1: Base Operations Matrix (4 cols) -->
+        <div class="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-5 shadow-xs backdrop-blur-md transition-colors lg:col-span-4 dark:border-white/10 dark:bg-slate-900/40">
+            <h3 class="mb-4 flex items-center justify-between border-b border-slate-200/80 pb-2.5 font-mono text-[11px] font-bold tracking-widest text-slate-800 uppercase dark:border-white/10 dark:text-slate-200">
+                <span class="flex items-center gap-2">
+                    <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
+                    BASE OPERATIONS
+                </span>
+                <span class="text-[9px] font-normal text-slate-400 dark:text-slate-500">OPS.01</span>
             </h3>
-            <ul class="flex flex-col space-y-3 text-sm">
+            <ul class="flex flex-col space-y-1.5 text-sm">
                 <li>
                     <a
                         href="/"
                         data-astro-prefetch="hover"
-                        class="group inline-flex items-center gap-2 transition-colors hover:text-(--accent)"
-                        ><span
-                            class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
-                            >/</span
-                        >Home</a
+                        class="group flex items-center justify-between rounded-lg px-2.5 py-1.5 font-medium text-slate-700 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5"
                     >
+                        <span>Home</span>
+                        <span class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500">[1]</span>
+                    </a>
                 </li>
                 <li>
                     <a
                         href="/personnel"
                         data-astro-prefetch="hover"
-                        class="group inline-flex items-center gap-2 transition-colors hover:text-(--accent)"
-                        ><span
-                            class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
-                            >/</span
-                        >Personnel</a
+                        class="group flex items-center justify-between rounded-lg px-2.5 py-1.5 font-medium text-slate-700 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5"
                     >
+                        <span>Personnel</span>
+                        <span class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500">[2]</span>
+                    </a>
                 </li>
                 <li>
                     <a
                         href="/projects"
                         data-astro-prefetch="hover"
-                        class="group inline-flex items-center gap-2 transition-colors hover:text-(--accent)"
-                        ><span
-                            class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
-                            >/</span
-                        >Projects</a
+                        class="group flex items-center justify-between rounded-lg px-2.5 py-1.5 font-medium text-slate-700 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5"
                     >
+                        <span>Projects</span>
+                        <span class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500">[3]</span>
+                    </a>
                 </li>
                 <li>
                     <a
                         href="/pedagogy"
                         data-astro-prefetch="hover"
-                        class="group inline-flex items-center gap-2 transition-colors hover:text-(--accent)"
-                        ><span
-                            class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
-                            >/</span
-                        >Pedagogy</a
+                        class="group flex items-center justify-between rounded-lg px-2.5 py-1.5 font-medium text-slate-700 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5"
                     >
+                        <span>Pedagogy</span>
+                        <span class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500">[4]</span>
+                    </a>
                 </li>
                 <li>
                     <a
                         href="/transmissions"
                         data-astro-prefetch="hover"
-                        class="group inline-flex items-center gap-2 transition-colors hover:text-(--accent)"
-                        ><span
-                            class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
-                            >/</span
-                        >Transmissions</a
+                        class="group flex items-center justify-between rounded-lg px-2.5 py-1.5 font-medium text-slate-700 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5"
                     >
+                        <span>Transmissions</span>
+                        <span class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500">[5]</span>
+                    </a>
                 </li>
-                <li>
+                <li class="pt-2 border-t border-slate-200/60 dark:border-white/5">
                     <button
                         popovertarget="books-popover"
                         aria-expanded="false"
                         aria-controls="books-popover"
-                        class="group inline-flex cursor-pointer items-center gap-2 border-none bg-transparent p-0 font-sans text-sm text-slate-500 transition-colors hover:text-(--accent) focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:text-slate-400 dark:focus-visible:ring-offset-(--bg-main)"
+                        class="group flex w-full cursor-pointer items-center justify-between rounded-lg px-2.5 py-1.5 text-left font-sans text-xs font-semibold text-slate-600 transition-all hover:bg-(--accent)/10 hover:text-(--accent) focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:text-slate-400 dark:hover:bg-(--accent)/10 dark:hover:text-(--accent)"
                     >
-                        <span
-                            class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
-                            >/</span
-                        >Recommended Books
+                        <span class="flex items-center gap-1.5">
+                            <span>📚</span>
+                            <span>Recommended Books</span>
+                        </span>
+                        <span class="font-mono text-[9px] text-(--accent)">[POPOVER]</span>
                     </button>
                 </li>
                 <li>
                     <a
                         href="/rss.xml"
-                        class="group inline-flex items-center gap-2 transition-colors hover:text-(--accent)"
-                        ><span
-                            class="font-mono text-[10px] opacity-50 transition-opacity group-hover:opacity-100"
-                            >/</span
-                        >RSS Feed</a
+                        class="group flex items-center justify-between rounded-lg px-2.5 py-1.5 font-mono text-xs text-slate-500 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-400 dark:hover:bg-white/5"
                     >
+                        <span class="flex items-center gap-1.5">
+                            <span>📡</span>
+                            <span>RSS Telemetry Feed</span>
+                        </span>
+                        <span class="text-[10px]">XML</span>
+                    </a>
                 </li>
             </ul>
         </div>
 
-        <!-- Column 2: Recent Transmissions -->
-        <div class="flex flex-col space-y-4">
-            <h3
-                class="mb-2 flex items-center gap-2 font-mono text-[10px] tracking-widest text-slate-900 uppercase dark:text-white"
-            >
-                <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
-                Recent Transmissions
+        <!-- Deck Module 2: Recent Transmission Wire (4 cols) -->
+        <div class="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-5 shadow-xs backdrop-blur-md transition-colors lg:col-span-4 dark:border-white/10 dark:bg-slate-900/40">
+            <h3 class="mb-4 flex items-center justify-between border-b border-slate-200/80 pb-2.5 font-mono text-[11px] font-bold tracking-widest text-slate-800 uppercase dark:border-white/10 dark:text-slate-200">
+                <span class="flex items-center gap-2">
+                    <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
+                    LOG STREAM
+                </span>
+                <span class="text-[9px] font-normal text-slate-400 dark:text-slate-500">LATEST_4</span>
             </h3>
-            <ul class="flex flex-col space-y-3">
+            <ul class="flex flex-col space-y-2">
                 {
                     posts.map((post) => (
                         <li>
                             <a
                                 href={`/transmissions/${post.id}/`}
                                 data-astro-prefetch="hover"
-                                class="group flex flex-col space-y-0.5 transition-colors"
+                                class="group block rounded-lg p-2 transition-all hover:bg-slate-200/50 dark:hover:bg-white/5"
                             >
-                                <div class="flex items-center gap-1.5 font-mono text-[10px] text-slate-400 transition-colors group-hover:text-(--accent) dark:text-slate-500">
-                                    <span class="text-(--accent)">
-                                        [ {formatMarqueeDate(post.data.pubDate)} ]
+                                <div class="flex items-center justify-between gap-2 font-mono text-[10px] text-slate-400 dark:text-slate-500">
+                                    <span class="font-bold text-(--accent)">
+                                        {formatMarqueeDate(post.data.pubDate)}
                                     </span>
                                     <span
                                         class="relative-time-indicator opacity-80"
@@ -180,7 +207,7 @@ const formatMarqueeDate = (date: Date) => {
                                         --
                                     </span>
                                 </div>
-                                <span class="line-clamp-1 text-sm text-slate-500 transition-colors group-hover:text-(--accent) dark:text-slate-400">
+                                <span class="mt-1 line-clamp-1 text-xs font-medium text-slate-700 transition-colors group-hover:text-(--accent) dark:text-slate-300">
                                     {post.data.title}
                                 </span>
                             </a>
@@ -190,69 +217,71 @@ const formatMarqueeDate = (date: Date) => {
             </ul>
         </div>
 
-        <!-- Column 3: System Diagnostics -->
-        <div class="flex flex-col space-y-4">
-            <h3
-                class="mb-2 flex items-center gap-2 font-mono text-[10px] tracking-widest text-slate-900 uppercase dark:text-white"
-            >
-                <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
-                System Diagnostics
+        <!-- Deck Module 3: Avionics Diagnostic Terminal (4 cols) -->
+        <div class="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-5 shadow-xs backdrop-blur-md transition-colors lg:col-span-4 dark:border-white/10 dark:bg-slate-900/40">
+            <h3 class="mb-4 flex items-center justify-between border-b border-slate-200/80 pb-2.5 font-mono text-[11px] font-bold tracking-widest text-slate-800 uppercase dark:border-white/10 dark:text-slate-200">
+                <span class="flex items-center gap-2">
+                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                    SYSTEM TELEMETRY
+                </span>
+                <span class="text-[9px] font-normal text-slate-400 dark:text-slate-500">DIAG_03</span>
             </h3>
-            <div
-                class="premium-glass space-y-1.5 rounded-lg p-4 font-mono text-[11px] leading-relaxed text-slate-500 select-none dark:text-slate-400"
-            >
+            <div class="space-y-2 font-mono text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">
                 <div class="flex items-center justify-between">
-                    <span>SYS.CORE // ASTRO v6.1.7</span>
-                    <span class="relative flex h-1.5 w-1.5 shrink-0">
-                        <span
-                            class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
-                        ></span>
-                        <span
-                            class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
-                        ></span>
+                    <span class="text-slate-500 dark:text-slate-400">SYS.CORE //</span>
+                    <span class="inline-flex items-center gap-1.5 font-semibold text-slate-800 dark:text-slate-200">
+                        ASTRO v6.1.7
+                        <span class="relative flex h-1.5 w-1.5 shrink-0">
+                            <span class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                        </span>
                     </span>
                 </div>
-                <div>STYLE.SYS // TAILWIND CSS v4.0</div>
-                <div id="footer-uptime">SYS.SESSION // 00h 00m 00s</div>
-                <div>BUILD.SHA // {gitSha}</div>
-                <div>PAGES.INDEXED // {totalPages}</div>
-                <div class="flex items-center justify-between text-[10px]">
-                    <span>BUILT.WITH //</span>
-                    <span class="flex items-center gap-1 font-semibold">
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-500 dark:text-slate-400">STYLE.SYS //</span>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">TAILWIND v4.0</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-500 dark:text-slate-400">SESSION //</span>
+                    <span id="footer-uptime" class="font-semibold text-slate-800 dark:text-slate-200">00h 00m 00s</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-500 dark:text-slate-400">BUILD.SHA //</span>
+                    <span class="rounded bg-slate-200/70 px-1.5 py-0.5 text-[10px] font-bold text-slate-700 dark:bg-white/10 dark:text-slate-300">{gitSha}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-500 dark:text-slate-400">INDEXED //</span>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">{totalPages} ROUTES</span>
+                </div>
+                <div class="flex items-center justify-between pt-1 border-t border-slate-200/60 dark:border-white/5 text-[10px]">
+                    <span class="text-slate-500 dark:text-slate-400">BUILT.WITH //</span>
+                    <span class="flex items-center gap-1 font-bold">
                         <a
                             href="https://x.ai/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="text-slate-700 transition-colors hover:text-(--accent) focus-visible:text-(--accent) focus-visible:outline-none dark:text-slate-300"
+                            class="text-slate-700 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-slate-300"
                         >Grok</a>
                         <span class="text-slate-400 dark:text-slate-600">+</span>
                         <a
                             href="https://antigravity.google/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="text-slate-700 transition-colors hover:text-(--accent) focus-visible:text-(--accent) focus-visible:outline-none dark:text-slate-300"
+                            class="text-slate-700 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-slate-300"
                         >Antigravity</a>
                     </span>
                 </div>
-                <div
-                    class="mt-2 flex flex-col gap-1 border-t border-dashed border-slate-200/50 pt-2 dark:border-white/5"
-                >
-                    <span
-                        class="text-[8px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                        >// CURRENT_STUDY</span
-                    >
-                    <span class="text-[10px] leading-relaxed text-slate-600 dark:text-slate-300"
-                        >{currentLearning}</span
-                    >
+                <div class="mt-2.5 rounded-lg border border-slate-200/80 bg-slate-100/60 p-2.5 dark:border-white/5 dark:bg-black/20">
+                    <span class="mb-0.5 block text-[8px] tracking-widest text-slate-400 uppercase dark:text-slate-500">// CURRENT_STUDY</span>
+                    <span class="block text-[10px] leading-relaxed font-sans font-medium text-slate-700 dark:text-slate-300">{currentLearning}</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div
-        class="layout-container mt-12 flex flex-col-reverse items-center justify-between gap-4 border-t border-slate-200/60 pt-8 sm:flex-row dark:border-white/5"
-    >
-        <div class="flex flex-col items-center gap-1.5 text-center sm:items-start sm:text-left">
+    <!-- Sub-Footer Colophon & Cyber Socials -->
+    <div class="layout-container mt-10 flex flex-col-reverse items-center justify-between gap-6 border-t border-slate-200/80 pt-8 md:flex-row dark:border-white/10">
+        <div class="flex flex-col items-center gap-1.5 text-center md:items-start md:text-left">
             <p class="font-mono text-xs text-slate-500 dark:text-slate-400">
                 &copy; {today.getFullYear()} Dhaatrik Chowdhury. All rights reserved.
             </p>
@@ -285,51 +314,42 @@ const formatMarqueeDate = (date: Date) => {
                 href={SOCIAL_LINKS.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="cyber-icon group flex h-8 w-8 items-center justify-center rounded border border-slate-200 bg-white text-slate-400 transition-colors hover:text-slate-900 dark:border-white/5 dark:bg-[#151a22] dark:hover:text-white"
+                class="cyber-icon group flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200/80 bg-slate-50 text-slate-500 shadow-2xs transition-all hover:border-(--accent)/40 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
                 data-icon="x"
                 aria-label="X (Twitter)"
             >
                 <div class="icon-container">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14"
-                        ><path
-                            fill="currentColor"
-                            d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
-                        ></path></svg
-                    >
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14">
+                        <path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                    </svg>
                 </div>
             </a>
             <a
                 href={SOCIAL_LINKS.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="cyber-icon group flex h-8 w-8 items-center justify-center rounded border border-slate-200 bg-white text-slate-400 transition-colors hover:text-slate-900 dark:border-white/5 dark:bg-[#151a22] dark:hover:text-white"
+                class="cyber-icon group flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200/80 bg-slate-50 text-slate-500 shadow-2xs transition-all hover:border-(--accent)/40 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
                 data-icon="github"
                 aria-label="GitHub"
             >
                 <div class="icon-container">
-                    <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"
-                        ><path
-                            fill="currentColor"
-                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                        ></path></svg
-                    >
+                    <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16">
+                        <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                    </svg>
                 </div>
             </a>
             <a
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="cyber-icon group flex h-8 w-8 items-center justify-center rounded border border-slate-200 bg-white text-slate-400 transition-colors hover:text-slate-900 dark:border-white/5 dark:bg-[#151a22] dark:hover:text-white"
+                class="cyber-icon group flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200/80 bg-slate-50 text-slate-500 shadow-2xs transition-all hover:border-(--accent)/40 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
                 data-icon="linkedin"
                 aria-label="LinkedIn"
             >
                 <div class="icon-container">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14"
-                        ><path
-                            fill="currentColor"
-                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                        ></path></svg
-                    >
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14">
+                        <path fill="currentColor" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
                 </div>
             </a>
         </div>
@@ -669,6 +689,18 @@ const formatMarqueeDate = (date: Date) => {
         updateTelemetry();
 
         const telemetryInterval = window.setInterval(updateTelemetry, 1000);
+
+        // 4. Return to Orbit button
+        const returnBtn = document.getElementById('return-to-orbit-btn');
+        if (returnBtn) {
+            returnBtn.addEventListener(
+                'click',
+                () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+                { signal }
+            );
+        }
 
         signal.addEventListener('abort', () => {
             clearInterval(telemetryInterval);

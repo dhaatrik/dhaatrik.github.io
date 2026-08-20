@@ -399,8 +399,8 @@ export async function setupPost() {
             return;
         }
 
-        // Header offset threshold (140px accommodates sticky header + breathing room)
-        const scrollThreshold = 140;
+        // Header offset threshold (220px or top quarter of viewport)
+        const scrollThreshold = Math.max(220, Math.floor(window.innerHeight * 0.25));
         let currentActive = '';
 
         for (const heading of headingElements) {
