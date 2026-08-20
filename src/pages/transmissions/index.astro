@@ -456,47 +456,11 @@ const postsWithReadingTime = posts.map((post: any) => {
                 </search>
 
                 <div
-                    class="relative rounded-xl border border-slate-200 bg-slate-500/5 p-4 sm:p-6 dark:border-slate-800"
+                    class="reveal-stagger grid gap-8 md:grid-cols-2"
+                    id="logs-grid"
+                    role="listbox"
+                    aria-label="Transmission search results"
                 >
-                    <!-- High-Science Blueprint Framing Calibration Marks -->
-                    <div
-                        class="pointer-events-none absolute top-0 left-0 -translate-x-1.5 -translate-y-1.5 font-mono text-xs text-slate-400 select-none dark:text-slate-600"
-                    >
-                        +
-                    </div>
-                    <div
-                        class="pointer-events-none absolute top-0 right-0 translate-x-1.5 -translate-y-1.5 font-mono text-xs text-slate-400 select-none dark:text-slate-600"
-                    >
-                        +
-                    </div>
-                    <div
-                        class="pointer-events-none absolute bottom-0 left-0 -translate-x-1.5 translate-y-1.5 font-mono text-xs text-slate-400 select-none dark:text-slate-600"
-                    >
-                        +
-                    </div>
-                    <div
-                        class="pointer-events-none absolute right-0 bottom-0 translate-x-1.5 translate-y-1.5 font-mono text-xs text-slate-400 select-none dark:text-slate-600"
-                    >
-                        +
-                    </div>
-
-                    <div
-                        class="absolute -top-3 left-4 bg-(--bg-main) px-2 font-mono text-[9px] font-semibold tracking-widest text-(--accent) uppercase"
-                    >
-                        LOG_MATRIX // ACTIVE
-                    </div>
-                    <div
-                        class="absolute right-4 -bottom-3 bg-(--bg-main) px-2 font-mono text-[9px] tracking-widest text-slate-600 uppercase dark:text-slate-400"
-                    >
-                        REF_GRID: 50.84.11
-                    </div>
-
-                    <div
-                        class="reveal-stagger grid gap-8 md:grid-cols-2"
-                        id="logs-grid"
-                        role="listbox"
-                        aria-label="Transmission search results"
-                    >
                         {
                             postsWithReadingTime.map((post: any, i: number) => (
                                 <a
