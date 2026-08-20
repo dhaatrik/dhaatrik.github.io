@@ -349,27 +349,32 @@ export async function setupPost() {
         tocLinks.forEach((link) => {
             const htmlLink = link as HTMLElement;
             const indexSpan = htmlLink.querySelector('.toc-index');
+            const indicatorSpan = htmlLink.querySelector('.toc-indicator');
             if (htmlLink.dataset.slug === currentSectionId) {
-                htmlLink.classList.add('!text-(--accent)', '!border-(--accent)', 'font-semibold');
+                htmlLink.classList.add('!text-(--accent)', 'font-semibold', 'bg-slate-200/50', 'dark:bg-white/10');
                 htmlLink.classList.remove(
                     'text-slate-600',
-                    'dark:text-slate-400',
-                    'border-transparent'
+                    'dark:text-slate-400'
                 );
                 if (indexSpan) {
                     indexSpan.classList.add('!text-(--accent)', 'opacity-100');
-                    indexSpan.classList.remove('text-slate-400', 'dark:text-slate-500', 'opacity-75');
+                    indexSpan.classList.remove('text-slate-500', 'dark:text-slate-400', 'opacity-80');
+                }
+                if (indicatorSpan) {
+                    indicatorSpan.classList.add('!bg-(--accent)', '!w-[3px]', 'shadow-[0_0_8px_var(--accent)]');
                 }
             } else {
-                htmlLink.classList.remove('!text-(--accent)', '!border-(--accent)', 'font-semibold');
+                htmlLink.classList.remove('!text-(--accent)', 'font-semibold', 'bg-slate-200/50', 'dark:bg-white/10');
                 htmlLink.classList.add(
                     'text-slate-600',
-                    'dark:text-slate-400',
-                    'border-transparent'
+                    'dark:text-slate-400'
                 );
                 if (indexSpan) {
                     indexSpan.classList.remove('!text-(--accent)', 'opacity-100');
-                    indexSpan.classList.add('text-slate-400', 'dark:text-slate-500', 'opacity-75');
+                    indexSpan.classList.add('text-slate-500', 'dark:text-slate-400', 'opacity-80');
+                }
+                if (indicatorSpan) {
+                    indicatorSpan.classList.remove('!bg-(--accent)', '!w-[3px]', 'shadow-[0_0_8px_var(--accent)]');
                 }
             }
         });
