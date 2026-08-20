@@ -348,20 +348,29 @@ export async function setupPost() {
     const updateActiveToc = (currentSectionId: string) => {
         tocLinks.forEach((link) => {
             const htmlLink = link as HTMLElement;
+            const indexSpan = htmlLink.querySelector('.toc-index');
             if (htmlLink.dataset.slug === currentSectionId) {
-                htmlLink.classList.add('!text-(--accent)', '!border-(--accent)', 'font-medium');
+                htmlLink.classList.add('!text-(--accent)', '!border-(--accent)', 'font-semibold');
                 htmlLink.classList.remove(
                     'text-slate-600',
                     'dark:text-slate-400',
                     'border-transparent'
                 );
+                if (indexSpan) {
+                    indexSpan.classList.add('!text-(--accent)', 'opacity-100');
+                    indexSpan.classList.remove('text-slate-400', 'dark:text-slate-500', 'opacity-75');
+                }
             } else {
-                htmlLink.classList.remove('!text-(--accent)', '!border-(--accent)', 'font-medium');
+                htmlLink.classList.remove('!text-(--accent)', '!border-(--accent)', 'font-semibold');
                 htmlLink.classList.add(
                     'text-slate-600',
                     'dark:text-slate-400',
                     'border-transparent'
                 );
+                if (indexSpan) {
+                    indexSpan.classList.remove('!text-(--accent)', 'opacity-100');
+                    indexSpan.classList.add('text-slate-400', 'dark:text-slate-500', 'opacity-75');
+                }
             }
         });
     };

@@ -266,7 +266,7 @@ const breadcrumbSchema = JSON.stringify({
 
                     <div id="rendered-content-container" class="blog-reveal blog-reveal-2">
                         <div
-                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 marker:text-(--accent)"
+                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-headings:scroll-mt-24 prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 marker:text-(--accent)"
                         >
                             <slot />
                         </div>
@@ -557,14 +557,14 @@ const breadcrumbSchema = JSON.stringify({
                                                 <li class="toc-item">
                                                     <a
                                                         href={`#${heading.slug}`}
-                                                        class="block border-l-2 border-transparent py-1 text-xs text-slate-600 transition-colors hover:text-(--accent) dark:text-slate-400"
+                                                        class="group/toc block border-l-2 border-transparent py-1 text-xs text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-slate-400"
                                                         data-slug={heading.slug}
                                                         style={`padding-left: ${(heading.depth - 1) * 0.75}rem;`}
                                                     >
-                                                        <span class="text-slate-400 dark:text-slate-600">
+                                                        <span class="toc-index text-slate-400 opacity-75 transition-colors group-hover/toc:text-(--accent) dark:text-slate-500">
                                                             {String(index + 1).padStart(2, '0')} //
                                                         </span>{' '}
-                                                        {heading.text}
+                                                        <span class="toc-text transition-colors">{heading.text}</span>
                                                     </a>
                                                 </li>
                                             )
