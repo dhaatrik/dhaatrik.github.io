@@ -438,7 +438,6 @@ const webSiteSchema = JSON.stringify({
                         aria-expanded="false"
                         aria-controls="project-popover-currently-exploring"
                     >
-                        <div class="hologram-overlay"></div>
                         <div class="relative z-10 flex h-full flex-col justify-between" data-tilt-z>
                             <div>
                                 <div
@@ -660,8 +659,6 @@ const webSiteSchema = JSON.stringify({
                             const parsed = parseTelemetry(telemetryStr);
                             return (
                                 <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
-                                    <div class="hologram-overlay" />
-
                                     {/* Hologram WebM Video */}
                                     <div class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl">
                                         {project.data.video && (
@@ -836,7 +833,6 @@ const webSiteSchema = JSON.stringify({
                     <article
                         class="bento-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
                     >
-                        <div class="hologram-overlay"></div>
                         <div class="relative z-10 flex h-full flex-col justify-between" data-tilt-z>
                             <div>
                                 <div
