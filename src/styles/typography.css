@@ -63,7 +63,7 @@
 .prose h6 {
     font-family: var(--font-heading);
     font-optical-sizing: auto;
-    text-wrap: balance;
+    text-wrap: pretty;
 }
 
 .prose p {
