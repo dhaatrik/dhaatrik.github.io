@@ -117,4 +117,14 @@ test.describe('BlogPost Interactive Features', () => {
         const path = await download.path();
         expect(path).toBeTruthy();
     });
+
+    test('Mermaid flowchart should render as SVG on posts with mermaid diagrams', async ({
+        page,
+    }) => {
+        await page.goto('/transmissions/deltav-lab-native-physics-core/');
+        const mermaidPre = page.locator('pre.mermaid');
+        await expect(mermaidPre).toBeVisible();
+        const mermaidSvg = mermaidPre.locator('svg');
+        await expect(mermaidSvg).toBeVisible({ timeout: 10000 });
+    });
 });

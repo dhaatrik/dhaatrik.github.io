@@ -18,7 +18,7 @@ async function setupMermaid(signal: AbortSignal) {
             mermaid.initialize({
                 startOnLoad: false,
                 theme: 'dark',
-                securityLevel: 'strict',
+                securityLevel: 'loose',
                 fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
                 flowchart: { curve: 'basis' },
             });
