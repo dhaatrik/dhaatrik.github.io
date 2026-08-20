@@ -1,7 +1,6 @@
 import { glossary } from '../../data/glossary';
 
 let postAbortController: AbortController | null = null;
-let tocObserver: IntersectionObserver | null = null;
 let mermaidInitialized = false;
 
 async function setupMermaid(signal: AbortSignal) {
@@ -341,9 +340,11 @@ export async function setupPost() {
         );
     }
 
-    // 3. TOC active link tracking (using high-performance IntersectionObserver)
+    // 3. TOC active link tracking (deterministic position-based scrollspy)
     const tocLinks = document.querySelectorAll('#toc a');
-    const sections = document.querySelectorAll('.prose h2, .prose h3, .prose h4');
+    const headingElements = Array.from(
+        document.querySelectorAll('.prose h2, .prose h3, .prose h4')
+    ) as HTMLElement[];
 
     const updateActiveToc = (currentSectionId: string) => {
         tocLinks.forEach((link) => {
@@ -381,35 +382,41 @@ export async function setupPost() {
     };
 
     let activeSectionId = '';
-    const visibleSections = new Set<string>();
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '-130px 0px -60% 0px',
-        threshold: 0,
-    };
+    const evaluateActiveSection = () => {
+        if (headingElements.length === 0) return;
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                visibleSections.add(entry.target.id);
-            } else {
-                visibleSections.delete(entry.target.id);
+        // If user is at or near the bottom of the page, activate the last heading
+        const isNearBottom =
+            window.innerHeight + window.scrollY >=
+            document.documentElement.scrollHeight - 60;
+        if (isNearBottom) {
+            const lastHeading = headingElements[headingElements.length - 1];
+            if (lastHeading.id && lastHeading.id !== activeSectionId) {
+                activeSectionId = lastHeading.id;
+                updateActiveToc(activeSectionId);
             }
-        });
+            return;
+        }
 
+        // Header offset threshold (140px accommodates sticky header + breathing room)
+        const scrollThreshold = 140;
         let currentActive = '';
 
-        for (const sec of sections) {
-            if (visibleSections.has(sec.id)) {
-                currentActive = sec.id;
+        for (const heading of headingElements) {
+            const rect = heading.getBoundingClientRect();
+            if (rect.top <= scrollThreshold) {
+                currentActive = heading.id;
+            } else {
                 break;
             }
         }
 
-        // Fallback for short pages: if we have scrolled down but no heading has crossed the threshold
-        if (!currentActive && sections.length > 0 && window.scrollY > 10) {
-            currentActive = sections[0].id;
+        // If before the first heading but scrolled slightly
+        if (!currentActive && headingElements.length > 0) {
+            if (window.scrollY > 40) {
+                currentActive = headingElements[0].id;
+            }
         }
 
         if (currentActive !== activeSectionId) {
@@ -418,8 +425,20 @@ export async function setupPost() {
         }
     };
 
-    tocObserver = new IntersectionObserver(observerCallback, observerOptions);
-    sections.forEach((sec) => tocObserver?.observe(sec));
+    let tocTicking = false;
+    const handleTocScroll = () => {
+        if (!tocTicking) {
+            window.requestAnimationFrame(() => {
+                evaluateActiveSection();
+                tocTicking = false;
+            });
+            tocTicking = true;
+        }
+    };
+
+    window.addEventListener('scroll', handleTocScroll, { passive: true, signal });
+    window.addEventListener('resize', handleTocScroll, { passive: true, signal });
+    evaluateActiveSection();
 
     // Maintain a single fallback scroll listener for the reading progress bar (only if CSS timelines are unsupported)
     if (!hasScrollTimeline && progressBar) {
@@ -833,9 +852,5 @@ export function cleanupPost() {
     if (postAbortController) {
         postAbortController.abort();
         postAbortController = null;
-    }
-    if (tocObserver) {
-        tocObserver.disconnect();
-        tocObserver = null;
     }
 }
