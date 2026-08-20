@@ -40,7 +40,7 @@ const postsWithReadingTime = posts.map((post: any) => {
         >
             <div
                 id="reticle-bg"
-                class="pointer-events-none absolute top-12 right-0 -z-10 text-slate-900 opacity-5 transition-transform duration-300 ease-out dark:text-white md:top-16"
+                class="pointer-events-none absolute top-12 right-0 -z-10 text-slate-900 opacity-5 transition-transform duration-300 ease-out md:top-16 dark:text-white"
             >
                 <svg
                     width="400"
@@ -461,179 +461,176 @@ const postsWithReadingTime = posts.map((post: any) => {
                     role="listbox"
                     aria-label="Transmission search results"
                 >
-                        {
-                            postsWithReadingTime.map((post: any, i: number) => (
-                                <a
-                                    href={`/transmissions/${post.id}/`}
-                                    data-astro-prefetch="hover"
-                                    data-tags={post.data.tags ? post.data.tags.join(',') : ''}
-                                    id={`search-result-${i}`}
-                                    role="option"
-                                    aria-selected="false"
-                                    class:list={[
-                                        'bento-card blog-post-card group relative block overflow-hidden transition-all active:scale-[0.99]',
-                                        {
-                                            'md:col-span-2 md:grid md:grid-cols-2 md:items-center md:gap-8':
-                                                i === 0,
-                                            'content-visibility-auto-post-card': i >= 2,
-                                        },
-                                    ]}
-                                >
-                                    {post.data.heroImage ? (
-                                        <div
-                                            class:list={[
-                                                'bento-card-inner',
-                                                i !== 0 ? 'mb-4' : 'mb-4 md:mb-0 md:h-full',
-                                            ]}
-                                        >
-                                            {/* ⚡ Bolt: Optimize LCP by eager loading the first image (above the fold) with high priority */}
-                                            <Image
-                                                width={720}
-                                                height={360}
-                                                src={post.data.heroImage}
-                                                alt=""
-                                                class:list={[
-                                                    'w-full object-cover transition-transform duration-300 group-hover:scale-105 group-focus-visible:scale-105',
-                                                    i === 0 ? 'h-48 md:h-full md:min-h-75' : 'h-48',
-                                                ]}
-                                                loading={i === 0 ? 'eager' : 'lazy'}
-                                                fetchpriority={i === 0 ? 'high' : 'auto'}
-                                            />
-                                        </div>
-                                    ) : (
-                                        <div
-                                            class:list={[
-                                                'bento-card-inner relative flex items-center justify-center overflow-hidden bg-slate-100 dark:bg-slate-900',
-                                                i !== 0
-                                                    ? 'mb-4 h-48'
-                                                    : 'mb-4 h-48 md:mb-0 md:h-full md:min-h-75',
-                                            ]}
-                                        >
-                                            <div class="bg-grid-motif absolute inset-0 opacity-20 dark:opacity-50" />
-                                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--accent-glow)_0%,transparent_70%)] opacity-50 dark:opacity-100" />
-                                            <div class="absolute inset-0 m-4 rounded-lg border border-(--accent)/20" />
-                                            <span class="z-10 font-mono text-7xl font-bold text-(--accent)/80 drop-shadow-lg">
-                                                {post.data.title.charAt(0).toUpperCase()}
-                                            </span>
-                                        </div>
-                                    )}
+                    {
+                        postsWithReadingTime.map((post: any, i: number) => (
+                            <a
+                                href={`/transmissions/${post.id}/`}
+                                data-astro-prefetch="hover"
+                                data-tags={post.data.tags ? post.data.tags.join(',') : ''}
+                                id={`search-result-${i}`}
+                                role="option"
+                                aria-selected="false"
+                                class:list={[
+                                    'bento-card blog-post-card group relative block overflow-hidden transition-all active:scale-[0.99]',
+                                    {
+                                        'md:col-span-2 md:grid md:grid-cols-2 md:items-center md:gap-8':
+                                            i === 0,
+                                        'content-visibility-auto-post-card': i >= 2,
+                                    },
+                                ]}
+                            >
+                                {post.data.heroImage ? (
                                     <div
                                         class:list={[
-                                            'flex flex-col justify-center',
-                                            i === 0 ? 'md:p-2' : '',
+                                            'bento-card-inner',
+                                            i !== 0 ? 'mb-4' : 'mb-4 md:mb-0 md:h-full',
                                         ]}
                                     >
-                                        <div class="mb-3 font-mono text-[10px] tracking-widest text-(--accent)">
-                                            LOG_
-                                            {String(postsWithReadingTime.length - i).padStart(
-                                                3,
-                                                '0'
-                                            )}
-                                        </div>
-                                        <div class="mb-3 flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-(--text-secondary)">
-                                            <FormattedDate
-                                                date={post.data.pubDate}
-                                                format="technical"
-                                            />
-                                            {post.readingTime && (
-                                                <>
-                                                    <span
-                                                        aria-hidden="true"
-                                                        class="text-slate-300 dark:text-slate-700"
-                                                    >
-                                                        |
-                                                    </span>
-                                                    <span class="font-mono text-xs">
-                                                        {post.readingTime}
-                                                    </span>
-                                                </>
-                                            )}
-                                            {post.data.tags && post.data.tags.length > 0 && (
-                                                <>
-                                                    <span
-                                                        aria-hidden="true"
-                                                        class="text-slate-300 dark:text-slate-700"
-                                                    >
-                                                        |
-                                                    </span>
-                                                    <div class="flex flex-wrap gap-1.5">
-                                                        {post.data.tags.map((tag: string) => (
-                                                            <span
-                                                                class="post-card-tag rounded bg-(--accent)/15 px-2 py-0.5 text-[10px] font-bold tracking-widest text-(--accent) uppercase transition-all duration-300"
-                                                                data-tag={tag.toLowerCase()}
-                                                            >
-                                                                {tag}
-                                                            </span>
-                                                        ))}
-                                                    </div>
-                                                </>
-                                            )}
-                                        </div>
-                                        <h2
+                                        {/* ⚡ Bolt: Optimize LCP by eager loading the first image (above the fold) with high priority */}
+                                        <Image
+                                            width={720}
+                                            height={360}
+                                            src={post.data.heroImage}
+                                            alt=""
                                             class:list={[
-                                                'font-bold tracking-tight text-balance text-slate-900 transition-colors group-hover:text-(--accent) group-focus-visible:text-(--accent) dark:text-white',
-                                                i === 0 ? 'text-2xl sm:text-3xl' : 'text-xl',
+                                                'w-full object-cover transition-transform duration-300 group-hover:scale-105 group-focus-visible:scale-105',
+                                                i === 0 ? 'h-48 md:h-full md:min-h-75' : 'h-48',
                                             ]}
-                                        >
-                                            {post.data.title}
-                                        </h2>
-                                        <p class="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                                            {post.data.description}
-                                        </p>
-                                        <div class="mt-4 h-6 overflow-hidden">
-                                            <span class="inline-block -translate-x-4 text-sm font-bold text-(--accent) opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                                                Read Transmission &rarr;
-                                            </span>
-                                        </div>
+                                            loading={i === 0 ? 'eager' : 'lazy'}
+                                            fetchpriority={i === 0 ? 'high' : 'auto'}
+                                        />
                                     </div>
-                                </a>
-                            ))
-                        }
-                    </div>
-                </div>
-
-                <!-- Empty State UI -->
-                <div id="search-empty-state" class="hidden py-20 text-center" aria-hidden="true">
-                    <div
-                        class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            ><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"
-                            ></path></svg
-                        >
-                    </div>
-                    <h3
-                        id="empty-state-title"
-                        class="mb-2 text-lg font-bold text-slate-900 dark:text-white"
-                    >
-                        Nothing in the archives, buddy.
-                    </h3>
-                    <p
-                        id="empty-state-desc"
-                        class="mx-auto max-w-sm text-sm text-slate-500 dark:text-slate-400"
-                    >
-                        I either haven't made that mistake yet, or I just haven't written it down.
-                        Try checking another keyword.
-                    </p>
-                    <button
-                        id="clear-filters-btn"
-                        aria-label="Clear all search filters"
-                        class="mt-4 cursor-pointer rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
-                    >
-                        Clear Filters
-                    </button>
+                                ) : (
+                                    <div
+                                        class:list={[
+                                            'bento-card-inner relative flex items-center justify-center overflow-hidden bg-slate-100 dark:bg-slate-900',
+                                            i !== 0
+                                                ? 'mb-4 h-48'
+                                                : 'mb-4 h-48 md:mb-0 md:h-full md:min-h-75',
+                                        ]}
+                                    >
+                                        <div class="bg-grid-motif absolute inset-0 opacity-20 dark:opacity-50" />
+                                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--accent-glow)_0%,transparent_70%)] opacity-50 dark:opacity-100" />
+                                        <div class="absolute inset-0 m-4 rounded-lg border border-(--accent)/20" />
+                                        <span class="z-10 font-mono text-7xl font-bold text-(--accent)/80 drop-shadow-lg">
+                                            {post.data.title.charAt(0).toUpperCase()}
+                                        </span>
+                                    </div>
+                                )}
+                                <div
+                                    class:list={[
+                                        'flex flex-col justify-center',
+                                        i === 0 ? 'md:p-2' : '',
+                                    ]}
+                                >
+                                    <div class="mb-3 font-mono text-[10px] tracking-widest text-(--accent)">
+                                        LOG_
+                                        {String(postsWithReadingTime.length - i).padStart(3, '0')}
+                                    </div>
+                                    <div class="mb-3 flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-(--text-secondary)">
+                                        <FormattedDate
+                                            date={post.data.pubDate}
+                                            format="technical"
+                                        />
+                                        {post.readingTime && (
+                                            <>
+                                                <span
+                                                    aria-hidden="true"
+                                                    class="text-slate-300 dark:text-slate-700"
+                                                >
+                                                    |
+                                                </span>
+                                                <span class="font-mono text-xs">
+                                                    {post.readingTime}
+                                                </span>
+                                            </>
+                                        )}
+                                        {post.data.tags && post.data.tags.length > 0 && (
+                                            <>
+                                                <span
+                                                    aria-hidden="true"
+                                                    class="text-slate-300 dark:text-slate-700"
+                                                >
+                                                    |
+                                                </span>
+                                                <div class="flex flex-wrap gap-1.5">
+                                                    {post.data.tags.map((tag: string) => (
+                                                        <span
+                                                            class="post-card-tag rounded bg-(--accent)/15 px-2 py-0.5 text-[10px] font-bold tracking-widest text-(--accent) uppercase transition-all duration-300"
+                                                            data-tag={tag.toLowerCase()}
+                                                        >
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                    <h2
+                                        class:list={[
+                                            'font-bold tracking-tight text-balance text-slate-900 transition-colors group-hover:text-(--accent) group-focus-visible:text-(--accent) dark:text-white',
+                                            i === 0 ? 'text-2xl sm:text-3xl' : 'text-xl',
+                                        ]}
+                                    >
+                                        {post.data.title}
+                                    </h2>
+                                    <p class="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                        {post.data.description}
+                                    </p>
+                                    <div class="mt-4 h-6 overflow-hidden">
+                                        <span class="inline-block -translate-x-4 text-sm font-bold text-(--accent) opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                                            Read Transmission &rarr;
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        ))
+                    }
                 </div>
             </section>
+
+            <!-- Empty State UI -->
+            <div id="search-empty-state" class="hidden py-20 text-center" aria-hidden="true">
+                <div
+                    class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"
+                        ></path></svg
+                    >
+                </div>
+                <h3
+                    id="empty-state-title"
+                    class="mb-2 text-lg font-bold text-slate-900 dark:text-white"
+                >
+                    Nothing in the archives, buddy.
+                </h3>
+                <p
+                    id="empty-state-desc"
+                    class="mx-auto max-w-sm text-sm text-slate-500 dark:text-slate-400"
+                >
+                    I either haven't made that mistake yet, or I just haven't written it down. Try
+                    checking another keyword.
+                </p>
+                <button
+                    id="clear-filters-btn"
+                    aria-label="Clear all search filters"
+                    class="mt-4 cursor-pointer rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
+                >
+                    Clear Filters
+                </button>
+            </div>
         </main>
+
         <Footer />
 
         <style>

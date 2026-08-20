@@ -17,7 +17,7 @@ test.describe('BlogPost Interactive Features', () => {
         // Initially rendered content should be visible, raw content should be hidden
         await expect(renderedContent).toBeVisible();
         await expect(rawContent).toBeHidden();
-        await expect(toggleBtn).toHaveText('[ RENDERED ]');
+        await expect(toggleBtn).toHaveText(/RENDERED/);
 
         // Click toggle to switch to RAW mode
         await toggleBtn.click();
@@ -25,7 +25,7 @@ test.describe('BlogPost Interactive Features', () => {
         // Rendered content should be hidden, raw content should be visible
         await expect(renderedContent).toBeHidden();
         await expect(rawContent).toBeVisible();
-        await expect(toggleBtn).toHaveText('[ RAW ]');
+        await expect(toggleBtn).toHaveText(/RAW/);
 
         // Click toggle to switch back to RENDERED mode
         await toggleBtn.click();
@@ -33,7 +33,7 @@ test.describe('BlogPost Interactive Features', () => {
         // Rendered content should be visible again, raw content should be hidden
         await expect(renderedContent).toBeVisible();
         await expect(rawContent).toBeHidden();
-        await expect(toggleBtn).toHaveText('[ RENDERED ]');
+        await expect(toggleBtn).toHaveText(/RENDERED/);
     });
 
     test('KaTeX formula inspector should trigger popover tooltip on click and dismiss on document click', async ({

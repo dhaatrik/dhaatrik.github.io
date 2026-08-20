@@ -59,18 +59,26 @@ const formatMarqueeDate = (date: Date) => {
         class="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-(--accent)/10 via-(--accent)/2 to-transparent"
     >
     </div>
-    <div class="bg-grid-motif pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"></div>
+    <div
+        class="bg-grid-motif pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+    >
+    </div>
 
     <!-- Main Cockpit Deck Architecture (Clean Unboxed Grid) -->
-    <div class="layout-container relative z-10 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-12">
+    <div
+        class="layout-container relative z-10 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-12"
+    >
         <!-- Deck Column 1: Base Operations Matrix (4 cols) -->
         <div class="flex flex-col lg:col-span-4">
-            <h3 class="mb-4 flex items-center justify-between border-b border-slate-200/80 pb-2.5 font-mono text-[11px] font-bold tracking-widest text-slate-800 uppercase dark:border-white/10 dark:text-slate-200">
+            <h3
+                class="mb-4 flex items-center justify-between border-b border-slate-200/80 pb-2.5 font-mono text-[11px] font-bold tracking-widest text-slate-800 uppercase dark:border-white/10 dark:text-slate-200"
+            >
                 <span class="flex items-center gap-2">
                     <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
                     BASE OPERATIONS
                 </span>
-                <span class="text-[9px] font-normal text-slate-400 dark:text-slate-500">OPS.01</span>
+                <span class="text-[9px] font-normal text-slate-400 dark:text-slate-500">OPS.01</span
+                >
             </h3>
             <ul class="flex flex-col space-y-1 text-sm">
                 <li>
@@ -80,7 +88,10 @@ const formatMarqueeDate = (date: Date) => {
                         class="group flex items-center justify-between rounded-lg px-2 py-1.5 font-medium text-slate-700 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5"
                     >
                         <span>Home</span>
-                        <span class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500">[1]</span>
+                        <span
+                            class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500"
+                            >[1]</span
+                        >
                     </a>
                 </li>
                 <li>
@@ -90,7 +101,10 @@ const formatMarqueeDate = (date: Date) => {
                         class="group flex items-center justify-between rounded-lg px-2 py-1.5 font-medium text-slate-700 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5"
                     >
                         <span>Personnel</span>
-                        <span class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500">[2]</span>
+                        <span
+                            class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500"
+                            >[2]</span
+                        >
                     </a>
                 </li>
                 <li>
@@ -100,7 +114,10 @@ const formatMarqueeDate = (date: Date) => {
                         class="group flex items-center justify-between rounded-lg px-2 py-1.5 font-medium text-slate-700 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5"
                     >
                         <span>Projects</span>
-                        <span class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500">[3]</span>
+                        <span
+                            class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500"
+                            >[3]</span
+                        >
                     </a>
                 </li>
                 <li>
@@ -110,7 +127,10 @@ const formatMarqueeDate = (date: Date) => {
                         class="group flex items-center justify-between rounded-lg px-2 py-1.5 font-medium text-slate-700 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5"
                     >
                         <span>Pedagogy</span>
-                        <span class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500">[4]</span>
+                        <span
+                            class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500"
+                            >[4]</span
+                        >
                     </a>
                 </li>
                 <li>
@@ -120,10 +140,13 @@ const formatMarqueeDate = (date: Date) => {
                         class="group flex items-center justify-between rounded-lg px-2 py-1.5 font-medium text-slate-700 transition-all hover:bg-slate-200/50 hover:text-(--accent) dark:text-slate-300 dark:hover:bg-white/5"
                     >
                         <span>Transmissions</span>
-                        <span class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500">[5]</span>
+                        <span
+                            class="font-mono text-[10px] text-slate-400 opacity-60 transition-opacity group-hover:opacity-100 dark:text-slate-500"
+                            >[5]</span
+                        >
                     </a>
                 </li>
-                <li class="pt-2 border-t border-slate-200/60 dark:border-white/5">
+                <li class="border-t border-slate-200/60 pt-2 dark:border-white/5">
                     <button
                         popovertarget="books-popover"
                         aria-expanded="false"
@@ -148,12 +171,16 @@ const formatMarqueeDate = (date: Date) => {
 
         <!-- Deck Column 2: Recent Transmission Wire (4 cols) -->
         <div class="flex flex-col lg:col-span-4">
-            <h3 class="mb-4 flex items-center justify-between border-b border-slate-200/80 pb-2.5 font-mono text-[11px] font-bold tracking-widest text-slate-800 uppercase dark:border-white/10 dark:text-slate-200">
+            <h3
+                class="mb-4 flex items-center justify-between border-b border-slate-200/80 pb-2.5 font-mono text-[11px] font-bold tracking-widest text-slate-800 uppercase dark:border-white/10 dark:text-slate-200"
+            >
                 <span class="flex items-center gap-2">
                     <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
                     LOG STREAM
                 </span>
-                <span class="text-[9px] font-normal text-slate-400 dark:text-slate-500">LATEST_4</span>
+                <span class="text-[9px] font-normal text-slate-400 dark:text-slate-500"
+                    >LATEST_4</span
+                >
             </h3>
             <ul class="flex flex-col space-y-1.5">
                 {
@@ -187,41 +214,65 @@ const formatMarqueeDate = (date: Date) => {
 
         <!-- Deck Column 3: Avionics Diagnostic Terminal (4 cols) -->
         <div class="flex flex-col lg:col-span-4">
-            <h3 class="mb-4 flex items-center justify-between border-b border-slate-200/80 pb-2.5 font-mono text-[11px] font-bold tracking-widest text-slate-800 uppercase dark:border-white/10 dark:text-slate-200">
+            <h3
+                class="mb-4 flex items-center justify-between border-b border-slate-200/80 pb-2.5 font-mono text-[11px] font-bold tracking-widest text-slate-800 uppercase dark:border-white/10 dark:text-slate-200"
+            >
                 <span class="flex items-center gap-2">
                     <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
                     SYSTEM TELEMETRY
                 </span>
-                <span class="text-[9px] font-normal text-slate-400 dark:text-slate-500">DIAG_03</span>
+                <span class="text-[9px] font-normal text-slate-400 dark:text-slate-500"
+                    >DIAG_03</span
+                >
             </h3>
-            <div class="space-y-2 font-mono text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">
+            <div
+                class="space-y-2 font-mono text-[11px] leading-relaxed text-slate-600 dark:text-slate-400"
+            >
                 <div class="flex items-center justify-between">
                     <span class="text-slate-500 dark:text-slate-400">SYS.CORE //</span>
-                    <span class="inline-flex items-center gap-1.5 font-semibold text-slate-800 dark:text-slate-200">
+                    <span
+                        class="inline-flex items-center gap-1.5 font-semibold text-slate-800 dark:text-slate-200"
+                    >
                         ASTRO v6.1.7
                         <span class="relative flex h-1.5 w-1.5 shrink-0">
-                            <span class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-                            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                            <span
+                                class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
+                            ></span>
+                            <span
+                                class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+                            ></span>
                         </span>
                     </span>
                 </div>
                 <div class="flex items-center justify-between">
                     <span class="text-slate-500 dark:text-slate-400">STYLE.SYS //</span>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200">TAILWIND v4.0</span>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200"
+                        >TAILWIND v4.0</span
+                    >
                 </div>
                 <div class="flex items-center justify-between">
                     <span class="text-slate-500 dark:text-slate-400">SESSION //</span>
-                    <span id="footer-uptime" class="font-semibold text-slate-800 dark:text-slate-200">00h 00m 00s</span>
+                    <span
+                        id="footer-uptime"
+                        class="font-semibold text-slate-800 dark:text-slate-200">00h 00m 00s</span
+                    >
                 </div>
                 <div class="flex items-center justify-between">
                     <span class="text-slate-500 dark:text-slate-400">BUILD.SHA //</span>
-                    <span class="rounded bg-slate-200/70 px-1.5 py-0.5 text-[10px] font-bold text-slate-700 dark:bg-white/10 dark:text-slate-300">{gitSha}</span>
+                    <span
+                        class="rounded bg-slate-200/70 px-1.5 py-0.5 text-[10px] font-bold text-slate-700 dark:bg-white/10 dark:text-slate-300"
+                        >{gitSha}</span
+                    >
                 </div>
                 <div class="flex items-center justify-between">
                     <span class="text-slate-500 dark:text-slate-400">INDEXED //</span>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200">{totalPages} ROUTES</span>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200"
+                        >{totalPages} ROUTES</span
+                    >
                 </div>
-                <div class="flex items-center justify-between pt-1 border-t border-slate-200/60 dark:border-white/5 text-[10px]">
+                <div
+                    class="flex items-center justify-between border-t border-slate-200/60 pt-1 text-[10px] dark:border-white/5"
+                >
                     <span class="text-slate-500 dark:text-slate-400">BUILT.WITH //</span>
                     <span class="flex items-center gap-1 font-bold">
                         <a
@@ -229,31 +280,45 @@ const formatMarqueeDate = (date: Date) => {
                             target="_blank"
                             rel="noopener noreferrer"
                             class="text-slate-700 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-slate-300"
-                        >Grok</a>
+                            >Grok</a
+                        >
                         <span class="text-slate-400 dark:text-slate-600">+</span>
                         <a
                             href="https://antigravity.google/"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="text-slate-700 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-slate-300"
-                        >Antigravity</a>
+                            >Antigravity</a
+                        >
                     </span>
                 </div>
-                <div class="mt-3 rounded-lg border border-slate-200/80 bg-slate-100/60 p-2.5 dark:border-white/5 dark:bg-white/[0.02]">
-                    <span class="mb-0.5 block text-[8px] tracking-widest text-slate-400 uppercase dark:text-slate-500">// CURRENT_STUDY</span>
-                    <span class="block text-[10px] leading-relaxed font-sans font-medium text-slate-700 dark:text-slate-300">{currentLearning}</span>
+                <div
+                    class="mt-3 rounded-lg border border-slate-200/80 bg-slate-100/60 p-2.5 dark:border-white/5 dark:bg-white/[0.02]"
+                >
+                    <span
+                        class="mb-0.5 block text-[8px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                        >// CURRENT_STUDY</span
+                    >
+                    <span
+                        class="block font-sans text-[10px] leading-relaxed font-medium text-slate-700 dark:text-slate-300"
+                        >{currentLearning}</span
+                    >
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Sub-Footer Colophon & Cyber Socials -->
-    <div class="layout-container mt-10 flex flex-col-reverse items-center justify-between gap-6 border-t border-slate-200/80 pt-8 md:flex-row dark:border-white/10">
+    <div
+        class="layout-container mt-10 flex flex-col-reverse items-center justify-between gap-6 border-t border-slate-200/80 pt-8 md:flex-row dark:border-white/10"
+    >
         <div class="flex flex-col items-center gap-1.5 text-center md:items-start md:text-left">
             <p class="font-mono text-xs text-slate-500 dark:text-slate-400">
                 &copy; {today.getFullYear()} Dhaatrik Chowdhury. All rights reserved.
             </p>
-            <p class="flex flex-wrap items-center justify-center gap-1.5 font-mono text-[11px] text-slate-400 dark:text-slate-500">
+            <p
+                class="flex flex-wrap items-center justify-center gap-1.5 font-mono text-[11px] text-slate-400 dark:text-slate-500"
+            >
                 <span>Engineered with</span>
                 <a
                     href="https://x.ai/"
@@ -288,7 +353,10 @@ const formatMarqueeDate = (date: Date) => {
                 >
                     <div class="icon-container">
                         <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14">
-                            <path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                            <path
+                                fill="currentColor"
+                                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+                            ></path>
                         </svg>
                     </div>
                 </a>
@@ -302,7 +370,10 @@ const formatMarqueeDate = (date: Date) => {
                 >
                     <div class="icon-container">
                         <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16">
-                            <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                            <path
+                                fill="currentColor"
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                            ></path>
                         </svg>
                     </div>
                 </a>
@@ -316,13 +387,17 @@ const formatMarqueeDate = (date: Date) => {
                 >
                     <div class="icon-container">
                         <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14">
-                            <path fill="currentColor" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            <path
+                                fill="currentColor"
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                            ></path>
                         </svg>
                     </div>
                 </a>
             </div>
 
-            <span class="hidden h-4 w-px bg-slate-200 sm:inline dark:bg-white/10" aria-hidden="true"></span>
+            <span class="hidden h-4 w-px bg-slate-200 sm:inline dark:bg-white/10" aria-hidden="true"
+            ></span>
 
             <button
                 id="return-to-orbit-btn"
@@ -331,8 +406,19 @@ const formatMarqueeDate = (date: Date) => {
                 class="magnetic-target group inline-flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200/80 bg-slate-100/70 px-3 py-1.5 font-mono text-[11px] font-semibold text-slate-700 shadow-2xs backdrop-blur-md transition-all hover:border-(--accent)/50 hover:bg-(--accent)/10 hover:text-(--accent) focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-(--accent)/10 dark:hover:text-(--accent)"
             >
                 <span>RETURN TO ORBIT</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-y-0.5">
-                    <path d="m18 15-6-6-6 6"/>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="transition-transform group-hover:-translate-y-0.5"
+                >
+                    <path d="m18 15-6-6-6 6"></path>
                 </svg>
             </button>
         </div>
@@ -401,17 +487,17 @@ const formatMarqueeDate = (date: Date) => {
                                 aria-label={`Read more about ${book.title} by ${book.author} (opens in a new tab)`}
                                 class="book-card-row group/book relative block overflow-hidden rounded-xl border border-slate-200/80 bg-white/70 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-(--accent)/40 hover:bg-white hover:shadow-[0_4px_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-(--accent)/40 dark:hover:bg-[#151a22]"
                             >
-                                <!-- Left Neon Horizon Accent (Fades in on Hover) -->
+                                {/* Left Neon Horizon Accent (Fades in on Hover) */}
                                 <div class="pointer-events-none absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b from-(--accent) to-blue-500 opacity-0 transition-opacity duration-300 group-hover/book:opacity-100 group-hover/book:shadow-[0_0_10px_var(--accent-glow)]" />
 
-                                <!-- Main Header Row -->
+                                {/* Main Header Row */}
                                 <div class="flex items-start justify-between gap-4">
                                     <div class="flex min-w-0 items-start gap-3">
-                                        <span class="mt-0.5 font-mono text-[10px] font-bold tracking-wider text-slate-400 select-none transition-colors duration-200 group-hover/book:text-(--accent) dark:text-slate-500">
+                                        <span class="mt-0.5 font-mono text-[10px] font-bold tracking-wider text-slate-400 transition-colors duration-200 select-none group-hover/book:text-(--accent) dark:text-slate-500">
                                             {formattedIndex}
                                         </span>
                                         <div class="min-w-0">
-                                            <h4 class="text-sm font-bold leading-snug text-slate-900 transition-colors duration-200 group-hover/book:text-(--accent) dark:text-white">
+                                            <h4 class="text-sm leading-snug font-bold text-slate-900 transition-colors duration-200 group-hover/book:text-(--accent) dark:text-white">
                                                 {book.title}
                                             </h4>
                                             <p class="mt-0.5 font-mono text-xs text-slate-500 dark:text-slate-400">
@@ -422,7 +508,7 @@ const formatMarqueeDate = (date: Date) => {
 
                                     <div class="flex shrink-0 items-center gap-2">
                                         <div class="flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white/80 px-2.5 py-0.5 font-mono text-[9px] font-semibold tracking-wider text-(--accent) transition-all duration-300 group-hover/book:border-(--accent)/40 group-hover/book:bg-(--accent)/10 group-hover/book:shadow-[0_0_8px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30">
-                                            <span class="h-1.5 w-1.5 rounded-full bg-(--accent) animate-pulse" />
+                                            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)" />
                                             <span>FOCUS: {telemetry.focus}</span>
                                         </div>
                                         <svg
@@ -443,13 +529,20 @@ const formatMarqueeDate = (date: Date) => {
                                     </div>
                                 </div>
 
-                                <!-- Accordion Drawer (Smooth 0fr -> 1fr CSS Grid Animation) -->
+                                {/* Accordion Drawer (Smooth 0fr -> 1fr CSS Grid Animation) */}
                                 {book.hint && (
                                     <div class="book-hint-accordion">
                                         <div class="book-hint-inner">
                                             <div class="rounded-lg border-l-2 border-(--accent) bg-(--accent)/5 p-3 text-xs leading-relaxed text-slate-700 dark:bg-white/[0.04] dark:text-slate-300">
                                                 <div class="mb-1 flex items-center gap-1.5 font-mono text-[9px] font-bold tracking-wider text-(--accent) uppercase">
-                                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                    <svg
+                                                        width="11"
+                                                        height="11"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="2.5"
+                                                    >
                                                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                                                     </svg>
                                                     <span>WHY IT SHAPED MY THINKING</span>

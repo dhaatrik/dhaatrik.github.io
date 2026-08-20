@@ -352,30 +352,46 @@ export async function setupPost() {
             const indexSpan = htmlLink.querySelector('.toc-index');
             const indicatorSpan = htmlLink.querySelector('.toc-indicator');
             if (htmlLink.dataset.slug === currentSectionId) {
-                htmlLink.classList.add('!text-(--accent)', 'font-semibold', 'bg-slate-200/50', 'dark:bg-white/10');
-                htmlLink.classList.remove(
-                    'text-slate-600',
-                    'dark:text-slate-400'
+                htmlLink.classList.add(
+                    '!text-(--accent)',
+                    'font-semibold',
+                    'bg-slate-200/50',
+                    'dark:bg-white/10'
                 );
+                htmlLink.classList.remove('text-slate-600', 'dark:text-slate-400');
                 if (indexSpan) {
                     indexSpan.classList.add('!text-(--accent)', 'opacity-100');
-                    indexSpan.classList.remove('text-slate-500', 'dark:text-slate-400', 'opacity-80');
+                    indexSpan.classList.remove(
+                        'text-slate-500',
+                        'dark:text-slate-400',
+                        'opacity-80'
+                    );
                 }
                 if (indicatorSpan) {
-                    indicatorSpan.classList.add('!bg-(--accent)', '!w-[3px]', 'shadow-[0_0_8px_var(--accent)]');
+                    indicatorSpan.classList.add(
+                        '!bg-(--accent)',
+                        '!w-[3px]',
+                        'shadow-[0_0_8px_var(--accent)]'
+                    );
                 }
             } else {
-                htmlLink.classList.remove('!text-(--accent)', 'font-semibold', 'bg-slate-200/50', 'dark:bg-white/10');
-                htmlLink.classList.add(
-                    'text-slate-600',
-                    'dark:text-slate-400'
+                htmlLink.classList.remove(
+                    '!text-(--accent)',
+                    'font-semibold',
+                    'bg-slate-200/50',
+                    'dark:bg-white/10'
                 );
+                htmlLink.classList.add('text-slate-600', 'dark:text-slate-400');
                 if (indexSpan) {
                     indexSpan.classList.remove('!text-(--accent)', 'opacity-100');
                     indexSpan.classList.add('text-slate-500', 'dark:text-slate-400', 'opacity-80');
                 }
                 if (indicatorSpan) {
-                    indicatorSpan.classList.remove('!bg-(--accent)', '!w-[3px]', 'shadow-[0_0_8px_var(--accent)]');
+                    indicatorSpan.classList.remove(
+                        '!bg-(--accent)',
+                        '!w-[3px]',
+                        'shadow-[0_0_8px_var(--accent)]'
+                    );
                 }
             }
         });
@@ -388,8 +404,7 @@ export async function setupPost() {
 
         // If user is at or near the bottom of the page, activate the last heading
         const isNearBottom =
-            window.innerHeight + window.scrollY >=
-            document.documentElement.scrollHeight - 60;
+            window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60;
         if (isNearBottom) {
             const lastHeading = headingElements[headingElements.length - 1];
             if (lastHeading.id && lastHeading.id !== activeSectionId) {

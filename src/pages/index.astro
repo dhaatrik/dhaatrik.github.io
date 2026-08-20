@@ -191,16 +191,25 @@ const webSiteSchema = JSON.stringify({
                                 ></span>
                             </span>
                             <span>SYS.ONLINE</span>
-                            <span class="text-emerald-600/70 dark:text-emerald-400/70">[v4.2.0]</span>
+                            <span class="text-emerald-600/70 dark:text-emerald-400/70"
+                                >[v4.2.0]</span
+                            >
                         </div>
 
                         <!-- Divider / Separator -->
-                        <span class="hidden text-slate-300 sm:inline dark:text-white/20" aria-hidden="true">|</span>
+                        <span
+                            class="hidden text-slate-300 sm:inline dark:text-white/20"
+                            aria-hidden="true">|</span
+                        >
 
                         <!-- Mission Telemetry Segment -->
-                        <div class="flex items-center gap-1.5 px-1 py-0.5 tracking-wider text-slate-600 sm:px-0 dark:text-slate-300">
+                        <div
+                            class="flex items-center gap-1.5 px-1 py-0.5 tracking-wider text-slate-600 sm:px-0 dark:text-slate-300"
+                        >
                             <span class="font-bold text-(--accent)">MISSION:</span>
-                            <span class="font-medium text-slate-700 dark:text-slate-200">FIRST-PRINCIPLES ENGINEERING</span>
+                            <span class="font-medium text-slate-700 dark:text-slate-200"
+                                >FIRST-PRINCIPLES ENGINEERING</span
+                            >
                         </div>
                     </div>
                     <h1
@@ -232,9 +241,9 @@ const webSiteSchema = JSON.stringify({
                     >
                         I'm Dhaatrik Chowdhury, an engineer from India building practical software
                         from first principles. This site is my honest engineering diary, not a
-                        polished portfolio. It is an open log of what I shipped, what broke in production,
-                        and the lessons I wish I had learned sooner. I avoid shortcuts because they
-                        always come back to charge interest.
+                        polished portfolio. It is an open log of what I shipped, what broke in
+                        production, and the lessons I wish I had learned sooner. I avoid shortcuts
+                        because they always come back to charge interest.
                     </p>
 
                     <!-- CTA Hierarchy -->
@@ -245,7 +254,7 @@ const webSiteSchema = JSON.stringify({
                         <a
                             href="/personnel"
                             data-astro-prefetch="hover"
-                            class="magnetic-target group transition-spring inline-flex items-center gap-2 rounded-full bg-(--accent-button-bg) px-6 py-2.5 font-medium text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:focus-visible:ring-offset-(--bg-main)"
+                            class="magnetic-target group transition-spring inline-flex items-center gap-2 rounded-full bg-(--accent-button-bg) px-6 py-2.5 font-semibold text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] dark:focus-visible:ring-offset-(--bg-main)"
                         >
                             Read My Story
                             <svg
@@ -460,8 +469,12 @@ const webSiteSchema = JSON.stringify({
                             <div
                                 class="flex items-center justify-between gap-3 border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400"
                             >
-                                <span class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400">STAGE: ACTIVE_EXPLORATION</span>
-                                <span class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
+                                <span
+                                    class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400"
+                                    >STAGE: ACTIVE_EXPLORATION</span
+                                >
+                                <span
+                                    class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
                                     >READ NOTES&nbsp;&rarr;</span
                                 >
                             </div>
@@ -805,7 +818,8 @@ const webSiteSchema = JSON.stringify({
                             <div
                                 class="flex items-center justify-between gap-3 border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400"
                             >
-                                <span class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400"
+                                <span
+                                    class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400"
                                     >INDEX: 12 REPOSITORIES</span
                                 >
                                 <span
@@ -863,17 +877,22 @@ const webSiteSchema = JSON.stringify({
                                 <a
                                     href={`/transmissions/${post.id}/`}
                                     data-astro-prefetch="hover"
-                                    class="bento-card group block p-5 sm:p-6 transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
+                                    class="bento-card group block p-5 transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none sm:p-6 dark:focus-visible:ring-offset-(--bg-main)"
                                 >
                                     <article class="flex flex-col justify-between gap-4">
                                         {/* Top Signal Ribbon */}
                                         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/60 pb-3 font-mono text-[10px] text-slate-400 dark:border-white/5 dark:text-slate-500">
                                             <div class="flex items-center gap-2">
                                                 <span class="inline-flex items-center gap-1.5 font-bold tracking-wider text-(--accent)">
-                                                    <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)"></span>
+                                                    <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)" />
                                                     TRANSMISSION 0{index + 1}
                                                 </span>
-                                                <span class="text-slate-300 dark:text-white/10" aria-hidden="true">//</span>
+                                                <span
+                                                    class="text-slate-300 dark:text-white/10"
+                                                    aria-hidden="true"
+                                                >
+                                                    //
+                                                </span>
                                                 <span class="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-600 uppercase dark:bg-white/5 dark:text-slate-400">
                                                     DECLASSIFIED
                                                 </span>
@@ -883,8 +902,13 @@ const webSiteSchema = JSON.stringify({
                                                     date={post.data.pubDate}
                                                     format="technical"
                                                 />
-                                                <span class="text-slate-300 dark:text-white/10" aria-hidden="true">•</span>
-                                                <span class="text-slate-600 dark:text-slate-300 font-medium">
+                                                <span
+                                                    class="text-slate-300 dark:text-white/10"
+                                                    aria-hidden="true"
+                                                >
+                                                    •
+                                                </span>
+                                                <span class="font-medium text-slate-600 dark:text-slate-300">
                                                     {readingTime} min read
                                                 </span>
                                             </div>
@@ -904,15 +928,23 @@ const webSiteSchema = JSON.stringify({
                                         <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/60 pt-3 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400">
                                             <div class="flex flex-wrap items-center gap-2">
                                                 <span class="text-[9px] tracking-wider text-slate-400 uppercase dark:text-slate-500">
-                                                    DOI: <span class="text-slate-600 dark:text-slate-400">{doiNum}</span>
+                                                    DOI:{' '}
+                                                    <span class="text-slate-600 dark:text-slate-400">
+                                                        {doiNum}
+                                                    </span>
                                                 </span>
                                                 {post.data.tags && post.data.tags.length > 0 && (
-                                                    <div class="hidden sm:flex items-center gap-1.5 pl-2">
-                                                        {post.data.tags.slice(0, 3).map((tag: string) => (
-                                                            <span class="rounded bg-slate-100/80 px-1.5 py-0.5 text-[9px] text-slate-500 dark:bg-white/5 dark:text-slate-400">
-                                                                #{tag.replace(/\s+/g, '').toLowerCase()}
-                                                            </span>
-                                                        ))}
+                                                    <div class="hidden items-center gap-1.5 pl-2 sm:flex">
+                                                        {post.data.tags
+                                                            .slice(0, 3)
+                                                            .map((tag: string) => (
+                                                                <span class="rounded bg-slate-100/80 px-1.5 py-0.5 text-[9px] text-slate-500 dark:bg-white/5 dark:text-slate-400">
+                                                                    #
+                                                                    {tag
+                                                                        .replace(/\s+/g, '')
+                                                                        .toLowerCase()}
+                                                                </span>
+                                                            ))}
                                                     </div>
                                                 )}
                                             </div>
@@ -933,7 +965,8 @@ const webSiteSchema = JSON.stringify({
                                                     <div class="h-full w-px bg-slate-800 dark:bg-white" />
                                                 </div>
                                                 <span class="font-mono text-[10.5px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1">
-                                                    READ TRANSMISSION <span aria-hidden="true">&rarr;</span>
+                                                    READ TRANSMISSION{' '}
+                                                    <span aria-hidden="true">&rarr;</span>
                                                 </span>
                                             </div>
                                         </div>

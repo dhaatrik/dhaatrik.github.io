@@ -19,8 +19,10 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
         test(`should have zero critical or serious WCAG violations on route: ${route}`, async ({
             page,
         }) => {
-            await page.goto(route, { waitUntil: 'load' });
+            await page.goto(route, { waitUntil: 'networkidle' });
             await page.locator('main, body').first().waitFor({ state: 'visible' });
+            await page.evaluate(() => document.fonts.ready);
+            await page.waitForTimeout(300);
 
             // Run the Axe accessibility scanner
             const results = await new AxeBuilder({ page })

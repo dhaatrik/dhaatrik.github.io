@@ -385,7 +385,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     href="/"
                     data-nav-key="1"
                     title="Home [Press 1]"
-                    class="group/link flex items-center text-xs font-semibold tracking-widest uppercase text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
@@ -397,7 +397,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     href="/personnel"
                     data-nav-key="2"
                     title="Personnel [Press 2]"
-                    class="group/link flex items-center text-xs font-semibold tracking-widest uppercase text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
@@ -409,7 +409,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     href="/projects"
                     data-nav-key="3"
                     title="Projects [Press 3]"
-                    class="group/link flex items-center text-xs font-semibold tracking-widest uppercase text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
@@ -421,7 +421,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     href="/pedagogy"
                     data-nav-key="4"
                     title="Pedagogy [Press 4]"
-                    class="group/link flex items-center text-xs font-semibold tracking-widest uppercase text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
@@ -433,7 +433,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     href="/transmissions"
                     data-nav-key="5"
                     title="Transmissions [Press 5]"
-                    class="group/link flex items-center text-xs font-semibold tracking-widest uppercase text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
@@ -448,7 +448,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                 aria-label="Toggle navigation menu"
                 aria-expanded="false"
                 aria-controls="mobile-nav-drawer"
-                class="magnetic-target relative z-50 flex h-11 w-11 min-h-[44px] min-w-[44px] cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full border border-transparent transition-colors hover:bg-slate-200/60 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 md:hidden dark:hover:bg-white/10 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
+                class="magnetic-target relative z-50 flex h-11 min-h-[44px] w-11 min-w-[44px] cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full border border-transparent transition-colors hover:bg-slate-200/60 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 md:hidden dark:hover:bg-white/10 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
             >
                 <span class="hamburger-line h-0.5 w-5 bg-current"></span>
                 <span class="hamburger-line h-0.5 w-5 bg-current"></span>
@@ -467,7 +467,7 @@ const displayPathShort = formatHeaderPath(displayPath);
 
 <nav
     id="mobile-nav-drawer"
-    class="glass-surface glass-drawer overscroll-contain fixed top-0 right-0 z-40 flex h-full w-72 translate-x-full flex-col gap-6 p-6 pt-[calc(5.5rem+env(safe-area-inset-top,0px))] pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] md:hidden"
+    class="glass-surface glass-drawer fixed top-0 right-0 z-40 flex h-full w-72 translate-x-full flex-col gap-6 overscroll-contain p-6 pt-[calc(5.5rem+env(safe-area-inset-top,0px))] pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] md:hidden"
     aria-label="Mobile navigation"
 >
     <!-- Decorative Grid Motif -->
@@ -546,7 +546,9 @@ const displayPathShort = formatHeaderPath(displayPath);
                         >
                             {item.index}
                         </span>
-                        <span class="text-xs font-semibold tracking-widest uppercase">{item.label}</span>
+                        <span class="text-xs font-semibold tracking-widest uppercase">
+                            {item.label}
+                        </span>
                     </div>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
