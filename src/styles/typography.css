@@ -51,7 +51,7 @@
     font-family: var(--font-sans);
     font-optical-sizing: auto;
     letter-spacing: 0.01em;
-    max-width: 70ch;
+    max-width: 100%;
     width: 100%;
 }
 
