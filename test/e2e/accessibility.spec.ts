@@ -22,7 +22,7 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
             await page.goto(route, { waitUntil: 'networkidle' });
             await page.locator('main, body').first().waitFor({ state: 'visible' });
             await page.evaluate(() => document.fonts.ready);
-            await page.waitForTimeout(300);
+            await page.waitForTimeout(500);
 
             // Run the Axe accessibility scanner
             const results = await new AxeBuilder({ page })
