@@ -182,14 +182,14 @@
 
     /* Refined Glassmorphism for Bento Project & Transmission Cards */
     .bento-card {
-        --glass-bg-opacity: 0.58;
-        --glass-border-opacity: 0.16;
+        --glass-bg-opacity: 0.70;
+        --glass-border-opacity: 0.18;
         --neon-glow-opacity: 0;
 
         position: relative;
         background-color: rgba(var(--glass-bg-raw), var(--glass-bg-opacity)) !important;
-        backdrop-filter: blur(20px) saturate(140%);
-        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        backdrop-filter: blur(16px) saturate(120%);
+        -webkit-backdrop-filter: blur(16px) saturate(120%);
         border: 1px solid rgba(var(--glass-border-raw), var(--glass-border-opacity)) !important;
         border-radius: var(--bento-radius);
         padding: var(--bento-padding);
@@ -214,26 +214,26 @@
     }
 
     .dark .bento-card {
-        --glass-bg-opacity: 0.38;
-        --glass-border-opacity: 0.10;
+        --glass-bg-opacity: 0.60;
+        --glass-border-opacity: 0.12;
         box-shadow:
-            0 4px 28px -2px rgba(0, 0, 0, 0.30),
+            0 8px 32px 0 rgba(0, 0, 0, 0.36),
             0 0 calc(var(--neon-glow-opacity) * 15px)
                 rgba(var(--neon-glow-1-rgb), calc(var(--neon-glow-opacity) * 0.35));
     }
 
     .bento-card:hover,
     .bento-card:focus-within {
-        --glass-bg-opacity: 0.72;
-        --glass-border-opacity: 0.30;
-        --neon-glow-opacity: 0.75;
+        --glass-bg-opacity: 0.85;
+        --glass-border-opacity: 0.28;
+        --neon-glow-opacity: 0.8;
     }
 
     .dark .bento-card:hover,
     .dark .bento-card:focus-within {
-        --glass-bg-opacity: 0.52;
+        --glass-bg-opacity: 0.72;
         --glass-border-opacity: 0.22;
-        --neon-glow-opacity: 0.75;
+        --neon-glow-opacity: 0.8;
     }
 
     .bento-card::before {
