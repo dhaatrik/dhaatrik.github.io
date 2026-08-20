@@ -216,6 +216,24 @@ const formatMarqueeDate = (date: Date) => {
                 <div id="footer-uptime">SYS.SESSION // 00h 00m 00s</div>
                 <div>BUILD.SHA // {gitSha}</div>
                 <div>PAGES.INDEXED // {totalPages}</div>
+                <div class="flex items-center justify-between text-[10px]">
+                    <span>SYNTHESIS.AI //</span>
+                    <span class="flex items-center gap-1 font-semibold">
+                        <a
+                            href="https://x.ai/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-slate-700 transition-colors hover:text-(--accent) focus-visible:text-(--accent) focus-visible:outline-none dark:text-slate-300"
+                        >xAI</a>
+                        <span class="text-slate-400 dark:text-slate-600">+</span>
+                        <a
+                            href="https://antigravity.google/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-slate-700 transition-colors hover:text-(--accent) focus-visible:text-(--accent) focus-visible:outline-none dark:text-slate-300"
+                        >Antigravity</a>
+                    </span>
+                </div>
                 <div
                     class="mt-2 flex flex-col gap-1 border-t border-dashed border-slate-200/50 pt-2 dark:border-white/5"
                 >
@@ -234,9 +252,32 @@ const formatMarqueeDate = (date: Date) => {
     <div
         class="layout-container mt-12 flex flex-col-reverse items-center justify-between gap-4 border-t border-slate-200/60 pt-8 sm:flex-row dark:border-white/5"
     >
-        <p class="font-mono text-xs text-slate-500 dark:text-slate-400">
-            &copy; {today.getFullYear()} Dhaatrik Chowdhury. All rights reserved.
-        </p>
+        <div class="flex flex-col items-center gap-1.5 text-center sm:items-start sm:text-left">
+            <p class="font-mono text-xs text-slate-500 dark:text-slate-400">
+                &copy; {today.getFullYear()} Dhaatrik Chowdhury. All rights reserved.
+            </p>
+            <p class="flex flex-wrap items-center justify-center gap-1 font-mono text-[11px] text-slate-400 dark:text-slate-500">
+                <span>Synthesized with</span>
+                <a
+                    href="https://x.ai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-medium text-slate-600 underline decoration-slate-300 decoration-dotted underline-offset-2 transition-colors hover:text-(--accent) hover:decoration-(--accent) focus-visible:text-(--accent) focus-visible:outline-none dark:text-slate-300 dark:decoration-slate-700 dark:hover:text-(--accent)"
+                >
+                    xAI (Grok-CLI)
+                </a>
+                <span>&bull;</span>
+                <span>Orchestrated via</span>
+                <a
+                    href="https://antigravity.google/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-medium text-slate-600 underline decoration-slate-300 decoration-dotted underline-offset-2 transition-colors hover:text-(--accent) hover:decoration-(--accent) focus-visible:text-(--accent) focus-visible:outline-none dark:text-slate-300 dark:decoration-slate-700 dark:hover:text-(--accent)"
+                >
+                    Google Antigravity
+                </a>
+            </p>
+        </div>
 
         <!-- Social Icons with Cyber Micro-interaction -->
         <div class="flex items-center gap-3">
