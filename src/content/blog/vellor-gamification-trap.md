@@ -2,6 +2,7 @@
 title: 'The Gamification Trap — When Vellor Almost Became a Mobile Game'
 description: 'Confetti, ranks, and 25+ achievements are real features — and a real fuckup when they almost buried the invoice button.'
 pubDate: 2026-07-01
+heroImage: '../../assets/og/vellor-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['vellor', 'ui-ux', 'pedagogy']
 clearance: 'PUBLIC'

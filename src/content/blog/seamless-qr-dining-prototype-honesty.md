@@ -2,6 +2,7 @@
 title: "Seamless QR Dining — What's Simulated vs What a Real Restaurant Would Need"
 description: 'Honest limits of Seamless QR Dining v3.0.0: in-memory orders, simulated OTP, no payments — and what production contactless dining actually requires.'
 pubDate: 2026-07-10
+heroImage: '../../assets/og/seamless-qr-dining-transmissions.jpg'
 updatedDate: 2026-07-10
 tags: ['seamless-qr-dining', 'demo', 'mit', 'restaurant']
 clearance: 'PUBLIC'

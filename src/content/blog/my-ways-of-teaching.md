@@ -2,6 +2,7 @@
 title: 'How I Teach: Bus Wheels, Kitchen Labs, and Open Skies'
 description: 'A mission log on my non-traditional teaching philosophy — sibling-centric tutoring, everyday observations, and why I stopped lecturing from a raised podium.'
 pubDate: 2026-06-16
+heroImage: '../../assets/og/pedagogy-transmissions.jpg'
 tags: ['pedagogy']
 clearance: 'PUBLIC'
 readingTime: '8 min'

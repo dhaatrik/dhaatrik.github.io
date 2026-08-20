@@ -2,6 +2,7 @@
 title: 'Why Bill Express — Local POS for Small Retail, Not a Freelancer PDF Toy'
 description: 'Honest origin story for Bill Express v1.0.0: Express + SQLite GST POS with inventory, customers, and invoices — not a browser-only jsPDF freelancer tool.'
 pubDate: 2026-06-30
+heroImage: '../../assets/og/bill-express-transmissions.jpg'
 updatedDate: 2026-06-30
 tags: ['bill-express', 'pos', 'gst', 'express', 'sqlite']
 clearance: 'PUBLIC'

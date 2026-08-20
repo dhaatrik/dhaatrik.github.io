@@ -2,6 +2,7 @@
 title: 'Why I Chose This Tech Stack for Vellor — Honest Tradeoffs'
 description: 'React 19, Zustand 5, Vite 6, localStorage + AES-GCM — not because they are trendy, but because a solo tutor app has different enemies than a SaaS unicorn.'
 pubDate: 2026-07-01
+heroImage: '../../assets/og/vellor-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['vellor', 'react', 'typescript', 'pwa', 'offline-first']
 clearance: 'PUBLIC'

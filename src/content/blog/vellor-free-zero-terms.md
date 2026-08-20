@@ -2,6 +2,7 @@
 title: 'Why Vellor Is Free — and What "Zero Terms" Actually Means'
 description: 'MIT license, no subscriptions, no data harvesting — and the honest part: zero SaaS terms is not the same as zero legal text or zero maintenance burden.'
 pubDate: 2026-07-01
+heroImage: '../../assets/og/vellor-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['vellor', 'open-source', 'pedagogy', 'privacy']
 clearance: 'PUBLIC'

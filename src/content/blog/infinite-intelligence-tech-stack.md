@@ -2,6 +2,7 @@
 title: 'Infinite Intelligence Tech Stack — Client Orchestration, @google/genai, Export, Zero Backend'
 description: 'Why v4.0.0 uses React 19 + Vite 6 + @google/genai with html2canvas/jsPDF export — no server, BYOK Gemini calls from the browser.'
 pubDate: 2026-07-14
+heroImage: '../../assets/og/infinite-intelligence-transmissions.jpg'
 updatedDate: 2026-07-14
 tags: ['infinite-intelligence', 'react', 'vite', 'genai']
 clearance: 'PUBLIC'

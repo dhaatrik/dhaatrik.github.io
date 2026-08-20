@@ -2,6 +2,7 @@
 title: 'Why Vireo — Wellness UI Today vs the Private Journal I Advertised'
 description: 'Honest origin story for Vireo Wellness v2.0.0: a mock-data wellness UI demo with meals, glucose charts, and simulated devices — not an offline PWA journal yet.'
 pubDate: 2026-07-01
+heroImage: '../../assets/og/vireo-wellness-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['vireo-wellness', 'react', 'wellness', 'ui-demo']
 clearance: 'PUBLIC'
