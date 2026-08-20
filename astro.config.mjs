@@ -9,8 +9,9 @@ import tailwindcss from '@tailwindcss/vite';
 import remarkMath from 'remark-math';
 import remarkMermaid from './src/plugins/remark-mermaid.mjs';
 import rehypeKatex from 'rehype-katex';
+import rehypeAccessibleTable from './src/plugins/rehype-accessible-table.mjs';
 
-const markdownRehypePlugins = [rehypeKatex];
+const markdownRehypePlugins = [rehypeKatex, rehypeAccessibleTable];
 
 // https://astro.build/config
 export default defineConfig({

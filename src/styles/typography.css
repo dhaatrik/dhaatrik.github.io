@@ -8,11 +8,21 @@
 @source '../scripts/blog/postSetup.ts';
 
 /* Responsive tables and lists inside blog / project prose */
-.prose table {
-    display: block;
+.prose .table-container {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+}
+
+.prose .table-container:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.prose table {
+    width: 100%;
 }
 
 .prose p {
