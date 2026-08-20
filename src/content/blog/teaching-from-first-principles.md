@@ -2,6 +2,7 @@
 title: 'Teaching From First Principles: A Mission Log on How I Actually Teach'
 description: 'My teaching philosophy in plain language — observation before equations, sibling-centric trust, and why I refuse to let students memorize what they do not understand.'
 pubDate: 2026-06-17
+heroImage: '../../assets/og/pedagogy-transmissions.jpg'
 tags: ['pedagogy']
 clearance: 'PUBLIC'
 readingTime: '9 min'

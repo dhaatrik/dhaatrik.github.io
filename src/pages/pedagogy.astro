@@ -24,12 +24,12 @@ import dbImage from '../assets/DB.jpeg';
         <main
             id="main-content"
             tabindex="-1"
-            class="relative flex grow flex-col gap-(--section-gap-mobile) overflow-x-hidden py-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:py-(--section-gap-desktop)"
+            class="relative flex grow flex-col gap-(--section-gap-mobile) overflow-x-hidden pt-6 pb-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:pt-10 md:pb-(--section-gap-desktop)"
         >
             <!-- Background Reticle Grid -->
             <div
                 id="reticle-bg"
-                class="pointer-events-none absolute top-32 right-0 -z-10 text-slate-900 opacity-5 transition-transform duration-300 ease-out dark:text-white"
+                class="pointer-events-none absolute top-12 right-0 -z-10 text-slate-900 opacity-5 transition-transform duration-300 ease-out md:top-16 dark:text-white"
             >
                 <svg
                     width="400"
@@ -283,60 +283,58 @@ import dbImage from '../assets/DB.jpeg';
                         x="139"
                         y="67"
                         font-family="monospace"
-                        font-size="5"
+                        font-size="4"
                         fill="currentColor"
                         opacity="0.6">APEX: (100,85)</text
                     >
 
                     <!-- Blueprint labels -->
                     <text
-                        x="110"
-                        y="30"
+                        x="115"
+                        y="32"
                         font-family="monospace"
-                        font-size="6"
+                        font-size="4.5"
                         fill="currentColor"
-                        opacity="0.6">MODEL: MORTARBOARD_CAP</text
+                        opacity="0.7">MODEL: MORTARBOARD_CAP</text
                     >
                     <text
-                        x="110"
-                        y="38"
+                        x="115"
+                        y="39"
                         font-family="monospace"
-                        font-size="6"
+                        font-size="4"
                         fill="currentColor"
-                        opacity="0.6">Z-PLANE: ISO_PRJ</text
+                        opacity="0.5">Z-PLANE: ISO_PRJ</text
                     >
                     <text
-                        x="110"
+                        x="115"
                         y="46"
                         font-family="monospace"
-                        font-size="6"
+                        font-size="4"
                         fill="currentColor"
-                        opacity="0.6">TILT_ANG: 14.50°</text
+                        opacity="0.5">TILT_ANG: 14.50°</text
                     >
                     <text
-                        x="25"
-                        y="170"
-                        font-family="monospace"
-                        font-size="6"
-                        fill="currentColor"
-                        opacity="0.6">SYS.PEDAGOGICAL_RECON // V2.0</text
-                    >
-                    <text
-                        x="25"
-                        y="178"
+                        x="24"
+                        y="172"
                         font-family="monospace"
                         font-size="5"
                         fill="currentColor"
-                        opacity="0.4">DBS_CLASSES.ARCHIVE</text
+                        opacity="0.8">SYS.PEDAGOGICAL_RECON // V2.0</text
+                    >
+                    <text
+                        x="24"
+                        y="179"
+                        font-family="monospace"
+                        font-size="4"
+                        fill="currentColor"
+                        opacity="0.6">DBS_CLASSES.ARCHIVE</text
                     >
                 </svg>
             </div>
 
             <!-- Page Hero -->
             <section class="layout-container">
-                <div
-                    class="mb-12 flex flex-col items-center gap-8 md:flex-row-reverse md:items-start"
-                >
+                <div class="flex flex-col items-center gap-8 md:flex-row-reverse md:items-start">
                     <div
                         class="relative mx-auto w-full max-w-65 shrink-0 p-3 sm:max-w-80 md:mx-0 md:w-80"
                     >
@@ -408,11 +406,12 @@ import dbImage from '../assets/DB.jpeg';
                         <p
                             class="text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                         >
-                            This is the raw log from nine years of teaching physics and math to kids
-                            who wanted to understand, not just pass. From explaining kinematics
-                            using bus wheels on the streets to modeling thermodynamics in my
-                            kitchen, this is the story of DBS Classes, what worked, and why I
-                            eventually stopped.
+                            This is the unfiltered log from nine years of teaching physics and
+                            mathematics to students who wanted real understanding, not just exam
+                            shortcuts. From deriving kinematics using rolling bus wheels to
+                            demonstrating thermodynamics in a home kitchen, this records what DBS
+                            Classes got right, where it struggled, and why I wrapped up operations
+                            in 2025.
                         </p>
 
                         <!-- Philosophical Axiom Callout -->
@@ -500,10 +499,10 @@ import dbImage from '../assets/DB.jpeg';
                                 <p
                                     class="mb-4 leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    I spent 9 years (wrapping up in March 2025) figuring out how to
-                                    make physics and maths actually click. Roughly 200 students
-                                    across school classrooms, coaching batches, 1:1 sessions, and
-                                    online groups — each one taught me something I didn't expect.
+                                    Over nine years (concluding in March 2025), I worked with
+                                    roughly 200 students across school classrooms, coaching batches,
+                                    1:1 mentorship, and online sessions. Every batch showed me where
+                                    traditional textbook explanations fail.
                                 </p>
                                 <ul
                                     class="space-y-2 font-mono text-xs text-slate-600 dark:text-slate-400"
@@ -580,36 +579,44 @@ import dbImage from '../assets/DB.jpeg';
                                 <p
                                     class="mb-4 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    Physics and maths were my home turf. But when a student needed
-                                    chemistry or biology for an exam, I'd dive in — because teaching
-                                    isn't about staying in your lane, it's about getting them
-                                    unstuck.
+                                    Physics and mathematics were my primary focus. When a student
+                                    got stuck in chemistry or biology, I stepped in to rebuild the
+                                    underlying core concepts so they could solve problems on their
+                                    own.
                                 </p>
                             </div>
                             <div class="space-y-2.5 font-mono text-[10px]">
                                 <div
                                     class="flex items-center justify-between border-b border-slate-200/50 pb-1.5 dark:border-white/5"
                                 >
-                                    <span class="text-slate-400 uppercase">// MATHEMATICS</span>
+                                    <span class="text-slate-500 uppercase dark:text-slate-400"
+                                        >// MATHEMATICS</span
+                                    >
                                     <span class="font-bold text-(--accent)">CORE</span>
                                 </div>
                                 <div
                                     class="flex items-center justify-between border-b border-slate-200/50 pb-1.5 dark:border-white/5"
                                 >
-                                    <span class="text-slate-400 uppercase">// PHYSICS</span>
+                                    <span class="text-slate-500 uppercase dark:text-slate-400"
+                                        >// PHYSICS</span
+                                    >
                                     <span class="font-bold text-(--accent)">CORE</span>
                                 </div>
                                 <div
                                     class="flex items-center justify-between border-b border-slate-200/50 pb-1.5 dark:border-white/5"
                                 >
-                                    <span class="text-slate-400 uppercase">// CHEMISTRY</span>
-                                    <span class="font-bold text-slate-500 dark:text-slate-400"
+                                    <span class="text-slate-500 uppercase dark:text-slate-400"
+                                        >// CHEMISTRY</span
+                                    >
+                                    <span class="font-bold text-slate-600 dark:text-slate-300"
                                         >SUPPORTING</span
                                     >
                                 </div>
                                 <div class="flex items-center justify-between">
-                                    <span class="text-slate-400 uppercase">// BIOLOGY</span>
-                                    <span class="font-bold text-slate-500 dark:text-slate-400"
+                                    <span class="text-slate-500 uppercase dark:text-slate-400"
+                                        >// BIOLOGY</span
+                                    >
+                                    <span class="font-bold text-slate-600 dark:text-slate-300"
                                         >SUPPORTING</span
                                     >
                                 </div>
@@ -645,10 +652,10 @@ import dbImage from '../assets/DB.jpeg';
                                 <p
                                     class="mb-4 leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    I treated my students like younger siblings — not passive
-                                    listeners. No rote memorization sermons. Just curiosity,
-                                    real-world demos, and the occasional bus-wheel kinematics
-                                    lecture:
+                                    I mentored students like younger siblings rather than passive
+                                    listeners. No rote memorization drills. We used physical demos,
+                                    street observations, and live derivations to build intuition
+                                    before touching formulas:
                                 </p>
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <div
@@ -712,16 +719,16 @@ import dbImage from '../assets/DB.jpeg';
                                 <p
                                     class="text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    Teaching taught me psychology I never signed up for — how we
-                                    actually learn, what makes eyes light up, and what makes someone
-                                    zone out mid-derivation. That knowledge still shapes how I build
-                                    software.
+                                    Teaching taught me how people actually process complex
+                                    information: what creates genuine curiosity, and where mental
+                                    fatigue sets in. That understanding directly informs how I
+                                    design user interfaces and software architecture today.
                                 </p>
                             </div>
                             <div
                                 class="mt-4 border-t border-slate-200/50 pt-3 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400"
                             >
-                                [ OBSERVATION_LOG: 98% ENGAGEMENT ACHIEVED VIA COGNITIVE ALIGNMENT ]
+                                // OBSERVATION: 98% ENGAGEMENT ACHIEVED VIA COGNITIVE ALIGNMENT
                             </div>
                         </div>
                     </div>
@@ -766,19 +773,20 @@ import dbImage from '../assets/DB.jpeg';
                                     <span class="font-bold text-(--accent)">DECODING:</span> "DB" represents
                                     <span class="text-slate-800 dark:text-slate-200"
                                         >"Dhaatu Bhaiyaa"</span
-                                    >. Dhaatu is Dhaatrik's nickname, and Bhaiyaa is Hindi for big
-                                    brother, reflecting what his students called him.
+                                    >. Dhaatu is my nickname, and Bhaiyaa is Hindi for big brother,
+                                    reflecting what my students called me.
                                 </div>
                             </div>
 
                             <div class="mt-8">
-                                <span class="font-mono text-[9px] text-slate-400 uppercase"
+                                <span
+                                    class="font-mono text-[9px] text-slate-500 uppercase dark:text-slate-400"
                                     >// RETRO_RATING</span
                                 >
                                 <div
                                     class="mt-1 font-mono text-base font-bold text-red-600 dark:text-red-400"
                                 >
-                                    [ AUDITED FAILURE ]
+                                    AUDITED FAILURE
                                 </div>
                                 <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">
                                     An experiment I cut short — not because of external drama, but
@@ -804,7 +812,7 @@ import dbImage from '../assets/DB.jpeg';
                                         stroke-width="2"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
-                                        class="text-slate-400"
+                                        class="text-slate-500 dark:text-slate-400"
                                         ><path
                                             d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"
                                         ></path><line x1="4" y1="22" x2="4" y2="15"></line></svg
@@ -814,11 +822,11 @@ import dbImage from '../assets/DB.jpeg';
                                 <p
                                     class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    A personal website should serve as an honest ledger of both
-                                    achievements and failures. He uploaded 20 math and physics
-                                    videos before losing focus. He has written three self-critical
-                                    reflections explaining why he started, his experimental teaching
-                                    methods, and a post-mortem on why he stopped:
+                                    An honest engineering diary records failures just as
+                                    transparently as milestones. I published 20 physics and math
+                                    lectures on YouTube before losing consistency. Here is the
+                                    three-part post-mortem on why I started, how I taught, and why I
+                                    shut the project down:
                                 </p>
 
                                 <div
@@ -828,7 +836,8 @@ import dbImage from '../assets/DB.jpeg';
                                         href="/transmissions/why-i-started-dbs-classes"
                                         class="flex flex-col justify-between rounded-lg border border-slate-200/80 bg-white p-4 transition-colors hover:border-(--accent) dark:border-white/5 dark:bg-[#151a22]"
                                     >
-                                        <span class="text-[9px] text-slate-400 uppercase"
+                                        <span
+                                            class="text-[9px] text-slate-500 uppercase dark:text-slate-400"
                                             >// LOG 01</span
                                         >
                                         <span
@@ -840,7 +849,8 @@ import dbImage from '../assets/DB.jpeg';
                                         href="/transmissions/my-ways-of-teaching"
                                         class="flex flex-col justify-between rounded-lg border border-slate-200/80 bg-white p-4 transition-colors hover:border-(--accent) dark:border-white/5 dark:bg-[#151a22]"
                                     >
-                                        <span class="text-[9px] text-slate-400 uppercase"
+                                        <span
+                                            class="text-[9px] text-slate-500 uppercase dark:text-slate-400"
                                             >// LOG 02</span
                                         >
                                         <span
@@ -876,7 +886,7 @@ import dbImage from '../assets/DB.jpeg';
                                     href="/transmissions?tag=youtube"
                                     class="magnetic-target rounded border border-(--accent)/20 bg-(--accent)/10 px-4 py-2 font-mono text-xs tracking-widest text-(--accent) transition-all hover:bg-(--accent)/20 active:scale-[0.98]"
                                 >
-                                    [ FILTER MISSION_LOGS // GO ]
+                                    FILTER MISSION_LOGS &rarr;
                                 </a>
                             </div>
                         </div>
@@ -905,23 +915,23 @@ import dbImage from '../assets/DB.jpeg';
                         <button
                             data-subject="all"
                             aria-pressed="true"
-                            class="subject-tab active cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)]"
+                            class="subject-tab active cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 font-semibold text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)]"
                         >
-                            [ ALL ]
+                            ALL
                         </button>
                         <button
                             data-subject="physics"
                             aria-pressed="false"
-                            class="subject-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)]"
+                            class="subject-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 font-semibold text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)]"
                         >
-                            [ PHYSICS ]
+                            PHYSICS
                         </button>
                         <button
                             data-subject="maths"
                             aria-pressed="false"
-                            class="subject-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)]"
+                            class="subject-tab cursor-pointer rounded-md border border-slate-300 bg-slate-100/80 px-3 py-1.5 font-semibold text-slate-600 transition-all hover:border-slate-400 hover:bg-slate-200/50 dark:border-slate-800 dark:bg-[#151a22]/80 dark:text-slate-400 dark:hover:border-slate-700 [&.active]:border-(--accent) [&.active]:bg-(--accent)/10 [&.active]:text-(--accent) [&.active]:shadow-[0_0_12px_var(--accent-glow)]"
                         >
-                            [ MATHEMATICS ]
+                            MATHEMATICS
                         </button>
                     </div>
                 </div>

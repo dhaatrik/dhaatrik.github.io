@@ -57,14 +57,14 @@ Professional-grade here does **not** mean "pretty 3D rocket." It means a **verif
 
 ```mermaid
 flowchart BT
-    R0[R0 Runnable sim]
-    R1[R1 Documented assumptions]
-    R2[R2 Analytical unit tests]
-    R3[R3 Flight telemetry V&V]
-    R4[R4 Monte Carlo dispersion]
-    R5[R5 Toolchain APIs]
-    R6[R6 SIL / HIL real-time]
-    R7[R7 Governance + licensing]
+    R0["R0 Runnable sim"]
+    R1["R1 Documented assumptions"]
+    R2["R2 Analytical unit tests"]
+    R3["R3 Flight telemetry V&V"]
+    R4["R4 Monte Carlo dispersion"]
+    R5["R5 Toolchain APIs"]
+    R6["R6 SIL / HIL real-time"]
+    R7["R7 Governance + licensing"]
     R0 --> R1 --> R2 --> R3 --> R4 --> R5 --> R6 --> R7
 ```
 

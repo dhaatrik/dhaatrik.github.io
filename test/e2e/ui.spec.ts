@@ -88,10 +88,10 @@ test.describe('Portfolio UI Interactivity', () => {
         page,
     }) => {
         // 1. Check URL query param filtering
-        await page.goto('/transmissions?q=scrollytell');
+        await page.goto('/transmissions?q=vellor');
 
         // The post card should be visible
-        const postCard = page.locator('.blog-post-card[href*="/deltav-lab-scrollytelling-demo/"]');
+        const postCard = page.locator('.blog-post-card[href*="/vellor-why-and-what/"]');
         await expect(postCard).toBeVisible();
 
         // 2. Test typing updates URL (debounced) and sessionStorage
@@ -99,7 +99,7 @@ test.describe('Portfolio UI Interactivity', () => {
         await searchInput.fill('nonexistent');
 
         // Initially should not be updated yet (debouncing)
-        expect(page.url()).toContain('q=scrollytell');
+        expect(page.url()).toContain('q=vellor');
 
         // Wait for debounce timeout (150ms debounce + 300ms replacestate + buffer)
         await expect(page).toHaveURL(/.*q=nonexistent.*/);
@@ -156,19 +156,19 @@ test.describe('Portfolio UI Interactivity', () => {
         await page.setViewportSize({ width: 1440, height: 900 });
 
         // Navigate to a post with headings
-        await page.goto('/transmissions/deltav-lab-scrollytelling-demo/');
+        await page.goto('/transmissions/deltav-lab-science/');
 
         // Disable smooth scrolling to make scrollIntoView instant
         await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
         await page.waitForLoadState('networkidle');
 
-        const tocLink = page.locator('#toc a[href="#the-math-behind-staging"]');
+        const tocLink = page.locator('#toc a[href="#propulsion-and-tsiolkovsky"]');
 
         // Check initial state (should not have active classes if we are at the top)
         await expect(tocLink).not.toHaveClass(/!text-\(--accent\)/);
 
         // Scroll the headings section to be perfectly within the active region (Y = 200)
-        const headingsHeader = page.locator('#the-math-behind-staging');
+        const headingsHeader = page.locator('#propulsion-and-tsiolkovsky');
         await headingsHeader.evaluate((el) => {
             const rect = el.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -222,7 +222,7 @@ test.describe('Portfolio UI Interactivity', () => {
         });
 
         // Navigate to a post known to have a code block
-        await page.goto('/transmissions/deltav-lab-scrollytelling-demo/');
+        await page.goto('/transmissions/deltav-lab-flight-computer/');
         await page.waitForSelector('.code-wrapper-processed .copy-btn', { state: 'visible' });
 
         // Select the first copy button and its corresponding pre element

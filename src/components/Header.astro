@@ -67,6 +67,8 @@ const displayPathShort = formatHeaderPath(displayPath);
             transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
             background-color 0.3s ease,
             border-color 0.3s ease,
+            backdrop-filter 0.3s ease,
+            -webkit-backdrop-filter 0.3s ease,
             box-shadow 0.3s ease;
     }
 
@@ -378,54 +380,64 @@ const displayPathShort = formatHeaderPath(displayPath);
             </div>
         </a>
         <div class="flex shrink-0 items-center gap-2.5 sm:gap-4 md:gap-6">
-            <div class="desktop-nav-links hidden items-center gap-6 md:flex">
+            <div class="desktop-nav-links hidden items-center gap-5 md:flex lg:gap-6">
                 <HeaderLink
                     href="/"
-                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    data-nav-key="1"
+                    title="Home [Press 1]"
+                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
-                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
+                        class="mr-1.5 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
                         >[ 01 ]</span
                     >Home
                 </HeaderLink>
                 <HeaderLink
                     href="/personnel"
-                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    data-nav-key="2"
+                    title="Personnel [Press 2]"
+                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
-                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
+                        class="mr-1.5 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
                         >[ 02 ]</span
                     >Personnel
                 </HeaderLink>
                 <HeaderLink
                     href="/projects"
-                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    data-nav-key="3"
+                    title="Projects [Press 3]"
+                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
-                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
+                        class="mr-1.5 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
                         >[ 03 ]</span
                     >Projects
                 </HeaderLink>
                 <HeaderLink
                     href="/pedagogy"
-                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    data-nav-key="4"
+                    title="Pedagogy [Press 4]"
+                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
-                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
+                        class="mr-1.5 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
                         >[ 04 ]</span
                     >Pedagogy
                 </HeaderLink>
                 <HeaderLink
                     href="/transmissions"
-                    class="group/link flex items-center text-slate-600 transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    data-nav-key="5"
+                    title="Transmissions [Press 5]"
+                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
                 >
                     <span
                         aria-hidden="true"
-                        class="mr-2 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
+                        class="mr-1.5 font-mono text-[10px] text-slate-400 opacity-70 transition-colors group-hover/link:text-(--accent) dark:text-slate-500"
                         >[ 05 ]</span
                     >Transmissions
                 </HeaderLink>
@@ -436,7 +448,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                 aria-label="Toggle navigation menu"
                 aria-expanded="false"
                 aria-controls="mobile-nav-drawer"
-                class="magnetic-target relative z-50 flex h-9 w-9 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full border border-transparent transition-colors hover:bg-slate-200/60 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 md:hidden dark:hover:bg-white/10 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
+                class="magnetic-target relative z-50 flex h-11 min-h-[44px] w-11 min-w-[44px] cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full border border-transparent transition-colors hover:bg-slate-200/60 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 md:hidden dark:hover:bg-white/10 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
             >
                 <span class="hamburger-line h-0.5 w-5 bg-current"></span>
                 <span class="hamburger-line h-0.5 w-5 bg-current"></span>
@@ -449,12 +461,13 @@ const displayPathShort = formatHeaderPath(displayPath);
 <div
     id="mobile-nav-backdrop"
     class="pointer-events-none fixed inset-0 z-40 bg-slate-950/40 opacity-0 backdrop-blur-md md:hidden"
+    aria-hidden="true"
 >
 </div>
 
 <nav
     id="mobile-nav-drawer"
-    class="glass-surface glass-drawer fixed top-0 right-0 z-40 flex h-full w-72 translate-x-full flex-col gap-6 p-6 pt-24 md:hidden"
+    class="glass-surface glass-drawer fixed top-0 right-0 z-40 flex h-full w-72 translate-x-full flex-col gap-6 overscroll-contain p-6 pt-[calc(5.5rem+env(safe-area-inset-top,0px))] pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] md:hidden"
     aria-label="Mobile navigation"
 >
     <!-- Decorative Grid Motif -->
@@ -475,36 +488,42 @@ const displayPathShort = formatHeaderPath(displayPath);
                 {
                     href: '/',
                     label: 'Home',
+                    key: '1',
                     index: '[ 01 ]',
                     isActive: cleanPath === '' || cleanPath === '/',
                 },
                 {
                     href: '/personnel',
                     label: 'Personnel',
+                    key: '2',
                     index: '[ 02 ]',
                     isActive: cleanPath.startsWith('/personnel'),
                 },
                 {
                     href: '/projects',
                     label: 'Projects',
+                    key: '3',
                     index: '[ 03 ]',
                     isActive: cleanPath.startsWith('/projects'),
                 },
                 {
                     href: '/pedagogy',
                     label: 'Pedagogy',
+                    key: '4',
                     index: '[ 04 ]',
                     isActive: cleanPath.startsWith('/pedagogy'),
                 },
                 {
                     href: '/transmissions',
                     label: 'Transmissions',
+                    key: '5',
                     index: '[ 05 ]',
                     isActive: cleanPath.startsWith('/transmissions'),
                 },
             ].map((item) => (
                 <a
                     href={item.href}
+                    data-nav-key={item.key}
                     data-astro-prefetch="hover"
                     class:list={[
                         'drawer-item group/link relative flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm outline-none focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#0b0e14]',
@@ -527,7 +546,9 @@ const displayPathShort = formatHeaderPath(displayPath);
                         >
                             {item.index}
                         </span>
-                        <span class="tracking-wide">{item.label}</span>
+                        <span class="text-xs font-semibold tracking-widest uppercase">
+                            {item.label}
+                        </span>
                     </div>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -649,16 +670,16 @@ const displayPathShort = formatHeaderPath(displayPath);
             if (signal.aborted) return;
             const currentScroll = window.scrollY;
 
-            // Shrink header and add subtle shadow on scroll (JS fallback only)
+            // Shrink header and toggle glass canopy on scroll (JS fallback)
             if (!hasScrollTimeline) {
-                if (currentScroll > 50) {
+                if (currentScroll > 30) {
                     nav.classList.remove('py-4');
                     nav.classList.add('py-2');
-                    header.classList.add('is-scrolled', 'shadow-md', 'dark:shadow-black/50');
+                    header.classList.add('is-scrolled');
                 } else {
                     nav.classList.add('py-4');
                     nav.classList.remove('py-2');
-                    header.classList.remove('is-scrolled', 'shadow-md', 'dark:shadow-black/50');
+                    header.classList.remove('is-scrolled');
                 }
             }
 
@@ -733,6 +754,12 @@ const displayPathShort = formatHeaderPath(displayPath);
                 toggleBtn.setAttribute('aria-expanded', 'true');
                 document.body.style.overflow = 'hidden';
 
+                // Mark background inert for accessibility (Modern Web Guidance)
+                const mainEl = document.querySelector('main');
+                const footerEl = document.querySelector('footer');
+                if (mainEl) mainEl.setAttribute('inert', '');
+                if (footerEl) footerEl.setAttribute('inert', '');
+
                 // Clear inline style overrides
                 drawer.style.transform = '';
                 backdrop.style.opacity = '';
@@ -753,6 +780,12 @@ const displayPathShort = formatHeaderPath(displayPath);
                 toggleBtn.classList.remove('open');
                 toggleBtn.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
+
+                // Restore background interactivity
+                const mainEl = document.querySelector('main');
+                const footerEl = document.querySelector('footer');
+                if (mainEl) mainEl.removeAttribute('inert');
+                if (footerEl) footerEl.removeAttribute('inert');
 
                 // Clear inline style overrides immediately so the transition runs smoothly
                 drawer.style.transform = '';
@@ -889,6 +922,56 @@ const displayPathShort = formatHeaderPath(displayPath);
         }
     };
 
+    // Global Direct Hotkeys (1 -> Home, 2 -> Personnel, 3 -> Projects, 4 -> Pedagogy, 5 -> Transmissions)
+    const navKeyRoutes: Record<string, string> = {
+        '1': '/',
+        '2': '/personnel',
+        '3': '/projects',
+        '4': '/pedagogy',
+        '5': '/transmissions',
+    };
+
+    if (!(window as any).__hasGlobalNavHotkeys) {
+        (window as any).__hasGlobalNavHotkeys = true;
+        window.addEventListener('keydown', (e: KeyboardEvent) => {
+            // Ignore if modifier keys are pressed (e.g. Cmd+1, Ctrl+1, Alt+1)
+            if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+
+            // Ignore when typing inside any interactive input element or open search dialog
+            const activeEl = document.activeElement;
+            const isTyping =
+                activeEl instanceof HTMLInputElement ||
+                activeEl instanceof HTMLTextAreaElement ||
+                activeEl instanceof HTMLSelectElement ||
+                activeEl?.getAttribute('contenteditable') === 'true' ||
+                activeEl?.closest('search, [popover], dialog');
+
+            if (isTyping) return;
+
+            const targetPath = navKeyRoutes[e.key];
+            if (targetPath) {
+                const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+                const cleanTarget = targetPath.replace(/\/$/, '') || '/';
+                if (currentPath === cleanTarget) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetLink =
+                        document.querySelector<HTMLAnchorElement>(
+                            `.desktop-nav-links a[data-nav-key="${e.key}"]`
+                        ) ||
+                        document.querySelector<HTMLAnchorElement>(
+                            `#mobile-nav-drawer a[data-nav-key="${e.key}"]`
+                        );
+                    if (targetLink) {
+                        e.preventDefault();
+                        targetLink.click();
+                    }
+                }
+            }
+        });
+    }
+
     document.addEventListener('astro:page-load', setupHeader);
 
     document.addEventListener('astro:before-preparation', () => {
@@ -904,6 +987,8 @@ const displayPathShort = formatHeaderPath(displayPath);
             backdrop?.classList.remove('opacity-100', 'pointer-events-auto');
             toggleBtn.classList.remove('open');
             document.body.style.overflow = '';
+            document.querySelector('main')?.removeAttribute('inert');
+            document.querySelector('footer')?.removeAttribute('inert');
         }
 
         if (headerAbortController) {

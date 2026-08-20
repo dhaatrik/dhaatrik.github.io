@@ -2,6 +2,7 @@
 title: 'Why Glassbox Exists — Org Feedback Terminal, Not a Code Sandbox'
 description: 'Honest origin story for Glassbox v4.2.1: cyberpunk employee feedback terminal with Kanban, metrics, and Gemini sentiment — not VM2 sandbox security.'
 pubDate: 2026-06-29
+heroImage: '../../assets/og/glassbox-transmissions.jpg'
 updatedDate: 2026-06-29
 tags: ['glassbox', 'react', 'gemini', 'feedback', 'kanban']
 clearance: 'PUBLIC'

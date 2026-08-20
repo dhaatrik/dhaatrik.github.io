@@ -31,7 +31,7 @@ export const parseTelemetry = (telemetryStr: string) => {
     return {
         colorClass,
         textClass,
-        badgeText: `[ ${badgeText} ]`,
+        badgeText,
         status,
     };
 };

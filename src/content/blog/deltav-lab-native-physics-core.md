@@ -56,19 +56,19 @@ React was never the problem. **Co-locating cert-shaped physics with UI bundling*
 
 ```mermaid
 flowchart LR
-    subgraph browser [Browser — TypeScript/React]
-        UI[Mission Control + VAB]
-        WASM[deltav_core.wasm]
-        UI <-->|SharedArrayBuffer / WASM linear memory| WASM
+    subgraph browser ["Browser — TypeScript/React"]
+        UI["Mission Control + VAB"]
+        WASM["deltav_core.wasm"]
+        UI <--> |"SharedArrayBuffer / WASM linear memory"| WASM
     end
-    subgraph native [Native — Rust crate]
-        CORE[deltav-core integrator]
-        BATCH[Monte Carlo runner]
-        PY[PyO3 bindings]
+    subgraph native ["Native — Rust crate"]
+        CORE["deltav-core integrator"]
+        BATCH["Monte Carlo runner"]
+        PY["PyO3 bindings"]
     end
-    subgraph ops [Ops / Lab]
-        CLI[deltav-cli batch]
-        HIL[UDP HIL bridge]
+    subgraph ops ["Ops / Lab"]
+        CLI["deltav-cli batch"]
+        HIL["UDP HIL bridge"]
     end
     CORE --> WASM
     CORE --> BATCH

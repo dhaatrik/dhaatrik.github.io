@@ -2,6 +2,7 @@
 title: 'Infinite Intelligence — API Keys, Rate Limits, and Recursion Depth Guardrails'
 description: 'MIT-licensed BYOK multi-agent tool v4.0.0: you supply Gemini API keys, pay per token, and must cap debate depth — honest economics and limits.'
 pubDate: 2026-07-15
+heroImage: '../../assets/og/infinite-intelligence-transmissions.jpg'
 updatedDate: 2026-07-15
 tags: ['infinite-intelligence', 'byok', 'mit', 'gemini']
 clearance: 'PUBLIC'

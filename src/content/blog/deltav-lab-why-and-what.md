@@ -104,12 +104,12 @@ Full key map: [simulation_controls.md](https://github.com/dhaatrik/professional-
 
 ## Who Should Use This
 
-| You are…                                               | DeltaV Lab is…                                                                                                    |
-| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| A student learning staging and Δv budgets              | A great sandbox — pair it with [scrollytelling demo](/transmissions/deltav-lab-scrollytelling-demo/) on this site |
-| A hobbyist who loves KSP but wants auditability        | Pull the repo and break my drag model                                                                             |
-| A flight dynamics engineer needing dispersion analysis | Wrong tool — read [limitations post](/transmissions/deltav-lab-not-professional-grade/)                           |
-| Me, at 2 AM, checking a guidance script                | Exactly what I built it for                                                                                       |
+| You are…                                               | DeltaV Lab is…                                                                                         |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| A student learning staging and Δv budgets              | A great sandbox — pair it with [science transmission](/transmissions/deltav-lab-science/) on this site |
+| A hobbyist who loves KSP but wants auditability        | Pull the repo and break my drag model                                                                  |
+| A flight dynamics engineer needing dispersion analysis | Wrong tool — read [limitations post](/transmissions/deltav-lab-not-professional-grade/)                |
+| Me, at 2 AM, checking a guidance script                | Exactly what I built it for                                                                            |
 
 ---
 

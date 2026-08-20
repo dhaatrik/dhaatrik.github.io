@@ -2,6 +2,7 @@
 title: 'FuelDrop — Open Demo, Simulated OTP, Not Production Fuel Ops'
 description: 'MIT-licensed FuelDrop v3.0.0 is a free UX demo — simulated auth, no payments, no live logistics. Honest scope for forkers and evaluators.'
 pubDate: 2026-07-07
+heroImage: '../../assets/og/fueldrop-transmissions.jpg'
 updatedDate: 2026-07-07
 tags: ['fueldrop', 'open-source', 'mit', 'demo']
 clearance: 'PUBLIC'

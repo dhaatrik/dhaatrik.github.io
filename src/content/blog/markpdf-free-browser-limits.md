@@ -2,6 +2,7 @@
 title: 'MarkPDF — No Server, No Math (Yet), Browser-Dependent PDF Output'
 description: 'MIT-licensed, client-only MarkPDF v1.0.0: free to use and fork, with honest limits on LaTeX math, print variance, and large documents.'
 pubDate: 2026-07-04
+heroImage: '../../assets/og/markpdf-transmissions.jpg'
 updatedDate: 2026-07-04
 tags: ['markpdf', 'open-source', 'mit', 'privacy']
 clearance: 'PUBLIC'

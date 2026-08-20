@@ -14,9 +14,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Playwright
+# Playwright & Lighthouse CI
 playwright-report/
 test-results/
+.lighthouseci/
 
 # Local agent/IDE terminal session output (not project source)
 terminals/

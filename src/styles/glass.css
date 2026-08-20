@@ -4,9 +4,8 @@
      * Modifiers: .glass-chrome (fixed header), .glass-drawer (mobile nav).
      */
     .glass-surface,
-    .premium-glass,
-    .bento-card {
-        --glass-bg-opacity: 0.35;
+    .premium-glass {
+        --glass-bg-opacity: 0.85;
         --glass-border-opacity: 0.12;
         --neon-glow-opacity: 0;
         --blueprint-opacity: 0.02;
@@ -35,9 +34,14 @@
             transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    .dark .glass-surface,
+    .dark .premium-glass {
+        --glass-bg-opacity: 0.65;
+        --glass-border-opacity: 0.08;
+    }
+
     .glass-surface::after,
-    .premium-glass::after,
-    .bento-card::after {
+    .premium-glass::after {
         content: '';
         position: absolute;
         inset: 0;
@@ -64,48 +68,75 @@
     .glass-surface:hover,
     .glass-surface:focus-within,
     .premium-glass:hover,
-    .premium-glass:focus-within,
-    .bento-card:hover,
-    .bento-card:focus-within {
-        --glass-bg-opacity: 0.55;
+    .premium-glass:focus-within {
+        --glass-bg-opacity: 0.95;
         --glass-border-opacity: 0.25;
         --neon-glow-opacity: 1;
         --blueprint-opacity: 0.08;
     }
 
+    .dark .glass-surface:hover,
+    .dark .glass-surface:focus-within,
+    .dark .premium-glass:hover,
+    .dark .premium-glass:focus-within {
+        --glass-bg-opacity: 0.8;
+        --glass-border-opacity: 0.2;
+    }
+
     .glass-surface:hover::after,
     .glass-surface:focus-within::after,
     .premium-glass:hover::after,
-    .premium-glass:focus-within::after,
-    .bento-card:hover::after,
-    .bento-card:focus-within::after {
+    .premium-glass:focus-within::after {
         clip-path: inset(0 0 0 0);
     }
 
     /* Fixed chrome: site header */
     .glass-chrome {
-        --glass-bg-opacity: 0.7;
-        --glass-border-opacity: 0.1;
-        --blueprint-opacity: 0.03;
-        backdrop-filter: blur(20px) saturate(140%);
-        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        --glass-bg-opacity: 0;
+        --glass-border-opacity: 0;
+        --blueprint-opacity: 0;
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        background-color: transparent !important;
         border-radius: 0;
         border-top: none;
         border-left: none;
         border-right: none;
+        border-bottom: 1px solid transparent !important;
+        box-shadow: none !important;
+    }
+
+    .glass-chrome::after {
+        opacity: 0;
     }
 
     .glass-chrome.is-scrolled {
-        --glass-bg-opacity: 0.82;
-        --glass-border-opacity: 0.14;
+        --glass-bg-opacity: 0.8;
+        --glass-border-opacity: 0.08;
+        --blueprint-opacity: 0.02;
+        backdrop-filter: blur(16px) saturate(140%);
+        -webkit-backdrop-filter: blur(16px) saturate(140%);
+        background-color: rgba(var(--glass-bg-raw), var(--glass-bg-opacity)) !important;
+        border-bottom: 1px solid rgba(var(--glass-border-raw), var(--glass-border-opacity)) !important;
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .glass-chrome.is-scrolled::after {
+        opacity: var(--blueprint-opacity);
     }
 
     .dark .glass-chrome {
-        --glass-bg-opacity: 0.72;
+        background-color: transparent !important;
+        border-bottom-color: transparent !important;
+        box-shadow: none !important;
     }
 
     .dark .glass-chrome.is-scrolled {
         --glass-bg-opacity: 0.85;
+        --glass-border-opacity: 0.08;
+        background-color: rgba(11, 14, 20, var(--glass-bg-opacity)) !important;
+        border-bottom-color: rgba(255, 255, 255, var(--glass-border-opacity)) !important;
+        box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.4) !important;
     }
 
     /* Mobile navigation drawer */
@@ -125,13 +156,84 @@
         box-shadow: -10px 0 40px -15px var(--accent-glow);
     }
 
+    /* Glass Docking Deck: Site Footer */
+    .glass-footer {
+        --glass-bg-opacity: 0.65;
+        --glass-border-opacity: 0.12;
+        --blueprint-opacity: 0.03;
+        backdrop-filter: blur(20px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        background-color: rgba(var(--glass-bg-raw), var(--glass-bg-opacity));
+        border-radius: 0;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid rgba(var(--glass-border-raw), var(--glass-border-opacity));
+        box-shadow: 0 -4px 24px -2px rgba(0, 0, 0, 0.04);
+    }
+
+    .dark .glass-footer {
+        --glass-bg-opacity: 0.75;
+        --glass-border-opacity: 0.08;
+        background-color: rgba(11, 14, 20, var(--glass-bg-opacity));
+        border-top-color: rgba(255, 255, 255, var(--glass-border-opacity));
+        box-shadow: 0 -8px 32px -4px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Refined Glassmorphism for Bento Project & Transmission Cards */
     .bento-card {
+        --glass-bg-opacity: 0.7;
+        --glass-border-opacity: 0.18;
+        --neon-glow-opacity: 0;
+
+        position: relative;
+        background-color: rgba(var(--glass-bg-raw), var(--glass-bg-opacity)) !important;
+        backdrop-filter: blur(16px) saturate(120%);
+        -webkit-backdrop-filter: blur(16px) saturate(120%);
+        border: 1px solid rgba(var(--glass-border-raw), var(--glass-border-opacity)) !important;
         border-radius: var(--bento-radius);
         padding: var(--bento-padding);
         will-change: transform, opacity;
         transform-style: preserve-3d;
         content-visibility: auto;
         contain-intrinsic-size: 0 320px;
+
+        box-shadow:
+            0 4px 24px -2px rgba(0, 0, 0, 0.04),
+            0 0 calc(var(--neon-glow-opacity) * 15px)
+                rgba(var(--neon-glow-1-rgb), calc(var(--neon-glow-opacity) * 0.35));
+
+        transition:
+            --glass-bg-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            --glass-border-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            --neon-glow-opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dark .bento-card {
+        --glass-bg-opacity: 0.6;
+        --glass-border-opacity: 0.12;
+        box-shadow:
+            0 8px 32px 0 rgba(0, 0, 0, 0.36),
+            0 0 calc(var(--neon-glow-opacity) * 15px)
+                rgba(var(--neon-glow-1-rgb), calc(var(--neon-glow-opacity) * 0.35));
+    }
+
+    .bento-card:hover,
+    .bento-card:focus-within {
+        --glass-bg-opacity: 0.85;
+        --glass-border-opacity: 0.28;
+        --neon-glow-opacity: 0.8;
+    }
+
+    .dark .bento-card:hover,
+    .dark .bento-card:focus-within {
+        --glass-bg-opacity: 0.72;
+        --glass-border-opacity: 0.22;
+        --neon-glow-opacity: 0.8;
     }
 
     .bento-card::before {

@@ -2,6 +2,7 @@
 title: 'Why Vellor Exists — and What It Actually Is'
 description: 'Honest origin story for my free tutoring-management PWA: nine years of watching teachers rent their own student data, and what v4.2 actually ships.'
 pubDate: 2026-07-01
+heroImage: '../../assets/og/vellor-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['pedagogy', 'vellor', 'pwa', 'offline-first']
 clearance: 'PUBLIC'

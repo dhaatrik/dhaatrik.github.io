@@ -45,6 +45,32 @@ Index: [`.agents/README.md`](.agents/README.md)
 5. **JSON-LD** — Homepage: `WebSite` + `FAQPage`; posts: `Article`; use `set:html` pattern in Astro.
 6. **Semantics** — One `h1`, proper heading order, semantic HTML, descriptive image `alt`.
 
+## Commit Guidelines & Conventions
+
+All automated and pair-programming agents MUST make regular, small, atomic commits with clear messages without waiting to be prompted. Commit messages directly inform project logs and changelogs.
+
+- **Message Format**: Follow the **Conventional Commits** specification:
+    ```
+    <type>(<scope>): <short description in lowercase, imperative mood>
+    ```
+- **Types**:
+    - `feat`: A new feature, component, or functional capability (e.g., `feat(header): add orbital telemetry breadcrumbs`)
+    - `fix`: A bug, layout breakage, or visual regression fix (e.g., `fix(drawer): correct swipe gesture velocity threshold`)
+    - `style`: Visual refinements, CSS glassmorphism, token styling, micro-animations (e.g., `style(home): remove redundant hero scroll cue`)
+    - `refactor`: Structural or architectural code improvements without changing behavior (e.g., `refactor(nav): extract breadcrumb helper function`)
+    - `perf`: Performance tuning, CWV, asset optimization, GPU layers (e.g., `perf(marquee): optimize hardware-accelerated transforms`)
+    - `docs`: Documentation, SKILL files, markdown content, or instruction updates (e.g., `docs(agents): add conventional commit guidelines`)
+    - `test`: Adding, updating, or fixing unit and E2E test suites (e.g., `test(a11y): add keyboard trap validation`)
+    - `chore`: Tooling, configs, dependency bumps, or pipeline maintenance (e.g., `chore(deps): update astro to latest patch`)
+
+- **Scopes**: Always specify the component or module in parentheses:
+    - Common scopes: `header`, `home`, `personnel`, `projects`, `pedagogy`, `transmissions`, `ui`, `nav`, `drawer`, `a11y`, `seo`, `tokens`, `skills`, `deps`, `ci`.
+
+- **Style Rules**:
+    - Write in the **imperative mood** ("add", "fix", "remove", not "added" or "fixes").
+    - Keep the first line concise (under 72 characters where possible).
+    - Make **frequent, incremental commits** rather than giant multi-file dumps so changelogs remain granular and readable.
+
 ## Engineering defaults
 
 - Run `npm run build`, `npm test`, and `npm run test:e2e` before considering work done.

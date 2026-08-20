@@ -127,7 +127,7 @@ const breadcrumbSchema = JSON.stringify({
         <main
             id="main-content"
             tabindex="-1"
-            class="layout-container grow py-(--section-gap-mobile) md:py-(--section-gap-desktop)"
+            class="layout-container grow pt-6 pb-(--section-gap-mobile) md:pt-10 md:pb-(--section-gap-desktop)"
         >
             <div class="blog-reveal blog-reveal-1 mb-8">
                 <a
@@ -159,8 +159,26 @@ const breadcrumbSchema = JSON.stringify({
                 <div class="prose-container w-full min-w-0">
                     <!-- Laboratory Report Header -->
                     <div
-                        class="blog-reveal blog-reveal-1 mb-10 rounded-xl border border-slate-200/60 bg-slate-50/60 p-5 font-mono text-xs text-slate-500 shadow-xs backdrop-blur-md dark:border-white/5 dark:bg-[#0f141f] dark:text-slate-400"
+                        class="blog-reveal blog-reveal-1 glass-surface relative mb-10 rounded-xl p-5 font-mono text-xs text-slate-500 shadow-xs dark:text-slate-400"
                     >
+                        {/* Corner Target Accents */}
+                        <span
+                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+
                         <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
                             <div class="space-y-1">
                                 <div
@@ -205,7 +223,7 @@ const breadcrumbSchema = JSON.stringify({
                                         title="Switch to raw markdown mode"
                                         class="cursor-pointer font-bold text-(--accent) uppercase hover:underline focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
                                     >
-                                        [ RENDERED ]
+                                        RENDERED
                                     </button>
                                 </div>
                             </div>
@@ -266,7 +284,7 @@ const breadcrumbSchema = JSON.stringify({
 
                     <div id="rendered-content-container" class="blog-reveal blog-reveal-2">
                         <div
-                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 marker:text-(--accent)"
+                            class="prose prose-slate dark:prose-invert md:prose-lg prose-headings:font-heading prose-headings:tracking-tight prose-headings:scroll-mt-24 prose-a:text-(--accent) hover:prose-a:text-(--accent)/80 prose-strong:text-slate-900 dark:prose-strong:text-white prose-pre:bg-slate-900 dark:prose-pre:bg-[#0b0e14] prose-pre:border prose-pre:border-slate-800 marker:text-(--accent)"
                         >
                             <slot />
                         </div>
@@ -312,7 +330,7 @@ const breadcrumbSchema = JSON.stringify({
                                     y1="2"
                                     y2="15"></line></svg
                             >
-                            [ EXPORT TRANSMISSION DATA ]
+                            EXPORT TRANSMISSION DATA //
                         </button>
                         <div id="export-options" class="mt-4 hidden flex-col gap-2">
                             <a
@@ -444,7 +462,7 @@ const breadcrumbSchema = JSON.stringify({
                                     >
                                         <div class="bg-grid-motif absolute inset-0 opacity-10 dark:opacity-30" />
                                         <div class="relative z-10 flex h-full flex-col justify-between gap-4">
-                                            <span class="font-mono text-[10px] tracking-widest text-slate-400">
+                                            <span class="font-mono text-[10px] tracking-widest text-slate-500 dark:text-slate-400">
                                                 &larr;{' '}
                                                 {isSeriesNav
                                                     ? 'PREVIOUS IN SERIES'
@@ -481,7 +499,7 @@ const breadcrumbSchema = JSON.stringify({
                                     >
                                         <div class="bg-grid-motif absolute inset-0 opacity-10 dark:opacity-30" />
                                         <div class="relative z-10 flex h-full flex-col items-end justify-between gap-4">
-                                            <span class="font-mono text-[10px] tracking-widest text-slate-400">
+                                            <span class="font-mono text-[10px] tracking-widest text-slate-500 dark:text-slate-400">
                                                 {isSeriesNav ? 'NEXT IN SERIES' : 'NEXT LOG'} &rarr;
                                             </span>
                                             <span class="font-bold text-balance text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
@@ -515,36 +533,22 @@ const breadcrumbSchema = JSON.stringify({
                 <!-- Sticky Sidebar TOC -->
                 {
                     headings.length > 0 ? (
-                        <aside class="blog-reveal blog-reveal-4 sticky top-24 hidden max-h-[calc(100vh-8rem)] w-full overflow-y-auto pr-2 lg:block">
-                            <div class="premium-glass rounded-xl p-4">
-                                <h3 class="mb-4 flex items-center gap-2 font-mono text-[10px] tracking-widest text-slate-500 uppercase">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="12"
-                                        height="12"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    >
-                                        <>
-                                            <line x1="21" x2="14" y1="4" y2="4" />
-                                            <line x1="10" x2="3" y1="4" y2="4" />
-                                            <line x1="21" x2="12" y1="12" y2="12" />
-                                            <line x1="8" x2="3" y1="12" y2="12" />
-                                            <line x1="21" x2="16" y1="20" y2="20" />
-                                            <line x1="12" x2="3" y1="20" y2="20" />
-                                            <line x1="14" x2="14" y1="2" y2="6" />
-                                            <line x1="8" x2="8" y1="10" y2="14" />
-                                            <line x1="16" x2="16" y1="18" y2="22" />
-                                        </>
-                                    </svg>
-                                    INDEX
-                                </h3>
+                        <aside class="blog-reveal blog-reveal-4 sticky top-24 hidden max-h-[calc(100vh-8rem)] w-full overflow-x-hidden overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] lg:block [&::-webkit-scrollbar]:hidden">
+                            <div class="glass-surface rounded-2xl p-4.5 shadow-xs transition-colors">
+                                <div class="mb-4 flex items-center justify-between border-b border-slate-200/80 pb-2.5 dark:border-white/10">
+                                    <h3 class="flex items-center gap-2 font-mono text-[11px] font-bold tracking-widest text-slate-800 uppercase dark:text-slate-200">
+                                        <span class="relative flex h-2 w-2">
+                                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-(--accent) opacity-75" />
+                                            <span class="relative inline-flex h-2 w-2 rounded-full bg-(--accent) shadow-[0_0_6px_var(--accent)]" />
+                                        </span>
+                                        INDEX
+                                    </h3>
+                                    <span class="font-mono text-[9px] font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
+                                        {headings.length} NODES
+                                    </span>
+                                </div>
                                 <nav id="toc">
-                                    <ul class="flex flex-col space-y-2 font-mono text-sm">
+                                    <ul class="flex flex-col space-y-1 font-mono text-sm">
                                         {headings.map(
                                             (
                                                 heading: {
@@ -557,14 +561,17 @@ const breadcrumbSchema = JSON.stringify({
                                                 <li class="toc-item">
                                                     <a
                                                         href={`#${heading.slug}`}
-                                                        class="block border-l-2 border-transparent py-1 text-xs text-slate-600 transition-colors hover:text-(--accent) dark:text-slate-400"
+                                                        class="group/toc relative block rounded-md py-1.5 pr-2 text-xs text-slate-600 transition-all hover:bg-slate-200/40 hover:text-(--accent) focus-visible:bg-slate-200/40 focus-visible:text-(--accent) dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-(--accent)"
                                                         data-slug={heading.slug}
-                                                        style={`padding-left: ${(heading.depth - 1) * 0.75}rem;`}
+                                                        style={`padding-left: ${(heading.depth - 1) * 0.75 + 0.6}rem;`}
                                                     >
-                                                        <span class="text-slate-400 dark:text-slate-600">
+                                                        <span class="toc-indicator absolute top-1.5 bottom-1.5 left-1 w-[2px] rounded-full bg-transparent transition-all duration-200 group-hover/toc:bg-(--accent)/40" />
+                                                        <span class="toc-index mr-1 font-mono text-[10px] text-slate-500 opacity-80 transition-colors group-hover/toc:text-(--accent) dark:text-slate-400">
                                                             {String(index + 1).padStart(2, '0')} //
                                                         </span>{' '}
-                                                        {heading.text}
+                                                        <span class="toc-text leading-relaxed transition-colors">
+                                                            {heading.text}
+                                                        </span>
                                                     </a>
                                                 </li>
                                             )

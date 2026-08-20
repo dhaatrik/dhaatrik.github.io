@@ -84,13 +84,13 @@ const updateSpotlights = () => {
         const dy = mouseY - centerY;
         const distance = Math.hypot(dx, dy);
 
-        const threshold = 80;
+        const threshold = 55;
 
         if (distance < threshold) {
             const ratio = 1 - distance / threshold;
-            const pullX = dx * 0.35 * ratio;
-            const pullY = dy * 0.35 * ratio;
-            const scale = 1 + ratio * 0.06;
+            const pullX = dx * 0.16 * ratio;
+            const pullY = dy * 0.16 * ratio;
+            const scale = 1 + ratio * 0.02;
 
             el.style.transition = 'none';
             el.style.transform = `translate(${pullX}px, ${pullY}px) scale(${scale})`;
@@ -98,17 +98,10 @@ const updateSpotlights = () => {
         } else if (el.getAttribute('data-magnetic-active') === 'true') {
             el.style.transform = 'translate(0px, 0px) scale(1)';
             if (el.classList.contains('transition-spring')) {
-                const supportsLinear =
-                    window.CSS && CSS.supports('animation-timing-function', 'linear(0, 1)');
-                if (supportsLinear) {
-                    el.style.transition =
-                        'transform 0.8s var(--ease-spring-bounce), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
-                } else {
-                    el.style.transition =
-                        'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
-                }
+                el.style.transition =
+                    'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease';
             } else {
-                el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+                el.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
             }
             el.setAttribute('data-magnetic-active', 'false');
         }

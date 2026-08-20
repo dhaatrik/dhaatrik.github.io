@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('BlogPost Interactive Features', () => {
     test.beforeEach(async ({ page }) => {
         // Navigate to a post known to have interactive formulas and code blocks
-        await page.goto('/transmissions/deltav-lab-scrollytelling-demo/');
+        await page.goto('/transmissions/deltav-lab-science/');
         await page.locator('#toggle-mode-btn').waitFor({ state: 'visible' });
     });
 
@@ -17,7 +17,7 @@ test.describe('BlogPost Interactive Features', () => {
         // Initially rendered content should be visible, raw content should be hidden
         await expect(renderedContent).toBeVisible();
         await expect(rawContent).toBeHidden();
-        await expect(toggleBtn).toHaveText('[ RENDERED ]');
+        await expect(toggleBtn).toHaveText(/RENDERED/);
 
         // Click toggle to switch to RAW mode
         await toggleBtn.click();
@@ -25,7 +25,7 @@ test.describe('BlogPost Interactive Features', () => {
         // Rendered content should be hidden, raw content should be visible
         await expect(renderedContent).toBeHidden();
         await expect(rawContent).toBeVisible();
-        await expect(toggleBtn).toHaveText('[ RAW ]');
+        await expect(toggleBtn).toHaveText(/RAW/);
 
         // Click toggle to switch back to RENDERED mode
         await toggleBtn.click();
@@ -33,28 +33,25 @@ test.describe('BlogPost Interactive Features', () => {
         // Rendered content should be visible again, raw content should be hidden
         await expect(renderedContent).toBeVisible();
         await expect(rawContent).toBeHidden();
-        await expect(toggleBtn).toHaveText('[ RENDERED ]');
+        await expect(toggleBtn).toHaveText(/RENDERED/);
     });
 
     test('KaTeX formula inspector should trigger popover tooltip on click and dismiss on document click', async ({
         page,
     }) => {
-        const mathBlock = page
-            .locator('p:has-text("Tsiolkovsky rocket equation") + .katex-display .katex')
-            .first();
+        const mathBlock = page.locator('.katex-display').first();
         await mathBlock.scrollIntoViewIfNeeded();
 
         // Initially no math inspector tooltip should exist
         await expect(page.locator('#math-inspector-tooltip')).toHaveCount(0);
 
-        // Click math block to open inspector tooltip (using dispatchEvent for robustness on inline KaTeX spans)
-        await mathBlock.dispatchEvent('click');
+        // Click math block to open inspector tooltip
+        await mathBlock.click();
 
         // Tooltip should be visible and contain the breakdown keyword
         const tooltip = page.locator('#math-inspector-tooltip');
         await expect(tooltip).toBeVisible();
         await expect(tooltip).toContainText('INSPECTING');
-        await expect(tooltip).toContainText('m0: Initial Mass'); // Part of Tsiolkovsky rocket equation definition
 
         // Click outside (e.g., body) to dismiss
         await page.click('body');
@@ -116,5 +113,17 @@ test.describe('BlogPost Interactive Features', () => {
 
         const path = await download.path();
         expect(path).toBeTruthy();
+    });
+
+    test('Mermaid flowchart should render as SVG on posts with mermaid diagrams', async ({
+        page,
+    }) => {
+        await page.goto('/transmissions/deltav-lab-native-physics-core/', {
+            waitUntil: 'networkidle',
+        });
+        const mermaidPre = page.locator('pre.mermaid');
+        await expect(mermaidPre).toBeVisible();
+        const mermaidSvg = mermaidPre.locator('svg');
+        await expect(mermaidSvg).toBeVisible({ timeout: 15000 });
     });
 });

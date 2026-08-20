@@ -2,6 +2,7 @@
 title: 'Vellor Mission Log: Power-Tutor Ops and the Storage Correction'
 description: 'Engineering diary on Vellor v4.2 — roster performance, PWA cache fights, and admitting I wrote IndexedDB when the repo actually uses AES-GCM localStorage.'
 pubDate: 2026-06-17
+heroImage: '../../assets/og/vellor-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['pedagogy', 'vellor', 'pwa', 'offline-first']
 clearance: 'PUBLIC'

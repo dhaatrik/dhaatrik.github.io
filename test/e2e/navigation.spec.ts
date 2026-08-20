@@ -37,6 +37,28 @@ test.describe('Header Navigation & Scroll Behaviors', () => {
             expect(transform === 'translateY(0)' || transform === 'translateY(0px)').toBe(true);
         }).toPass();
     });
+
+    test('Global number hotkeys 1-5 should navigate between main sections', async ({ page }) => {
+        // Press '2' to navigate to /personnel
+        await page.keyboard.press('2');
+        await expect(page).toHaveURL(/.*personnel/);
+
+        // Press '3' to navigate to /projects
+        await page.keyboard.press('3');
+        await expect(page).toHaveURL(/.*projects/);
+
+        // Press '4' to navigate to /pedagogy
+        await page.keyboard.press('4');
+        await expect(page).toHaveURL(/.*pedagogy/);
+
+        // Press '5' to navigate to /transmissions
+        await page.keyboard.press('5');
+        await expect(page).toHaveURL(/.*transmissions/);
+
+        // Press '1' to return to Home
+        await page.keyboard.press('1');
+        await expect(page).toHaveURL(/\/$/);
+    });
 });
 
 test.describe('Mobile Navigation Drawer', () => {

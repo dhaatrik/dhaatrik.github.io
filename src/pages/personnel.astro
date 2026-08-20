@@ -36,11 +36,11 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
         <main
             id="main-content"
             tabindex="-1"
-            class="relative flex grow flex-col gap-(--section-gap-mobile) overflow-x-hidden py-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:py-(--section-gap-desktop)"
+            class="relative flex grow flex-col gap-(--section-gap-mobile) overflow-x-hidden pt-6 pb-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:pt-10 md:pb-(--section-gap-desktop)"
         >
             <div
                 id="reticle-bg"
-                class="pointer-events-none absolute top-32 right-0 -z-10 text-slate-900 opacity-5 transition-transform duration-300 ease-out dark:text-white"
+                class="pointer-events-none absolute top-12 right-0 -z-10 text-slate-900 opacity-5 transition-transform duration-300 ease-out md:top-16 dark:text-white"
             >
                 <svg
                     width="400"
@@ -273,7 +273,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                         x="171"
                         y="98"
                         font-family="monospace"
-                        font-size="5"
+                        font-size="4"
                         fill="currentColor"
                         opacity="0.6"
                         transform="rotate(90 171 98)">H_DIM: 88mm</text
@@ -293,59 +293,57 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                         x="128"
                         y="125"
                         font-family="monospace"
-                        font-size="5"
+                        font-size="4"
                         fill="currentColor"
                         opacity="0.5">θ = 45°</text
                     >
 
                     <!-- Blueprint labels -->
                     <text
-                        x="110"
-                        y="30"
+                        x="115"
+                        y="32"
                         font-family="monospace"
-                        font-size="6"
+                        font-size="4.5"
                         fill="currentColor"
-                        opacity="0.6">MODEL: PERSONNEL_SPEC</text
+                        opacity="0.7">MODEL: PERSONNEL_SPEC</text
                     >
                     <text
-                        x="110"
-                        y="38"
+                        x="115"
+                        y="39"
                         font-family="monospace"
-                        font-size="6"
+                        font-size="4"
                         fill="currentColor"
-                        opacity="0.6">DOSS_REF: DHAATRIK.C</text
+                        opacity="0.5">DOSS_REF: DHAATRIK.C</text
                     >
                     <text
-                        x="110"
+                        x="115"
                         y="46"
                         font-family="monospace"
-                        font-size="6"
+                        font-size="4"
                         fill="currentColor"
-                        opacity="0.6">STATUS: OPERATIONAL</text
+                        opacity="0.5">STATUS: OPERATIONAL</text
                     >
                     <text
-                        x="25"
-                        y="170"
-                        font-family="monospace"
-                        font-size="6"
-                        fill="currentColor"
-                        opacity="0.6">SYS.BIOMETRIC_RECON // V2.0</text
-                    >
-                    <text
-                        x="25"
-                        y="178"
+                        x="24"
+                        y="172"
                         font-family="monospace"
                         font-size="5"
                         fill="currentColor"
-                        opacity="0.4">DHAATRIK.DOSSIER.CORE</text
+                        opacity="0.8">SYS.BIOMETRIC_RECON // V2.0</text
+                    >
+                    <text
+                        x="24"
+                        y="179"
+                        font-family="monospace"
+                        font-size="4"
+                        fill="currentColor"
+                        opacity="0.6">DHAATRIK.DOSSIER.CORE</text
                     >
                 </svg>
             </div>
 
-            <section id="hero-section" class="layout-container relative pb-16">
-                <div
-                    class="mb-16 flex flex-col items-center gap-8 md:flex-row-reverse md:items-start"
-                >
+            <section id="hero-section" class="layout-container relative">
+                <div class="flex flex-col items-center gap-8 md:flex-row-reverse md:items-start">
                     <div
                         class="relative mx-auto w-full max-w-65 shrink-0 p-3 sm:max-w-80 md:mx-0 md:w-80"
                     >
@@ -400,7 +398,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                 sizes="(max-width: 640px) 260px, (max-width: 768px) 320px, 320px"
                                 formats={['avif', 'webp']}
                                 fallbackFormat="jpeg"
-                                class="aspect-square w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
+                                class="aspect-square w-full object-cover transition-all duration-500 hover:scale-[1.02]"
                             />
                         </div>
                     </div>
@@ -413,10 +411,10 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                             class="space-y-6 text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                         >
                             <p>
-                                I'm an engineer who can't stop asking "but why does that actually
-                                work?" I build data-sovereign systems by stripping problems down to
-                                first principles — and I log the messy parts here so future-me
-                                doesn't repeat the same mistakes.
+                                I build software by asking why things work under the hood until I
+                                reach the physics or mathematical fundamentals. I focus on
+                                data-sovereign systems built from first principles, logging the
+                                messy parts here so future-me avoids the same traps.
                             </p>
 
                             <div
@@ -428,18 +426,14 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                     // OPERATIONAL PHILOSOPHY
                                 </div>
                                 <p>
-                                    I don't try to reinvent foundation models from scratch. I'm an
-                                    execution engine — I use AI to ship functional, data-sovereign
-                                    systems that solve real problems. Fancy research papers can
-                                    wait.
+                                    I don't train foundation models from scratch. I build real-world
+                                    systems around them. My focus is writing clean, local-first code
+                                    that solves concrete problems for users without locking them
+                                    into proprietary black boxes.
                                 </p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="scroll-cue" aria-hidden="true">
-                    <span class="scroll-cue-line"></span>
-                    <span class="scroll-cue-label">scroll</span>
                 </div>
             </section>
 
@@ -489,16 +483,17 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                 <p
                                     class="leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    Right now I'm deep in agtech — trying to put AI where it
-                                    actually helps farmers, not where a pitch deck says it should. I
-                                    also build tools for educators, like <a
+                                    Right now I am working on agtech systems that solve actual soil
+                                    and crop logistics rather than pitch-deck hype. I also develop
+                                    tools for teachers, including <a
                                         href="https://github.com/dhaatrik"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label="View Vellor on GitHub (opens in a new tab)"
                                         class="font-medium text-(--accent) decoration-dashed underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)"
                                         >Vellor</a
-                                    >, an offline-first tool for independent educators.
+                                    >: an offline-first workspace designed for independent
+                                    educators.
                                 </p>
                             </div>
 
@@ -509,7 +504,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                     <span class="text-slate-400 uppercase dark:text-slate-500"
                                         >// ACTIVE FOCUS NODE</span
                                     >
-                                    <span class="font-bold text-(--accent)">[ STATUS ]</span>
+                                    <span class="font-bold text-(--accent)">STATUS //</span>
                                 </div>
                                 <ul
                                     class="space-y-2.5 font-mono text-[11px] text-slate-600 dark:text-(--text-secondary)"
@@ -522,7 +517,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                             Agritech AI Solutions
                                         </span>
                                         <span class="font-bold text-green-600 dark:text-green-400"
-                                            >[ R&D_ACTIVE ]</span
+                                            >R&D ACTIVE</span
                                         >
                                     </li>
                                     <li class="flex items-center justify-between">
@@ -531,8 +526,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                             ></span>
                                             Vellor Protocol
                                         </span>
-                                        <span class="font-bold text-(--accent)">[ LOCAL_CORE ]</span
-                                        >
+                                        <span class="font-bold text-(--accent)">LOCAL CORE</span>
                                     </li>
                                     <li class="flex items-center justify-between">
                                         <span class="flex items-center gap-2">
@@ -542,7 +536,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                             Data-Sovereign Tooling
                                         </span>
                                         <span class="font-bold text-slate-500 dark:text-slate-400"
-                                            >[ DEPLOYED ]</span
+                                            >DEPLOYED</span
                                         >
                                     </li>
                                 </ul>
@@ -588,10 +582,10 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                 <p
                                     class="leading-relaxed text-slate-600 dark:text-(--text-secondary)"
                                 >
-                                    My curiosity pulls me toward the weird corners of reality.
-                                    Lately that's rocket math (DeltaV Lab is my excuse), quantum
-                                    mechanics I barely understand, and psychology — nine years of
-                                    teaching will do that to you.
+                                    Lately my study time goes toward orbital mechanics (DeltaV Lab
+                                    is my testbed), applied physics, and cognitive psychology. Nine
+                                    years of teaching taught me that debugging human understanding
+                                    is just as challenging as debugging code.
                                 </p>
                             </div>
 
@@ -604,7 +598,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                     <span class="text-slate-400 uppercase dark:text-slate-500"
                                         >// RESEARCH NODES</span
                                     >
-                                    <span class="font-bold text-(--accent)">[ DEPTH ]</span>
+                                    <span class="font-bold text-(--accent)">RESEARCH DEPTH //</span>
                                 </div>
                                 <div class="space-y-3">
                                     <div>
@@ -752,19 +746,16 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                 <p>
                                     <strong class="font-medium text-slate-900 dark:text-white"
                                         >FuelDrop</strong
-                                    > was more than a codebase for me — it was my main startup bet in
-                                    Q1 2025. I wanted on-demand fuel logistics; the repo at
-                                    <strong class="font-medium text-slate-800 dark:text-slate-200"
-                                        >v3.0.0</strong
-                                    >
-                                    is a frontend UX demo — polished ordering and captain surfaces, no
-                                    WebSocket backend, no dispatch ops. The honest confession is published:
+                                    > started as my primary startup attempt in Q1 2025 for on-demand fuel
+                                    logistics. Version 3.0.0 exists as a frontend UX prototype with simulated
+                                    ordering surfaces and driver state. The honest breakdown of what worked
+                                    and where the operational model broke is documented in the
                                     <a
                                         href="/transmissions/fueldrop-why-and-what/"
                                         data-astro-prefetch="hover"
                                         class="font-medium text-(--accent) underline decoration-dashed underline-offset-4 transition-colors hover:text-slate-900 dark:hover:text-white"
                                     >
-                                        why-and-what
+                                        why-and-what mission log
                                     </a>.
                                 </p>
                                 <div class="my-4 border-l-2 border-(--accent) py-1 pl-4">
@@ -914,7 +905,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                     class="magnetic-target rounded border border-(--accent)/20 bg-(--accent)/10 px-4 py-2 font-mono text-xs tracking-widest text-(--accent) transition-all hover:bg-(--accent)/20 active:scale-[0.98]"
                                     aria-label="See how I actually teach"
                                 >
-                                    [ EXPLORE MY METHOD &rarr; ]
+                                    EXPLORE MY METHOD &rarr;
                                 </a>
                             </div>
                         </div>
@@ -989,7 +980,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                         </div>
                         <div class="relative z-10 mt-4 space-y-3">
                             <div
-                                class="rounded-lg border border-slate-100 bg-slate-50 p-3 transition-colors group-hover:border-(--accent)/30 dark:border-white/5 dark:bg-black/20"
+                                class="rounded-lg border border-slate-200/80 bg-slate-100/70 p-3 transition-colors group-hover:border-(--accent)/30 dark:border-white/5 dark:bg-black/20"
                             >
                                 <span
                                     class="mb-1 block text-xs tracking-wider text-slate-500 uppercase dark:text-slate-400"
@@ -1015,39 +1006,339 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
 
                     {/* 6. Monthly Insights Terminal Snippet */}
                     <div
-                        class="bento-card flex h-full flex-col overflow-hidden border-[#333] bg-[#1e1e1e] p-0 text-left dark:border-[#333] dark:bg-[#1e1e1e]"
+                        class="glass-surface bento-card flex h-full flex-col overflow-hidden p-0 text-left shadow-xs transition-colors"
                     >
                         <div
-                            class="flex items-center gap-2 border-b border-[#111] bg-[#2d2d2d] px-4 py-2"
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-4 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
                         >
-                            <div class="flex gap-1.5">
-                                <div class="h-3 w-3 rounded-full bg-[#ff5f56]"></div>
-                                <div class="h-3 w-3 rounded-full bg-[#ffbd2e]"></div>
-                                <div class="h-3 w-3 rounded-full bg-[#27c93f]"></div>
+                            <div class="flex items-center gap-2">
+                                <div class="flex gap-1.5">
+                                    <div class="h-3 w-3 rounded-full bg-[#ff5f56]/90 shadow-xs">
+                                    </div>
+                                    <div class="h-3 w-3 rounded-full bg-[#ffbd2e]/90 shadow-xs">
+                                    </div>
+                                    <div class="h-3 w-3 rounded-full bg-[#27c93f]/90 shadow-xs">
+                                    </div>
+                                </div>
+                                <span
+                                    class="ml-2 font-mono text-xs font-semibold text-slate-600 dark:text-slate-400"
+                                    >bash — reflection</span
+                                >
                             </div>
-                            <span class="ml-2 font-mono text-xs text-[#888]">bash</span>
+                            <span class="font-mono text-[10px] text-slate-400 dark:text-slate-500"
+                                >RO/SYS</span
+                            >
                         </div>
-                        <div class="grow p-4 font-mono text-sm">
-                            <div class="mb-2 text-[#50fa7b]">$ cat /logs/may-reflection.txt</div>
+                        <div class="grow p-5 font-mono text-xs leading-relaxed sm:text-sm">
+                            <div
+                                class="mb-3 flex items-center gap-2 text-emerald-600 dark:text-[#50fa7b]"
+                            >
+                                <span class="font-bold">~ $</span>
+                                <span class="font-semibold text-slate-800 dark:text-slate-200"
+                                    >cat /logs/may-reflection.txt</span
+                                >
+                            </div>
                             <div
                                 id="terminal-snippet"
-                                class="leading-relaxed text-[#f8f8f2]"
+                                class="leading-relaxed text-slate-700 dark:text-slate-200"
                                 data-text="Optimization is a trap if you haven't nailed the fundamentals first. Build robust, scale later."
                             >
-                                <span class="text-[#bd93f9]">"</span><span class="animate-pulse"
+                                <span class="font-bold text-purple-600 dark:text-[#bd93f9]">"</span
+                                ><span class="animate-pulse text-emerald-600 dark:text-[#50fa7b]"
                                     >█</span
                                 >
                             </div>
-                            <div class="mt-2 animate-pulse text-[#50fa7b]">_</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* 8. Interactive Terminal Contact CTA */}
+            {/* 8. My Tech Stack */}
+            <section class="layout-container content-visibility-auto-tech-stack reveal-on-scroll">
+                <h2
+                    class="mb-2 text-3xl font-bold tracking-tight text-balance text-slate-900 dark:text-white"
+                >
+                    My Tech Stack
+                </h2>
+                <p
+                    class="mb-8 max-w-3xl font-mono text-[10px] leading-relaxed tracking-tight text-slate-500 uppercase dark:text-slate-400"
+                >
+                    // SYSTEM_INVENTORY: TECHNICAL ASSETS REGISTERED FOR TARGETED SYSTEM
+                    ARCHITECTURE AND HIGH-VELOCITY DEPLOYMENT. UTILITY PRIORITIZED OVER SYNTAX
+                    MEMORIZATION.
+                </p>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    {/* MODULE 01: Frontend */}
+                    <div
+                        class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
+                    >
+                        <!-- Corner Target Accents -->
+                        <span
+                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+
+                        <!-- Corner Labels -->
+                        <span
+                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
+                            >// MODULE_01 // FE_SYS</span
+                        >
+                        <span
+                            class="absolute top-2 right-3 font-mono text-[8px] font-semibold tracking-wider text-(--accent) uppercase"
+                            >ACTIVE</span
+                        >
+
+                        <div>
+                            <h3
+                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
+                                data-original="Frontend Subsystem"
+                            >
+                                Frontend Subsystem
+                            </h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {
+                                    techGroups.Frontend.map((tech) => (
+                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
+                                            <span>{tech.name}</span>
+                                            {tech.deployment && (
+                                                <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
+                                                    {tech.deployment}
+                                                </span>
+                                            )}
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Bottom Corner Labels -->
+                        <span
+                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
+                            >REF_ID: FE-01</span
+                        >
+                        <span
+                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
+                            >CAP: 100%</span
+                        >
+                    </div>
+
+                    {/* MODULE 02: Backend */}
+                    <div
+                        class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
+                    >
+                        <!-- Corner Target Accents -->
+                        <span
+                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+
+                        <!-- Corner Labels -->
+                        <span
+                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
+                            >// MODULE_02 // BE_SYS</span
+                        >
+                        <span
+                            class="absolute top-2 right-3 font-mono text-[8px] font-semibold tracking-wider text-(--accent) uppercase"
+                            >ACTIVE</span
+                        >
+
+                        <div>
+                            <h3
+                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
+                                data-original="Backend Engine"
+                            >
+                                Backend Engine
+                            </h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {
+                                    techGroups.Backend.map((tech) => (
+                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
+                                            <span>{tech.name}</span>
+                                            {tech.deployment && (
+                                                <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
+                                                    {tech.deployment}
+                                                </span>
+                                            )}
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Bottom Corner Labels -->
+                        <span
+                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
+                            >REF_ID: BE-02</span
+                        >
+                        <span
+                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
+                            >CAP: 100%</span
+                        >
+                    </div>
+
+                    {/* MODULE 03: Data & Cloud */}
+                    <div
+                        class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
+                    >
+                        <!-- Corner Target Accents -->
+                        <span
+                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+
+                        <!-- Corner Labels -->
+                        <span
+                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
+                            >// MODULE_03 // DB_SYS</span
+                        >
+                        <span
+                            class="absolute top-2 right-3 font-mono text-[8px] font-semibold tracking-wider text-(--accent) uppercase"
+                            >ACTIVE</span
+                        >
+
+                        <div>
+                            <h3
+                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
+                                data-original="Data & Cloud"
+                            >
+                                Data & Cloud
+                            </h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {
+                                    techGroups.Cloud_Db.map((tech) => (
+                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
+                                            <span>{tech.name}</span>
+                                            {tech.deployment && (
+                                                <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
+                                                    {tech.deployment}
+                                                </span>
+                                            )}
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Bottom Corner Labels -->
+                        <span
+                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
+                            >REF_ID: DB-03</span
+                        >
+                        <span
+                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
+                            >CAP: 100%</span
+                        >
+                    </div>
+
+                    {/* MODULE 04: AI & Learning */}
+                    <div
+                        class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
+                    >
+                        <!-- Corner Target Accents -->
+                        <span
+                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+                        <span
+                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
+                            >+</span
+                        >
+
+                        <!-- Corner Labels -->
+                        <span
+                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
+                            >// MODULE_04 // AI_SYS</span
+                        >
+                        <span
+                            class="absolute top-2 right-3 font-mono text-[8px] font-semibold tracking-wider text-(--accent) uppercase"
+                            >ACTIVE</span
+                        >
+
+                        <div>
+                            <h3
+                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
+                                data-original="AI & Learning"
+                            >
+                                AI & Learning
+                            </h3>
+                            <div class="flex flex-wrap gap-2.5">
+                                {
+                                    techGroups.AI_Math.map((tech) => (
+                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
+                                            <span>{tech.name}</span>
+                                            {tech.deployment && (
+                                                <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
+                                                    {tech.deployment}
+                                                </span>
+                                            )}
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Bottom Corner Labels -->
+                        <span
+                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
+                            >REF_ID: AI-04</span
+                        >
+                        <span
+                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
+                            >CAP: 100%</span
+                        >
+                    </div>
+                </div>
+            </section>
+
+            {/* 9. Interactive Terminal Contact CTA */}
             <section class="layout-container reveal-on-scroll">
                 <div
-                    class="bento-card group relative flex flex-col items-center overflow-hidden border-slate-200 bg-slate-50 p-8 text-center md:p-12 dark:border-[#30363d] dark:bg-[#0d1117]"
+                    class="glass-surface bento-card group relative flex flex-col items-center overflow-hidden p-8 text-center md:p-12"
                 >
                     <div class="bg-grid-motif pointer-events-none absolute inset-0 opacity-10">
                     </div>
@@ -1088,287 +1379,6 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                                 >
                             </a>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="layout-container content-visibility-auto-tech-stack reveal-on-scroll">
-                <h2
-                    class="mb-2 text-3xl font-bold tracking-tight text-balance text-slate-900 dark:text-white"
-                >
-                    My Tech Stack
-                </h2>
-                <p
-                    class="mb-8 max-w-3xl font-mono text-[10px] leading-relaxed tracking-tight text-slate-500 uppercase dark:text-slate-400"
-                >
-                    // SYSTEM_INVENTORY: TECHNICAL ASSETS REGISTERED FOR TARGETED SYSTEM
-                    ARCHITECTURE AND HIGH-VELOCITY DEPLOYMENT. UTILITY PRIORITIZED OVER SYNTAX
-                    MEMORIZATION.
-                </p>
-
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    {/* MODULE 01: Frontend */}
-                    <div
-                        class="relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
-                    >
-                        <!-- Corner Target Accents -->
-                        <span
-                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-
-                        <!-- Corner Labels -->
-                        <span
-                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
-                            >// MODULE_01 // FE_SYS</span
-                        >
-                        <span
-                            class="absolute top-2 right-3 font-mono text-[8px] tracking-wider text-(--accent) uppercase"
-                            >[SYS.ACTIVE]</span
-                        >
-
-                        <div>
-                            <h3
-                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
-                                data-original="Frontend Subsystem"
-                            >
-                                Frontend Subsystem
-                            </h3>
-                            <div class="flex flex-wrap gap-2.5">
-                                {
-                                    techGroups.Frontend.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
-                                            <span>{tech.name}</span>
-                                            {tech.deployment && (
-                                                <span class="font-mono text-[8px] tracking-widest text-slate-400 uppercase dark:text-slate-500">
-                                                    {tech.deployment}
-                                                </span>
-                                            )}
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                        </div>
-
-                        <!-- Bottom Corner Labels -->
-                        <span
-                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                            >REF_ID: FE-01</span
-                        >
-                        <span
-                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                            >CAP: 100%</span
-                        >
-                    </div>
-
-                    {/* MODULE 02: Backend */}
-                    <div
-                        class="relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
-                    >
-                        <!-- Corner Target Accents -->
-                        <span
-                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-
-                        <!-- Corner Labels -->
-                        <span
-                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
-                            >// MODULE_02 // BE_SYS</span
-                        >
-                        <span
-                            class="absolute top-2 right-3 font-mono text-[8px] tracking-wider text-(--accent) uppercase"
-                            >[SYS.ACTIVE]</span
-                        >
-
-                        <div>
-                            <h3
-                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
-                                data-original="Backend Engine"
-                            >
-                                Backend Engine
-                            </h3>
-                            <div class="flex flex-wrap gap-2.5">
-                                {
-                                    techGroups.Backend.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
-                                            <span>{tech.name}</span>
-                                            {tech.deployment && (
-                                                <span class="font-mono text-[8px] tracking-widest text-slate-400 uppercase dark:text-slate-500">
-                                                    {tech.deployment}
-                                                </span>
-                                            )}
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                        </div>
-
-                        <!-- Bottom Corner Labels -->
-                        <span
-                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                            >REF_ID: BE-02</span
-                        >
-                        <span
-                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                            >CAP: 100%</span
-                        >
-                    </div>
-
-                    {/* MODULE 03: Data & Cloud */}
-                    <div
-                        class="relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
-                    >
-                        <!-- Corner Target Accents -->
-                        <span
-                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-
-                        <!-- Corner Labels -->
-                        <span
-                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
-                            >// MODULE_03 // DB_SYS</span
-                        >
-                        <span
-                            class="absolute top-2 right-3 font-mono text-[8px] tracking-wider text-(--accent) uppercase"
-                            >[SYS.ACTIVE]</span
-                        >
-
-                        <div>
-                            <h3
-                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
-                                data-original="Data & Cloud"
-                            >
-                                Data & Cloud
-                            </h3>
-                            <div class="flex flex-wrap gap-2.5">
-                                {
-                                    techGroups.Cloud_Db.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
-                                            <span>{tech.name}</span>
-                                            {tech.deployment && (
-                                                <span class="font-mono text-[8px] tracking-widest text-slate-400 uppercase dark:text-slate-500">
-                                                    {tech.deployment}
-                                                </span>
-                                            )}
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                        </div>
-
-                        <!-- Bottom Corner Labels -->
-                        <span
-                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                            >REF_ID: DB-03</span
-                        >
-                        <span
-                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                            >CAP: 100%</span
-                        >
-                    </div>
-
-                    {/* MODULE 04: AI & Learning */}
-                    <div
-                        class="relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
-                    >
-                        <!-- Corner Target Accents -->
-                        <span
-                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-
-                        <!-- Corner Labels -->
-                        <span
-                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-400 uppercase dark:text-slate-500"
-                            >// MODULE_04 // AI_SYS</span
-                        >
-                        <span
-                            class="absolute top-2 right-3 font-mono text-[8px] tracking-wider text-(--accent) uppercase"
-                            >[SYS.ACTIVE]</span
-                        >
-
-                        <div>
-                            <h3
-                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
-                                data-original="AI & Learning"
-                            >
-                                AI & Learning
-                            </h3>
-                            <div class="flex flex-wrap gap-2.5">
-                                {
-                                    techGroups.AI_Math.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
-                                            <span>{tech.name}</span>
-                                            {tech.deployment && (
-                                                <span class="font-mono text-[8px] tracking-widest text-slate-400 uppercase dark:text-slate-500">
-                                                    {tech.deployment}
-                                                </span>
-                                            )}
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                        </div>
-
-                        <!-- Bottom Corner Labels -->
-                        <span
-                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                            >REF_ID: AI-04</span
-                        >
-                        <span
-                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                            >CAP: 100%</span
-                        >
                     </div>
                 </div>
             </section>
@@ -1442,17 +1452,20 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
                         const prefersReducedMotion = window.matchMedia(
                             '(prefers-reduced-motion: reduce)'
                         ).matches;
+                        const quoteSpan =
+                            '<span class="font-bold text-purple-600 dark:text-[#bd93f9]">"</span>';
                         if (prefersReducedMotion) {
-                            terminalSnippet.innerHTML = `<span class="text-[#bd93f9]">"</span>${rawText}<span class="text-[#bd93f9]">"</span>`;
+                            terminalSnippet.innerHTML = `${quoteSpan}${rawText}${quoteSpan}`;
                             return;
                         }
                         if (index <= rawText.length) {
-                            let displayed = '<span class="text-[#bd93f9]">"</span>';
+                            let displayed = quoteSpan;
                             displayed += rawText.substring(0, index);
                             if (index < rawText.length) {
-                                displayed += '<span class="animate-pulse">█</span>';
+                                displayed +=
+                                    '<span class="inline-block animate-pulse text-emerald-600 dark:text-[#50fa7b]">█</span>';
                             } else {
-                                displayed += '<span class="text-[#bd93f9]">"</span>';
+                                displayed += quoteSpan;
                             }
                             terminalSnippet.innerHTML = displayed;
                             index++;

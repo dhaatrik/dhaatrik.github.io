@@ -1,7 +1,6 @@
 import { glossary } from '../../data/glossary';
 
 let postAbortController: AbortController | null = null;
-let tocObserver: IntersectionObserver | null = null;
 let mermaidInitialized = false;
 
 async function setupMermaid(signal: AbortSignal) {
@@ -19,7 +18,7 @@ async function setupMermaid(signal: AbortSignal) {
             mermaid.initialize({
                 startOnLoad: false,
                 theme: 'dark',
-                securityLevel: 'strict',
+                securityLevel: 'loose',
                 fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
                 flowchart: { curve: 'basis' },
             });
@@ -341,61 +340,98 @@ export async function setupPost() {
         );
     }
 
-    // 3. TOC active link tracking (using high-performance IntersectionObserver)
+    // 3. TOC active link tracking (deterministic position-based scrollspy)
     const tocLinks = document.querySelectorAll('#toc a');
-    const sections = document.querySelectorAll('.prose h2, .prose h3, .prose h4');
+    const headingElements = Array.from(
+        document.querySelectorAll('.prose h2, .prose h3, .prose h4')
+    ) as HTMLElement[];
 
     const updateActiveToc = (currentSectionId: string) => {
         tocLinks.forEach((link) => {
             const htmlLink = link as HTMLElement;
+            const indexSpan = htmlLink.querySelector('.toc-index');
+            const indicatorSpan = htmlLink.querySelector('.toc-indicator');
             if (htmlLink.dataset.slug === currentSectionId) {
-                htmlLink.classList.add('!text-(--accent)', '!border-(--accent)', 'font-medium');
-                htmlLink.classList.remove(
-                    'text-slate-600',
-                    'dark:text-slate-400',
-                    'border-transparent'
-                );
-            } else {
-                htmlLink.classList.remove('!text-(--accent)', '!border-(--accent)', 'font-medium');
                 htmlLink.classList.add(
-                    'text-slate-600',
-                    'dark:text-slate-400',
-                    'border-transparent'
+                    '!text-(--accent)',
+                    'font-semibold',
+                    'bg-slate-200/50',
+                    'dark:bg-white/10'
                 );
+                htmlLink.classList.remove('text-slate-600', 'dark:text-slate-400');
+                if (indexSpan) {
+                    indexSpan.classList.add('!text-(--accent)', 'opacity-100');
+                    indexSpan.classList.remove(
+                        'text-slate-500',
+                        'dark:text-slate-400',
+                        'opacity-80'
+                    );
+                }
+                if (indicatorSpan) {
+                    indicatorSpan.classList.add(
+                        '!bg-(--accent)',
+                        '!w-[3px]',
+                        'shadow-[0_0_8px_var(--accent)]'
+                    );
+                }
+            } else {
+                htmlLink.classList.remove(
+                    '!text-(--accent)',
+                    'font-semibold',
+                    'bg-slate-200/50',
+                    'dark:bg-white/10'
+                );
+                htmlLink.classList.add('text-slate-600', 'dark:text-slate-400');
+                if (indexSpan) {
+                    indexSpan.classList.remove('!text-(--accent)', 'opacity-100');
+                    indexSpan.classList.add('text-slate-500', 'dark:text-slate-400', 'opacity-80');
+                }
+                if (indicatorSpan) {
+                    indicatorSpan.classList.remove(
+                        '!bg-(--accent)',
+                        '!w-[3px]',
+                        'shadow-[0_0_8px_var(--accent)]'
+                    );
+                }
             }
         });
     };
 
     let activeSectionId = '';
-    const visibleSections = new Set<string>();
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '-130px 0px -60% 0px',
-        threshold: 0,
-    };
+    const evaluateActiveSection = () => {
+        if (headingElements.length === 0) return;
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                visibleSections.add(entry.target.id);
-            } else {
-                visibleSections.delete(entry.target.id);
+        // If user is at or near the bottom of the page, activate the last heading
+        const isNearBottom =
+            window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60;
+        if (isNearBottom) {
+            const lastHeading = headingElements[headingElements.length - 1];
+            if (lastHeading.id && lastHeading.id !== activeSectionId) {
+                activeSectionId = lastHeading.id;
+                updateActiveToc(activeSectionId);
             }
-        });
+            return;
+        }
 
+        // Header offset threshold (220px or top quarter of viewport)
+        const scrollThreshold = Math.max(220, Math.floor(window.innerHeight * 0.25));
         let currentActive = '';
 
-        for (const sec of sections) {
-            if (visibleSections.has(sec.id)) {
-                currentActive = sec.id;
+        for (const heading of headingElements) {
+            const rect = heading.getBoundingClientRect();
+            if (rect.top <= scrollThreshold) {
+                currentActive = heading.id;
+            } else {
                 break;
             }
         }
 
-        // Fallback for short pages: if we have scrolled down but no heading has crossed the threshold
-        if (!currentActive && sections.length > 0 && window.scrollY > 10) {
-            currentActive = sections[0].id;
+        // If before the first heading but scrolled slightly
+        if (!currentActive && headingElements.length > 0) {
+            if (window.scrollY > 40) {
+                currentActive = headingElements[0].id;
+            }
         }
 
         if (currentActive !== activeSectionId) {
@@ -404,8 +440,20 @@ export async function setupPost() {
         }
     };
 
-    tocObserver = new IntersectionObserver(observerCallback, observerOptions);
-    sections.forEach((sec) => tocObserver?.observe(sec));
+    let tocTicking = false;
+    const handleTocScroll = () => {
+        if (!tocTicking) {
+            window.requestAnimationFrame(() => {
+                evaluateActiveSection();
+                tocTicking = false;
+            });
+            tocTicking = true;
+        }
+    };
+
+    window.addEventListener('scroll', handleTocScroll, { passive: true, signal });
+    window.addEventListener('resize', handleTocScroll, { passive: true, signal });
+    evaluateActiveSection();
 
     // Maintain a single fallback scroll listener for the reading progress bar (only if CSS timelines are unsupported)
     if (!hasScrollTimeline && progressBar) {
@@ -436,13 +484,13 @@ export async function setupPost() {
                 if (isRaw) {
                     rawContainer.classList.remove('hidden');
                     renderedContainer.classList.add('hidden');
-                    toggleModeBtn.innerText = '[ RAW ]';
+                    toggleModeBtn.innerText = 'RAW MARKDOWN';
                     toggleModeBtn.setAttribute('aria-label', 'Switch to rendered mode');
                     toggleModeBtn.setAttribute('title', 'Switch to rendered mode');
                 } else {
                     rawContainer.classList.add('hidden');
                     renderedContainer.classList.remove('hidden');
-                    toggleModeBtn.innerText = '[ RENDERED ]';
+                    toggleModeBtn.innerText = 'RENDERED';
                     toggleModeBtn.setAttribute('aria-label', 'Switch to raw markdown mode');
                     toggleModeBtn.setAttribute('title', 'Switch to raw markdown mode');
                 }
@@ -819,9 +867,5 @@ export function cleanupPost() {
     if (postAbortController) {
         postAbortController.abort();
         postAbortController = null;
-    }
-    if (tocObserver) {
-        tocObserver.disconnect();
-        tocObserver = null;
     }
 }

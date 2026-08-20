@@ -52,11 +52,11 @@ const jsonLd = JSON.stringify(webpageSchema);
         <main
             id="main-content"
             tabindex="-1"
-            class="relative flex grow flex-col gap-(--section-gap-mobile) overflow-x-hidden py-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:py-(--section-gap-desktop)"
+            class="relative flex grow flex-col gap-(--section-gap-mobile) overflow-x-hidden pt-6 pb-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:pt-10 md:pb-(--section-gap-desktop)"
         >
             <div
                 id="reticle-bg"
-                class="pointer-events-none absolute top-32 right-0 -z-10 text-slate-900 opacity-5 transition-transform duration-300 ease-out dark:text-white"
+                class="pointer-events-none absolute top-12 right-0 -z-10 text-slate-900 opacity-5 transition-transform duration-300 ease-out md:top-16 dark:text-white"
             >
                 <svg
                     width="400"
@@ -85,6 +85,7 @@ const jsonLd = JSON.stringify(webpageSchema);
                         stroke-width="0.3"
                         stroke-dasharray="1 9"
                         opacity="0.15"></path>
+                    <!-- Concentric dashed calibration circles -->
                     <circle
                         cx="100"
                         cy="100"
@@ -110,6 +111,17 @@ const jsonLd = JSON.stringify(webpageSchema);
                         stroke="currentColor"
                         stroke-width="0.5"
                         stroke-dasharray="6 6"></circle>
+                    <circle
+                        cx="100"
+                        cy="100"
+                        r="30"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="0.3"
+                        stroke-dasharray="1 3"
+                        opacity="0.5"></circle>
+
+                    <!-- Calibration axes -->
                     <line
                         x1="10"
                         y1="100"
@@ -126,6 +138,218 @@ const jsonLd = JSON.stringify(webpageSchema);
                         stroke="currentColor"
                         stroke-width="0.5"
                         stroke-dasharray="2 4"></line>
+
+                    <!-- Compass Ticks -->
+                    <line x1="100" y1="10" x2="100" y2="15" stroke="currentColor" stroke-width="1"
+                    ></line>
+                    <line x1="100" y1="185" x2="100" y2="190" stroke="currentColor" stroke-width="1"
+                    ></line>
+                    <line x1="10" y1="100" x2="15" y2="100" stroke="currentColor" stroke-width="1"
+                    ></line>
+                    <line x1="185" y1="100" x2="190" y2="100" stroke="currentColor" stroke-width="1"
+                    ></line>
+
+                    <!-- Outer diamond projection bounds -->
+                    <path
+                        d="M 100 20 L 180 100 L 100 180 L 20 100 Z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="0.3"
+                        stroke-dasharray="1 5"></path>
+
+                    <!-- Orbital Workbench / Payload Module Isometric Blueprint -->
+                    <g id="workbench-schematic">
+                        <!-- Upper Docking Collar -->
+                        <ellipse
+                            cx="100"
+                            cy="50"
+                            rx="22"
+                            ry="9"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.2"></ellipse>
+                        <ellipse
+                            cx="100"
+                            cy="50"
+                            rx="12"
+                            ry="5"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="0.7"
+                            stroke-dasharray="2 2"></ellipse>
+                        <circle cx="100" cy="50" r="1.5" fill="currentColor"></circle>
+
+                        <!-- Central Isometric Chassis Box -->
+                        <!-- Top Face -->
+                        <path
+                            d="M 100,50 L 136,68 L 100,86 L 64,68 Z"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.4"></path>
+                        <!-- Left Face -->
+                        <path
+                            d="M 64,68 L 100,86 L 100,136 L 64,118 Z"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.4"></path>
+                        <!-- Right Face -->
+                        <path
+                            d="M 100,86 L 136,68 L 136,118 L 100,136 Z"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.4"></path>
+
+                        <!-- Chassis Internal Structural Trusses (X-bracing) -->
+                        <line
+                            x1="64"
+                            y1="68"
+                            x2="100"
+                            y2="136"
+                            stroke="currentColor"
+                            stroke-width="0.4"
+                            stroke-dasharray="1.5 2"
+                            opacity="0.6"></line>
+                        <line
+                            x1="64"
+                            y1="118"
+                            x2="100"
+                            y2="86"
+                            stroke="currentColor"
+                            stroke-width="0.4"
+                            stroke-dasharray="1.5 2"
+                            opacity="0.6"></line>
+                        <line
+                            x1="100"
+                            y1="86"
+                            x2="136"
+                            y2="118"
+                            stroke="currentColor"
+                            stroke-width="0.4"
+                            stroke-dasharray="1.5 2"
+                            opacity="0.6"></line>
+                        <line
+                            x1="100"
+                            y1="136"
+                            x2="136"
+                            y2="68"
+                            stroke="currentColor"
+                            stroke-width="0.4"
+                            stroke-dasharray="1.5 2"
+                            opacity="0.6"></line>
+
+                        <!-- Deployable Solar Array Left Wing -->
+                        <path
+                            d="M 64,80 L 26,62 L 26,104 L 64,122 Z"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="0.9"></path>
+                        <line
+                            x1="45"
+                            y1="71"
+                            x2="45"
+                            y2="113"
+                            stroke="currentColor"
+                            stroke-width="0.5"
+                            stroke-dasharray="1 1"></line>
+                        <line
+                            x1="26"
+                            y1="83"
+                            x2="64"
+                            y2="101"
+                            stroke="currentColor"
+                            stroke-width="0.5"
+                            stroke-dasharray="1 1"></line>
+
+                        <!-- Deployable Solar Array Right Wing -->
+                        <path
+                            d="M 136,80 L 174,62 L 174,104 L 136,122 Z"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="0.9"></path>
+                        <line
+                            x1="155"
+                            y1="71"
+                            x2="155"
+                            y2="113"
+                            stroke="currentColor"
+                            stroke-width="0.5"
+                            stroke-dasharray="1 1"></line>
+                        <line
+                            x1="136"
+                            y1="101"
+                            x2="174"
+                            y2="83"
+                            stroke="currentColor"
+                            stroke-width="0.5"
+                            stroke-dasharray="1 1"></line>
+
+                        <!-- Propulsion Gimbal Nozzle at Base -->
+                        <path
+                            d="M 94,136 L 88,154 L 112,154 L 106,136 Z"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.1"></path>
+                        <ellipse
+                            cx="100"
+                            cy="154"
+                            rx="12"
+                            ry="3.5"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="0.8"></ellipse>
+                        <line
+                            x1="100"
+                            y1="154"
+                            x2="100"
+                            y2="170"
+                            stroke="currentColor"
+                            stroke-width="0.6"
+                            stroke-dasharray="1 2"></line>
+                        <circle cx="100" cy="170" r="1" fill="currentColor"></circle>
+                    </g>
+
+                    <!-- Telemetry Technical Labels -->
+                    <text
+                        x="24"
+                        y="172"
+                        font-family="monospace"
+                        font-size="5"
+                        fill="currentColor"
+                        opacity="0.8">SYS.PROJECT_ARCHIVE // V2.0</text
+                    >
+                    <text
+                        x="24"
+                        y="179"
+                        font-family="monospace"
+                        font-size="4"
+                        fill="currentColor"
+                        opacity="0.6">DHAATRIK.WORKBENCH.CORE</text
+                    >
+
+                    <text
+                        x="115"
+                        y="32"
+                        font-family="monospace"
+                        font-size="4.5"
+                        fill="currentColor"
+                        opacity="0.7">MODEL: ORBITAL_WORKBENCH</text
+                    >
+                    <text
+                        x="115"
+                        y="39"
+                        font-family="monospace"
+                        font-size="4"
+                        fill="currentColor"
+                        opacity="0.5">Z-PLANE: ISO_PRJ</text
+                    >
+                    <text
+                        x="115"
+                        y="46"
+                        font-family="monospace"
+                        font-size="4"
+                        fill="currentColor"
+                        opacity="0.5">PAYLOAD_MASS: 420kg</text
+                    >
                 </svg>
             </div>
 
@@ -160,8 +384,6 @@ const jsonLd = JSON.stringify(webpageSchema);
                             const parsed = parseTelemetry(telemetryStr);
                             return (
                                 <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
-                                    <div class="hologram-overlay" />
-
                                     <div
                                         class="relative z-10 flex h-full flex-col justify-between"
                                         data-tilt-z
@@ -180,11 +402,6 @@ const jsonLd = JSON.stringify(webpageSchema);
                                                             ` // ${telemetryRest.trim()}`}
                                                     </span>
                                                 </div>
-                                                <span
-                                                    class={`shrink-0 font-bold whitespace-nowrap ${parsed.textClass}`}
-                                                >
-                                                    {parsed.badgeText}
-                                                </span>
                                             </div>
 
                                             <div class="mb-4 flex items-start justify-between gap-4">
@@ -297,22 +514,22 @@ const jsonLd = JSON.stringify(webpageSchema);
                                             {project.data.tags && project.data.tags.length > 0 && (
                                                 <div class="flex flex-wrap gap-1.5 font-mono text-[9px]">
                                                     {project.data.tags.map((tag: string) => (
-                                                        <span class="rounded bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-white/5 dark:text-slate-400">
+                                                        <span class="rounded-md border border-slate-200/80 bg-slate-100/80 px-2 py-0.5 text-slate-600 dark:border-white/5 dark:bg-white/5 dark:text-slate-400">
                                                             #{tag.toUpperCase()}
                                                         </span>
                                                     ))}
                                                 </div>
                                             )}
-                                            <div class="mission-report-footer type-telemetry flex items-center justify-between text-slate-500 dark:text-slate-400">
-                                                <span class="truncate">
+                                            <div class="mission-report-footer type-telemetry flex items-center justify-between gap-3 text-slate-500 dark:text-slate-400">
+                                                <span class="min-w-0 flex-1 truncate">
                                                     PROGRESS: {project.data.progress}
                                                 </span>
                                                 <a
                                                     href={`/projects/${projectIdClean}`}
-                                                    class="relative z-20 shrink-0 font-mono text-[9px] font-bold tracking-wider text-(--accent) transition-all group-hover:translate-x-0.5 hover:opacity-80"
+                                                    class="relative z-20 shrink-0 font-mono text-[10px] font-semibold tracking-wider text-(--accent) transition-all group-hover:translate-x-1 hover:opacity-80"
                                                     aria-label={`Read the full ${project.data.title} mission log`}
                                                 >
-                                                    Read the full story&nbsp;→
+                                                    Read mission log&nbsp;→
                                                 </a>
                                             </div>
                                         </div>
