@@ -1,5 +1,98 @@
 # Changelog
 
+## [4.3.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.2.0...v4.3.0) (2026-08-20)
+
+
+### Features
+
+* **footer:** add synthesis credits to xAI Grok-CLI and Google Antigravity ([b3231f5](https://github.com/dhaatrik/dhaatrik.github.io/commit/b3231f586ae95504779fbdb0091e94bc20dfeab9))
+* **footer:** integrate official vector logos with xAI and Google Antigravity credits ([9dd0c3c](https://github.com/dhaatrik/dhaatrik.github.io/commit/9dd0c3cbf62df981eaef2ed2e4983c004a12a112))
+* **footer:** redesign into orbital flight terminal and cockpit telemetry dock ([bd07352](https://github.com/dhaatrik/dhaatrik.github.io/commit/bd073526760b65532756f721af06d81319e83916))
+* **header:** implement modern web guidance inert management, safe-area-insets, and 44px tap targets ([fd2c378](https://github.com/dhaatrik/dhaatrik.github.io/commit/fd2c378975dd8dd5e2a36673b9a1ffc15b2fe8a3))
+* **home:** elevate Featured Engineering and Latest Thinking cards with avionics telemetry and transmission ribbons ([cbd97ec](https://github.com/dhaatrik/dhaatrik.github.io/commit/cbd97ecc3bdd5e64a7ec079aec5d73454663c624))
+* **nav:** add global keyboard hotkeys 1-5 for instant section navigation ([67e600f](https://github.com/dhaatrik/dhaatrik.github.io/commit/67e600f39a09a10d58134862e14ba676c5d48d25))
+* **projects:** add orbital workbench isometric blueprint reticle SVG ([11d5c04](https://github.com/dhaatrik/dhaatrik.github.io/commit/11d5c04cb89bbc9cb5d05c9454fd3734c0da434e))
+* **transmissions:** add bespoke sci-fi hero graphics for all transmission series ([c4452fa](https://github.com/dhaatrik/dhaatrik.github.io/commit/c4452fa7fddeb217c3cc36c336c3579790e3a60b))
+* **transmissions:** update DeltaV Lab hero transmission graphic ([83d948e](https://github.com/dhaatrik/dhaatrik.github.io/commit/83d948e2dbf96f09ee374cbc343d023c57fb6c7c))
+
+
+### Bug Fixes
+
+* **a11y:** enhance text contrast and landmark labeling on project and blog layouts ([ca571e7](https://github.com/dhaatrik/dhaatrik.github.io/commit/ca571e7561acf6fbfc9afd2576245e6660c2126b))
+* **a11y:** wrap markdown tables in focusable scroll region with aria landmarks ([536ebd0](https://github.com/dhaatrik/dhaatrik.github.io/commit/536ebd0c7ec1e529d283b98118cd6bb37d35935d))
+* **blog:** add scroll-mt-24 header offset and synchronize index active state ([0ae1389](https://github.com/dhaatrik/dhaatrik.github.io/commit/0ae13896d3579e026d1c85250b691d72a83d63b5))
+* **blog:** fix Mermaid diagram syntax and configure securityLevel for SVG rendering ([5a3a836](https://github.com/dhaatrik/dhaatrik.github.io/commit/5a3a8368686bed4100587f92575c1004c0f9d58b))
+* **blog:** implement deterministic position scrollspy to prevent index backward jumps ([b348b86](https://github.com/dhaatrik/dhaatrik.github.io/commit/b348b8612048ccdabd1b6ef7a9ebe1f41e918550))
+* **home:** optimize hero cockpit HUD badge layout and border radius for mobile devices ([85de972](https://github.com/dhaatrik/dhaatrik.github.io/commit/85de972a3f69e2fec60e0ae53e80e672b749b445))
+* **home:** prevent featured stage text overlap and harmonize glass surfaces ([6a4e6d9](https://github.com/dhaatrik/dhaatrik.github.io/commit/6a4e6d99f06256fac17083078eef629e2e521a02))
+
+
+### Styles & UI Polish
+
+* **blog:** harmonize reading header and TOC with global glass surfaces ([db08f3b](https://github.com/dhaatrik/dhaatrik.github.io/commit/db08f3b7ff9ccc0fc77f58fe5d81adb85b41abeb))
+* **blog:** modernize rendered toggle switch and export transmission CTA ([5cbbd71](https://github.com/dhaatrik/dhaatrik.github.io/commit/5cbbd71ef17bc66438476e8aa979a1438ad612ef))
+* **blog:** redesign index sidebar into sleek telemetry hud eliminating clipped glow box ([cb5fa80](https://github.com/dhaatrik/dhaatrik.github.io/commit/cb5fa8055c00133da1e317c6e4b7c9d09ba9598f))
+* **books:** upgrade popover bars to rich dossier cards with smooth css grid transitions ([f9e2dc0](https://github.com/dhaatrik/dhaatrik.github.io/commit/f9e2dc06ac985957b896413a2d02ff5bc7747f17))
+* **footer:** fix layout grid hierarchy and calibrate copyright and social button alignment ([1b23317](https://github.com/dhaatrik/dhaatrik.github.io/commit/1b233174de400a3857f42d3a52ac43c9516f05cc))
+* **footer:** move return to orbit button to sub-footer alongside social icons ([eca7f71](https://github.com/dhaatrik/dhaatrik.github.io/commit/eca7f71c7aba937a0c413d124396f48a145225f7))
+* **footer:** remove bento card boxes and emojis for a clean architectural layout ([0f8af9a](https://github.com/dhaatrik/dhaatrik.github.io/commit/0f8af9a423d13675301a79cc0b8329b590d2a0ec))
+* **footer:** remove station telemetry bar from footer header ([fefec96](https://github.com/dhaatrik/dhaatrik.github.io/commit/fefec962164d381e79d66274939c1119ac9f66ba))
+* **footer:** simplify AI credit links to clean text format for Grok and Antigravity ([2b09835](https://github.com/dhaatrik/dhaatrik.github.io/commit/2b09835a3251bec6712b5ee66c0180df237aefae))
+* **footer:** transform footer into translucent glassmorphic docking deck with horizon glow ([1c956b4](https://github.com/dhaatrik/dhaatrik.github.io/commit/1c956b4d2ac87d623e2af73a526b056bd0d68099))
+* **footer:** update attribution line to 'The Engineering Duo' format ([6faef3b](https://github.com/dhaatrik/dhaatrik.github.io/commit/6faef3b1791fc96eebe629ae5408e44871440ffe))
+* **header:** apply calibrated uppercase typography with wide tracking to navigation links ([860e840](https://github.com/dhaatrik/dhaatrik.github.io/commit/860e840843a6eacc6f9e4df22039d3529aef5e1d))
+* **header:** blend navigation into page background at top and activate glass canopy on scroll ([8125b0e](https://github.com/dhaatrik/dhaatrik.github.io/commit/8125b0e1e18217fc896b0e3307425a398aa9a303))
+* **hero:** dampen magnetic pull and button spring physics for restrained premium feel ([b5716f1](https://github.com/dhaatrik/dhaatrik.github.io/commit/b5716f1d29b3efbb19ff53dcaa7fbd5f393b0dcc))
+* **hero:** expand viewport breathing room and capsule spacing for smooth scroll initiation ([9ed41ed](https://github.com/dhaatrik/dhaatrik.github.io/commit/9ed41ed1e9ea25c4981fdb361b8dc077a7887be0))
+* **home:** calibrate hero positioning and remove triple-stacked top padding ([bde65c0](https://github.com/dhaatrik/dhaatrik.github.io/commit/bde65c0d9050f9f11b8f526987d6693f81bc1f5b))
+* **home:** remove pulsing dots and top telemetry headers from repo cards ([05a4873](https://github.com/dhaatrik/dhaatrik.github.io/commit/05a4873cadad38d45f07318d1a58c591a67535bf))
+* **home:** remove redundant hero scroll cue in favor of telemetry capsule ([4cfe938](https://github.com/dhaatrik/dhaatrik.github.io/commit/4cfe9387af67ef6b4fea9880fb0fb78eb1109b9a))
+* **home:** upgrade hero status capsule to segmented cockpit hud ([a8e4d85](https://github.com/dhaatrik/dhaatrik.github.io/commit/a8e4d8567e5605d090a11ee696c6030cf4e27523))
+* **layout:** harmonize section vertical rhythm and spacing across all pages ([6e8a549](https://github.com/dhaatrik/dhaatrik.github.io/commit/6e8a549077ca4528fcbf5939724494db9ebb9eaa))
+* **pedagogy:** modernize subject filter tabs and mission log telemetry ([ed62ebf](https://github.com/dhaatrik/dhaatrik.github.io/commit/ed62ebfb11701dace79238c6d7c9fbd743193e72))
+* **personnel,pedagogy:** calibrate page header top padding and reticle watermark alignment ([473142d](https://github.com/dhaatrik/dhaatrik.github.io/commit/473142d873cb4088603da0bbce7f68bc5fd62bcc))
+* **personnel:** harmonize tech stack and contact terminal with global glass ([89d64a2](https://github.com/dhaatrik/dhaatrik.github.io/commit/89d64a2c36c2e16f4a04612bfa84e59302e46e13))
+* **personnel:** optimize monthly reflection bash terminal for light and dark themes ([daefd73](https://github.com/dhaatrik/dhaatrik.github.io/commit/daefd730384ed685fc561acda9045611e282257b))
+* **personnel:** remove hero scroll cue ([b96ca60](https://github.com/dhaatrik/dhaatrik.github.io/commit/b96ca609e404d0370acf2e28e724666e757ed739))
+* **projects:** align back navigation with case study article container ([39cb534](https://github.com/dhaatrik/dhaatrik.github.io/commit/39cb5345c03f4e4b8441ed25c24eb656885951ea))
+* **projects:** calibrate main container padding and blueprint watermark alignment ([063bbdf](https://github.com/dhaatrik/dhaatrik.github.io/commit/063bbdf44e572f0590ae8ab49a51b998f7ac864e))
+* **projects:** expand prose to max-w-none to align text width with fuckup log card ([be72f4d](https://github.com/dhaatrik/dhaatrik.github.io/commit/be72f4d85bc7ffd51d75cbf90253f4b3180eebe3))
+* **projects:** harmonize case study layout width and padding with site-wide max-w-7xl grid ([c297834](https://github.com/dhaatrik/dhaatrik.github.io/commit/c2978341eed5b47ad1d1b07fb9114620fab8db8d))
+* **projects:** harmonize workbench cards with global glass surfaces ([b9ef301](https://github.com/dhaatrik/dhaatrik.github.io/commit/b9ef301b7a9c37839f6bd6c013edd673026bb3be))
+* **projects:** modernize case study metadata ribbon and card tags ([459ccac](https://github.com/dhaatrik/dhaatrik.github.io/commit/459ccacd52f67307f02acb2cf1ea5dbca87a5b8c))
+* **projects:** remove hologram scanlines from engineering cards for clean presentation ([c9cc48d](https://github.com/dhaatrik/dhaatrik.github.io/commit/c9cc48d2cff5c4ff73f5ac2083b9a4e979369f7f))
+* **theme:** enhance light mode contrast, glass opacity, and photo vibrancy ([e43c0e6](https://github.com/dhaatrik/dhaatrik.github.io/commit/e43c0e6d9d748ae9e2c89490ff00bf2b87bd0db7))
+* **tokens:** calibrate global glassmorphism surface tokens and bento card aesthetics ([8e94920](https://github.com/dhaatrik/dhaatrik.github.io/commit/8e94920990c93fddafea9e6b9e11358cd42a26a2))
+* **transmissions,layout:** calibrate main container vertical padding rhythm globally ([f148a54](https://github.com/dhaatrik/dhaatrik.github.io/commit/f148a54f3d33417bbb7c30ca08188f912cc87911))
+* **transmissions:** modernize subsystem filter tabs and RSS telemetry ([fa5ed8f](https://github.com/dhaatrik/dhaatrik.github.io/commit/fa5ed8f23de33c4acc0a8a05fc51a0f1d0934dfd))
+* **transmissions:** polish parabolic dish telemetry blueprint SVG ([c86df70](https://github.com/dhaatrik/dhaatrik.github.io/commit/c86df7086c00add79bb3695bf5963fe600dcc7b0))
+* **transmissions:** remove outer matrix container box for clean grid layout ([0b7fd5a](https://github.com/dhaatrik/dhaatrik.github.io/commit/0b7fd5aa687e8e9e4918a9431b770e97a4e87c07))
+* **typography:** expand .prose max-width from 70ch to 100% to fill column width ([8383a83](https://github.com/dhaatrik/dhaatrik.github.io/commit/8383a8305bccea657589c7f94a81d71bed93839e))
+* **typography:** update prose headings text-wrap to pretty to fill full container width ([7bd6916](https://github.com/dhaatrik/dhaatrik.github.io/commit/7bd691666ccc87bdc276b191ef27e33bb7000f71))
+* **ui:** enhance bento cards with subtle glassmorphic translucency and backdrop blur ([306cd2c](https://github.com/dhaatrik/dhaatrik.github.io/commit/306cd2c1d9d563d7b39cececa9582cade2898f29))
+* **ui:** harmonize pedagogy and personnel blueprint reticle SVGs ([1f099a1](https://github.com/dhaatrik/dhaatrik.github.io/commit/1f099a1c582ba7726231abcbd4a8c6b8e9b7203b))
+* **ui:** remove bracketed status badges across project and personnel cards ([ebd40e6](https://github.com/dhaatrik/dhaatrik.github.io/commit/ebd40e663f0a954ca8808e81c9de0288ac26b501))
+
+
+### Code Refactoring
+
+* **footer:** remove tip jar buttons and payment popovers for pure engineering focus ([0fe2eba](https://github.com/dhaatrik/dhaatrik.github.io/commit/0fe2ebad722c86e6dfcdcf60656a436601907397))
+* **personnel:** reorder tech stack above contact and clean telemetry badges ([5ce7b26](https://github.com/dhaatrik/dhaatrik.github.io/commit/5ce7b26b029669a56f93385de99b8c767013ce88))
+* **transmissions:** remove deltav-lab-scrollytelling-demo and cleanup references ([dcfd24f](https://github.com/dhaatrik/dhaatrik.github.io/commit/dcfd24f485a2fa09f495a8002fb78aad9850ed5e))
+
+
+### Documentation & Skills
+
+* **agents:** add conventional commit guidelines and scopes for automated changelog tracking ([2cb1aac](https://github.com/dhaatrik/dhaatrik.github.io/commit/2cb1aac0b1145e02b8617f5843eecd27d40521a5))
+* **content:** elevate hero, personnel, and pedagogy copy to authentic engineering diary voice ([ad9f495](https://github.com/dhaatrik/dhaatrik.github.io/commit/ad9f4957381c78b07c91f49183e4129f41f572c0))
+* **pedagogy:** convert DBS Classes retrospective to authentic first-person diary voice ([a11e24d](https://github.com/dhaatrik/dhaatrik.github.io/commit/a11e24dd454459764501e031752e5420389bae60))
+
+
+### Chores & Maintenance
+
+* **ci:** add .lighthouseci/ to .gitignore ([7b69c83](https://github.com/dhaatrik/dhaatrik.github.io/commit/7b69c830d7401629a8affe86175d3e0aea0a0827))
+* **ci:** format codebase and calibrate e2e tests for CI/CD pipeline ([f8adae4](https://github.com/dhaatrik/dhaatrik.github.io/commit/f8adae4e7adafdb3714232c2ad76a322404ffb6f))
+
 ## [4.2.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.1.0...v4.2.0) (2026-08-19)
 
 
