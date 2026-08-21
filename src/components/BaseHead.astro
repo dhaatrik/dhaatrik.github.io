@@ -48,6 +48,7 @@ const personSchema = JSON.stringify({
     '@type': 'Person',
     name: 'Dhaatrik Chowdhury',
     url: Astro.site,
+    image: new URL('/me.jpeg', Astro.site).href,
     sameAs: [
         'https://github.com/dhaatrik',
         'https://linkedin.com/in/dhaatrik',
@@ -91,6 +92,7 @@ const personSchema = JSON.stringify({
     })();
 </script>
 <link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="author" href="/personnel/" />
 
 <!-- Font Preloading -->
 <link rel="preload" href={nunitoUrl} as="font" type="font/woff2" crossorigin />
