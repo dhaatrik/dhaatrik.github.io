@@ -175,6 +175,35 @@ html.dark .prose tbody tr:hover,
     content: '' !important;
 }
 
+/* Optimized Line Divisions (Horizontal Rules & Section Separators) */
+.prose hr {
+    border: 0 !important;
+    height: 1px !important;
+    margin: 2.75rem 0 !important;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(148, 163, 184, 0.4) 15%,
+        rgba(148, 163, 184, 0.75) 50%,
+        rgba(148, 163, 184, 0.4) 85%,
+        transparent 100%
+    ) !important;
+}
+
+html.dark .prose hr,
+.dark .prose hr,
+[data-theme='dark'] .prose hr {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(59, 130, 246, 0.3) 15%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(59, 130, 246, 0.3) 85%,
+        transparent 100%
+    ) !important;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.15);
+}
+
 /* Architecture diagrams and system blueprints */
 .prose .architecture-diagram {
     margin: 2rem 0;
