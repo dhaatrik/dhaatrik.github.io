@@ -16,7 +16,12 @@ const breadcrumbSchema = JSON.stringify({
     '@type': 'BreadcrumbList',
     itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).href },
-        { '@type': 'ListItem', position: 2, name: 'Pedagogy', item: new URL('/pedagogy/', Astro.site).href },
+        {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Pedagogy',
+            item: new URL('/pedagogy/', Astro.site).href,
+        },
     ],
 }).replace(/</g, '\\u003c');
 ---
