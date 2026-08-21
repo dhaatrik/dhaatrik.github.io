@@ -32,6 +32,16 @@ const webpageSchema = {
     },
 };
 const jsonLd = JSON.stringify(webpageSchema);
+
+// BreadcrumbList JSON-LD for clean SERP navigation trails
+const breadcrumbSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).href },
+        { '@type': 'ListItem', position: 2, name: 'Projects', item: new URL('/projects/', Astro.site).href },
+    ],
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -42,6 +52,7 @@ const jsonLd = JSON.stringify(webpageSchema);
             description="My project workbench — things I've shipped, shelved, or am still patching at 2 AM."
         />
         <script is:inline type="application/ld+json" set:html={jsonLd} />
+        <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <!-- Flashlight Spotlight Background -->

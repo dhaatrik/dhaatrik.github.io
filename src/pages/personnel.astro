@@ -20,6 +20,16 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
     displayMode: true,
     throwOnError: false,
 });
+
+// BreadcrumbList JSON-LD for clean SERP navigation trails
+const breadcrumbSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).href },
+        { '@type': 'ListItem', position: 2, name: 'About', item: new URL('/personnel/', Astro.site).href },
+    ],
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -29,6 +39,7 @@ const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0
             title={`About | ${SITE_TITLE}`}
             description="Mission dossier — who I am, what I'm building, what broke along the way, and the stack I actually use."
         />
+        <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
         <KatexStyles />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
