@@ -19,11 +19,12 @@
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
 }
 
-:global(.dark) .prose .table-container,
-.dark .prose .table-container {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(13, 17, 23, 0.75);
-    box-shadow: none;
+html.dark .prose .table-container,
+.dark .prose .table-container,
+[data-theme='dark'] .prose .table-container {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(13, 17, 23, 0.85);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
 }
 
 .prose .table-container:focus-visible {
@@ -40,13 +41,14 @@
 
 .prose thead {
     border-bottom: 2px solid rgba(148, 163, 184, 0.5);
-    background: rgba(241, 245, 249, 0.9);
+    background: rgba(241, 245, 249, 0.95);
 }
 
-:global(.dark) .prose thead,
-.dark .prose thead {
+html.dark .prose thead,
+.dark .prose thead,
+[data-theme='dark'] .prose thead {
     border-bottom: 2px solid rgba(255, 255, 255, 0.15);
-    background: rgba(21, 26, 34, 0.9);
+    background: rgba(21, 26, 34, 0.95);
 }
 
 .prose thead th {
@@ -62,8 +64,9 @@
     transition: background-color 0.15s ease;
 }
 
-:global(.dark) .prose tbody tr,
-.dark .prose tbody tr {
+html.dark .prose tbody tr,
+.dark .prose tbody tr,
+[data-theme='dark'] .prose tbody tr {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -72,12 +75,13 @@
 }
 
 .prose tbody tr:hover {
-    background-color: rgba(37, 99, 235, 0.04);
+    background-color: rgba(37, 99, 235, 0.05);
 }
 
-:global(.dark) .prose tbody tr:hover,
-.dark .prose tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.03);
+html.dark .prose tbody tr:hover,
+.dark .prose tbody tr:hover,
+[data-theme='dark'] .prose tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04);
 }
 
 .prose tbody td {
