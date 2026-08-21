@@ -610,7 +610,7 @@ export async function setupPost() {
         const wrapper = existingWrapper ?? document.createElement('div');
         if (!existingWrapper) {
             wrapper.className =
-                'code-wrapper-processed relative group rounded-lg overflow-hidden border border-slate-700 bg-[#0d1117] my-6 shadow-xl';
+                'code-wrapper-processed relative group rounded-xl overflow-hidden border border-slate-300 dark:border-slate-800 bg-[#0d1117] my-6 shadow-md dark:shadow-2xl transition-all';
 
             pre.parentNode?.insertBefore(wrapper, pre);
 
@@ -626,16 +626,16 @@ export async function setupPost() {
 
             const header = document.createElement('div');
             header.className =
-                'flex items-center justify-between px-4 py-2 bg-slate-800/80 border-b border-slate-700 backdrop-blur';
+                'flex items-center justify-between px-4 py-2.5 bg-slate-900/95 dark:bg-[#0f141f]/95 border-b border-slate-800 backdrop-blur select-none';
             header.innerHTML = `
                         <div class="flex gap-2 items-center">
-                            <div class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] opacity-80 shadow-xs"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] opacity-80 shadow-xs"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#27c93f] opacity-80 shadow-xs"></div>
                             <div class="code-telemetry hidden ml-3 font-mono text-[9px] text-(--accent) tracking-widest bg-(--accent)/10 border border-(--accent)/20 px-2 py-0.5 rounded select-none"></div>
                         </div>
                         <div class="flex items-center gap-4">
-                            <div aria-hidden="true" class="font-mono text-[10px] tracking-widest text-slate-400">${lang}</div>
+                            <div aria-hidden="true" class="font-mono text-[10px] tracking-widest text-slate-400 uppercase">${lang}</div>
                             <button class="copy-btn opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-(--accent) cursor-pointer" aria-label="Copy code" aria-live="polite">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                                 COPY
