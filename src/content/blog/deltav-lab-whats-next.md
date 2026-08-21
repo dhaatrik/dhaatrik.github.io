@@ -56,91 +56,68 @@ Professional-grade here does **not** mean "pretty 3D rocket." It means a **verif
 **Implemented rigor (R0–R2 partial) got us a teaching sandbox. Industry trust starts at R3.** NASA's modeling and simulation V&V framework ([NASA-STD-7009](https://standards.nasa.gov/standard/NASA/NASA-STD-7009)) is the mental model: credibility evidence, validation against reality, uncertainty quantification — not just "we use RK4."
 
 <div class="architecture-diagram my-8 overflow-hidden rounded-xl border border-slate-300 dark:border-slate-800 bg-[#0d1117] p-4 sm:p-6 shadow-xl transition-all">
-    <div class="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3 font-mono text-xs text-slate-400">
-        <div class="flex items-center gap-2">
-            <span class="inline-block h-2.5 w-2.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(59,130,246,0.8)]"></span>
-            <span class="font-bold tracking-widest text-slate-200 uppercase">SYS.LADDER // THE AEROSPACE TRUST PIPELINE</span>
-        </div>
-        <span class="text-[10px] tracking-wider text-slate-500">[ NASA-STD-7009 METHODOLOGY ]</span>
-    </div>
-
-    <div class="overflow-x-auto">
-        <svg viewBox="0 0 820 480" width="100%" height="auto" class="font-mono text-xs min-w-[680px] select-none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="trust-grad" x1="0%" y1="100%" x2="0%" y2="0%">
-                    <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.1"/>
-                    <stop offset="50%" stop-color="#06b6d4" stop-opacity="0.15"/>
-                    <stop offset="100%" stop-color="#10b981" stop-opacity="0.2"/>
-                </linearGradient>
-            </defs>
-
-            <!-- Background Track -->
-            <rect x="20" y="15" width="780" height="450" rx="8" fill="url(#trust-grad)" stroke="#334155" stroke-width="1"/>
-
-            <!-- Step Cards R0 to R7 (ascending upwards) -->
-            <!-- R7 -->
-            <rect x="50" y="30" width="720" height="42" rx="6" fill="#151a22" stroke="#10b981" stroke-width="1.5"/>
-            <circle cx="80" cy="51" r="14" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
-            <text x="73" y="55" fill="#10b981" font-weight="bold" font-size="11">R7</text>
-            <text x="110" y="55" fill="#f1f5f9" font-weight="bold" font-size="12">Governance &amp; Certification</text>
-            <text x="440" y="55" fill="#94a3b8" font-size="11">Requirements traceability, FMEA, DO-178C adjacent</text>
-
-            <!-- R6 -->
-            <rect x="50" y="80" width="720" height="42" rx="6" fill="#151a22" stroke="#06b6d4" stroke-width="1"/>
-            <circle cx="80" cy="101" r="14" fill="#06b6d4" fill-opacity="0.2" stroke="#06b6d4" stroke-width="1"/>
-            <text x="73" y="105" fill="#06b6d4" font-weight="bold" font-size="11">R6</text>
-            <text x="110" y="105" fill="#f1f5f9" font-weight="bold" font-size="12">SIL / HIL Real-Time Bridge</text>
-            <text x="440" y="105" fill="#94a3b8" font-size="11">POSIX RT clock, UDP/CCSDS avionics telemetry</text>
-
-            <!-- R5 -->
-            <rect x="50" y="130" width="720" height="42" rx="6" fill="#151a22" stroke="#06b6d4" stroke-width="1"/>
-            <circle cx="80" cy="151" r="14" fill="#06b6d4" fill-opacity="0.2" stroke="#06b6d4" stroke-width="1"/>
-            <text x="73" y="155" fill="#06b6d4" font-weight="bold" font-size="11">R5</text>
-            <text x="110" y="155" fill="#f1f5f9" font-weight="bold" font-size="12">Integrated Toolchain APIs</text>
-            <text x="440" y="155" fill="#94a3b8" font-size="11">Python wheel (`pyo3`), MATLAB, FMU export</text>
-
-            <!-- R4 -->
-            <rect x="50" y="180" width="720" height="42" rx="6" fill="#151a22" stroke="#06b6d4" stroke-width="1"/>
-            <circle cx="80" cy="201" r="14" fill="#06b6d4" fill-opacity="0.2" stroke="#06b6d4" stroke-width="1"/>
-            <text x="73" y="205" fill="#06b6d4" font-weight="bold" font-size="11">R4</text>
-            <text x="110" y="205" fill="#f1f5f9" font-weight="bold" font-size="12">Statistical Monte Carlo</text>
-            <text x="440" y="205" fill="#94a3b8" font-size="11">10,000 runs, dispersion ellipses, wind ensembles</text>
-
-            <!-- R3 -->
-            <rect x="50" y="230" width="720" height="42" rx="6" fill="#151a22" stroke="#3b82f6" stroke-width="2"/>
-            <circle cx="80" cy="251" r="14" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1.5"/>
-            <text x="73" y="255" fill="#60a5fa" font-weight="bold" font-size="11">R3</text>
-            <text x="110" y="255" fill="#60a5fa" font-weight="bold" font-size="12">Flight Telemetry V&amp;V</text>
-            <text x="440" y="255" fill="#93c5fd" font-size="11">Falcon 9 / Electron public data, &lt;2% error gates</text>
-
-            <!-- DIVIDER: CRITICAL TRUST THRESHOLD -->
-            <line x1="30" y1="285" x2="790" y2="285" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="6 4"/>
-            <rect x="230" y="275" width="360" height="20" rx="4" fill="#0b0e14" stroke="#f59e0b" stroke-width="1"/>
-            <text x="245" y="289" fill="#fbbf24" font-size="10" font-weight="bold" letter-spacing="0.5">▲ INDUSTRY TRUST THRESHOLD (START HERE) ▲</text>
-
-            <!-- R2 -->
-            <rect x="50" y="305" width="720" height="42" rx="6" fill="#151a22" stroke="#334155" stroke-width="1"/>
-            <circle cx="80" cy="326" r="14" fill="#64748b" fill-opacity="0.2" stroke="#64748b" stroke-width="1"/>
-            <text x="73" y="330" fill="#94a3b8" font-weight="bold" font-size="11">R2</text>
-            <text x="110" y="330" fill="#f1f5f9" font-weight="bold" font-size="12">Unit &amp; Analytical Validation</text>
-            <text x="440" y="330" fill="#94a3b8" font-size="11">Vitest orbital invariants, circular velocity tests</text>
-
-            <!-- R1 -->
-            <rect x="50" y="355" width="720" height="42" rx="6" fill="#151a22" stroke="#334155" stroke-width="1"/>
-            <circle cx="80" cy="376" r="14" fill="#64748b" fill-opacity="0.2" stroke="#64748b" stroke-width="1"/>
-            <text x="73" y="380" fill="#94a3b8" font-weight="bold" font-size="11">R1</text>
-            <text x="110" y="380" fill="#f1f5f9" font-weight="bold" font-size="12">Documented Assumptions</text>
-            <text x="440" y="380" fill="#94a3b8" font-size="11">Theory Manual v0.1, state vector &amp; frame definitions</text>
-
-            <!-- R0 -->
-            <rect x="50" y="405" width="720" height="42" rx="6" fill="#151a22" stroke="#334155" stroke-width="1"/>
-            <circle cx="80" cy="426" r="14" fill="#64748b" fill-opacity="0.2" stroke="#64748b" stroke-width="1"/>
-            <text x="73" y="430" fill="#94a3b8" font-weight="bold" font-size="11">R0</text>
-            <text x="110" y="430" fill="#f1f5f9" font-weight="bold" font-size="12">Runnable Sandbox</text>
-            <text x="440" y="430" fill="#94a3b8" font-size="11">Browser launch, RK4 in Web Worker, no cheat orbit</text>
-        </svg>
-    </div>
-
+<div class="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3 font-mono text-xs text-slate-400">
+<div class="flex items-center gap-2">
+<span class="inline-block h-2.5 w-2.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(59,130,246,0.8)]"></span>
+<span class="font-bold tracking-widest text-slate-200 uppercase">SYS.LADDER // THE AEROSPACE TRUST PIPELINE</span>
+</div>
+<span class="text-[10px] tracking-wider text-slate-500">[ NASA-STD-7009 METHODOLOGY ]</span>
+</div>
+<div class="overflow-x-auto">
+<svg viewBox="0 0 820 480" width="100%" height="auto" class="font-mono text-xs min-w-[680px] select-none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="trust-grad" x1="0%" y1="100%" x2="0%" y2="0%">
+<stop offset="0%" stop-color="#3b82f6" stop-opacity="0.1"/>
+<stop offset="50%" stop-color="#06b6d4" stop-opacity="0.15"/>
+<stop offset="100%" stop-color="#10b981" stop-opacity="0.2"/>
+</linearGradient>
+</defs>
+<rect x="20" y="15" width="780" height="450" rx="8" fill="url(#trust-grad)" stroke="#334155" stroke-width="1"/>
+<rect x="50" y="30" width="720" height="42" rx="6" fill="#151a22" stroke="#10b981" stroke-width="1.5"/>
+<circle cx="80" cy="51" r="14" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
+<text x="73" y="55" fill="#10b981" font-weight="bold" font-size="11">R7</text>
+<text x="110" y="55" fill="#f1f5f9" font-weight="bold" font-size="12">Governance &amp; Certification</text>
+<text x="440" y="55" fill="#94a3b8" font-size="11">Requirements traceability, FMEA, DO-178C adjacent</text>
+<rect x="50" y="80" width="720" height="42" rx="6" fill="#151a22" stroke="#06b6d4" stroke-width="1"/>
+<circle cx="80" cy="101" r="14" fill="#06b6d4" fill-opacity="0.2" stroke="#06b6d4" stroke-width="1"/>
+<text x="73" y="105" fill="#06b6d4" font-weight="bold" font-size="11">R6</text>
+<text x="110" y="105" fill="#f1f5f9" font-weight="bold" font-size="12">SIL / HIL Real-Time Bridge</text>
+<text x="440" y="105" fill="#94a3b8" font-size="11">POSIX RT clock, UDP/CCSDS avionics telemetry</text>
+<rect x="50" y="130" width="720" height="42" rx="6" fill="#151a22" stroke="#06b6d4" stroke-width="1"/>
+<circle cx="80" cy="151" r="14" fill="#06b6d4" fill-opacity="0.2" stroke="#06b6d4" stroke-width="1"/>
+<text x="73" y="155" fill="#06b6d4" font-weight="bold" font-size="11">R5</text>
+<text x="110" y="155" fill="#f1f5f9" font-weight="bold" font-size="12">Integrated Toolchain APIs</text>
+<text x="440" y="155" fill="#94a3b8" font-size="11">Python wheel (`pyo3`), MATLAB, FMU export</text>
+<rect x="50" y="180" width="720" height="42" rx="6" fill="#151a22" stroke="#06b6d4" stroke-width="1"/>
+<circle cx="80" cy="201" r="14" fill="#06b6d4" fill-opacity="0.2" stroke="#06b6d4" stroke-width="1"/>
+<text x="73" y="205" fill="#06b6d4" font-weight="bold" font-size="11">R4</text>
+<text x="110" y="205" fill="#f1f5f9" font-weight="bold" font-size="12">Statistical Monte Carlo</text>
+<text x="440" y="205" fill="#94a3b8" font-size="11">10,000 runs, dispersion ellipses, wind ensembles</text>
+<rect x="50" y="230" width="720" height="42" rx="6" fill="#151a22" stroke="#3b82f6" stroke-width="2"/>
+<circle cx="80" cy="251" r="14" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="73" y="255" fill="#60a5fa" font-weight="bold" font-size="11">R3</text>
+<text x="110" y="255" fill="#60a5fa" font-weight="bold" font-size="12">Flight Telemetry V&amp;V</text>
+<text x="440" y="255" fill="#93c5fd" font-size="11">Falcon 9 / Electron public data, &lt;2% error gates</text>
+<line x1="30" y1="285" x2="790" y2="285" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="6 4"/>
+<rect x="230" y="275" width="360" height="20" rx="4" fill="#0b0e14" stroke="#f59e0b" stroke-width="1"/>
+<text x="245" y="289" fill="#fbbf24" font-size="10" font-weight="bold" letter-spacing="0.5">▲ INDUSTRY TRUST THRESHOLD (START HERE) ▲</text>
+<rect x="50" y="305" width="720" height="42" rx="6" fill="#151a22" stroke="#334155" stroke-width="1"/>
+<circle cx="80" cy="326" r="14" fill="#64748b" fill-opacity="0.2" stroke="#64748b" stroke-width="1"/>
+<text x="73" y="330" fill="#94a3b8" font-weight="bold" font-size="11">R2</text>
+<text x="110" y="330" fill="#f1f5f9" font-weight="bold" font-size="12">Unit &amp; Analytical Validation</text>
+<text x="440" y="330" fill="#94a3b8" font-size="11">Vitest orbital invariants, circular velocity tests</text>
+<rect x="50" y="355" width="720" height="42" rx="6" fill="#151a22" stroke="#334155" stroke-width="1"/>
+<circle cx="80" cy="376" r="14" fill="#64748b" fill-opacity="0.2" stroke="#64748b" stroke-width="1"/>
+<text x="73" y="380" fill="#94a3b8" font-weight="bold" font-size="11">R1</text>
+<text x="110" y="380" fill="#f1f5f9" font-weight="bold" font-size="12">Documented Assumptions</text>
+<text x="440" y="380" fill="#94a3b8" font-size="11">Theory Manual v0.1, state vector &amp; frame definitions</text>
+<rect x="50" y="405" width="720" height="42" rx="6" fill="#151a22" stroke="#334155" stroke-width="1"/>
+<circle cx="80" cy="426" r="14" fill="#64748b" fill-opacity="0.2" stroke="#64748b" stroke-width="1"/>
+<text x="73" y="430" fill="#94a3b8" font-weight="bold" font-size="11">R0</text>
+<text x="110" y="430" fill="#f1f5f9" font-weight="bold" font-size="12">Runnable Sandbox</text>
+<text x="440" y="430" fill="#94a3b8" font-size="11">Browser launch, RK4 in Web Worker, no cheat orbit</text>
+</svg>
+</div>
 </div>
 
 ---
