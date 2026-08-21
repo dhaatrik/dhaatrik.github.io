@@ -7,7 +7,6 @@ import { unified } from '@astrojs/markdown-remark';
 
 import tailwindcss from '@tailwindcss/vite';
 import remarkMath from 'remark-math';
-import remarkMermaid from './src/plugins/remark-mermaid.mjs';
 import rehypeKatex from 'rehype-katex';
 import rehypeAccessibleTable from './src/plugins/rehype-accessible-table.mjs';
 
@@ -31,7 +30,7 @@ export default defineConfig({
         // Migrated from deprecated top-level remarkPlugins/rehypePlugins keys
         // (removed in Astro 8.0) to the unified() processor pattern (Astro 6.4+)
         processor: unified({
-            remarkPlugins: [remarkMath, remarkMermaid],
+            remarkPlugins: [remarkMath],
             rehypePlugins: markdownRehypePlugins,
         }),
     },

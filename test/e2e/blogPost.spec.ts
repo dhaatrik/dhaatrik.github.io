@@ -115,15 +115,15 @@ test.describe('BlogPost Interactive Features', () => {
         expect(path).toBeTruthy();
     });
 
-    test('Mermaid flowchart should render as SVG on posts with mermaid diagrams', async ({
+    test('Architecture diagram should render as responsive SVG on posts with system blueprints', async ({
         page,
     }) => {
         await page.goto('/transmissions/deltav-lab-native-physics-core/', {
             waitUntil: 'networkidle',
         });
-        const mermaidPre = page.locator('pre.mermaid');
-        await expect(mermaidPre).toBeVisible();
-        const mermaidSvg = mermaidPre.locator('svg');
-        await expect(mermaidSvg).toBeVisible({ timeout: 15000 });
+        const diagram = page.locator('.architecture-diagram');
+        await expect(diagram).toBeVisible();
+        const diagramSvg = diagram.locator('svg');
+        await expect(diagramSvg).toBeVisible();
     });
 });

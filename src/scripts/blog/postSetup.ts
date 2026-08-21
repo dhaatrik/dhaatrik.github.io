@@ -1,36 +1,6 @@
 import { glossary } from '../../data/glossary';
 
 let postAbortController: AbortController | null = null;
-let mermaidInitialized = false;
-
-async function setupMermaid(signal: AbortSignal) {
-    const container = document.getElementById('rendered-content-container');
-    if (!container) return;
-
-    const nodes = container.querySelectorAll<HTMLPreElement>(
-        'pre.mermaid:not([data-mermaid-processed])'
-    );
-    if (nodes.length === 0) return;
-
-    try {
-        const mermaid = (await import('mermaid')).default;
-        if (!mermaidInitialized) {
-            mermaid.initialize({
-                startOnLoad: false,
-                theme: 'dark',
-                securityLevel: 'loose',
-                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-                flowchart: { curve: 'basis' },
-            });
-            mermaidInitialized = true;
-        }
-        if (signal.aborted) return;
-        await mermaid.run({ nodes: Array.from(nodes) });
-        nodes.forEach((node) => node.setAttribute('data-mermaid-processed', 'true'));
-    } catch (err) {
-        console.warn('Mermaid render failed:', err);
-    }
-}
 
 export async function setupPost() {
     if (postAbortController) {
@@ -752,9 +722,6 @@ export async function setupPost() {
             { signal }
         );
     });
-
-    // 3.4 Mermaid diagrams (client-side; remark-mermaid emits <pre class="mermaid">)
-    await setupMermaid(signal);
 
     // 5. Global Glossary Popovers (wrapped in requestIdleCallback to safeguard main-thread responsiveness)
     const initializeGlossary = () => {
