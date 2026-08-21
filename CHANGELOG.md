@@ -1,5 +1,41 @@
 # Changelog
 
+## [4.4.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.3.0...v4.4.0) (2026-08-21)
+
+
+### Features
+
+* **seo:** add BreadcrumbList schema to hub pages ([e315d40](https://github.com/dhaatrik/dhaatrik.github.io/commit/e315d404a823d7b85b19427a29f629a4b8249c46))
+* **seo:** add image to Person schema and author link ([7394f7d](https://github.com/dhaatrik/dhaatrik.github.io/commit/7394f7d7fb6f8b53a5aeaa3256ea79aaad9a9016))
+* **seo:** add lastmod to sitemap entries ([5f5d81d](https://github.com/dhaatrik/dhaatrik.github.io/commit/5f5d81d683e161970bada0e5176c540a4bdef5de))
+* **seo:** generate PNG favicons and add apple-touch-icon ([bfd01f3](https://github.com/dhaatrik/dhaatrik.github.io/commit/bfd01f33be24fd31d2f3e52a94043cfd6d5043a2))
+* **seo:** upgrade project schema to SoftwareSourceCode ([4bdb5ab](https://github.com/dhaatrik/dhaatrik.github.io/commit/4bdb5ab5a7ddaefa841f3abac481ae6510d4eff7))
+* **transmissions:** replace runtime mermaid with static responsive SVG architecture blueprints ([80939b6](https://github.com/dhaatrik/dhaatrik.github.io/commit/80939b68807069c6e7b7c58eab499795f83e1707))
+
+
+### Bug Fixes
+
+* **seo:** trim overlong title and description frontmatter ([4557f32](https://github.com/dhaatrik/dhaatrik.github.io/commit/4557f32c2d92282f9841780143f961300815e5d5))
+* **transmissions:** eliminate markdown indentation in SVG architecture blueprints ([c0af483](https://github.com/dhaatrik/dhaatrik.github.io/commit/c0af483bd830a8baa8d6e8a861276ea2acd54f03))
+* **typography:** resolve dark mode table theme selector in typography.css ([0006f9a](https://github.com/dhaatrik/dhaatrik.github.io/commit/0006f9a164f689cbc23c2d75f5aad1b68a8911fa))
+
+
+### Styles & UI Polish
+
+* **seo:** format hub page breadcrumb schemas with prettier ([9c1da9d](https://github.com/dhaatrik/dhaatrik.github.io/commit/9c1da9de923ed69e038644032e92aa4184b26141))
+* **typography:** enhance light mode table borders and theme-calibrate code blocks ([f70ed22](https://github.com/dhaatrik/dhaatrik.github.io/commit/f70ed22a5d3439b544f64e0f34cec9c6cce8f4af))
+* **typography:** optimize horizontal rule line divisions for light and dark themes ([0d3134f](https://github.com/dhaatrik/dhaatrik.github.io/commit/0d3134f91c272c0bdccca3ae256af5103e3c1eb1))
+
+
+### Documentation & Skills
+
+* **agents:** update SEO and schema standards in instructions and skill ([be05881](https://github.com/dhaatrik/dhaatrik.github.io/commit/be05881572283480c24fcf7db5d20f32ff7f5e94))
+
+
+### Chores & Maintenance
+
+* **plugins:** remove unused remark-mermaid plugin ([485a453](https://github.com/dhaatrik/dhaatrik.github.io/commit/485a4533d3c1bea97fb45b4b643946e868e9cb69))
+
 ## [4.3.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.2.0...v4.3.0) (2026-08-20)
 
 
