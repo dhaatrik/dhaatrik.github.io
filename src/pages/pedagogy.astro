@@ -9,6 +9,21 @@ import dbImage from '../assets/DB.jpeg';
 
 // Pre-render a math symbol or formula using KaTeX if desired, or use standard text
 // Since we want this to load fast, we can render normal HTML and styled math
+
+// BreadcrumbList JSON-LD for clean SERP navigation trails
+const breadcrumbSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).href },
+        {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Pedagogy',
+            item: new URL('/pedagogy/', Astro.site).href,
+        },
+    ],
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -18,6 +33,7 @@ import dbImage from '../assets/DB.jpeg';
             title={`Pedagogy | ${SITE_TITLE}`}
             description="Nine years of teaching experiments — bus wheels, kitchen demos, DBS Classes, and what I learned when I stopped."
         />
+        <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <Header />

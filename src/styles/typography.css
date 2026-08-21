@@ -12,8 +12,19 @@
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    margin: 1.5rem 0;
-    border-radius: 0.5rem;
+    margin: 2rem 0;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(248, 250, 252, 0.75);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+html.dark .prose .table-container,
+.dark .prose .table-container,
+[data-theme='dark'] .prose .table-container {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(13, 17, 23, 0.85);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
 }
 
 .prose .table-container:focus-visible {
@@ -23,6 +34,60 @@
 
 .prose table {
     width: 100%;
+    margin: 0 !important;
+    border-collapse: collapse;
+    font-size: 0.9em;
+}
+
+.prose thead {
+    border-bottom: 2px solid rgba(148, 163, 184, 0.5);
+    background: rgba(241, 245, 249, 0.95);
+}
+
+html.dark .prose thead,
+.dark .prose thead,
+[data-theme='dark'] .prose thead {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    background: rgba(21, 26, 34, 0.95);
+}
+
+.prose thead th {
+    padding: 0.875rem 1rem !important;
+    color: var(--text-primary) !important;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    letter-spacing: 0.025em;
+}
+
+.prose tbody tr {
+    border-bottom: 1px solid rgba(148, 163, 184, 0.3) !important;
+    transition: background-color 0.15s ease;
+}
+
+html.dark .prose tbody tr,
+.dark .prose tbody tr,
+[data-theme='dark'] .prose tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.prose tbody tr:last-child {
+    border-bottom: none !important;
+}
+
+.prose tbody tr:hover {
+    background-color: rgba(37, 99, 235, 0.05);
+}
+
+html.dark .prose tbody tr:hover,
+.dark .prose tbody tr:hover,
+[data-theme='dark'] .prose tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.prose tbody td {
+    padding: 0.875rem 1rem !important;
+    vertical-align: top;
+    color: var(--text-primary);
 }
 
 .prose p {
@@ -110,20 +175,42 @@
     content: '' !important;
 }
 
-/* Client-rendered Mermaid diagrams (remark-mermaid.mjs + postSetup.ts) */
-.prose pre.mermaid,
-.prose .mermaid {
-    margin: 1.75rem 0;
-    padding: 1rem 1.25rem;
-    overflow-x: auto;
-    border-radius: 0.75rem;
-    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
-    background: color-mix(in srgb, var(--accent) 4%, #0b0e14);
-    text-align: center;
+/* Optimized Line Divisions (Horizontal Rules & Section Separators) */
+.prose hr {
+    border: 0 !important;
+    height: 1px !important;
+    margin: 2.75rem 0 !important;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(148, 163, 184, 0.4) 15%,
+        rgba(148, 163, 184, 0.75) 50%,
+        rgba(148, 163, 184, 0.4) 85%,
+        transparent 100%
+    ) !important;
 }
 
-.prose pre.mermaid svg,
-.prose .mermaid svg {
+html.dark .prose hr,
+.dark .prose hr,
+[data-theme='dark'] .prose hr {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(59, 130, 246, 0.3) 15%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(59, 130, 246, 0.3) 85%,
+        transparent 100%
+    ) !important;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.15);
+}
+
+/* Architecture diagrams and system blueprints */
+.prose .architecture-diagram {
+    margin: 2rem 0;
+    max-width: 100%;
+}
+
+.prose .architecture-diagram svg {
     display: block;
     max-width: 100%;
     height: auto;

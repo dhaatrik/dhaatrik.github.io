@@ -126,10 +126,19 @@ Inject in `<head>`:
 - `Article` / `BlogPosting` — headline, description, datePublished, author, image
 - `BreadcrumbList` — Home → Transmissions → post title
 
-### Project pages
+### Project pages (`src/pages/projects/[...slug].astro`)
 
-- Article-style or `TechArticle` where appropriate
-- Person as author
+- `SoftwareSourceCode` — name, description, author, codeRepository (GitHub URL), programmingLanguage, runtimePlatform, license, image, keywords
+- `BreadcrumbList` — Home → Projects → project title
+
+### Hub pages (`/projects/`, `/transmissions/`, `/pedagogy/`, `/personnel/`)
+
+- `BreadcrumbList` — Home → [Section Name]
+
+### Global author identity (`BaseHead.astro`)
+
+- `Person` — name, url, image (`/me.jpeg`), sameAs links, jobTitle
+- `<link rel="author" href="/personnel/" />` on every page
 
 ### Astro injection pattern (mandatory)
 
@@ -164,9 +173,11 @@ Implementation details: `dhaatrik-astro-site` skill.
 - Semantic tags: `<main>`, `<article>`, `<section>`, `<nav>`, `<aside>`
 - **Descriptive `alt` on every image** (Astro `<Image>` and `<Picture>`)
 - Internal links between related transmissions and project mission logs
-- Sitemap: `@astrojs/sitemap` — verify new routes appear after build
+- Sitemap: `@astrojs/sitemap` with `<lastmod>` timestamps — verify new routes appear after build
+- Favicons: SVG vector dynamic toggle + PNG fallbacks (`48x48`, `192x192`, `apple-touch-icon.png`)
 - RSS: [`src/pages/rss.xml.js`](../../../src/pages/rss.xml.js) — new posts auto-included
 - Canonical URLs on all pages via BaseHead
+- Author discovery: `<link rel="author" href="/personnel/" />`
 
 ### Meta description guidelines
 

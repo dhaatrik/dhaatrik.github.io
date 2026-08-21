@@ -54,28 +54,77 @@ React was never the problem. **Co-locating cert-shaped physics with UI bundling*
 
 ## Target Architecture
 
-```mermaid
-flowchart LR
-    subgraph browser ["Browser — TypeScript/React"]
-        UI["Mission Control + VAB"]
-        WASM["deltav_core.wasm"]
-        UI <--> |"SharedArrayBuffer / WASM linear memory"| WASM
-    end
-    subgraph native ["Native — Rust crate"]
-        CORE["deltav-core integrator"]
-        BATCH["Monte Carlo runner"]
-        PY["PyO3 bindings"]
-    end
-    subgraph ops ["Ops / Lab"]
-        CLI["deltav-cli batch"]
-        HIL["UDP HIL bridge"]
-    end
-    CORE --> WASM
-    CORE --> BATCH
-    CORE --> PY
-    CORE --> CLI
-    CLI --> HIL
-```
+<div class="architecture-diagram my-8 overflow-hidden rounded-xl border border-slate-300 dark:border-slate-800 bg-[#0d1117] p-4 sm:p-6 shadow-xl transition-all">
+<div class="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3 font-mono text-xs text-slate-400">
+<div class="flex items-center gap-2">
+<span class="inline-block h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]"></span>
+<span class="font-bold tracking-widest text-slate-200 uppercase">SYS.ARCH // DELTAV LAB TARGET ARCHITECTURE</span>
+</div>
+<span class="text-[10px] tracking-wider text-slate-500">[ HYBRID WASM + RUST DUAL-CORE ]</span>
+</div>
+<div class="overflow-x-auto">
+<svg viewBox="0 0 820 380" width="100%" height="auto" class="font-mono text-xs min-w-[700px] select-none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#06b6d4" stop-opacity="0.15"/>
+<stop offset="100%" stop-color="#3b82f6" stop-opacity="0.05"/>
+</linearGradient>
+<linearGradient id="rust-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#f97316" stop-opacity="0.15"/>
+<stop offset="100%" stop-color="#ef4444" stop-opacity="0.05"/>
+</linearGradient>
+<linearGradient id="ops-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#10b981" stop-opacity="0.15"/>
+<stop offset="100%" stop-color="#06b6d4" stop-opacity="0.05"/>
+</linearGradient>
+<marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1 L 8 5 L 0 9 z" fill="#06b6d4"/>
+</marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1 L 8 5 L 0 9 z" fill="#f97316"/>
+</marker>
+<marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1 L 8 5 L 0 9 z" fill="#10b981"/>
+</marker>
+</defs>
+<rect x="10" y="20" width="370" height="340" rx="8" fill="url(#cyan-grad)" stroke="#06b6d4" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="30" y="48" fill="#06b6d4" font-weight="bold" font-size="13" letter-spacing="1">BROWSER // TYPESCRIPT &amp; REACT</text>
+<rect x="30" y="70" width="330" height="70" rx="6" fill="#151a22" stroke="#334155" stroke-width="1.5"/>
+<text x="45" y="98" fill="#f1f5f9" font-weight="bold" font-size="12">Mission Control HUD + VAB</text>
+<text x="45" y="122" fill="#94a3b8" font-size="10">React 19, WebGL Canvas, Time-Warp Controls</text>
+<path d="M 195 140 L 195 210" stroke="#06b6d4" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow-cyan)" marker-start="url(#arrow-cyan)"/>
+<rect x="80" y="165" width="230" height="22" rx="4" fill="#0b0e14" stroke="#06b6d4" stroke-opacity="0.4"/>
+<text x="92" y="180" fill="#06b6d4" font-size="9.5" font-weight="600">SharedArrayBuffer / WASM Linear Memory</text>
+<rect x="30" y="220" width="330" height="70" rx="6" fill="#151a22" stroke="#334155" stroke-width="1.5"/>
+<text x="45" y="248" fill="#f1f5f9" font-weight="bold" font-size="12">deltav_core.wasm</text>
+<text x="45" y="272" fill="#94a3b8" font-size="10">wasm-pack compiled target for Web Worker (50 Hz)</text>
+<path d="M 440 105 C 390 105, 390 255, 370 255" fill="none" stroke="#f97316" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrow-orange)"/>
+<rect x="420" y="20" width="390" height="210" rx="8" fill="url(#rust-grad)" stroke="#f97316" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="440" y="48" fill="#f97316" font-weight="bold" font-size="13" letter-spacing="1">NATIVE // RUST WORKSPACE (deltav-core)</text>
+<rect x="440" y="70" width="350" height="60" rx="6" fill="#151a22" stroke="#f97316" stroke-width="1.5"/>
+<text x="455" y="96" fill="#f1f5f9" font-weight="bold" font-size="12">deltav-core Integrator</text>
+<text x="455" y="118" fill="#fdba74" font-size="10">RK4 Equations of Motion, NRLMSISE-00, Quaternion 6DOF</text>
+<rect x="440" y="150" width="165" height="60" rx="6" fill="#151a22" stroke="#334155" stroke-width="1.5"/>
+<text x="452" y="174" fill="#f1f5f9" font-weight="bold" font-size="11">Monte Carlo Runner</text>
+<text x="452" y="196" fill="#94a3b8" font-size="9.5">Rayon Multi-Core Batch</text>
+<path d="M 520 130 L 520 150" stroke="#f97316" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+<rect x="625" y="150" width="165" height="60" rx="6" fill="#151a22" stroke="#334155" stroke-width="1.5"/>
+<text x="637" y="174" fill="#f1f5f9" font-weight="bold" font-size="11">PyO3 Bindings</text>
+<text x="637" y="196" fill="#94a3b8" font-size="9.5">Jupyter / ML Pipeline</text>
+<path d="M 710 130 L 710 150" stroke="#f97316" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+<rect x="420" y="250" width="390" height="110" rx="8" fill="url(#ops-grad)" stroke="#10b981" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="440" y="278" fill="#10b981" font-weight="bold" font-size="13" letter-spacing="1">OPS &amp; HARDWARE IN THE LOOP (HIL)</text>
+<rect x="440" y="295" width="165" height="50" rx="6" fill="#151a22" stroke="#334155" stroke-width="1.5"/>
+<text x="452" y="318" fill="#f1f5f9" font-weight="bold" font-size="11">deltav-cli</text>
+<text x="452" y="336" fill="#94a3b8" font-size="9.5">CLI Batch Runner</text>
+<path d="M 605 320 L 625 320" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-emerald)"/>
+<rect x="625" y="295" width="165" height="50" rx="6" fill="#151a22" stroke="#10b981" stroke-width="1.5"/>
+<text x="637" y="318" fill="#f1f5f9" font-weight="bold" font-size="11">UDP HIL Bridge</text>
+<text x="637" y="336" fill="#6ee7b7" font-size="9.5">Avionics &amp; Speedgoat</text>
+<path d="M 615 115 C 625 130, 625 240, 520 295" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrow-emerald)"/>
+</svg>
+</div>
+</div>
 
 **Three deliverables from one Rust workspace:**
 

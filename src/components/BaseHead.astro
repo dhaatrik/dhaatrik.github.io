@@ -48,6 +48,7 @@ const personSchema = JSON.stringify({
     '@type': 'Person',
     name: 'Dhaatrik Chowdhury',
     url: Astro.site,
+    image: new URL('/me.jpeg', Astro.site).href,
     sameAs: [
         'https://github.com/dhaatrik',
         'https://linkedin.com/in/dhaatrik',
@@ -73,6 +74,10 @@ const personSchema = JSON.stringify({
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 <link id="favicon" rel="icon" type="image/svg+xml" href="/logo_dark.svg" />
+<!-- PNG favicon fallbacks for Google Search & mobile -->
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <script is:inline>
     // Theme initializer — runs before paint to prevent FOUC.
     // Default to 'dark' if no stored preference.
@@ -91,6 +96,7 @@ const personSchema = JSON.stringify({
     })();
 </script>
 <link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="author" href="/personnel/" />
 
 <!-- Font Preloading -->
 <link rel="preload" href={nunitoUrl} as="font" type="font/woff2" crossorigin />

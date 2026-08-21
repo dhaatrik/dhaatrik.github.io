@@ -40,10 +40,10 @@ const parsed = parseTelemetry(telemetryStr);
 const projectSlug = project.id.replace(/\.md$/, '');
 const transmissionTag = rawTransmissionTag || projectSlug;
 
-// Generate JSON-LD CreativeWork Schema
+// Generate JSON-LD SoftwareSourceCode Schema (richer than CreativeWork for GitHub projects)
 const projectSchema = {
     '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
+    '@type': 'SoftwareSourceCode',
     name: title,
     description: description,
     author: {
@@ -58,6 +58,10 @@ const projectSchema = {
     url: new URL(Astro.url.pathname, Astro.site).href,
     image: logo ? new URL(logo.src, Astro.site).href : undefined,
     ...(tags && tags.length > 0 && { keywords: tags.join(', ') }),
+    ...(githubUrl && { codeRepository: githubUrl }),
+    ...(tags && tags.length > 0 && { programmingLanguage: tags }),
+    runtimePlatform: 'Web Browser',
+    license: 'https://opensource.org/licenses/MIT',
 };
 const jsonLd = JSON.stringify(projectSchema);
 

@@ -1,5 +1,5 @@
 ---
-title: 'DeltaV Lab Flight Computer — Teaching Autopilot Without Faking Physics'
+title: 'DeltaV Lab Flight Computer — Autopilot Without Faking It'
 description: 'How the WHEN/THEN DSL guides real launches in DeltaV Lab — parser design, condition variables, and why scriptable GNC beats cinematic autopilot.'
 pubDate: 2026-06-27
 updatedDate: 2026-06-30

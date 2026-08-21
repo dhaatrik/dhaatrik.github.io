@@ -42,8 +42,9 @@ Index: [`.agents/README.md`](.agents/README.md)
 2. **robots.txt** — Keep AI crawlers allowed (`GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`, etc.).
 3. **Meta** — Every route: `title`, `description`, `keywords`, dynamic `og:type` via `BaseHead`.
 4. **AEO/GEO** — Question-style phrasing in JSON-LD / `llms-full.txt`; Mission Report H2s in body prose.
-5. **JSON-LD** — Homepage: `WebSite` + `FAQPage`; posts: `Article`; use `set:html` pattern in Astro.
-6. **Semantics** — One `h1`, proper heading order, semantic HTML, descriptive image `alt`.
+5. **JSON-LD** — Homepage: `WebSite` + `FAQPage`; posts: `Article` + `BreadcrumbList`; projects: `SoftwareSourceCode` + `BreadcrumbList`; hub pages: `BreadcrumbList`; global: `Person` (with avatar image + `rel="author"`).
+6. **Sitemap & Icons** — `@astrojs/sitemap` with `<lastmod>` timestamps; PNG favicons (`48x48`, `192x192`) + `apple-touch-icon.png` in `BaseHead`.
+7. **Semantics** — One `h1`, proper heading order, semantic HTML, descriptive image `alt`.
 
 ## Commit Guidelines & Conventions
 
