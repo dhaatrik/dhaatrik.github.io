@@ -32,4 +32,9 @@ describe('Constants', () => {
             assert.ok(platform in consts.SOCIAL_LINKS, `Missing expected platform: ${platform}`);
         });
     });
+
+    test('SITE_VERSION is a valid semver string prefixed with v', () => {
+        assert.strictEqual(typeof consts.SITE_VERSION, 'string');
+        assert.match(consts.SITE_VERSION, /^v\d+\.\d+\.\d+/);
+    });
 });

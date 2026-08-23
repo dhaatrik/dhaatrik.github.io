@@ -3,7 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_VERSION } from '../consts';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
@@ -192,7 +192,7 @@ const webSiteSchema = JSON.stringify({
                             </span>
                             <span>SYS.ONLINE</span>
                             <span class="text-emerald-600/70 dark:text-emerald-400/70"
-                                >[v4.2.0]</span
+                                >[{SITE_VERSION}]</span
                             >
                         </div>
 

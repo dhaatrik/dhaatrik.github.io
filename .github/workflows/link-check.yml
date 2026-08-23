@@ -22,6 +22,18 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build static site
+              run: npm run build
+
             - name: Restore lychee cache
               uses: actions/cache@v4
               with:
@@ -44,7 +56,8 @@ jobs:
                       --exclude 'https?://localhost.*'
                       --exclude 'https?://127\.0\.0\.1.*'
                       --exclude 'file:///.*'
-                      README.md AGENTS.md public/llms.txt public/llms-full.txt 'src/content/**/*.md' 'src/content/**/*.mdx'
+                      --root-dir "${{ github.workspace }}/dist"
+                      README.md AGENTS.md public/llms.txt public/llms-full.txt 'src/content/**/*.md' 'src/content/**/*.mdx' 'dist/**/*.html'
                   output: ./lychee-out.md
 
             - name: Create or Update Issue on Broken Links

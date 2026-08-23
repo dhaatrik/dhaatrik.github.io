@@ -1,9 +1,11 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
+import pkg from '../package.json' with { type: 'json' };
 
 export const SITE_TITLE = 'Dhaatrik Chowdhury | Engineering Diary & Mission Logs';
 export const SITE_DESCRIPTION =
     'Honest engineering transmissions from Dhaatrik — what I built, what broke, and what I learned along the way.';
+export const SITE_VERSION = `v${pkg.version}`;
 
 export const SOCIAL_LINKS = {
     github: 'https://github.com/dhaatrik',
