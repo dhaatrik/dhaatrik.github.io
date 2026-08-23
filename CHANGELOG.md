@@ -1,5 +1,22 @@
 # Changelog
 
+## [4.5.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.4.0...v4.5.0) (2026-08-23)
+
+
+### Features
+
+* **home:** automate hero system version from package.json ([00f07a1](https://github.com/dhaatrik/dhaatrik.github.io/commit/00f07a15bbc284aad971c4bea495e3c053929617))
+
+
+### Bug Fixes
+
+* **ci:** add build step and root-dir resolution to link checker workflow ([e917871](https://github.com/dhaatrik/dhaatrik.github.io/commit/e91787199316dbeea464dd738b24c5f4d287a772))
+
+
+### Tests & Verification
+
+* **content:** add internal link integrity validation test suite ([a92ed6c](https://github.com/dhaatrik/dhaatrik.github.io/commit/a92ed6c676b73464110c0866d9328749b0989c73))
+
 ## [4.4.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.3.0...v4.4.0) (2026-08-21)
 
 
