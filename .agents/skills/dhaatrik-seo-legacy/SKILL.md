@@ -65,7 +65,7 @@ Location: [`public/robots.txt`](../../../public/robots.txt)
 
 - Default: `User-agent: *` → `Allow: /`
 - **Explicitly allow** AI crawlers: `Google-Extended`, `GPTBot`, `ChatGPT-User`, `PerplexityBot`, `ClaudeBot`, `anthropic-ai`, `Applebot-Extended`, `CCBot`, `Bingbot`, etc.
-- Include `Sitemap: https://dhaatrik.github.io/sitemap-index.xml`
+- Include `Sitemap: https://dhaatrik.github.io/sitemap.xml` and `Sitemap: https://dhaatrik.github.io/sitemap-index.xml`
 - Do not block `/transmissions/` or `/projects/` for AI agents
 
 ### Global meta (via `BaseHead.astro`)
@@ -216,7 +216,7 @@ Run after SEO/AEO/GEO/LLM work:
 4. [ ] `llms.txt` + `llms-full.txt` updated
 5. [ ] `robots.txt` still permits AI crawlers
 6. [ ] Images have `alt` text
-7. [ ] `npm run build` — check `dist/sitemap-index.xml`, `dist/llms.txt`
+7. [ ] `npm run build` — check `dist/sitemap.xml`, `dist/sitemap-index.xml`, `dist/llms.txt`
 8. [ ] Optional: Google Rich Results Test, social card preview
 
 ---
