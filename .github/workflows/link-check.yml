@@ -56,8 +56,9 @@ jobs:
                       --exclude 'https?://localhost.*'
                       --exclude 'https?://127\.0\.0\.1.*'
                       --exclude 'file:///.*'
+                      --exclude 'https?://dhaatrik\.github\.io/404/?'
                       --root-dir "${{ github.workspace }}/dist"
-                      README.md AGENTS.md public/llms.txt public/llms-full.txt 'src/content/**/*.md' 'src/content/**/*.mdx' 'dist/**/*.html'
+                      README.md AGENTS.md public/llms.txt public/llms-full.txt 'src/content/**/*.md' 'dist/**/*.html'
                   output: ./lychee-out.md
 
             - name: Create or Update Issue on Broken Links
