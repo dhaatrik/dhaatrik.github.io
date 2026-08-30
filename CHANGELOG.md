@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.5.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.5.0...v4.5.1) (2026-08-30)
+
+
+### Bug Fixes
+
+* **ci:** exclude 404 url and remove unused mdx glob in link checker ([e3af289](https://github.com/dhaatrik/dhaatrik.github.io/commit/e3af289955d08b1cff5b8f7e03554b862ef8b29a))
+* **seo:** omit canonical and add noindex on 404 error page ([0ced2ba](https://github.com/dhaatrik/dhaatrik.github.io/commit/0ced2ba9519385765d625a9b1c6f01b9939480b0))
+
 ## [4.5.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.4.0...v4.5.0) (2026-08-23)
 
 
