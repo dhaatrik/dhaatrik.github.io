@@ -26,9 +26,8 @@ interface Props {
     keywords?: string[];
     pubDate?: Date;
     updatedDate?: Date;
+    noindex?: boolean;
 }
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const {
     title,
@@ -38,7 +37,15 @@ const {
     keywords,
     pubDate,
     updatedDate,
+    noindex = false,
 } = Astro.props;
+
+const is404 =
+    noindex ||
+    Astro.url.pathname === '/404' ||
+    Astro.url.pathname === '/404/' ||
+    Astro.url.pathname === '/404.html';
+const canonicalURL = is404 ? null : new URL(Astro.url.pathname, Astro.site);
 
 // ⚡ Bolt: Cache image URL instantiation to avoid redundant parsing during SSG
 const imageUrl = new URL(image.src, Astro.site);
@@ -110,18 +117,19 @@ const personSchema = JSON.stringify({
 />
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+{canonicalURL && <link rel="canonical" href={canonicalURL} />}
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="author" content="Dhaatrik Chowdhury" />
+{is404 && <meta name="robots" content="noindex, nofollow" />}
 {keywords && keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
-<meta property="og:url" content={Astro.url} />
+{!is404 && <meta property="og:url" content={Astro.url} />}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
@@ -140,7 +148,7 @@ const personSchema = JSON.stringify({
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
+{!is404 && <meta property="twitter:url" content={Astro.url} />}
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={imageUrl} />

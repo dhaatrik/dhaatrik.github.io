@@ -110,4 +110,26 @@ test.describe('SEO and Metadata Verification', () => {
         const twitterImage = page.locator('meta[property="twitter:image"]');
         await expect(twitterImage).toHaveAttribute('content', /.*delta-v-lab.*/);
     });
+
+    test('404 page should have noindex robots tag and no canonical or og:url pointing to 404', async ({
+        page,
+    }) => {
+        await page.goto('/404');
+        await page.waitForLoadState('networkidle');
+
+        // Robots tag must be noindex, nofollow
+        const robots = page.locator('meta[name="robots"]');
+        await expect(robots).toHaveAttribute('content', 'noindex, nofollow');
+
+        // Should not have a canonical link tag
+        const canonical = page.locator('link[rel="canonical"]');
+        await expect(canonical).toHaveCount(0);
+
+        // Should not have og:url or twitter:url pointing to 404
+        const ogUrl = page.locator('meta[property="og:url"]');
+        await expect(ogUrl).toHaveCount(0);
+
+        const twitterUrl = page.locator('meta[property="twitter:url"]');
+        await expect(twitterUrl).toHaveCount(0);
+    });
 });
