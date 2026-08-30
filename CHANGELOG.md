@@ -1,5 +1,22 @@
 # Changelog
 
+## [4.6.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.5.1...v4.6.0) (2026-08-30)
+
+
+### Features
+
+* **seo:** flatten sitemap to single direct sitemap.xml for Google Search Console ([3fe05b9](https://github.com/dhaatrik/dhaatrik.github.io/commit/3fe05b9b79febbf95a95607de318422bfead7fee))
+
+
+### Documentation & Skills
+
+* **seo:** document flat sitemap architecture and checklist ([94ba226](https://github.com/dhaatrik/dhaatrik.github.io/commit/94ba226be4d4dbf4c5f59046649b2043f848c5b1))
+
+
+### Tests & Verification
+
+* **seo:** add sitemap.xml validation to content and e2e test suites ([78675a3](https://github.com/dhaatrik/dhaatrik.github.io/commit/78675a350211ac1d949f98580c54b7b7ccf35b6a))
+
 ## [4.5.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.5.0...v4.5.1) (2026-08-30)
 
 
