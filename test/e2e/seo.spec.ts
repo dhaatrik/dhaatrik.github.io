@@ -79,21 +79,31 @@ test.describe('SEO and Metadata Verification', () => {
         );
     });
 
-    test('robots.txt and sitemap should be reachable and correctly structured', async ({
+    test('robots.txt and sitemaps should be reachable and correctly structured', async ({
         page,
     }) => {
         const robotsResponse = await page.goto('/robots.txt');
         expect(robotsResponse?.status()).toBe(200);
         const robotsText = await robotsResponse?.text();
         expect(robotsText).toContain('User-agent: *');
-        expect(robotsText).toContain('Sitemap:');
+        expect(robotsText).toContain('Sitemap: https://dhaatrik.github.io/sitemap.xml');
+        expect(robotsText).toContain('Sitemap: https://dhaatrik.github.io/sitemap-index.xml');
+
+        // Check direct flat sitemap.xml is reachable (Astro sitemaps are build-time only, so we accept 200 in preview/prod, or 404 in dev mode)
+        const flatSitemapResponse = await page.goto('/sitemap.xml');
+        expect([200, 404]).toContain(flatSitemapResponse?.status());
+        if (flatSitemapResponse?.status() === 200) {
+            const flatSitemapText = await flatSitemapResponse?.text();
+            expect(flatSitemapText).toContain('<urlset');
+            expect(flatSitemapText).toContain('https://dhaatrik.github.io/');
+        }
 
         // Check sitemap-index.xml is reachable (Astro sitemaps are build-time only, so we accept 200 in preview/prod, or 404 in dev mode)
-        const sitemapResponse = await page.goto('/sitemap-index.xml');
-        expect([200, 404]).toContain(sitemapResponse?.status());
-        if (sitemapResponse?.status() === 200) {
-            const sitemapText = await sitemapResponse?.text();
-            expect(sitemapText).toContain('<sitemapindex');
+        const sitemapIndexResponse = await page.goto('/sitemap-index.xml');
+        expect([200, 404]).toContain(sitemapIndexResponse?.status());
+        if (sitemapIndexResponse?.status() === 200) {
+            const sitemapIndexText = await sitemapIndexResponse?.text();
+            expect(sitemapIndexText).toContain('<sitemapindex');
         }
     });
 

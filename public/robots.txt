@@ -55,4 +55,5 @@ Allow: /
 # =============================================================================
 # Sitemap & LLM Context Files
 # =============================================================================
+Sitemap: https://dhaatrik.github.io/sitemap.xml
 Sitemap: https://dhaatrik.github.io/sitemap-index.xml

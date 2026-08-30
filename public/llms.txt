@@ -83,7 +83,8 @@ The site footer includes a live system diagnostics block:
 ## Feeds
 
 - [RSS Feed](https://dhaatrik.github.io/rss.xml)
-- [Sitemap](https://dhaatrik.github.io/sitemap-index.xml)
+- [Sitemap](https://dhaatrik.github.io/sitemap.xml)
+- [Sitemap Index](https://dhaatrik.github.io/sitemap-index.xml)
 
 ## Agent / coding-agent instructions
 
