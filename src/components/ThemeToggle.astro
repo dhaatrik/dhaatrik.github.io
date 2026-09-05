@@ -87,6 +87,11 @@
             if (link) {
                 link.href = isDark ? '/logo_light.svg' : '/logo_dark.svg';
             }
+            var color = isDark ? '#08090a' : '#f8fafc';
+            var metas = document.querySelectorAll('meta[name="theme-color"]');
+            for (var i = 0; i < metas.length; i++) {
+                metas[i].setAttribute('content', color);
+            }
         }
 
         function toggle(event) {

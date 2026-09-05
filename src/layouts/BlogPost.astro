@@ -46,7 +46,7 @@ const articleSchema = JSON.stringify({
     description: description,
     image: heroImage ? new URL(heroImage.src, Astro.site).href : undefined,
     datePublished: pubDate.toISOString(),
-    ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+    dateModified: (updatedDate || pubDate).toISOString(),
     author: {
         '@type': 'Person',
         name: 'Dhaatrik Chowdhury',
@@ -272,7 +272,7 @@ const breadcrumbSchema = JSON.stringify({
                                     width={1020}
                                     height={510}
                                     src={heroImage}
-                                    alt=""
+                                    alt={`Cover schematic for ${title}`}
                                     loading="eager"
                                     fetchpriority="high"
                                     class="w-full object-cover"
@@ -568,7 +568,7 @@ const breadcrumbSchema = JSON.stringify({
                                                         data-slug={heading.slug}
                                                         style={`padding-left: ${(heading.depth - 1) * 0.75 + 0.6}rem;`}
                                                     >
-                                                        <span class="toc-indicator absolute top-1.5 bottom-1.5 left-1 w-[2px] rounded-full bg-transparent transition-all duration-200 group-hover/toc:bg-(--accent)/40" />
+                                                        <span class="toc-indicator absolute top-1.5 bottom-1.5 left-1 w-0.5 rounded-full bg-transparent transition-all duration-200 group-hover/toc:bg-(--accent)/40" />
                                                         <span class="toc-index mr-1 font-mono text-[10px] text-slate-600 opacity-80 transition-colors group-hover/toc:text-(--accent) dark:text-slate-400">
                                                             {String(index + 1).padStart(2, '0')} //
                                                         </span>{' '}

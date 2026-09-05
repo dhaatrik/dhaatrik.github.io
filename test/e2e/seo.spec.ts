@@ -23,14 +23,52 @@ test.describe('SEO and Metadata Verification', () => {
         expect(schemas.length).toBeGreaterThan(0);
 
         let foundPerson = false;
+        let foundWebSiteSearchAction = false;
         for (const schema of schemas) {
             const content = await schema.innerText();
             if (content.includes('"@type":"Person"') || content.includes('"@type": "Person"')) {
                 foundPerson = true;
-                break;
+            }
+            if (content.includes('"SearchAction"') && content.includes('/transmissions/?q=')) {
+                foundWebSiteSearchAction = true;
             }
         }
         expect(foundPerson).toBe(true);
+        expect(foundWebSiteSearchAction).toBe(true);
+
+        const ogImage = page.locator('meta[property="og:image"]');
+        await expect(ogImage).toHaveAttribute('content', /home-og/);
+
+        // Check theme-color meta tags
+        const darkThemeColor = page.locator(
+            'meta[name="theme-color"][media*="prefers-color-scheme: dark"]'
+        );
+        await expect(darkThemeColor).toHaveAttribute('content', '#08090a');
+        const lightThemeColor = page.locator(
+            'meta[name="theme-color"][media*="prefers-color-scheme: light"]'
+        );
+        await expect(lightThemeColor).toHaveAttribute('content', '#f8fafc');
+    });
+
+    test('top-level hub routes should serve unique custom OpenGraph and Twitter images', async ({
+        page,
+    }) => {
+        const hubs = [
+            { path: '/', pattern: /home-og/ },
+            { path: '/personnel/', pattern: /personnel-og/ },
+            { path: '/projects/', pattern: /projects-og/ },
+            { path: '/pedagogy/', pattern: /pedagogy-transmissions/ },
+            { path: '/transmissions/', pattern: /transmissions-og/ },
+        ];
+
+        for (const hub of hubs) {
+            await page.goto(hub.path);
+            await page.waitForLoadState('domcontentloaded');
+            const ogImage = page.locator('meta[property="og:image"]');
+            await expect(ogImage).toHaveAttribute('content', hub.pattern);
+            const twitterImage = page.locator('meta[name="twitter:image"]');
+            await expect(twitterImage).toHaveAttribute('content', hub.pattern);
+        }
     });
 
     test('blog post page should contain article schema and open graph tags', async ({ page }) => {
@@ -44,14 +82,24 @@ test.describe('SEO and Metadata Verification', () => {
         // Check schema.org JSON-LD has Article
         const schemas = await page.locator('script[type="application/ld+json"]').all();
         let foundArticle = false;
+        let parsedArticle: any = null;
         for (const schema of schemas) {
             const content = await schema.innerText();
             if (content.includes('"@type":"Article"') || content.includes('"@type": "Article"')) {
                 foundArticle = true;
+                try {
+                    parsedArticle = JSON.parse(content);
+                } catch {
+                    // Ignore parse error
+                }
                 break;
             }
         }
         expect(foundArticle).toBe(true);
+        expect(parsedArticle).not.toBeNull();
+        expect(parsedArticle.datePublished).toBeDefined();
+        expect(parsedArticle.dateModified).toBeDefined();
+        expect(new Date(parsedArticle.dateModified).getTime()).not.toBeNaN();
 
         const ogImage = page.locator('meta[property="og:image"]');
         await expect(ogImage).toHaveAttribute('content', /delta-v-lab/);
@@ -117,7 +165,7 @@ test.describe('SEO and Metadata Verification', () => {
         const ogImage = page.locator('meta[property="og:image"]');
         await expect(ogImage).toHaveAttribute('content', /.*delta-v-lab.*/);
 
-        const twitterImage = page.locator('meta[property="twitter:image"]');
+        const twitterImage = page.locator('meta[name="twitter:image"]');
         await expect(twitterImage).toHaveAttribute('content', /.*delta-v-lab.*/);
     });
 
@@ -139,7 +187,7 @@ test.describe('SEO and Metadata Verification', () => {
         const ogUrl = page.locator('meta[property="og:url"]');
         await expect(ogUrl).toHaveCount(0);
 
-        const twitterUrl = page.locator('meta[property="twitter:url"]');
+        const twitterUrl = page.locator('meta[name="twitter:url"]');
         await expect(twitterUrl).toHaveCount(0);
     });
 });

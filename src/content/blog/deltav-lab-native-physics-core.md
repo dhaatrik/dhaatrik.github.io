@@ -63,7 +63,7 @@ React was never the problem. **Co-locating cert-shaped physics with UI bundling*
 <span class="text-[10px] tracking-wider text-slate-500">[ HYBRID WASM + RUST DUAL-CORE ]</span>
 </div>
 <div class="overflow-x-auto">
-<svg viewBox="0 0 820 380" width="100%" height="auto" class="font-mono text-xs min-w-[700px] select-none" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 820 380" width="100%" height="auto" class="font-mono text-xs min-w-175 select-none" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
 <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.15"/>
@@ -164,23 +164,23 @@ That is the difference between "cool GitHub project" and "runs in our Jupyter pi
 
 Do **not** big-bang rewrite `src/physics/` over a weekend. Strangle the worker:
 
-#### Step 1 — Golden fixtures (week 1–2)
+### Step 1 — Golden fixtures (week 1–2)
 
 Export 50 representative trajectories from current TS worker (pad launch, staging, orbit insert, re-entry). JSON state snapshots every 0.02 s. These become **parity tests** for the Rust core.
 
-#### Step 2 — Rust RK4 + 2D forces (week 3–6)
+### Step 2 — Rust RK4 + 2D forces (week 3–6)
 
 Port `FIXED_DT = 0.02`, gravity, thrust, exponential atmosphere, drag — no new physics yet. `cargo test` asserts `<1e-9` drift vs golden JSON on analytical cases.
 
-#### Step 3 — WASM drop-in (week 7–8)
+### Step 3 — WASM drop-in (week 7–8)
 
 Replace integration loop body in worker with WASM calls. TypeScript keeps message protocol + SharedArrayBuffer layout. User sees no UI change.
 
-#### Step 4 — Native CLI + Python (month 3)
+### Step 4 — Native CLI + Python (month 3)
 
 Same crate, no WASM, run 10k cases on a server. Prove throughput win before adding 6DOF complexity.
 
-#### Step 5 — 6DOF + slosh (month 4+)
+### Step 5 — 6DOF + slosh (month 4+)
 
 Extend state vector; TS UI gains attitude telemetry channels. Golden tests **re-baseline** only after flight V&V says the old 2D model was wrong anyway.
 

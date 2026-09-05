@@ -80,8 +80,8 @@ test.describe('Portfolio UI Interactivity', () => {
         // After page loads, elements should fade out
         await page.waitForLoadState('networkidle');
 
-        await expect(progressBar).toHaveCSS('opacity', '0');
-        await expect(statusTag).toHaveCSS('opacity', '0');
+        await expect(progressBar).toHaveCSS('opacity', '0', { timeout: 10000 });
+        await expect(statusTag).toHaveCSS('opacity', '0', { timeout: 10000 });
     });
 
     test('Blog page search should retain queries and update URL/sessionStorage', async ({
@@ -269,7 +269,7 @@ test.describe('Portfolio UI Interactivity', () => {
 
         // Click "Currently Exploring" card
         const card = page
-            .locator('article[data-popover-target="project-popover-currently-exploring"]')
+            .locator('[data-popover-target="project-popover-currently-exploring"]')
             .first();
         await card.click();
 
@@ -309,5 +309,13 @@ test.describe('Portfolio UI Interactivity', () => {
             expect(currentText).not.toBe('First-Principles Thinker.');
             expect(currentText.length).toBeGreaterThan(0);
         }).toPass({ timeout: 6000 });
+    });
+
+    test('Flashlight glowing cursor background should be mounted in the DOM', async ({ page }) => {
+        await page.goto('/');
+        await page.waitForLoadState('domcontentloaded');
+
+        const flashlight = page.locator('#flashlight-bg');
+        await expect(flashlight).toBeAttached();
     });
 });

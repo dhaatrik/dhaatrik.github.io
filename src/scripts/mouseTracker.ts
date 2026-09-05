@@ -1,19 +1,14 @@
-// Global mouse spotlight, flashlight background tracking, and 3D Bento Card Parallax Tilt
+// Global mouse spotlight, flashlight background tracking, magnetic targets, and 3D Bento Card Parallax Tilt
 // Gated behind media query to run ONLY on devices with hover capabilities (non-touch/desktop)
 
-let spotlightRafId: number | null = null;
-let mouseX = 0;
-let mouseY = 0;
-let cardsCollection: HTMLCollectionOf<Element> | null = null;
+let mouseX = -1000;
+let mouseY = -1000;
 let flashlightBg: HTMLElement | null = null;
+let flashlightRafId: number | null = null;
 let magneticTargets: HTMLElement[] = [];
+let magneticRafId: number | null = null;
 
-// Cache layout rects to prevent layout thrashing on mousemove
-let cachedCardsData: {
-    card: HTMLElement;
-    rect: { left: number; top: number; width: number; height: number };
-}[] = [];
-
+// Cache magnetic button rects to prevent layout thrashing
 let cachedMagnetData: {
     el: HTMLElement;
     rect: { left: number; top: number; width: number; height: number };
@@ -21,33 +16,19 @@ let cachedMagnetData: {
 
 let layoutUpdateTimeout: ReturnType<typeof setTimeout> | null = null;
 
-const cacheLayouts = () => {
-    cachedCardsData = [];
-    if (cardsCollection) {
-        for (let i = 0; i < cardsCollection.length; i++) {
-            const card = cardsCollection[i] as HTMLElement;
-            const rect = card.getBoundingClientRect();
-            cachedCardsData.push({
-                card,
-                rect: {
-                    left: rect.left + window.scrollX,
-                    top: rect.top + window.scrollY,
-                    width: rect.width,
-                    height: rect.height,
-                },
-            });
-        }
-    }
-
+const cacheMagnetLayouts = () => {
     cachedMagnetData = [];
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
     for (let i = 0; i < magneticTargets.length; i++) {
         const el = magneticTargets[i];
         const rect = el.getBoundingClientRect();
         cachedMagnetData.push({
             el,
             rect: {
-                left: rect.left + window.scrollX,
-                top: rect.top + window.scrollY,
+                left: rect.left + scrollX,
+                top: rect.top + scrollY,
                 width: rect.width,
                 height: rect.height,
             },
@@ -55,24 +36,17 @@ const cacheLayouts = () => {
     }
 };
 
-const updateSpotlights = () => {
-    const scrollX = window.scrollX;
-    const scrollY = window.scrollY;
-
-    cachedCardsData.forEach(({ card, rect }) => {
-        const currentRectLeft = rect.left - scrollX;
-        const currentRectTop = rect.top - scrollY;
-
-        const x = mouseX - currentRectLeft;
-        const y = mouseY - currentRectTop;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-    });
-
+const updateFlashlight = () => {
     if (flashlightBg) {
         flashlightBg.style.setProperty('--bg-mouse-x', `${mouseX}px`);
         flashlightBg.style.setProperty('--bg-mouse-y', `${mouseY}px`);
     }
+    flashlightRafId = null;
+};
+
+const updateMagneticTargets = () => {
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
 
     cachedMagnetData.forEach(({ el, rect }) => {
         const currentRectLeft = rect.left - scrollX;
@@ -107,23 +81,28 @@ const updateSpotlights = () => {
         }
     });
 
-    spotlightRafId = null;
+    magneticRafId = null;
 };
 
 const onMouseMove = (e: MouseEvent) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    if (!spotlightRafId) {
-        spotlightRafId = requestAnimationFrame(updateSpotlights);
+
+    if (!flashlightRafId) {
+        flashlightRafId = requestAnimationFrame(updateFlashlight);
+    }
+
+    if (!magneticRafId && cachedMagnetData.length > 0) {
+        magneticRafId = requestAnimationFrame(updateMagneticTargets);
     }
 };
 
 const handleScrollOrResize = () => {
     if (layoutUpdateTimeout) clearTimeout(layoutUpdateTimeout);
     layoutUpdateTimeout = setTimeout(() => {
-        cacheLayouts();
-        if (!spotlightRafId) {
-            spotlightRafId = requestAnimationFrame(updateSpotlights);
+        cacheMagnetLayouts();
+        if (!flashlightRafId) {
+            flashlightRafId = requestAnimationFrame(updateFlashlight);
         }
     }, 150);
 };
@@ -133,16 +112,15 @@ const initMouseTracker = () => {
     if (!flashlightBg) {
         flashlightBg = document.createElement('div');
         flashlightBg.id = 'flashlight-bg';
+        flashlightBg.className = 'pointer-events-none fixed inset-0 z-0';
         document.body.prepend(flashlightBg);
     }
 
-    cardsCollection = document.getElementsByClassName('bento-card');
-    // ⚡ Bolt: Replace querySelectorAll with getElementsByClassName for faster DOM traversal
     magneticTargets = Array.from(
         document.getElementsByClassName('magnetic-target')
     ) as HTMLElement[];
 
-    cacheLayouts();
+    cacheMagnetLayouts();
 
     document.removeEventListener('mousemove', onMouseMove);
     window.removeEventListener('scroll', handleScrollOrResize);
@@ -151,26 +129,8 @@ const initMouseTracker = () => {
     document.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('scroll', handleScrollOrResize, { passive: true });
     window.addEventListener('resize', handleScrollOrResize, { passive: true });
-};
 
-const handlePageShow = (e: PageTransitionEvent) => {
-    if (e.persisted) {
-        initMouseTracker();
-    }
-};
-
-// Check media query to only bind mouse listeners on capable devices
-const runMouseTracker = () => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
-    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (!isFinePointer) return;
-
-    initMouseTracker();
-    window.addEventListener('pageshow', handlePageShow);
-
-    // Bind 3D Bento Card Parallax Tilt
+    // Bind Zero-Lag 3D Bento Card Parallax Tilt & Localized Card Spotlight
     const cards = document.getElementsByClassName('bento-card');
     Array.from(cards).forEach((cardEl) => {
         const card = cardEl as HTMLElement;
@@ -202,6 +162,9 @@ const runMouseTracker = () => {
         };
 
         const handleCardEnter = () => {
+            // Remove transform transition while actively tracking to eliminate lag
+            card.style.transition = 'none';
+
             const rect = card.getBoundingClientRect();
             cachedRect = {
                 left: rect.left + window.scrollX,
@@ -229,8 +192,12 @@ const runMouseTracker = () => {
                 cancelAnimationFrame(cardRafId);
                 cardRafId = null;
             }
+            // Restore smooth cubic-bezier transition for the exit return animation
+            card.style.transition =
+                'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease';
             card.style.transform =
                 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+
             tilts.forEach((targetEl) => {
                 const target = targetEl as HTMLElement;
                 target.style.transform = 'translateZ(0px)';
@@ -244,22 +211,46 @@ const runMouseTracker = () => {
     });
 };
 
+const handlePageShow = (e: PageTransitionEvent) => {
+    if (e.persisted) {
+        initMouseTracker();
+    }
+};
+
+// Check media query to only bind mouse listeners on capable devices
+const runMouseTracker = () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!isFinePointer) return;
+
+    initMouseTracker();
+    window.addEventListener('pageshow', handlePageShow);
+};
+
 const destroyMouseTracker = () => {
     document.removeEventListener('mousemove', onMouseMove);
     window.removeEventListener('pageshow', handlePageShow);
     window.removeEventListener('scroll', handleScrollOrResize);
     window.removeEventListener('resize', handleScrollOrResize);
+
     if (layoutUpdateTimeout) {
         clearTimeout(layoutUpdateTimeout);
         layoutUpdateTimeout = null;
     }
-    if (spotlightRafId) {
-        cancelAnimationFrame(spotlightRafId);
-        spotlightRafId = null;
+    if (flashlightRafId) {
+        cancelAnimationFrame(flashlightRafId);
+        flashlightRafId = null;
     }
-    cardsCollection = null;
+    if (magneticRafId) {
+        cancelAnimationFrame(magneticRafId);
+        magneticRafId = null;
+    }
+
     flashlightBg = null;
     magneticTargets = [];
+    cachedMagnetData = [];
 };
 
 document.addEventListener('astro:page-load', runMouseTracker);

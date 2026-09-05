@@ -55,4 +55,57 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
             expect(violations).toHaveLength(0);
         });
     }
+
+    test('should enforce proper heading order without level skips on /projects/', async ({
+        page,
+    }) => {
+        await page.goto('/projects/', { waitUntil: 'domcontentloaded' });
+        await page.waitForSelector('main, #main-content', { state: 'visible' });
+
+        const headings = await page.$$eval('h1, h2, h3, h4, h5, h6', (elements) =>
+            elements.map((el) => ({
+                tag: el.tagName.toLowerCase(),
+                level: parseInt(el.tagName.replace('H', ''), 10),
+                text: (el.textContent || '').trim().replace(/\s+/g, ' '),
+            }))
+        );
+
+        expect(headings.length).toBeGreaterThan(0);
+        expect(headings[0].level).toBe(1);
+
+        // Verify that heading levels do not jump up by more than 1 level at a time (e.g. h1 -> h3 is invalid)
+        let previousLevel = 0;
+        for (const heading of headings) {
+            if (previousLevel > 0) {
+                expect(heading.level - previousLevel).toBeLessThanOrEqual(1);
+            }
+            previousLevel = heading.level;
+        }
+
+        // Verify that project cards are semantic h2 elements
+        const projectCardHeadings = await page.$$eval('.mission-report-card h2', (elements) =>
+            elements.map((el) => el.textContent?.trim())
+        );
+        expect(projectCardHeadings.length).toBe(12);
+    });
+
+    test('should mark YouTube thumbnails as aria-hidden on /pedagogy/', async ({ page }) => {
+        await page.goto('/pedagogy/', { waitUntil: 'domcontentloaded' });
+        await page.waitForSelector('#video-grid', { state: 'visible' });
+
+        const thumbnails = await page.$$eval('#video-grid .video-card img', (elements) =>
+            elements.map((img) => ({
+                ariaHidden: img.getAttribute('aria-hidden'),
+                alt: img.getAttribute('alt'),
+                src: img.getAttribute('src'),
+            }))
+        );
+
+        expect(thumbnails.length).toBeGreaterThan(0);
+        for (const thumb of thumbnails) {
+            expect(thumb.ariaHidden).toBe('true');
+            expect(thumb.alt).toBe('');
+            expect(thumb.src).toContain('img.youtube.com');
+        }
+    });
 });

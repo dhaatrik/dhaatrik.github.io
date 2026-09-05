@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_VERSION } from '../consts';
+import homeOgImage from '../assets/og/home-og.jpg';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
@@ -95,6 +96,14 @@ const webSiteSchema = JSON.stringify({
         '@type': 'Person',
         name: 'Dhaatrik Chowdhury',
     },
+    potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+            '@type': 'EntryPoint',
+            urlTemplate: 'https://dhaatrik.github.io/transmissions/?q={search_term_string}',
+        },
+        'query-input': 'required name=search_term_string',
+    },
 }).replace(/</g, '\\u003c');
 ---
 
@@ -104,6 +113,7 @@ const webSiteSchema = JSON.stringify({
         <BaseHead
             title={SITE_TITLE}
             description={SITE_DESCRIPTION}
+            image={homeOgImage}
             keywords={[
                 'Dhaatrik Chowdhury',
                 'AI Engineer',
@@ -121,6 +131,8 @@ const webSiteSchema = JSON.stringify({
         <script is:inline type="application/ld+json" set:html={webSiteSchema} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
+        <!-- Flashlight Spotlight Background -->
+        <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
         <Header />
         <main
             id="main-content"
@@ -440,7 +452,7 @@ const webSiteSchema = JSON.stringify({
 
                 <div class="bento-grid perspective-1000 reveal-stagger">
                     <!-- Current Focus Bento Card -->
-                    <article
+                    <div
                         class="bento-card group bento-card-project relative flex cursor-pointer flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
                         data-popover-target="project-popover-currently-exploring"
                         role="button"
@@ -479,7 +491,7 @@ const webSiteSchema = JSON.stringify({
                                 >
                             </div>
                         </div>
-                    </article>
+                    </div>
 
                     {/* Currently Exploring popover details popup */}
                     <div
@@ -497,7 +509,7 @@ const webSiteSchema = JSON.stringify({
                                         id="project-popover-title-currently-exploring"
                                         class="text-lg font-bold text-slate-900 sm:text-xl dark:text-white"
                                     >
-                                        Currently Exploring
+                                        Active Exploration Dossier
                                     </h3>
                                     <span
                                         class="inline-flex shrink-0 items-center rounded-full border border-(--accent)/35 bg-(--accent)/5 px-2 py-0.5 font-mono text-[9px] font-bold tracking-wider whitespace-nowrap text-(--accent) uppercase sm:text-[10px]"

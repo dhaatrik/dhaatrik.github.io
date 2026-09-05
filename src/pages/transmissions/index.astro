@@ -7,6 +7,7 @@ import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_TITLE } from '../../consts';
+import transmissionsOgImage from '../../assets/og/transmissions-og.jpg';
 
 const posts = (await getCollection('blog')).sort(
     (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -44,10 +45,13 @@ const breadcrumbSchema = JSON.stringify({
         <BaseHead
             title={`Transmissions | ${SITE_TITLE}`}
             description="Mission logs from my engineering diary — honest notes on what I built, what broke, and what I learned."
+            image={transmissionsOgImage}
         />
         <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
+        <!-- Flashlight Spotlight Background -->
+        <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
         <Header />
         <main
             id="main-content"
@@ -508,6 +512,7 @@ const breadcrumbSchema = JSON.stringify({
                                             height={360}
                                             src={post.data.heroImage}
                                             alt=""
+                                            aria-hidden="true"
                                             class:list={[
                                                 'w-full object-cover transition-transform duration-300 group-hover:scale-105 group-focus-visible:scale-105',
                                                 i === 0 ? 'h-48 md:h-full md:min-h-75' : 'h-48',

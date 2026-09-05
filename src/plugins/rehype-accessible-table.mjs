@@ -8,11 +8,10 @@ export default function rehypeAccessibleTable() {
     return (tree) => {
         visit(tree, 'element', (node, index, parent) => {
             if (node.tagName === 'table' && parent && parent.tagName !== 'div') {
-                if (!node.properties) node.properties = {};
-                node.properties.tabIndex = 0;
-                node.properties.role = 'region';
-                node.properties['aria-label'] =
-                    node.properties['aria-label'] || 'Scrollable data table';
+                const tableLabel =
+                    node.properties && node.properties['aria-label']
+                        ? node.properties['aria-label']
+                        : 'Scrollable data table';
 
                 const wrapper = {
                     type: 'element',
@@ -21,7 +20,7 @@ export default function rehypeAccessibleTable() {
                         className: ['table-container'],
                         tabIndex: 0,
                         role: 'region',
-                        'aria-label': 'Scrollable data table',
+                        'aria-label': tableLabel,
                     },
                     children: [node],
                 };
