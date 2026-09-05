@@ -236,12 +236,25 @@ Thus, `SearchAction` is viable and can point directly to `/transmissions/?q={sea
 10. **Schema E2E Assertions:** Added automated Playwright tests in `test/e2e/seo.spec.ts` for `SearchAction` and `dateModified`. *(Commit `6b9368c`)*
 11. **Conversion Affordance (F2) Closed:** Formally closed as **Intentional / By Design** with site owner approval. The site is an honest engineering diary, not a commercial resume or lead-gen funnel; existing terminal links and social profiles provide peer access without spam.
 
+### Phase 4: Forensic Re-Audit & Hidden Defect Resolution (COMPLETED)
+12. **Markdown Heading Hierarchy Skips (WCAG 1.3.1):** Corrected `####` heading level skips directly under `##` in:
+    - `src/content/transmissions/deltav-lab-native-physics-core.md`
+    - `src/content/transmissions/deltav-lab-whats-next.md`
+    - `src/content/transmissions/why-i-stopped-youtube-classes.md`
+    *(Commit `a8b53f8`)*
+13. **Duplicate Region Landmark on Tables (Axe `landmark-unique`):** Removed duplicate `role="region"` and `aria-label` on inner `<table>` inside `src/plugins/rehype-accessible-table.mjs`, preserving single focusable wrapper landmark. *(Commit `e77a892`)*
+14. **Valid ARIA Roles (W3C `aria-allowed-role`):** Changed popover modal trigger from `<article role="button">` to `<div role="button">` in `src/pages/index.astro` to avoid overriding implicit landmark semantics. *(Commit `419b7c3`)*
+15. **Descriptive Image Alt & Decorative ARIA (WCAG 1.1.1):** Replaced empty alt on blog hero schematic in `src/layouts/BlogPost.astro` with descriptive title schematic alt, and marked transmission card thumbnails with `aria-hidden="true"`. *(Commit `dfb1a8d`)*
+16. **Theme Color Meta Tags & Dynamic Preference Sync:** Added dual `<meta name="theme-color">` tags in `src/components/BaseHead.astro` with `(prefers-color-scheme: dark)` (`#08090a`) and `(prefers-color-scheme: light)` (`#f8fafc`), plus dynamic runtime sync in `BaseHead.astro` and `src/components/ThemeToggle.astro`. *(Commit `b0647ba`)*
+17. **End-to-End Suite Alignment:** Updated popover trigger selector in `test/e2e/ui.spec.ts` and added theme-color assertions in `test/e2e/seo.spec.ts`. *(Commit `893e77c`)*
+
 ---
 
 ## Evidence & Verification Index
 
 - **Source Code Files Analyzed & Refitted:**
   - `src/components/BaseHead.astro`
+  - `src/components/ThemeToggle.astro`
   - `src/pages/index.astro`
   - `src/pages/personnel.astro`
   - `src/pages/projects/index.astro`
@@ -249,11 +262,18 @@ Thus, `SearchAction` is viable and can point directly to `/transmissions/?q={sea
   - `src/pages/pedagogy.astro`
   - `src/pages/transmissions/index.astro`
   - `src/layouts/BlogPost.astro`
+  - `src/plugins/rehype-accessible-table.mjs`
   - `src/content.config.ts`
   - `public/robots.txt`, `public/llms.txt`, `public/llms-full.txt`
-  - `test/e2e/accessibility.spec.ts`, `test/e2e/seo.spec.ts`
-- **Build Output Verification:** `dist/` (53 pages generated via `astro build` in 8.59s).
+  - `test/e2e/accessibility.spec.ts`, `test/e2e/seo.spec.ts`, `test/e2e/ui.spec.ts`
+- **Build Output Verification:** `dist/` (53 pages generated via `astro build` in 5.60s with 0 errors).
 - **Test Suite Results:**
-  - `npm test`: 122/122 passing (Node test runner).
-  - `npm run test:e2e`: 42/42 passing (Playwright + Axe-core across all routes).
+  - `npm test`: 122/122 passing (Node test runner, 11 test suites).
+  - `npm run test:e2e`: 42/42 passing (Playwright + Axe-core accessibility across all routes).
+- **Forensic Code & DOM Audits:**
+  - Heading level skips across all 53 built pages: 0
+  - Images missing alt text across all content & components: 0
+  - Missing theme-color / charset / viewport / canonical tags: 0
+  - Unsafe `target="_blank"` links without `rel="noopener noreferrer"`: 0
+  - Invalid ARIA roles or unlabelled interactive elements: 0
 
