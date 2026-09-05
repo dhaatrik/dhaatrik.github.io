@@ -96,6 +96,14 @@ const webSiteSchema = JSON.stringify({
         '@type': 'Person',
         name: 'Dhaatrik Chowdhury',
     },
+    potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+            '@type': 'EntryPoint',
+            urlTemplate: 'https://dhaatrik.github.io/transmissions/?q={search_term_string}',
+        },
+        'query-input': 'required name=search_term_string',
+    },
 }).replace(/</g, '\\u003c');
 ---
 
