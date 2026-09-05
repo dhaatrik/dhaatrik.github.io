@@ -164,23 +164,23 @@ That is the difference between "cool GitHub project" and "runs in our Jupyter pi
 
 Do **not** big-bang rewrite `src/physics/` over a weekend. Strangle the worker:
 
-#### Step 1 — Golden fixtures (week 1–2)
+### Step 1 — Golden fixtures (week 1–2)
 
 Export 50 representative trajectories from current TS worker (pad launch, staging, orbit insert, re-entry). JSON state snapshots every 0.02 s. These become **parity tests** for the Rust core.
 
-#### Step 2 — Rust RK4 + 2D forces (week 3–6)
+### Step 2 — Rust RK4 + 2D forces (week 3–6)
 
 Port `FIXED_DT = 0.02`, gravity, thrust, exponential atmosphere, drag — no new physics yet. `cargo test` asserts `<1e-9` drift vs golden JSON on analytical cases.
 
-#### Step 3 — WASM drop-in (week 7–8)
+### Step 3 — WASM drop-in (week 7–8)
 
 Replace integration loop body in worker with WASM calls. TypeScript keeps message protocol + SharedArrayBuffer layout. User sees no UI change.
 
-#### Step 4 — Native CLI + Python (month 3)
+### Step 4 — Native CLI + Python (month 3)
 
 Same crate, no WASM, run 10k cases on a server. Prove throughput win before adding 6DOF complexity.
 
-#### Step 5 — 6DOF + slosh (month 4+)
+### Step 5 — 6DOF + slosh (month 4+)
 
 Extend state vector; TS UI gains attitude telemetry channels. Golden tests **re-baseline** only after flight V&V says the old 2D model was wrong anyway.
 

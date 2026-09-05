@@ -37,19 +37,19 @@ To document this retrospective with integrity, I have to catalog my failures wit
 
 When I trace the drop-off honestly, three internal bottlenecks stand out:
 
-#### 1. The Solo Production Bottleneck (Novelty Fade)
+### 1. The Solo Production Bottleneck (Novelty Fade)
 
 Initially, researching, scripting, and mapping out the geometry of trigonometry and dimensional analysis felt like pure creative play. Operating as a solo creator, though, meant I had to be the researcher, scriptwriter, lecturer, videographer, audio engineer, editor, graphic designer, and SEO marketer — all at once.
 
 Once the novelty of setting up lighting rigs and tweaking audio levels wore off, the production process became a high-friction chore. The mental energy required to run the entire pipeline alone began to outweigh the immediate creative satisfaction of teaching.
 
-#### 2. The Illusion of "Next Week" (Loss of Focus)
+### 2. The Illusion of "Next Week" (Loss of Focus)
 
 I started letting other software projects and academic pursuits take priority. Because I was running the channel independently, there were no external deadlines, no manager requesting updates, and no direct financial pressure.
 
 Without external accountability, it was easy to tell myself, _"I will write the next script this weekend and upload next week."_ That single week of delay compounded into a month, then a quarter, and eventually became a multi-year gap of silence.
 
-#### 3. The Fragility of Motivation (Lack of Discipline)
+### 3. The Fragility of Motivation (Lack of Discipline)
 
 I relied heavily on creative motivation rather than operational discipline. Motivation is a volatile resource — it fluctuates with mood, energy levels, and immediate focus. Because I did not build a resilient system (script templates, batch recording sessions, a locked-in production calendar), I was highly vulnerable to the slightest dip in creative drive.
 

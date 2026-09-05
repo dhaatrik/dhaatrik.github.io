@@ -146,25 +146,25 @@ I unpack the migration architecture in [native physics core](/transmissions/delt
 
 This is the order I would actually execute. Visibility and V&V before rewriting everything.
 
-#### Phase 1 — Credibility quick wins (weeks 1–6)
+### Phase 1 — Credibility quick wins (weeks 1–6)
 
 1. **Hosted live demo** — One-click try on `deltavlab.space` (or similar). Pre-load Falcon 9 Block 5, Electron, Starship teaching configs. Busy engineers will not `git clone && npm run dev`.
 2. **Professional SW hygiene on existing TS** — Requirements traceability (equation → source), expand Vitest coverage toward 90% on `src/physics/`, SonarQube/Coverity on CI, FMEA for each fault-injector mode.
 3. **Theory Manual v0.1** — First 30 pages: state vector definition, force models, integrator, known limitations. Stop hiding assumptions in code only.
 
-#### Phase 2 — Validation before rewrite (months 2–5)
+### Phase 2 — Validation before rewrite (months 2–5)
 
 4. **Flight telemetry V&V program** — This is the **#1 unlock** for commercial curiosity. Ingest public Falcon 9 / Electron / Starship test-flight time series (altitude, velocity, acceleration, dynamic pressure). Publish overlay plots + error tables. **Automated regression: CI fails if Max-Q timing drifts >2%.** Release a Verification Report PDF + Zenodo dataset DOI.
 5. **Hybrid native core v1** — Extract RK4 + atmosphere + drag into Rust (`deltav-core` crate). WASM for browser worker; `maturin`/`pyo3` for Python. TypeScript UI unchanged.
 6. **6DOF attitude dynamics** — Quaternion kinematics, inertia tensor, TVC actuator lag, stage-separation transients. Still 2D ascent? Not anymore.
 7. **Industry environment models** — NRLMSISE-00 / Jacchia-77 atmosphere; EGM2008 gravity; ECMWF/GFS wind import; switchable "student/simple" vs "ops/full" modes.
 
-#### Phase 3 — Analysis at scale (months 5–8)
+### Phase 3 — Analysis at scale (months 5–8)
 
 8. **Monte Carlo dispersion** — Thrust $\pm 3\%$, mass bias, wind ensembles, sensor noise. Output impact ellipses, success probability, tornado sensitivity. Requires native batch runner (Rayon / cluster), not a Chrome tab.
 9. **Public benchmark report** — DeltaV Lab vs RocketPy vs OpenRocket vs GMAT on the same vehicles. Target <1% altitude/velocity error where data exists. Submit to AIAA ASCEND or IAC; universities cite it or they do not.
 
-#### Phase 4 — Mission design UX (months 8–14)
+### Phase 4 — Mission design UX (months 8–14)
 
 10. **3D flight visualization** — Three.js or Cesium globe, trajectory ribbons, replay sync with CSV black box. Pros live in spatial views (STK/FreeFlyer habit).
 11. **GNC evolution** — Kalman filters, noisy IMU/GPS models, PEG-style guidance, SIL mode running **the same** guidance binary as hardware would.
@@ -172,7 +172,7 @@ This is the order I would actually execute. Visibility and V&V before rewriting 
 13. **Trajectory optimization** — CasADi / embedded optimizer for pitch programs, launch windows, landing burns; export to DSL tables.
 14. **Reusability modules** — Grid fins, propulsive landing, entry heating — where commercial interest actually concentrates today.
 
-#### Phase 5 — Enterprise tail (14+ months)
+### Phase 5 — Enterprise tail (14+ months)
 
 15. **HIL / real-time** — UDP telemetry (CCSDS-flavored packets), wall-clock locked sim, Speedgoat/Arduino reference interfaces.
 16. **Dual licensing** — MIT for education; commercial agreement with support, indemnity, on-prem SSO for companies that need paperwork.
