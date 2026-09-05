@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.8.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.8.0...v4.8.1) (2026-09-05)
+
+
+### Chores & Maintenance
+
+* **docs:** remove obsolete TODO_1.md ([3e751e3](https://github.com/dhaatrik/dhaatrik.github.io/commit/3e751e3bbd50feb085eac532a901236529053260))
+
 ## [4.8.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.7.0...v4.8.0) (2026-09-05)
 
 
