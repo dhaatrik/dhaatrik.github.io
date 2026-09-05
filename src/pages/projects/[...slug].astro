@@ -91,12 +91,18 @@ const breadcrumbSchema = {
     ],
 };
 const breadcrumbLd = JSON.stringify(breadcrumbSchema);
+
+// Enrich page title with descriptive pitch and author branding for SERP snippets
+const shortTagline = description.includes('—') ? description.split('—')[0].trim() : '';
+const pageTitle = shortTagline
+    ? `${title} — ${shortTagline} | Dhaatrik Chowdhury`
+    : `${title} | Projects — Dhaatrik Chowdhury`;
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={`${title} | Projects`} description={description} image={logo} />
+        <BaseHead title={pageTitle} description={description} image={logo} />
         <TypographyStyles />
         <script is:inline type="application/ld+json" set:html={jsonLd} />
         <script is:inline type="application/ld+json" set:html={breadcrumbLd} />
