@@ -1,5 +1,60 @@
 # Changelog
 
+## [4.7.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.6.0...v4.7.0) (2026-09-05)
+
+
+### Features
+
+* **fx:** implement concept 3 fluid waveform and magnetic flux caustics ([e9c2571](https://github.com/dhaatrik/dhaatrik.github.io/commit/e9c257129423e89b70e40cc2e9d66ff156f341b6))
+* **fx:** refine fluid waveform into crystal-clear soothing water caustics ([acbaf50](https://github.com/dhaatrik/dhaatrik.github.io/commit/acbaf50ba83d5183bc1a8408147167754cba8280))
+* **fx:** replace radial glow with gravitational spacetime grid warp and zero-lag 3d card tilt ([8980223](https://github.com/dhaatrik/dhaatrik.github.io/commit/89802237a748330e28b1556acd63ab84f70599d1))
+* **fx:** replace static css background spots with pure living dot matrix physics ([82bc36d](https://github.com/dhaatrik/dhaatrik.github.io/commit/82bc36dbe53f2443b4dcfac588d8eb631be898a9))
+* **fx:** restore glowing cursor flashlight with zero-lag card spotlights ([c65f9ca](https://github.com/dhaatrik/dhaatrik.github.io/commit/c65f9caf8552de9ad0574d19c60e386afc85029b))
+* **head:** add theme-color meta tags with dark and light media query support ([b0647ba](https://github.com/dhaatrik/dhaatrik.github.io/commit/b0647baeeada16b8ee750e5992ebf9517f50f16b))
+* **schema:** ensure dateModified is always present in article json-ld ([14b6b0b](https://github.com/dhaatrik/dhaatrik.github.io/commit/14b6b0b001778d426a44da0f00a58c592dcfd9d7))
+* **seo:** add bespoke opengraph and twitter images for all top-level hub routes ([e305974](https://github.com/dhaatrik/dhaatrik.github.io/commit/e3059747f7a40f84e86b7b93d05f72bed1b0194a))
+* **seo:** add searchaction potentialaction to website json-ld schema ([80c2b84](https://github.com/dhaatrik/dhaatrik.github.io/commit/80c2b84efe82f0c39a703fe7c75b4e6914f7fa47))
+* **seo:** enrich project detail titles with tagline and author branding ([673d799](https://github.com/dhaatrik/dhaatrik.github.io/commit/673d79943a9caa75cb068eab1bb3e9641fd96678))
+
+
+### Bug Fixes
+
+* **a11y:** add aria-hidden to decorative video thumbnails on pedagogy hub ([7c8553b](https://github.com/dhaatrik/dhaatrik.github.io/commit/7c8553bd9b962af0a6ef861cc2de177c31578e12))
+* **a11y:** promote project card titles to h2 on workbench hub ([2ce8e71](https://github.com/dhaatrik/dhaatrik.github.io/commit/2ce8e714b508634322a559a47c3ffc614d7932c5))
+* **a11y:** remove duplicate region landmark on markdown tables in rehype plugin ([e77a892](https://github.com/dhaatrik/dhaatrik.github.io/commit/e77a89282001cc280c2ad25e379addf987c46b8a))
+* **content:** correct heading hierarchy skips in physics core, whats next, and youtube retrospectives ([a8b53f8](https://github.com/dhaatrik/dhaatrik.github.io/commit/a8b53f8bec9de07c23bec69ca2da163b60eee403))
+* **fx:** replace discrete grid with anti-aliased water ripple and hydrodynamic wake engine ([78fcb4a](https://github.com/dhaatrik/dhaatrik.github.io/commit/78fcb4ac75f411b1c328cbcc269d039019bef605))
+* **home:** change bento popover trigger container from article to div role=button ([419b7c3](https://github.com/dhaatrik/dhaatrik.github.io/commit/419b7c31eecea8ee87b5a2a8c6ab4d3be175eeac))
+* **home:** deduplicate currently exploring heading in research popover ([51fb519](https://github.com/dhaatrik/dhaatrik.github.io/commit/51fb51905df5f3c1377c9cc01dd68418bec4d15a))
+* **seo:** add descriptive alt text to blog hero schematics and aria-hidden to card thumbs ([dfb1a8d](https://github.com/dhaatrik/dhaatrik.github.io/commit/dfb1a8d4218e77f6cd24b4e45fd08b70e988f5c6))
+* **seo:** standardize twitter card meta tags to name attribute ([39a81d6](https://github.com/dhaatrik/dhaatrik.github.io/commit/39a81d66766c2a5454a79673c2c71d804d13cee0))
+
+
+### Styles & UI Polish
+
+* format repository with prettier according to ci guidelines ([41aeb24](https://github.com/dhaatrik/dhaatrik.github.io/commit/41aeb2437a8d1037eb0486054ca94a0b4f601dd3))
+* **ui:** adopt canonical tailwind v4 classes across components and content ([a90bbb3](https://github.com/dhaatrik/dhaatrik.github.io/commit/a90bbb35fa14ce55a986ce653ab4d7d067bcbeeb))
+
+
+### Documentation & Skills
+
+* **audit:** enrich report with codebase verification and ground truth ([95330a8](https://github.com/dhaatrik/dhaatrik.github.io/commit/95330a89244afecd769fe1f02a0958591cb5abce))
+* **audit:** import site audit report baseline for flight-readiness refit ([f564033](https://github.com/dhaatrik/dhaatrik.github.io/commit/f5640338fc506e5096980570c66e3d991c3bb46a))
+* **audit:** update site audit report with phase 3 completion and f2 resolution ([f8e5ff0](https://github.com/dhaatrik/dhaatrik.github.io/commit/f8e5ff065f982a8709a22e0d6ce91430c39c86e6))
+* **audit:** update site audit report with phase 4 forensic refit and verification ([5eab78f](https://github.com/dhaatrik/dhaatrik.github.io/commit/5eab78f7918303e9537039d59379dea671a4b6a1))
+
+
+### Tests & Verification
+
+* **a11y:** add regression assertions for heading order and decorative thumbnails ([0c5f59e](https://github.com/dhaatrik/dhaatrik.github.io/commit/0c5f59ef9d5b02625ce2fc3a253a13af09c15ebc))
+* **e2e:** update popover trigger selector to match div container ([893e77c](https://github.com/dhaatrik/dhaatrik.github.io/commit/893e77cee2cb3bdcad941eec1d71d0d3331c62d7))
+* **seo:** add regression assertions for website searchaction and article datemodified ([6b9368c](https://github.com/dhaatrik/dhaatrik.github.io/commit/6b9368c756c5bbee2def44ce15ad09855efa6bc4))
+
+
+### Chores & Maintenance
+
+* **audit:** remove outdated site audit report file ([29c8dc0](https://github.com/dhaatrik/dhaatrik.github.io/commit/29c8dc05f4be4c8d731fbc697a60b32780051937))
+
 ## [4.6.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.5.1...v4.6.0) (2026-08-30)
 
 
