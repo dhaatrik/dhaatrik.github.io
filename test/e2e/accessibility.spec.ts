@@ -56,7 +56,9 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
         });
     }
 
-    test('should enforce proper heading order without level skips on /projects/', async ({ page }) => {
+    test('should enforce proper heading order without level skips on /projects/', async ({
+        page,
+    }) => {
         await page.goto('/projects/', { waitUntil: 'domcontentloaded' });
         await page.waitForSelector('main, #main-content', { state: 'visible' });
 
@@ -107,4 +109,3 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
         }
     });
 });
-

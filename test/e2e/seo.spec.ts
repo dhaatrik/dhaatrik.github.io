@@ -40,9 +40,13 @@ test.describe('SEO and Metadata Verification', () => {
         await expect(ogImage).toHaveAttribute('content', /home-og/);
 
         // Check theme-color meta tags
-        const darkThemeColor = page.locator('meta[name="theme-color"][media*="prefers-color-scheme: dark"]');
+        const darkThemeColor = page.locator(
+            'meta[name="theme-color"][media*="prefers-color-scheme: dark"]'
+        );
         await expect(darkThemeColor).toHaveAttribute('content', '#08090a');
-        const lightThemeColor = page.locator('meta[name="theme-color"][media*="prefers-color-scheme: light"]');
+        const lightThemeColor = page.locator(
+            'meta[name="theme-color"][media*="prefers-color-scheme: light"]'
+        );
         await expect(lightThemeColor).toHaveAttribute('content', '#f8fafc');
     });
 
