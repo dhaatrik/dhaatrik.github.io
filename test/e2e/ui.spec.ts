@@ -269,7 +269,7 @@ test.describe('Portfolio UI Interactivity', () => {
 
         // Click "Currently Exploring" card
         const card = page
-            .locator('article[data-popover-target="project-popover-currently-exploring"]')
+            .locator('[data-popover-target="project-popover-currently-exploring"]')
             .first();
         await card.click();
 
