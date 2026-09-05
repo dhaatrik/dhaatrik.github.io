@@ -117,7 +117,7 @@ test.describe('SEO and Metadata Verification', () => {
         const ogImage = page.locator('meta[property="og:image"]');
         await expect(ogImage).toHaveAttribute('content', /.*delta-v-lab.*/);
 
-        const twitterImage = page.locator('meta[property="twitter:image"]');
+        const twitterImage = page.locator('meta[name="twitter:image"]');
         await expect(twitterImage).toHaveAttribute('content', /.*delta-v-lab.*/);
     });
 
@@ -139,7 +139,7 @@ test.describe('SEO and Metadata Verification', () => {
         const ogUrl = page.locator('meta[property="og:url"]');
         await expect(ogUrl).toHaveCount(0);
 
-        const twitterUrl = page.locator('meta[property="twitter:url"]');
+        const twitterUrl = page.locator('meta[name="twitter:url"]');
         await expect(twitterUrl).toHaveCount(0);
     });
 });
