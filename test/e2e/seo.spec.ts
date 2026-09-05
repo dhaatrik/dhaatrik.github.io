@@ -190,4 +190,31 @@ test.describe('SEO and Metadata Verification', () => {
         const twitterUrl = page.locator('meta[name="twitter:url"]');
         await expect(twitterUrl).toHaveCount(0);
     });
+
+    test('pedagogy hub should contain VideoObject ItemList schema and accessible ai.txt', async ({
+        page,
+    }) => {
+        await page.goto('/pedagogy/');
+        await page.waitForLoadState('domcontentloaded');
+
+        const schemas = await page.locator('script[type="application/ld+json"]').all();
+        let foundVideoList = false;
+        for (const s of schemas) {
+            const content = await s.innerText();
+            if (content.includes('VideoObject') && content.includes('DBS Classes')) {
+                foundVideoList = true;
+                const parsed = JSON.parse(content);
+                expect(parsed['@type']).toBe('ItemList');
+                expect(parsed.itemListElement.length).toBe(20);
+                expect(parsed.itemListElement[0].item['@type']).toBe('VideoObject');
+                break;
+            }
+        }
+        expect(foundVideoList).toBe(true);
+
+        const aiResponse = await page.goto('/ai.txt');
+        expect(aiResponse?.status()).toBe(200);
+        const aiText = await aiResponse?.text();
+        expect(aiText).toContain('Context: https://dhaatrik.github.io/llms.txt');
+    });
 });
