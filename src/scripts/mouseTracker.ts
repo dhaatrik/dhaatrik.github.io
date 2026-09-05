@@ -16,13 +16,13 @@ let cachedMagnetData: {
 
 let layoutUpdateTimeout: ReturnType<typeof setTimeout> | null = null;
 
-// --- Fluid Waveform / Magnetic Flux Caustics (Liquid Ferrofluid) Engine ---
+// --- Fluid Waveform / Water Caustics (Calm Liquid Ripple) Engine ---
 let spacetimeCanvas: HTMLCanvasElement | null = null;
 let spacetimeCtx: CanvasRenderingContext2D | null = null;
 let spacetimeRafId: number | null = null;
 let themeObserver: MutationObserver | null = null;
 
-const SIM_DOWNSCALE = 10;
+const SIM_DOWNSCALE = 6;
 let simWidth = 0;
 let simHeight = 0;
 let simSize = 0;
@@ -30,6 +30,17 @@ let simSize = 0;
 let waveCurrent: Float32Array = new Float32Array(0);
 let wavePrevious: Float32Array = new Float32Array(0);
 let waveNext: Float32Array = new Float32Array(0);
+
+interface WaterRipple {
+    x: number;
+    y: number;
+    radius: number;
+    maxRadius: number;
+    alpha: number;
+    speed: number;
+}
+let activeRipples: WaterRipple[] = [];
+let lastRippleTime = 0;
 
 let offscreenCanvas: HTMLCanvasElement | null = null;
 let offscreenCtx: CanvasRenderingContext2D | null = null;
@@ -40,7 +51,7 @@ let canvasHeight = 0;
 let isCanvasSleeping = false;
 let idleFrames = 0;
 
-const DAMPING = 0.974;
+const DAMPING = 0.982;
 
 const resizeFluidCanvas = () => {
     if (!spacetimeCanvas || !spacetimeCtx) return;
@@ -62,6 +73,7 @@ const resizeFluidCanvas = () => {
     waveCurrent = new Float32Array(simSize);
     wavePrevious = new Float32Array(simSize);
     waveNext = new Float32Array(simSize);
+    activeRipples = [];
 
     offscreenCanvas = document.createElement('canvas');
     offscreenCanvas.width = simWidth;
@@ -80,8 +92,9 @@ const injectFluidEnergy = (x: number, y: number, speed: number) => {
     const gx = Math.round((x / canvasWidth) * simWidth);
     const gy = Math.round((y / canvasHeight) * simHeight);
 
-    const radius = 3;
-    const impulse = Math.min(speed * 0.35 + 1.5, 12);
+    const radius = 5;
+    // Gentle, calm water impulse
+    const impulse = Math.min(speed * 0.22 + 1.0, 6.5);
 
     for (let dy = -radius; dy <= radius; dy++) {
         const py = gy + dy;
@@ -92,10 +105,25 @@ const injectFluidEnergy = (x: number, y: number, speed: number) => {
             if (px <= 1 || px >= simWidth - 2) continue;
             const distSq = dx * dx + dy * dy;
             if (distSq <= radius * radius) {
-                const falloff = 1 - Math.sqrt(distSq) / radius;
-                waveCurrent[row + px] += impulse * falloff * falloff;
+                // Smooth Gaussian bell curve: prevents harsh spikes, creates pure circular water swell
+                const falloff = Math.exp(-distSq / (radius * 1.6));
+                waveCurrent[row + px] += impulse * falloff;
             }
         }
+    }
+
+    // Spawn expanding concentric water ripple wavefronts at calm intervals
+    const now = performance.now();
+    if (now - lastRippleTime > 130 && speed > 0.35) {
+        lastRippleTime = now;
+        activeRipples.push({
+            x,
+            y,
+            radius: 8,
+            maxRadius: Math.min(180, 80 + speed * 5),
+            alpha: 0.42,
+            speed: 1.6,
+        });
     }
 };
 
@@ -110,7 +138,7 @@ const renderFluidCanvas = () => {
 
     let totalWaveEnergy = 0;
 
-    // 2D wave propagation step
+    // 2D isotropic 9-point wave propagation step
     for (let y = 1; y < simHeight - 1; y++) {
         const row = y * simWidth;
         const rowAbove = (y - 1) * simWidth;
@@ -118,13 +146,19 @@ const renderFluidCanvas = () => {
 
         for (let x = 1; x < simWidth - 1; x++) {
             const idx = row + x;
-            let val =
-                (waveCurrent[idx - 1] +
-                    waveCurrent[idx + 1] +
-                    waveCurrent[rowAbove + x] +
-                    waveCurrent[rowBelow + x]) *
-                    0.5 -
-                wavePrevious[idx];
+            // 9-point Laplacian eliminates square artifacts and yields true circular water ripples
+            const cardinal =
+                waveCurrent[idx - 1] +
+                waveCurrent[idx + 1] +
+                waveCurrent[rowAbove + x] +
+                waveCurrent[rowBelow + x];
+            const diagonal =
+                waveCurrent[rowAbove + x - 1] +
+                waveCurrent[rowAbove + x + 1] +
+                waveCurrent[rowBelow + x - 1] +
+                waveCurrent[rowBelow + x + 1];
+
+            let val = (cardinal * 0.5 + diagonal * 0.25) * 0.5 - wavePrevious[idx];
 
             val *= DAMPING;
             waveNext[idx] = val;
@@ -138,7 +172,7 @@ const renderFluidCanvas = () => {
     waveCurrent = waveNext;
     waveNext = temp;
 
-    // Render caustics into offscreen ImageData
+    // Render crystal-clear caustics into offscreen ImageData
     if (offscreenImgData && offscreenCtx) {
         const data = offscreenImgData.data;
         let ptr = 0;
@@ -157,29 +191,40 @@ const renderFluidCanvas = () => {
                 const gy = waveCurrent[rowBelow + x] - waveCurrent[rowAbove + x];
                 const height = waveCurrent[idx];
 
-                const grad = Math.sqrt(gx * gx + gy * gy);
-                const caustic = Math.min(1, grad * 0.42 + Math.max(0, height) * 0.1);
+                // Curvature focuses light into thin, razor-crisp caustic lines
+                const laplacian =
+                    waveCurrent[left] +
+                    waveCurrent[right] +
+                    waveCurrent[rowAbove + x] +
+                    waveCurrent[rowBelow + x] -
+                    4 * height;
+                const slope = Math.sqrt(gx * gx + gy * gy);
 
-                if (caustic > 0.015) {
+                // Caustic score: focused primarily on wave crests and refraction ridges
+                const causticScore = Math.max(0, -laplacian * 0.7 + slope * 0.4);
+
+                if (causticScore > 0.08) {
+                    // Non-linear power curve creates thin, crisp liquid ribbons without smoky haze
+                    const norm = Math.min(1, (causticScore - 0.08) * 2.5);
+                    const caustic = Math.pow(norm, 1.8);
+
                     if (isDark) {
-                        // Liquid ferrofluid caustics: sapphire into luminous cyan and bright crests
-                        const t = Math.min(1, caustic * 1.5);
-                        const r = Math.round(25 + t * 200);
-                        const g = Math.round(110 + t * 115);
-                        const b = Math.round(235 + t * 20);
-                        const alpha = Math.round(Math.min(210, caustic * 240));
+                        // Crystal-clear aquatic caustics: translucent cerulean to brilliant aqua-cyan and sparkling white peak
+                        const r = Math.round(28 + caustic * 227);
+                        const g = Math.round(145 + caustic * 110);
+                        const b = Math.round(238 + caustic * 17);
+                        const alpha = Math.round(caustic * 195);
 
                         data[ptr] = r;
                         data[ptr + 1] = g;
                         data[ptr + 2] = b;
                         data[ptr + 3] = alpha;
                     } else {
-                        // Light mode crystalline water caustics
-                        const t = Math.min(1, caustic * 1.4);
-                        const r = Math.round(20 + t * 20);
-                        const g = Math.round(60 + t * 40);
-                        const b = Math.round(140 + t * 90);
-                        const alpha = Math.round(Math.min(160, caustic * 180));
+                        // Light mode: clear water ripples casting deep azure caustics
+                        const r = Math.round(15 + caustic * 22);
+                        const g = Math.round(85 + caustic * 55);
+                        const b = Math.round(195 + caustic * 60);
+                        const alpha = Math.round(caustic * 160);
 
                         data[ptr] = r;
                         data[ptr + 1] = g;
@@ -187,7 +232,7 @@ const renderFluidCanvas = () => {
                         data[ptr + 3] = alpha;
                     }
                 } else {
-                    data[ptr + 3] = 0;
+                    data[ptr + 3] = 0; // 100% transparent: crystal clear!
                 }
                 ptr += 4;
             }
@@ -205,29 +250,34 @@ const renderFluidCanvas = () => {
         spacetimeCtx.drawImage(offscreenCanvas, 0, 0, canvasWidth, canvasHeight);
     }
 
-    // Draw magnetic flux caustic contour rings around cursor during motion
-    if (
-        mouseX >= 0 &&
-        mouseY >= 0 &&
-        (Math.abs(mouseSpeedX) > 0.1 || Math.abs(mouseSpeedY) > 0.1)
-    ) {
-        const rings = [28, 56, 84, 115];
+    // Render and update expanding concentric water ripples
+    if (activeRipples.length > 0) {
         spacetimeCtx.save();
-        spacetimeCtx.lineWidth = 1.2;
+        spacetimeCtx.lineWidth = 1;
 
-        for (let k = 0; k < rings.length; k++) {
-            const baseRadius = rings[k];
-            const ringAlpha = Math.max(0, (1 - baseRadius / 140) * 0.38);
+        for (let i = activeRipples.length - 1; i >= 0; i--) {
+            const rip = activeRipples[i];
+            rip.radius += rip.speed;
+            rip.alpha *= 0.965;
+
+            if (rip.alpha < 0.015 || rip.radius >= rip.maxRadius) {
+                activeRipples.splice(i, 1);
+                continue;
+            }
+
+            const progress = rip.radius / rip.maxRadius;
+            const strokeAlpha = rip.alpha * (1 - progress);
+
             spacetimeCtx.strokeStyle = isDark
-                ? `rgba(34, 211, 238, ${ringAlpha.toFixed(3)})`
-                : `rgba(37, 99, 235, ${(ringAlpha * 0.8).toFixed(3)})`;
+                ? `rgba(56, 189, 248, ${strokeAlpha.toFixed(3)})`
+                : `rgba(2, 132, 199, ${(strokeAlpha * 0.85).toFixed(3)})`;
 
             spacetimeCtx.beginPath();
             const steps = 36;
             for (let s = 0; s <= steps; s++) {
                 const theta = (s / steps) * Math.PI * 2;
-                const sx = mouseX + Math.cos(theta) * baseRadius;
-                const sy = mouseY + Math.sin(theta) * baseRadius;
+                const sx = rip.x + Math.cos(theta) * rip.radius;
+                const sy = rip.y + Math.sin(theta) * rip.radius;
 
                 const gx = Math.max(
                     0,
@@ -239,9 +289,9 @@ const renderFluidCanvas = () => {
                 );
                 const waveDistort = waveCurrent[gy * simWidth + gx] || 0;
 
-                const rad = baseRadius + waveDistort * 2.8;
-                const px = mouseX + Math.cos(theta) * rad;
-                const py = mouseY + Math.sin(theta) * rad;
+                const r = rip.radius + waveDistort * 1.5;
+                const px = rip.x + Math.cos(theta) * r;
+                const py = rip.y + Math.sin(theta) * r;
 
                 if (s === 0) {
                     spacetimeCtx.moveTo(px, py);
@@ -256,7 +306,12 @@ const renderFluidCanvas = () => {
     }
 
     // Auto-sleep system: conserve CPU/battery when fluid settles
-    if (totalWaveEnergy < 0.15 && Math.abs(mouseSpeedX) < 0.01 && Math.abs(mouseSpeedY) < 0.01) {
+    if (
+        totalWaveEnergy < 0.12 &&
+        activeRipples.length === 0 &&
+        Math.abs(mouseSpeedX) < 0.01 &&
+        Math.abs(mouseSpeedY) < 0.01
+    ) {
         idleFrames++;
         if (idleFrames > 35) {
             isCanvasSleeping = true;
@@ -543,6 +598,7 @@ const destroyMouseTracker = () => {
     offscreenCanvas = null;
     offscreenCtx = null;
     offscreenImgData = null;
+    activeRipples = [];
     magneticTargets = [];
     cachedMagnetData = [];
 };
