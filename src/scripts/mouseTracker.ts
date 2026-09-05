@@ -16,42 +16,39 @@ let cachedMagnetData: {
 
 let layoutUpdateTimeout: ReturnType<typeof setTimeout> | null = null;
 
-// --- Fluid Waveform / Water Caustics (Calm Liquid Ripple) Engine ---
+// --- Calm Liquid Water Ripple & Hydrodynamic Wake Engine ---
 let spacetimeCanvas: HTMLCanvasElement | null = null;
 let spacetimeCtx: CanvasRenderingContext2D | null = null;
 let spacetimeRafId: number | null = null;
 let themeObserver: MutationObserver | null = null;
 
-const SIM_DOWNSCALE = 6;
-let simWidth = 0;
-let simHeight = 0;
-let simSize = 0;
-
-let waveCurrent: Float32Array = new Float32Array(0);
-let wavePrevious: Float32Array = new Float32Array(0);
-let waveNext: Float32Array = new Float32Array(0);
-
-interface WaterRipple {
+interface WaterWavePacket {
     x: number;
     y: number;
-    radius: number;
-    maxRadius: number;
-    alpha: number;
-    speed: number;
+    birthTime: number;
+    duration: number; // Duration of wave packet (ms)
+    maxRadius: number; // Expanding radius limit
+    amplitude: number; // Wave peak amplitude
+    wavelength: number; // Distance between concentric crests
+    ringCount: number; // Number of harmonic rings in packet
 }
-let activeRipples: WaterRipple[] = [];
-let lastRippleTime = 0;
 
-let offscreenCanvas: HTMLCanvasElement | null = null;
-let offscreenCtx: CanvasRenderingContext2D | null = null;
-let offscreenImgData: ImageData | null = null;
+interface CursorTrailPoint {
+    x: number;
+    y: number;
+    time: number;
+}
+
+let activeRipples: WaterWavePacket[] = [];
+let cursorTrail: CursorTrailPoint[] = [];
+let lastRippleX = -1000;
+let lastRippleY = -1000;
+let lastRippleTime = 0;
 
 let canvasWidth = 0;
 let canvasHeight = 0;
 let isCanvasSleeping = false;
 let idleFrames = 0;
-
-const DAMPING = 0.982;
 
 const resizeFluidCanvas = () => {
     if (!spacetimeCanvas || !spacetimeCtx) return;
@@ -66,254 +63,192 @@ const resizeFluidCanvas = () => {
     spacetimeCanvas.style.height = `${canvasHeight}px`;
     spacetimeCtx.scale(dpr, dpr);
 
-    simWidth = Math.max(32, Math.floor(canvasWidth / SIM_DOWNSCALE));
-    simHeight = Math.max(24, Math.floor(canvasHeight / SIM_DOWNSCALE));
-    simSize = simWidth * simHeight;
-
-    waveCurrent = new Float32Array(simSize);
-    wavePrevious = new Float32Array(simSize);
-    waveNext = new Float32Array(simSize);
-    activeRipples = [];
-
-    offscreenCanvas = document.createElement('canvas');
-    offscreenCanvas.width = simWidth;
-    offscreenCanvas.height = simHeight;
-    offscreenCtx = offscreenCanvas.getContext('2d', { willReadFrequently: false });
-    if (offscreenCtx) {
-        offscreenImgData = offscreenCtx.createImageData(simWidth, simHeight);
-    }
-
     wakeFluidCanvas();
 };
 
-const injectFluidEnergy = (x: number, y: number, speed: number) => {
-    if (simWidth === 0 || simHeight === 0) return;
+const spawnWaterDroplet = (
+    x: number,
+    y: number,
+    amplitude = 0.55,
+    rings = 2,
+    customDuration?: number
+) => {
+    const dur = customDuration || 1600;
+    const maxR = Math.min(220, 110 + amplitude * 120);
 
-    const gx = Math.round((x / canvasWidth) * simWidth);
-    const gy = Math.round((y / canvasHeight) * simHeight);
+    activeRipples.push({
+        x,
+        y,
+        birthTime: performance.now(),
+        duration: dur,
+        maxRadius: maxR,
+        amplitude: Math.min(0.75, Math.max(0.2, amplitude)),
+        wavelength: 22,
+        ringCount: rings,
+    });
 
-    const radius = 5;
-    // Gentle, calm water impulse
-    const impulse = Math.min(speed * 0.22 + 1.0, 6.5);
-
-    for (let dy = -radius; dy <= radius; dy++) {
-        const py = gy + dy;
-        if (py <= 1 || py >= simHeight - 2) continue;
-        const row = py * simWidth;
-        for (let dx = -radius; dx <= radius; dx++) {
-            const px = gx + dx;
-            if (px <= 1 || px >= simWidth - 2) continue;
-            const distSq = dx * dx + dy * dy;
-            if (distSq <= radius * radius) {
-                // Smooth Gaussian bell curve: prevents harsh spikes, creates pure circular water swell
-                const falloff = Math.exp(-distSq / (radius * 1.6));
-                waveCurrent[row + px] += impulse * falloff;
-            }
-        }
-    }
-
-    // Spawn expanding concentric water ripple wavefronts at calm intervals
-    const now = performance.now();
-    if (now - lastRippleTime > 130 && speed > 0.35) {
-        lastRippleTime = now;
-        activeRipples.push({
-            x,
-            y,
-            radius: 8,
-            maxRadius: Math.min(180, 80 + speed * 5),
-            alpha: 0.42,
-            speed: 1.6,
-        });
-    }
+    wakeFluidCanvas();
 };
 
 const renderFluidCanvas = () => {
     if (!spacetimeCanvas || !spacetimeCtx) return;
 
+    const now = performance.now();
     const isDark = document.documentElement.classList.contains('dark');
 
-    // Gradually decay cursor speed vector
+    // Clean expired trail points older than 260ms
+    while (cursorTrail.length > 0 && now - cursorTrail[0].time > 260) {
+        cursorTrail.shift();
+    }
+
+    // Smoothly decay mouse speed
     mouseSpeedX *= 0.85;
     mouseSpeedY *= 0.85;
 
-    let totalWaveEnergy = 0;
-
-    // 2D isotropic 9-point wave propagation step
-    for (let y = 1; y < simHeight - 1; y++) {
-        const row = y * simWidth;
-        const rowAbove = (y - 1) * simWidth;
-        const rowBelow = (y + 1) * simWidth;
-
-        for (let x = 1; x < simWidth - 1; x++) {
-            const idx = row + x;
-            // 9-point Laplacian eliminates square artifacts and yields true circular water ripples
-            const cardinal =
-                waveCurrent[idx - 1] +
-                waveCurrent[idx + 1] +
-                waveCurrent[rowAbove + x] +
-                waveCurrent[rowBelow + x];
-            const diagonal =
-                waveCurrent[rowAbove + x - 1] +
-                waveCurrent[rowAbove + x + 1] +
-                waveCurrent[rowBelow + x - 1] +
-                waveCurrent[rowBelow + x + 1];
-
-            let val = (cardinal * 0.5 + diagonal * 0.25) * 0.5 - wavePrevious[idx];
-
-            val *= DAMPING;
-            waveNext[idx] = val;
-            totalWaveEnergy += Math.abs(val);
-        }
-    }
-
-    // Pointer swap buffers
-    const temp = wavePrevious;
-    wavePrevious = waveCurrent;
-    waveCurrent = waveNext;
-    waveNext = temp;
-
-    // Render crystal-clear caustics into offscreen ImageData
-    if (offscreenImgData && offscreenCtx) {
-        const data = offscreenImgData.data;
-        let ptr = 0;
-
-        for (let y = 0; y < simHeight; y++) {
-            const row = y * simWidth;
-            const rowAbove = (y > 0 ? y - 1 : 0) * simWidth;
-            const rowBelow = (y < simHeight - 1 ? y + 1 : simHeight - 1) * simWidth;
-
-            for (let x = 0; x < simWidth; x++) {
-                const idx = row + x;
-                const left = x > 0 ? idx - 1 : idx;
-                const right = x < simWidth - 1 ? idx + 1 : idx;
-
-                const gx = waveCurrent[right] - waveCurrent[left];
-                const gy = waveCurrent[rowBelow + x] - waveCurrent[rowAbove + x];
-                const height = waveCurrent[idx];
-
-                // Curvature focuses light into thin, razor-crisp caustic lines
-                const laplacian =
-                    waveCurrent[left] +
-                    waveCurrent[right] +
-                    waveCurrent[rowAbove + x] +
-                    waveCurrent[rowBelow + x] -
-                    4 * height;
-                const slope = Math.sqrt(gx * gx + gy * gy);
-
-                // Caustic score: focused primarily on wave crests and refraction ridges
-                const causticScore = Math.max(0, -laplacian * 0.7 + slope * 0.4);
-
-                if (causticScore > 0.08) {
-                    // Non-linear power curve creates thin, crisp liquid ribbons without smoky haze
-                    const norm = Math.min(1, (causticScore - 0.08) * 2.5);
-                    const caustic = Math.pow(norm, 1.8);
-
-                    if (isDark) {
-                        // Crystal-clear aquatic caustics: translucent cerulean to brilliant aqua-cyan and sparkling white peak
-                        const r = Math.round(28 + caustic * 227);
-                        const g = Math.round(145 + caustic * 110);
-                        const b = Math.round(238 + caustic * 17);
-                        const alpha = Math.round(caustic * 195);
-
-                        data[ptr] = r;
-                        data[ptr + 1] = g;
-                        data[ptr + 2] = b;
-                        data[ptr + 3] = alpha;
-                    } else {
-                        // Light mode: clear water ripples casting deep azure caustics
-                        const r = Math.round(15 + caustic * 22);
-                        const g = Math.round(85 + caustic * 55);
-                        const b = Math.round(195 + caustic * 60);
-                        const alpha = Math.round(caustic * 160);
-
-                        data[ptr] = r;
-                        data[ptr + 1] = g;
-                        data[ptr + 2] = b;
-                        data[ptr + 3] = alpha;
-                    }
-                } else {
-                    data[ptr + 3] = 0; // 100% transparent: crystal clear!
-                }
-                ptr += 4;
-            }
-        }
-
-        offscreenCtx.putImageData(offscreenImgData, 0, 0);
-    }
-
-    // Clear main canvas and draw hardware-upscaled bilinear caustics
+    // Clear canvas
     spacetimeCtx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-    if (offscreenCanvas) {
-        spacetimeCtx.imageSmoothingEnabled = true;
-        spacetimeCtx.imageSmoothingQuality = 'high';
-        spacetimeCtx.drawImage(offscreenCanvas, 0, 0, canvasWidth, canvasHeight);
-    }
-
-    // Render and update expanding concentric water ripples
-    if (activeRipples.length > 0) {
+    // 1. Draw Hydrodynamic Liquid Wake Stream behind cursor
+    if (cursorTrail.length >= 2) {
         spacetimeCtx.save();
-        spacetimeCtx.lineWidth = 1;
+        spacetimeCtx.lineCap = 'round';
+        spacetimeCtx.lineJoin = 'round';
 
-        for (let i = activeRipples.length - 1; i >= 0; i--) {
-            const rip = activeRipples[i];
-            rip.radius += rip.speed;
-            rip.alpha *= 0.965;
+        for (let i = 0; i < cursorTrail.length - 1; i++) {
+            const p1 = cursorTrail[i];
+            const p2 = cursorTrail[i + 1];
+            const age = now - p2.time;
+            const life = Math.max(0, 1 - age / 260); // 1.0 at cursor tip, 0.0 at tail
+            if (life <= 0) continue;
 
-            if (rip.alpha < 0.015 || rip.radius >= rip.maxRadius) {
-                activeRipples.splice(i, 1);
-                continue;
-            }
-
-            const progress = rip.radius / rip.maxRadius;
-            const strokeAlpha = rip.alpha * (1 - progress);
-
-            spacetimeCtx.strokeStyle = isDark
-                ? `rgba(56, 189, 248, ${strokeAlpha.toFixed(3)})`
-                : `rgba(2, 132, 199, ${(strokeAlpha * 0.85).toFixed(3)})`;
+            const width = 1.2 + life * 6.5; // Smoothly tapers from cursor
+            const alpha = life * (isDark ? 0.24 : 0.18);
 
             spacetimeCtx.beginPath();
-            const steps = 36;
-            for (let s = 0; s <= steps; s++) {
-                const theta = (s / steps) * Math.PI * 2;
-                const sx = rip.x + Math.cos(theta) * rip.radius;
-                const sy = rip.y + Math.sin(theta) * rip.radius;
-
-                const gx = Math.max(
-                    0,
-                    Math.min(simWidth - 1, Math.round((sx / canvasWidth) * simWidth))
-                );
-                const gy = Math.max(
-                    0,
-                    Math.min(simHeight - 1, Math.round((sy / canvasHeight) * simHeight))
-                );
-                const waveDistort = waveCurrent[gy * simWidth + gx] || 0;
-
-                const r = rip.radius + waveDistort * 1.5;
-                const px = rip.x + Math.cos(theta) * r;
-                const py = rip.y + Math.sin(theta) * r;
-
-                if (s === 0) {
-                    spacetimeCtx.moveTo(px, py);
-                } else {
-                    spacetimeCtx.lineTo(px, py);
-                }
-            }
-            spacetimeCtx.closePath();
+            spacetimeCtx.moveTo(p1.x, p1.y);
+            spacetimeCtx.lineTo(p2.x, p2.y);
+            spacetimeCtx.lineWidth = width;
+            spacetimeCtx.strokeStyle = isDark
+                ? `rgba(56, 189, 248, ${alpha.toFixed(3)})`
+                : `rgba(2, 132, 199, ${alpha.toFixed(3)})`;
             spacetimeCtx.stroke();
         }
         spacetimeCtx.restore();
     }
 
-    // Auto-sleep system: conserve CPU/battery when fluid settles
+    // 2. Draw Glassy Liquid Droplet Lens at Cursor Tip
+    const currentSpeed = Math.hypot(mouseSpeedX, mouseSpeedY);
+    if (mouseX >= 0 && mouseY >= 0 && (currentSpeed > 0.05 || cursorTrail.length > 0)) {
+        spacetimeCtx.save();
+        const lensRadius = Math.min(32, 20 + currentSpeed * 0.8);
+        const grad = spacetimeCtx.createRadialGradient(
+            mouseX,
+            mouseY,
+            0,
+            mouseX,
+            mouseY,
+            lensRadius
+        );
+        if (isDark) {
+            grad.addColorStop(0, 'rgba(56, 189, 248, 0.22)');
+            grad.addColorStop(0.5, 'rgba(3, 105, 161, 0.08)');
+            grad.addColorStop(1, 'rgba(56, 189, 248, 0)');
+        } else {
+            grad.addColorStop(0, 'rgba(2, 132, 199, 0.18)');
+            grad.addColorStop(0.5, 'rgba(14, 165, 233, 0.06)');
+            grad.addColorStop(1, 'rgba(2, 132, 199, 0)');
+        }
+        spacetimeCtx.fillStyle = grad;
+        spacetimeCtx.beginPath();
+        spacetimeCtx.arc(mouseX, mouseY, lensRadius, 0, Math.PI * 2);
+        spacetimeCtx.fill();
+        spacetimeCtx.restore();
+    }
+
+    // 3. Render Concentric Water Wave Packets
+    if (activeRipples.length > 0) {
+        spacetimeCtx.save();
+
+        for (let i = activeRipples.length - 1; i >= 0; i--) {
+            const rip = activeRipples[i];
+            const elapsed = now - rip.birthTime;
+            const progress = elapsed / rip.duration;
+
+            if (progress >= 1.0) {
+                activeRipples.splice(i, 1);
+                continue;
+            }
+
+            // Smooth physical wave dispersion & easing: 1 - exp(-2.6 * p)
+            const easeR = 1 - Math.exp(-2.6 * progress);
+            const leadRadius = rip.maxRadius * easeR;
+
+            // Physical wave packet envelope: smooth gentle attack, quadratic attenuation
+            const attack = Math.min(1, progress * 7.0);
+            const decay = Math.pow(1 - progress, 1.6);
+            const envelope = attack * decay * rip.amplitude;
+
+            if (envelope < 0.005) continue;
+
+            for (let k = 0; k < rip.ringCount; k++) {
+                // Dispersion: spacing expands slightly over time as wave moves out
+                const spacing = rip.wavelength * (1 + progress * 0.35);
+                const r = leadRadius - k * spacing;
+                if (r < 3 || r > rip.maxRadius * 1.05) continue;
+
+                // Secondary and tertiary crests carry naturally less energy
+                const ringFactor = Math.pow(0.72, k);
+                const ringAmp = envelope * ringFactor;
+                // Wave crest widens gracefully as it expands (natural dispersion)
+                const strokeWidth = 1.0 + progress * 2.4;
+
+                // A. Wave Body / Soft Liquid Refraction
+                const bodyAlpha = ringAmp * (isDark ? 0.24 : 0.18);
+                spacetimeCtx.lineWidth = strokeWidth * 2.4;
+                spacetimeCtx.strokeStyle = isDark
+                    ? `rgba(56, 189, 248, ${bodyAlpha.toFixed(3)})`
+                    : `rgba(2, 132, 199, ${bodyAlpha.toFixed(3)})`;
+                spacetimeCtx.beginPath();
+                spacetimeCtx.arc(rip.x, rip.y, r, 0, Math.PI * 2);
+                spacetimeCtx.stroke();
+
+                // B. Crisp Specular Surface Glint along Wave Crest
+                const glintAlpha = ringAmp * (isDark ? 0.46 : 0.36);
+                spacetimeCtx.lineWidth = strokeWidth * 0.85;
+                spacetimeCtx.strokeStyle = isDark
+                    ? `rgba(224, 242, 254, ${glintAlpha.toFixed(3)})`
+                    : `rgba(14, 165, 233, ${glintAlpha.toFixed(3)})`;
+                spacetimeCtx.beginPath();
+                spacetimeCtx.arc(rip.x, rip.y, r, 0, Math.PI * 2);
+                spacetimeCtx.stroke();
+
+                // C. Subtle Inner Trough Refraction (Creates genuine 3D liquid depth)
+                const troughR = r - spacing * 0.38;
+                if (troughR > 2) {
+                    const troughAlpha = ringAmp * (isDark ? 0.12 : 0.09);
+                    spacetimeCtx.lineWidth = strokeWidth * 1.5;
+                    spacetimeCtx.strokeStyle = isDark
+                        ? `rgba(3, 105, 161, ${troughAlpha.toFixed(3)})`
+                        : `rgba(30, 64, 175, ${troughAlpha.toFixed(3)})`;
+                    spacetimeCtx.beginPath();
+                    spacetimeCtx.arc(rip.x, rip.y, troughR, 0, Math.PI * 2);
+                    spacetimeCtx.stroke();
+                }
+            }
+        }
+
+        spacetimeCtx.restore();
+    }
+
+    // 4. Auto-sleep System: conserve 100% CPU/GPU when water settles
     if (
-        totalWaveEnergy < 0.12 &&
         activeRipples.length === 0 &&
+        cursorTrail.length === 0 &&
         Math.abs(mouseSpeedX) < 0.01 &&
         Math.abs(mouseSpeedY) < 0.01
     ) {
         idleFrames++;
-        if (idleFrames > 35) {
+        if (idleFrames > 25) {
             isCanvasSleeping = true;
             spacetimeRafId = null;
             spacetimeCtx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -341,6 +276,7 @@ const onMouseLeave = () => {
     mouseY = -1000;
     mouseSpeedX = 0;
     mouseSpeedY = 0;
+    cursorTrail = [];
     wakeFluidCanvas();
 };
 
@@ -413,13 +349,49 @@ const onMouseMove = (e: MouseEvent) => {
     mouseX = newX;
     mouseY = newY;
 
+    const now = performance.now();
     const speed = Math.hypot(mouseSpeedX, mouseSpeedY);
+
+    cursorTrail.push({ x: newX, y: newY, time: now });
+    while (cursorTrail.length > 0 && now - cursorTrail[0].time > 260) {
+        cursorTrail.shift();
+    }
+
+    // Check distance traversed since last water ripple
+    const distSinceLast = Math.hypot(newX - lastRippleX, newY - lastRippleY);
+
+    // Natural ripple spacing: emit tranquil concentric rings as cursor glides
+    if ((distSinceLast >= 42 || (distSinceLast >= 24 && speed > 7)) && now - lastRippleTime > 75) {
+        lastRippleX = newX;
+        lastRippleY = newY;
+        lastRippleTime = now;
+
+        const amp = Math.min(0.65, 0.25 + (speed / 25) * 0.35);
+        const maxR = Math.min(220, 95 + speed * 3.5);
+        const dur = Math.min(1800, 1300 + speed * 15);
+        const rings = speed > 10 ? 3 : 2;
+
+        activeRipples.push({
+            x: newX,
+            y: newY,
+            birthTime: now,
+            duration: dur,
+            maxRadius: maxR,
+            amplitude: amp,
+            wavelength: 22,
+            ringCount: rings,
+        });
+    }
+
     wakeFluidCanvas();
-    injectFluidEnergy(newX, newY, speed);
 
     if (!magneticRafId && cachedMagnetData.length > 0) {
         magneticRafId = requestAnimationFrame(updateMagneticTargets);
     }
+};
+
+const onPointerDown = (e: MouseEvent) => {
+    spawnWaterDroplet(e.clientX, e.clientY, 0.7, 3, 1900);
 };
 
 const handleScrollOrResize = () => {
@@ -461,11 +433,13 @@ const initMouseTracker = () => {
 
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseleave', onMouseLeave);
+    document.removeEventListener('pointerdown', onPointerDown);
     window.removeEventListener('scroll', handleScrollOrResize);
     window.removeEventListener('resize', handleScrollOrResize);
 
     document.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave, { passive: true });
+    document.addEventListener('pointerdown', onPointerDown, { passive: true });
     window.addEventListener('scroll', handleScrollOrResize, { passive: true });
     window.addEventListener('resize', handleScrollOrResize, { passive: true });
 
@@ -571,6 +545,7 @@ const runMouseTracker = () => {
 const destroyMouseTracker = () => {
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseleave', onMouseLeave);
+    document.removeEventListener('pointerdown', onPointerDown);
     window.removeEventListener('pageshow', handlePageShow);
     window.removeEventListener('scroll', handleScrollOrResize);
     window.removeEventListener('resize', handleScrollOrResize);
@@ -595,10 +570,8 @@ const destroyMouseTracker = () => {
 
     spacetimeCanvas = null;
     spacetimeCtx = null;
-    offscreenCanvas = null;
-    offscreenCtx = null;
-    offscreenImgData = null;
     activeRipples = [];
+    cursorTrail = [];
     magneticTargets = [];
     cachedMagnetData = [];
 };
