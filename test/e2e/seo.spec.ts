@@ -23,14 +23,18 @@ test.describe('SEO and Metadata Verification', () => {
         expect(schemas.length).toBeGreaterThan(0);
 
         let foundPerson = false;
+        let foundWebSiteSearchAction = false;
         for (const schema of schemas) {
             const content = await schema.innerText();
             if (content.includes('"@type":"Person"') || content.includes('"@type": "Person"')) {
                 foundPerson = true;
-                break;
+            }
+            if (content.includes('"SearchAction"') && content.includes('/transmissions/?q=')) {
+                foundWebSiteSearchAction = true;
             }
         }
         expect(foundPerson).toBe(true);
+        expect(foundWebSiteSearchAction).toBe(true);
 
         const ogImage = page.locator('meta[property="og:image"]');
         await expect(ogImage).toHaveAttribute('content', /home-og/);
@@ -68,14 +72,24 @@ test.describe('SEO and Metadata Verification', () => {
         // Check schema.org JSON-LD has Article
         const schemas = await page.locator('script[type="application/ld+json"]').all();
         let foundArticle = false;
+        let parsedArticle: any = null;
         for (const schema of schemas) {
             const content = await schema.innerText();
             if (content.includes('"@type":"Article"') || content.includes('"@type": "Article"')) {
                 foundArticle = true;
+                try {
+                    parsedArticle = JSON.parse(content);
+                } catch {
+                    // Ignore parse error
+                }
                 break;
             }
         }
         expect(foundArticle).toBe(true);
+        expect(parsedArticle).not.toBeNull();
+        expect(parsedArticle.datePublished).toBeDefined();
+        expect(parsedArticle.dateModified).toBeDefined();
+        expect(new Date(parsedArticle.dateModified).getTime()).not.toBeNaN();
 
         const ogImage = page.locator('meta[property="og:image"]');
         await expect(ogImage).toHaveAttribute('content', /delta-v-lab/);
