@@ -64,7 +64,7 @@ Professional-grade here does **not** mean "pretty 3D rocket." It means a **verif
 <span class="text-[10px] tracking-wider text-slate-500">[ NASA-STD-7009 METHODOLOGY ]</span>
 </div>
 <div class="overflow-x-auto">
-<svg viewBox="0 0 820 480" width="100%" height="auto" class="font-mono text-xs min-w-[680px] select-none" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 820 480" width="100%" height="auto" class="font-mono text-xs min-w-170 select-none" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <linearGradient id="trust-grad" x1="0%" y1="100%" x2="0%" y2="0%">
 <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.1"/>
