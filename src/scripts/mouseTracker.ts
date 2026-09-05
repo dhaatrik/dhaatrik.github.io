@@ -16,35 +16,33 @@ let cachedMagnetData: {
 
 let layoutUpdateTimeout: ReturnType<typeof setTimeout> | null = null;
 
-// --- Spacetime Canvas Living Dot Matrix Engine ---
+// --- Fluid Waveform / Magnetic Flux Caustics (Liquid Ferrofluid) Engine ---
 let spacetimeCanvas: HTMLCanvasElement | null = null;
 let spacetimeCtx: CanvasRenderingContext2D | null = null;
 let spacetimeRafId: number | null = null;
 let themeObserver: MutationObserver | null = null;
 
-const CELL_SIZE = 32;
-let gridCols = 0;
-let gridRows = 0;
-let gridNodeCount = 0;
+const SIM_DOWNSCALE = 10;
+let simWidth = 0;
+let simHeight = 0;
+let simSize = 0;
 
-let baseX: Float32Array = new Float32Array(0);
-let baseY: Float32Array = new Float32Array(0);
-let currX: Float32Array = new Float32Array(0);
-let currY: Float32Array = new Float32Array(0);
-let vx: Float32Array = new Float32Array(0);
-let vy: Float32Array = new Float32Array(0);
+let waveCurrent: Float32Array = new Float32Array(0);
+let wavePrevious: Float32Array = new Float32Array(0);
+let waveNext: Float32Array = new Float32Array(0);
+
+let offscreenCanvas: HTMLCanvasElement | null = null;
+let offscreenCtx: CanvasRenderingContext2D | null = null;
+let offscreenImgData: ImageData | null = null;
 
 let canvasWidth = 0;
 let canvasHeight = 0;
 let isCanvasSleeping = false;
 let idleFrames = 0;
 
-const R_INFLUENCE = 180;
-const R_INFLUENCE_SQ = R_INFLUENCE * R_INFLUENCE;
-const SPRING_K = 0.075;
-const DAMPING = 0.86;
+const DAMPING = 0.974;
 
-const resizeSpacetimeGrid = () => {
+const resizeFluidCanvas = () => {
     if (!spacetimeCanvas || !spacetimeCtx) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -57,162 +55,228 @@ const resizeSpacetimeGrid = () => {
     spacetimeCanvas.style.height = `${canvasHeight}px`;
     spacetimeCtx.scale(dpr, dpr);
 
-    gridCols = Math.ceil(canvasWidth / CELL_SIZE) + 2;
-    gridRows = Math.ceil(canvasHeight / CELL_SIZE) + 2;
-    gridNodeCount = gridCols * gridRows;
+    simWidth = Math.max(32, Math.floor(canvasWidth / SIM_DOWNSCALE));
+    simHeight = Math.max(24, Math.floor(canvasHeight / SIM_DOWNSCALE));
+    simSize = simWidth * simHeight;
 
-    baseX = new Float32Array(gridNodeCount);
-    baseY = new Float32Array(gridNodeCount);
-    currX = new Float32Array(gridNodeCount);
-    currY = new Float32Array(gridNodeCount);
-    vx = new Float32Array(gridNodeCount);
-    vy = new Float32Array(gridNodeCount);
+    waveCurrent = new Float32Array(simSize);
+    wavePrevious = new Float32Array(simSize);
+    waveNext = new Float32Array(simSize);
 
-    for (let r = 0; r < gridRows; r++) {
-        for (let c = 0; c < gridCols; c++) {
-            const idx = r * gridCols + c;
-            const x = c * CELL_SIZE;
-            const y = r * CELL_SIZE;
-            baseX[idx] = x;
-            baseY[idx] = y;
-            currX[idx] = x;
-            currY[idx] = y;
-            vx[idx] = 0;
-            vy[idx] = 0;
-        }
+    offscreenCanvas = document.createElement('canvas');
+    offscreenCanvas.width = simWidth;
+    offscreenCanvas.height = simHeight;
+    offscreenCtx = offscreenCanvas.getContext('2d', { willReadFrequently: false });
+    if (offscreenCtx) {
+        offscreenImgData = offscreenCtx.createImageData(simWidth, simHeight);
     }
 
-    wakeSpacetimeGrid();
+    wakeFluidCanvas();
 };
 
-const renderSpacetimeGrid = () => {
-    if (!spacetimeCanvas || !spacetimeCtx) return;
+const injectFluidEnergy = (x: number, y: number, speed: number) => {
+    if (simWidth === 0 || simHeight === 0) return;
 
-    spacetimeCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    const gx = Math.round((x / canvasWidth) * simWidth);
+    const gy = Math.round((y / canvasHeight) * simHeight);
+
+    const radius = 3;
+    const impulse = Math.min(speed * 0.35 + 1.5, 12);
+
+    for (let dy = -radius; dy <= radius; dy++) {
+        const py = gy + dy;
+        if (py <= 1 || py >= simHeight - 2) continue;
+        const row = py * simWidth;
+        for (let dx = -radius; dx <= radius; dx++) {
+            const px = gx + dx;
+            if (px <= 1 || px >= simWidth - 2) continue;
+            const distSq = dx * dx + dy * dy;
+            if (distSq <= radius * radius) {
+                const falloff = 1 - Math.sqrt(distSq) / radius;
+                waveCurrent[row + px] += impulse * falloff * falloff;
+            }
+        }
+    }
+};
+
+const renderFluidCanvas = () => {
+    if (!spacetimeCanvas || !spacetimeCtx) return;
 
     const isDark = document.documentElement.classList.contains('dark');
 
-    // Gradually decay velocity impulse
+    // Gradually decay cursor speed vector
     mouseSpeedX *= 0.85;
     mouseSpeedY *= 0.85;
 
-    let totalMovement = 0;
+    let totalWaveEnergy = 0;
 
-    // Physics step: Gravitational well + Hooke's Law spring restoring forces
-    for (let i = 0; i < gridNodeCount; i++) {
-        const dx = currX[i] - mouseX;
-        const dy = currY[i] - mouseY;
-        const distSq = dx * dx + dy * dy;
+    // 2D wave propagation step
+    for (let y = 1; y < simHeight - 1; y++) {
+        const row = y * simWidth;
+        const rowAbove = (y - 1) * simWidth;
+        const rowBelow = (y + 1) * simWidth;
 
-        if (distSq < R_INFLUENCE_SQ) {
-            const dist = Math.sqrt(distSq);
-            const norm = 1 - dist / R_INFLUENCE;
-            // Gravitational pull toward cursor: quadratic falloff
-            const pull = norm * norm * 24;
-            const dirX = dist > 0.001 ? dx / dist : 0;
-            const dirY = dist > 0.001 ? dy / dist : 0;
+        for (let x = 1; x < simWidth - 1; x++) {
+            const idx = row + x;
+            let val =
+                (waveCurrent[idx - 1] +
+                    waveCurrent[idx + 1] +
+                    waveCurrent[rowAbove + x] +
+                    waveCurrent[rowBelow + x]) *
+                    0.5 -
+                wavePrevious[idx];
 
-            // Kinetic wake impulse along cursor velocity vector
-            const wake = norm * 0.28;
-            vx[i] += mouseSpeedX * wake - dirX * pull * 0.12;
-            vy[i] += mouseSpeedY * wake - dirY * pull * 0.12;
-        }
-
-        // Hooke's Law restoring force toward rest coordinate
-        const springX = (baseX[i] - currX[i]) * SPRING_K;
-        const springY = (baseY[i] - currY[i]) * SPRING_K;
-
-        vx[i] = (vx[i] + springX) * DAMPING;
-        vy[i] = (vy[i] + springY) * DAMPING;
-
-        currX[i] += vx[i];
-        currY[i] += vy[i];
-
-        totalMovement += Math.abs(vx[i]) + Math.abs(vy[i]);
-    }
-
-    // Pass 1: Batch render all ambient (undisturbed) dots across the page
-    spacetimeCtx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)';
-    spacetimeCtx.beginPath();
-    for (let i = 0; i < gridNodeCount; i++) {
-        const dx = currX[i] - mouseX;
-        const dy = currY[i] - mouseY;
-        const distSq = dx * dx + dy * dy;
-        const dispX = currX[i] - baseX[i];
-        const dispY = currY[i] - baseY[i];
-        const dispSq = dispX * dispX + dispY * dispY;
-
-        if (distSq >= R_INFLUENCE_SQ && dispSq < 0.2) {
-            spacetimeCtx.moveTo(currX[i] + 1, currY[i]);
-            spacetimeCtx.arc(currX[i], currY[i], 1, 0, Math.PI * 2);
+            val *= DAMPING;
+            waveNext[idx] = val;
+            totalWaveEnergy += Math.abs(val);
         }
     }
-    spacetimeCtx.fill();
 
-    // Pass 2: Render active, gravitationally warped and lensed dots
-    for (let i = 0; i < gridNodeCount; i++) {
-        const dx = currX[i] - mouseX;
-        const dy = currY[i] - mouseY;
-        const distSq = dx * dx + dy * dy;
-        const dispX = currX[i] - baseX[i];
-        const dispY = currY[i] - baseY[i];
-        const dispSq = dispX * dispX + dispY * dispY;
+    // Pointer swap buffers
+    const temp = wavePrevious;
+    wavePrevious = waveCurrent;
+    waveCurrent = waveNext;
+    waveNext = temp;
 
-        if (distSq < R_INFLUENCE_SQ || dispSq >= 0.2) {
-            let t = 0;
-            if (distSq < R_INFLUENCE_SQ) {
-                t = 1 - Math.sqrt(distSq) / R_INFLUENCE;
-            } else {
-                t = Math.min(1, Math.sqrt(dispSq) / 10);
+    // Render caustics into offscreen ImageData
+    if (offscreenImgData && offscreenCtx) {
+        const data = offscreenImgData.data;
+        let ptr = 0;
+
+        for (let y = 0; y < simHeight; y++) {
+            const row = y * simWidth;
+            const rowAbove = (y > 0 ? y - 1 : 0) * simWidth;
+            const rowBelow = (y < simHeight - 1 ? y + 1 : simHeight - 1) * simWidth;
+
+            for (let x = 0; x < simWidth; x++) {
+                const idx = row + x;
+                const left = x > 0 ? idx - 1 : idx;
+                const right = x < simWidth - 1 ? idx + 1 : idx;
+
+                const gx = waveCurrent[right] - waveCurrent[left];
+                const gy = waveCurrent[rowBelow + x] - waveCurrent[rowAbove + x];
+                const height = waveCurrent[idx];
+
+                const grad = Math.sqrt(gx * gx + gy * gy);
+                const caustic = Math.min(1, grad * 0.42 + Math.max(0, height) * 0.1);
+
+                if (caustic > 0.015) {
+                    if (isDark) {
+                        // Liquid ferrofluid caustics: sapphire into luminous cyan and bright crests
+                        const t = Math.min(1, caustic * 1.5);
+                        const r = Math.round(25 + t * 200);
+                        const g = Math.round(110 + t * 115);
+                        const b = Math.round(235 + t * 20);
+                        const alpha = Math.round(Math.min(210, caustic * 240));
+
+                        data[ptr] = r;
+                        data[ptr + 1] = g;
+                        data[ptr + 2] = b;
+                        data[ptr + 3] = alpha;
+                    } else {
+                        // Light mode crystalline water caustics
+                        const t = Math.min(1, caustic * 1.4);
+                        const r = Math.round(20 + t * 20);
+                        const g = Math.round(60 + t * 40);
+                        const b = Math.round(140 + t * 90);
+                        const alpha = Math.round(Math.min(160, caustic * 180));
+
+                        data[ptr] = r;
+                        data[ptr + 1] = g;
+                        data[ptr + 2] = b;
+                        data[ptr + 3] = alpha;
+                    }
+                } else {
+                    data[ptr + 3] = 0;
+                }
+                ptr += 4;
             }
+        }
 
-            // Radius scales dynamically with gravitational proximity & kinetic displacement
-            const radius = 1 + t * 1.5;
+        offscreenCtx.putImageData(offscreenImgData, 0, 0);
+    }
+
+    // Clear main canvas and draw hardware-upscaled bilinear caustics
+    spacetimeCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    if (offscreenCanvas) {
+        spacetimeCtx.imageSmoothingEnabled = true;
+        spacetimeCtx.imageSmoothingQuality = 'high';
+        spacetimeCtx.drawImage(offscreenCanvas, 0, 0, canvasWidth, canvasHeight);
+    }
+
+    // Draw magnetic flux caustic contour rings around cursor during motion
+    if (
+        mouseX >= 0 &&
+        mouseY >= 0 &&
+        (Math.abs(mouseSpeedX) > 0.1 || Math.abs(mouseSpeedY) > 0.1)
+    ) {
+        const rings = [28, 56, 84, 115];
+        spacetimeCtx.save();
+        spacetimeCtx.lineWidth = 1.2;
+
+        for (let k = 0; k < rings.length; k++) {
+            const baseRadius = rings[k];
+            const ringAlpha = Math.max(0, (1 - baseRadius / 140) * 0.38);
+            spacetimeCtx.strokeStyle = isDark
+                ? `rgba(34, 211, 238, ${ringAlpha.toFixed(3)})`
+                : `rgba(37, 99, 235, ${(ringAlpha * 0.8).toFixed(3)})`;
+
             spacetimeCtx.beginPath();
-            spacetimeCtx.arc(currX[i], currY[i], radius, 0, Math.PI * 2);
+            const steps = 36;
+            for (let s = 0; s <= steps; s++) {
+                const theta = (s / steps) * Math.PI * 2;
+                const sx = mouseX + Math.cos(theta) * baseRadius;
+                const sy = mouseY + Math.sin(theta) * baseRadius;
 
-            if (isDark) {
-                // Dynamic bloom: ambient white (0.12) up to radiant cyan-white (0.85)
-                const alpha = Math.min(0.9, 0.12 + t * 0.75);
-                spacetimeCtx.fillStyle = `rgba(220, 248, 255, ${alpha.toFixed(3)})`;
-            } else {
-                // Dynamic bloom in light mode: ambient slate (0.12) up to vibrant indigo (0.75)
-                const alpha = Math.min(0.85, 0.12 + t * 0.65);
-                spacetimeCtx.fillStyle = `rgba(37, 99, 235, ${alpha.toFixed(3)})`;
-            }
-            spacetimeCtx.fill();
+                const gx = Math.max(
+                    0,
+                    Math.min(simWidth - 1, Math.round((sx / canvasWidth) * simWidth))
+                );
+                const gy = Math.max(
+                    0,
+                    Math.min(simHeight - 1, Math.round((sy / canvasHeight) * simHeight))
+                );
+                const waveDistort = waveCurrent[gy * simWidth + gx] || 0;
 
-            // Radiant celestial core for high proximity in dark mode
-            if (isDark && t > 0.65) {
-                spacetimeCtx.beginPath();
-                spacetimeCtx.arc(currX[i], currY[i], radius * 0.5, 0, Math.PI * 2);
-                spacetimeCtx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-                spacetimeCtx.fill();
+                const rad = baseRadius + waveDistort * 2.8;
+                const px = mouseX + Math.cos(theta) * rad;
+                const py = mouseY + Math.sin(theta) * rad;
+
+                if (s === 0) {
+                    spacetimeCtx.moveTo(px, py);
+                } else {
+                    spacetimeCtx.lineTo(px, py);
+                }
             }
+            spacetimeCtx.closePath();
+            spacetimeCtx.stroke();
         }
+        spacetimeCtx.restore();
     }
 
-    // Auto-sleep system: conserve CPU/battery when the grid has settled and mouse is still
-    if (totalMovement < 0.04 && Math.abs(mouseSpeedX) < 0.01 && Math.abs(mouseSpeedY) < 0.01) {
+    // Auto-sleep system: conserve CPU/battery when fluid settles
+    if (totalWaveEnergy < 0.15 && Math.abs(mouseSpeedX) < 0.01 && Math.abs(mouseSpeedY) < 0.01) {
         idleFrames++;
-        if (idleFrames > 30) {
+        if (idleFrames > 35) {
             isCanvasSleeping = true;
             spacetimeRafId = null;
+            spacetimeCtx.clearRect(0, 0, canvasWidth, canvasHeight);
             return;
         }
     } else {
         idleFrames = 0;
     }
 
-    spacetimeRafId = requestAnimationFrame(renderSpacetimeGrid);
+    spacetimeRafId = requestAnimationFrame(renderFluidCanvas);
 };
 
-const wakeSpacetimeGrid = () => {
+const wakeFluidCanvas = () => {
     if (isCanvasSleeping || !spacetimeRafId) {
         isCanvasSleeping = false;
         idleFrames = 0;
         if (!spacetimeRafId) {
-            spacetimeRafId = requestAnimationFrame(renderSpacetimeGrid);
+            spacetimeRafId = requestAnimationFrame(renderFluidCanvas);
         }
     }
 };
@@ -222,7 +286,7 @@ const onMouseLeave = () => {
     mouseY = -1000;
     mouseSpeedX = 0;
     mouseSpeedY = 0;
-    wakeSpacetimeGrid();
+    wakeFluidCanvas();
 };
 
 // --- Magnetic Targets Engine ---
@@ -294,7 +358,9 @@ const onMouseMove = (e: MouseEvent) => {
     mouseX = newX;
     mouseY = newY;
 
-    wakeSpacetimeGrid();
+    const speed = Math.hypot(mouseSpeedX, mouseSpeedY);
+    wakeFluidCanvas();
+    injectFluidEnergy(newX, newY, speed);
 
     if (!magneticRafId && cachedMagnetData.length > 0) {
         magneticRafId = requestAnimationFrame(updateMagneticTargets);
@@ -305,7 +371,7 @@ const handleScrollOrResize = () => {
     if (layoutUpdateTimeout) clearTimeout(layoutUpdateTimeout);
     layoutUpdateTimeout = setTimeout(() => {
         cacheMagnetLayouts();
-        resizeSpacetimeGrid();
+        resizeFluidCanvas();
     }, 150);
 };
 
@@ -326,11 +392,11 @@ const initMouseTracker = () => {
     ) as HTMLElement[];
 
     cacheMagnetLayouts();
-    resizeSpacetimeGrid();
+    resizeFluidCanvas();
 
     if (!themeObserver) {
         themeObserver = new MutationObserver(() => {
-            wakeSpacetimeGrid();
+            wakeFluidCanvas();
         });
         themeObserver.observe(document.documentElement, {
             attributes: true,
@@ -474,6 +540,9 @@ const destroyMouseTracker = () => {
 
     spacetimeCanvas = null;
     spacetimeCtx = null;
+    offscreenCanvas = null;
+    offscreenCtx = null;
+    offscreenImgData = null;
     magneticTargets = [];
     cachedMagnetData = [];
 };
