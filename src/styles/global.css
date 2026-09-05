@@ -631,19 +631,27 @@
 
 /* Premium UI Refresh Additions */
 
-/* Interactive Gravitational Spacetime Blueprint Grid Canvas */
-#spacetime-grid {
+/* Flashlight Spotlight Background */
+#flashlight-bg {
     position: fixed;
     inset: 0;
-    width: 100vw;
-    height: 100vh;
     pointer-events: none;
     z-index: 0;
-    contain: strict;
+    opacity: 1;
+    background: radial-gradient(
+        400px circle at var(--bg-mouse-x, 50%) var(--bg-mouse-y, 50%),
+        rgba(59, 130, 246, 0.06),
+        transparent 80%
+    );
+    transition: opacity 0.5s ease;
 }
 
-#flashlight-bg {
-    display: none;
+.dark #flashlight-bg {
+    background: radial-gradient(
+        400px circle at var(--bg-mouse-x, 50%) var(--bg-mouse-y, 50%),
+        rgba(59, 130, 246, 0.15),
+        transparent 80%
+    );
 }
 
 /* 3D Tilt Setup */
@@ -1383,8 +1391,7 @@ html.theme-transition::view-transition-old(root) {
         transform: none !important;
     }
 
-    #flashlight-bg,
-    #spacetime-grid {
+    #flashlight-bg {
         display: none !important;
     }
 

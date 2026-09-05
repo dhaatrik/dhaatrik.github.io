@@ -311,12 +311,11 @@ test.describe('Portfolio UI Interactivity', () => {
         }).toPass({ timeout: 6000 });
     });
 
-    test('Spacetime Grid canvas should be mounted and initialized in the DOM', async ({ page }) => {
+    test('Flashlight glowing cursor background should be mounted in the DOM', async ({ page }) => {
         await page.goto('/');
         await page.waitForLoadState('domcontentloaded');
 
-        const canvas = page.locator('#spacetime-grid');
-        await expect(canvas).toBeAttached();
-        await expect(canvas).toHaveAttribute('aria-hidden', 'true');
+        const flashlight = page.locator('#flashlight-bg');
+        await expect(flashlight).toBeAttached();
     });
 });
