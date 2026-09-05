@@ -31,6 +31,30 @@ test.describe('SEO and Metadata Verification', () => {
             }
         }
         expect(foundPerson).toBe(true);
+
+        const ogImage = page.locator('meta[property="og:image"]');
+        await expect(ogImage).toHaveAttribute('content', /home-og/);
+    });
+
+    test('top-level hub routes should serve unique custom OpenGraph and Twitter images', async ({
+        page,
+    }) => {
+        const hubs = [
+            { path: '/', pattern: /home-og/ },
+            { path: '/personnel/', pattern: /personnel-og/ },
+            { path: '/projects/', pattern: /projects-og/ },
+            { path: '/pedagogy/', pattern: /pedagogy-transmissions/ },
+            { path: '/transmissions/', pattern: /transmissions-og/ },
+        ];
+
+        for (const hub of hubs) {
+            await page.goto(hub.path);
+            await page.waitForLoadState('domcontentloaded');
+            const ogImage = page.locator('meta[property="og:image"]');
+            await expect(ogImage).toHaveAttribute('content', hub.pattern);
+            const twitterImage = page.locator('meta[name="twitter:image"]');
+            await expect(twitterImage).toHaveAttribute('content', hub.pattern);
+        }
     });
 
     test('blog post page should contain article schema and open graph tags', async ({ page }) => {

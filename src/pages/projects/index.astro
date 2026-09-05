@@ -5,6 +5,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import { SITE_TITLE } from '../../consts';
+import projectsOgImage from '../../assets/og/projects-og.jpg';
 
 type ProjectEntry = CollectionEntry<'projects'>;
 
@@ -55,6 +56,7 @@ const breadcrumbSchema = JSON.stringify({
         <BaseHead
             title={`Projects | ${SITE_TITLE}`}
             description="My project workbench — things I've shipped, shelved, or am still patching at 2 AM."
+            image={projectsOgImage}
         />
         <script is:inline type="application/ld+json" set:html={jsonLd} />
         <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />

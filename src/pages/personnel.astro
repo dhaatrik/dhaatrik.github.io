@@ -8,6 +8,7 @@ import { SITE_TITLE, SOCIAL_LINKS } from '../consts';
 import katex from 'katex';
 import { Picture } from 'astro:assets';
 import meImage from '../assets/me.jpeg';
+import personnelOgImage from '../assets/og/personnel-og.jpg';
 
 import { techGroups } from '../data/techStack';
 
@@ -43,6 +44,7 @@ const breadcrumbSchema = JSON.stringify({
         <BaseHead
             title={`About | ${SITE_TITLE}`}
             description="Mission dossier — who I am, what I'm building, what broke along the way, and the stack I actually use."
+            image={personnelOgImage}
         />
         <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
         <KatexStyles />

@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_VERSION } from '../consts';
+import homeOgImage from '../assets/og/home-og.jpg';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { techGroups, type TechIcon } from '../data/techStack';
 import { getReadingTime } from '../utils/readingTime';
@@ -104,6 +105,7 @@ const webSiteSchema = JSON.stringify({
         <BaseHead
             title={SITE_TITLE}
             description={SITE_DESCRIPTION}
+            image={homeOgImage}
             keywords={[
                 'Dhaatrik Chowdhury',
                 'AI Engineer',

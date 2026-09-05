@@ -6,6 +6,7 @@ import { SITE_TITLE } from '../consts';
 import { youtubeVideos } from '../data/videos';
 import { Picture } from 'astro:assets';
 import dbImage from '../assets/DB.jpeg';
+import pedagogyOgImage from '../assets/og/pedagogy-transmissions.jpg';
 
 // Pre-render a math symbol or formula using KaTeX if desired, or use standard text
 // Since we want this to load fast, we can render normal HTML and styled math
@@ -32,6 +33,7 @@ const breadcrumbSchema = JSON.stringify({
         <BaseHead
             title={`Pedagogy | ${SITE_TITLE}`}
             description="Nine years of teaching experiments — bus wheels, kitchen demos, DBS Classes, and what I learned when I stopped."
+            image={pedagogyOgImage}
         />
         <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
     </head>
