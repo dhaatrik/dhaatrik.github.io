@@ -16,12 +16,13 @@ let cachedMagnetData: {
 
 let layoutUpdateTimeout: ReturnType<typeof setTimeout> | null = null;
 
-// --- Spacetime Canvas Grid Engine ---
+// --- Spacetime Canvas Living Dot Matrix Engine ---
 let spacetimeCanvas: HTMLCanvasElement | null = null;
 let spacetimeCtx: CanvasRenderingContext2D | null = null;
 let spacetimeRafId: number | null = null;
+let themeObserver: MutationObserver | null = null;
 
-const CELL_SIZE = 38;
+const CELL_SIZE = 32;
 let gridCols = 0;
 let gridRows = 0;
 let gridNodeCount = 0;
@@ -38,9 +39,9 @@ let canvasHeight = 0;
 let isCanvasSleeping = false;
 let idleFrames = 0;
 
-const R_INFLUENCE = 190;
+const R_INFLUENCE = 180;
 const R_INFLUENCE_SQ = R_INFLUENCE * R_INFLUENCE;
-const SPRING_K = 0.08;
+const SPRING_K = 0.075;
 const DAMPING = 0.86;
 
 const resizeSpacetimeGrid = () => {
@@ -70,8 +71,8 @@ const resizeSpacetimeGrid = () => {
     for (let r = 0; r < gridRows; r++) {
         for (let c = 0; c < gridCols; c++) {
             const idx = r * gridCols + c;
-            const x = c * CELL_SIZE - CELL_SIZE / 2;
-            const y = r * CELL_SIZE - CELL_SIZE / 2;
+            const x = c * CELL_SIZE;
+            const y = r * CELL_SIZE;
             baseX[idx] = x;
             baseY[idx] = y;
             currX[idx] = x;
@@ -97,7 +98,7 @@ const renderSpacetimeGrid = () => {
 
     let totalMovement = 0;
 
-    // Physics step
+    // Physics step: Gravitational well + Hooke's Law spring restoring forces
     for (let i = 0; i < gridNodeCount; i++) {
         const dx = currX[i] - mouseX;
         const dy = currY[i] - mouseY;
@@ -106,18 +107,18 @@ const renderSpacetimeGrid = () => {
         if (distSq < R_INFLUENCE_SQ) {
             const dist = Math.sqrt(distSq);
             const norm = 1 - dist / R_INFLUENCE;
-            // Gravitational pull toward cursor
-            const pull = norm * norm * 26;
+            // Gravitational pull toward cursor: quadratic falloff
+            const pull = norm * norm * 24;
             const dirX = dist > 0.001 ? dx / dist : 0;
             const dirY = dist > 0.001 ? dy / dist : 0;
 
-            // Kinetic wake impulse from cursor velocity
-            const wake = norm * 0.26;
-            vx[i] += mouseSpeedX * wake - dirX * pull * 0.14;
-            vy[i] += mouseSpeedY * wake - dirY * pull * 0.14;
+            // Kinetic wake impulse along cursor velocity vector
+            const wake = norm * 0.28;
+            vx[i] += mouseSpeedX * wake - dirX * pull * 0.12;
+            vy[i] += mouseSpeedY * wake - dirY * pull * 0.12;
         }
 
-        // Hooke's Law spring restoring force
+        // Hooke's Law restoring force toward rest coordinate
         const springX = (baseX[i] - currX[i]) * SPRING_K;
         const springY = (baseY[i] - currY[i]) * SPRING_K;
 
@@ -130,44 +131,62 @@ const renderSpacetimeGrid = () => {
         totalMovement += Math.abs(vx[i]) + Math.abs(vy[i]);
     }
 
-    // Draw horizontal grid lines
+    // Pass 1: Batch render all ambient (undisturbed) dots across the page
+    spacetimeCtx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)';
     spacetimeCtx.beginPath();
-    for (let r = 0; r < gridRows; r++) {
-        const offset = r * gridCols;
-        spacetimeCtx.moveTo(currX[offset], currY[offset]);
-        for (let c = 1; c < gridCols; c++) {
-            spacetimeCtx.lineTo(currX[offset + c], currY[offset + c]);
+    for (let i = 0; i < gridNodeCount; i++) {
+        const dx = currX[i] - mouseX;
+        const dy = currY[i] - mouseY;
+        const distSq = dx * dx + dy * dy;
+        const dispX = currX[i] - baseX[i];
+        const dispY = currY[i] - baseY[i];
+        const dispSq = dispX * dispX + dispY * dispY;
+
+        if (distSq >= R_INFLUENCE_SQ && dispSq < 0.2) {
+            spacetimeCtx.moveTo(currX[i] + 1, currY[i]);
+            spacetimeCtx.arc(currX[i], currY[i], 1, 0, Math.PI * 2);
         }
     }
-    // Draw vertical grid lines
-    for (let c = 0; c < gridCols; c++) {
-        spacetimeCtx.moveTo(currX[c], currY[c]);
-        for (let r = 1; r < gridRows; r++) {
-            spacetimeCtx.lineTo(currX[r * gridCols + c], currY[r * gridCols + c]);
-        }
-    }
-    spacetimeCtx.strokeStyle = isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgba(30, 41, 59, 0.09)';
-    spacetimeCtx.lineWidth = 1;
-    spacetimeCtx.stroke();
+    spacetimeCtx.fill();
 
-    // Draw localized telemetry nodes near cursor
-    spacetimeCtx.fillStyle = isDark ? 'rgba(34, 211, 238, 0.55)' : 'rgba(37, 99, 235, 0.4)';
-    const minCol = Math.max(0, Math.floor((mouseX - R_INFLUENCE) / CELL_SIZE));
-    const maxCol = Math.min(gridCols - 1, Math.ceil((mouseX + R_INFLUENCE) / CELL_SIZE));
-    const minRow = Math.max(0, Math.floor((mouseY - R_INFLUENCE) / CELL_SIZE));
-    const maxRow = Math.min(gridRows - 1, Math.ceil((mouseY + R_INFLUENCE) / CELL_SIZE));
+    // Pass 2: Render active, gravitationally warped and lensed dots
+    for (let i = 0; i < gridNodeCount; i++) {
+        const dx = currX[i] - mouseX;
+        const dy = currY[i] - mouseY;
+        const distSq = dx * dx + dy * dy;
+        const dispX = currX[i] - baseX[i];
+        const dispY = currY[i] - baseY[i];
+        const dispSq = dispX * dispX + dispY * dispY;
 
-    for (let r = minRow; r <= maxRow; r++) {
-        for (let c = minCol; c <= maxCol; c++) {
-            const idx = r * gridCols + c;
-            const dx = currX[idx] - mouseX;
-            const dy = currY[idx] - mouseY;
-            const distSq = dx * dx + dy * dy;
+        if (distSq < R_INFLUENCE_SQ || dispSq >= 0.2) {
+            let t = 0;
             if (distSq < R_INFLUENCE_SQ) {
-                const dist = Math.sqrt(distSq);
-                const radius = (1 - dist / R_INFLUENCE) * 2.2 + 0.6;
+                t = 1 - Math.sqrt(distSq) / R_INFLUENCE;
+            } else {
+                t = Math.min(1, Math.sqrt(dispSq) / 10);
+            }
+
+            // Radius scales dynamically with gravitational proximity & kinetic displacement
+            const radius = 1 + t * 1.5;
+            spacetimeCtx.beginPath();
+            spacetimeCtx.arc(currX[i], currY[i], radius, 0, Math.PI * 2);
+
+            if (isDark) {
+                // Dynamic bloom: ambient white (0.12) up to radiant cyan-white (0.85)
+                const alpha = Math.min(0.9, 0.12 + t * 0.75);
+                spacetimeCtx.fillStyle = `rgba(220, 248, 255, ${alpha.toFixed(3)})`;
+            } else {
+                // Dynamic bloom in light mode: ambient slate (0.12) up to vibrant indigo (0.75)
+                const alpha = Math.min(0.85, 0.12 + t * 0.65);
+                spacetimeCtx.fillStyle = `rgba(37, 99, 235, ${alpha.toFixed(3)})`;
+            }
+            spacetimeCtx.fill();
+
+            // Radiant celestial core for high proximity in dark mode
+            if (isDark && t > 0.65) {
                 spacetimeCtx.beginPath();
-                spacetimeCtx.arc(currX[idx], currY[idx], radius, 0, Math.PI * 2);
+                spacetimeCtx.arc(currX[i], currY[i], radius * 0.5, 0, Math.PI * 2);
+                spacetimeCtx.fillStyle = 'rgba(255, 255, 255, 0.95)';
                 spacetimeCtx.fill();
             }
         }
@@ -196,6 +215,14 @@ const wakeSpacetimeGrid = () => {
             spacetimeRafId = requestAnimationFrame(renderSpacetimeGrid);
         }
     }
+};
+
+const onMouseLeave = () => {
+    mouseX = -1000;
+    mouseY = -1000;
+    mouseSpeedX = 0;
+    mouseSpeedY = 0;
+    wakeSpacetimeGrid();
 };
 
 // --- Magnetic Targets Engine ---
@@ -301,11 +328,23 @@ const initMouseTracker = () => {
     cacheMagnetLayouts();
     resizeSpacetimeGrid();
 
+    if (!themeObserver) {
+        themeObserver = new MutationObserver(() => {
+            wakeSpacetimeGrid();
+        });
+        themeObserver.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class'],
+        });
+    }
+
     document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseleave', onMouseLeave);
     window.removeEventListener('scroll', handleScrollOrResize);
     window.removeEventListener('resize', handleScrollOrResize);
 
     document.addEventListener('mousemove', onMouseMove, { passive: true });
+    document.addEventListener('mouseleave', onMouseLeave, { passive: true });
     window.addEventListener('scroll', handleScrollOrResize, { passive: true });
     window.addEventListener('resize', handleScrollOrResize, { passive: true });
 
@@ -410,9 +449,15 @@ const runMouseTracker = () => {
 
 const destroyMouseTracker = () => {
     document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseleave', onMouseLeave);
     window.removeEventListener('pageshow', handlePageShow);
     window.removeEventListener('scroll', handleScrollOrResize);
     window.removeEventListener('resize', handleScrollOrResize);
+
+    if (themeObserver) {
+        themeObserver.disconnect();
+        themeObserver = null;
+    }
 
     if (layoutUpdateTimeout) {
         clearTimeout(layoutUpdateTimeout);

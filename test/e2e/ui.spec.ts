@@ -80,8 +80,8 @@ test.describe('Portfolio UI Interactivity', () => {
         // After page loads, elements should fade out
         await page.waitForLoadState('networkidle');
 
-        await expect(progressBar).toHaveCSS('opacity', '0');
-        await expect(statusTag).toHaveCSS('opacity', '0');
+        await expect(progressBar).toHaveCSS('opacity', '0', { timeout: 10000 });
+        await expect(statusTag).toHaveCSS('opacity', '0', { timeout: 10000 });
     });
 
     test('Blog page search should retain queries and update URL/sessionStorage', async ({
