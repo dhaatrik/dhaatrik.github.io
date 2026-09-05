@@ -1,19 +1,14 @@
-// Global mouse spotlight, flashlight background tracking, and 3D Bento Card Parallax Tilt
+// Global Gravitational Spacetime Warp Canvas, Magnetic Buttons, and Zero-Lag 3D Card Tilt
 // Gated behind media query to run ONLY on devices with hover capabilities (non-touch/desktop)
 
-let spotlightRafId: number | null = null;
-let mouseX = 0;
-let mouseY = 0;
-let cardsCollection: HTMLCollectionOf<Element> | null = null;
-let flashlightBg: HTMLElement | null = null;
+let mouseX = -1000;
+let mouseY = -1000;
+let mouseSpeedX = 0;
+let mouseSpeedY = 0;
+let magneticRafId: number | null = null;
 let magneticTargets: HTMLElement[] = [];
 
-// Cache layout rects to prevent layout thrashing on mousemove
-let cachedCardsData: {
-    card: HTMLElement;
-    rect: { left: number; top: number; width: number; height: number };
-}[] = [];
-
+// Cache magnetic button rects to prevent layout thrashing
 let cachedMagnetData: {
     el: HTMLElement;
     rect: { left: number; top: number; width: number; height: number };
@@ -21,33 +16,202 @@ let cachedMagnetData: {
 
 let layoutUpdateTimeout: ReturnType<typeof setTimeout> | null = null;
 
-const cacheLayouts = () => {
-    cachedCardsData = [];
-    if (cardsCollection) {
-        for (let i = 0; i < cardsCollection.length; i++) {
-            const card = cardsCollection[i] as HTMLElement;
-            const rect = card.getBoundingClientRect();
-            cachedCardsData.push({
-                card,
-                rect: {
-                    left: rect.left + window.scrollX,
-                    top: rect.top + window.scrollY,
-                    width: rect.width,
-                    height: rect.height,
-                },
-            });
+// --- Spacetime Canvas Grid Engine ---
+let spacetimeCanvas: HTMLCanvasElement | null = null;
+let spacetimeCtx: CanvasRenderingContext2D | null = null;
+let spacetimeRafId: number | null = null;
+
+const CELL_SIZE = 38;
+let gridCols = 0;
+let gridRows = 0;
+let gridNodeCount = 0;
+
+let baseX: Float32Array = new Float32Array(0);
+let baseY: Float32Array = new Float32Array(0);
+let currX: Float32Array = new Float32Array(0);
+let currY: Float32Array = new Float32Array(0);
+let vx: Float32Array = new Float32Array(0);
+let vy: Float32Array = new Float32Array(0);
+
+let canvasWidth = 0;
+let canvasHeight = 0;
+let isCanvasSleeping = false;
+let idleFrames = 0;
+
+const R_INFLUENCE = 190;
+const R_INFLUENCE_SQ = R_INFLUENCE * R_INFLUENCE;
+const SPRING_K = 0.08;
+const DAMPING = 0.86;
+
+const resizeSpacetimeGrid = () => {
+    if (!spacetimeCanvas || !spacetimeCtx) return;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvasWidth = window.innerWidth;
+    canvasHeight = window.innerHeight;
+
+    spacetimeCanvas.width = Math.floor(canvasWidth * dpr);
+    spacetimeCanvas.height = Math.floor(canvasHeight * dpr);
+    spacetimeCanvas.style.width = `${canvasWidth}px`;
+    spacetimeCanvas.style.height = `${canvasHeight}px`;
+    spacetimeCtx.scale(dpr, dpr);
+
+    gridCols = Math.ceil(canvasWidth / CELL_SIZE) + 2;
+    gridRows = Math.ceil(canvasHeight / CELL_SIZE) + 2;
+    gridNodeCount = gridCols * gridRows;
+
+    baseX = new Float32Array(gridNodeCount);
+    baseY = new Float32Array(gridNodeCount);
+    currX = new Float32Array(gridNodeCount);
+    currY = new Float32Array(gridNodeCount);
+    vx = new Float32Array(gridNodeCount);
+    vy = new Float32Array(gridNodeCount);
+
+    for (let r = 0; r < gridRows; r++) {
+        for (let c = 0; c < gridCols; c++) {
+            const idx = r * gridCols + c;
+            const x = c * CELL_SIZE - CELL_SIZE / 2;
+            const y = r * CELL_SIZE - CELL_SIZE / 2;
+            baseX[idx] = x;
+            baseY[idx] = y;
+            currX[idx] = x;
+            currY[idx] = y;
+            vx[idx] = 0;
+            vy[idx] = 0;
         }
     }
 
+    wakeSpacetimeGrid();
+};
+
+const renderSpacetimeGrid = () => {
+    if (!spacetimeCanvas || !spacetimeCtx) return;
+
+    spacetimeCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    const isDark = document.documentElement.classList.contains('dark');
+
+    // Gradually decay velocity impulse
+    mouseSpeedX *= 0.85;
+    mouseSpeedY *= 0.85;
+
+    let totalMovement = 0;
+
+    // Physics step
+    for (let i = 0; i < gridNodeCount; i++) {
+        const dx = currX[i] - mouseX;
+        const dy = currY[i] - mouseY;
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq < R_INFLUENCE_SQ) {
+            const dist = Math.sqrt(distSq);
+            const norm = 1 - dist / R_INFLUENCE;
+            // Gravitational pull toward cursor
+            const pull = norm * norm * 26;
+            const dirX = dist > 0.001 ? dx / dist : 0;
+            const dirY = dist > 0.001 ? dy / dist : 0;
+
+            // Kinetic wake impulse from cursor velocity
+            const wake = norm * 0.26;
+            vx[i] += mouseSpeedX * wake - dirX * pull * 0.14;
+            vy[i] += mouseSpeedY * wake - dirY * pull * 0.14;
+        }
+
+        // Hooke's Law spring restoring force
+        const springX = (baseX[i] - currX[i]) * SPRING_K;
+        const springY = (baseY[i] - currY[i]) * SPRING_K;
+
+        vx[i] = (vx[i] + springX) * DAMPING;
+        vy[i] = (vy[i] + springY) * DAMPING;
+
+        currX[i] += vx[i];
+        currY[i] += vy[i];
+
+        totalMovement += Math.abs(vx[i]) + Math.abs(vy[i]);
+    }
+
+    // Draw horizontal grid lines
+    spacetimeCtx.beginPath();
+    for (let r = 0; r < gridRows; r++) {
+        const offset = r * gridCols;
+        spacetimeCtx.moveTo(currX[offset], currY[offset]);
+        for (let c = 1; c < gridCols; c++) {
+            spacetimeCtx.lineTo(currX[offset + c], currY[offset + c]);
+        }
+    }
+    // Draw vertical grid lines
+    for (let c = 0; c < gridCols; c++) {
+        spacetimeCtx.moveTo(currX[c], currY[c]);
+        for (let r = 1; r < gridRows; r++) {
+            spacetimeCtx.lineTo(currX[r * gridCols + c], currY[r * gridCols + c]);
+        }
+    }
+    spacetimeCtx.strokeStyle = isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgba(30, 41, 59, 0.09)';
+    spacetimeCtx.lineWidth = 1;
+    spacetimeCtx.stroke();
+
+    // Draw localized telemetry nodes near cursor
+    spacetimeCtx.fillStyle = isDark ? 'rgba(34, 211, 238, 0.55)' : 'rgba(37, 99, 235, 0.4)';
+    const minCol = Math.max(0, Math.floor((mouseX - R_INFLUENCE) / CELL_SIZE));
+    const maxCol = Math.min(gridCols - 1, Math.ceil((mouseX + R_INFLUENCE) / CELL_SIZE));
+    const minRow = Math.max(0, Math.floor((mouseY - R_INFLUENCE) / CELL_SIZE));
+    const maxRow = Math.min(gridRows - 1, Math.ceil((mouseY + R_INFLUENCE) / CELL_SIZE));
+
+    for (let r = minRow; r <= maxRow; r++) {
+        for (let c = minCol; c <= maxCol; c++) {
+            const idx = r * gridCols + c;
+            const dx = currX[idx] - mouseX;
+            const dy = currY[idx] - mouseY;
+            const distSq = dx * dx + dy * dy;
+            if (distSq < R_INFLUENCE_SQ) {
+                const dist = Math.sqrt(distSq);
+                const radius = (1 - dist / R_INFLUENCE) * 2.2 + 0.6;
+                spacetimeCtx.beginPath();
+                spacetimeCtx.arc(currX[idx], currY[idx], radius, 0, Math.PI * 2);
+                spacetimeCtx.fill();
+            }
+        }
+    }
+
+    // Auto-sleep system: conserve CPU/battery when the grid has settled and mouse is still
+    if (totalMovement < 0.04 && Math.abs(mouseSpeedX) < 0.01 && Math.abs(mouseSpeedY) < 0.01) {
+        idleFrames++;
+        if (idleFrames > 30) {
+            isCanvasSleeping = true;
+            spacetimeRafId = null;
+            return;
+        }
+    } else {
+        idleFrames = 0;
+    }
+
+    spacetimeRafId = requestAnimationFrame(renderSpacetimeGrid);
+};
+
+const wakeSpacetimeGrid = () => {
+    if (isCanvasSleeping || !spacetimeRafId) {
+        isCanvasSleeping = false;
+        idleFrames = 0;
+        if (!spacetimeRafId) {
+            spacetimeRafId = requestAnimationFrame(renderSpacetimeGrid);
+        }
+    }
+};
+
+// --- Magnetic Targets Engine ---
+const cacheMagnetLayouts = () => {
     cachedMagnetData = [];
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
     for (let i = 0; i < magneticTargets.length; i++) {
         const el = magneticTargets[i];
         const rect = el.getBoundingClientRect();
         cachedMagnetData.push({
             el,
             rect: {
-                left: rect.left + window.scrollX,
-                top: rect.top + window.scrollY,
+                left: rect.left + scrollX,
+                top: rect.top + scrollY,
                 width: rect.width,
                 height: rect.height,
             },
@@ -55,24 +219,9 @@ const cacheLayouts = () => {
     }
 };
 
-const updateSpotlights = () => {
+const updateMagneticTargets = () => {
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
-
-    cachedCardsData.forEach(({ card, rect }) => {
-        const currentRectLeft = rect.left - scrollX;
-        const currentRectTop = rect.top - scrollY;
-
-        const x = mouseX - currentRectLeft;
-        const y = mouseY - currentRectTop;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-    });
-
-    if (flashlightBg) {
-        flashlightBg.style.setProperty('--bg-mouse-x', `${mouseX}px`);
-        flashlightBg.style.setProperty('--bg-mouse-y', `${mouseY}px`);
-    }
 
     cachedMagnetData.forEach(({ el, rect }) => {
         const currentRectLeft = rect.left - scrollX;
@@ -107,42 +256,50 @@ const updateSpotlights = () => {
         }
     });
 
-    spotlightRafId = null;
+    magneticRafId = null;
 };
 
 const onMouseMove = (e: MouseEvent) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    if (!spotlightRafId) {
-        spotlightRafId = requestAnimationFrame(updateSpotlights);
+    const newX = e.clientX;
+    const newY = e.clientY;
+    mouseSpeedX = newX - mouseX;
+    mouseSpeedY = newY - mouseY;
+    mouseX = newX;
+    mouseY = newY;
+
+    wakeSpacetimeGrid();
+
+    if (!magneticRafId && cachedMagnetData.length > 0) {
+        magneticRafId = requestAnimationFrame(updateMagneticTargets);
     }
 };
 
 const handleScrollOrResize = () => {
     if (layoutUpdateTimeout) clearTimeout(layoutUpdateTimeout);
     layoutUpdateTimeout = setTimeout(() => {
-        cacheLayouts();
-        if (!spotlightRafId) {
-            spotlightRafId = requestAnimationFrame(updateSpotlights);
-        }
+        cacheMagnetLayouts();
+        resizeSpacetimeGrid();
     }, 150);
 };
 
 const initMouseTracker = () => {
-    flashlightBg = document.getElementById('flashlight-bg');
-    if (!flashlightBg) {
-        flashlightBg = document.createElement('div');
-        flashlightBg.id = 'flashlight-bg';
-        document.body.prepend(flashlightBg);
+    // Ensure Spacetime Canvas exists
+    spacetimeCanvas = document.getElementById('spacetime-grid') as HTMLCanvasElement | null;
+    if (!spacetimeCanvas) {
+        spacetimeCanvas = document.createElement('canvas');
+        spacetimeCanvas.id = 'spacetime-grid';
+        spacetimeCanvas.className = 'pointer-events-none fixed inset-0 z-0 h-full w-full';
+        spacetimeCanvas.setAttribute('aria-hidden', 'true');
+        document.body.prepend(spacetimeCanvas);
     }
+    spacetimeCtx = spacetimeCanvas.getContext('2d', { alpha: true });
 
-    cardsCollection = document.getElementsByClassName('bento-card');
-    // ⚡ Bolt: Replace querySelectorAll with getElementsByClassName for faster DOM traversal
     magneticTargets = Array.from(
         document.getElementsByClassName('magnetic-target')
     ) as HTMLElement[];
 
-    cacheLayouts();
+    cacheMagnetLayouts();
+    resizeSpacetimeGrid();
 
     document.removeEventListener('mousemove', onMouseMove);
     window.removeEventListener('scroll', handleScrollOrResize);
@@ -151,26 +308,8 @@ const initMouseTracker = () => {
     document.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('scroll', handleScrollOrResize, { passive: true });
     window.addEventListener('resize', handleScrollOrResize, { passive: true });
-};
 
-const handlePageShow = (e: PageTransitionEvent) => {
-    if (e.persisted) {
-        initMouseTracker();
-    }
-};
-
-// Check media query to only bind mouse listeners on capable devices
-const runMouseTracker = () => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
-    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (!isFinePointer) return;
-
-    initMouseTracker();
-    window.addEventListener('pageshow', handlePageShow);
-
-    // Bind 3D Bento Card Parallax Tilt
+    // Bind Zero-Lag 3D Bento Card Parallax Tilt
     const cards = document.getElementsByClassName('bento-card');
     Array.from(cards).forEach((cardEl) => {
         const card = cardEl as HTMLElement;
@@ -190,7 +329,7 @@ const runMouseTracker = () => {
             const xc = cachedRect.width / 2;
             const yc = cachedRect.height / 2;
 
-            const maxTilt = 4.5; // Maximum tilt angle in degrees
+            const maxTilt = 4.5;
             const tiltX = ((yc - y) / yc) * maxTilt;
             const tiltY = ((x - xc) / xc) * maxTilt;
 
@@ -202,6 +341,9 @@ const runMouseTracker = () => {
         };
 
         const handleCardEnter = () => {
+            // Remove transform transition while actively tracking to eliminate lag
+            card.style.transition = 'none';
+
             const rect = card.getBoundingClientRect();
             cachedRect = {
                 left: rect.left + window.scrollX,
@@ -229,8 +371,12 @@ const runMouseTracker = () => {
                 cancelAnimationFrame(cardRafId);
                 cardRafId = null;
             }
+            // Restore smooth cubic-bezier transition for the exit return animation
+            card.style.transition =
+                'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease';
             card.style.transform =
                 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+
             tilts.forEach((targetEl) => {
                 const target = targetEl as HTMLElement;
                 target.style.transform = 'translateZ(0px)';
@@ -244,22 +390,47 @@ const runMouseTracker = () => {
     });
 };
 
+const handlePageShow = (e: PageTransitionEvent) => {
+    if (e.persisted) {
+        initMouseTracker();
+    }
+};
+
+// Check media query to only bind mouse listeners on capable devices
+const runMouseTracker = () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!isFinePointer) return;
+
+    initMouseTracker();
+    window.addEventListener('pageshow', handlePageShow);
+};
+
 const destroyMouseTracker = () => {
     document.removeEventListener('mousemove', onMouseMove);
     window.removeEventListener('pageshow', handlePageShow);
     window.removeEventListener('scroll', handleScrollOrResize);
     window.removeEventListener('resize', handleScrollOrResize);
+
     if (layoutUpdateTimeout) {
         clearTimeout(layoutUpdateTimeout);
         layoutUpdateTimeout = null;
     }
-    if (spotlightRafId) {
-        cancelAnimationFrame(spotlightRafId);
-        spotlightRafId = null;
+    if (magneticRafId) {
+        cancelAnimationFrame(magneticRafId);
+        magneticRafId = null;
     }
-    cardsCollection = null;
-    flashlightBg = null;
+    if (spacetimeRafId) {
+        cancelAnimationFrame(spacetimeRafId);
+        spacetimeRafId = null;
+    }
+
+    spacetimeCanvas = null;
+    spacetimeCtx = null;
     magneticTargets = [];
+    cachedMagnetData = [];
 };
 
 document.addEventListener('astro:page-load', runMouseTracker);

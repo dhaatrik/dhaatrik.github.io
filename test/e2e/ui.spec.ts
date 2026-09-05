@@ -310,4 +310,13 @@ test.describe('Portfolio UI Interactivity', () => {
             expect(currentText.length).toBeGreaterThan(0);
         }).toPass({ timeout: 6000 });
     });
+
+    test('Spacetime Grid canvas should be mounted and initialized in the DOM', async ({ page }) => {
+        await page.goto('/');
+        await page.waitForLoadState('domcontentloaded');
+
+        const canvas = page.locator('#spacetime-grid');
+        await expect(canvas).toBeAttached();
+        await expect(canvas).toHaveAttribute('aria-hidden', 'true');
+    });
 });
