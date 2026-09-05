@@ -423,7 +423,7 @@ const breadcrumbSchema = JSON.stringify({
                                             </div>
 
                                             <div class="mb-4 flex items-start justify-between gap-4">
-                                                <h3 class="text-2xl leading-tight font-bold text-slate-900 transition-colors dark:text-white">
+                                                <h2 class="text-2xl leading-tight font-bold text-slate-900 transition-colors dark:text-white">
                                                     <a
                                                         href={`/projects/${projectIdClean}`}
                                                         data-astro-prefetch="hover"
@@ -431,7 +431,7 @@ const breadcrumbSchema = JSON.stringify({
                                                     >
                                                         {project.data.title}
                                                     </a>
-                                                </h3>
+                                                </h2>
                                                 {project.data.githubUrl && (
                                                     <a
                                                         href={project.data.githubUrl}
