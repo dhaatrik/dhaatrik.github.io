@@ -89,7 +89,9 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
         expect(projectCardHeadings.length).toBe(12);
     });
 
-    test('should mark YouTube thumbnails as aria-hidden on /pedagogy/', async ({ page }) => {
+    test('should provide descriptive alt, dimensions, and aria-hidden on /pedagogy/ thumbnails', async ({
+        page,
+    }) => {
         await page.goto('/pedagogy/', { waitUntil: 'domcontentloaded' });
         await page.waitForSelector('#video-grid', { state: 'visible' });
 
@@ -98,13 +100,17 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
                 ariaHidden: img.getAttribute('aria-hidden'),
                 alt: img.getAttribute('alt'),
                 src: img.getAttribute('src'),
+                width: img.getAttribute('width'),
+                height: img.getAttribute('height'),
             }))
         );
 
         expect(thumbnails.length).toBeGreaterThan(0);
         for (const thumb of thumbnails) {
             expect(thumb.ariaHidden).toBe('true');
-            expect(thumb.alt).toBe('');
+            expect(thumb.alt).toContain('Video tutorial thumbnail:');
+            expect(thumb.width).toBe('320');
+            expect(thumb.height).toBe('180');
             expect(thumb.src).toContain('img.youtube.com');
         }
     });

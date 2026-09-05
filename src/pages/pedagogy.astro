@@ -977,7 +977,9 @@ const breadcrumbSchema = JSON.stringify({
                                     {/* Dynamic YouTube Thumbnail (MQ) */}
                                     <img
                                         src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`}
-                                        alt=""
+                                        alt={`Video tutorial thumbnail: ${video.title}`}
+                                        width="320"
+                                        height="180"
                                         aria-hidden="true"
                                         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                                         loading="lazy"
