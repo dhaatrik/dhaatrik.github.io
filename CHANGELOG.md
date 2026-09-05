@@ -1,5 +1,30 @@
 # Changelog
 
+## [4.8.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.7.0...v4.8.0) (2026-09-05)
+
+
+### Features
+
+* **schema:** inject VideoObject ItemList structured data on pedagogy hub ([f65764f](https://github.com/dhaatrik/dhaatrik.github.io/commit/f65764fb45c8188cf51520132e82b42c3d6d4348))
+* **seo:** add public/ai.txt machine-readable discovery bridge ([5b2d7c5](https://github.com/dhaatrik/dhaatrik.github.io/commit/5b2d7c52bdc2c0620814074d62b2555bcb1caf35))
+
+
+### Bug Fixes
+
+* **a11y:** add descriptive alts and layout dimensions to pedagogy thumbnails ([7a9cb8e](https://github.com/dhaatrik/dhaatrik.github.io/commit/7a9cb8e601589fb7f834999e741fe056c085fe99))
+* **seo:** use semantic button for glossary popovers instead of javascript void anchor ([54c5318](https://github.com/dhaatrik/dhaatrik.github.io/commit/54c53186d18ef63686b2bbc3cd412da41402e1da))
+
+
+### Styles & UI Polish
+
+* **docs:** format 2026-09-06.md with prettier ([f08fdf7](https://github.com/dhaatrik/dhaatrik.github.io/commit/f08fdf7b988c5a93277e567462b16a1cef5a8ea7))
+
+
+### Documentation & Skills
+
+* **audit:** consolidate 2026-09-06 audit report and diff ([483b8f7](https://github.com/dhaatrik/dhaatrik.github.io/commit/483b8f73cd30a0a4959aeb752218539185e379f9))
+* **audit:** update dossier scorecard to 100/100 and document shipped fixes ([69bc10b](https://github.com/dhaatrik/dhaatrik.github.io/commit/69bc10b40cf48af8ab3aeece8405106b4a5eff35))
+
 ## [4.7.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.6.0...v4.7.0) (2026-09-05)
 
 
