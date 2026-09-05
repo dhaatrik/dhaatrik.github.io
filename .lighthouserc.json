@@ -7,10 +7,20 @@
             "startServerReadyTimeout": 30000,
             "url": [
                 "http://localhost:4321/",
+                "http://localhost:4321/personnel/",
                 "http://localhost:4321/projects/",
-                "http://localhost:4321/transmissions/",
                 "http://localhost:4321/pedagogy/",
-                "http://localhost:4321/personnel/"
+                "http://localhost:4321/transmissions/",
+                "http://localhost:4321/projects/vellor/",
+                "http://localhost:4321/projects/deltav-lab/",
+                "http://localhost:4321/projects/fueldrop/",
+                "http://localhost:4321/projects/the-infinite-intelligence/",
+                "http://localhost:4321/projects/bill-express/",
+                "http://localhost:4321/projects/glassbox/",
+                "http://localhost:4321/transmissions/infinite-intelligence-why-and-what/",
+                "http://localhost:4321/transmissions/my-ways-of-teaching/",
+                "http://localhost:4321/transmissions/why-i-started-dbs-classes/",
+                "http://localhost:4321/transmissions/vellor-why-and-what/"
             ],
             "settings": {
                 "preset": "desktop",
