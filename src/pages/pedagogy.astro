@@ -25,6 +25,34 @@ const breadcrumbSchema = JSON.stringify({
         },
     ],
 }).replace(/</g, '\\u003c');
+
+// ItemList of VideoObject schemas for all 20 pedagogy tutorials
+const videoItemListSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'DBS Classes Physics and Mathematics Video Lessons',
+    description:
+        'Educational video archive of first-principles physics and mathematics lectures by Dhaatrik Chowdhury.',
+    itemListElement: youtubeVideos.map((video, index) => {
+        const parsedDate = new Date(video.date);
+        const isoDate = !isNaN(parsedDate.getTime())
+            ? parsedDate.toISOString().split('T')[0]
+            : '2023-09-01';
+        return {
+            '@type': 'ListItem',
+            position: index + 1,
+            item: {
+                '@type': 'VideoObject',
+                name: video.title,
+                description: `${video.title} — Conceptual lesson exploring ${video.subject} from first principles.`,
+                thumbnailUrl: [`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`],
+                uploadDate: isoDate,
+                embedUrl: `https://www.youtube-nocookie.com/embed/${video.youtubeId}`,
+                contentUrl: video.url,
+            },
+        };
+    }),
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -36,6 +64,7 @@ const breadcrumbSchema = JSON.stringify({
             image={pedagogyOgImage}
         />
         <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
+        <script is:inline type="application/ld+json" set:html={videoItemListSchema} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <!-- Flashlight Spotlight Background -->
@@ -977,7 +1006,9 @@ const breadcrumbSchema = JSON.stringify({
                                     {/* Dynamic YouTube Thumbnail (MQ) */}
                                     <img
                                         src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`}
-                                        alt=""
+                                        alt={`Video tutorial thumbnail: ${video.title}`}
+                                        width="320"
+                                        height="180"
                                         aria-hidden="true"
                                         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                                         loading="lazy"

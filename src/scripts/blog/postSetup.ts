@@ -781,10 +781,10 @@ export async function setupPost() {
                         const tooltipId = `tooltip-glossary-${termLower}-${matchCount}`;
                         const anchorName = `--tooltip-glossary-${termLower}-${matchCount}`;
 
-                        const trigger = document.createElement('a');
-                        trigger.href = 'javascript:void(0)';
+                        const trigger = document.createElement('button');
+                        trigger.type = 'button';
                         trigger.className =
-                            'relative inline-block border-b border-dashed border-(--accent)/50 text-slate-800 dark:text-slate-200 cursor-help transition-colors hover:text-(--accent) hover:border-(--accent)';
+                            'relative inline border-b border-dashed border-(--accent)/50 text-slate-800 dark:text-slate-200 cursor-help transition-colors hover:text-(--accent) hover:border-(--accent) bg-transparent p-0 font-inherit text-left';
                         trigger.setAttribute('interestfor', tooltipId);
                         trigger.style.setProperty('anchor-name', anchorName);
                         trigger.textContent = term;

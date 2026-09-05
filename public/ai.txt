@@ -1,0 +1,15 @@
+# =============================================================================
+# ai.txt — dhaatrik.github.io
+# Machine-readable permissions and context for AI models, agents, and LLMs
+# =============================================================================
+
+User-Agent: *
+Allow: /
+
+# Full LLM-friendly documentation and knowledge graph
+Context: https://dhaatrik.github.io/llms.txt
+Context-Full: https://dhaatrik.github.io/llms-full.txt
+
+# Canonical Sitemaps
+Sitemap: https://dhaatrik.github.io/sitemap.xml
+Sitemap: https://dhaatrik.github.io/sitemap-index.xml

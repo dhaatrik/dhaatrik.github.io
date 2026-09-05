@@ -57,3 +57,6 @@ Allow: /
 # =============================================================================
 Sitemap: https://dhaatrik.github.io/sitemap.xml
 Sitemap: https://dhaatrik.github.io/sitemap-index.xml
+# LLM Context: https://dhaatrik.github.io/llms.txt
+# AI Permissions & Context: https://dhaatrik.github.io/ai.txt
+
