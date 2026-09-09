@@ -1,5 +1,75 @@
 # Changelog
 
+## [4.9.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.8.1...v4.9.0) (2026-09-09)
+
+
+### Features
+
+* **blog:** show computed reading time on post page ([50bf315](https://github.com/dhaatrik/dhaatrik.github.io/commit/50bf315f5fa07d2b1ae20c0bf53c548d43583b5c))
+
+
+### Bug Fixes
+
+* **blog:** preserve formula inspector event handling across re-renders ([cc9371e](https://github.com/dhaatrik/dhaatrik.github.io/commit/cc9371ea881a379686910c05b5eefbb9f04ecfae))
+* **rss:** remove fake project entries with fabricated dates ([51338bd](https://github.com/dhaatrik/dhaatrik.github.io/commit/51338bd19122e410e31ccd2f6b255e5d34c23e0a))
+* **seo:** point robots.txt to canonical sitemap-index.xml only ([18845ba](https://github.com/dhaatrik/dhaatrik.github.io/commit/18845baa04011f5c5c6a0c5ebcfc9e9a637f2d06))
+* **seo:** remove dead sitemap.xml link from BaseHead ([beece9b](https://github.com/dhaatrik/dhaatrik.github.io/commit/beece9baa6be9da5852f70d5d6ff5dc312991efe))
+* **seo:** remove sitemap-flatten hack, use canonical sitemap-index ([c951342](https://github.com/dhaatrik/dhaatrik.github.io/commit/c9513421facc7610e0fe60977477101875d983ee))
+* **seo:** stop faking sitemap lastmod on every build ([bd3f172](https://github.com/dhaatrik/dhaatrik.github.io/commit/bd3f1722b1f65ca19d18bf33311a26518702dab4))
+* **seo:** update BaseHead fallback OG image to home-og.jpg ([26c2d81](https://github.com/dhaatrik/dhaatrik.github.io/commit/26c2d812224bed9006269cf2ab4efa7480856f91))
+
+
+### Performance Improvements
+
+* **seo:** recompress OG images from ~13MB to ~2MB total ([b361302](https://github.com/dhaatrik/dhaatrik.github.io/commit/b3613027034ef78975dd7e92376f1d7935dfe475))
+* **ui:** optimize SVG logos from ~83KB to ~45KB each ([aedf798](https://github.com/dhaatrik/dhaatrik.github.io/commit/aedf79862beae65eaa6e36b85243d47c1f79f86d))
+
+
+### Styles & UI Polish
+
+* format footer, header, and homeHub with prettier ([7182a73](https://github.com/dhaatrik/dhaatrik.github.io/commit/7182a73a85b302eefcf6069d28203b7e07c34f56))
+* **ui:** update parallax section comment in global.css ([99be997](https://github.com/dhaatrik/dhaatrik.github.io/commit/99be997df6769fb7e831fa1d6d6eebc7f7474e7a))
+
+
+### Code Refactoring
+
+* **assets:** deduplicate me.jpeg, single source in src/assets/ ([3179471](https://github.com/dhaatrik/dhaatrik.github.io/commit/3179471a0e0e6b68303de678e7cee59931219db9))
+* **blog:** modularize postSetup helpers ([8a53b62](https://github.com/dhaatrik/dhaatrik.github.io/commit/8a53b62d95a8edf97258127f06fc1defbbf62220))
+* **blog:** remove readingTime from blog schema ([fe63423](https://github.com/dhaatrik/dhaatrik.github.io/commit/fe634230952b03e45bbdb62af8450663d83fc1dc))
+* **blog:** strip static readingTime from all 35 post frontmatters ([7a10f9c](https://github.com/dhaatrik/dhaatrik.github.io/commit/7a10f9c1f41526d45334fb4594e521f38d609f31))
+* **footer:** extract setupFooter to src/scripts/footer.ts ([77b65bd](https://github.com/dhaatrik/dhaatrik.github.io/commit/77b65bd44be23d93ebd73f3a67b116725451214f))
+* **header:** extract setupHeader to src/scripts/header.ts ([fe92fec](https://github.com/dhaatrik/dhaatrik.github.io/commit/fe92fecf92d024f86a2371d0f322c4487ea4d167))
+* **home:** extract homeHub script to src/scripts/homeHub.ts ([0f6e694](https://github.com/dhaatrik/dhaatrik.github.io/commit/0f6e6946752a8c515fb2af042f5751a2132ca682))
+* **projects:** remove dead video schema field and observer ([729c0dd](https://github.com/dhaatrik/dhaatrik.github.io/commit/729c0dd63ca3ca45452770a931a989f1d27ee293))
+* **ui:** delete dead Scrollytell component and CSS ([bc06efe](https://github.com/dhaatrik/dhaatrik.github.io/commit/bc06efefe1fabdd55c48b12fd475ff3b5305cd43))
+* **ui:** delete orphaned optimizeLogos script ([29529d9](https://github.com/dhaatrik/dhaatrik.github.io/commit/29529d9c193e500709e007eae8ec1743c0adb908))
+* **ui:** delete unused Math.astro component ([db957ac](https://github.com/dhaatrik/dhaatrik.github.io/commit/db957acc83723ce744cb7c2ad0806b652689f9e6))
+
+
+### Documentation & Skills
+
+* **seo:** remove dead sitemap.xml references from ai.txt and llms.txt ([11ce064](https://github.com/dhaatrik/dhaatrik.github.io/commit/11ce064286e918291a70cbaa3fca0aa3493e3fbd))
+* **seo:** update skill docs for canonical sitemap-index story ([74ab1d2](https://github.com/dhaatrik/dhaatrik.github.io/commit/74ab1d222073d6ebc7d55f80f48e1218d1d3ad26))
+* **skills:** remove readingTime from astro-site schema docs ([180eaf8](https://github.com/dhaatrik/dhaatrik.github.io/commit/180eaf88f542b830effcbdf8e011ef4a8f29e1b8))
+* **skills:** remove readingTime requirement from mission-report skill ([846cc1d](https://github.com/dhaatrik/dhaatrik.github.io/commit/846cc1df9fdee3de65df6d401196c4f9952d6a46))
+* **skills:** remove references to deleted components and tools ([7dbdba1](https://github.com/dhaatrik/dhaatrik.github.io/commit/7dbdba1b2ec8b22a71c727c5524199591dc02163))
+
+
+### Tests & Verification
+
+* **content:** remove sitemap.xml from valid route whitelist ([a6cdb1f](https://github.com/dhaatrik/dhaatrik.github.io/commit/a6cdb1f0aafdb5bc5b462cd8873e2275c20ce08d))
+* **rss:** update test to expect blog-only feed with real dates ([c2ee3d8](https://github.com/dhaatrik/dhaatrik.github.io/commit/c2ee3d828869b7c48b51914cab7e89c115486c64))
+* **seo:** require 200 for sitemap-index, drop dead sitemap.xml test ([d252025](https://github.com/dhaatrik/dhaatrik.github.io/commit/d252025830e84cab9ef514b2d25c1964dd6dec42))
+
+
+### Chores & Maintenance
+
+* **assets:** remove unused blog placeholder image ([696f20c](https://github.com/dhaatrik/dhaatrik.github.io/commit/696f20cf8ecd25ff22f739d5037e63e12bd20fc4))
+* **deps:** remove unused @astrojs/mdx integration ([8a65df4](https://github.com/dhaatrik/dhaatrik.github.io/commit/8a65df413ddc2ece403d1f9e675404bb5825cfb6))
+* **deps:** remove unused mermaid dependency and skip guard ([6475e29](https://github.com/dhaatrik/dhaatrik.github.io/commit/6475e29c0d1f29945a4a0067ecd46e50d47282f6))
+* **hygiene:** remove bolt comments ([67ac1f7](https://github.com/dhaatrik/dhaatrik.github.io/commit/67ac1f77ed4b92ae651943c855b653f073932c37))
+* **seo:** sync llms.txt versions to 4.8.1 ([4a2ad44](https://github.com/dhaatrik/dhaatrik.github.io/commit/4a2ad445424b39e01961f0b1331fa92e1c52ca2e))
+
 ## [4.8.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.8.0...v4.8.1) (2026-09-05)
 
 
