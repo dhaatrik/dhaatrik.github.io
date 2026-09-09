@@ -1,10 +1,6 @@
-// @ts-check
-
 import { existsSync } from 'node:fs';
-import { copyFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 import { unified } from '@astrojs/markdown-remark';
@@ -20,27 +16,26 @@ const markdownRehypePlugins = [rehypeKatex, rehypeAccessibleTable];
 export default defineConfig({
     site: 'https://dhaatrik.github.io',
     integrations: [
-        mdx(),
         sitemap({
             entryLimit: 10000,
-            serialize(item) {
-                // Set lastmod to current build date for all pages.
-                // Signals freshness to Googlebot on each deploy.
-                item.lastmod = new Date().toISOString();
-                return item;
-            },
         }),
         {
-            name: 'sitemap-flatten',
+            name: 'dev-sitemap-server',
             hooks: {
-                'astro:build:done': async ({ dir, logger }) => {
-                    const destDir = fileURLToPath(dir);
-                    const sitemap0Path = resolve(destDir, 'sitemap-0.xml');
-                    const sitemapPath = resolve(destDir, 'sitemap.xml');
-                    if (existsSync(sitemap0Path)) {
-                        await copyFile(sitemap0Path, sitemapPath);
-                        logger.info('`sitemap.xml` flattened from `sitemap-0.xml` at `dist`');
-                    }
+                'astro:server:setup': ({ server }) => {
+                    server.middlewares.use(async (req, res, next) => {
+                        if (req.url === '/sitemap-index.xml') {
+                            const distPath = resolve('./dist/sitemap-index.xml');
+                            const xml = existsSync(distPath)
+                                ? await readFile(distPath, 'utf-8')
+                                : '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://dhaatrik.github.io/sitemap-0.xml</loc></sitemap></sitemapindex>';
+                            res.setHeader('Content-Type', 'application/xml');
+                            res.statusCode = 200;
+                            res.end(xml);
+                            return;
+                        }
+                        next();
+                    });
                 },
             },
         },
@@ -54,7 +49,7 @@ export default defineConfig({
         }),
     },
 
-    // ⚡ Bolt: Enable Astro link prefetching for instant perceived page transitions
+    // Enable Astro link prefetching for instant perceived page transitions
     // This will prefetch assets for linked pages automatically either on hover or visibility
     prefetch: true,
 

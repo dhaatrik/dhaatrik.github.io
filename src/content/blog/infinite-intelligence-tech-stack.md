@@ -6,7 +6,6 @@ heroImage: '../../assets/og/infinite-intelligence-transmissions.jpg'
 updatedDate: 2026-07-14
 tags: ['infinite-intelligence', 'react', 'vite', 'genai']
 clearance: 'PUBLIC'
-readingTime: '10 min'
 hasMath: false
 series: 'Infinite Intelligence'
 seriesOrder: 2

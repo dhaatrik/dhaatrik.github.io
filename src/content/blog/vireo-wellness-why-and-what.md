@@ -6,7 +6,6 @@ heroImage: '../../assets/og/vireo-wellness-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['vireo-wellness', 'react', 'wellness', 'ui-demo']
 clearance: 'PUBLIC'
-readingTime: '11 min'
 hasMath: false
 series: 'Vireo Wellness'
 seriesOrder: 1

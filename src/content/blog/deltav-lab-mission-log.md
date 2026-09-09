@@ -6,7 +6,6 @@ updatedDate: 2026-06-30
 heroImage: '../../assets/og/delta-v-lab-transmissions.jpg'
 tags: ['aerospace', 'deltav-lab']
 clearance: 'PUBLIC'
-readingTime: '9 min'
 hasMath: true
 series: 'DeltaV Lab'
 seriesOrder: 4

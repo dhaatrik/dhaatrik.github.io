@@ -6,7 +6,6 @@ heroImage: '../../assets/og/bill-express-transmissions.jpg'
 updatedDate: 2026-06-30
 tags: ['bill-express', 'pos', 'gst', 'express', 'sqlite']
 clearance: 'PUBLIC'
-readingTime: '11 min'
 hasMath: false
 series: 'Bill Express'
 seriesOrder: 1

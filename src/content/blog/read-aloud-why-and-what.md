@@ -6,7 +6,6 @@ heroImage: '../../assets/og/read-aloud-transmissions.jpg'
 updatedDate: 2026-07-12
 tags: ['read-aloud', 'chrome-extension', 'mv3', 'accessibility']
 clearance: 'PUBLIC'
-readingTime: '11 min'
 hasMath: false
 series: 'Read Aloud'
 seriesOrder: 1

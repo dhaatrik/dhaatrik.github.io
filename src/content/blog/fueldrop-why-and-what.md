@@ -6,7 +6,6 @@ heroImage: '../../assets/og/fueldrop-transmissions.jpg'
 updatedDate: 2026-07-05
 tags: ['fueldrop', 'react', 'pwa', 'ux-demo']
 clearance: 'PUBLIC'
-readingTime: '11 min'
 hasMath: false
 series: 'FuelDrop'
 seriesOrder: 1

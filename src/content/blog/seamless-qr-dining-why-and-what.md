@@ -6,7 +6,6 @@ heroImage: '../../assets/og/seamless-qr-dining-transmissions.jpg'
 updatedDate: 2026-07-08
 tags: ['seamless-qr-dining', 'nextjs', 'restaurant', 'demo']
 clearance: 'PUBLIC'
-readingTime: '11 min'
 hasMath: false
 series: 'Seamless QR Dining'
 seriesOrder: 1

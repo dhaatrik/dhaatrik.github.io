@@ -13,7 +13,7 @@ const posts = (await getCollection('blog')).sort(
     (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-// ⚡ Bolt: Optimize reading time calculation by using raw body instead of full AST rendering
+// Optimize reading time calculation by using raw body instead of full AST rendering
 const postsWithReadingTime = posts.map((post: any) => {
     // `post.body` contains the raw uncompiled markdown string (available in Astro 5 glob loader)
     const body = post.body || '';
@@ -506,7 +506,7 @@ const breadcrumbSchema = JSON.stringify({
                                             i !== 0 ? 'mb-4' : 'mb-4 md:mb-0 md:h-full',
                                         ]}
                                     >
-                                        {/* ⚡ Bolt: Optimize LCP by eager loading the first image (above the fold) with high priority */}
+                                        {/* Optimize LCP by eager loading the first image (above the fold) with high priority */}
                                         <Image
                                             width={720}
                                             height={360}
@@ -686,7 +686,7 @@ const breadcrumbSchema = JSON.stringify({
                 searchAbortController = new AbortController();
                 const { signal } = searchAbortController;
 
-                // ⚡ Bolt: Cache expensive DOM text extraction to avoid redundant parsing on every keystroke
+                // Cache expensive DOM text extraction to avoid redundant parsing on every keystroke
                 const cachedCardsData = Array.from(cards).map((card) => {
                     const htmlCard = card as HTMLElement;
                     const titleElement = htmlCard.querySelector('h2');
@@ -870,7 +870,7 @@ const breadcrumbSchema = JSON.stringify({
                         }
 
                         // Tag Highlight updates
-                        // ⚡ Bolt: Replace querySelectorAll with getElementsByClassName for faster DOM traversal
+                        // Use getElementsByClassName for faster DOM traversal
                         const tagElements = Array.from(
                             element.getElementsByClassName('post-card-tag')
                         );
@@ -1017,7 +1017,7 @@ const breadcrumbSchema = JSON.stringify({
 
                 filterPosts();
 
-                // ⚡ Bolt: Debounce search input to prevent redundant layout recalcs on every keystroke
+                // Debounce search input to prevent redundant layout recalcs on every keystroke
                 const debounce = (fn: Function, ms = 200) => {
                     let timeoutId: ReturnType<typeof setTimeout>;
                     return function (this: any, ...args: any[]) {

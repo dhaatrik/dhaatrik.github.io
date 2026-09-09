@@ -6,7 +6,6 @@ heroImage: '../../assets/og/markpdf-transmissions.jpg'
 updatedDate: 2026-07-04
 tags: ['markpdf', 'open-source', 'mit', 'privacy']
 clearance: 'PUBLIC'
-readingTime: '9 min'
 hasMath: false
 series: 'MarkPDF'
 seriesOrder: 3

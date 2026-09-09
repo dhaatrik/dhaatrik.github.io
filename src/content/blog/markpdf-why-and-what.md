@@ -6,7 +6,6 @@ heroImage: '../../assets/og/markpdf-transmissions.jpg'
 updatedDate: 2026-07-02
 tags: ['markpdf', 'markdown', 'print', 'privacy']
 clearance: 'PUBLIC'
-readingTime: '10 min'
 hasMath: false
 series: 'MarkPDF'
 seriesOrder: 1

@@ -6,7 +6,6 @@ heroImage: '../../assets/og/vellor-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['pedagogy', 'vellor', 'pwa', 'offline-first']
 clearance: 'PUBLIC'
-readingTime: '12 min'
 hasMath: false
 series: 'Vellor'
 seriesOrder: 1

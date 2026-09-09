@@ -3,8 +3,8 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const blog = defineCollection({
-    // Load Markdown and MDX files in the `src/content/blog/` directory.
-    loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
+    // Load Markdown files in the `src/content/blog/` directory.
+    loader: glob({ base: './src/content/blog', pattern: '**/*.md' }),
     // Type-check frontmatter using a schema
     schema: ({ image }) =>
         z.object({
@@ -14,7 +14,6 @@ const blog = defineCollection({
             pubDate: z.coerce.date(),
             updatedDate: z.coerce.date().optional(),
             heroImage: z.optional(image()),
-            readingTime: z.string().optional(),
             tags: z.array(z.string()).optional(),
             series: z.string().optional(),
             seriesOrder: z.number().optional(),
@@ -28,13 +27,12 @@ const blog = defineCollection({
 });
 
 const projects = defineCollection({
-    loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
+    loader: glob({ base: './src/content/projects', pattern: '**/*.md' }),
     schema: ({ image }) =>
         z.object({
             title: z.string(),
             description: z.string(),
             logo: z.optional(image()),
-            video: z.string().optional(),
             tags: z.array(z.string()).optional(),
             githubUrl: z
                 .string()

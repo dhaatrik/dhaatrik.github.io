@@ -27,11 +27,11 @@ description: >
 ## Current Site Architecture (Know This)
 
 - **Framework**: Astro 6 (SSG with `prefetch: true` enabled for instant client transitions)
-- **Markdown & Math Processor**: Unified processor pattern (`markdown.processor: unified({ remarkPlugins: [remarkMath, remarkMermaid], rehypePlugins: [rehypeKatex] })`)
+- **Markdown & Math Processor**: Unified processor pattern (`markdown.processor: unified({ remarkPlugins: [remarkMath], rehypePlugins: [rehypeKatex] })`)
 - **Styling**: Tailwind CSS v4 + `@tailwindcss/vite` plugin + modular CSS tokens in `src/styles/`
 - **Content Collections**: `src/content.config.ts` using Astro `glob()` loader + Zod schema validation
-    - `blog`: `pubDate`, `updatedDate`, `heroImage`, `readingTime`, `tags`, `series`, `seriesOrder`, `clearance`, `hasMath`
-    - `projects`: `title`, `description`, `logo`, `video`, `tags`, `githubUrl`, `progress`, `order`, `transmissionTag`, `telemetry`, `fuckup_teaser`, `pain_level`
+    - `blog`: `pubDate`, `updatedDate`, `heroImage`, `tags`, `series`, `seriesOrder`, `clearance`, `hasMath`
+    - `projects`: `title`, `description`, `logo`, `tags`, `githubUrl`, `progress`, `order`, `transmissionTag`, `telemetry`, `fuckup_teaser`, `pain_level`
 - **Images**: Astro `<Image>` component powered by `sharp`
 - **Typography**: `@fontsource/nunito` (body) + `@fontsource/poppins` (headings)
 - **Testing**:
@@ -41,7 +41,7 @@ description: >
 - **Key Folders**:
     - `src/pages/` — Routing (`index.astro`, `personnel.astro`, `pedagogy.astro`, `projects/`, `transmissions/`, `404.astro`, `rss.xml.js`)
     - `src/content/` — Collections (`blog/`, `projects/`)
-    - `src/components/` — Reusable UI (`Header`, `Footer`, `ThemeToggle`, `Scrollytell`, `Math`, `KatexStyles`, etc.)
+    - `src/components/` — Reusable UI (`Header`, `Footer`, `ThemeToggle`, `KatexStyles`, etc.)
     - `src/layouts/` — Page shells (`BlogPost.astro`)
     - `src/styles/` — `global.css`, `tokens.css`, `glass.css`, `motion.css`, `typography.css`
     - `src/data/` — Static datasets (`glossary.ts`, `readingList.ts`, `status.ts`, `techStack.ts`, `videos.ts`)

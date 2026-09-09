@@ -5,7 +5,6 @@ pubDate: 2026-06-16
 heroImage: '../../assets/og/pedagogy-transmissions.jpg'
 tags: ['pedagogy']
 clearance: 'PUBLIC'
-readingTime: '8 min'
 ---
 
 ```

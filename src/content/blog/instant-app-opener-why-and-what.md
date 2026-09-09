@@ -6,7 +6,6 @@ heroImage: '../../assets/og/instant-app-opener-transmissions.jpg'
 updatedDate: 2026-06-28
 tags: ['instant-app-opener', 'nextjs', 'deep-links', 'pwa']
 clearance: 'PUBLIC'
-readingTime: '10 min'
 hasMath: false
 series: 'Instant App Opener'
 seriesOrder: 1

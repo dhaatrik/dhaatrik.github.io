@@ -1430,7 +1430,7 @@ const breadcrumbSchema = JSON.stringify({
                         }
 
                         const interval = setInterval(() => {
-                            // ⚡ Bolt: Eliminate massive array allocations/GC pressure by using string concatenation
+                            // Eliminate array allocations and GC pressure by using string concatenation
                             let nextText = '';
                             for (let i = 0; i < length; i++) {
                                 if (i < iterations) {

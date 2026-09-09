@@ -44,7 +44,6 @@ const validStaticRoutes = new Set([
     '/llms-full.txt',
     '/ai.txt',
     '/robots.txt',
-    '/sitemap.xml',
     '/sitemap-index.xml',
 ]);
 

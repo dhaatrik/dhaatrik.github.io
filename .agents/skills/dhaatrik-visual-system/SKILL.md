@@ -129,7 +129,7 @@ Use these hardware-accelerated utilities from `global.css`:
 - **Preferred Method**: Pure CSS transitions + keyframes (fastest, most reliable on GitHub Pages)
 - Use `transition-all`, `transition-colors`, `transition-transform`
 - Subtle scale, lift, or glow changes on hover/focus
-- For scroll-triggered reveals: IntersectionObserver + CSS classes (already partially implemented via Scrollytell)
+- For scroll-triggered reveals: IntersectionObserver + CSS classes (implemented via `scrollReveal.ts`)
 - Always wrap animations in `@media (prefers-reduced-motion: no-preference)`
 - Never use heavy libraries (Framer Motion etc.) unless absolutely necessary
 
