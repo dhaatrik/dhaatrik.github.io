@@ -8,6 +8,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import KatexStyles from '../components/KatexStyles.astro';
 import TypographyStyles from '../components/TypographyStyles.astro';
+import { getReadingTime } from '../utils/readingTime';
 
 // KaTeX CSS loaded conditionally via KatexStyles (self-hosted; CSP blocks CDN)
 
@@ -18,6 +19,7 @@ type Props = CollectionEntry<'blog'>['data'] & {
     nextPost?: CollectionEntry<'blog'> | null;
     isSeriesNav?: boolean;
     rawContent?: string;
+    readingTime?: number;
 };
 
 const {
@@ -38,6 +40,8 @@ const {
     hasMath = false,
 } = Astro.props;
 
+const readingTime = Astro.props.readingTime ?? getReadingTime(rawContent);
+
 // Generate Article JSON-LD for blog post SEO and LLM citation
 const articleSchema = JSON.stringify({
     '@context': 'https://schema.org',
@@ -47,6 +51,7 @@ const articleSchema = JSON.stringify({
     image: heroImage ? new URL(heroImage.src, Astro.site).href : undefined,
     datePublished: pubDate.toISOString(),
     dateModified: (updatedDate || pubDate).toISOString(),
+    timeRequired: `PT${readingTime}M`,
     author: {
         '@type': 'Person',
         name: 'Dhaatrik Chowdhury',
@@ -179,7 +184,7 @@ const breadcrumbSchema = JSON.stringify({
                             >+</span
                         >
 
-                        <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+                        <div class="grid grid-cols-2 gap-6 sm:grid-cols-5">
                             <div class="space-y-1">
                                 <div
                                     class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
@@ -188,6 +193,16 @@ const breadcrumbSchema = JSON.stringify({
                                 </div>
                                 <div class="font-bold text-slate-900 dark:text-slate-200">
                                     <FormattedDate date={pubDate} format="technical" />
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <div
+                                    class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
+                                >
+                                    // READ TIME
+                                </div>
+                                <div class="font-bold text-slate-900 dark:text-slate-200">
+                                    {readingTime} min read
                                 </div>
                             </div>
                             <div class="space-y-1">
@@ -210,7 +225,7 @@ const breadcrumbSchema = JSON.stringify({
                                     {clearance}
                                 </div>
                             </div>
-                            <div class="space-y-1">
+                            <div class="col-span-2 space-y-1 sm:col-span-1">
                                 <div
                                     class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
                                 >
