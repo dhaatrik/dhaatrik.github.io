@@ -107,7 +107,7 @@ Required at top of every transmission (blog post). See `dhaatrik-mission-report`
 Prefer over walls of prose:
 
 - Comparison **tables** (before/after, options considered, metrics)
-- **Mermaid** or styled ASCII for pipelines/architectures
+- **Styled ASCII** or SVG diagrams for pipelines/architectures
 - Bulleted learnings with clear cause → effect
 
 ---

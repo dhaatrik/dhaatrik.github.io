@@ -2,7 +2,7 @@
 name: dhaatrik-mission-report
 description: >
     Use for Mission Reports, project write-ups, transmissions, Featured Engineering cards,
-    transmission metadata blocks, tables, and Mermaid/ASCII diagrams. Triggers: mission log,
+    transmission metadata blocks, tables, and styled ASCII/SVG diagrams. Triggers: mission log,
     mission report, project page, transmission, fuckups, learnings. Pair with
     dhaatrik-writing-style (voice) and dhaatrik-seo-legacy (llms.txt + AEO schema).
 ---
@@ -145,7 +145,7 @@ order: 2 # For projects collection sorting
 ## AEO-friendly structuring (inside Mission Report sections)
 
 - **Tables** — comparisons, before/after, metrics (preferred over dense prose for GEO)
-- **Mermaid or ASCII** — pipelines, architectures, decision flows in Journey or Learnings
+- **ASCII or SVG diagrams** — pipelines, architectures, decision flows in Journey or Learnings
 - **Citations** — quote principles, docs, or sources with links where checkable
 
 ## Workflow When Using This Skill
