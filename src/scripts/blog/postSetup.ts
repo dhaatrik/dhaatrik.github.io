@@ -571,8 +571,6 @@ export async function setupPost() {
     // 4. Code Block Hacker Polish
     const codeBlocks = document.getElementsByTagName('pre');
     Array.from(codeBlocks).forEach((pre) => {
-        if (pre.classList.contains('mermaid')) return;
-
         const existingWrapper = pre.parentElement?.classList.contains('code-wrapper-processed')
             ? pre.parentElement
             : null;
