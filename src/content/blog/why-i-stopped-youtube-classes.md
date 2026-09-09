@@ -5,7 +5,6 @@ pubDate: 2026-06-16
 heroImage: '../../assets/og/dbs-classes-transmissions.jpg'
 tags: ['pedagogy', 'youtube']
 clearance: 'PUBLIC'
-readingTime: '7 min'
 ---
 
 ```

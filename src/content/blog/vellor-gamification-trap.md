@@ -6,7 +6,6 @@ heroImage: '../../assets/og/vellor-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['vellor', 'ui-ux', 'pedagogy']
 clearance: 'PUBLIC'
-readingTime: '8 min'
 hasMath: false
 series: 'Vellor'
 seriesOrder: 4

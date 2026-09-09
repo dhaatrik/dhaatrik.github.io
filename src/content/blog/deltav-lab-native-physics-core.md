@@ -6,7 +6,6 @@ updatedDate: 2026-07-01
 heroImage: '../../assets/og/delta-v-lab-transmissions.jpg'
 tags: ['aerospace', 'deltav-lab', 'rust', 'wasm', 'simulation']
 clearance: 'PUBLIC'
-readingTime: '14 min'
 hasMath: true
 series: 'DeltaV Lab'
 seriesOrder: 8

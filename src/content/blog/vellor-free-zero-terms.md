@@ -6,7 +6,6 @@ heroImage: '../../assets/og/vellor-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['vellor', 'open-source', 'pedagogy', 'privacy']
 clearance: 'PUBLIC'
-readingTime: '10 min'
 hasMath: false
 series: 'Vellor'
 seriesOrder: 3

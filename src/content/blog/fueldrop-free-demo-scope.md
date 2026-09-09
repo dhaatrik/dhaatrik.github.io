@@ -6,7 +6,6 @@ heroImage: '../../assets/og/fueldrop-transmissions.jpg'
 updatedDate: 2026-07-07
 tags: ['fueldrop', 'open-source', 'mit', 'demo']
 clearance: 'PUBLIC'
-readingTime: '9 min'
 hasMath: false
 series: 'FuelDrop'
 seriesOrder: 3

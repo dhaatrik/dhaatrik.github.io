@@ -6,7 +6,6 @@ heroImage: '../../assets/og/infinite-intelligence-transmissions.jpg'
 updatedDate: 2026-07-13
 tags: ['infinite-intelligence', 'gemini', 'multi-agent', 'byok']
 clearance: 'PUBLIC'
-readingTime: '11 min'
 hasMath: false
 series: 'Infinite Intelligence'
 seriesOrder: 1

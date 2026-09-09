@@ -6,7 +6,6 @@ heroImage: '../../assets/og/fintrack-transmissions.jpg'
 updatedDate: 2026-07-11
 tags: ['fintrack', 'react', 'zustand', 'recharts']
 clearance: 'PUBLIC'
-readingTime: '10 min'
 hasMath: false
 series: 'FinTrack'
 seriesOrder: 1

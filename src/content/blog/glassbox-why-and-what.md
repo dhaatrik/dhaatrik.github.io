@@ -6,7 +6,6 @@ heroImage: '../../assets/og/glassbox-transmissions.jpg'
 updatedDate: 2026-06-29
 tags: ['glassbox', 'react', 'gemini', 'feedback', 'kanban']
 clearance: 'PUBLIC'
-readingTime: '11 min'
 hasMath: false
 series: 'Glassbox'
 seriesOrder: 1

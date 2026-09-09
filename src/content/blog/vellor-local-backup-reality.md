@@ -6,7 +6,6 @@ heroImage: '../../assets/og/vellor-transmissions.jpg'
 updatedDate: 2026-07-01
 tags: ['vellor', 'privacy', 'offline-first', 'pwa']
 clearance: 'PUBLIC'
-readingTime: '9 min'
 hasMath: false
 series: 'Vellor'
 seriesOrder: 5

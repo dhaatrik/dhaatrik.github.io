@@ -6,7 +6,6 @@ heroImage: '../../assets/og/seamless-qr-dining-transmissions.jpg'
 updatedDate: 2026-07-10
 tags: ['seamless-qr-dining', 'demo', 'mit', 'restaurant']
 clearance: 'PUBLIC'
-readingTime: '9 min'
 hasMath: false
 series: 'Seamless QR Dining'
 seriesOrder: 3
