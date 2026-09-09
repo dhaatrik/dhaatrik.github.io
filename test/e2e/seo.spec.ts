@@ -134,25 +134,13 @@ test.describe('SEO and Metadata Verification', () => {
         expect(robotsResponse?.status()).toBe(200);
         const robotsText = await robotsResponse?.text();
         expect(robotsText).toContain('User-agent: *');
-        expect(robotsText).toContain('Sitemap: https://dhaatrik.github.io/sitemap.xml');
         expect(robotsText).toContain('Sitemap: https://dhaatrik.github.io/sitemap-index.xml');
 
-        // Check direct flat sitemap.xml is reachable (Astro sitemaps are build-time only, so we accept 200 in preview/prod, or 404 in dev mode)
-        const flatSitemapResponse = await page.goto('/sitemap.xml');
-        expect([200, 404]).toContain(flatSitemapResponse?.status());
-        if (flatSitemapResponse?.status() === 200) {
-            const flatSitemapText = await flatSitemapResponse?.text();
-            expect(flatSitemapText).toContain('<urlset');
-            expect(flatSitemapText).toContain('https://dhaatrik.github.io/');
-        }
-
-        // Check sitemap-index.xml is reachable (Astro sitemaps are build-time only, so we accept 200 in preview/prod, or 404 in dev mode)
+        // Check canonical sitemap-index.xml is reachable and correctly structured (must return 200, never 404)
         const sitemapIndexResponse = await page.goto('/sitemap-index.xml');
-        expect([200, 404]).toContain(sitemapIndexResponse?.status());
-        if (sitemapIndexResponse?.status() === 200) {
-            const sitemapIndexText = await sitemapIndexResponse?.text();
-            expect(sitemapIndexText).toContain('<sitemapindex');
-        }
+        expect(sitemapIndexResponse?.status()).toBe(200);
+        const sitemapIndexText = await sitemapIndexResponse?.text();
+        expect(sitemapIndexText).toContain('<sitemapindex');
     });
 
     test('project detail page should contain project logo as OpenGraph and Twitter images', async ({
