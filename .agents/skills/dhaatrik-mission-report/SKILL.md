@@ -102,7 +102,6 @@ description: 'Honest story of building a high-fidelity 4th-order physics engine 
 pubDate: 2026-06-18
 updatedDate: 2026-06-18
 heroImage: '/images/deltav-hero.webp' # Use Astro Image optimization
-readingTime: '12 min'
 tags: ['rust', 'wasm', 'aerospace', 'simulation', 'fuckups']
 series: 'Engineering Missions'
 clearance: 'PUBLIC'
@@ -113,7 +112,7 @@ order: 2 # For projects collection sorting
 **Rules:**
 
 - `description` must hint at the honest story (not marketing copy).
-- Always include `readingTime` (approximate).
+- Reading time is auto-computed from body prose via `getReadingTime(body)`; do not include in frontmatter.
 - Use meaningful tags that reflect learnings.
 - `clearance` defaults to PUBLIC for most content.
 
