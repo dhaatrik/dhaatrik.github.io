@@ -4,7 +4,6 @@ import { existsSync } from 'node:fs';
 import { copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 import { unified } from '@astrojs/markdown-remark';
@@ -20,7 +19,6 @@ const markdownRehypePlugins = [rehypeKatex, rehypeAccessibleTable];
 export default defineConfig({
     site: 'https://dhaatrik.github.io',
     integrations: [
-        mdx(),
         sitemap({
             entryLimit: 10000,
             serialize(item) {
