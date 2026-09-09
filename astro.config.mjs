@@ -1,9 +1,5 @@
 // @ts-check
 
-import { existsSync } from 'node:fs';
-import { copyFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 import { unified } from '@astrojs/markdown-remark';
@@ -22,20 +18,6 @@ export default defineConfig({
         sitemap({
             entryLimit: 10000,
         }),
-        {
-            name: 'sitemap-flatten',
-            hooks: {
-                'astro:build:done': async ({ dir, logger }) => {
-                    const destDir = fileURLToPath(dir);
-                    const sitemap0Path = resolve(destDir, 'sitemap-0.xml');
-                    const sitemapPath = resolve(destDir, 'sitemap.xml');
-                    if (existsSync(sitemap0Path)) {
-                        await copyFile(sitemap0Path, sitemapPath);
-                        logger.info('`sitemap.xml` flattened from `sitemap-0.xml` at `dist`');
-                    }
-                },
-            },
-        },
     ],
     markdown: {
         // Migrated from deprecated top-level remarkPlugins/rehypePlugins keys
