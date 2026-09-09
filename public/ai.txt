@@ -10,6 +10,5 @@ Allow: /
 Context: https://dhaatrik.github.io/llms.txt
 Context-Full: https://dhaatrik.github.io/llms-full.txt
 
-# Canonical Sitemaps
-Sitemap: https://dhaatrik.github.io/sitemap.xml
+# Canonical Sitemap
 Sitemap: https://dhaatrik.github.io/sitemap-index.xml
