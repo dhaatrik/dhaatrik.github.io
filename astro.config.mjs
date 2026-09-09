@@ -21,12 +21,6 @@ export default defineConfig({
     integrations: [
         sitemap({
             entryLimit: 10000,
-            serialize(item) {
-                // Set lastmod to current build date for all pages.
-                // Signals freshness to Googlebot on each deploy.
-                item.lastmod = new Date().toISOString();
-                return item;
-            },
         }),
         {
             name: 'sitemap-flatten',
