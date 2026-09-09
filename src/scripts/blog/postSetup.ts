@@ -209,7 +209,7 @@ export async function setupPost() {
     }
 
     // 3.3 Interactive Formula Term Inspector
-    setupFormulaInspector(signal);
+    setupFormulaInspector();
 
     // 4. Code Block Hacker Polish
     const codeBlocks = document.getElementsByTagName('pre');

@@ -1,4 +1,4 @@
-export function setupFormulaInspector(signal: AbortSignal) {
+export function setupFormulaInspector() {
     const mathBlocks = document.querySelectorAll('.katex-display, .katex');
     mathBlocks.forEach((block) => {
         if (block.classList.contains('inspector-processed')) return;
@@ -52,52 +52,48 @@ export function setupFormulaInspector(signal: AbortSignal) {
         htmlBlock.style.cursor = 'pointer';
         htmlBlock.title = 'Click to inspect formula parameters';
 
-        htmlBlock.addEventListener(
-            'click',
-            (e) => {
-                e.stopPropagation();
+        htmlBlock.addEventListener('click', (e) => {
+            e.stopPropagation();
 
-                const existing = document.getElementById('math-inspector-tooltip');
-                if (existing) {
-                    existing.remove();
-                    if (existing.dataset.anchorId === htmlBlock.id) {
-                        return;
-                    }
+            const existing = document.getElementById('math-inspector-tooltip');
+            if (existing) {
+                existing.remove();
+                if (existing.dataset.anchorId === htmlBlock.id) {
+                    return;
                 }
+            }
 
-                if (!htmlBlock.id) {
-                    htmlBlock.id = `math-block-${Math.random().toString(36).substring(2, 9)}`;
-                }
+            if (!htmlBlock.id) {
+                htmlBlock.id = `math-block-${Math.random().toString(36).substring(2, 9)}`;
+            }
 
-                const tooltip = document.createElement('div');
-                tooltip.id = 'math-inspector-tooltip';
-                tooltip.dataset.anchorId = htmlBlock.id;
-                tooltip.className =
-                    'absolute z-50 p-2.5 bg-slate-900 border border-slate-700 text-slate-300 font-mono text-[10px] rounded shadow-xl tracking-wider';
-                tooltip.innerHTML = `[ <span class="text-(--accent)">INSPECTING</span> ] &rarr; ${definition}`;
+            const tooltip = document.createElement('div');
+            tooltip.id = 'math-inspector-tooltip';
+            tooltip.dataset.anchorId = htmlBlock.id;
+            tooltip.className =
+                'absolute z-50 p-2.5 bg-slate-900 border border-slate-700 text-slate-300 font-mono text-[10px] rounded shadow-xl tracking-wider';
+            tooltip.innerHTML = `[ <span class="text-(--accent)">INSPECTING</span> ] &rarr; ${definition}`;
 
-                document.body.appendChild(tooltip);
+            document.body.appendChild(tooltip);
 
-                const rect = htmlBlock.getBoundingClientRect();
-                tooltip.style.left = `${window.scrollX + rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-                tooltip.style.top = `${window.scrollY + rect.bottom + 6}px`;
+            const rect = htmlBlock.getBoundingClientRect();
+            tooltip.style.left = `${window.scrollX + rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
+            tooltip.style.top = `${window.scrollY + rect.bottom + 6}px`;
 
-                const tooltipRect = tooltip.getBoundingClientRect();
-                if (tooltipRect.left < 10) {
-                    tooltip.style.left = '10px';
-                } else if (tooltipRect.right > window.innerWidth - 10) {
-                    tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
-                }
+            const tooltipRect = tooltip.getBoundingClientRect();
+            if (tooltipRect.left < 10) {
+                tooltip.style.left = '10px';
+            } else if (tooltipRect.right > window.innerWidth - 10) {
+                tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
+            }
 
-                const dismissTooltip = () => {
-                    tooltip.remove();
-                    document.removeEventListener('click', dismissTooltip);
-                };
-                setTimeout(() => {
-                    document.addEventListener('click', dismissTooltip, { signal });
-                }, 10);
-            },
-            { signal }
-        );
+            const dismissTooltip = () => {
+                tooltip.remove();
+                document.removeEventListener('click', dismissTooltip);
+            };
+            setTimeout(() => {
+                document.addEventListener('click', dismissTooltip);
+            }, 10);
+        });
     });
 }
