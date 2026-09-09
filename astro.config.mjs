@@ -49,7 +49,7 @@ export default defineConfig({
         }),
     },
 
-    // ⚡ Bolt: Enable Astro link prefetching for instant perceived page transitions
+    // Enable Astro link prefetching for instant perceived page transitions
     // This will prefetch assets for linked pages automatically either on hover or visibility
     prefetch: true,
 

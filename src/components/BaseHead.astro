@@ -6,7 +6,7 @@ import '@fontsource/nunito/latin-400.css';
 import '@fontsource/nunito/latin-500.css';
 import '@fontsource/nunito/latin-600.css';
 import '@fontsource/nunito/latin-700.css';
-// ⚡ Bolt: Explicitly import 700 weight CSS to utilize the preloaded font and avoid faux-bold synthesis
+// Explicitly import 700 weight CSS to utilize the preloaded font and avoid faux-bold synthesis
 import '@fontsource/poppins/latin-700.css';
 
 // Import font files for preloading
@@ -48,7 +48,7 @@ const is404 =
     Astro.url.pathname === '/404.html';
 const canonicalURL = is404 ? null : new URL(Astro.url.pathname, Astro.site);
 
-// ⚡ Bolt: Cache image URL instantiation to avoid redundant parsing during SSG
+// Cache image URL instantiation to avoid redundant parsing during SSG
 const imageUrl = new URL(image.src, Astro.site);
 
 const personSchema = JSON.stringify({
@@ -184,7 +184,7 @@ const personSchema = JSON.stringify({
 
     // Make scrollable code blocks keyboard-focusable for accessibility
     const checkScrollableCodeBlocks = () => {
-        // ⚡ Bolt: Replace querySelectorAll with getElementsByTagName for faster DOM traversal
+        // Use getElementsByTagName for faster DOM traversal
         Array.from(document.getElementsByTagName('pre')).forEach((block) => {
             if (block.scrollWidth > block.clientWidth) {
                 block.setAttribute('tabindex', '0');

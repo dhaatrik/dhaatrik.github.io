@@ -20,7 +20,7 @@ const getTechnicalDate = (d: Date) => {
     {
         format === 'technical'
             ? getTechnicalDate(date)
-            : /* ⚡ Bolt: Cache Intl.DateTimeFormat to avoid repeated object creation during SSG */
+            : /* Cache Intl.DateTimeFormat to avoid repeated object creation during SSG */
               dateFormatter.format(date)
     }
 </time>

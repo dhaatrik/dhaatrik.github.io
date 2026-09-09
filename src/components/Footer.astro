@@ -19,7 +19,7 @@ const bookTelemetry: Record<string, { status: string; focus: string }> = {
     'Thinking, Fast and Slow': { status: 'IN_PROGRESS', focus: 'COGNITION' },
 };
 
-// ⚡ Bolt: Fetch collections concurrently to parallelize file I/O operations and optimize Astro SSG build performance.
+// Fetch collections concurrently to parallelize file I/O operations and optimize Astro SSG build performance.
 const [rawPosts, projects] = await Promise.all([getCollection('blog'), getCollection('projects')]);
 
 // Fetch the 4 most recent blog posts for "Transmissions"
