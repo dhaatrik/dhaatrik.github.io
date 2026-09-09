@@ -70,9 +70,7 @@ export const setupHomeHub = () => {
         const target = document.getElementById('identity-rotator');
         if (!target) return;
 
-        const prefersReducedMotion = window.matchMedia(
-            '(prefers-reduced-motion: reduce)'
-        ).matches;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) {
             currentIdx = (currentIdx + 1) % identities.length;
             target.textContent = identities[currentIdx];
@@ -181,10 +179,7 @@ export const setupHomeHub = () => {
                         if (scrollY === 0) {
                             telemetryText.textContent = 'SCROLL TO INITIATE';
                         } else if (scrollY > 0 && scrollY < 120) {
-                            const pct = Math.min(
-                                100,
-                                Math.round((scrollY / 120) * 100)
-                            );
+                            const pct = Math.min(100, Math.round((scrollY / 120) * 100));
                             telemetryText.textContent = `LINKING TELEMETRY // ${pct}%`;
                         } else {
                             telemetryText.textContent = 'TELEMETRY ONLINE // 100%';
@@ -216,9 +211,7 @@ export const setupHomeHub = () => {
     }
 
     // --- 8.5. Bind View Transition Names to Homepage Blog Cards ---
-    const homeBlogCards = document.querySelectorAll(
-        'a.bento-card[href*="/transmissions/"]'
-    );
+    const homeBlogCards = document.querySelectorAll('a.bento-card[href*="/transmissions/"]');
     homeBlogCards.forEach((card) => {
         card.addEventListener('click', () => {
             const titleEl = card.querySelector('h3');

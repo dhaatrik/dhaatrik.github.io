@@ -236,8 +236,7 @@ export const setupHeader = () => {
             if (telemetryPathEl) {
                 const pathname = window.location.pathname;
                 const cleanPath = pathname.replace(/\/$/, '');
-                telemetryPathEl.textContent =
-                    cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
+                telemetryPathEl.textContent = cleanPath === '' ? '~/home' : `~/home${cleanPath}`;
             }
         };
         updateTelemetryPath();
@@ -262,8 +261,7 @@ export const setupHeader = () => {
                         const latencyMs = Math.round(
                             navEntry.responseStart - navEntry.requestStart
                         );
-                        const label =
-                            latencyMs < 50 ? 'FAST' : latencyMs < 200 ? 'STABLE' : 'SLOW';
+                        const label = latencyMs < 50 ? 'FAST' : latencyMs < 200 ? 'STABLE' : 'SLOW';
                         rttEl.textContent = `${latencyMs}ms // ${label}`;
                     } else {
                         rttEl.textContent = '—';
