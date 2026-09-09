@@ -30,7 +30,7 @@ description: >
 - **Markdown & Math Processor**: Unified processor pattern (`markdown.processor: unified({ remarkPlugins: [remarkMath, remarkMermaid], rehypePlugins: [rehypeKatex] })`)
 - **Styling**: Tailwind CSS v4 + `@tailwindcss/vite` plugin + modular CSS tokens in `src/styles/`
 - **Content Collections**: `src/content.config.ts` using Astro `glob()` loader + Zod schema validation
-    - `blog`: `pubDate`, `updatedDate`, `heroImage`, `readingTime`, `tags`, `series`, `seriesOrder`, `clearance`, `hasMath`
+    - `blog`: `pubDate`, `updatedDate`, `heroImage`, `tags`, `series`, `seriesOrder`, `clearance`, `hasMath`
     - `projects`: `title`, `description`, `logo`, `video`, `tags`, `githubUrl`, `progress`, `order`, `transmissionTag`, `telemetry`, `fuckup_teaser`, `pain_level`
 - **Images**: Astro `<Image>` component powered by `sharp`
 - **Typography**: `@fontsource/nunito` (body) + `@fontsource/poppins` (headings)
