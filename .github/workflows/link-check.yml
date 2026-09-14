@@ -38,9 +38,9 @@ jobs:
               uses: actions/cache@v4
               with:
                   path: .lycheecache
-                  key: lychee-cache-${{ github.sha }}
+                  key: lychee-cache-v2-${{ github.sha }}
                   restore-keys: |
-                      lychee-cache-
+                      lychee-cache-v2-
 
             - name: Run Lychee Link Checker
               id: lychee
@@ -49,6 +49,9 @@ jobs:
                   args: >-
                       --cache
                       --max-cache-age 1d
+                      --cache-exclude-status '500..=599'
+                      --max-retries 3
+                      --retry-wait-time 3
                       --timeout 15
                       --max-concurrency 8
                       --accept 200,204,429
