@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.9.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.9.0...v4.9.1) (2026-09-14)
+
+
+### Bug Fixes
+
+* **seo:** replace dead Amazon ASIN and exclude Amazon from link checker ([9fa69a3](https://github.com/dhaatrik/dhaatrik.github.io/commit/9fa69a3c46024190b06fa7e318ea1b385e3d5574))
+
 ## [4.9.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.8.1...v4.9.0) (2026-09-09)
 
 
