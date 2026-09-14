@@ -53,6 +53,7 @@ jobs:
                       --max-concurrency 8
                       --accept 200,204,429
                       --exclude 'https?://(www\.)?(x\.com|twitter\.com|linkedin\.com|medium\.com).*'
+                      --exclude 'https?://(www\.)?amazon\.(in|com|co\.uk).*'
                       --exclude 'https?://localhost.*'
                       --exclude 'https?://127\.0\.0\.1.*'
                       --exclude 'file:///.*'

@@ -75,7 +75,7 @@ export const recommendedBooks: Book[] = [
     {
         title: 'Thinking, Fast and Slow',
         author: 'Daniel Kahneman',
-        link: 'https://www.amazon.in/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555',
+        link: 'https://www.amazon.in/Thinking-Fast-Slow-Daniel-Kahneman/dp/0141033576',
         hint: "Hit hardest during FuelDrop's pricing architecture — I caught myself using System 1 thinking to make System 2 decisions and had to scrap two weeks of work.",
     },
 ];
