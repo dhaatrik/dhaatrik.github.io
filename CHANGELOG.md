@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.9.2](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.9.1...v4.9.2) (2026-09-14)
+
+
+### Bug Fixes
+
+* **ci:** add retries and exclude 5xx from lychee cache in link audit ([9fdf07b](https://github.com/dhaatrik/dhaatrik.github.io/commit/9fdf07ba9e586fca2db3ebd8e7c4990dfc997d51))
+
 ## [4.9.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.9.0...v4.9.1) (2026-09-14)
 
 
