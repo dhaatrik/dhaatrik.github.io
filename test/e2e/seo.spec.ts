@@ -212,4 +212,18 @@ test.describe('SEO and Metadata Verification', () => {
         const aiText = await aiResponse?.text();
         expect(aiText).toContain('Context: https://dhaatrik.github.io/llms.txt');
     });
+
+    test('llms.txt and llms-full.txt should be accessible and declare current site version', async ({
+        page,
+    }) => {
+        const llmsResponse = await page.goto('/llms.txt');
+        expect(llmsResponse?.status()).toBe(200);
+        const llmsText = await llmsResponse?.text();
+        expect(llmsText).toMatch(/Site version:\s*v\d+\.\d+\.\d+/);
+
+        const llmsFullResponse = await page.goto('/llms-full.txt');
+        expect(llmsFullResponse?.status()).toBe(200);
+        const llmsFullText = await llmsFullResponse?.text();
+        expect(llmsFullText).toMatch(/Site version:\s*v\d+\.\d+\.\d+/);
+    });
 });
