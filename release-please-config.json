@@ -8,6 +8,16 @@
             "bump-minor-pre-major": false,
             "bump-patch-for-minor-pre-major": false,
             "include-component-in-tag": false,
+            "extra-files": [
+                {
+                    "type": "generic",
+                    "path": "public/llms.txt"
+                },
+                {
+                    "type": "generic",
+                    "path": "public/llms-full.txt"
+                }
+            ],
             "changelog-sections": [
                 { "type": "feat", "section": "Features", "hidden": false },
                 { "type": "fix", "section": "Bug Fixes", "hidden": false },

@@ -10,6 +10,7 @@ import tailwindcss from '@tailwindcss/vite';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeAccessibleTable from './src/plugins/rehype-accessible-table.mjs';
+import { syncVersions } from './scripts/sync-versions.mjs';
 
 const markdownRehypePlugins = [rehypeKatex, rehypeAccessibleTable];
 
@@ -21,8 +22,11 @@ export default defineConfig({
             entryLimit: 10000,
         }),
         {
-            name: 'sitemap-fallback-integration',
+            name: 'sitemap-fallback-and-version-sync',
             hooks: {
+                'astro:config:setup': () => {
+                    syncVersions();
+                },
                 'astro:build:done': async ({ dir }) => {
                     const distDir = fileURLToPath(dir);
                     const sitemapIndexPath = resolve(distDir, 'sitemap-index.xml');
@@ -30,8 +34,10 @@ export default defineConfig({
                     if (existsSync(sitemapIndexPath)) {
                         await copyFile(sitemapIndexPath, sitemapFallbackPath);
                     }
+                    syncVersions();
                 },
                 'astro:server:setup': ({ server }) => {
+                    syncVersions();
                     server.middlewares.use(async (req, res, next) => {
                         if (req.url === '/sitemap-index.xml' || req.url === '/sitemap.xml') {
                             const distPath = resolve('./dist/sitemap-index.xml');
