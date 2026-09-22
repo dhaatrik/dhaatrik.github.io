@@ -35,7 +35,6 @@ const projects = defineCollection({
             logo: z.optional(image()),
             tags: z.array(z.string()).optional(),
             githubUrl: z
-                .string()
                 .url()
                 .refine((url) => url.startsWith('http://') || url.startsWith('https://'), {
                     message: 'URL must use http or https protocol for security',
