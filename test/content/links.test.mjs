@@ -45,6 +45,7 @@ const validStaticRoutes = new Set([
     '/ai.txt',
     '/robots.txt',
     '/sitemap-index.xml',
+    '/sitemap.xml',
 ]);
 
 const linkRegex = /\[.*?\]\((.*?)\)/g;

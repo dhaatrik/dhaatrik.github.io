@@ -9,10 +9,12 @@
     },
     "scripts": {
         "dev": "astro dev",
+        "prebuild": "node ./scripts/sync-versions.mjs",
         "build": "astro build",
         "preview": "astro preview",
         "astro": "astro",
         "format": "prettier --write .",
+        "sync:version": "node ./scripts/sync-versions.mjs",
         "test": "node --experimental-strip-types --import \"data:text/javascript,import { register } from 'node:module'; register(new URL('./test/loaders/loader.mjs', 'file://' + process.cwd() + '/'));\" --test test/**/*.test.mjs",
         "test:e2e": "playwright test"
     },

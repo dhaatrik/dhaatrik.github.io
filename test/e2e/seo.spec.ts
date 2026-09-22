@@ -135,12 +135,32 @@ test.describe('SEO and Metadata Verification', () => {
         const robotsText = await robotsResponse?.text();
         expect(robotsText).toContain('User-agent: *');
         expect(robotsText).toContain('Sitemap: https://dhaatrik.github.io/sitemap-index.xml');
+        expect(robotsText).toContain('Sitemap: https://dhaatrik.github.io/sitemap.xml');
 
         // Check canonical sitemap-index.xml is reachable and correctly structured (must return 200, never 404)
         const sitemapIndexResponse = await page.goto('/sitemap-index.xml');
         expect(sitemapIndexResponse?.status()).toBe(200);
         const sitemapIndexText = await sitemapIndexResponse?.text();
         expect(sitemapIndexText).toContain('<sitemapindex');
+
+        // Check fallback sitemap.xml is reachable and mirrors sitemap-index.xml (must return 200, never 404)
+        const sitemapResponse = await page.goto('/sitemap.xml');
+        expect(sitemapResponse?.status()).toBe(200);
+        const sitemapText = await sitemapResponse?.text();
+        expect(sitemapText).toContain('<sitemapindex');
+
+        // Check fallback sitemap.xml with query parameters (must return 200, never 404)
+        const sitemapQueryResponse = await page.goto('/sitemap.xml?v=4.9.2');
+        expect(sitemapQueryResponse?.status()).toBe(200);
+        const sitemapQueryText = await sitemapQueryResponse?.text();
+        expect(sitemapQueryText).toContain('<sitemapindex');
+
+        // Check sub-sitemap /sitemap-0.xml is reachable when present
+        const subSitemapResponse = await page.goto('/sitemap-0.xml');
+        if (subSitemapResponse?.status() === 200) {
+            const subSitemapText = await subSitemapResponse?.text();
+            expect(subSitemapText).toContain('<urlset');
+        }
     });
 
     test('project detail page should contain project logo as OpenGraph and Twitter images', async ({
@@ -204,5 +224,20 @@ test.describe('SEO and Metadata Verification', () => {
         expect(aiResponse?.status()).toBe(200);
         const aiText = await aiResponse?.text();
         expect(aiText).toContain('Context: https://dhaatrik.github.io/llms.txt');
+    });
+
+    test('llms.txt and llms-full.txt should be accessible and declare current site version', async ({
+        page,
+    }) => {
+        const llmsResponse = await page.goto('/llms.txt');
+        expect(llmsResponse?.status()).toBe(200);
+        const llmsText = await llmsResponse?.text();
+        expect(llmsText).toMatch(/Site version:\s*v\d+\.\d+\.\d+/);
+        expect(llmsText).toContain('https://dhaatrik.github.io/sitemap.xml');
+
+        const llmsFullResponse = await page.goto('/llms-full.txt');
+        expect(llmsFullResponse?.status()).toBe(200);
+        const llmsFullText = await llmsFullResponse?.text();
+        expect(llmsFullText).toMatch(/Site version:\s*v\d+\.\d+\.\d+/);
     });
 });
