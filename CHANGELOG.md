@@ -1,5 +1,30 @@
 # Changelog
 
+## [4.10.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.9.2...v4.10.0) (2026-09-22)
+
+
+### Features
+
+* **seo:** automate version synchronization across repository files ([cc9a356](https://github.com/dhaatrik/dhaatrik.github.io/commit/cc9a356c0f79b2eb53e3a8b286864cbba57ab4e7))
+* **seo:** restore sitemap.xml fallback mirroring sitemap-index.xml ([9c1f7f9](https://github.com/dhaatrik/dhaatrik.github.io/commit/9c1f7f97ded50f3c96ce3daf8b46141f285e20e5))
+
+
+### Bug Fixes
+
+* **seo:** harden sitemap dev middleware and build hooks for query params and sub-sitemaps ([4471a51](https://github.com/dhaatrik/dhaatrik.github.io/commit/4471a51363e96a803f2b9a77ae710c6b564418f5))
+* **seo:** improve version synchronizer regex resilience and manifest alignment ([a2ed99a](https://github.com/dhaatrik/dhaatrik.github.io/commit/a2ed99a036dbbe6c20554ecb556188e5c5ea0623))
+
+
+### Code Refactoring
+
+* **projects:** migrate deprecated z.string().url() to modern z.url() ([b2d231b](https://github.com/dhaatrik/dhaatrik.github.io/commit/b2d231b72edbb62b8a9a8f9c3a2727cf60697d0c))
+
+
+### Tests & Verification
+
+* **seo:** add unit and e2e verification for version alignment ([f0b4bab](https://github.com/dhaatrik/dhaatrik.github.io/commit/f0b4babecb2f05385418cc75b0e5d2445cdff61c))
+* **seo:** verify query-param sitemap handling and version replacer edge cases ([8a39f3c](https://github.com/dhaatrik/dhaatrik.github.io/commit/8a39f3c138520a3ac620ba8eda03a13115269d62))
+
 ## [4.9.2](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.9.1...v4.9.2) (2026-09-14)
 
 
