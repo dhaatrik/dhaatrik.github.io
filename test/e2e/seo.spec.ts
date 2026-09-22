@@ -135,12 +135,19 @@ test.describe('SEO and Metadata Verification', () => {
         const robotsText = await robotsResponse?.text();
         expect(robotsText).toContain('User-agent: *');
         expect(robotsText).toContain('Sitemap: https://dhaatrik.github.io/sitemap-index.xml');
+        expect(robotsText).toContain('Sitemap: https://dhaatrik.github.io/sitemap.xml');
 
         // Check canonical sitemap-index.xml is reachable and correctly structured (must return 200, never 404)
         const sitemapIndexResponse = await page.goto('/sitemap-index.xml');
         expect(sitemapIndexResponse?.status()).toBe(200);
         const sitemapIndexText = await sitemapIndexResponse?.text();
         expect(sitemapIndexText).toContain('<sitemapindex');
+
+        // Check fallback sitemap.xml is reachable and mirrors sitemap-index.xml (must return 200, never 404)
+        const sitemapResponse = await page.goto('/sitemap.xml');
+        expect(sitemapResponse?.status()).toBe(200);
+        const sitemapText = await sitemapResponse?.text();
+        expect(sitemapText).toContain('<sitemapindex');
     });
 
     test('project detail page should contain project logo as OpenGraph and Twitter images', async ({

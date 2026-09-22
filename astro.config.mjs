@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
-import { readFile } from 'node:fs/promises';
+import { readFile, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 import { unified } from '@astrojs/markdown-remark';
@@ -20,11 +21,19 @@ export default defineConfig({
             entryLimit: 10000,
         }),
         {
-            name: 'dev-sitemap-server',
+            name: 'sitemap-fallback-integration',
             hooks: {
+                'astro:build:done': async ({ dir }) => {
+                    const distDir = fileURLToPath(dir);
+                    const sitemapIndexPath = resolve(distDir, 'sitemap-index.xml');
+                    const sitemapFallbackPath = resolve(distDir, 'sitemap.xml');
+                    if (existsSync(sitemapIndexPath)) {
+                        await copyFile(sitemapIndexPath, sitemapFallbackPath);
+                    }
+                },
                 'astro:server:setup': ({ server }) => {
                     server.middlewares.use(async (req, res, next) => {
-                        if (req.url === '/sitemap-index.xml') {
+                        if (req.url === '/sitemap-index.xml' || req.url === '/sitemap.xml') {
                             const distPath = resolve('./dist/sitemap-index.xml');
                             const xml = existsSync(distPath)
                                 ? await readFile(distPath, 'utf-8')
