@@ -33,22 +33,47 @@ export default defineConfig({
                     const sitemapFallbackPath = resolve(distDir, 'sitemap.xml');
                     if (existsSync(sitemapIndexPath)) {
                         await copyFile(sitemapIndexPath, sitemapFallbackPath);
+                    } else if (existsSync(sitemapFallbackPath)) {
+                        await copyFile(sitemapFallbackPath, sitemapIndexPath);
                     }
-                    syncVersions();
+                    syncVersions(false, distDir);
                 },
                 'astro:server:setup': ({ server }) => {
                     syncVersions();
                     server.middlewares.use(async (req, res, next) => {
-                        if (req.url === '/sitemap-index.xml' || req.url === '/sitemap.xml') {
+                        const rawUrl = req.url || '';
+                        const pathname = rawUrl.split('?')[0];
+
+                        if (pathname === '/sitemap-index.xml' || pathname === '/sitemap.xml') {
                             const distPath = resolve('./dist/sitemap-index.xml');
                             const xml = existsSync(distPath)
                                 ? await readFile(distPath, 'utf-8')
                                 : '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://dhaatrik.github.io/sitemap-0.xml</loc></sitemap></sitemapindex>';
-                            res.setHeader('Content-Type', 'application/xml');
+                            res.setHeader('Content-Type', 'application/xml; charset=utf-8');
                             res.statusCode = 200;
+                            if (req.method === 'HEAD') {
+                                res.end();
+                                return;
+                            }
                             res.end(xml);
                             return;
                         }
+
+                        if (/^\/sitemap-\d+\.xml$/.test(pathname)) {
+                            const subfilePath = resolve(`./dist${pathname}`);
+                            if (existsSync(subfilePath)) {
+                                const xml = await readFile(subfilePath, 'utf-8');
+                                res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+                                res.statusCode = 200;
+                                if (req.method === 'HEAD') {
+                                    res.end();
+                                    return;
+                                }
+                                res.end(xml);
+                                return;
+                            }
+                        }
+
                         next();
                     });
                 },
