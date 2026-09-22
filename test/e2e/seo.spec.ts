@@ -148,6 +148,19 @@ test.describe('SEO and Metadata Verification', () => {
         expect(sitemapResponse?.status()).toBe(200);
         const sitemapText = await sitemapResponse?.text();
         expect(sitemapText).toContain('<sitemapindex');
+
+        // Check fallback sitemap.xml with query parameters (must return 200, never 404)
+        const sitemapQueryResponse = await page.goto('/sitemap.xml?v=4.9.2');
+        expect(sitemapQueryResponse?.status()).toBe(200);
+        const sitemapQueryText = await sitemapQueryResponse?.text();
+        expect(sitemapQueryText).toContain('<sitemapindex');
+
+        // Check sub-sitemap /sitemap-0.xml is reachable when present
+        const subSitemapResponse = await page.goto('/sitemap-0.xml');
+        if (subSitemapResponse?.status() === 200) {
+            const subSitemapText = await subSitemapResponse?.text();
+            expect(subSitemapText).toContain('<urlset');
+        }
     });
 
     test('project detail page should contain project logo as OpenGraph and Twitter images', async ({
@@ -220,6 +233,7 @@ test.describe('SEO and Metadata Verification', () => {
         expect(llmsResponse?.status()).toBe(200);
         const llmsText = await llmsResponse?.text();
         expect(llmsText).toMatch(/Site version:\s*v\d+\.\d+\.\d+/);
+        expect(llmsText).toContain('https://dhaatrik.github.io/sitemap.xml');
 
         const llmsFullResponse = await page.goto('/llms-full.txt');
         expect(llmsFullResponse?.status()).toBe(200);

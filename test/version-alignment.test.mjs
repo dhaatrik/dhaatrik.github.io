@@ -95,5 +95,52 @@ describe('Repository & Site Version Alignment', () => {
             0,
             'Repository should already be fully synchronized with package.json version'
         );
+        assert.strictEqual(result.version, pkg.version);
+        assert.strictEqual(result.versionTag, `v${pkg.version}`);
+    });
+
+    test('version replacer patterns correctly handle version variants and prereleases', () => {
+        const sampleVersionTag = 'v4.10.0';
+        const llmsPattern =
+            /Site version:\s*v?[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.]+)?(\.?)(\s*<!--\s*x-release-please-version\s*-->)?/gi;
+        const llmsReplacement = `Site version: ${sampleVersionTag}. <!-- x-release-please-version -->`;
+
+        const variants = [
+            'Site version: v4.9.2. <!-- x-release-please-version -->',
+            'Site version: 4.9.2. <!-- x-release-please-version -->',
+            'Site version: v4.9.2',
+            'Site version: 4.9.2',
+            'Site version: v4.10.0-rc.1. <!-- x-release-please-version -->',
+        ];
+
+        for (const variant of variants) {
+            const replaced = variant.replace(llmsPattern, llmsReplacement);
+            assert.strictEqual(
+                replaced,
+                `Site version: ${sampleVersionTag}. <!-- x-release-please-version -->`,
+                `Failed to normalize variant: "${variant}"`
+            );
+        }
+
+        const llmsFullPattern =
+            /\*\*Site version:\s*v?[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.]+)?(\.?)\*\*(\s*<!--\s*x-release-please-version\s*-->)?/gi;
+        const llmsFullReplacement = `**Site version: ${sampleVersionTag}.** <!-- x-release-please-version -->`;
+
+        const fullVariants = [
+            '**Site version: v4.9.2.** <!-- x-release-please-version -->',
+            '**Site version: 4.9.2.** <!-- x-release-please-version -->',
+            '**Site version: v4.9.2**',
+            '**Site version: 4.9.2**',
+            '**Site version: v4.10.0-beta.0.** <!-- x-release-please-version -->',
+        ];
+
+        for (const variant of fullVariants) {
+            const replaced = variant.replace(llmsFullPattern, llmsFullReplacement);
+            assert.strictEqual(
+                replaced,
+                `**Site version: ${sampleVersionTag}.** <!-- x-release-please-version -->`,
+                `Failed to normalize full variant: "${variant}"`
+            );
+        }
     });
 });
