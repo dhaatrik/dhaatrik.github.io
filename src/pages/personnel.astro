@@ -12,17 +12,14 @@ import personnelOgImage from '../assets/og/personnel-og.jpg';
 
 import { techGroups } from '../data/techStack';
 
-// Library Tracking Data
 const booksRead = 7;
 const booksGoal = 52;
 
-// Pre-render rocket equation using KaTeX
 const rocketEquationHtml = katex.renderToString('\\Delta v = v_e \\ln \\frac{m_0}{m_f}', {
     displayMode: true,
     throwOnError: false,
 });
 
-// BreadcrumbList JSON-LD for clean SERP navigation trails
 const breadcrumbSchema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -50,7 +47,6 @@ const breadcrumbSchema = JSON.stringify({
         <KatexStyles />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
-        <!-- Flashlight Spotlight Background -->
         <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
         <Header />
         <main
@@ -825,7 +821,6 @@ const breadcrumbSchema = JSON.stringify({
                     </div>
 
                     <div class="relative z-10 grid grid-cols-1 md:grid-cols-[1fr_2.5fr]">
-                        <!-- Left sidebar - Telemetry/Status -->
                         <div
                             class="flex flex-col justify-between border-b border-slate-100 bg-slate-50/50 p-6 md:border-r md:border-b-0 md:p-8 dark:border-white/5 dark:bg-black/20"
                         >
@@ -867,7 +862,6 @@ const breadcrumbSchema = JSON.stringify({
                             </div>
                         </div>
 
-                        <!-- Right content - Details & Link -->
                         <div class="flex flex-col justify-between p-6 md:p-8">
                             <div>
                                 <div class="mb-6 flex items-start justify-between">
@@ -1089,11 +1083,9 @@ const breadcrumbSchema = JSON.stringify({
                 </p>
 
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    {/* MODULE 01: Frontend */}
                     <div
                         class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
                     >
-                        <!-- Corner Target Accents -->
                         <span
                             class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
                             >+</span
@@ -1111,7 +1103,6 @@ const breadcrumbSchema = JSON.stringify({
                             >+</span
                         >
 
-                        <!-- Corner Labels -->
                         <span
                             class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
                             >// MODULE_01 // FE_SYS</span
@@ -1144,7 +1135,6 @@ const breadcrumbSchema = JSON.stringify({
                             </div>
                         </div>
 
-                        <!-- Bottom Corner Labels -->
                         <span
                             class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
                             >REF_ID: FE-01</span
@@ -1155,11 +1145,9 @@ const breadcrumbSchema = JSON.stringify({
                         >
                     </div>
 
-                    {/* MODULE 02: Backend */}
                     <div
                         class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
                     >
-                        <!-- Corner Target Accents -->
                         <span
                             class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
                             >+</span
@@ -1177,7 +1165,6 @@ const breadcrumbSchema = JSON.stringify({
                             >+</span
                         >
 
-                        <!-- Corner Labels -->
                         <span
                             class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
                             >// MODULE_02 // BE_SYS</span
@@ -1210,7 +1197,6 @@ const breadcrumbSchema = JSON.stringify({
                             </div>
                         </div>
 
-                        <!-- Bottom Corner Labels -->
                         <span
                             class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
                             >REF_ID: BE-02</span
@@ -1221,11 +1207,9 @@ const breadcrumbSchema = JSON.stringify({
                         >
                     </div>
 
-                    {/* MODULE 03: Data & Cloud */}
                     <div
                         class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
                     >
-                        <!-- Corner Target Accents -->
                         <span
                             class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
                             >+</span
@@ -1243,7 +1227,6 @@ const breadcrumbSchema = JSON.stringify({
                             >+</span
                         >
 
-                        <!-- Corner Labels -->
                         <span
                             class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
                             >// MODULE_03 // DB_SYS</span
@@ -1276,7 +1259,6 @@ const breadcrumbSchema = JSON.stringify({
                             </div>
                         </div>
 
-                        <!-- Bottom Corner Labels -->
                         <span
                             class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
                             >REF_ID: DB-03</span
@@ -1287,11 +1269,9 @@ const breadcrumbSchema = JSON.stringify({
                         >
                     </div>
 
-                    {/* MODULE 04: AI & Learning */}
                     <div
                         class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
                     >
-                        <!-- Corner Target Accents -->
                         <span
                             class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
                             >+</span
@@ -1309,7 +1289,6 @@ const breadcrumbSchema = JSON.stringify({
                             >+</span
                         >
 
-                        <!-- Corner Labels -->
                         <span
                             class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
                             >// MODULE_04 // AI_SYS</span
@@ -1342,7 +1321,6 @@ const breadcrumbSchema = JSON.stringify({
                             </div>
                         </div>
 
-                        <!-- Bottom Corner Labels -->
                         <span
                             class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
                             >REF_ID: AI-04</span
@@ -1355,7 +1333,6 @@ const breadcrumbSchema = JSON.stringify({
                 </div>
             </section>
 
-            {/* 9. Interactive Terminal Contact CTA */}
             <section class="layout-container reveal-on-scroll">
                 <div
                     class="glass-surface bento-card group relative flex flex-col items-center overflow-hidden p-8 text-center md:p-12"
@@ -1412,7 +1389,6 @@ const breadcrumbSchema = JSON.stringify({
         </style>
         <script>
             document.addEventListener('astro:page-load', () => {
-                // 1. Coordinated parallel decode animation on load
                 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
                 const cypherElements = Array.from(
                     document.getElementsByClassName('cypher-text')
@@ -1458,7 +1434,6 @@ const breadcrumbSchema = JSON.stringify({
 
                 runParallelDecode();
 
-                // 2. Scroll-triggered IntersectionObserver Typewriter for Terminal
                 const terminalSnippet = document.getElementById('terminal-snippet');
                 let typewriterTimeout: ReturnType<typeof setTimeout> | null = null;
 
@@ -1508,7 +1483,6 @@ const breadcrumbSchema = JSON.stringify({
                     observer.observe(terminalSnippet);
                 }
 
-                // 4. Kinetic Reticle Mouse Tracking Parallax
                 const reticle = document.getElementById('reticle-bg');
                 let reticleRafId: number | null = null;
                 let mouseX = 0;
@@ -1543,7 +1517,6 @@ const breadcrumbSchema = JSON.stringify({
                     window.addEventListener('mousemove', handleReticleParallax);
                 }
 
-                // 5. The "Offline-First" Easter Egg
                 const handleOffline = () => {
                     const toast = document.createElement('div');
                     toast.className =
@@ -1551,12 +1524,10 @@ const breadcrumbSchema = JSON.stringify({
                     toast.innerHTML = `<span class="text-(--accent) font-bold">Vellor Protocol Engaged:</span> You are offline, but this data remains accessible.`;
                     document.body.appendChild(toast);
 
-                    // Animate in
                     setTimeout(() => {
                         toast.classList.remove('translate-y-10', 'opacity-0');
                     }, 100);
 
-                    // Remove after 6 seconds
                     setTimeout(() => {
                         toast.classList.add('translate-y-10', 'opacity-0');
                         setTimeout(() => toast.remove(), 300);
@@ -1565,20 +1536,16 @@ const breadcrumbSchema = JSON.stringify({
 
                 window.addEventListener('offline', handleOffline);
 
-                // Cleanup Event Listeners on Page Transition
                 document.addEventListener(
                     'astro:before-preparation',
                     () => {
-                        // Clear cypher intervals
                         activeIntervals.forEach((interval) => clearInterval(interval));
                         activeIntervals.clear();
 
-                        // Clear typewriter timeout
                         if (typewriterTimeout) {
                             clearTimeout(typewriterTimeout);
                         }
 
-                        // Remove mousemove listener
                         if (!prefersReducedMotion) {
                             window.removeEventListener('mousemove', handleReticleParallax);
                         }
@@ -1586,7 +1553,6 @@ const breadcrumbSchema = JSON.stringify({
                             window.cancelAnimationFrame(reticleRafId);
                         }
 
-                        // Remove offline event listener
                         window.removeEventListener('offline', handleOffline);
                     },
                     { once: true }
