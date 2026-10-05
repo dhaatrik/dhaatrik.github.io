@@ -93,7 +93,7 @@ Every major report **must** follow this 6-part structure (use as **H2** headings
 
 ## Astro Frontmatter Template (Required)
 
-Use this exact structure for every new `.md` / `.mdx` file in `src/content/projects/` or `src/content/blog/`:
+Use this exact structure for every new `.md` file in `src/content/projects/` or `src/content/blog/`:
 
 ```yaml
 ---
