@@ -36,7 +36,6 @@ export default defineConfig({
                     } else if (existsSync(sitemapFallbackPath)) {
                         await copyFile(sitemapFallbackPath, sitemapIndexPath);
                     }
-                    syncVersions(false, distDir);
                 },
                 'astro:server:setup': ({ server }) => {
                     syncVersions();
