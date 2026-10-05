@@ -42,7 +42,6 @@ const {
 
 const readingTime = Astro.props.readingTime ?? getReadingTime(rawContent);
 
-// Generate Article JSON-LD for blog post SEO and LLM citation
 const articleSchema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -68,7 +67,6 @@ const articleSchema = JSON.stringify({
     ...(tags && tags.length > 0 && { keywords: tags.join(', ') }),
 }).replace(/</g, '\\u003c');
 
-// Generate BreadcrumbList JSON-LD
 const breadcrumbSchema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -107,19 +105,15 @@ const breadcrumbSchema = JSON.stringify({
             updatedDate={updatedDate}
             keywords={tags}
         />
-        <!-- Article-specific JSON-LD -->
         <script is:inline type="application/ld+json" set:html={articleSchema} />
-        <!-- Breadcrumb JSON-LD -->
         <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
         <TypographyStyles />
         {hasMath && <KatexStyles />}
     </head>
 
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
-        <!-- Flashlight Spotlight Background -->
         <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
 
-        <!-- Reading Progress Bar -->
         <div id="progress-container" class="fixed top-0 left-0 z-50 h-0.5 w-full bg-transparent">
             <div
                 id="progress-bar"
@@ -160,13 +154,10 @@ const breadcrumbSchema = JSON.stringify({
             <article
                 class="relative mx-auto grid max-w-7xl grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_280px]"
             >
-                <!-- Main Content Column -->
                 <div class="prose-container w-full min-w-0">
-                    <!-- Laboratory Report Header -->
                     <div
                         class="blog-reveal blog-reveal-1 glass-surface relative mb-10 rounded-xl p-5 font-mono text-xs text-slate-600 shadow-xs dark:text-slate-400"
                     >
-                        {/* Corner Target Accents */}
                         <span
                             class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
                             >+</span
@@ -317,7 +308,6 @@ const breadcrumbSchema = JSON.stringify({
                         />
                     </div>
 
-                    <!-- Transmission Export CTA -->
                     <div
                         class="blog-reveal blog-reveal-3 mt-16 border-t border-slate-200 pt-8 dark:border-slate-800"
                     >
@@ -466,7 +456,6 @@ const breadcrumbSchema = JSON.stringify({
                         </div>
                     </div>
 
-                    <!-- Previous / Next Navigation -->
                     {
                         (prevPost || nextPost) && (
                             <div class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -545,7 +534,6 @@ const breadcrumbSchema = JSON.stringify({
                     }
                 </div>
 
-                <!-- Sticky Sidebar TOC -->
                 {
                     headings.length > 0 ? (
                         <aside

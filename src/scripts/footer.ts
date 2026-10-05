@@ -21,7 +21,6 @@ export const setupFooter = () => {
         }
     })();
 
-    // 1. Calculate relative time for recent transmissions (automatically updates)
     const updateRelativeTimes = () => {
         const indicators = document.getElementsByClassName('relative-time-indicator');
         const now = new Date().getTime();
@@ -58,7 +57,6 @@ export const setupFooter = () => {
     };
     updateRelativeTimes();
 
-    // 2. Sequential Cyber Scramble Text Deceleration Sequence
     const cyberIcons = document.getElementsByClassName('cyber-icon');
     const hexChars = [
         '0',
@@ -176,7 +174,6 @@ export const setupFooter = () => {
         }
     });
 
-    // 3. Telemetry loop (Uptime and fluctuating CPU load)
     const uptimeEl = document.getElementById('footer-uptime');
     const startTime = Date.now();
 
@@ -200,7 +197,6 @@ export const setupFooter = () => {
 
     const telemetryInterval = window.setInterval(updateTelemetry, 1000);
 
-    // 4. Return to Orbit button
     const returnBtn = document.getElementById('return-to-orbit-btn');
     if (returnBtn) {
         returnBtn.addEventListener(
