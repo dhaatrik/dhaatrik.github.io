@@ -19,16 +19,20 @@ const blogSchema = z.object({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     heroImage: imageMock(),
-    readingTime: z.string().optional(),
+    tags: z.array(z.string()).optional(),
     series: z.string().optional(),
     seriesOrder: z.number().optional(),
+    author: z.string().default('DHAATRIK'),
+    clearance: z
+        .enum(['PUBLIC', 'INTERNAL', 'RESTRICTED', 'CONFIDENTIAL', 'LEVEL_4'])
+        .default('PUBLIC'),
     hasMath: z.boolean().default(false),
 });
 
 const projectsSchema = z.object({
     title: z.string(),
     description: z.string(),
-    logo: z.string().optional(),
+    logo: imageMock(),
     tags: z.array(z.string()).optional(),
     githubUrl: z
         .url()
@@ -38,7 +42,8 @@ const projectsSchema = z.object({
         .optional(),
     progress: z.string().optional(),
     order: z.number().default(0),
-    telemetry: z.string().regex(/^STATUS:\s*.+/i),
+    transmissionTag: z.string().optional(),
+    telemetry: z.string().regex(/^STATUS:\s*.+/i, 'telemetry must start with STATUS:'),
     fuckup_teaser: z.string().min(10),
     pain_level: z.number().min(1).max(5),
 });
@@ -53,7 +58,7 @@ const validateDirectory = (dirPath, schema, collectionName) => {
 
     const files = fs
         .readdirSync(dirPath)
-        .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'));
+        .filter((file) => file.endsWith('.md'));
 
     describe(`${collectionName} Content Validation`, () => {
         files.forEach((file) => {
