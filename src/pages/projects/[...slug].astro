@@ -92,11 +92,9 @@ const breadcrumbSchema = {
 };
 const breadcrumbLd = JSON.stringify(breadcrumbSchema);
 
-// Enrich page title with descriptive pitch and author branding for SERP snippets
+// Enrich page title with descriptive pitch for SERP snippets
 const shortTagline = description.includes('—') ? description.split('—')[0].trim() : '';
-const pageTitle = shortTagline
-    ? `${title} — ${shortTagline} | Dhaatrik Chowdhury`
-    : `${title} | Projects — Dhaatrik Chowdhury`;
+const pageTitle = shortTagline ? `${title} — ${shortTagline}` : `${title} | Projects`;
 ---
 
 <!doctype html>

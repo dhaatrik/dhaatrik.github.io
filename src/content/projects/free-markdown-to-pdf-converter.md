@@ -1,6 +1,6 @@
 ---
 title: 'MarkPDF'
-description: 'Browser markdown-to-PDF via react-markdown preview and native print export — GFM, syntax highlighting, no server. Not KaTeX, not jsPDF.'
+description: 'Browser markdown-to-PDF — react-markdown preview and native print export, GFM, syntax highlighting, no server. Not KaTeX, not jsPDF.'
 logo: '../../assets/markpdf.png'
 githubUrl: 'https://github.com/dhaatrik/free-markdown-to-pdf-converter'
 progress: 'v1.0.0 — GFM editor, live preview, browser print Save as PDF'
