@@ -1,5 +1,5 @@
 ---
-title: 'Why MarkPDF — Zero-Install Markdown to PDF via Browser Print, Not jsPDF'
+title: 'Why MarkPDF — Browser Print Markdown to PDF, Not jsPDF'
 description: 'Honest origin story for MarkPDF v1.0.0: react-markdown + GFM preview, browser print-to-PDF export — not KaTeX, not jsPDF, not Remark/Rehype pipeline.'
 pubDate: 2026-07-02
 heroImage: '../../assets/og/markpdf-transmissions.jpg'

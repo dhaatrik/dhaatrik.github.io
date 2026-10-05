@@ -1,5 +1,5 @@
 ---
-title: 'Why DeltaV Lab Is Not Professional-Grade (Despite What the README Says)'
+title: 'Why DeltaV Lab Is Not Professional-Grade'
 description: 'An honest audit: no published flight V&V, simplified 2D physics, browser 50Hz limits, and the gaps in path_to_perfection.md — implemented rigor is not industry trust.'
 pubDate: 2026-06-30
 updatedDate: 2026-06-30

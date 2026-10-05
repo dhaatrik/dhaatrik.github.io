@@ -73,28 +73,28 @@ Features a terminal-style search widget implementing the **WAI-ARIA 1.2 Combobox
 
 First-person origin story for DeltaV Lab (github.com/dhaatrik/professional-rocket-launch-simulation). Motivation: bridge Kerbal Space Program intuition and engineering auditability without STK licensing. Defines concrete scope — VAB vehicle assembly, Mission Control flight sim, optional telemetry.html second screen, 50Hz Web Worker physics with SharedArrayBuffer. Audience: students, hobbyists, self — explicitly not range-safety certification. Features: DSL flight computer, FTS, fault injector, checklist, black box CSV export. Honest contrast between README "engineering-grade" marketing and site diary truth. Cross-links to science and limitations transmissions.
 
-### The Science Inside DeltaV Lab — Forces, Integration, and Flight Software
+### The Science Inside DeltaV Lab — Forces, Integration, and GNC
 **URL:** https://dhaatrik.github.io/transmissions/deltav-lab-science/
 **Published:** 2026-06-29
 **Tags:** aerospace, deltav-lab, physics, simulation
 
 Technical transmission grounded in professional-rocket-launch-simulation repo source. Architecture: RK4 integration at FIXED_DT=0.02s (50Hz) in PhysicsWorker.ts, SharedArrayBuffer telemetry, main-thread paint only. Physics: inverse-square gravity, variable-mass thrust with sea-level/vacuum Isp, exponential atmosphere (7km scale height, density LUT to 200km), dynamic pressure drag, layered wind + Dryden gusts, CP-vs-CoM aero stability, thermal ablation. Orbital mechanics: Vis-Viva, Keplerian elements, Hohmann transfers, ground track with Earth rotation. DSL flight computer (WHEN/THEN) with ALTITUDE, VELOCITY, APOGEE, DYNAMIC_PRESSURE conditions. Safety: FTS, checklist, fault injector. Vitest validates analytical cases — not flight telemetry. Notes 2D scope ceiling.
 
-### Why DeltaV Lab Is Not Professional-Grade (Despite What the README Says)
+### Why DeltaV Lab Is Not Professional-Grade
 **URL:** https://dhaatrik.github.io/transmissions/deltav-lab-not-professional-grade/
 **Published:** 2026-06-30
 **Tags:** aerospace, deltav-lab, fuckups, simulation
 
 Honest audit distinguishing implemented rigor from industry trust. verification/ folder contains UI/tooltip tests — no Falcon 9 or Electron flight-telemetry V&V. Gaps from path_to_perfection.md: no Monte Carlo dispersion, no 6DOF/slosh/TVC dynamics, no NRLMSISE-00/ECMWF wind, no Rust/WASM batch backend, no HIL/CCSDS, no pip-install API, no hosted zero-install demo. Browser 50Hz worker cannot scale to 10k-run ensembles. README "hyper-realistic" vs. repo roadmap admitted openly. Teaching sandbox excels; range-safety sign-off does not.
 
-### What Is Next for DeltaV Lab — A Roadmap to Professional-Grade Launch Simulation
+### What Is Next for DeltaV Lab — Professional-Grade Sim Roadmap
 **URL:** https://dhaatrik.github.io/transmissions/deltav-lab-whats-next/
 **Published:** 2026-07-01
 **Tags:** aerospace, deltav-lab, simulation, roadmap
 
 Phased evolution plan from browser teaching sandbox toward commercial trajectory tooling. Trust ladder R0–R7 (runnable → documented → unit-validated → flight-validated → Monte Carlo → toolchain APIs → SIL/HIL → governance). Five implementation phases sourced from path_to_perfection.md: hosted demo + SW hygiene, flight telemetry V&V PDF, Rust/WASM native core + 6DOF + NRLMSISE/ECMWF environments, batch dispersion + public benchmark vs RocketPy/GMAT, 3D viz + GNC/SIL + Python API + optimization + reusability, HIL + dual licensing. NASA-STD-7009 M&S V&V framing. Honest disclaimer: not claiming SpaceX internal replacement — credible validation methodology overlap. Cross-links to limitations, science, native-core migration.
 
-### DeltaV Lab Native Physics Core — Escaping the React/TypeScript Ceiling
+### DeltaV Lab Native Physics Core — Escaping TypeScript Limits
 **URL:** https://dhaatrik.github.io/transmissions/deltav-lab-native-physics-core/
 **Published:** 2026-07-01
 **Tags:** aerospace, deltav-lab, rust, wasm, simulation
@@ -213,7 +213,7 @@ Mindful dual-ledger personal finance app v1.0.0 (github.com/dhaatrik/expense-vs-
 
 First-person origin story for FuelDrop v3.0.0 (github.com/dhaatrik/fueldrop). Polished frontend-only React SPA prototyping on-demand fuel delivery: customer ordering, captain dashboard (/captain), fleet mode, Leaflet map presentation, and simulated OTP (1234). Corrects portfolio copy that claimed WebSocket real-time fleet telematics and high-concurrency server rollbacks.
 
-### FuelDrop Tech Stack — Client-Only React SPA vs What Needs a Backend
+### FuelDrop Tech Stack — React 19, Leaflet, and PWA Scope
 **URL:** https://dhaatrik.github.io/transmissions/fueldrop-tech-stack/
 **Published:** 2026-07-12
 **Tags:** fueldrop, react, vite, leaflet
@@ -244,7 +244,7 @@ Honest identity correction for Glassbox v4.2.1 (github.com/dhaatrik/glassbox). C
 
 Origin story for The Infinite Intelligence v4.0.0 (github.com/dhaatrik/the-infinite-intelligence). Client-side council-of-models workspace: four-agent squad (DEFAULT_AGENTS), Beta Mode dynamic personas, first-principles prompt deconstruction, parallel/sequential/round-robin debate topologies, human-in-the-loop steering, session branching, and PDF/Markdown executive export using @google/genai with gemma-4-31b-it. Corrects outdated portfolio description of a 3-agent chat wrapper.
 
-### Infinite Intelligence Tech Stack — Client Orchestration, @google/genai, Export, Zero Backend
+### Infinite Intelligence Tech Stack — Zero Backend Orchestration
 **URL:** https://dhaatrik.github.io/transmissions/infinite-intelligence-tech-stack/
 **Published:** 2026-07-14
 **Tags:** infinite-intelligence, react, vite, genai
@@ -252,7 +252,7 @@ Origin story for The Infinite Intelligence v4.0.0 (github.com/dhaatrik/the-infin
 
 Architecture analysis of v4.0.0: React 19.2, TypeScript 5.8, Vite 6, @google/genai, Motion 12, html2canvas + jsPDF, react-markdown. Explains state-machine-driven agent orchestration in the browser tab, handling out-of-order async streams, and why no backend server is used.
 
-### Infinite Intelligence — API Keys, Rate Limits, and Recursion Depth Guardrails
+### Infinite Intelligence — API Keys, Rate Limits, and Guardrails
 **URL:** https://dhaatrik.github.io/transmissions/infinite-intelligence-byok-guardrails/
 **Published:** 2026-07-15
 **Tags:** infinite-intelligence, byok, mit, gemini
@@ -260,14 +260,14 @@ Architecture analysis of v4.0.0: React 19.2, TypeScript 5.8, Vite 6, @google/gen
 
 BYOK economics and risk management for multi-agent LLM orchestration. Details token cost drivers across agent counts and critique rounds, documents the real rate-limit bill fuckup from unbounded debate loops, and emphasizes client-side recursion depth guardrails.
 
-### Why I Built a Deep-Link Handoff Tool — and What It Actually Is
+### Why I Built a Deep-Link Handoff Tool (Not Electron)
 **URL:** https://dhaatrik.github.io/transmissions/instant-app-opener-why-and-what/
 **Published:** 2026-07-16
 **Tags:** instant-app-opener, deep-link, web, handoff
 
 Origin and architecture for Instant App Opener v0.2.0 (github.com/dhaatrik/instant-app-opener). Next.js 15 web app that converts standard social media URLs into mobile deep links with copy, Web Share API, and QR handoff. Replaces stale portfolio copy describing an Electron system-tray app with registry hooks.
 
-### Why MarkPDF — Zero-Install Markdown to PDF via Browser Print, Not jsPDF
+### Why MarkPDF — Browser Print Markdown to PDF, Not jsPDF
 **URL:** https://dhaatrik.github.io/transmissions/markpdf-why-and-what/
 **Published:** 2026-07-02
 **Tags:** markpdf, markdown, print, privacy
@@ -275,7 +275,7 @@ Origin and architecture for Instant App Opener v0.2.0 (github.com/dhaatrik/insta
 
 Origin story for MarkPDF v1.0.0 (github.com/dhaatrik/free-markdown-to-pdf-converter). Split-pane GFM editor, live react-markdown + remark-gfm preview, syntax highlighting, and PDF export via the browser's native print engine. Corrects portfolio claims of KaTeX math, unified Remark/Rehype pipelines, and jsPDF export.
 
-### MarkPDF Tech Stack — react-markdown, Print CSS, and Syntax Highlighting Tradeoffs
+### MarkPDF Tech Stack — react-markdown & Print CSS Tradeoffs
 **URL:** https://dhaatrik.github.io/transmissions/markpdf-tech-stack/
 **Published:** 2026-07-03
 **Tags:** markpdf, react, markdown, print-css
@@ -306,7 +306,7 @@ Origin and architecture for Read Aloud v4.0.0 (github.com/dhaatrik/ReadAloud_Chr
 
 Origin story for Seamless QR Dining v3.0.0 (github.com/dhaatrik/seamless-qr-dining). Next.js 16 full-stack demo: customer menu (?table=N), kitchen dashboard (/kitchen), simulated OTP, and in-memory React Context order sync (77 Jest tests). Corrects portfolio fiction of a distributed WebSocket server.
 
-### Seamless QR Dining Tech Stack — Next.js 16, Context Order Bus, Component Architecture
+### Seamless QR Dining Tech Stack — Next.js 16 & Context Order Bus
 **URL:** https://dhaatrik.github.io/transmissions/seamless-qr-dining-tech-stack/
 **Published:** 2026-07-09
 **Tags:** seamless-qr-dining, nextjs, react, context
@@ -314,7 +314,7 @@ Origin story for Seamless QR Dining v3.0.0 (github.com/dhaatrik/seamless-qr-dini
 
 Stack breakdown of Seamless QR Dining v3.0.0: Next.js 16 App Router, React 19, Tailwind CSS 3, Framer Motion, and React Context order bus. Explains why Context was chosen for the demo spine and outlines future WebSocket and database requirements for multi-device production.
 
-### Seamless QR Dining — What's Simulated vs What a Real Restaurant Would Need
+### Seamless QR Dining — Prototype Scope vs Production Needs
 **URL:** https://dhaatrik.github.io/transmissions/seamless-qr-dining-prototype-honesty/
 **Published:** 2026-07-10
 **Tags:** seamless-qr-dining, demo, mit, restaurant
