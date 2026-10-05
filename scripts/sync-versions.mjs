@@ -46,16 +46,6 @@ export function syncVersions(dryRun = false) {
                         /Site version:\s*v?[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.]+)?(\.?)(\s*<!--\s*x-release-please-version\s*-->)?/gi,
                     replacement: `Site version: ${versionTag}. <!-- x-release-please-version -->`,
                 },
-                {
-                    // Clean up hardcoded patch versions in section headers
-                    pattern: /## Footer Diagnostics \(v\d+\.\d+\.\d+\)/gi,
-                    replacement: '## Footer Diagnostics',
-                },
-                {
-                    // Clean up hardcoded patch versions in bullet points
-                    pattern: /v\d+\.\d+\.\d+:\s*(soil chemistry & crop physiology)/gi,
-                    replacement: '$1',
-                },
             ],
         },
         {
