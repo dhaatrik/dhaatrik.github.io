@@ -56,9 +56,7 @@ const validateDirectory = (dirPath, schema, collectionName) => {
         return;
     }
 
-    const files = fs
-        .readdirSync(dirPath)
-        .filter((file) => file.endsWith('.md'));
+    const files = fs.readdirSync(dirPath).filter((file) => file.endsWith('.md'));
 
     describe(`${collectionName} Content Validation`, () => {
         files.forEach((file) => {
