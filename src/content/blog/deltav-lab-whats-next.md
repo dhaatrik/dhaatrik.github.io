@@ -1,5 +1,5 @@
 ---
-title: 'What Is Next for DeltaV Lab — Professional-Grade Sim Roadmap'
+title: "What's Next for DeltaV Lab — Professional-Grade Roadmap"
 description: 'Honest phased plan from browser teaching sandbox to something a flight-dynamics team could pilot: V&V, 6DOF, Monte Carlo, native physics core, HIL, and the trust ladder SpaceX-adjacent engineers actually use.'
 pubDate: 2026-07-01
 updatedDate: 2026-07-01

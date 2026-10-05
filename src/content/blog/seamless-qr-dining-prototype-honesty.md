@@ -1,5 +1,5 @@
 ---
-title: 'Seamless QR Dining — Prototype Scope vs Production Needs'
+title: 'Seamless QR Dining — Simulated vs Real Restaurant Needs'
 description: 'Honest limits of Seamless QR Dining v3.0.0: in-memory orders, simulated OTP, no payments — and what production contactless dining actually requires.'
 pubDate: 2026-07-10
 heroImage: '../../assets/og/seamless-qr-dining-transmissions.jpg'
