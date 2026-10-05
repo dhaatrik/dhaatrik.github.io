@@ -127,7 +127,9 @@ describe('Transmission Titles and Metadata (Brief 2 & 2b)', () => {
 
             // Verify JSON-LD Article headline and BreadcrumbList item 3 name match title
             const jsonLdMatches = [
-                ...html.matchAll(/<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/g),
+                ...html.matchAll(
+                    /<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/g
+                ),
             ];
             let foundArticleHeadline = false;
             let foundBreadcrumbTitle = false;
@@ -158,10 +160,7 @@ describe('Transmission Titles and Metadata (Brief 2 & 2b)', () => {
                 }
             }
 
-            assert.ok(
-                foundArticleHeadline,
-                `Missing or invalid Article JSON-LD schema in ${slug}`
-            );
+            assert.ok(foundArticleHeadline, `Missing or invalid Article JSON-LD schema in ${slug}`);
             assert.ok(
                 foundBreadcrumbTitle,
                 `Missing or invalid BreadcrumbList JSON-LD schema item 3 in ${slug}`
