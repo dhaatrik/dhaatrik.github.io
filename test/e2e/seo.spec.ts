@@ -180,29 +180,59 @@ test.describe('SEO and Metadata Verification', () => {
     test('project detail pages should have concise titles matching og and twitter without brand suffix', async ({
         page,
     }) => {
-        const projectSlugs = [
-            'instant-app-opener',
-            'free-markdown-to-pdf-converter',
-            'seamless-qr-dining',
-            'fueldrop',
-            'vellor',
-            'the-infinite-intelligence',
-        ];
+        const expectedProjects: Record<string, { title: string; descriptionPrefix?: string }> = {
+            'instant-app-opener': {
+                title: 'Instant App Opener — social URLs to mobile deep links',
+                descriptionPrefix: 'social URLs to mobile deep links — copy, Web Share',
+            },
+            'free-markdown-to-pdf-converter': {
+                title: 'MarkPDF — Browser markdown-to-PDF via print export',
+                descriptionPrefix:
+                    'Browser markdown-to-PDF via print export — react-markdown preview',
+            },
+            'seamless-qr-dining': {
+                title: 'Seamless QR Dining — Next.js 16 restaurant demo v3.0.0',
+            },
+            fueldrop: {
+                title: 'FuelDrop — Frontend-only fuel delivery UX demo v3.0.0',
+            },
+            vellor: {
+                title: 'Vellor — Free MIT-licensed tutoring-management PWA',
+            },
+            'the-infinite-intelligence': {
+                title: 'Infinite Intelligence — BYOK multi-agent council v4.0.0',
+            },
+        };
 
-        for (const slug of projectSlugs) {
+        for (const [slug, expected] of Object.entries(expectedProjects)) {
             await page.goto(`/projects/${slug}/`);
             await page.waitForLoadState('domcontentloaded');
 
             const pageTitle = await page.title();
+            const metaTitle = await page.locator('meta[name="title"]').getAttribute('content');
             const ogTitle = await page.locator('meta[property="og:title"]').getAttribute('content');
             const twitterTitle = await page
                 .locator('meta[name="twitter:title"]')
                 .getAttribute('content');
 
             expect(pageTitle.length).toBeLessThanOrEqual(65);
+            expect(pageTitle).toBe(expected.title);
+            expect(metaTitle).toBe(pageTitle);
             expect(ogTitle).toBe(pageTitle);
             expect(twitterTitle).toBe(pageTitle);
             expect(pageTitle).not.toContain(' | Dhaatrik Chowdhury');
+            expect(pageTitle).not.toContain(' | Projects');
+
+            if (expected.descriptionPrefix) {
+                const metaDesc = await page
+                    .locator('meta[name="description"]')
+                    .getAttribute('content');
+                const ogDesc = await page
+                    .locator('meta[property="og:description"]')
+                    .getAttribute('content');
+                expect(metaDesc).toContain(expected.descriptionPrefix);
+                expect(ogDesc).toContain(expected.descriptionPrefix);
+            }
         }
     });
 
