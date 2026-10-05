@@ -1089,7 +1089,6 @@ const videoItemListSchema = JSON.stringify({
         <script>
             // Client-side subject filtering for videos
             const setupVideoFilters = () => {
-                // Use getElementsByClassName for faster DOM traversal
                 const tabs = Array.from(document.getElementsByClassName('subject-tab'));
                 const cards = Array.from(document.getElementsByClassName('video-card'));
                 const emptyState = document.getElementById('video-empty-state');

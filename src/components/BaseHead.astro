@@ -47,8 +47,6 @@ const is404 =
     Astro.url.pathname === '/404/' ||
     Astro.url.pathname === '/404.html';
 const canonicalURL = is404 ? null : new URL(Astro.url.pathname, Astro.site);
-
-// Cache image URL instantiation to avoid redundant parsing during SSG
 const imageUrl = new URL(image.src, Astro.site);
 
 const personSchema = JSON.stringify({
@@ -183,7 +181,6 @@ const personSchema = JSON.stringify({
 
     // Make scrollable code blocks keyboard-focusable for accessibility
     const checkScrollableCodeBlocks = () => {
-        // Use getElementsByTagName for faster DOM traversal
         Array.from(document.getElementsByTagName('pre')).forEach((block) => {
             if (block.scrollWidth > block.clientWidth) {
                 block.setAttribute('tabindex', '0');

@@ -13,7 +13,6 @@ import { getPainLevelLabel } from '../data/status';
 type ProjectEntry = CollectionEntry<'projects'>;
 type BlogEntry = CollectionEntry<'blog'>;
 
-// Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
     getCollection('projects').then((raw: CollectionEntry<'projects'>[]) =>
         raw

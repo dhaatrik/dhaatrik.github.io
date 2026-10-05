@@ -1,7 +1,5 @@
 /**
  * Single-pass string scanner to count words and calculate reading time.
- * This avoids massive array allocations caused by String.prototype.split(/\s+/)
- * and is significantly faster during SSG loops.
  */
 export function getReadingTime(text: string): number {
     let words = 0;
