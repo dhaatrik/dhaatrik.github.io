@@ -93,7 +93,7 @@ const breadcrumbLd = JSON.stringify(breadcrumbSchema);
 
 // Enrich page title with descriptive pitch for SERP snippets
 const shortTagline = description.includes('—') ? description.split('—')[0].trim() : '';
-const pageTitle = shortTagline ? `${title} — ${shortTagline}` : `${title} | Projects`;
+const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
 ---
 
 <!doctype html>

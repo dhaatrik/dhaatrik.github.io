@@ -177,6 +177,35 @@ test.describe('SEO and Metadata Verification', () => {
         await expect(twitterImage).toHaveAttribute('content', /.*delta-v-lab.*/);
     });
 
+    test('project detail pages should have concise titles matching og and twitter without brand suffix', async ({
+        page,
+    }) => {
+        const projectSlugs = [
+            'instant-app-opener',
+            'free-markdown-to-pdf-converter',
+            'seamless-qr-dining',
+            'fueldrop',
+            'vellor',
+            'the-infinite-intelligence',
+        ];
+
+        for (const slug of projectSlugs) {
+            await page.goto(`/projects/${slug}/`);
+            await page.waitForLoadState('domcontentloaded');
+
+            const pageTitle = await page.title();
+            const ogTitle = await page.locator('meta[property="og:title"]').getAttribute('content');
+            const twitterTitle = await page
+                .locator('meta[name="twitter:title"]')
+                .getAttribute('content');
+
+            expect(pageTitle.length).toBeLessThanOrEqual(65);
+            expect(ogTitle).toBe(pageTitle);
+            expect(twitterTitle).toBe(pageTitle);
+            expect(pageTitle).not.toContain(' | Dhaatrik Chowdhury');
+        }
+    });
+
     test('404 page should have noindex robots tag and no canonical or og:url pointing to 404', async ({
         page,
     }) => {
