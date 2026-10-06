@@ -1,7 +1,4 @@
 {
     "css.customData": [],
-    "css.lint.unknownAtRules": "ignore",
-    "json.schemaDownload.trustedDomains": {
-        "https://raw.githubusercontent.com/googleapis/": true
-    }
+    "css.lint.unknownAtRules": "ignore"
 }
