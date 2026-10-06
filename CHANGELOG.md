@@ -1,5 +1,43 @@
 # Changelog
 
+## [4.10.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.10.0...v4.10.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **release:** drop remote schema to prevent untrusted domain diagnostic ([7f127fb](https://github.com/dhaatrik/dhaatrik.github.io/commit/7f127fb261a3e5bb0670aa5dcc1dceef051e7eb0))
+* **seo:** align project page title fallback and description trims ([895c61c](https://github.com/dhaatrik/dhaatrik.github.io/commit/895c61c8828cec60a9b28809ff3bcee4f496ac52))
+* **seo:** drop project brand suffix and trim overlong project descriptions ([1e44a76](https://github.com/dhaatrik/dhaatrik.github.io/commit/1e44a76fefdd2e214d049e6194faf1a8468d1a49))
+
+
+### Performance Improvements
+
+* **build:** slim version-sync fan-out and drop dead patterns ([2d4b7ca](https://github.com/dhaatrik/dhaatrik.github.io/commit/2d4b7ca579d1ab2c0f092f8d8607933a3af64fd6))
+* **build:** slim version-sync fan-out to source declarations ([68ec18a](https://github.com/dhaatrik/dhaatrik.github.io/commit/68ec18a6e5451491f8187e5934f828a9b2cd4c0e))
+
+
+### Styles & UI Polish
+
+* **content:** trim overlong transmission frontmatter titles for serp clarity ([02587ce](https://github.com/dhaatrik/dhaatrik.github.io/commit/02587ce03ecb75d7c74cd79d2e52f35f6067d490))
+* **content:** trim transmission frontmatter titles under 65 chars per brief 2 ([f8f3a51](https://github.com/dhaatrik/dhaatrik.github.io/commit/f8f3a51dac65de0ea048dc824e77124e41b535e3))
+* format codebase with prettier ([777403a](https://github.com/dhaatrik/dhaatrik.github.io/commit/777403a3971dc624ab93b7662cf120b02e2af0b5))
+* **test:** format transmission title test suite with prettier ([a1233c9](https://github.com/dhaatrik/dhaatrik.github.io/commit/a1233c906c7a4db28ddc7d42f6674a20364b6c3f))
+* **ui:** trim narrating comments across schemas templates and scripts ([d87398a](https://github.com/dhaatrik/dhaatrik.github.io/commit/d87398a2af5ce377020bf916051fd2825f6f4d88))
+* **ui:** trim narrating performance comments across components and pages ([dace1f7](https://github.com/dhaatrik/dhaatrik.github.io/commit/dace1f7b1abc890ae4b29efcc0885877bcaeb076))
+* **ui:** trim section and narrator comments across pages and dense templates ([311d533](https://github.com/dhaatrik/dhaatrik.github.io/commit/311d53374afba2f5d389a5d921f6f20477f7547e))
+* **vscode:** trust googleapis domain for release-please json schema ([34c6959](https://github.com/dhaatrik/dhaatrik.github.io/commit/34c6959ba4160feec28aff5a46240a088503dfad))
+
+
+### Documentation & Skills
+
+* **agents:** align skills and repository documentation to markdown-only ([1f7c25f](https://github.com/dhaatrik/dhaatrik.github.io/commit/1f7c25f488d14bdcb7e36d67aaa5e9569d3973e3))
+
+
+### Tests & Verification
+
+* **content:** mirror live zod schemas in validation test suite ([8e0574c](https://github.com/dhaatrik/dhaatrik.github.io/commit/8e0574c8c45ac3d047699e680f48cd67c6b27520))
+* **seo:** strengthen unit and e2e assertions for project titles and metadata ([f358c77](https://github.com/dhaatrik/dhaatrik.github.io/commit/f358c771ffd1d1e70fb910a5a6db1535e7b2fa9c))
+
 ## [4.10.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.9.2...v4.10.0) (2026-09-22)
 
 
