@@ -13,9 +13,7 @@ const posts = (await getCollection('blog')).sort(
     (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-// Optimize reading time calculation by using raw body instead of full AST rendering
 const postsWithReadingTime = posts.map((post: any) => {
-    // `post.body` contains the raw uncompiled markdown string (available in Astro 5 glob loader)
     const body = post.body || '';
     return {
         ...post,
@@ -23,7 +21,6 @@ const postsWithReadingTime = posts.map((post: any) => {
     };
 });
 
-// BreadcrumbList JSON-LD for clean SERP navigation trails
 const breadcrumbSchema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -50,7 +47,6 @@ const breadcrumbSchema = JSON.stringify({
         <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
-        <!-- Flashlight Spotlight Background -->
         <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
         <Header />
         <main
@@ -365,7 +361,6 @@ const breadcrumbSchema = JSON.stringify({
                     alone. Honest logs on teaching, shipping, and the fuckups in between.
                 </p>
 
-                <!-- Subsystem Domain Tabs -->
                 <div
                     class="reveal-on-scroll mb-10 flex flex-wrap gap-2.5 font-mono text-xs select-none"
                 >
@@ -437,7 +432,6 @@ const breadcrumbSchema = JSON.stringify({
                     >
                 </div>
 
-                <!-- Terminal-Style Search Bar -->
                 <search class="mb-10 block font-mono">
                     <label for="search-logs" class="sr-only">Search Mission Logs</label>
                     <div
@@ -506,7 +500,6 @@ const breadcrumbSchema = JSON.stringify({
                                             i !== 0 ? 'mb-4' : 'mb-4 md:mb-0 md:h-full',
                                         ]}
                                     >
-                                        {/* Optimize LCP by eager loading the first image (above the fold) with high priority */}
                                         <Image
                                             width={720}
                                             height={360}
@@ -610,7 +603,6 @@ const breadcrumbSchema = JSON.stringify({
                 </div>
             </section>
 
-            <!-- Empty State UI -->
             <div id="search-empty-state" class="hidden py-20 text-center" aria-hidden="true">
                 <div
                     class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500"
@@ -686,7 +678,6 @@ const breadcrumbSchema = JSON.stringify({
                 searchAbortController = new AbortController();
                 const { signal } = searchAbortController;
 
-                // Cache expensive DOM text extraction to avoid redundant parsing on every keystroke
                 const cachedCardsData = Array.from(cards).map((card) => {
                     const htmlCard = card as HTMLElement;
                     const titleElement = htmlCard.querySelector('h2');
@@ -870,7 +861,6 @@ const breadcrumbSchema = JSON.stringify({
                         }
 
                         // Tag Highlight updates
-                        // Use getElementsByClassName for faster DOM traversal
                         const tagElements = Array.from(
                             element.getElementsByClassName('post-card-tag')
                         );
@@ -1017,7 +1007,6 @@ const breadcrumbSchema = JSON.stringify({
 
                 filterPosts();
 
-                // Debounce search input to prevent redundant layout recalcs on every keystroke
                 const debounce = (fn: Function, ms = 200) => {
                     let timeoutId: ReturnType<typeof setTimeout>;
                     return function (this: any, ...args: any[]) {

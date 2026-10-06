@@ -74,7 +74,7 @@ It is designed to act as an interactive "Engineering Journal" for zero-to-one st
 
 - **Framework**: [Astro v6](https://astro.build/) (Static Site Generation / SSG)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) + Custom CSS Properties
-- **Markup/Markdown**: Astro Content Collections with MDX support & Zod schemas
+- **Markup/Markdown**: Astro Content Collections with Markdown support & Zod schemas
 - **Typography**: [Google Fonts](https://fonts.google.com/) (Nunito for Sans-Serif, Poppins for Headings)
 - **Image Processing**: Astro `<Image />` component powered by `sharp`
 - **Testing Suites**: [Playwright](https://playwright.dev/) for E2E tests, Node's `--test` runner for unit tests
@@ -91,7 +91,7 @@ dhaatrik.github.io/
 ├── src/
 │   ├── assets/          # Optimized graphic assets and images
 │   ├── components/      # Reusable UI nodes (Header, Footer, ThemeToggle)
-│   ├── content/         # Structured Markdown/MDX content collections
+│   ├── content/         # Structured Markdown content collections
 │   │   ├── blog/        # Technical publications and logs
 │   │   └── projects/    # Homepage project grid definitions
 │   ├── layouts/         # Page shell wrappers (BlogPost layout)

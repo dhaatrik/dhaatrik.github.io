@@ -13,7 +13,6 @@ import { getPainLevelLabel } from '../data/status';
 type ProjectEntry = CollectionEntry<'projects'>;
 type BlogEntry = CollectionEntry<'blog'>;
 
-// Fetch collections concurrently to reduce total wait time during SSG
 const [projects, posts] = await Promise.all([
     getCollection('projects').then((raw: CollectionEntry<'projects'>[]) =>
         raw
@@ -125,13 +124,10 @@ const webSiteSchema = JSON.stringify({
                 'India',
             ]}
         />
-        <!-- FAQ Structured Data for AEO/GEO -->
         <script is:inline type="application/ld+json" set:html={faqSchema} />
-        <!-- WebSite Structured Data -->
         <script is:inline type="application/ld+json" set:html={webSiteSchema} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
-        <!-- Flashlight Spotlight Background -->
         <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
         <Header />
         <main
@@ -139,7 +135,6 @@ const webSiteSchema = JSON.stringify({
             tabindex="-1"
             class="flex flex-col gap-(--section-gap-mobile) pt-6 pb-(--section-gap-mobile) md:gap-(--section-gap-desktop) md:pt-10 md:pb-(--section-gap-desktop)"
         >
-            <!-- Hero Section: The Boring Section -->
             <section
                 id="hero-section"
                 class="layout-container relative flex min-h-[72vh] w-full flex-col justify-center overflow-hidden pt-6 pb-14 sm:min-h-[78vh] sm:pt-10 sm:pb-20 md:min-h-[84vh] md:pt-14 md:pb-24"
@@ -258,7 +253,6 @@ const webSiteSchema = JSON.stringify({
                         because they always come back to charge interest.
                     </p>
 
-                    <!-- CTA Hierarchy -->
                     <div
                         class="reveal-on-scroll flex flex-wrap items-center gap-6"
                         data-reveal-delay="300"
@@ -436,7 +430,6 @@ const webSiteSchema = JSON.stringify({
                 </div>
             </section>
 
-            <!-- Projects Section: Featured Engineering -->
             <section
                 id="projects"
                 class="layout-container content-visibility-auto-projects mb-0 pb-16"
@@ -996,7 +989,6 @@ const webSiteSchema = JSON.stringify({
         </main>
         <Footer />
 
-        <!-- Interactive Script: Premium UX Handlers with Astro lifecycle support -->
         <script src="../scripts/homeHub.ts"></script>
     </body>
 </html>

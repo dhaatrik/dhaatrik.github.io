@@ -62,29 +62,35 @@ describe('Repository & Site Version Alignment', () => {
         );
     });
 
-    test('public/llms.txt contains synchronized site version and release-please marker', () => {
+    test('public/llms.txt contains synchronized site version matching package.json', () => {
         const expectedDeclaration = `Site version: v${pkg.version}. <!-- x-release-please-version -->`;
         assert.ok(
             llmsTxt.includes(expectedDeclaration),
             `public/llms.txt must contain "${expectedDeclaration}"`
         );
-        assert.doesNotMatch(
-            llmsTxt,
-            /v4\.8\.1/,
-            'public/llms.txt must not contain stale v4.8.1 version strings'
+        const versionMatch = llmsTxt.match(
+            /Site version:\s*(v?[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.]+)?)/i
+        );
+        assert.strictEqual(
+            versionMatch?.[1],
+            `v${pkg.version}`,
+            `public/llms.txt site version must match package.json version v${pkg.version}`
         );
     });
 
-    test('public/llms-full.txt contains synchronized site version and release-please marker', () => {
+    test('public/llms-full.txt contains synchronized site version matching package.json', () => {
         const expectedDeclaration = `**Site version: v${pkg.version}.** <!-- x-release-please-version -->`;
         assert.ok(
             llmsFullTxt.includes(expectedDeclaration),
             `public/llms-full.txt must contain "${expectedDeclaration}"`
         );
-        assert.doesNotMatch(
-            llmsFullTxt,
-            /v4\.8\.1/,
-            'public/llms-full.txt must not contain stale v4.8.1 version strings'
+        const versionMatch = llmsFullTxt.match(
+            /\*\*Site version:\s*(v?[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.]+)?)/i
+        );
+        assert.strictEqual(
+            versionMatch?.[1],
+            `v${pkg.version}`,
+            `public/llms-full.txt site version must match package.json version v${pkg.version}`
         );
     });
 

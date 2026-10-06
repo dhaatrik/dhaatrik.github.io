@@ -1,6 +1,5 @@
 /**
- * Cache the Intl.DateTimeFormat instance to avoid costly re-initializations
- * during Astro's Static Site Generation (SSG) process for components rendered in loops.
+ * Reusable Intl.DateTimeFormat instance for consistent date rendering.
  */
 export const dateFormatter = new Intl.DateTimeFormat('en-us', {
     year: 'numeric',

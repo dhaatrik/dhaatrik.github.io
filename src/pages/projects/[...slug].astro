@@ -65,7 +65,6 @@ const projectSchema = {
 };
 const jsonLd = JSON.stringify(projectSchema);
 
-// Generate BreadcrumbList JSON-LD
 const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -92,11 +91,9 @@ const breadcrumbSchema = {
 };
 const breadcrumbLd = JSON.stringify(breadcrumbSchema);
 
-// Enrich page title with descriptive pitch and author branding for SERP snippets
+// Enrich page title with descriptive pitch for SERP snippets
 const shortTagline = description.includes('—') ? description.split('—')[0].trim() : '';
-const pageTitle = shortTagline
-    ? `${title} — ${shortTagline} | Dhaatrik Chowdhury`
-    : `${title} | Projects — Dhaatrik Chowdhury`;
+const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
 ---
 
 <!doctype html>
@@ -108,7 +105,6 @@ const pageTitle = shortTagline
         <script is:inline type="application/ld+json" set:html={breadcrumbLd} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
-        <!-- Flashlight Spotlight Background -->
         <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
 
         <Header />
@@ -119,7 +115,6 @@ const pageTitle = shortTagline
             class="layout-container relative z-10 grow pt-6 pb-(--section-gap-mobile) md:pt-10 md:pb-(--section-gap-desktop)"
         >
             <article class="mx-auto w-full max-w-7xl">
-                <!-- Back Navigation -->
                 <div class="animate-fade-in mb-8">
                     <a
                         href="/projects"
@@ -145,7 +140,6 @@ const pageTitle = shortTagline
                     </a>
                 </div>
 
-                <!-- Case Study Header -->
                 <div class="animate-fade-in-up mb-12">
                     <div
                         class="flex flex-col gap-6 border-b border-slate-200/60 pb-8 md:flex-row md:items-center md:justify-between dark:border-white/5"
@@ -176,11 +170,9 @@ const pageTitle = shortTagline
                     </div>
                 </div>
 
-                <!-- Classification / Telemetry Metadata Block -->
                 <div
                     class="animate-fade-in-up relative mb-12 rounded-xl border border-slate-200/60 bg-slate-50/60 p-5 font-mono text-xs text-slate-600 shadow-xs backdrop-blur-md delay-100 dark:border-white/5 dark:bg-[#0f141f] dark:text-slate-400"
                 >
-                    {/* Corner Target Accents */}
                     <span
                         class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
                         >+</span
@@ -313,9 +305,7 @@ const pageTitle = shortTagline
                     </div>
                 </div>
 
-                <!-- Main Content Area -->
                 <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_280px]">
-                    <!-- Markdown Body -->
                     <div class="w-full min-w-0">
                         {
                             fuckup_teaser && (
@@ -338,7 +328,6 @@ const pageTitle = shortTagline
                         </div>
                     </div>
 
-                    <!-- Sidebar details -->
                     <aside
                         aria-label="Project details and repository links"
                         class="animate-fade-in-up space-y-8 delay-300 lg:sticky lg:top-28"

@@ -177,6 +177,108 @@ test.describe('SEO and Metadata Verification', () => {
         await expect(twitterImage).toHaveAttribute('content', /.*delta-v-lab.*/);
     });
 
+    test('project detail pages should have concise titles matching og and twitter without brand suffix', async ({
+        page,
+    }) => {
+        const expectedProjects: Record<string, { title: string; descriptionPrefix?: string }> = {
+            'instant-app-opener': {
+                title: 'Instant App Opener — social URLs to mobile deep links',
+                descriptionPrefix: 'social URLs to mobile deep links — copy, Web Share',
+            },
+            'free-markdown-to-pdf-converter': {
+                title: 'MarkPDF — Browser markdown-to-PDF via print export',
+                descriptionPrefix:
+                    'Browser markdown-to-PDF via print export — react-markdown preview',
+            },
+            'seamless-qr-dining': {
+                title: 'Seamless QR Dining — Next.js 16 restaurant demo v3.0.0',
+            },
+            fueldrop: {
+                title: 'FuelDrop — Frontend-only fuel delivery UX demo v3.0.0',
+            },
+            vellor: {
+                title: 'Vellor — Free MIT-licensed tutoring-management PWA',
+            },
+            'the-infinite-intelligence': {
+                title: 'Infinite Intelligence — BYOK multi-agent council v4.0.0',
+            },
+        };
+
+        for (const [slug, expected] of Object.entries(expectedProjects)) {
+            await page.goto(`/projects/${slug}/`);
+            await page.waitForLoadState('domcontentloaded');
+
+            const pageTitle = await page.title();
+            const metaTitle = await page.locator('meta[name="title"]').getAttribute('content');
+            const ogTitle = await page.locator('meta[property="og:title"]').getAttribute('content');
+            const twitterTitle = await page
+                .locator('meta[name="twitter:title"]')
+                .getAttribute('content');
+
+            expect(pageTitle.length).toBeLessThanOrEqual(65);
+            expect(pageTitle).toBe(expected.title);
+            expect(metaTitle).toBe(pageTitle);
+            expect(ogTitle).toBe(pageTitle);
+            expect(twitterTitle).toBe(pageTitle);
+            expect(pageTitle).not.toContain(' | Dhaatrik Chowdhury');
+            expect(pageTitle).not.toContain(' | Projects');
+
+            if (expected.descriptionPrefix) {
+                const metaDesc = await page
+                    .locator('meta[name="description"]')
+                    .getAttribute('content');
+                const ogDesc = await page
+                    .locator('meta[property="og:description"]')
+                    .getAttribute('content');
+                expect(metaDesc).toContain(expected.descriptionPrefix);
+                expect(ogDesc).toContain(expected.descriptionPrefix);
+            }
+        }
+    });
+
+    test('target transmission pages should have concise titles <= 65 chars matching og, twitter, and h1', async ({
+        page,
+    }) => {
+        const expectedTransmissions = {
+            'markpdf-tech-stack': 'MarkPDF Tech Stack — react-markdown, Print CSS, Highlighting',
+            'seamless-qr-dining-tech-stack':
+                'Seamless QR Dining Tech Stack — Next.js 16 & Context Bus',
+            'instant-app-opener-why-and-what':
+                'Why Instant App Opener — Deep-Link Handoff (Not Electron)',
+            'deltav-lab-whats-next': "What's Next for DeltaV Lab — Professional-Grade Roadmap",
+            'seamless-qr-dining-prototype-honesty':
+                'Seamless QR Dining — Simulated vs Real Restaurant Needs',
+            'infinite-intelligence-byok-guardrails':
+                'Infinite Intelligence — BYOK Keys, Rate Limits, Guardrails',
+            'infinite-intelligence-tech-stack':
+                'Infinite Intelligence Tech Stack — Orchestration, Zero Backend',
+            'markpdf-why-and-what': 'Why MarkPDF — Browser Print to PDF, Not jsPDF',
+            'deltav-lab-science': 'DeltaV Lab Science — Forces, Integration, Flight Software',
+            'deltav-lab-not-professional-grade': 'Why DeltaV Lab Is Not Professional-Grade',
+        };
+
+        for (const [slug, expectedTitle] of Object.entries(expectedTransmissions)) {
+            await page.goto(`/transmissions/${slug}/`);
+            await page.waitForLoadState('domcontentloaded');
+
+            const pageTitle = await page.title();
+            const metaTitle = await page.locator('meta[name="title"]').getAttribute('content');
+            const ogTitle = await page.locator('meta[property="og:title"]').getAttribute('content');
+            const twitterTitle = await page
+                .locator('meta[name="twitter:title"]')
+                .getAttribute('content');
+            const h1Text = (await page.locator('article h1').innerText()).trim();
+
+            expect(pageTitle.length).toBeLessThanOrEqual(65);
+            expect(pageTitle).toBe(expectedTitle);
+            expect(metaTitle).toBe(pageTitle);
+            expect(ogTitle).toBe(pageTitle);
+            expect(twitterTitle).toBe(pageTitle);
+            expect(h1Text).toBe(pageTitle);
+            expect(pageTitle).not.toContain(' | Dhaatrik Chowdhury');
+        }
+    });
+
     test('404 page should have noindex robots tag and no canonical or og:url pointing to 404', async ({
         page,
     }) => {

@@ -2,7 +2,7 @@
 name: dhaatrik-astro-site
 description: >
     Use for Astro architecture, components, content collections, performance, Tailwind v4,
-    MDX/LaTeX, image optimization, GitHub Pages deployment, testing, JSON-LD injection,
+    Markdown/LaTeX, image optimization, GitHub Pages deployment, testing, JSON-LD injection,
     BaseHead meta tags, llms.txt output, and robots.txt. Triggers: Astro, refactor, build,
     BaseHead, JSON-LD, schema, og:type, sitemap, RSS. Pair with dhaatrik-seo-legacy for
     SEO/AEO/GEO strategy and dhaatrik-writing-style for content.
@@ -61,7 +61,7 @@ description: >
 
 ### Adding a New Project / Mission Report
 
-1. Create MD/MDX in `src/content/projects/`
+1. Create Markdown (.md) in `src/content/projects/`
 2. Use the exact frontmatter template from `dhaatrik-mission-report` skill
 3. Update homepage `index.astro` to include it in the sorted projects list
 4. Optimize heroImage with Astro `<Image>`
@@ -151,7 +151,7 @@ const jsonLd = JSON.stringify(schema).replace(/</g, '\\u003c');
 
 - **Build fails on GitHub Pages**: Check base path, image paths, and environment variables
 - **Tailwind not applying**: Verify `@tailwindcss/vite` plugin in astro.config
-- **MDX/LaTeX broken**: Ensure remark-math and rehype-katex are in astro.config
+- **LaTeX/Math broken**: Ensure remark-math and rehype-katex are in astro.config
 - **Images not optimizing**: Use Astro Image component, not plain `<img>`
 - **Slow performance**: Audit client islands and large dependencies
 

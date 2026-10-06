@@ -1,6 +1,6 @@
 ---
 title: 'Instant App Opener'
-description: 'Next.js web app that converts social URLs into mobile deep links — copy, Web Share, or QR handoff. Not Electron, not a tray launcher.'
+description: 'social URLs to mobile deep links — copy, Web Share, or QR handoff. Not Electron, not a tray launcher.'
 logo: '../../assets/instant-app-opener.png'
 githubUrl: 'https://github.com/dhaatrik/instant-app-opener'
 progress: 'v0.2.0 — README "V2" deep-link handoff (Next.js 15)'

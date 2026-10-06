@@ -2,7 +2,6 @@ const initScrollReveal = () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const singleReveals = document.querySelectorAll('.reveal-on-scroll, .blueprint-reveal');
-    // Use getElementsByClassName for faster DOM traversal
     const staggers = Array.from(document.getElementsByClassName('reveal-stagger'));
 
     if (prefersReducedMotion) {

@@ -11,7 +11,7 @@ function getMarkdownFiles(dir) {
     return fs.readdirSync(dir, { withFileTypes: true }).flatMap((dirent) => {
         const res = path.resolve(dir, dirent.name);
         if (dirent.isDirectory()) return getMarkdownFiles(res);
-        if (dirent.name.endsWith('.md') || dirent.name.endsWith('.mdx')) return [res];
+        if (dirent.name.endsWith('.md')) return [res];
         return [];
     });
 }

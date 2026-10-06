@@ -31,7 +31,6 @@ export async function setupPost() {
         }
     })();
 
-    // 1. Reading Progress Bar (Fallback logic for unsupported browsers)
     const progressBar = document.getElementById('progress-bar');
     const hasScrollTimeline = CSS.supports(
         '(animation-timeline: scroll()) and (animation-range: 0% 100%)'
@@ -46,10 +45,8 @@ export async function setupPost() {
         }
     };
 
-    // 2. Export Actions (JSON-LD, offline archive, link copy)
     setupExportActions(signal);
 
-    // 3. TOC active link tracking (deterministic position-based scrollspy)
     const tocLinks = document.querySelectorAll('#toc a');
     const headingElements = Array.from(
         document.querySelectorAll('.prose h2, .prose h3, .prose h4')
@@ -181,7 +178,6 @@ export async function setupPost() {
         updateProgress();
     }
 
-    // 3.1 RAW / RENDERED Mode Toggle Action
     const toggleModeBtn = document.getElementById('toggle-mode-btn');
     const renderedContainer = document.getElementById('rendered-content-container');
     const rawContainer = document.getElementById('raw-markdown-container');
@@ -208,10 +204,8 @@ export async function setupPost() {
         );
     }
 
-    // 3.3 Interactive Formula Term Inspector
     setupFormulaInspector();
 
-    // 4. Code Block Hacker Polish
     const codeBlocks = document.getElementsByTagName('pre');
     Array.from(codeBlocks).forEach((pre) => {
         const existingWrapper = pre.parentElement?.classList.contains('code-wrapper-processed')
@@ -364,7 +358,7 @@ export async function setupPost() {
         );
     });
 
-    // 5. Global Glossary Popovers (wrapped in requestIdleCallback to safeguard main-thread responsiveness)
+    // Global Glossary Popovers wrapped in requestIdleCallback to safeguard main-thread responsiveness
     const initializeGlossary = () => {
         if (signal.aborted) return;
 

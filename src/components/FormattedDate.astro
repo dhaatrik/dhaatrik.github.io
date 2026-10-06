@@ -17,10 +17,5 @@ const getTechnicalDate = (d: Date) => {
 ---
 
 <time datetime={date.toISOString()}>
-    {
-        format === 'technical'
-            ? getTechnicalDate(date)
-            : /* Cache Intl.DateTimeFormat to avoid repeated object creation during SSG */
-              dateFormatter.format(date)
-    }
+    {format === 'technical' ? getTechnicalDate(date) : dateFormatter.format(date)}
 </time>

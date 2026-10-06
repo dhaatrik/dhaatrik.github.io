@@ -11,7 +11,6 @@ import pedagogyOgImage from '../assets/og/pedagogy-transmissions.jpg';
 // Pre-render a math symbol or formula using KaTeX if desired, or use standard text
 // Since we want this to load fast, we can render normal HTML and styled math
 
-// BreadcrumbList JSON-LD for clean SERP navigation trails
 const breadcrumbSchema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -26,7 +25,6 @@ const breadcrumbSchema = JSON.stringify({
     ],
 }).replace(/</g, '\\u003c');
 
-// ItemList of VideoObject schemas for all 20 pedagogy tutorials
 const videoItemListSchema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -67,7 +65,6 @@ const videoItemListSchema = JSON.stringify({
         <script is:inline type="application/ld+json" set:html={videoItemListSchema} />
     </head>
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
-        <!-- Flashlight Spotlight Background -->
         <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
         <Header />
         <main
@@ -381,7 +378,6 @@ const videoItemListSchema = JSON.stringify({
                 </svg>
             </div>
 
-            <!-- Page Hero -->
             <section class="layout-container">
                 <div class="flex flex-col items-center gap-8 md:flex-row-reverse md:items-start">
                     <div
@@ -517,7 +513,6 @@ const videoItemListSchema = JSON.stringify({
                 </div>
             </section>
 
-            <!-- Experience & Philosophy Grid -->
             <section class="layout-container reveal-on-scroll relative z-10">
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                     <!-- Card 1: Experience Overview -->
@@ -943,7 +938,6 @@ const videoItemListSchema = JSON.stringify({
                 </div>
             </section>
 
-            <!-- Video Archive Grid -->
             <section class="layout-container reveal-on-scroll">
                 <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
                     <div>
@@ -959,7 +953,6 @@ const videoItemListSchema = JSON.stringify({
 
                     <div id="video-announcer" class="sr-only" aria-live="polite"></div>
 
-                    <!-- Subject Filtering Buttons -->
                     <div class="flex gap-2 font-mono text-xs select-none">
                         <button
                             data-subject="all"
@@ -1049,7 +1042,6 @@ const videoItemListSchema = JSON.stringify({
                     }
                 </div>
 
-                <!-- Empty State -->
                 <div id="video-empty-state" class="hidden py-20 text-center" aria-hidden="true">
                     <div
                         class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500"
@@ -1089,7 +1081,6 @@ const videoItemListSchema = JSON.stringify({
         <script>
             // Client-side subject filtering for videos
             const setupVideoFilters = () => {
-                // Use getElementsByClassName for faster DOM traversal
                 const tabs = Array.from(document.getElementsByClassName('subject-tab'));
                 const cards = Array.from(document.getElementsByClassName('video-card'));
                 const emptyState = document.getElementById('video-empty-state');
