@@ -26,9 +26,6 @@
     .reveal-on-scroll,
     .reveal-stagger > *,
     .blueprint-reveal,
-    .scroll-cue,
-    .scroll-cue-line,
-    .animate-marquee,
     .animate-fade-in-up,
     .blog-reveal,
     .parallax-hero-bg,
@@ -42,23 +39,6 @@
     }
 }
 
-/* Custom Tailwind CSS v4 GPU Utilities */
-@utility transition-gpu {
-    transition-property: transform, opacity, filter, backdrop-filter;
-    transition-duration: 300ms;
-    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@utility promote-gpu {
-    will-change: transform, opacity;
-}
-
-@utility transition-bento {
-    transition-property: transform, opacity, background-color, border-color, box-shadow;
-    transition-duration: 300ms;
-    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
 @utility transition-spring {
     transition:
         transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -69,30 +49,14 @@
 }
 
 @theme {
-    --ease-spring-bounce: cubic-bezier(0.16, 1, 0.3, 1);
-
     --font-sans: 'Nunito', 'sans-serif';
     --font-heading: 'Poppins', 'sans-serif';
 
-    --animate-marquee: marquee 25s linear infinite;
     --animate-fade-in-up: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-
-    --animate-telemetry-pulse: telemetry-chevron-slide 2.2s infinite cubic-bezier(0.16, 1, 0.3, 1);
-    --animate-fade-out-scroll: fade-out-scroll auto linear both;
     --animate-pulse-emerald: pulse-emerald 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     --animate-pulse-amber: pulse-amber 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     --animate-pulse-cyan: pulse-cyan 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     --animate-pulse-red: pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-
-    @keyframes marquee {
-        0% {
-            transform: translateX(0);
-        }
-
-        100% {
-            transform: translateX(-50%);
-        }
-    }
 
     @keyframes fadeInUp {
         from {
@@ -103,36 +67,6 @@
         to {
             opacity: 1;
             transform: translateY(0);
-        }
-    }
-
-    @keyframes telemetry-chevron-slide {
-        0% {
-            transform: translateY(-3px);
-            opacity: 0.25;
-        }
-
-        50% {
-            transform: translateY(1px);
-            opacity: 1;
-        }
-
-        100% {
-            transform: translateY(5px);
-            opacity: 0;
-        }
-    }
-
-    @keyframes fade-out-scroll {
-        from {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        to {
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            visibility: hidden;
         }
     }
 
@@ -534,28 +468,6 @@
     border-color: color-mix(in srgb, var(--accent) 50%, transparent) !important;
 }
 
-/* Infinite Marquee Animation for Tech Stack */
-.animate-marquee {
-    animation: var(--animate-marquee);
-    will-change: transform;
-}
-
-.animate-marquee:hover,
-.group:focus-within .animate-marquee {
-    animation-play-state: paused;
-}
-
-.group:focus .animate-marquee,
-.group:focus-within .animate-marquee {
-    animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .animate-marquee {
-        animation-play-state: paused;
-    }
-}
-
 /* Global Focus Styles */
 @layer base {
     a:focus-visible,
@@ -621,15 +533,6 @@
     animation-delay: 300ms;
 }
 
-.delay-400 {
-    animation-delay: 400ms;
-}
-
-.delay-500 {
-    animation-delay: 500ms;
-}
-
-/* Premium UI Refresh Additions */
 
 /* Flashlight Spotlight Background */
 #flashlight-bg {
@@ -1049,7 +952,6 @@
    Ranges are registered via CSS.highlights.set() in postSetup.ts and
    transmissions/index.astro. */
 
-mark.search-match-fallback,
 .search-highlight {
     background: rgba(var(--neon-glow-1-rgb), 0.25);
     color: inherit;
@@ -1058,7 +960,6 @@ mark.search-match-fallback,
     font-weight: 600;
 }
 
-/* Phase IV: Native Scroll-Driven Animations */
 @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
     @keyframes progress-grow {
         from {
@@ -1250,15 +1151,7 @@ html.theme-transition::view-transition-old(root) {
    no JS changes are needed here.
    ═══════════════════════════════════════════════════════════════ */
 @media (pointer: coarse) {
-    /* 1. Stop the infinite marquee animation on touch devices.
-          Icons become horizontally scrollable instead. */
-    .animate-marquee {
-        animation: none;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* 2. Disable hero parallax scroll-driven animation.
+    /* 1. Disable hero parallax scroll-driven animation.
           The element stays visible but no longer shifts on scroll. */
     .parallax-hero-bg {
         animation: none !important;
@@ -1266,14 +1159,14 @@ html.theme-transition::view-transition-old(root) {
         will-change: auto;
     }
 
-    /* 3. Remove the compositor layer from bento cards.
+    /* 2. Remove the compositor layer from bento cards.
           The 3D tilt JS never fires on touch — the layer is pure waste. */
     .bento-card {
         will-change: auto;
         transform-style: flat;
     }
 
-    /* 4. Remove the compositor layer from magnetic targets.
+    /* 3. Remove the compositor layer from magnetic targets.
           The magnetic-pull JS never fires on touch devices. */
     .magnetic-target,
     .transition-spring {
