@@ -11,7 +11,6 @@ export async function setupPost() {
     postAbortController = new AbortController();
     const { signal } = postAbortController;
 
-
     const progressBar = document.getElementById('progress-bar');
     const hasScrollTimeline = CSS.supports(
         '(animation-timeline: scroll()) and (animation-range: 0% 100%)'

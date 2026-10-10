@@ -9,7 +9,6 @@ export const setupFooter = () => {
     footerAbortController = new AbortController();
     const { signal } = footerAbortController;
 
-
     const updateRelativeTimes = () => {
         const indicators = document.getElementsByClassName('relative-time-indicator');
         const now = new Date().getTime();
