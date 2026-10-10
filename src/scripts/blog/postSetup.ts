@@ -11,26 +11,6 @@ export async function setupPost() {
     postAbortController = new AbortController();
     const { signal } = postAbortController;
 
-    // Load polyfills if necessary asynchronously without blocking main initialization
-    (async () => {
-        try {
-            if (!HTMLElement.prototype.hasOwnProperty('popover')) {
-                // @ts-ignore
-                await import('https://unpkg.com/@oddbird/popover-polyfill@latest');
-            }
-            if (!HTMLButtonElement.prototype.hasOwnProperty('interestForElement')) {
-                // @ts-ignore
-                await import('https://unpkg.com/interestfor@latest');
-            }
-            if (!('anchorName' in document.documentElement.style)) {
-                // @ts-ignore
-                await import('https://unpkg.com/@oddbird/css-anchor-positioning');
-            }
-        } catch (err) {
-            console.warn('Polyfill loading deferred or offline:', err);
-        }
-    })();
-
     const progressBar = document.getElementById('progress-bar');
     const hasScrollTimeline = CSS.supports(
         '(animation-timeline: scroll()) and (animation-range: 0% 100%)'
@@ -421,6 +401,7 @@ export async function setupPost() {
                         trigger.className =
                             'relative inline border-b border-dashed border-(--accent)/50 text-slate-800 dark:text-slate-200 cursor-help transition-colors hover:text-(--accent) hover:border-(--accent) bg-transparent p-0 font-inherit text-left';
                         trigger.setAttribute('interestfor', tooltipId);
+                        trigger.setAttribute('popovertarget', tooltipId);
                         trigger.style.setProperty('anchor-name', anchorName);
                         trigger.textContent = term;
 

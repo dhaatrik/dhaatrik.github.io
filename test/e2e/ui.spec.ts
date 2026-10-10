@@ -318,4 +318,55 @@ test.describe('Portfolio UI Interactivity', () => {
         const flashlight = page.locator('#flashlight-bg');
         await expect(flashlight).toBeAttached();
     });
+
+    test('Reticle blueprint frame mounts on hub pages, responds to mouse on personnel/transmissions, and stays static on projects', async ({
+        page,
+    }) => {
+        // 1. Check personnel page: reticle mounts and transforms on mousemove
+        await page.goto('/personnel/');
+        await page.waitForLoadState('networkidle');
+
+        const reticlePersonnel = page.locator('#reticle-bg');
+        await expect(reticlePersonnel).toBeAttached();
+
+        // Move mouse to trigger parallax
+        await page.mouse.move(600, 400);
+        await page.waitForTimeout(100);
+
+        const transformPersonnel = await reticlePersonnel.evaluate((el) => el.style.transform);
+        expect(transformPersonnel).toContain('translate3d');
+
+        // 2. Client-side navigate to /projects/
+        const projectsLink = page.locator('header a[href="/projects"]').first();
+        await projectsLink.click();
+        await expect(page).toHaveURL(/\/projects/);
+
+        const reticleProjects = page.locator('#reticle-bg');
+        await expect(reticleProjects).toBeAttached();
+        const workbench = page.locator('#workbench-schematic');
+        await expect(workbench).toBeAttached();
+
+        // Move mouse on projects
+        await page.mouse.move(200, 200);
+        await page.mouse.move(800, 600);
+        await page.waitForTimeout(100);
+
+        // Projects reticle must stay static (no transform applied)
+        const transformProjects = await reticleProjects.evaluate((el) => el.style.transform);
+        expect(transformProjects).toBe('');
+
+        // 3. Client-side navigate to /transmissions/
+        const transLink = page.locator('header a[href="/transmissions"]').first();
+        await transLink.click();
+        await expect(page).toHaveURL(/\/transmissions/);
+
+        const reticleTrans = page.locator('#reticle-bg');
+        await expect(reticleTrans).toBeAttached();
+
+        await page.mouse.move(700, 500);
+        await page.waitForTimeout(100);
+
+        const transformTrans = await reticleTrans.evaluate((el) => el.style.transform);
+        expect(transformTrans).toContain('translate3d');
+    });
 });
