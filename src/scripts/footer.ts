@@ -9,17 +9,6 @@ export const setupFooter = () => {
     footerAbortController = new AbortController();
     const { signal } = footerAbortController;
 
-    // Load Popover polyfill dynamically if missing
-    (async () => {
-        if (!HTMLElement.prototype.hasOwnProperty('popover')) {
-            try {
-                // @ts-ignore
-                await import('https://unpkg.com/@oddbird/popover-polyfill@latest');
-            } catch (err) {
-                console.warn('Popover polyfill deferred or offline:', err);
-            }
-        }
-    })();
 
     const updateRelativeTimes = () => {
         const indicators = document.getElementsByClassName('relative-time-indicator');
