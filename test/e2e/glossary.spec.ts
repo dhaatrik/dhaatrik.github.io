@@ -45,4 +45,25 @@ test.describe('Glossary Popover Functionality', () => {
         const hasProse = await page.locator('.prose').first().isVisible();
         expect(hasProse).toBe(true);
     });
+
+    test('renders glossary term trigger with popovertarget and toggles tooltip on click', async ({
+        page,
+    }) => {
+        await page.goto('/transmissions/deltav-lab-science/');
+        await page.waitForLoadState('networkidle');
+
+        // Locate glossary button trigger with popovertarget attribute
+        const trigger = page.locator('button[popovertarget^="tooltip-glossary-"]').first();
+        await expect(trigger).toBeAttached();
+
+        const tooltipId = await trigger.getAttribute('popovertarget');
+        expect(tooltipId).toBeTruthy();
+
+        const popover = page.locator(`#${tooltipId}`);
+        await expect(popover).toBeAttached();
+
+        // Click trigger to toggle popover via fallback
+        await trigger.click();
+        await expect(popover).toBeVisible();
+    });
 });
