@@ -1,6 +1,6 @@
 # Dhaatrik Chowdhury — Personal Portfolio & Blog
 
-> Personal website of Dhaatrik Chowdhury, an Entrepreneur and AI Engineer from India. Features a portfolio of projects, pedagogy philosophy, and technical blog posts (called "transmissions"). Site version: v4.10.1. <!-- x-release-please-version -->
+> Personal website of Dhaatrik Chowdhury, an Entrepreneur and AI Engineer from India. Features a portfolio of projects, pedagogy philosophy, and technical blog posts (called "transmissions"). Site version: v4.10.2. <!-- x-release-please-version -->
 
 ## Core Pages
 

@@ -1,5 +1,30 @@
 # Changelog
 
+## [4.10.2](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.10.1...v4.10.2) (2026-10-11)
+
+
+### Bug Fixes
+
+* **ui:** remove csp-blocked cdn polyfills and add popover fallback ([ba63732](https://github.com/dhaatrik/dhaatrik.github.io/commit/ba6373222a7b2399b50fdabe93a7c17461cb96a1))
+
+
+### Styles & UI Polish
+
+* **ui:** delete unused animations, scroll-cue styles and dead css ([e21f2af](https://github.com/dhaatrik/dhaatrik.github.io/commit/e21f2af2b8f220a40920813672d5890e0112e1cd))
+* **ui:** format postSetup, footer, and global styles with prettier ([d4034ca](https://github.com/dhaatrik/dhaatrik.github.io/commit/d4034ca0d2332e12316d4845f9f847a87bb2ec51))
+
+
+### Code Refactoring
+
+* **core:** scrub cdn polyfills, decouple dev sitemaps, prune dead css, and unify reticle frame ([b753432](https://github.com/dhaatrik/dhaatrik.github.io/commit/b753432b2555924bb9b39a6744946c22871ca412))
+* **ui:** extract shared reticle blueprint frame and parallax script ([a3f715e](https://github.com/dhaatrik/dhaatrik.github.io/commit/a3f715e61fa9554d9d4d93924010496be9719688))
+
+
+### Tests & Verification
+
+* **e2e:** add verification tests for glossary popover fallback and reticle parallax ([a44a34a](https://github.com/dhaatrik/dhaatrik.github.io/commit/a44a34a2dfef0b453e78825272f19caceac311e4))
+* **e2e:** run tests against preview server and remove dev sitemap middleware ([3bf9ba2](https://github.com/dhaatrik/dhaatrik.github.io/commit/3bf9ba2a8797c7453c1020a764490b8727c450f9))
+
 ## [4.10.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.10.0...v4.10.1) (2026-10-06)
 
 
