@@ -19,7 +19,7 @@ concurrency:
 jobs:
     verify:
         name: Code Quality & Engineering Verification
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
@@ -53,6 +53,10 @@ jobs:
               if: steps.playwright-cache.outputs.cache-hit != 'true'
               run: npx playwright install --with-deps chromium
 
+            - name: Install Playwright Chromium OS dependencies
+              if: steps.playwright-cache.outputs.cache-hit == 'true'
+              run: npx playwright install-deps chromium
+
             - name: Run E2E verification
               run: npm run test:e2e
 
@@ -69,7 +73,7 @@ jobs:
     build:
         name: Build Static Artifacts
         needs: verify
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
@@ -87,7 +91,7 @@ jobs:
         needs: build
         # Strict assurance that deployment only occurs from main
         if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         environment:
             name: github-pages
             url: ${{ steps.deployment.outputs.page_url }}
@@ -104,7 +108,7 @@ jobs:
         needs: [verify, build, deploy]
         # Strict assurance that versioning/release only runs after successful deployment on main
         if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         permissions:
             contents: write
             pull-requests: write
