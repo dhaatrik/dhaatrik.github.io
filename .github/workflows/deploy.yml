@@ -90,7 +90,7 @@ jobs:
         name: Launch to Production
         needs: build
         # Strict assurance that deployment only occurs from main
-        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        if: github.ref == 'refs/heads/main'
         runs-on: ubuntu-24.04
         environment:
             name: github-pages
@@ -107,7 +107,7 @@ jobs:
         name: Manage Versioning & Changelog
         needs: [verify, build, deploy]
         # Strict assurance that versioning/release only runs after successful deployment on main
-        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        if: github.ref == 'refs/heads/main'
         runs-on: ubuntu-24.04
         permissions:
             contents: write
