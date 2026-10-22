@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.10.3](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.10.2...v4.10.3) (2026-10-22)
+
+
+### Chores & Maintenance
+
+* add MIT license and agent scaffolding to gitignore ([5ce8a46](https://github.com/dhaatrik/dhaatrik.github.io/commit/5ce8a463bf5594ad07eeaca1d1421dc3d97e3704))
+
 ## [4.10.2](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.10.1...v4.10.2) (2026-10-11)
 
 
