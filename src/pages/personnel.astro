@@ -29,7 +29,7 @@ const breadcrumbSchema = JSON.stringify({
         {
             '@type': 'ListItem',
             position: 2,
-            name: 'About',
+            name: 'Personnel',
             item: new URL('/personnel/', Astro.site).href,
         },
     ],
@@ -40,7 +40,7 @@ const breadcrumbSchema = JSON.stringify({
 <html lang="en">
     <head>
         <BaseHead
-            title={`About | ${SITE_TITLE}`}
+            title={`Personnel | ${SITE_TITLE}`}
             description="Mission dossier — who I am, what I'm building, what broke along the way, and the stack I actually use."
             image={personnelOgImage}
         />
