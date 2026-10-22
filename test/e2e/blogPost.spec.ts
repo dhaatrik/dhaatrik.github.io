@@ -115,6 +115,39 @@ test.describe('BlogPost Interactive Features', () => {
         expect(path).toBeTruthy();
     });
 
+    test('Offline transmission HTML export should trigger file download and escape HTML entities', async ({
+        page,
+    }) => {
+        const exportBtn = page.locator('#export-btn');
+        await exportBtn.scrollIntoViewIfNeeded();
+
+        // Open export menu options
+        await exportBtn.click();
+
+        const exportOfflineBtn = page.locator('#export-offline-btn');
+        await expect(exportOfflineBtn).toBeVisible();
+
+        // Wait for download event and trigger export
+        const downloadPromise = page.waitForEvent('download');
+        await exportOfflineBtn.click();
+        const download = await downloadPromise;
+
+        // Verify file properties
+        const filename = download.suggestedFilename();
+        expect(filename).toContain('transmission-archive-');
+        expect(filename.endsWith('.html')).toBe(true);
+
+        const path = await download.path();
+        expect(path).toBeTruthy();
+        if (path) {
+            const fs = await import('node:fs/promises');
+            const content = await fs.readFile(path, 'utf8');
+            expect(content).toContain('<!doctype html>');
+            expect(content).toContain('VELLOR TRANSMISSION LOG');
+            expect(content).not.toContain('<script>alert');
+        }
+    });
+
     test('Architecture diagram should render as responsive SVG on posts with system blueprints', async ({
         page,
     }) => {

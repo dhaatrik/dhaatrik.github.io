@@ -420,6 +420,8 @@ const formatMarqueeDate = (date: Date) => {
     <div
         popover
         id="books-popover"
+        role="dialog"
+        aria-modal="true"
         aria-labelledby="books-popover-title"
         class="premium-glass m-auto w-[calc(100%-2rem)] max-w-2xl rounded-2xl p-0 md:w-full"
     >
@@ -454,8 +456,13 @@ const formatMarqueeDate = (date: Date) => {
                 popovertargetaction="hide"
                 class="mt-0.5 shrink-0 cursor-pointer rounded-sm p-1 text-slate-500 transition-colors hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none sm:mt-1 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
             >
-                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-                    ><path d="M18 6L6 18M6 6l12 12"></path></svg
+                <svg
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg
                 >
             </button>
         </div>
