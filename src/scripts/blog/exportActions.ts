@@ -1,3 +1,12 @@
+export function escapeHtml(str: string): string {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
 export function setupExportActions(signal: AbortSignal) {
     // Export Button Toggle
     const exportBtn = document.getElementById('export-btn');
@@ -115,7 +124,7 @@ export function setupExportActions(signal: AbortSignal) {
     \x3chead\x3e
         \x3cmeta charset="utf-8"\x3e
         \x3cmeta name="viewport" content="width=device-width, initial-scale=1.0"\x3e
-        \x3ctitle\x3e${postTitle} - Offline Transmission\x3c/title\x3e
+        \x3ctitle\x3e${escapeHtml(postTitle)} - Offline Transmission\x3c/title\x3e
         \x3cstyle\x3e
             :root {
                 --bg-main: #f8fafc;
@@ -216,8 +225,8 @@ export function setupExportActions(signal: AbortSignal) {
     \x3c/head\x3e
     \x3cbody\x3e
         \x3cdiv class="header-block"\x3e
-            \x3ch1\x3e${postTitle}\x3c/h1\x3e
-            \x3cp style="margin: 0 0 16px 0; color: #64748b;"\x3e${postDesc}\x3c/p\x3e
+            \x3ch1\x3e${escapeHtml(postTitle)}\x3c/h1\x3e
+            \x3cp style="margin: 0 0 16px 0; color: #64748b;"\x3e${escapeHtml(postDesc)}\x3c/p\x3e
             \x3cdiv class="meta-grid"\x3e
                 \x3cdiv\x3e
                     \x3cdiv class="meta-label"\x3eSOURCE\x3c/div\x3e
