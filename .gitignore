@@ -41,3 +41,7 @@ TODO_*.md
 
 # jetbrains setting folder
 .idea/
+
+# AI agent scaffolding
+.jules/
+conductor/
