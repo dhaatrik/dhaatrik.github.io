@@ -1,5 +1,31 @@
 # Changelog
 
+## [4.10.4](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.10.3...v4.10.4) (2026-10-22)
+
+
+### Bug Fixes
+
+* **a11y:** add role dialog and modal semantics to books popover ([5ccc300](https://github.com/dhaatrik/dhaatrik.github.io/commit/5ccc3003f20f0cfb5b8bf9ddf9f69cae272e6a38))
+* **home:** add explicit width and height dimensions to brand mark images ([5a8260b](https://github.com/dhaatrik/dhaatrik.github.io/commit/5a8260bf935359c31e5046d47b366f64d6c2a0d7))
+* **security:** escape html metadata in offline transmission generator ([2ff184e](https://github.com/dhaatrik/dhaatrik.github.io/commit/2ff184ee91220b031c9fd112c59e250ddd390a5e))
+* **security:** tighten csp font source directive ([50a2d6e](https://github.com/dhaatrik/dhaatrik.github.io/commit/50a2d6e35a516b317f69d945414736019665a609))
+* **seo:** harmonize personnel route title and breadcrumb metadata ([ace08b6](https://github.com/dhaatrik/dhaatrik.github.io/commit/ace08b619cf299b549f454fad38d3c92490ba0ae))
+
+
+### Performance Improvements
+
+* **katex:** add font-display swap to mathematical font definitions ([4f499e6](https://github.com/dhaatrik/dhaatrik.github.io/commit/4f499e68ab7e1345d919abe05efea00a8552ce23))
+
+
+### Code Refactoring
+
+* **audit:** apply and harden fresnel code audit recommendations ([08164f2](https://github.com/dhaatrik/dhaatrik.github.io/commit/08164f221f61a2e7a73339c000aa133c11d02ece))
+
+
+### Tests & Verification
+
+* **blog:** add unit and e2e coverage for offline transmission export and entity escaping ([cef353c](https://github.com/dhaatrik/dhaatrik.github.io/commit/cef353ca9727c54d6d3f6b54c31c61c9823f9c5c))
+
 ## [4.10.3](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.10.2...v4.10.3) (2026-10-22)
 
 
