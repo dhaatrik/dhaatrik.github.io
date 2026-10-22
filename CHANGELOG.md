@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.11.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.10.4...v4.11.0) (2026-10-22)
+
+
+### Features
+
+* **verify:** add verification skill, feature map, and control script for dhaatrik-site ([90d1f21](https://github.com/dhaatrik/dhaatrik.github.io/commit/90d1f21fff8a7f04df617f6e19d74b5b098694db))
+
+
+### Chores & Maintenance
+
+* **pstack:** configure per-role model rules and add project verification skill ([719f53d](https://github.com/dhaatrik/dhaatrik.github.io/commit/719f53d051844a5e2187565ee9b0cee4116e5310))
+* **pstack:** configure per-role model rules for medium reasoning budget ([2109c23](https://github.com/dhaatrik/dhaatrik.github.io/commit/2109c23657fdca0dc31ad8b4999ee0974656ba20))
+
 ## [4.10.4](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.10.3...v4.10.4) (2026-10-22)
 
 
