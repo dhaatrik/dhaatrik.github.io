@@ -71,8 +71,33 @@ export function setupFormulaInspector() {
             tooltip.id = 'math-inspector-tooltip';
             tooltip.dataset.anchorId = htmlBlock.id;
             tooltip.className =
-                'absolute z-50 p-2.5 bg-slate-900 border border-slate-700 text-slate-300 font-mono text-[10px] rounded shadow-xl tracking-wider';
-            tooltip.innerHTML = `[ <span class="text-(--accent)">INSPECTING</span> ] &rarr; ${definition}`;
+                'absolute z-50 p-3 bg-slate-950/95 dark:bg-[#0b0e14]/95 border border-slate-700/80 dark:border-white/15 text-slate-300 font-mono text-[10px] rounded-lg shadow-[0_16px_36px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.1)] tracking-wider max-w-sm backdrop-blur-md transition-all';
+
+            const parts = definition.split('//').map((p) => p.trim());
+            const itemsHtml = parts
+                .map((part) => {
+                    const colonIdx = part.indexOf(':');
+                    if (colonIdx !== -1) {
+                        const sym = part.substring(0, colonIdx).trim();
+                        const desc = part.substring(colonIdx + 1).trim();
+                        return `<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-slate-900/80 border border-slate-800 text-slate-300"><span class="font-bold text-(--accent)">${sym}</span><span class="text-slate-500">:</span><span>${desc}</span></div>`;
+                    }
+                    return `<div class="px-2 py-1 rounded bg-slate-900/80 border border-slate-800 text-slate-300">${part}</div>`;
+                })
+                .join('');
+
+            tooltip.innerHTML = `
+                <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-2.5 select-none">
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-red-400/80 shadow-xs"></span>
+                        <span class="w-2 h-2 rounded-full bg-amber-400/80 shadow-xs"></span>
+                        <span class="w-2 h-2 rounded-full bg-emerald-400/80 shadow-xs"></span>
+                        <span class="ml-2 font-bold tracking-widest text-(--accent) text-[9px] uppercase">[ INSPECTING ] MATH.RADAR</span>
+                    </div>
+                    <span class="text-[9px] text-slate-500 tracking-wider">ESC TO DISMISS</span>
+                </div>
+                <div class="flex flex-wrap gap-1.5">${itemsHtml}</div>
+            `;
 
             document.body.appendChild(tooltip);
 
@@ -90,9 +115,18 @@ export function setupFormulaInspector() {
             const dismissTooltip = () => {
                 tooltip.remove();
                 document.removeEventListener('click', dismissTooltip);
+                document.removeEventListener('keydown', handleEsc);
             };
+
+            const handleEsc = (evt: KeyboardEvent) => {
+                if (evt.key === 'Escape') {
+                    dismissTooltip();
+                }
+            };
+
             setTimeout(() => {
                 document.addEventListener('click', dismissTooltip);
+                document.addEventListener('keydown', handleEsc);
             }, 10);
         });
     });
