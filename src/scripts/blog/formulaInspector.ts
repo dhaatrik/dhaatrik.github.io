@@ -70,8 +70,13 @@ export function setupFormulaInspector() {
             const tooltip = document.createElement('div');
             tooltip.id = 'math-inspector-tooltip';
             tooltip.dataset.anchorId = htmlBlock.id;
+            try {
+                tooltip.setAttribute('popover', 'auto');
+            } catch {
+                // Older browser fallback
+            }
             tooltip.className =
-                'absolute z-50 p-3 bg-slate-950/95 dark:bg-[#0b0e14]/95 border border-slate-700/80 dark:border-white/15 text-slate-300 font-mono text-[10px] rounded-lg shadow-[0_16px_36px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.1)] tracking-wider max-w-sm backdrop-blur-md transition-all';
+                'fixed inset-auto z-50 m-0 p-3 bg-slate-950/95 dark:bg-[#0b0e14]/95 border border-slate-700/80 dark:border-white/15 text-slate-300 font-mono text-[10px] rounded-lg shadow-[0_16px_36px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.1)] tracking-wider max-w-sm backdrop-blur-md transition-all';
 
             const parts = definition.split('//').map((p) => p.trim());
             const itemsHtml = parts
@@ -102,21 +107,43 @@ export function setupFormulaInspector() {
             document.body.appendChild(tooltip);
 
             const rect = htmlBlock.getBoundingClientRect();
-            tooltip.style.left = `${window.scrollX + rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-            tooltip.style.top = `${window.scrollY + rect.bottom + 6}px`;
+            const top = Math.min(window.innerHeight - 160, Math.max(10, rect.bottom + 6));
+            const left = Math.max(
+                10,
+                Math.min(window.innerWidth - 330, rect.left + rect.width / 2 - 160)
+            );
+            tooltip.style.top = `${top}px`;
+            tooltip.style.left = `${left}px`;
 
-            const tooltipRect = tooltip.getBoundingClientRect();
-            if (tooltipRect.left < 10) {
-                tooltip.style.left = '10px';
-            } else if (tooltipRect.right > window.innerWidth - 10) {
-                tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
+            // Native Popover API activation
+            if (typeof tooltip.showPopover === 'function') {
+                try {
+                    tooltip.showPopover();
+                } catch {
+                    // Fallback to standard DOM visibility
+                }
             }
 
             const dismissTooltip = () => {
-                tooltip.remove();
-                document.removeEventListener('click', dismissTooltip);
-                document.removeEventListener('keydown', handleEsc);
+                if (typeof tooltip.hidePopover === 'function') {
+                    try {
+                        tooltip.hidePopover();
+                    } catch {
+                        tooltip.remove();
+                    }
+                } else {
+                    tooltip.remove();
+                }
             };
+
+            // Remove when popover toggles to closed
+            tooltip.addEventListener('toggle', (evt: any) => {
+                if (evt.newState === 'closed') {
+                    tooltip.remove();
+                    document.removeEventListener('click', dismissTooltip);
+                    document.removeEventListener('keydown', handleEsc);
+                }
+            });
 
             const handleEsc = (evt: KeyboardEvent) => {
                 if (evt.key === 'Escape') {
