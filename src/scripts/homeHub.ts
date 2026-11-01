@@ -4,7 +4,7 @@ export const setupHomeHub = () => {
     Array.from(projectCards).forEach((card) => {
         card.addEventListener('click', (e) => {
             // Ignore clicks on links/buttons inside the card
-            if ((e.target as HTMLElement | null)?.closest('.github-link')) {
+            if ((e.target as HTMLElement | null)?.closest('.github-link, a[href]')) {
                 return;
             }
             const popoverId = card.getAttribute('data-popover-target');
@@ -159,7 +159,93 @@ export const setupHomeHub = () => {
         window.addEventListener('pageshow', handlePageShow);
     }
 
-    // --- 6. Scroll Telemetry Indicator Connection Setup ---
+    // --- 2. Offline Fail-Safe Protocol Handler ---
+    const beacon = document.getElementById('hero-status-beacon');
+    const label = document.getElementById('hero-status-label');
+    const version = document.getElementById('hero-status-version');
+    const dot = document.getElementById('hero-status-dot');
+    const ping = document.getElementById('hero-status-ping');
+    const offlineBadge = document.getElementById('offline-fail-safe-badge');
+
+    const handleOffline = () => {
+        if (label) label.textContent = 'SYS.OFFLINE';
+        if (version) version.textContent = '[FAIL-SAFE ACTIVE]';
+        if (beacon) {
+            beacon.classList.remove(
+                'border-emerald-500/30',
+                'bg-emerald-500/10',
+                'text-emerald-600',
+                'dark:border-emerald-400/30',
+                'dark:bg-emerald-400/10',
+                'dark:text-emerald-400'
+            );
+            beacon.classList.add(
+                'border-amber-500/40',
+                'bg-amber-500/15',
+                'text-amber-500',
+                'dark:border-amber-400/40',
+                'dark:bg-amber-400/15',
+                'dark:text-amber-400'
+            );
+        }
+        if (dot) {
+            dot.classList.remove('bg-emerald-500', 'dark:bg-emerald-400');
+            dot.classList.add('bg-amber-500', 'dark:bg-amber-400');
+        }
+        if (ping) {
+            ping.classList.remove('bg-emerald-500', 'dark:bg-emerald-400');
+            ping.classList.add('bg-amber-500', 'dark:bg-amber-400');
+        }
+        if (offlineBadge) {
+            offlineBadge.classList.remove('hidden');
+            offlineBadge.classList.add('flex');
+        }
+    };
+
+    const handleOnline = () => {
+        if (label) label.textContent = 'SYS.ONLINE';
+        if (version && beacon?.dataset.siteVersion) {
+            version.textContent = `[${beacon.dataset.siteVersion}]`;
+        }
+        if (beacon) {
+            beacon.classList.remove(
+                'border-amber-500/40',
+                'bg-amber-500/15',
+                'text-amber-500',
+                'dark:border-amber-400/40',
+                'dark:bg-amber-400/15',
+                'dark:text-amber-400'
+            );
+            beacon.classList.add(
+                'border-emerald-500/30',
+                'bg-emerald-500/10',
+                'text-emerald-600',
+                'dark:border-emerald-400/30',
+                'dark:bg-emerald-400/10',
+                'dark:text-emerald-400'
+            );
+        }
+        if (dot) {
+            dot.classList.remove('bg-amber-500', 'dark:bg-amber-400');
+            dot.classList.add('bg-emerald-500', 'dark:bg-emerald-400');
+        }
+        if (ping) {
+            ping.classList.remove('bg-amber-500', 'dark:bg-amber-400');
+            ping.classList.add('bg-emerald-500', 'dark:bg-emerald-400');
+        }
+        if (offlineBadge) {
+            offlineBadge.classList.remove('flex');
+            offlineBadge.classList.add('hidden');
+        }
+    };
+
+    if (typeof navigator !== 'undefined' && !navigator.onLine) {
+        handleOffline();
+    }
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline);
+
+    // --- 3. Scroll Telemetry Indicator Connection Setup ---
     const telemetry = document.querySelector('.scroll-telemetry-container') as HTMLElement | null;
     const telemetryText = document.getElementById('scroll-telemetry-text');
     let handleScroll: (() => void) | undefined;
@@ -199,7 +285,7 @@ export const setupHomeHub = () => {
         window.addEventListener('scroll', handleScroll, { passive: true });
     }
 
-    // --- 8. Programmatic Accessibility Focus Routing ---
+    // --- 4. Programmatic Accessibility Focus Routing ---
     if (document.activeElement === document.body || !document.activeElement) {
         const mainContent = document.getElementById('main-content');
         if (mainContent) {
@@ -210,7 +296,7 @@ export const setupHomeHub = () => {
         }
     }
 
-    // --- 8.5. Bind View Transition Names to Homepage Blog Cards ---
+    // --- 5. Bind View Transition Names to Homepage Blog Cards ---
     const homeBlogCards = document.querySelectorAll('a.bento-card[href*="/transmissions/"]');
     homeBlogCards.forEach((card) => {
         card.addEventListener('click', () => {
@@ -221,13 +307,15 @@ export const setupHomeHub = () => {
         });
     });
 
-    // --- 9. Cleanup Event Listeners on Page Transition ---
+    // --- 6. Cleanup Event Listeners on Page Transition ---
     document.addEventListener(
         'astro:before-preparation',
         () => {
             if (typewriterTimeout) clearTimeout(typewriterTimeout);
             document.removeEventListener('visibilitychange', handleVisibilityChange);
             window.removeEventListener('pageshow', handlePageShow);
+            window.removeEventListener('offline', handleOffline);
+            window.removeEventListener('online', handleOnline);
             if (handleScroll) window.removeEventListener('scroll', handleScroll);
         },
         { once: true }

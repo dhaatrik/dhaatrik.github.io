@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import ReticleFrame from '../components/ReticleFrame.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_VERSION } from '../consts';
 import homeOgImage from '../assets/og/home-og.jpg';
 import { getCollection, type CollectionEntry } from 'astro:content';
@@ -13,14 +14,12 @@ import { getPainLevelLabel } from '../data/status';
 type ProjectEntry = CollectionEntry<'projects'>;
 type BlogEntry = CollectionEntry<'blog'>;
 
-const [projects, posts] = await Promise.all([
+const [allProjects, posts] = await Promise.all([
     getCollection('projects').then((raw: CollectionEntry<'projects'>[]) =>
-        raw
-            .sort(
-                (a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) =>
-                    a.data.order - b.data.order
-            )
-            .slice(0, 4)
+        raw.sort(
+            (a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) =>
+                a.data.order - b.data.order
+        )
     ),
     getCollection('blog').then((raw: CollectionEntry<'blog'>[]) =>
         raw
@@ -31,6 +30,14 @@ const [projects, posts] = await Promise.all([
             .slice(0, 3)
     ),
 ]);
+
+// Extract primary featured projects
+const deltaVProject = allProjects.find((p) => p.id.includes('deltav-lab'));
+const vellorProject = allProjects.find((p) => p.id.includes('vellor'));
+const infiniteIntelligenceProject = allProjects.find((p) =>
+    p.id.includes('the-infinite-intelligence')
+);
+const fuelDropProject = allProjects.find((p) => p.id.includes('fueldrop'));
 
 // Premium Founder Lineup
 const lineupNames = ['React', 'TypeScript', 'Python', 'TensorFlow'];
@@ -139,6 +146,9 @@ const webSiteSchema = JSON.stringify({
                 id="hero-section"
                 class="layout-container relative flex min-h-[72vh] w-full flex-col justify-center overflow-hidden pt-6 pb-14 sm:min-h-[78vh] sm:pt-10 sm:pb-20 md:min-h-[84vh] md:pt-14 md:pb-24"
             >
+                <!-- Blueprint Reticle Calibration Frame with Mouse Parallax -->
+                <ReticleFrame class="top-4 right-0 md:top-8" />
+
                 <!-- Parallax Background Element -->
                 <div class="parallax-hero-bg blueprint-reveal flex items-center justify-center">
                     <div
@@ -191,18 +201,24 @@ const webSiteSchema = JSON.stringify({
                     >
                         <!-- Status Beacon Chip -->
                         <div
+                            id="hero-status-beacon"
+                            data-site-version={SITE_VERSION}
                             class="inline-flex w-fit items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-semibold text-emerald-600 sm:rounded-full dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-400"
                         >
                             <span class="relative flex h-2 w-2 shrink-0">
                                 <span
+                                    id="hero-status-ping"
                                     class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75 dark:bg-emerald-400"
                                 ></span>
                                 <span
+                                    id="hero-status-dot"
                                     class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.6)] dark:bg-emerald-400"
                                 ></span>
                             </span>
-                            <span>SYS.ONLINE</span>
-                            <span class="text-emerald-600/70 dark:text-emerald-400/70"
+                            <span id="hero-status-label">SYS.ONLINE</span>
+                            <span
+                                id="hero-status-version"
+                                class="text-emerald-600/70 dark:text-emerald-400/70"
                                 >[{SITE_VERSION}]</span
                             >
                         </div>
@@ -223,6 +239,24 @@ const webSiteSchema = JSON.stringify({
                             >
                         </div>
                     </div>
+
+                    <!-- Offline Fail-Safe Notification Badge -->
+                    <div
+                        id="offline-fail-safe-badge"
+                        role="status"
+                        aria-live="polite"
+                        class="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 items-center gap-2.5 rounded-full border border-amber-500/40 bg-amber-950/85 px-4 py-2 font-mono text-xs font-medium text-amber-300 shadow-[0_0_25px_rgba(245,158,11,0.3)] backdrop-blur-md"
+                    >
+                        <span class="relative flex h-2 w-2 shrink-0">
+                            <span
+                                class="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"
+                            ></span>
+                            <span class="relative inline-flex h-2 w-2 rounded-full bg-amber-400"
+                            ></span>
+                        </span>
+                        <span>SYS.OFFLINE // FAIL-SAFE PROTOCOL ENGAGED // LOCAL CACHE ACTIVE</span>
+                    </div>
+
                     <h1
                         class="type-display reveal-on-scroll mb-6 text-slate-900 dark:text-white"
                         data-reveal-delay="100"
@@ -439,6 +473,12 @@ const webSiteSchema = JSON.stringify({
                 class="layout-container content-visibility-auto-projects mb-0 pb-16"
             >
                 <div class="reveal-on-scroll mb-10">
+                    <div class="mb-2 flex items-center gap-2 font-mono text-[11px] text-(--accent)">
+                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)"></span>
+                        <span class="font-bold tracking-widest uppercase"
+                            >SYS.MODULE // WORKBENCH</span
+                        >
+                    </div>
                     <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                         Featured Engineering
                     </h2>
@@ -447,8 +487,257 @@ const webSiteSchema = JSON.stringify({
                     </p>
                 </div>
 
-                <div class="bento-grid perspective-1000 reveal-stagger">
-                    <!-- Current Focus Bento Card -->
+                <!-- Bento Grid Layout: Flagship Anchor + Quiet Satellites -->
+                <div
+                    class="bento-grid perspective-1000 reveal-stagger grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+                >
+                    {/* 1. Flagship Hero Anchor Card: DeltaV Lab */}
+                    {
+                        deltaVProject && (
+                            <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_25px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_25px_var(--accent-glow)] md:col-span-2">
+                                <div
+                                    class="relative z-10 flex h-full flex-col justify-between"
+                                    data-tilt-z
+                                >
+                                    <div>
+                                        {/*  */}
+                                        <div class="mb-4 flex items-center justify-between border-b border-slate-200/60 pb-3 font-mono text-[10px] dark:border-white/10">
+                                            <div class="flex items-center gap-2">
+                                                <div class="flex items-center gap-1.5">
+                                                    <span class="h-2 w-2 rounded-full border border-red-500/40 bg-red-500/20" />
+                                                    <span class="h-2 w-2 rounded-full border border-amber-500/40 bg-amber-500/20" />
+                                                    <span class="h-2 w-2 rounded-full border border-emerald-500/40 bg-emerald-500/20" />
+                                                </div>
+                                                <span class="font-bold tracking-wider text-slate-600 dark:text-slate-300">
+                                                    ORBITAL_SIM_STAGE // RK4_50HZ
+                                                </span>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <span class="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-bold text-emerald-600 dark:text-emerald-400">
+                                                    <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+                                                    OPERATIONAL
+                                                </span>
+                                                {deltaVProject.data.githubUrl && (
+                                                    <a
+                                                        href={deltaVProject.data.githubUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        aria-label={`View ${deltaVProject.data.title} on GitHub (opens in a new tab)`}
+                                                        title={`View ${deltaVProject.data.title} on GitHub`}
+                                                        class="github-link relative z-20 text-slate-400 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-slate-500 dark:hover:text-white dark:focus-visible:text-white"
+                                                    >
+                                                        <svg
+                                                            viewBox="0 0 16 16"
+                                                            aria-hidden="true"
+                                                            width="18"
+                                                            height="18"
+                                                        >
+                                                            <path
+                                                                fill="currentColor"
+                                                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                                                            />
+                                                        </svg>
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        {/*  */}
+                                        <div class="relative mb-5 overflow-hidden rounded-xl border border-slate-200/70 bg-slate-900/90 p-4 text-white shadow-inner dark:border-white/10 dark:bg-black/60">
+                                            <div class="mb-2 flex items-center justify-between font-mono text-[10px] text-slate-400">
+                                                <span>TRAJECTORY_VECTOR // LEO</span>
+                                                <span class="font-bold text-cyan-400">
+                                                    &Delta;v: 9,420 m/s &bull; TWR: 1.42
+                                                </span>
+                                            </div>
+                                            <svg
+                                                viewBox="0 0 400 120"
+                                                class="h-24 w-full overflow-visible stroke-current"
+                                                aria-hidden="true"
+                                            >
+                                                {/*  */}
+                                                <line
+                                                    x1="0"
+                                                    y1="60"
+                                                    x2="400"
+                                                    y2="60"
+                                                    stroke="#334155"
+                                                    stroke-dasharray="2 4"
+                                                    stroke-width="0.75"
+                                                />
+                                                <line
+                                                    x1="200"
+                                                    y1="0"
+                                                    x2="200"
+                                                    y2="120"
+                                                    stroke="#334155"
+                                                    stroke-dasharray="2 4"
+                                                    stroke-width="0.75"
+                                                />
+                                                {/*  */}
+                                                <circle
+                                                    cx="200"
+                                                    cy="180"
+                                                    r="130"
+                                                    fill="#0f172a"
+                                                    stroke="#38bdf8"
+                                                    stroke-width="1.2"
+                                                    opacity="0.8"
+                                                />
+                                                {/*  */}
+                                                <circle
+                                                    cx="200"
+                                                    cy="180"
+                                                    r="138"
+                                                    fill="none"
+                                                    stroke="#0284c7"
+                                                    stroke-width="0.75"
+                                                    stroke-dasharray="3 3"
+                                                    opacity="0.5"
+                                                />
+                                                {/*  */}
+                                                <ellipse
+                                                    cx="200"
+                                                    cy="60"
+                                                    rx="170"
+                                                    ry="42"
+                                                    fill="none"
+                                                    stroke="#67e8f9"
+                                                    stroke-width="1.5"
+                                                    stroke-dasharray="4 4"
+                                                    class="opacity-80"
+                                                />
+                                                {/*  */}
+                                                <circle
+                                                    cx="370"
+                                                    cy="60"
+                                                    r="4"
+                                                    fill="#38bdf8"
+                                                    class="animate-ping"
+                                                    opacity="0.75"
+                                                />
+                                                <circle cx="370" cy="60" r="3" fill="#38bdf8" />
+                                                <text
+                                                    x="360"
+                                                    y="50"
+                                                    font-family="monospace"
+                                                    font-size="8"
+                                                    fill="#38bdf8"
+                                                    text-anchor="end"
+                                                >
+                                                    AP: 420KM
+                                                </text>
+                                                {/*  */}
+                                                <circle cx="30" cy="60" r="3" fill="#818cf8" />
+                                                <text
+                                                    x="40"
+                                                    y="50"
+                                                    font-family="monospace"
+                                                    font-size="8"
+                                                    fill="#818cf8"
+                                                >
+                                                    PE: 185KM
+                                                </text>
+                                                {/*  */}
+                                                <text
+                                                    x="200"
+                                                    y="24"
+                                                    font-family="monospace"
+                                                    font-size="8"
+                                                    fill="#94a3b8"
+                                                    text-anchor="middle"
+                                                >
+                                                    50Hz RK4 WORKER // SHARED_ARRAY_BUFFER
+                                                </text>
+                                            </svg>
+                                        </div>
+
+                                        <h3 class="mb-2 text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
+                                            <a
+                                                href={`/projects/${deltaVProject.id.replace(/\.md$/, '')}`}
+                                                data-astro-prefetch="hover"
+                                                class="after:absolute after:inset-0 after:z-10 focus:outline-none"
+                                            >
+                                                {deltaVProject.data.title}
+                                            </a>
+                                        </h3>
+                                        <p class="mb-4 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                            {deltaVProject.data.description}
+                                        </p>
+
+                                        {/*  */}
+                                        {deltaVProject.data.pain_level && (
+                                            <div class="mb-3 space-y-1.5">
+                                                <span class="block font-mono text-[9px] text-slate-500 dark:text-slate-400">
+                                                    // IMPACT.LOG
+                                                </span>
+                                                <div
+                                                    class="flex items-center gap-1"
+                                                    role="meter"
+                                                    aria-label={`Impact level: ${deltaVProject.data.pain_level} out of 5`}
+                                                    aria-valuetext={getPainLevelLabel(
+                                                        deltaVProject.data.pain_level
+                                                    )}
+                                                    aria-valuenow={deltaVProject.data.pain_level}
+                                                    aria-valuemin={1}
+                                                    aria-valuemax={5}
+                                                >
+                                                    {[1, 2, 3, 4, 5].map((i) => (
+                                                        <span
+                                                            aria-hidden="true"
+                                                            class={`h-1 w-6 rounded-xs transition-all duration-300 ${
+                                                                i <=
+                                                                (deltaVProject.data.pain_level ?? 0)
+                                                                    ? 'bg-amber-500 opacity-90 shadow-[0_0_6px_rgba(245,158,11,0.5)]'
+                                                                    : 'bg-slate-200 opacity-20 dark:bg-white/5'
+                                                            }`}
+                                                        />
+                                                    ))}
+                                                    <span class="ml-1 font-mono text-[9px] text-slate-500 dark:text-slate-400">
+                                                        {deltaVProject.data.pain_level}/5
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/*  */}
+                                        {deltaVProject.data.fuckup_teaser && (
+                                            <div class="mb-4">
+                                                <div class="rounded-lg border border-red-500/20 bg-red-500/5 p-2.5 dark:border-red-500/20 dark:bg-red-950/20">
+                                                    <div class="mb-1 flex items-center gap-1.5">
+                                                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
+                                                        <span class="font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
+                                                            // FAULT_ANALYSIS
+                                                        </span>
+                                                    </div>
+                                                    <p class="font-mono text-[10.5px] leading-relaxed text-red-700/90 dark:text-red-300/90">
+                                                        "{deltaVProject.data.fuckup_teaser}"
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div class="flex items-center justify-between gap-3 border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400">
+                                        <span class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400">
+                                            STAGE:{' '}
+                                            <span class="text-slate-700 dark:text-slate-300">
+                                                {deltaVProject.data.progress}
+                                            </span>
+                                        </span>
+                                        <span
+                                            class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
+                                            aria-label={`Read the full ${deltaVProject.data.title} mission log`}
+                                        >
+                                            EXPLORE LOG&nbsp;&rarr;
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        )
+                    }
+
+                    {/* 2. Satellite Research Dossier: Currently Exploring */}
                     <div
                         class="bento-card group bento-card-project relative flex cursor-pointer flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
                         data-popover-target="project-popover-currently-exploring"
@@ -459,38 +748,111 @@ const webSiteSchema = JSON.stringify({
                     >
                         <div class="relative z-10 flex h-full flex-col justify-between" data-tilt-z>
                             <div>
-                                <div class="mb-3 flex items-start justify-between">
-                                    <h3
-                                        class="text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white"
-                                    >
-                                        Currently Exploring
-                                    </h3>
-                                </div>
-                                <p
-                                    class="mb-5 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
+                                <div
+                                    class="mb-3 flex items-center justify-between border-b border-slate-200/60 pb-3 font-mono text-[10px] dark:border-white/10"
                                 >
-                                    Investigating agricultural systems from first principles—soil
-                                    chemistry, plant biology, and biotech (90%)—while allocating
+                                    <div class="flex items-center gap-2">
+                                        <div class="flex items-center gap-1">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-cyan-400"
+                                            ></span>
+                                            <span class="h-1.5 w-1.5 rounded-full bg-blue-400"
+                                            ></span>
+                                            <span class="h-1.5 w-1.5 rounded-full bg-purple-400"
+                                            ></span>
+                                        </div>
+                                        <span
+                                            class="font-bold tracking-wider text-slate-600 dark:text-slate-300"
+                                        >
+                                            RESEARCH_DOSSIER
+                                        </span>
+                                    </div>
+                                    <span
+                                        class="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2 py-0.5 text-[9px] font-bold text-cyan-600 dark:text-cyan-400"
+                                    >
+                                        ACTIVE_TRACKS
+                                    </span>
+                                </div>
+
+                                <h3
+                                    class="mb-3 text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white"
+                                >
+                                    Currently Exploring
+                                </h3>
+                                <p
+                                    class="mb-4 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
+                                >
+                                    Investigating agricultural systems from first principles — soil
+                                    chemistry, plant biology, and biotech (90%) — while allocating
                                     time to quantum mechanics, rocketry, and Behçet's Syndrome
                                     literature.
                                 </p>
+
+                                {/*  */}
+                                <div
+                                    class="mb-4 space-y-2 rounded-lg border border-slate-200/80 bg-slate-50/50 p-2.5 font-mono text-[10px] dark:border-white/5 dark:bg-white/5"
+                                >
+                                    <div>
+                                        <div class="mb-1 flex justify-between text-[9px]">
+                                            <span class="text-slate-700 dark:text-slate-300"
+                                                >Agritech & Soil Biology</span
+                                            >
+                                            <span class="font-bold text-emerald-500">90%</span>
+                                        </div>
+                                        <div
+                                            class="h-1 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-white/10"
+                                        >
+                                            <div class="h-full w-[90%] rounded-full bg-emerald-500">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mb-1 flex justify-between text-[9px]">
+                                            <span class="text-slate-700 dark:text-slate-300"
+                                                >Rocket Physics & Sim</span
+                                            >
+                                            <span class="font-bold text-blue-500">75%</span>
+                                        </div>
+                                        <div
+                                            class="h-1 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-white/10"
+                                        >
+                                            <div class="h-full w-[75%] rounded-full bg-blue-500">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mb-1 flex justify-between text-[9px]">
+                                            <span class="text-slate-700 dark:text-slate-300"
+                                                >Behçet's Clinical Lit</span
+                                            >
+                                            <span class="font-bold text-purple-500">40%</span>
+                                        </div>
+                                        <div
+                                            class="h-1 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-white/10"
+                                        >
+                                            <div class="h-full w-[40%] rounded-full bg-purple-500">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div
                                 class="flex items-center justify-between gap-3 border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400"
                             >
                                 <span
                                     class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400"
-                                    >STAGE: ACTIVE_EXPLORATION</span
                                 >
+                                    STAGE: ACTIVE_EXPLORATION
+                                </span>
                                 <span
                                     class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
-                                    >READ NOTES&nbsp;&rarr;</span
                                 >
+                                    READ NOTES&nbsp;&rarr;
+                                </span>
                             </div>
                         </div>
                     </div>
 
-                    {/* Currently Exploring popover details popup */}
+                    {/* Currently Exploring Popover Details Popup */}
                     <div
                         popover
                         id="project-popover-currently-exploring"
@@ -643,40 +1005,40 @@ const webSiteSchema = JSON.stringify({
                         </div>
                     </div>
 
+                    {/* 3. Vellor: Offline-First Tutoring OS */}
                     {
-                        projects.map((project: ProjectEntry) => {
-                            const projectIdClean = project.id.replace(/\.md$/, '');
-                            return (
-                                <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
-                                    <div
-                                        class="relative z-10 flex h-full flex-col justify-between"
-                                        data-tilt-z
-                                    >
-                                        <div>
-                                            <div class="mb-3 flex items-start justify-between">
-                                                <h3 class="text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
+                        vellorProject && (
+                            <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
+                                <div
+                                    class="relative z-10 flex h-full flex-col justify-between"
+                                    data-tilt-z
+                                >
+                                    <div>
+                                        <div class="mb-3 flex items-center justify-between border-b border-slate-200/60 pb-3 font-mono text-[10px] dark:border-white/10">
+                                            <div class="flex items-center gap-2">
+                                                <span class="font-bold tracking-wider text-slate-600 dark:text-slate-300">
+                                                    VELLOR_OS // LOCAL_FIRST
+                                                </span>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <span class="inline-flex items-center gap-1 rounded-full border border-blue-500/30 bg-blue-500/10 px-2 py-0.5 text-[9px] font-bold text-blue-600 dark:text-blue-400">
+                                                    <span class="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                                                    SHIPPED
+                                                </span>
+                                                {vellorProject.data.githubUrl && (
                                                     <a
-                                                        href={`/projects/${projectIdClean}`}
-                                                        data-astro-prefetch="hover"
-                                                        class="after:absolute after:inset-0 after:z-10 focus:outline-none"
-                                                    >
-                                                        {project.data.title}
-                                                    </a>
-                                                </h3>
-                                                {project.data.githubUrl && (
-                                                    <a
-                                                        href={project.data.githubUrl}
+                                                        href={vellorProject.data.githubUrl}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        aria-label={`View ${project.data.title} on GitHub (opens in a new tab)`}
-                                                        title={`View ${project.data.title} on GitHub`}
+                                                        aria-label={`View ${vellorProject.data.title} on GitHub (opens in a new tab)`}
+                                                        title={`View ${vellorProject.data.title} on GitHub`}
                                                         class="github-link relative z-20 text-slate-400 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-slate-500 dark:hover:text-white dark:focus-visible:text-white"
                                                     >
                                                         <svg
                                                             viewBox="0 0 16 16"
                                                             aria-hidden="true"
-                                                            width="20"
-                                                            height="20"
+                                                            width="18"
+                                                            height="18"
                                                         >
                                                             <path
                                                                 fill="currentColor"
@@ -686,105 +1048,488 @@ const webSiteSchema = JSON.stringify({
                                                     </a>
                                                 )}
                                             </div>
-                                            <p class="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
-                                                {project.data.description}
-                                            </p>
+                                        </div>
 
-                                            {/* Pain Level Indicator */}
-                                            {project.data.pain_level && (
-                                                <div class="mb-3 space-y-1.5">
-                                                    <span class="block font-mono text-[9px] text-slate-500 dark:text-slate-400">
-                                                        // IMPACT.LOG
-                                                    </span>
-                                                    <div
-                                                        class="flex items-center gap-1"
-                                                        role="meter"
-                                                        aria-label={`Impact level: ${project.data.pain_level} out of 5`}
-                                                        aria-valuetext={getPainLevelLabel(
-                                                            project.data.pain_level
-                                                        )}
-                                                        aria-valuenow={project.data.pain_level}
-                                                        aria-valuemin={1}
-                                                        aria-valuemax={5}
+                                        {/*  */}
+                                        <div class="mb-4 rounded-lg border border-slate-200/80 bg-slate-50/60 p-2.5 font-mono text-[10px] dark:border-white/5 dark:bg-white/5">
+                                            <div class="flex items-center justify-between text-slate-700 dark:text-slate-300">
+                                                <span class="flex items-center gap-1.5">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="12"
+                                                        height="12"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="2"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="text-emerald-500"
                                                     >
-                                                        {[1, 2, 3, 4, 5].map((i) => {
-                                                            const colors: {
-                                                                [key: number]: string;
-                                                            } = {
-                                                                1: 'bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.5)]', // Violet
-                                                                2: 'bg-[#10b981] shadow-[0_0_6px_rgba(16,185,129,0.5)]', // Green
-                                                                3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]', // Yellow
-                                                                4: 'bg-[#f97316] shadow-[0_0_6px_rgba(249,115,22,0.5)]', // Orange
-                                                                5: 'bg-[#ef4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]', // Red
-                                                            };
-                                                            const activeColor =
-                                                                colors[
-                                                                    project.data.pain_level ?? 1
-                                                                ] ?? 'bg-(--accent)';
-                                                            return (
-                                                                <span
-                                                                    aria-hidden="true"
-                                                                    class={`h-1 w-5 rounded-xs transition-all duration-300 ${
-                                                                        i <=
-                                                                        (project.data.pain_level ??
-                                                                            0)
-                                                                            ? `${activeColor} opacity-90`
-                                                                            : 'bg-slate-200 opacity-20 dark:bg-white/5'
-                                                                    }`}
-                                                                />
-                                                            );
-                                                        })}
-                                                        <span class="ml-1 font-mono text-[9px] text-slate-500 dark:text-slate-400">
-                                                            {project.data.pain_level}/5
+                                                        <>
+                                                            <rect
+                                                                x="3"
+                                                                y="11"
+                                                                width="18"
+                                                                height="11"
+                                                                rx="2"
+                                                                ry="2"
+                                                            />
+                                                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                                        </>
+                                                    </svg>
+                                                    AES-GCM LOCAL STORAGE
+                                                </span>
+                                                <span class="font-bold text-emerald-600 dark:text-emerald-400">
+                                                    0 SERVERS
+                                                </span>
+                                            </div>
+                                            <div class="mt-1 flex items-center justify-between text-[9px] text-slate-500 dark:text-slate-400">
+                                                <span>ROSTER // LESSONS // INVOICES</span>
+                                                <span>100% CLIENT-ENCRYPTED</span>
+                                            </div>
+                                        </div>
+
+                                        <h3 class="mb-2 text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
+                                            <a
+                                                href={`/projects/${vellorProject.id.replace(/\.md$/, '')}`}
+                                                data-astro-prefetch="hover"
+                                                class="after:absolute after:inset-0 after:z-10 focus:outline-none"
+                                            >
+                                                {vellorProject.data.title}
+                                            </a>
+                                        </h3>
+                                        <p class="mb-4 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                            {vellorProject.data.description}
+                                        </p>
+
+                                        {/*  */}
+                                        {vellorProject.data.pain_level && (
+                                            <div class="mb-3 space-y-1.5">
+                                                <span class="block font-mono text-[9px] text-slate-500 dark:text-slate-400">
+                                                    // IMPACT.LOG
+                                                </span>
+                                                <div
+                                                    class="flex items-center gap-1"
+                                                    role="meter"
+                                                    aria-label={`Impact level: ${vellorProject.data.pain_level} out of 5`}
+                                                    aria-valuetext={getPainLevelLabel(
+                                                        vellorProject.data.pain_level
+                                                    )}
+                                                    aria-valuenow={vellorProject.data.pain_level}
+                                                    aria-valuemin={1}
+                                                    aria-valuemax={5}
+                                                >
+                                                    {[1, 2, 3, 4, 5].map((i) => (
+                                                        <span
+                                                            aria-hidden="true"
+                                                            class={`h-1 w-5 rounded-xs transition-all duration-300 ${
+                                                                i <=
+                                                                (vellorProject.data.pain_level ?? 0)
+                                                                    ? 'bg-yellow-500 opacity-90 shadow-[0_0_6px_rgba(234,179,8,0.5)]'
+                                                                    : 'bg-slate-200 opacity-20 dark:bg-white/5'
+                                                            }`}
+                                                        />
+                                                    ))}
+                                                    <span class="ml-1 font-mono text-[9px] text-slate-500 dark:text-slate-400">
+                                                        {vellorProject.data.pain_level}/5
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/*  */}
+                                        {vellorProject.data.fuckup_teaser && (
+                                            <div class="mb-4">
+                                                <div class="rounded-lg border border-red-500/20 bg-red-500/5 p-2.5 dark:border-red-500/20 dark:bg-red-950/20">
+                                                    <div class="mb-1 flex items-center gap-1.5">
+                                                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
+                                                        <span class="font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
+                                                            // FAULT_ANALYSIS
                                                         </span>
                                                     </div>
+                                                    <p class="line-clamp-2 font-mono text-[10.5px] leading-relaxed text-red-700/90 dark:text-red-300/90">
+                                                        "{vellorProject.data.fuckup_teaser}"
+                                                    </p>
                                                 </div>
-                                            )}
-
-                                            {/* Fuckup Teaser */}
-                                            {project.data.fuckup_teaser && (
-                                                <div class="mb-4">
-                                                    <div class="rounded-lg border border-red-500/20 bg-red-500/5 p-2.5 dark:border-red-500/20 dark:bg-red-950/20">
-                                                        <div class="mb-1 flex items-center gap-1.5">
-                                                            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
-                                                            <span class="font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
-                                                                // FAULT_ANALYSIS
-                                                            </span>
-                                                        </div>
-                                                        <p class="line-clamp-2 font-mono text-[10.5px] leading-relaxed text-red-700/90 dark:text-red-300/90">
-                                                            "{project.data.fuckup_teaser}"
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div class="flex items-center justify-between gap-3 border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400">
-                                            <span class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400">
-                                                STAGE:{' '}
-                                                <span class="text-slate-700 dark:text-slate-300">
-                                                    {project.data.progress}
-                                                </span>
-                                            </span>
-                                            <span
-                                                class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
-                                                aria-label={`Read the full ${project.data.title} mission log`}
-                                            >
-                                                EXPLORE LOG&nbsp;&rarr;
-                                            </span>
-                                        </div>
+                                            </div>
+                                        )}
                                     </div>
-                                </article>
-                            );
-                        })
+
+                                    <div class="flex items-center justify-between gap-3 border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400">
+                                        <span class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400">
+                                            STAGE:{' '}
+                                            <span class="text-slate-700 dark:text-slate-300">
+                                                {vellorProject.data.progress}
+                                            </span>
+                                        </span>
+                                        <span
+                                            class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
+                                            aria-label={`Read the full ${vellorProject.data.title} mission log`}
+                                        >
+                                            EXPLORE LOG&nbsp;&rarr;
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        )
                     }
 
-                    {/* More Projects Bento Card */}
+                    {/* 4. Infinite Intelligence: Multi-Agent Council SPA */}
+                    {
+                        infiniteIntelligenceProject && (
+                            <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
+                                <div
+                                    class="relative z-10 flex h-full flex-col justify-between"
+                                    data-tilt-z
+                                >
+                                    <div>
+                                        <div class="mb-3 flex items-center justify-between border-b border-slate-200/60 pb-3 font-mono text-[10px] dark:border-white/10">
+                                            <div class="flex items-center gap-2">
+                                                <span class="font-bold tracking-wider text-slate-600 dark:text-slate-300">
+                                                    COUNCIL_ORCHESTRATION
+                                                </span>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <span class="inline-flex items-center gap-1 rounded-full border border-purple-500/30 bg-purple-500/10 px-2 py-0.5 text-[9px] font-bold text-purple-600 dark:text-purple-400">
+                                                    <span class="h-1.5 w-1.5 rounded-full bg-purple-500" />
+                                                    BYOK
+                                                </span>
+                                                {infiniteIntelligenceProject.data.githubUrl && (
+                                                    <a
+                                                        href={
+                                                            infiniteIntelligenceProject.data
+                                                                .githubUrl
+                                                        }
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        aria-label={`View ${infiniteIntelligenceProject.data.title} on GitHub (opens in a new tab)`}
+                                                        title={`View ${infiniteIntelligenceProject.data.title} on GitHub`}
+                                                        class="github-link relative z-20 text-slate-400 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-slate-500 dark:hover:text-white dark:focus-visible:text-white"
+                                                    >
+                                                        <svg
+                                                            viewBox="0 0 16 16"
+                                                            aria-hidden="true"
+                                                            width="18"
+                                                            height="18"
+                                                        >
+                                                            <path
+                                                                fill="currentColor"
+                                                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                                                            />
+                                                        </svg>
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        {/*  */}
+                                        <div class="mb-4 rounded-lg border border-slate-200/80 bg-slate-50/60 p-2.5 font-mono text-[10px] dark:border-white/5 dark:bg-white/5">
+                                            <div class="flex items-center justify-between text-slate-700 dark:text-slate-300">
+                                                <span>GEMMA_4_31B // 4-AGENT SQUAD</span>
+                                                <span class="font-bold text-purple-600 dark:text-purple-400">
+                                                    CLIENT-ONLY
+                                                </span>
+                                            </div>
+                                            <div class="mt-2 grid grid-cols-4 gap-1 text-center text-[8.5px]">
+                                                <div class="rounded border border-purple-500/30 bg-purple-500/10 py-1 text-purple-700 dark:text-purple-300">
+                                                    SYNTH
+                                                </div>
+                                                <div class="rounded border border-blue-500/30 bg-blue-500/10 py-1 text-blue-700 dark:text-blue-300">
+                                                    CRITIC
+                                                </div>
+                                                <div class="rounded border border-emerald-500/30 bg-emerald-500/10 py-1 text-emerald-700 dark:text-emerald-300">
+                                                    ARCH
+                                                </div>
+                                                <div class="rounded border border-amber-500/30 bg-amber-500/10 py-1 text-amber-700 dark:text-amber-300">
+                                                    RSCH
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h3 class="mb-2 text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
+                                            <a
+                                                href={`/projects/${infiniteIntelligenceProject.id.replace(/\.md$/, '')}`}
+                                                data-astro-prefetch="hover"
+                                                class="after:absolute after:inset-0 after:z-10 focus:outline-none"
+                                            >
+                                                {infiniteIntelligenceProject.data.title}
+                                            </a>
+                                        </h3>
+                                        <p class="mb-4 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                            {infiniteIntelligenceProject.data.description}
+                                        </p>
+
+                                        {/*  */}
+                                        {infiniteIntelligenceProject.data.pain_level && (
+                                            <div class="mb-3 space-y-1.5">
+                                                <span class="block font-mono text-[9px] text-slate-500 dark:text-slate-400">
+                                                    // IMPACT.LOG
+                                                </span>
+                                                <div
+                                                    class="flex items-center gap-1"
+                                                    role="meter"
+                                                    aria-label={`Impact level: ${infiniteIntelligenceProject.data.pain_level} out of 5`}
+                                                    aria-valuetext={getPainLevelLabel(
+                                                        infiniteIntelligenceProject.data.pain_level
+                                                    )}
+                                                    aria-valuenow={
+                                                        infiniteIntelligenceProject.data.pain_level
+                                                    }
+                                                    aria-valuemin={1}
+                                                    aria-valuemax={5}
+                                                >
+                                                    {[1, 2, 3, 4, 5].map((i) => (
+                                                        <span
+                                                            aria-hidden="true"
+                                                            class={`h-1 w-5 rounded-xs transition-all duration-300 ${
+                                                                i <=
+                                                                (infiniteIntelligenceProject.data
+                                                                    .pain_level ?? 0)
+                                                                    ? 'bg-yellow-500 opacity-90 shadow-[0_0_6px_rgba(234,179,8,0.5)]'
+                                                                    : 'bg-slate-200 opacity-20 dark:bg-white/5'
+                                                            }`}
+                                                        />
+                                                    ))}
+                                                    <span class="ml-1 font-mono text-[9px] text-slate-500 dark:text-slate-400">
+                                                        {
+                                                            infiniteIntelligenceProject.data
+                                                                .pain_level
+                                                        }
+                                                        /5
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/*  */}
+                                        {infiniteIntelligenceProject.data.fuckup_teaser && (
+                                            <div class="mb-4">
+                                                <div class="rounded-lg border border-red-500/20 bg-red-500/5 p-2.5 dark:border-red-500/20 dark:bg-red-950/20">
+                                                    <div class="mb-1 flex items-center gap-1.5">
+                                                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
+                                                        <span class="font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
+                                                            // FAULT_ANALYSIS
+                                                        </span>
+                                                    </div>
+                                                    <p class="line-clamp-2 font-mono text-[10.5px] leading-relaxed text-red-700/90 dark:text-red-300/90">
+                                                        "
+                                                        {
+                                                            infiniteIntelligenceProject.data
+                                                                .fuckup_teaser
+                                                        }
+                                                        "
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div class="flex items-center justify-between gap-3 border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400">
+                                        <span class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400">
+                                            STAGE:{' '}
+                                            <span class="text-slate-700 dark:text-slate-300">
+                                                {infiniteIntelligenceProject.data.progress}
+                                            </span>
+                                        </span>
+                                        <span
+                                            class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
+                                            aria-label={`Read the full ${infiniteIntelligenceProject.data.title} mission log`}
+                                        >
+                                            EXPLORE LOG&nbsp;&rarr;
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        )
+                    }
+
+                    {/* 5. FuelDrop: Frontend UX Demo */}
+                    {
+                        fuelDropProject && (
+                            <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
+                                <div
+                                    class="relative z-10 flex h-full flex-col justify-between"
+                                    data-tilt-z
+                                >
+                                    <div>
+                                        <div class="mb-3 flex items-center justify-between border-b border-slate-200/60 pb-3 font-mono text-[10px] dark:border-white/10">
+                                            <div class="flex items-center gap-2">
+                                                <span class="font-bold tracking-wider text-slate-600 dark:text-slate-300">
+                                                    UX_DEMO // SIMULATED_FLEET
+                                                </span>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <span class="inline-flex items-center gap-1 rounded-full border border-orange-500/30 bg-orange-500/10 px-2 py-0.5 text-[9px] font-bold text-orange-600 dark:text-orange-400">
+                                                    <span class="h-1.5 w-1.5 rounded-full bg-orange-500" />
+                                                    DEMO
+                                                </span>
+                                                {fuelDropProject.data.githubUrl && (
+                                                    <a
+                                                        href={fuelDropProject.data.githubUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        aria-label={`View ${fuelDropProject.data.title} on GitHub (opens in a new tab)`}
+                                                        title={`View ${fuelDropProject.data.title} on GitHub`}
+                                                        class="github-link relative z-20 text-slate-400 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-slate-500 dark:hover:text-white dark:focus-visible:text-white"
+                                                    >
+                                                        <svg
+                                                            viewBox="0 0 16 16"
+                                                            aria-hidden="true"
+                                                            width="18"
+                                                            height="18"
+                                                        >
+                                                            <path
+                                                                fill="currentColor"
+                                                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                                                            />
+                                                        </svg>
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        {/*  */}
+                                        <div class="mb-4 rounded-lg border border-slate-200/80 bg-slate-50/60 p-2.5 font-mono text-[10px] dark:border-white/5 dark:bg-white/5">
+                                            <div class="flex items-center justify-between text-slate-700 dark:text-slate-300">
+                                                <span>LEAFLET GARAGE // CLIENT PROTOTYPE</span>
+                                                <span class="font-bold text-orange-600 dark:text-orange-400">
+                                                    NO BACKEND
+                                                </span>
+                                            </div>
+                                            <div class="mt-1 flex items-center justify-between text-[9px] text-slate-500 dark:text-slate-400">
+                                                <span>MOCK OTP: 1234</span>
+                                                <span>OPTIMISTIC LOCAL UI</span>
+                                            </div>
+                                        </div>
+
+                                        <h3 class="mb-2 text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
+                                            <a
+                                                href={`/projects/${fuelDropProject.id.replace(/\.md$/, '')}`}
+                                                data-astro-prefetch="hover"
+                                                class="after:absolute after:inset-0 after:z-10 focus:outline-none"
+                                            >
+                                                {fuelDropProject.data.title}
+                                            </a>
+                                        </h3>
+                                        <p class="mb-4 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
+                                            {fuelDropProject.data.description}
+                                        </p>
+
+                                        {/*  */}
+                                        {fuelDropProject.data.pain_level && (
+                                            <div class="mb-3 space-y-1.5">
+                                                <span class="block font-mono text-[9px] text-slate-500 dark:text-slate-400">
+                                                    // IMPACT.LOG
+                                                </span>
+                                                <div
+                                                    class="flex items-center gap-1"
+                                                    role="meter"
+                                                    aria-label={`Impact level: ${fuelDropProject.data.pain_level} out of 5`}
+                                                    aria-valuetext={getPainLevelLabel(
+                                                        fuelDropProject.data.pain_level
+                                                    )}
+                                                    aria-valuenow={fuelDropProject.data.pain_level}
+                                                    aria-valuemin={1}
+                                                    aria-valuemax={5}
+                                                >
+                                                    {[1, 2, 3, 4, 5].map((i) => (
+                                                        <span
+                                                            aria-hidden="true"
+                                                            class={`h-1 w-5 rounded-xs transition-all duration-300 ${
+                                                                i <=
+                                                                (fuelDropProject.data.pain_level ??
+                                                                    0)
+                                                                    ? 'bg-yellow-500 opacity-90 shadow-[0_0_6px_rgba(234,179,8,0.5)]'
+                                                                    : 'bg-slate-200 opacity-20 dark:bg-white/5'
+                                                            }`}
+                                                        />
+                                                    ))}
+                                                    <span class="ml-1 font-mono text-[9px] text-slate-500 dark:text-slate-400">
+                                                        {fuelDropProject.data.pain_level}/5
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/*  */}
+                                        {fuelDropProject.data.fuckup_teaser && (
+                                            <div class="mb-4">
+                                                <div class="rounded-lg border border-red-500/20 bg-red-500/5 p-2.5 dark:border-red-500/20 dark:bg-red-950/20">
+                                                    <div class="mb-1 flex items-center gap-1.5">
+                                                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
+                                                        <span class="font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
+                                                            // FAULT_ANALYSIS
+                                                        </span>
+                                                    </div>
+                                                    <p class="line-clamp-2 font-mono text-[10.5px] leading-relaxed text-red-700/90 dark:text-red-300/90">
+                                                        "{fuelDropProject.data.fuckup_teaser}"
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div class="flex items-center justify-between gap-3 border-t border-slate-200/50 pt-3.5 font-mono text-[10px] text-slate-500 dark:border-white/5 dark:text-slate-400">
+                                        <span class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400">
+                                            STAGE:{' '}
+                                            <span class="text-slate-700 dark:text-slate-300">
+                                                {fuelDropProject.data.progress}
+                                            </span>
+                                        </span>
+                                        <span
+                                            class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
+                                            aria-label={`Read the full ${fuelDropProject.data.title} mission log`}
+                                        >
+                                            EXPLORE LOG&nbsp;&rarr;
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        )
+                    }
+
+                    {/* 6. Satellite Terminal Card: More Projects Workbench Archive */}
                     <article
                         class="bento-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
                     >
                         <div class="relative z-10 flex h-full flex-col justify-between" data-tilt-z>
                             <div>
+                                <div
+                                    class="mb-3 flex items-center justify-between border-b border-slate-200/60 pb-3 font-mono text-[10px] dark:border-white/10"
+                                >
+                                    <span
+                                        class="font-bold tracking-wider text-slate-600 dark:text-slate-300"
+                                    >
+                                        CLI_TERMINAL // WORKBENCH
+                                    </span>
+                                    <span
+                                        class="rounded-full border border-slate-300/60 bg-slate-200/40 px-2 py-0.5 text-[9px] font-bold text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
+                                    >
+                                        12 REPOS
+                                    </span>
+                                </div>
+
+                                {/*  */}
+                                <div
+                                    class="mb-4 rounded-lg border border-slate-200/80 bg-slate-900/90 p-3 font-mono text-[10.5px] text-emerald-400 dark:border-white/10 dark:bg-black/60"
+                                >
+                                    <div
+                                        class="mb-1 flex items-center gap-1.5 text-[9.5px] text-slate-400"
+                                    >
+                                        <span class="font-bold text-blue-400">dhaatrik@local</span>
+                                        <span>:</span>
+                                        <span class="text-cyan-400">~/workspace</span>
+                                        <span>$</span>
+                                    </div>
+                                    <p class="font-mono text-[10px] text-slate-200">
+                                        gh repo list --visibility public
+                                    </p>
+                                    <p class="mt-1 truncate font-mono text-[9px] text-slate-400">
+                                        > Glassbox, Instant App Opener, Markdown PDF...
+                                    </p>
+                                </div>
+
                                 <h3
                                     class="mb-3 text-2xl font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white"
                                 >
@@ -809,8 +1554,9 @@ const webSiteSchema = JSON.stringify({
                             >
                                 <span
                                     class="min-w-0 flex-1 truncate text-[9.5px] text-slate-500 dark:text-slate-400"
-                                    >INDEX: 12 REPOSITORIES</span
                                 >
+                                    INDEX: 12 REPOSITORIES
+                                </span>
                                 <span
                                     class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-transform group-hover:translate-x-1"
                                 >
@@ -825,6 +1571,15 @@ const webSiteSchema = JSON.stringify({
             <section class="layout-container content-visibility-auto-blog mb-0 pb-0">
                 <div class="reveal-on-scroll mb-10 flex items-end justify-between">
                     <div>
+                        <div
+                            class="mb-2 flex items-center gap-2 font-mono text-[11px] text-(--accent)"
+                        >
+                            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)"
+                            ></span>
+                            <span class="font-bold tracking-widest uppercase"
+                                >SYS.TRANSMISSIONS // DISPATCH</span
+                            >
+                        </div>
                         <h2 class="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                             Latest Thinking
                         </h2>
@@ -994,5 +1749,6 @@ const webSiteSchema = JSON.stringify({
         <Footer />
 
         <script src="../scripts/homeHub.ts"></script>
+        <script src="../scripts/reticleParallax.ts"></script>
     </body>
 </html>
