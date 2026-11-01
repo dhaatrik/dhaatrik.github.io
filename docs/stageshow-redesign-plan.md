@@ -318,50 +318,50 @@ Each live lane runs on its own cloud VM at the PR head. Drive through `control-u
 
 **Files.**
 
-- [ ] Edit `src/pages/personnel.astro`.
-- [ ] Edit `src/pages/pedagogy.astro`.
-- [ ] Edit `src/pages/404.astro`.
+- [x] Edit `src/pages/personnel.astro`.
+- [x] Edit `src/pages/pedagogy.astro`.
+- [x] Edit `src/pages/404.astro`.
 
 **Build.**
 
-- [ ] Transform `src/pages/personnel.astro` into an authentic operator telemetry dossier with hardware specs and verified credentials.
-- [ ] Revamp `src/pages/pedagogy.astro` with Stageshow lecture playback stages, curriculum ledgers, and video timestamps.
-- [ ] Overhaul `src/pages/404.astro` into a navigational emergency radar recovery console with system diagnostic cues.
-- [ ] Align all secondary pages with global mission control aesthetic and accessible contrast.
+- [x] Transform `src/pages/personnel.astro` into an authentic operator telemetry dossier with hardware specs and verified credentials.
+- [x] Revamp `src/pages/pedagogy.astro` with Stageshow lecture playback stages, curriculum ledgers, and video timestamps.
+- [x] Overhaul `src/pages/404.astro` into a navigational emergency radar recovery console with system diagnostic cues.
+- [x] Align all secondary pages with global mission control aesthetic and accessible contrast.
 
 **You see.**
 
-- [ ] Personnel page reads as an immersive engineering dossier with live hardware specifications.
-- [ ] Pedagogy hub features realistic video classroom consoles and first-principles curriculum pathways.
-- [ ] 404 page presents a themed recovery radar that guides visitors back to active coordinates.
+- [x] Personnel page reads as an immersive engineering dossier with live hardware specifications.
+- [x] Pedagogy hub features realistic video classroom consoles and first-principles curriculum pathways.
+- [x] 404 page presents a themed recovery radar that guides visitors back to active coordinates.
 
 **Verify, unit.** Tests alone are not sufficient verification. A PR is verified only when its unit, live, and perf boxes are all checked.
 
-- [ ] Unit tests pass without error. Run `npm test`.
+- [x] Unit tests pass without error. Run `npm test`.
 
 **Verify, live.** Tests alone are not sufficient verification. A PR is verified only when its unit, live, and perf boxes are all checked. Ten lanes on `grok-4.6-fast-xhigh` at the PR head, per the boot recipe.
 
-- [ ] Lane 1. Regression lane against trunk. Run the same load-bearing scenario at trunk and head. If trunk lacks the feature, record that and gate the behavior the diff adds plus the end state the user waits for. Save `test-results/swarm-pr-05/worker-1/personnel-regression.png`. Pass when personnel, pedagogy, and 404 routes load cleanly without console errors.
-- [ ] Lane 2. Personnel operator dossier layout. Save `test-results/swarm-pr-05/worker-2/dossier-layout.png`. Pass when avatar, credentials, and bio block align in balanced technical hierarchy.
-- [ ] Lane 3. Hardware rig terminal specifications card. Save `test-results/swarm-pr-05/worker-3/hardware-card.png`. Pass when workstation specs render inside a styled terminal pane.
-- [ ] Lane 4. Pedagogy video lecture stage. Save `test-results/swarm-pr-05/worker-4/video-stage.png`. Pass when lecture video card displays thumbnail, duration pill, and scrubber bar.
-- [ ] Lane 5. Pedagogy curriculum outline navigation. Save `test-results/swarm-pr-05/worker-5/curriculum-nav.png`. Pass when clicking curriculum units reveals syllabus details.
-- [ ] Lane 6. Teaching philosophy callout cards. Save `test-results/swarm-pr-05/worker-6/philosophy-card.png`. Pass when sibling tutoring philosophy highlights with distinct specular border.
-- [ ] Lane 7. 404 navigational radar console. Save `test-results/swarm-pr-05/worker-7/404-radar.png`. Pass when 404 error page renders radar reticle and mission recovery links.
-- [ ] Lane 8. 404 SEO noindex verification. Save `test-results/swarm-pr-05/worker-8/404-noindex.png`. Pass when head tag contains noindex meta attribute.
-- [ ] Lane 9. Accessibility audit across all updated routes. Save `test-results/swarm-pr-05/worker-9/a11y-audit.png`. Pass when axe-core reports zero critical or serious WCAG violations.
-- [ ] Lane 10. End-to-end site link crawl. Save `test-results/swarm-pr-05/worker-10/link-crawl.png`. Pass when every internal navigation link returns HTTP status 200.
+- [x] Lane 1. Regression lane against trunk. Run the same load-bearing scenario at trunk and head. If trunk lacks the feature, record that and gate the behavior the diff adds plus the end state the user waits for. Save `test-results/swarm-pr-05/worker-1/personnel-regression.png`. Pass when personnel, pedagogy, and 404 routes load cleanly without console errors.
+- [x] Lane 2. Personnel operator dossier layout. Save `test-results/swarm-pr-05/worker-2/dossier-layout.png`. Pass when avatar, credentials, and bio block align in balanced technical hierarchy.
+- [x] Lane 3. Hardware rig terminal specifications card. Save `test-results/swarm-pr-05/worker-3/hardware-card.png`. Pass when workstation specs render inside a styled terminal pane.
+- [x] Lane 4. Pedagogy video lecture stage. Save `test-results/swarm-pr-05/worker-4/video-stage.png`. Pass when lecture video card displays thumbnail, duration pill, and scrubber bar.
+- [x] Lane 5. Pedagogy curriculum outline navigation. Save `test-results/swarm-pr-05/worker-5/curriculum-nav.png`. Pass when clicking curriculum units reveals syllabus details.
+- [x] Lane 6. Teaching philosophy callout cards. Save `test-results/swarm-pr-05/worker-6/philosophy-card.png`. Pass when sibling tutoring philosophy highlights with distinct specular border.
+- [x] Lane 7. 404 navigational radar console. Save `test-results/swarm-pr-05/worker-7/404-radar.png`. Pass when 404 error page renders radar reticle and mission recovery links.
+- [x] Lane 8. 404 SEO noindex verification. Save `test-results/swarm-pr-05/worker-8/404-noindex.png`. Pass when head tag contains noindex meta attribute.
+- [x] Lane 9. Accessibility audit across all updated routes. Save `test-results/swarm-pr-05/worker-9/a11y-audit.png`. Pass when axe-core reports zero critical or serious WCAG violations.
+- [x] Lane 10. End-to-end site link crawl. Save `test-results/swarm-pr-05/worker-10/link-crawl.png`. Pass when every internal navigation link returns HTTP status 200.
 
 **Verify, perf.** Tests alone are not sufficient verification. A PR is verified only when its unit, live, and perf boxes are all checked.
 
-- [ ] Metric. Full site build time and static bundle asset size.
-- [ ] Probe. Run `npm run build` and measure total dist directory size.
-- [ ] Baseline. Record trunk build time of 11.7 seconds and static dist footprint.
-- [ ] Rule. Head build time must remain under 15 seconds with no individual CSS file exceeding 40 kilobytes.
+- [x] Metric. Full site build time and static bundle asset size.
+- [x] Probe. Run `npm run build` and measure total dist directory size.
+- [x] Baseline. Record trunk build time of 11.7 seconds and static dist footprint.
+- [x] Rule. Head build time must remain under 15 seconds with no individual CSS file exceeding 40 kilobytes.
 
 **Review gate.** The operator reviews before merge.
 
-- [ ] Copy lane 1 screenshots into `test-results/pr-05-review-secondary.png`.
+- [x] Copy lane 1 screenshots into `test-results/pr-05-review-secondary.png`.
 - [ ] Record a 30 to 60 second video of the change on a lane VM. Save it as `test-results/pr-05-review.mp4`.
 - [ ] Post the screenshots and the video in chat. Stop at merge-ready. Wait for the operator's click.
 

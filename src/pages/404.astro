@@ -22,25 +22,231 @@ import { SITE_TITLE } from '../consts';
             tabindex="-1"
             class="layout-container flex grow items-center justify-center pt-6 pb-(--section-gap-mobile) md:pt-10 md:pb-(--section-gap-desktop)"
         >
-            <section class="bento-card relative max-w-2xl overflow-hidden text-center">
-                <div class="relative z-10 p-8">
-                    <h1 class="mb-6 text-6xl font-bold text-slate-900 md:text-8xl dark:text-white">
-                        404
-                    </h1>
-                    <h2 class="mb-4 text-3xl font-bold text-(--accent)">Ah, shit. A 404.</h2>
-                    <p
-                        class="mb-8 text-lg leading-relaxed text-slate-600 dark:text-(--text-secondary)"
+            <section
+                class="glass-surface bento-card relative w-full max-w-3xl overflow-hidden p-0 text-center shadow-2xl before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent"
+            >
+                {/* Stageshow Terminal Window Chrome */}
+                <div
+                    class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-4 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
+                >
+                    <div class="flex items-center gap-2">
+                        <div class="flex gap-1.5" aria-hidden="true">
+                            <span class="h-3 w-3 rounded-full bg-[#ff5f56]/90 shadow-xs"></span>
+                            <span class="h-3 w-3 rounded-full bg-[#ffbd2e]/90 shadow-xs"></span>
+                            <span class="h-3 w-3 rounded-full bg-[#27c93f]/90 shadow-xs"></span>
+                        </div>
+                        <span
+                            class="ml-2 font-mono text-xs font-semibold text-slate-600 dark:text-slate-400"
+                        >
+                            radar_console — trajectory_recovery.sh
+                        </span>
+                    </div>
+                    <span
+                        class="flex items-center gap-1.5 rounded border border-rose-500/30 bg-rose-500/10 px-2.5 py-0.5 font-mono text-[9px] font-bold tracking-widest text-rose-600 uppercase dark:text-rose-400"
                     >
-                        Looks like you've wandered off the track, buddy. I checked the logs —
-                        there's nothing out here. Not even DeltaV Lab's orbital tracking can find
-                        this page.
+                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-rose-500"></span>
+                        ERR: 0x404 // TRAJECTORY_LOST
+                    </span>
+                </div>
+
+                <div class="relative z-10 p-6 sm:p-10 md:p-12">
+                    {/* Radar Scope Visual Element */}
+                    <div class="relative mx-auto mb-8 flex h-48 w-48 items-center justify-center">
+                        <svg
+                            viewBox="0 0 200 200"
+                            class="h-full w-full text-(--accent)"
+                            aria-hidden="true"
+                        >
+                            {/* Outer rings */}
+                            <circle
+                                cx="100"
+                                cy="100"
+                                r="95"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1"
+                                stroke-opacity="0.3"></circle>
+                            <circle
+                                cx="100"
+                                cy="100"
+                                r="65"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="0.8"
+                                stroke-dasharray="3 3"
+                                stroke-opacity="0.4"></circle>
+                            <circle
+                                cx="100"
+                                cy="100"
+                                r="35"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="0.8"
+                                stroke-opacity="0.3"></circle>
+
+                            {/* Crosshairs */}
+                            <line
+                                x1="5"
+                                y1="100"
+                                x2="195"
+                                y2="100"
+                                stroke="currentColor"
+                                stroke-width="0.75"
+                                stroke-opacity="0.3"></line>
+                            <line
+                                x1="100"
+                                y1="5"
+                                x2="100"
+                                y2="195"
+                                stroke="currentColor"
+                                stroke-width="0.75"
+                                stroke-opacity="0.3"></line>
+
+                            {/* Radar sweep beam */}
+                            <line
+                                x1="100"
+                                y1="100"
+                                x2="165"
+                                y2="35"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-opacity="0.8"
+                                class="animate-pulse"></line>
+                            <polygon
+                                points="100,100 165,35 180,60"
+                                fill="currentColor"
+                                fill-opacity="0.08"></polygon>
+
+                            {/* Target coordinates pin */}
+                            <circle
+                                cx="155"
+                                cy="45"
+                                r="3"
+                                fill="#f43f5e"
+                                class="animate-ping"
+                                opacity="0.75"></circle>
+                            <circle cx="155" cy="45" r="2.5" fill="#f43f5e"></circle>
+                        </svg>
+
+                        <div
+                            class="pointer-events-none absolute inset-0 flex items-center justify-center font-mono text-4xl font-extrabold tracking-tighter text-slate-900 select-none md:text-5xl dark:text-white"
+                        >
+                            404
+                        </div>
+                    </div>
+
+                    <h1
+                        class="mb-3 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl dark:text-white"
+                    >
+                        Ah, shit. A 404.
+                    </h1>
+
+                    <p
+                        class="mx-auto mb-8 max-w-xl text-base leading-relaxed text-slate-600 dark:text-(--text-secondary)"
+                    >
+                        Looks like you've drifted off course, buddy. I checked the telemetry logs;
+                        there's nothing out here. Even DeltaV Lab's orbital tracking can't locate
+                        this coordinate. Select a recovery vector below to jump back to an active
+                        station.
                     </p>
+
+                    {/* Mission Recovery Vector Links */}
+                    <div class="mb-8">
+                        <div
+                            class="mb-3 font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
+                        >
+                            // ACTIVE_RECOVERY_COORDINATES
+                        </div>
+                        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                            <a
+                                href="/"
+                                data-astro-prefetch="hover"
+                                class="magnetic-target group flex flex-col justify-between rounded-lg border border-slate-200/80 bg-white/70 p-3.5 text-left transition-all hover:border-(--accent) hover:shadow-[0_0_15px_var(--accent-glow)] active:scale-95 dark:border-white/10 dark:bg-black/30"
+                            >
+                                <span
+                                    class="font-mono text-[9px] text-slate-400 group-hover:text-(--accent)"
+                                    >01 // BASE</span
+                                >
+                                <span
+                                    class="mt-1 font-mono text-sm font-bold text-slate-800 transition-colors group-hover:text-(--accent) dark:text-slate-200"
+                                >
+                                    Cockpit &rarr;
+                                </span>
+                            </a>
+
+                            <a
+                                href="/projects/"
+                                data-astro-prefetch="hover"
+                                class="magnetic-target group flex flex-col justify-between rounded-lg border border-slate-200/80 bg-white/70 p-3.5 text-left transition-all hover:border-(--accent) hover:shadow-[0_0_15px_var(--accent-glow)] active:scale-95 dark:border-white/10 dark:bg-black/30"
+                            >
+                                <span
+                                    class="font-mono text-[9px] text-slate-400 group-hover:text-(--accent)"
+                                    >02 // CATALOG</span
+                                >
+                                <span
+                                    class="mt-1 font-mono text-sm font-bold text-slate-800 transition-colors group-hover:text-(--accent) dark:text-slate-200"
+                                >
+                                    Projects &rarr;
+                                </span>
+                            </a>
+
+                            <a
+                                href="/transmissions/"
+                                data-astro-prefetch="hover"
+                                class="magnetic-target group flex flex-col justify-between rounded-lg border border-slate-200/80 bg-white/70 p-3.5 text-left transition-all hover:border-(--accent) hover:shadow-[0_0_15px_var(--accent-glow)] active:scale-95 dark:border-white/10 dark:bg-black/30"
+                            >
+                                <span
+                                    class="font-mono text-[9px] text-slate-400 group-hover:text-(--accent)"
+                                    >03 // LOGS</span
+                                >
+                                <span
+                                    class="mt-1 font-mono text-sm font-bold text-slate-800 transition-colors group-hover:text-(--accent) dark:text-slate-200"
+                                >
+                                    Transmissions &rarr;
+                                </span>
+                            </a>
+
+                            <a
+                                href="/pedagogy/"
+                                data-astro-prefetch="hover"
+                                class="magnetic-target group flex flex-col justify-between rounded-lg border border-slate-200/80 bg-white/70 p-3.5 text-left transition-all hover:border-(--accent) hover:shadow-[0_0_15px_var(--accent-glow)] active:scale-95 dark:border-white/10 dark:bg-black/30"
+                            >
+                                <span
+                                    class="font-mono text-[9px] text-slate-400 group-hover:text-(--accent)"
+                                    >04 // ARCHIVE</span
+                                >
+                                <span
+                                    class="mt-1 font-mono text-sm font-bold text-slate-800 transition-colors group-hover:text-(--accent) dark:text-slate-200"
+                                >
+                                    Pedagogy &rarr;
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
                     <a
                         href="/"
                         data-astro-prefetch="hover"
-                        class="magnetic-target inline-block rounded-lg bg-(--accent-button-bg) px-8 py-4 font-semibold text-white transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
+                        class="magnetic-target inline-flex items-center gap-2 rounded-lg bg-(--accent-button-bg) px-8 py-3.5 font-mono text-sm font-bold text-white transition-all hover:bg-blue-600 hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                     >
-                        Back to Cockpit
+                        <span>~ $ return --vector=origin</span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="transition-transform group-hover:translate-x-1"
+                            aria-hidden="true"
+                        >
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
                     </a>
                 </div>
             </section>
