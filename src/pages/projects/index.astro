@@ -363,9 +363,7 @@ const breadcrumbSchema = JSON.stringify({
                     {
                         projects.map((project: ProjectEntry) => {
                             const telemetryStr = project.data.telemetry;
-                            const [telemetryFirst, ...telemetryRestParts] =
-                                telemetryStr.split('//');
-                            const telemetryRest = telemetryRestParts.join(' // ');
+
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const parsed = parseTelemetry(telemetryStr);
                             const category = getProjectCategory(project);
