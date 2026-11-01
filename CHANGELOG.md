@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.13.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.12.0...v4.13.0) (2026-11-01)
+
+
+### Features
+
+* **home:** revamp mission control cockpit and bento stages ([5cf984b](https://github.com/dhaatrik/dhaatrik.github.io/commit/5cf984b56dc44bce3101c887b39ae59b97963979))
+* **home:** revamp mission control cockpit and bento stages ([f3fc96c](https://github.com/dhaatrik/dhaatrik.github.io/commit/f3fc96c90cfe1c16d9f2412848b97a717e434c78))
+
 ## [4.12.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.11.0...v4.12.0) (2026-11-01)
 
 
