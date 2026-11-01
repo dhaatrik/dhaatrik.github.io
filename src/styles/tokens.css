@@ -1,11 +1,12 @@
 /* ═══════════════════════════════════════════════════════════════
-   CANONICAL DESIGN TOKENS — dhaatrik.github.io v4
+   CANONICAL DESIGN TOKENS — dhaatrik.github.io v4 (Stageshow Elevate)
    ─────────────────────────────────────────────────────────────
    Public aliases (spec / docs):     Implementation tokens:
    --glass-bg                        --glass-bg-raw + --glass-bg-opacity
    --neon-cyan                       --neon-glow-1-rgb
    --neon-purple                     --neon-glow-2-rgb
    --blueprint-grid                  --blueprint-color-major / -minor
+   --specular-edge                   --specular-opacity
    ─────────────────────────────────────────────────────────────
    Apply surfaces via .glass-surface (see glass.css). Legacy:
    .premium-glass and .bento-card inherit the same rules.
@@ -33,4 +34,45 @@
     syntax: '<number>';
     inherits: true;
     initial-value: 0.02;
+}
+
+@property --specular-opacity {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0.1;
+}
+
+:root {
+    /* Stageshow surface steps (light mode) */
+    --surface-ground: #f8fafc;
+    --surface-step-1: #f1f5f9;
+    --surface-step-2: #ffffff;
+    --surface-step-3: #e2e8f0;
+    --surface-overlay: rgba(255, 255, 255, 0.95);
+    --specular-border: rgba(15, 23, 42, 0.08);
+    --specular-highlight: rgba(255, 255, 255, 0.85);
+
+    /* Telemetry metrics */
+    --telemetry-tracking: 0.08em;
+    --telemetry-size-xs: 0.625rem;
+    --telemetry-size-sm: 0.6875rem;
+    --telemetry-size-base: 0.75rem;
+
+    /* Hairline borders */
+    --hairline: 1px;
+    --hairline-color: rgba(15, 23, 42, 0.08);
+}
+
+.dark {
+    /* Stageshow surface steps (dark mode - deep cockpit) */
+    --surface-ground: #0b0e14;
+    --surface-step-1: #10141d;
+    --surface-step-2: #151a24;
+    --surface-step-3: #1d2432;
+    --surface-overlay: rgba(17, 22, 31, 0.95);
+    --specular-border: rgba(255, 255, 255, 0.08);
+    --specular-highlight: rgba(255, 255, 255, 0.12);
+
+    /* Hairline borders */
+    --hairline-color: rgba(255, 255, 255, 0.08);
 }

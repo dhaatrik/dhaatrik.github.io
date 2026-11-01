@@ -374,13 +374,30 @@ const displayPathShort = formatHeaderPath(displayPath);
                 </div>
             </div>
         </a>
-        <div class="flex shrink-0 items-center gap-2.5 sm:gap-4 md:gap-6">
-            <div class="desktop-nav-links hidden items-center gap-5 md:flex lg:gap-6">
+        <!-- Central Orbital Telemetry Badge -->
+        <div
+            class="hidden items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-3 py-1 font-mono text-[9px] font-semibold tracking-widest text-emerald-600 xl:flex dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-400"
+        >
+            <span class="relative flex h-1.5 w-1.5">
+                <span
+                    class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
+                ></span>
+                <span
+                    class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+                ></span>
+            </span>
+            <span>SYS.STATUS // ORBIT NOMINAL</span>
+        </div>
+
+        <div class="flex shrink-0 items-center gap-2.5 sm:gap-4 md:gap-5">
+            <div
+                class="desktop-nav-links hidden items-center gap-1 rounded-full border border-slate-200/60 bg-slate-100/40 p-1 md:flex dark:border-white/10 dark:bg-white/[0.03]"
+            >
                 <HeaderLink
                     href="/"
                     data-nav-key="1"
                     title="Home [Press 1]"
-                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    class="group/link flex items-center rounded-full px-3 py-1.5 text-xs font-semibold tracking-widest text-slate-600 uppercase transition-all hover:bg-white hover:text-(--accent) hover:shadow-xs focus-visible:text-(--accent) dark:text-(--text-secondary) dark:hover:bg-white/10 dark:hover:text-white"
                 >
                     <span
                         aria-hidden="true"
@@ -392,7 +409,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     href="/personnel"
                     data-nav-key="2"
                     title="Personnel [Press 2]"
-                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    class="group/link flex items-center rounded-full px-3 py-1.5 text-xs font-semibold tracking-widest text-slate-600 uppercase transition-all hover:bg-white hover:text-(--accent) hover:shadow-xs focus-visible:text-(--accent) dark:text-(--text-secondary) dark:hover:bg-white/10 dark:hover:text-white"
                 >
                     <span
                         aria-hidden="true"
@@ -404,7 +421,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     href="/projects"
                     data-nav-key="3"
                     title="Projects [Press 3]"
-                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    class="group/link flex items-center rounded-full px-3 py-1.5 text-xs font-semibold tracking-widest text-slate-600 uppercase transition-all hover:bg-white hover:text-(--accent) hover:shadow-xs focus-visible:text-(--accent) dark:text-(--text-secondary) dark:hover:bg-white/10 dark:hover:text-white"
                 >
                     <span
                         aria-hidden="true"
@@ -416,7 +433,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     href="/pedagogy"
                     data-nav-key="4"
                     title="Pedagogy [Press 4]"
-                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    class="group/link flex items-center rounded-full px-3 py-1.5 text-xs font-semibold tracking-widest text-slate-600 uppercase transition-all hover:bg-white hover:text-(--accent) hover:shadow-xs focus-visible:text-(--accent) dark:text-(--text-secondary) dark:hover:bg-white/10 dark:hover:text-white"
                 >
                     <span
                         aria-hidden="true"
@@ -428,7 +445,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     href="/transmissions"
                     data-nav-key="5"
                     title="Transmissions [Press 5]"
-                    class="group/link flex items-center text-xs font-semibold tracking-widest text-slate-600 uppercase transition-colors hover:text-(--accent) focus-visible:text-(--accent) dark:text-(--text-secondary)"
+                    class="group/link flex items-center rounded-full px-3 py-1.5 text-xs font-semibold tracking-widest text-slate-600 uppercase transition-all hover:bg-white hover:text-(--accent) hover:shadow-xs focus-visible:text-(--accent) dark:text-(--text-secondary) dark:hover:bg-white/10 dark:hover:text-white"
                 >
                     <span
                         aria-hidden="true"
@@ -443,7 +460,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                 aria-label="Toggle navigation menu"
                 aria-expanded="false"
                 aria-controls="mobile-nav-drawer"
-                class="magnetic-target relative z-50 flex h-11 min-h-11 w-11 min-w-11 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full border border-transparent transition-colors hover:bg-slate-200/60 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 md:hidden dark:hover:bg-white/10 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
+                class="magnetic-target relative z-50 flex h-11 min-h-11 w-11 min-w-11 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full border border-slate-200/60 transition-colors hover:bg-slate-200/60 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 md:hidden dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/10 dark:hover:text-white dark:focus-visible:ring-offset-(--bg-main)"
             >
                 <span class="hamburger-line h-0.5 w-5 bg-current"></span>
                 <span class="hamburger-line h-0.5 w-5 bg-current"></span>
