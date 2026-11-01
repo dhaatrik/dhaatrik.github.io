@@ -73,8 +73,18 @@ const formatMarqueeDate = (date: Date) => {
                     <span class="h-1.5 w-1.5 rounded-full bg-(--accent)"></span>
                     BASE OPERATIONS
                 </span>
-                <span class="text-[9px] font-normal text-slate-400 dark:text-slate-500">OPS.01</span
+                <span
+                    class="flex items-center gap-1.5 font-mono text-[9px] font-medium text-emerald-600 dark:text-emerald-400"
                 >
+                    <span class="relative flex h-1.5 w-1.5">
+                        <span
+                            class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
+                        ></span>
+                        <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"
+                        ></span>
+                    </span>
+                    22.57°N 88.36°E // LEO
+                </span>
             </h3>
             <ul class="flex flex-col space-y-1 text-sm">
                 <li>
