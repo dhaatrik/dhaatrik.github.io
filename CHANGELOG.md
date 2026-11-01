@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.14.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.13.0...v4.14.0) (2026-11-01)
+
+
+### Features
+
+* **personnel:** overhaul operator dossier, pedagogy hub, and 404 recovery console ([3cb9b3d](https://github.com/dhaatrik/dhaatrik.github.io/commit/3cb9b3d78de00f2b00257424ae595cab02f6a20b))
+* **personnel:** overhaul operator dossier, pedagogy hub, and 404 recovery console (PR-05) ([6b76c82](https://github.com/dhaatrik/dhaatrik.github.io/commit/6b76c82f46aa15c7e10e04a9e0735967af67ec9d))
+* **projects:** elevate catalog workbench and mission report layouts ([e4ed2d8](https://github.com/dhaatrik/dhaatrik.github.io/commit/e4ed2d85018cbfd387a0ab068019a0c611878efb))
+* **site:** complete stageshow redesign rollout (PR-03, PR-04, PR-05) ([26bb5ea](https://github.com/dhaatrik/dhaatrik.github.io/commit/26bb5ea3fa53f24553f110851ca4551e6a470312))
+* **transmissions:** refine archive search station and reading console ([89c4bdf](https://github.com/dhaatrik/dhaatrik.github.io/commit/89c4bdf36acc43086819583ab7f1e8e3e6c09000))
+
+
+### Bug Fixes
+
+* **types:** resolve optional progress diagnostic in project slug and clean unused vars ([f8ad226](https://github.com/dhaatrik/dhaatrik.github.io/commit/f8ad22629e153c5341be61877ab8121dd13168cb))
+
 ## [4.13.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.12.0...v4.13.0) (2026-11-01)
 
 
