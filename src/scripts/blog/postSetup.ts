@@ -126,11 +126,104 @@ export async function setupPost() {
         }
     };
 
+    // --- Table of Contents Collapse Toggle ---
+    const tocToggleBtn = document.getElementById('toc-toggle-btn');
+    const tocCollapsibleContainer = document.getElementById('toc-collapsible-container');
+    const tocIcon = document.getElementById('toc-toggle-icon');
+
+    if (tocToggleBtn && tocCollapsibleContainer) {
+        const isSavedCollapsed = sessionStorage.getItem('toc-collapsed') === 'true';
+        if (isSavedCollapsed) {
+            tocCollapsibleContainer.classList.add('hidden');
+            tocToggleBtn.setAttribute('aria-expanded', 'false');
+            tocToggleBtn.setAttribute('title', 'Expand table of contents');
+            if (tocIcon) tocIcon.classList.add('rotate-180');
+        }
+
+        tocToggleBtn.addEventListener(
+            'click',
+            () => {
+                const isCurrentlyExpanded = tocToggleBtn.getAttribute('aria-expanded') === 'true';
+                if (isCurrentlyExpanded) {
+                    tocCollapsibleContainer.classList.add('hidden');
+                    tocToggleBtn.setAttribute('aria-expanded', 'false');
+                    tocToggleBtn.setAttribute('title', 'Expand table of contents');
+                    if (tocIcon) tocIcon.classList.add('rotate-180');
+                    sessionStorage.setItem('toc-collapsed', 'true');
+                } else {
+                    tocCollapsibleContainer.classList.remove('hidden');
+                    tocToggleBtn.setAttribute('aria-expanded', 'true');
+                    tocToggleBtn.setAttribute('title', 'Collapse table of contents');
+                    if (tocIcon) tocIcon.classList.remove('rotate-180');
+                    sessionStorage.setItem('toc-collapsed', 'false');
+                }
+            },
+            { signal }
+        );
+    }
+
+    // --- Subtle Section Scroll Markers along Reading Telemetry Bar ---
+    const markersContainer = document.getElementById('section-markers-container');
+    const initSectionMarkers = () => {
+        if (!markersContainer || headingElements.length === 0) return;
+        markersContainer.innerHTML = '';
+        const scrollTotal =
+            document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        if (scrollTotal <= 0) return;
+
+        headingElements.forEach((heading) => {
+            const headingTop = heading.getBoundingClientRect().top + window.scrollY;
+            const pct = Math.min(100, Math.max(0, (headingTop / scrollTotal) * 100));
+            const marker = document.createElement('div');
+            marker.className =
+                'section-scroll-marker absolute top-0 bottom-0 w-[2px] -translate-x-1/2 bg-slate-400/40 dark:bg-white/25 transition-all duration-200 pointer-events-auto cursor-pointer';
+            marker.style.left = `${pct}%`;
+            marker.title = heading.textContent?.trim() || 'Section';
+            marker.addEventListener('click', () => {
+                heading.scrollIntoView({ behavior: 'smooth' });
+            });
+            markersContainer.appendChild(marker);
+        });
+    };
+
+    const updateActiveMarkers = () => {
+        if (!markersContainer) return;
+        const scrollTotal =
+            document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const currentScrollY = window.scrollY;
+        const currentPct = scrollTotal > 0 ? (currentScrollY / scrollTotal) * 100 : 0;
+
+        const markers = markersContainer.querySelectorAll('.section-scroll-marker');
+        markers.forEach((m) => {
+            const htmlMarker = m as HTMLElement;
+            const markerPct = parseFloat(htmlMarker.style.left);
+            if (markerPct <= currentPct + 0.5) {
+                htmlMarker.classList.add(
+                    'active-section-marker',
+                    '!bg-(--accent)',
+                    'shadow-[0_0_6px_var(--accent)]'
+                );
+                htmlMarker.classList.remove('bg-slate-400/40', 'dark:bg-white/25');
+            } else {
+                htmlMarker.classList.remove(
+                    'active-section-marker',
+                    '!bg-(--accent)',
+                    'shadow-[0_0_6px_var(--accent)]'
+                );
+                htmlMarker.classList.add('bg-slate-400/40', 'dark:bg-white/25');
+            }
+        });
+    };
+
+    initSectionMarkers();
+    window.addEventListener('resize', initSectionMarkers, { passive: true, signal });
+
     let tocTicking = false;
     const handleTocScroll = () => {
         if (!tocTicking) {
             window.requestAnimationFrame(() => {
                 evaluateActiveSection();
+                updateActiveMarkers();
                 tocTicking = false;
             });
             tocTicking = true;

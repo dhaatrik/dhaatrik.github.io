@@ -114,12 +114,17 @@ const breadcrumbSchema = JSON.stringify({
     <body class="bg-grid-motif relative flex min-h-screen flex-col pt-24">
         <div id="flashlight-bg" class="pointer-events-none fixed inset-0 z-0"></div>
 
-        <div id="progress-container" class="fixed top-0 left-0 z-50 h-0.5 w-full bg-transparent">
+        <div
+            id="progress-container"
+            class="pointer-events-none fixed top-0 left-0 z-50 h-1 w-full bg-transparent"
+        >
             <div
                 id="progress-bar"
                 class="h-full w-full origin-left scale-x-0 bg-(--accent) shadow-[0_0_10px_var(--accent)] transition-transform duration-150 ease-out"
             >
             </div>
+            <!-- Subtle section scroll markers on reading rail -->
+            <div id="section-markers-container" class="pointer-events-none absolute inset-0"></div>
         </div>
 
         <Header />
@@ -629,41 +634,74 @@ const breadcrumbSchema = JSON.stringify({
                                         </span>
                                         INDEX
                                     </h3>
-                                    <span class="font-mono text-[9px] font-semibold tracking-wider text-slate-600 uppercase dark:text-slate-400">
-                                        {headings.length} NODES
-                                    </span>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-mono text-[9px] font-semibold tracking-wider text-slate-600 uppercase dark:text-slate-400">
+                                            {headings.length} NODES
+                                        </span>
+                                        <button
+                                            id="toc-toggle-btn"
+                                            type="button"
+                                            aria-expanded="true"
+                                            aria-controls="toc-collapsible-container"
+                                            aria-label="Toggle Table of Contents"
+                                            title="Collapse table of contents"
+                                            class="cursor-pointer rounded border border-slate-300/60 bg-slate-100/60 p-1 text-slate-500 transition-colors hover:border-(--accent) hover:text-(--accent) focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:border-white/20 dark:hover:text-white"
+                                        >
+                                            <svg
+                                                id="toc-toggle-icon"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="12"
+                                                height="12"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="transition-transform duration-200"
+                                            >
+                                                <polyline points="18 15 12 9 6 15" />
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
-                                <nav id="toc" aria-label="Table of contents">
-                                    <ul class="flex flex-col space-y-1 font-mono text-sm">
-                                        {headings.map(
-                                            (
-                                                heading: {
-                                                    depth: number;
-                                                    slug: string;
-                                                    text: string;
-                                                },
-                                                index: number
-                                            ) => (
-                                                <li class="toc-item">
-                                                    <a
-                                                        href={`#${heading.slug}`}
-                                                        class="group/toc relative block rounded-md py-1.5 pr-2 text-xs text-slate-600 transition-all hover:bg-slate-200/40 hover:text-(--accent) focus-visible:bg-slate-200/40 focus-visible:text-(--accent) dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-(--accent)"
-                                                        data-slug={heading.slug}
-                                                        style={`padding-left: ${(heading.depth - 1) * 0.75 + 0.6}rem;`}
-                                                    >
-                                                        <span class="toc-indicator absolute top-1.5 bottom-1.5 left-1 w-0.5 rounded-full bg-transparent transition-all duration-200 group-hover/toc:bg-(--accent)/40" />
-                                                        <span class="toc-index mr-1 font-mono text-[10px] text-slate-600 opacity-80 transition-colors group-hover/toc:text-(--accent) dark:text-slate-400">
-                                                            {String(index + 1).padStart(2, '0')} //
-                                                        </span>{' '}
-                                                        <span class="toc-text leading-relaxed transition-colors">
-                                                            {heading.text}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
-                                </nav>
+                                <div
+                                    id="toc-collapsible-container"
+                                    class="transition-all duration-300 ease-out"
+                                >
+                                    <nav id="toc" aria-label="Table of contents">
+                                        <ul class="flex flex-col space-y-1 font-mono text-sm">
+                                            {headings.map(
+                                                (
+                                                    heading: {
+                                                        depth: number;
+                                                        slug: string;
+                                                        text: string;
+                                                    },
+                                                    index: number
+                                                ) => (
+                                                    <li class="toc-item">
+                                                        <a
+                                                            href={`#${heading.slug}`}
+                                                            class="group/toc relative block rounded-md py-1.5 pr-2 text-xs text-slate-600 transition-all hover:bg-slate-200/40 hover:text-(--accent) focus-visible:bg-slate-200/40 focus-visible:text-(--accent) dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-(--accent)"
+                                                            data-slug={heading.slug}
+                                                            style={`padding-left: ${(heading.depth - 1) * 0.75 + 0.6}rem;`}
+                                                        >
+                                                            <span class="toc-indicator absolute top-1.5 bottom-1.5 left-1 w-0.5 rounded-full bg-transparent transition-all duration-200 group-hover/toc:bg-(--accent)/40" />
+                                                            <span class="toc-index mr-1 font-mono text-[10px] text-slate-600 opacity-80 transition-colors group-hover/toc:text-(--accent) dark:text-slate-400">
+                                                                {String(index + 1).padStart(2, '0')}{' '}
+                                                                //
+                                                            </span>{' '}
+                                                            <span class="toc-text leading-relaxed transition-colors">
+                                                                {heading.text}
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </nav>
+                                </div>
                             </div>
                         </aside>
                     ) : (
