@@ -227,65 +227,105 @@ const breadcrumbSchema = JSON.stringify({
             <section id="hero-section" class="layout-container relative">
                 <div class="flex flex-col items-center gap-8 md:flex-row-reverse md:items-start">
                     <div
-                        class="relative mx-auto w-full max-w-65 shrink-0 p-3 sm:max-w-80 md:mx-0 md:w-80"
+                        class="relative mx-auto w-full max-w-65 shrink-0 sm:max-w-80 md:mx-0 md:w-80"
                     >
-                        {/* Clinical blueprint borders and target marks */}
+                        {/* Stageshow Operator Specimen Dossier Frame */}
                         <div
-                            class="pointer-events-none absolute inset-0 border border-dashed border-slate-200 dark:border-white/10"
+                            class="glass-surface relative overflow-hidden rounded-xl border border-slate-200/80 bg-white/70 shadow-xl transition-all duration-300 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/40 before:to-transparent dark:border-white/10 dark:bg-slate-900/60"
                         >
-                            {/* Corner target marks '+' */}
-                            <span
-                                class="absolute -top-1.5 -left-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                                >+</span
-                            >
-                            <span
-                                class="absolute -top-1.5 -right-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                                >+</span
-                            >
-                            <span
-                                class="absolute -bottom-1.5 -left-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                                >+</span
-                            >
-                            <span
-                                class="absolute -right-1.5 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                                >+</span
-                            >
-
-                            {/* Absolute layout text arrays along borders */}
-                            <span
-                                class="absolute top-1 left-2 font-mono text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                                >SPECIMEN_REF: 01</span
-                            >
-                            <span
-                                class="absolute right-2 bottom-1 font-mono text-[9px] font-bold tracking-widest text-slate-400 uppercase dark:text-slate-500"
-                                >DATA.CAP // 100%</span
-                            >
-                        </div>
-
-                        <div
-                            class="relative overflow-hidden rounded-lg bg-slate-100 dark:bg-black/40"
-                        >
-                            {/* Technical grid overlay */}
+                            {/* Window Chrome Header */}
                             <div
-                                class="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(rgba(0,0,0,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.08)_1px,transparent_1px)] bg-size-[10px_10px] opacity-50 dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]"
+                                class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3.5 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
                             >
+                                <div class="flex items-center gap-1.5" aria-hidden="true">
+                                    <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f56]/90 shadow-xs"
+                                    ></span>
+                                    <span class="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]/90 shadow-xs"
+                                    ></span>
+                                    <span class="h-2.5 w-2.5 rounded-full bg-[#27c93f]/90 shadow-xs"
+                                    ></span>
+                                    <span
+                                        class="ml-2 font-mono text-[10px] font-bold tracking-wider text-slate-600 dark:text-slate-400"
+                                    >
+                                        DOSSIER // SPECIMEN_01
+                                    </span>
+                                </div>
+                                <span
+                                    class="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 font-mono text-[8px] font-bold tracking-widest text-emerald-600 uppercase dark:text-emerald-400"
+                                >
+                                    <span
+                                        class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500"
+                                    ></span>
+                                    LOCK
+                                </span>
                             </div>
 
-                            <Picture
-                                src={meImage}
-                                alt="Dhaatrik"
-                                loading="eager"
-                                fetchpriority="high"
-                                widths={[260, 320, 520, 640]}
-                                sizes="(max-width: 640px) 260px, (max-width: 768px) 320px, 320px"
-                                formats={['avif', 'webp']}
-                                fallbackFormat="jpeg"
-                                class="aspect-square w-full object-cover transition-all duration-500 hover:scale-[1.02]"
-                            />
+                            <div class="p-3.5">
+                                <div
+                                    class="relative overflow-hidden rounded-lg bg-slate-100 dark:bg-black/40"
+                                >
+                                    {/* Technical grid overlay */}
+                                    <div
+                                        class="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(rgba(0,0,0,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.08)_1px,transparent_1px)] bg-size-[10px_10px] opacity-50 dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]"
+                                    >
+                                    </div>
+
+                                    <Picture
+                                        src={meImage}
+                                        alt="Dhaatrik"
+                                        loading="eager"
+                                        fetchpriority="high"
+                                        widths={[260, 320, 520, 640]}
+                                        sizes="(max-width: 640px) 260px, (max-width: 768px) 320px, 320px"
+                                        formats={['avif', 'webp']}
+                                        fallbackFormat="jpeg"
+                                        class="aspect-square w-full object-cover transition-all duration-500 hover:scale-[1.02]"
+                                    />
+                                </div>
+
+                                {/* Operator Telemetry Credentials Under Specimen */}
+                                <div
+                                    class="mt-3.5 space-y-1.5 border-t border-slate-200/70 pt-2.5 font-mono text-[9px] dark:border-white/10"
+                                >
+                                    <div
+                                        class="flex items-center justify-between text-slate-500 dark:text-slate-400"
+                                    >
+                                        <span>OPERATOR:</span>
+                                        <span class="font-bold text-slate-800 dark:text-slate-200"
+                                            >Dhaatrik Chowdhury</span
+                                        >
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-between text-slate-500 dark:text-slate-400"
+                                    >
+                                        <span>ROLE:</span>
+                                        <span class="text-(--accent)"
+                                            >Systems Architect // Educator</span
+                                        >
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-between text-slate-500 dark:text-slate-400"
+                                    >
+                                        <span>CLEARANCE:</span>
+                                        <span class="text-emerald-600 dark:text-emerald-400"
+                                            >SOVEREIGN LOCAL-FIRST</span
+                                        >
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                     <div class="w-full md:w-[calc(100%-352px)]">
-                        <h1 class="type-page-title mb-2 text-slate-900 dark:text-white">
+                        <div
+                            class="mb-3 inline-flex items-center gap-2 rounded-full border border-(--accent)/20 bg-(--accent)/10 px-3 py-1 font-mono text-[10px] font-bold tracking-widest text-(--accent) uppercase shadow-xs"
+                        >
+                            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)"
+                            ></span>
+                            SYS.BIOMETRIC_RECON // VERIFIED DOSSIER
+                        </div>
+
+                        <h1 class="type-page-title mb-3 text-slate-900 dark:text-white">
                             Mission Dossier
                         </h1>
 
@@ -299,15 +339,62 @@ const breadcrumbSchema = JSON.stringify({
                                 messy parts here so future-me avoids the same traps.
                             </p>
 
+                            {/* Operator Telemetry Credentials Matrix */}
+                            <div class="grid grid-cols-2 gap-3 font-mono text-xs sm:grid-cols-3">
+                                <div
+                                    class="rounded-lg border border-slate-200/70 bg-white/50 p-2.5 dark:border-white/5 dark:bg-black/20"
+                                >
+                                    <div class="text-[9px] text-slate-400 uppercase">
+                                        // PRIMARY_DOMAIN
+                                    </div>
+                                    <div
+                                        class="mt-0.5 font-bold text-slate-800 dark:text-slate-200"
+                                    >
+                                        Applied Systems
+                                    </div>
+                                </div>
+                                <div
+                                    class="rounded-lg border border-slate-200/70 bg-white/50 p-2.5 dark:border-white/5 dark:bg-black/20"
+                                >
+                                    <div class="text-[9px] text-slate-400 uppercase">
+                                        // ARCHITECTURE
+                                    </div>
+                                    <div
+                                        class="mt-0.5 font-bold text-slate-800 dark:text-slate-200"
+                                    >
+                                        Local-First / Sovereign
+                                    </div>
+                                </div>
+                                <div
+                                    class="col-span-2 rounded-lg border border-slate-200/70 bg-white/50 p-2.5 sm:col-span-1 dark:border-white/5 dark:bg-black/20"
+                                >
+                                    <div class="text-[9px] text-slate-400 uppercase">
+                                        // PEDAGOGY_CADENCE
+                                    </div>
+                                    <div class="mt-0.5 font-bold text-(--accent)">
+                                        9 Years Mentorship
+                                    </div>
+                                </div>
+                            </div>
+
                             <div
-                                class="mt-8 border-l-2 border-(--accent) pl-4 font-mono text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)"
+                                class="glass-surface relative overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/70 p-5 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent dark:border-white/10 dark:bg-black/30"
                             >
                                 <div
-                                    class="mb-2 text-xs font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500"
+                                    class="mb-2 flex items-center justify-between font-mono text-xs"
                                 >
-                                    // OPERATIONAL PHILOSOPHY
+                                    <span
+                                        class="font-bold tracking-wider text-slate-400 uppercase dark:text-slate-500"
+                                        >// OPERATIONAL PHILOSOPHY</span
+                                    >
+                                    <span
+                                        class="rounded bg-(--accent)/10 px-2 py-0.5 text-[9px] font-bold text-(--accent)"
+                                        >AXIOM 01</span
+                                    >
                                 </div>
-                                <p>
+                                <p
+                                    class="font-mono text-sm leading-relaxed text-slate-700 dark:text-slate-300"
+                                >
                                     I don't train foundation models from scratch. I build real-world
                                     systems around them. My focus is writing clean, local-first code
                                     that solves concrete problems for users without locking them
@@ -322,9 +409,29 @@ const breadcrumbSchema = JSON.stringify({
             <section class="layout-container reveal-on-scroll relative z-10">
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div
-                        class="bento-card group relative flex flex-col justify-between overflow-hidden p-6"
+                        class="glass-surface bento-card group relative flex flex-col justify-between overflow-hidden p-0 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent"
                     >
-                        <div class="relative z-10 flex h-full flex-col justify-between">
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-4 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
+                        >
+                            <div class="flex items-center gap-1.5" aria-hidden="true">
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f56]/90 shadow-xs"
+                                ></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]/90 shadow-xs"
+                                ></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#27c93f]/90 shadow-xs"
+                                ></span>
+                                <span
+                                    class="ml-2 font-mono text-[10px] font-semibold tracking-wider text-slate-600 dark:text-slate-400"
+                                >
+                                    SYS_FOCUS // BUILD_NODES
+                                </span>
+                            </div>
+                            <span class="font-mono text-[9px] font-bold text-(--accent) uppercase"
+                                >ACTIVE_R&D</span
+                            >
+                        </div>
+                        <div class="relative z-10 flex h-full flex-col justify-between p-6">
                             <div>
                                 <h2
                                     class="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white"
@@ -427,13 +534,33 @@ const breadcrumbSchema = JSON.stringify({
                     </div>
 
                     <div
-                        class="bento-card group relative flex flex-col justify-between overflow-hidden p-6"
+                        class="glass-surface bento-card group relative flex flex-col justify-between overflow-hidden p-0 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent"
                     >
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-4 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
+                        >
+                            <div class="flex items-center gap-1.5" aria-hidden="true">
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f56]/90 shadow-xs"
+                                ></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]/90 shadow-xs"
+                                ></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#27c93f]/90 shadow-xs"
+                                ></span>
+                                <span
+                                    class="ml-2 font-mono text-[10px] font-semibold tracking-wider text-slate-600 dark:text-slate-400"
+                                >
+                                    SYS_FOCUS // RESEARCH_DEPTH
+                                </span>
+                            </div>
+                            <span class="font-mono text-[9px] font-bold text-(--accent) uppercase"
+                                >ORBITAL_KINEMATICS</span
+                            >
+                        </div>
                         <div
                             class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 text-2xl whitespace-nowrap text-slate-900 opacity-5 blur-[0.5px] transition-opacity duration-500 select-none group-hover:opacity-15 sm:text-3xl dark:text-white"
                             set:html={rocketEquationHtml}
                         />
-                        <div class="relative z-10 flex h-full flex-col justify-between">
+                        <div class="relative z-10 flex h-full flex-col justify-between p-6">
                             <div>
                                 <h2
                                     class="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white"
@@ -542,7 +669,9 @@ const breadcrumbSchema = JSON.stringify({
                     Current Trajectory
                 </h2>
 
-                <div class="bento-card group relative overflow-hidden p-0">
+                <div
+                    class="glass-surface bento-card group relative overflow-hidden p-0 shadow-lg before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent"
+                >
                     {/* Background abstract radar pattern */}
                     <div
                         class="pointer-events-none absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40"
@@ -679,7 +808,9 @@ const breadcrumbSchema = JSON.stringify({
                     Pedagogical Experiments
                 </h2>
 
-                <div class="bento-card group relative overflow-hidden p-0">
+                <div
+                    class="glass-surface bento-card group relative overflow-hidden p-0 shadow-lg before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent"
+                >
                     <div
                         class="pointer-events-none absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40"
                         style="background-image: radial-gradient(circle at 100% 0%, var(--accent-glow) 0%, transparent 50%);"
@@ -802,9 +933,30 @@ const breadcrumbSchema = JSON.stringify({
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     {/* 1. The "52-Book Trajectory" Library Card */}
                     <div
-                        class="bento-card group relative flex flex-col justify-between overflow-hidden p-6"
+                        class="glass-surface bento-card group relative flex flex-col justify-between overflow-hidden p-0 shadow-xs transition-colors before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent"
                     >
-                        <div class="relative z-10">
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-4 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
+                        >
+                            <div class="flex items-center gap-1.5" aria-hidden="true">
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f56]/90 shadow-xs"
+                                ></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]/90 shadow-xs"
+                                ></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-[#27c93f]/90 shadow-xs"
+                                ></span>
+                                <span
+                                    class="ml-2 font-mono text-xs font-semibold text-slate-600 dark:text-slate-400"
+                                >
+                                    LIBRARY // 52_BOOK_TRAJECTORY
+                                </span>
+                            </div>
+                            <span class="font-mono text-[9px] font-bold text-(--accent) uppercase"
+                                >PROGRESS: {booksRead}/{booksGoal}</span
+                            >
+                        </div>
+
+                        <div class="p-6">
                             <div class="mb-4 flex items-start justify-between">
                                 <h3
                                     class="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-white"
@@ -857,42 +1009,43 @@ const breadcrumbSchema = JSON.stringify({
                                     }
                                 </div>
                             </div>
-                        </div>
-                        <div class="relative z-10 mt-4 space-y-3">
-                            <div
-                                class="rounded-lg border border-slate-200/80 bg-slate-100/70 p-3 transition-colors group-hover:border-(--accent)/30 dark:border-white/5 dark:bg-black/20"
-                            >
-                                <span
-                                    class="mb-1 block text-xs tracking-wider text-slate-500 uppercase dark:text-slate-400"
-                                    >Currently Reading</span
+
+                            <div class="space-y-3">
+                                <div
+                                    class="rounded-lg border border-slate-200/80 bg-slate-100/70 p-3 transition-colors group-hover:border-(--accent)/30 dark:border-white/5 dark:bg-black/20"
                                 >
-                                <div class="flex items-center">
                                     <span
-                                        class="truncate text-sm font-medium text-slate-900 dark:text-white"
-                                        >Elon Musk - Ashlee Vance</span
+                                        class="mb-1 block text-xs tracking-wider text-slate-500 uppercase dark:text-slate-400"
+                                        >Currently Reading</span
                                     >
+                                    <div class="flex items-center">
+                                        <span
+                                            class="truncate text-sm font-medium text-slate-900 dark:text-white"
+                                            >Elon Musk - Ashlee Vance</span
+                                        >
+                                    </div>
                                 </div>
+                                <button
+                                    popovertarget="books-popover"
+                                    aria-expanded="false"
+                                    aria-controls="books-popover"
+                                    class="magnetic-target flex w-full items-center justify-center rounded-lg bg-slate-900 py-2.5 text-center text-sm font-bold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-[0_0_15px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-(--bg-main)"
+                                >
+                                    Recommended Books
+                                </button>
                             </div>
-                            <button
-                                popovertarget="books-popover"
-                                aria-expanded="false"
-                                aria-controls="books-popover"
-                                class="magnetic-target flex w-full items-center justify-center rounded-lg bg-slate-900 py-2 text-center text-sm font-bold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-[0_0_15px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-(--bg-main)"
-                            >
-                                Recommended Books
-                            </button>
                         </div>
                     </div>
 
                     {/* 6. Monthly Insights Terminal Snippet */}
                     <div
-                        class="glass-surface bento-card flex h-full flex-col overflow-hidden p-0 text-left shadow-xs transition-colors"
+                        class="glass-surface bento-card flex h-full flex-col overflow-hidden p-0 text-left shadow-xs transition-colors before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent"
                     >
                         <div
                             class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-4 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
                         >
                             <div class="flex items-center gap-2">
-                                <div class="flex gap-1.5">
+                                <div class="flex gap-1.5" aria-hidden="true">
                                     <div class="h-3 w-3 rounded-full bg-[#ff5f56]/90 shadow-xs">
                                     </div>
                                     <div class="h-3 w-3 rounded-full bg-[#ffbd2e]/90 shadow-xs">
@@ -930,6 +1083,181 @@ const breadcrumbSchema = JSON.stringify({
                             </div>
                         </div>
                     </div>
+
+                    {/* Lane 3: Hardware Rig Terminal Specifications Card */}
+                    <div
+                        id="hardware-card"
+                        class="glass-surface bento-card relative flex flex-col justify-between overflow-hidden p-0 shadow-xl transition-colors before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent md:col-span-2"
+                    >
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-4 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
+                        >
+                            <div class="flex items-center gap-2">
+                                <div class="flex gap-1.5" aria-hidden="true">
+                                    <div class="h-3 w-3 rounded-full bg-[#ff5f56]/90 shadow-xs">
+                                    </div>
+                                    <div class="h-3 w-3 rounded-full bg-[#ffbd2e]/90 shadow-xs">
+                                    </div>
+                                    <div class="h-3 w-3 rounded-full bg-[#27c93f]/90 shadow-xs">
+                                    </div>
+                                </div>
+                                <span
+                                    class="ml-2 font-mono text-xs font-semibold text-slate-600 dark:text-slate-400"
+                                >
+                                    bash — workstation_telemetry.sh
+                                </span>
+                            </div>
+                            <span
+                                class="flex items-center gap-1.5 rounded border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[9px] font-bold tracking-widest text-emerald-600 uppercase dark:text-emerald-400"
+                            >
+                                <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500"
+                                ></span>
+                                HW_ONLINE // 24/7 NODE
+                            </span>
+                        </div>
+
+                        <div class="p-5 font-mono text-xs sm:p-6">
+                            <div
+                                class="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/60 pb-3 dark:border-white/5"
+                            >
+                                <div
+                                    class="flex items-center gap-2 text-emerald-600 dark:text-[#50fa7b]"
+                                >
+                                    <span class="font-bold">~ $</span>
+                                    <span class="font-semibold text-slate-800 dark:text-slate-200"
+                                        >neofetch --hardware-rig --telemetry</span
+                                    >
+                                </div>
+                                <span class="text-[10px] text-slate-400 dark:text-slate-500"
+                                    >KERNEL: 6.12.11-zen // ARCH: x86_64</span
+                                >
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+                                <div
+                                    class="rounded-lg border border-slate-200/70 bg-slate-100/60 p-3.5 dark:border-white/5 dark:bg-black/30"
+                                >
+                                    <div class="text-[9px] text-slate-400 uppercase">
+                                        // COMPUTE_HOST
+                                    </div>
+                                    <div class="mt-1 font-bold text-slate-800 dark:text-slate-200">
+                                        Custom Engineering Rig
+                                    </div>
+                                    <div
+                                        class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
+                                    >
+                                        Dual-OS High Velocity Node
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="rounded-lg border border-slate-200/70 bg-slate-100/60 p-3.5 dark:border-white/5 dark:bg-black/30"
+                                >
+                                    <div class="text-[9px] text-slate-400 uppercase">
+                                        // PROCESSOR
+                                    </div>
+                                    <div class="mt-1 font-bold text-slate-800 dark:text-slate-200">
+                                        AMD Ryzen Multi-Core
+                                    </div>
+                                    <div
+                                        class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
+                                    >
+                                        16 Cores / 32 Threads @ 4.8 GHz
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="rounded-lg border border-slate-200/70 bg-slate-100/60 p-3.5 dark:border-white/5 dark:bg-black/30"
+                                >
+                                    <div class="text-[9px] text-slate-400 uppercase">
+                                        // MEMORY_ARRAY
+                                    </div>
+                                    <div class="mt-1 font-bold text-(--accent)">
+                                        64 GB DDR5 5600 MT/s
+                                    </div>
+                                    <div
+                                        class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
+                                    >
+                                        Low-Latency Fast Page Cache
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="rounded-lg border border-slate-200/70 bg-slate-100/60 p-3.5 dark:border-white/5 dark:bg-black/30"
+                                >
+                                    <div class="text-[9px] text-slate-400 uppercase">
+                                        // ACCELERATOR
+                                    </div>
+                                    <div class="mt-1 font-bold text-slate-800 dark:text-slate-200">
+                                        RTX Studio + Tensor Cores
+                                    </div>
+                                    <div
+                                        class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
+                                    >
+                                        Local LLM & GGUF Inference
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3.5 grid grid-cols-1 gap-3.5 sm:grid-cols-3">
+                                <div
+                                    class="rounded-lg border border-slate-200/70 bg-slate-100/60 p-3.5 dark:border-white/5 dark:bg-black/30"
+                                >
+                                    <div class="text-[9px] text-slate-400 uppercase">
+                                        // STORAGE_POOL
+                                    </div>
+                                    <div class="mt-1 font-bold text-slate-800 dark:text-slate-200">
+                                        2TB NVMe PCIe 4.0 M.2
+                                    </div>
+                                    <div
+                                        class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
+                                    >
+                                        ZFS Scrub Verified // 7000 MB/s
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="rounded-lg border border-slate-200/70 bg-slate-100/60 p-3.5 dark:border-white/5 dark:bg-black/30"
+                                >
+                                    <div class="text-[9px] text-slate-400 uppercase">
+                                        // LOCAL_TOOLCHAIN
+                                    </div>
+                                    <div class="mt-1 font-bold text-slate-800 dark:text-slate-200">
+                                        zsh + tmux + Neovim
+                                    </div>
+                                    <div
+                                        class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
+                                    >
+                                        Bun, Node 22, Astro 6 SSG
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="rounded-lg border border-slate-200/70 bg-slate-100/60 p-3.5 dark:border-white/5 dark:bg-black/30"
+                                >
+                                    <div class="text-[9px] text-slate-400 uppercase">
+                                        // SENSOR_TELEMETRY
+                                    </div>
+                                    <div class="mt-1 flex items-center justify-between text-xs">
+                                        <span class="text-slate-500 dark:text-slate-400"
+                                            >THERMAL:</span
+                                        >
+                                        <span
+                                            class="font-bold text-emerald-600 dark:text-emerald-400"
+                                            >41.8°C NOMINAL</span
+                                        >
+                                    </div>
+                                    <div class="mt-0.5 flex items-center justify-between text-xs">
+                                        <span class="text-slate-500 dark:text-slate-400"
+                                            >SYS_UPTIME:</span
+                                        >
+                                        <span class="font-bold text-(--accent)">99.98% 34d 14h</span
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -950,45 +1278,37 @@ const breadcrumbSchema = JSON.stringify({
 
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div
-                        class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
+                        class="glass-surface bento-card relative flex min-h-50 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/50 p-0 shadow-sm transition-all before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent dark:border-white/10 dark:bg-black/20"
                     >
-                        <span
-                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3 py-2 dark:border-white/10 dark:bg-slate-900/80"
                         >
-                        <span
-                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
+                            <div class="flex items-center gap-1.5" aria-hidden="true">
+                                <span class="h-2 w-2 rounded-full bg-[#ff5f56]/90 shadow-xs"></span>
+                                <span class="h-2 w-2 rounded-full bg-[#ffbd2e]/90 shadow-xs"></span>
+                                <span class="h-2 w-2 rounded-full bg-[#27c93f]/90 shadow-xs"></span>
+                                <span
+                                    class="ml-1.5 font-mono text-[9px] font-bold text-slate-600 dark:text-slate-400"
+                                    >// MODULE_01 // FE_SYS</span
+                                >
+                            </div>
+                            <span
+                                class="font-mono text-[8px] font-bold tracking-widest text-(--accent) uppercase"
+                                >ONLINE</span
+                            >
+                        </div>
 
-                        <span
-                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
-                            >// MODULE_01 // FE_SYS</span
-                        >
-                        <span
-                            class="absolute top-2 right-3 font-mono text-[8px] font-semibold tracking-wider text-(--accent) uppercase"
-                            >ACTIVE</span
-                        >
-
-                        <div>
+                        <div class="p-5">
                             <h3
                                 class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
                                 data-original="Frontend Subsystem"
                             >
                                 Frontend Subsystem
                             </h3>
-                            <div class="flex flex-wrap gap-2.5">
+                            <div class="flex flex-wrap gap-2">
                                 {
                                     techGroups.Frontend.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
+                                        <div class="group/tech relative flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/40 dark:text-slate-200">
                                             <span>{tech.name}</span>
                                             {tech.deployment && (
                                                 <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
@@ -1001,56 +1321,46 @@ const breadcrumbSchema = JSON.stringify({
                             </div>
                         </div>
 
-                        <span
-                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
-                            >REF_ID: FE-01</span
+                        <div
+                            class="flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3 py-1.5 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/20 dark:text-slate-400"
                         >
-                        <span
-                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
-                            >CAP: 100%</span
-                        >
+                            <span>REF_ID: FE-01</span>
+                            <span>CAP: 100%</span>
+                        </div>
                     </div>
 
                     <div
-                        class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
+                        class="glass-surface bento-card relative flex min-h-50 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/50 p-0 shadow-sm transition-all before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent dark:border-white/10 dark:bg-black/20"
                     >
-                        <span
-                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3 py-2 dark:border-white/10 dark:bg-slate-900/80"
                         >
-                        <span
-                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
+                            <div class="flex items-center gap-1.5" aria-hidden="true">
+                                <span class="h-2 w-2 rounded-full bg-[#ff5f56]/90 shadow-xs"></span>
+                                <span class="h-2 w-2 rounded-full bg-[#ffbd2e]/90 shadow-xs"></span>
+                                <span class="h-2 w-2 rounded-full bg-[#27c93f]/90 shadow-xs"></span>
+                                <span
+                                    class="ml-1.5 font-mono text-[9px] font-bold text-slate-600 dark:text-slate-400"
+                                    >// MODULE_02 // BE_SYS</span
+                                >
+                            </div>
+                            <span
+                                class="font-mono text-[8px] font-bold tracking-widest text-(--accent) uppercase"
+                                >ONLINE</span
+                            >
+                        </div>
 
-                        <span
-                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
-                            >// MODULE_02 // BE_SYS</span
-                        >
-                        <span
-                            class="absolute top-2 right-3 font-mono text-[8px] font-semibold tracking-wider text-(--accent) uppercase"
-                            >ACTIVE</span
-                        >
-
-                        <div>
+                        <div class="p-5">
                             <h3
                                 class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
                                 data-original="Backend Engine"
                             >
                                 Backend Engine
                             </h3>
-                            <div class="flex flex-wrap gap-2.5">
+                            <div class="flex flex-wrap gap-2">
                                 {
                                     techGroups.Backend.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
+                                        <div class="group/tech relative flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/40 dark:text-slate-200">
                                             <span>{tech.name}</span>
                                             {tech.deployment && (
                                                 <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
@@ -1063,56 +1373,46 @@ const breadcrumbSchema = JSON.stringify({
                             </div>
                         </div>
 
-                        <span
-                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
-                            >REF_ID: BE-02</span
+                        <div
+                            class="flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3 py-1.5 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/20 dark:text-slate-400"
                         >
-                        <span
-                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
-                            >CAP: 100%</span
-                        >
+                            <span>REF_ID: BE-02</span>
+                            <span>CAP: 100%</span>
+                        </div>
                     </div>
 
                     <div
-                        class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
+                        class="glass-surface bento-card relative flex min-h-50 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/50 p-0 shadow-sm transition-all before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent dark:border-white/10 dark:bg-black/20"
                     >
-                        <span
-                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3 py-2 dark:border-white/10 dark:bg-slate-900/80"
                         >
-                        <span
-                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
+                            <div class="flex items-center gap-1.5" aria-hidden="true">
+                                <span class="h-2 w-2 rounded-full bg-[#ff5f56]/90 shadow-xs"></span>
+                                <span class="h-2 w-2 rounded-full bg-[#ffbd2e]/90 shadow-xs"></span>
+                                <span class="h-2 w-2 rounded-full bg-[#27c93f]/90 shadow-xs"></span>
+                                <span
+                                    class="ml-1.5 font-mono text-[9px] font-bold text-slate-600 dark:text-slate-400"
+                                    >// MODULE_03 // DB_SYS</span
+                                >
+                            </div>
+                            <span
+                                class="font-mono text-[8px] font-bold tracking-widest text-(--accent) uppercase"
+                                >ONLINE</span
+                            >
+                        </div>
 
-                        <span
-                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
-                            >// MODULE_03 // DB_SYS</span
-                        >
-                        <span
-                            class="absolute top-2 right-3 font-mono text-[8px] font-semibold tracking-wider text-(--accent) uppercase"
-                            >ACTIVE</span
-                        >
-
-                        <div>
+                        <div class="p-5">
                             <h3
                                 class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
                                 data-original="Data & Cloud"
                             >
                                 Data & Cloud
                             </h3>
-                            <div class="flex flex-wrap gap-2.5">
+                            <div class="flex flex-wrap gap-2">
                                 {
                                     techGroups.Cloud_Db.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
+                                        <div class="group/tech relative flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/40 dark:text-slate-200">
                                             <span>{tech.name}</span>
                                             {tech.deployment && (
                                                 <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
@@ -1125,56 +1425,46 @@ const breadcrumbSchema = JSON.stringify({
                             </div>
                         </div>
 
-                        <span
-                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
-                            >REF_ID: DB-03</span
+                        <div
+                            class="flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3 py-1.5 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/20 dark:text-slate-400"
                         >
-                        <span
-                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
-                            >CAP: 100%</span
-                        >
+                            <span>REF_ID: DB-03</span>
+                            <span>CAP: 100%</span>
+                        </div>
                     </div>
 
                     <div
-                        class="glass-surface relative flex min-h-50 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-50/50 p-6 pt-10 pb-8 dark:border-white/10 dark:bg-black/20"
+                        class="glass-surface bento-card relative flex min-h-50 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/50 p-0 shadow-sm transition-all before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent dark:border-white/10 dark:bg-black/20"
                     >
-                        <span
-                            class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3 py-2 dark:border-white/10 dark:bg-slate-900/80"
                         >
-                        <span
-                            class="pointer-events-none absolute -top-1 -right-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -bottom-1.5 -left-1 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
-                        <span
-                            class="pointer-events-none absolute -right-1 -bottom-1.5 font-mono text-[10px] font-bold text-(--accent)"
-                            >+</span
-                        >
+                            <div class="flex items-center gap-1.5" aria-hidden="true">
+                                <span class="h-2 w-2 rounded-full bg-[#ff5f56]/90 shadow-xs"></span>
+                                <span class="h-2 w-2 rounded-full bg-[#ffbd2e]/90 shadow-xs"></span>
+                                <span class="h-2 w-2 rounded-full bg-[#27c93f]/90 shadow-xs"></span>
+                                <span
+                                    class="ml-1.5 font-mono text-[9px] font-bold text-slate-600 dark:text-slate-400"
+                                    >// MODULE_04 // AI_SYS</span
+                                >
+                            </div>
+                            <span
+                                class="font-mono text-[8px] font-bold tracking-widest text-(--accent) uppercase"
+                                >ONLINE</span
+                            >
+                        </div>
 
-                        <span
-                            class="absolute top-2 left-3 font-mono text-[8px] tracking-wider text-slate-500 uppercase dark:text-slate-400"
-                            >// MODULE_04 // AI_SYS</span
-                        >
-                        <span
-                            class="absolute top-2 right-3 font-mono text-[8px] font-semibold tracking-wider text-(--accent) uppercase"
-                            >ACTIVE</span
-                        >
-
-                        <div>
+                        <div class="p-5">
                             <h3
                                 class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
                                 data-original="AI & Learning"
                             >
                                 AI & Learning
                             </h3>
-                            <div class="flex flex-wrap gap-2.5">
+                            <div class="flex flex-wrap gap-2">
                                 {
                                     techGroups.AI_Math.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-3 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/30 dark:text-slate-200">
+                                        <div class="group/tech relative flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/40 dark:text-slate-200">
                                             <span>{tech.name}</span>
                                             {tech.deployment && (
                                                 <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
@@ -1187,14 +1477,12 @@ const breadcrumbSchema = JSON.stringify({
                             </div>
                         </div>
 
-                        <span
-                            class="absolute bottom-2 left-3 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
-                            >REF_ID: AI-04</span
+                        <div
+                            class="flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3 py-1.5 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/20 dark:text-slate-400"
                         >
-                        <span
-                            class="absolute right-3 bottom-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:text-slate-400"
-                            >CAP: 100%</span
-                        >
+                            <span>REF_ID: AI-04</span>
+                            <span>CAP: 100%</span>
+                        </div>
                     </div>
                 </div>
             </section>
