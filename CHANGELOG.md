@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.12.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.11.0...v4.12.0) (2026-11-01)
+
+
+### Features
+
+* **chrome:** overhaul orbital telemetry navigation and design tokens ([9e04835](https://github.com/dhaatrik/dhaatrik.github.io/commit/9e0483517fc1c38d0b6291dac271e13abae7d309))
+* **chrome:** overhaul orbital telemetry navigation and design tokens ([afaf716](https://github.com/dhaatrik/dhaatrik.github.io/commit/afaf7161d5a35a1bbf26ce7b6738dc29d7a4ab19))
+
+
+### Documentation & Skills
+
+* **plan:** add stageshow redesign program plan ([4701ae2](https://github.com/dhaatrik/dhaatrik.github.io/commit/4701ae2da2c7e634e27e5f88b9292ba64e29827e))
+
 ## [4.11.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.10.4...v4.11.0) (2026-10-22)
 
 
