@@ -145,6 +145,13 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                         class="flex flex-col gap-6 border-b border-slate-200/60 pb-8 md:flex-row md:items-center md:justify-between dark:border-white/5"
                     >
                         <div class="space-y-4">
+                            <div class="flex items-center gap-2 font-mono text-xs text-(--accent)">
+                                <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)"
+                                ></span>
+                                <span class="font-bold tracking-widest uppercase"
+                                    >MISSION REPORT // {projectSlug.toUpperCase()}</span
+                                >
+                            </div>
                             <h1
                                 class="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl dark:text-white"
                             >
@@ -170,8 +177,9 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                     </div>
                 </div>
 
+                <!-- Structured Mission Report Header Telemetry Metadata Grid -->
                 <div
-                    class="animate-fade-in-up relative mb-12 rounded-xl border border-slate-200/60 bg-slate-50/60 p-5 font-mono text-xs text-slate-600 shadow-xs backdrop-blur-md delay-100 dark:border-white/5 dark:bg-[#0f141f] dark:text-slate-400"
+                    class="animate-fade-in-up relative mb-10 rounded-xl border border-slate-200/60 bg-slate-50/60 p-5 font-mono text-xs text-slate-600 shadow-xs backdrop-blur-md delay-100 dark:border-white/5 dark:bg-[#0f141f] dark:text-slate-400"
                 >
                     <span
                         class="pointer-events-none absolute -top-1 -left-1 font-mono text-[10px] font-bold text-(--accent)"
@@ -191,7 +199,7 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                     >
 
                     <div
-                        class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6"
+                        class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8"
                     >
                         <div class="space-y-1">
                             <div
@@ -199,8 +207,10 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                             >
                                 // PROJECT_ID
                             </div>
-                            <div class="font-bold text-slate-900 uppercase dark:text-slate-200">
-                                {project.id.replace(/\.md$/, '')}
+                            <div
+                                class="truncate font-bold text-slate-900 uppercase dark:text-slate-200"
+                            >
+                                {projectSlug}
                             </div>
                         </div>
                         <div class="space-y-1">
@@ -209,16 +219,34 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                             >
                                 // AUTHOR
                             </div>
-                            <div class="font-bold text-(--accent)">DHAATRIK CHOWDHURY</div>
+                            <div class="truncate font-bold text-(--accent)">DHAATRIK</div>
                         </div>
                         <div class="space-y-1">
                             <div
                                 class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
                             >
-                                // SUBJECT
+                                // LICENSE
                             </div>
-                            <div class="font-bold text-slate-900 dark:text-slate-200">
-                                CASE STUDY
+                            <div class="font-bold text-slate-900 dark:text-slate-200">MIT</div>
+                        </div>
+                        <div class="space-y-1">
+                            <div
+                                class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
+                            >
+                                // VERSION
+                            </div>
+                            <div class="truncate font-bold text-slate-900 dark:text-slate-200">
+                                {progress.split(' ')[0] || 'v1.0.0'}
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div
+                                class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
+                            >
+                                // STACK
+                            </div>
+                            <div class="truncate font-bold text-slate-900 dark:text-slate-200">
+                                {tags ? tags.slice(0, 2).join(', ') : 'TypeScript'}
                             </div>
                         </div>
                         <div class="space-y-1">
@@ -228,26 +256,7 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                                 // CLASSIFICATION
                             </div>
                             <div class="font-bold text-green-600 uppercase dark:text-green-400">
-                                PUBLIC // OPEN
-                            </div>
-                        </div>
-                        <div class="col-span-2 space-y-1 sm:col-span-2">
-                            <div
-                                class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
-                            >
-                                // TELEMETRY
-                            </div>
-                            <div
-                                class="type-telemetry flex min-w-0 items-center gap-1.5 font-bold text-slate-900 select-none dark:text-slate-200"
-                            >
-                                <span
-                                    class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
-                                ></span>
-                                <span class="truncate">
-                                    <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{
-                                        telemetryRest && ` // ${telemetryRest.trim()}`
-                                    }
-                                </span>
+                                OPEN // PUBLIC
                             </div>
                         </div>
                         {
@@ -267,18 +276,18 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                                     >
                                         {[1, 2, 3, 4, 5].map((i) => {
                                             const colors: { [key: number]: string } = {
-                                                1: 'bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.5)]', // Violet
-                                                2: 'bg-[#10b981] shadow-[0_0_6px_rgba(16,185,129,0.5)]', // Green
-                                                3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]', // Yellow
-                                                4: 'bg-[#f97316] shadow-[0_0_6px_rgba(249,115,22,0.5)]', // Orange
-                                                5: 'bg-[#ef4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]', // Red
+                                                1: 'bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.5)]',
+                                                2: 'bg-[#10b981] shadow-[0_0_6px_rgba(16,185,129,0.5)]',
+                                                3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]',
+                                                4: 'bg-[#f97316] shadow-[0_0_6px_rgba(249,115,22,0.5)]',
+                                                5: 'bg-[#ef4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]',
                                             };
                                             const activeColor =
                                                 colors[pain_level ?? 1] ?? 'bg-(--accent)';
                                             return (
                                                 <span
                                                     aria-hidden="true"
-                                                    class={`h-1.5 w-3.5 rounded-xs transition-all duration-300 ${
+                                                    class={`h-1.5 w-3 rounded-xs transition-all duration-300 ${
                                                         i <= (pain_level ?? 0)
                                                             ? `${activeColor} opacity-90`
                                                             : 'bg-slate-200 opacity-40 dark:bg-white/10'
@@ -290,19 +299,125 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                                 </div>
                             )
                         }
-                        {
-                            fuckup_teaser && (
-                                <div class="col-span-2 space-y-1 sm:col-span-1">
-                                    <div class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400">
-                                        // FUCKUP_LOG
-                                    </div>
-                                    <div class="font-bold text-red-600 dark:text-red-400">
-                                        RECORDED
-                                    </div>
-                                </div>
-                            )
-                        }
+                        <div class="col-span-2 space-y-1 sm:col-span-1">
+                            <div
+                                class="text-[9px] font-bold tracking-widest text-slate-600 uppercase dark:text-slate-400"
+                            >
+                                // TELEMETRY
+                            </div>
+                            <div
+                                class="type-telemetry flex min-w-0 items-center gap-1.5 font-bold text-slate-900 select-none dark:text-slate-200"
+                            >
+                                <span
+                                    class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
+                                ></span>
+                                <span class="truncate">
+                                    <span class="telemetry-keyword">{telemetryFirst.trim()}</span>{
+                                        telemetryRest && ` // ${telemetryRest.trim()}`
+                                    }
+                                </span>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Responsive Architecture Schematic Topology SVG -->
+                <div
+                    class="mb-12 overflow-hidden rounded-xl border border-slate-200/80 bg-slate-900/90 p-5 text-white shadow-inner dark:border-white/10 dark:bg-black/60"
+                >
+                    <div
+                        class="mb-3 flex items-center justify-between font-mono text-[10px] text-slate-400"
+                    >
+                        <span>SYSTEM_TOPOLOGY // CLIENT_SANDBOX</span>
+                        <span class="font-bold text-cyan-400">ZERO_TELEMETRY_EXFILTRATION</span>
+                    </div>
+                    <svg
+                        viewBox="0 0 800 110"
+                        class="h-auto w-full overflow-visible font-mono"
+                        aria-label="System architecture topology schematic"
+                    >
+                        <!-- Client Browser Layer -->
+                        <rect
+                            x="20"
+                            y="20"
+                            width="220"
+                            height="70"
+                            rx="8"
+                            fill="#1e293b"
+                            stroke="#38bdf8"
+                            stroke-width="1.2"></rect>
+                        <text
+                            x="130"
+                            y="52"
+                            font-size="11"
+                            fill="#38bdf8"
+                            font-weight="bold"
+                            text-anchor="middle">CLIENT RUNTIME</text
+                        >
+                        <text x="130" y="70" font-size="9" fill="#94a3b8" text-anchor="middle"
+                            >Astro 6 SSG / Browser DOM</text
+                        >
+
+                        <!-- Vector Connector 1 -->
+                        <path
+                            d="M 240 55 L 290 55"
+                            stroke="#67e8f9"
+                            stroke-width="1.5"
+                            stroke-dasharray="3 3"></path>
+                        <polygon points="290,55 282,51 282,59" fill="#67e8f9"></polygon>
+
+                        <!-- Processing Engine Layer -->
+                        <rect
+                            x="290"
+                            y="20"
+                            width="220"
+                            height="70"
+                            rx="8"
+                            fill="#1e293b"
+                            stroke="#818cf8"
+                            stroke-width="1.2"></rect>
+                        <text
+                            x="400"
+                            y="52"
+                            font-size="11"
+                            fill="#818cf8"
+                            font-weight="bold"
+                            text-anchor="middle">ISOLATED ENGINE</text
+                        >
+                        <text x="400" y="70" font-size="9" fill="#94a3b8" text-anchor="middle"
+                            >Workers / Model Execution</text
+                        >
+
+                        <!-- Vector Connector 2 -->
+                        <path
+                            d="M 510 55 L 560 55"
+                            stroke="#a78bfa"
+                            stroke-width="1.5"
+                            stroke-dasharray="3 3"></path>
+                        <polygon points="560,55 552,51 552,59" fill="#a78bfa"></polygon>
+
+                        <!-- Data Boundary Layer -->
+                        <rect
+                            x="560"
+                            y="20"
+                            width="220"
+                            height="70"
+                            rx="8"
+                            fill="#1e293b"
+                            stroke="#34d399"
+                            stroke-width="1.2"></rect>
+                        <text
+                            x="670"
+                            y="52"
+                            font-size="11"
+                            fill="#34d399"
+                            font-weight="bold"
+                            text-anchor="middle">STORAGE BOUNDARY</text
+                        >
+                        <text x="670" y="70" font-size="9" fill="#94a3b8" text-anchor="middle"
+                            >Local Encrypted / Zero Server</text
+                        >
+                    </svg>
                 </div>
 
                 <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_280px]">
@@ -310,14 +425,19 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                         {
                             fuckup_teaser && (
                                 <div
-                                    class="mission-fuckup-teaser expanded mb-6 text-slate-800 dark:text-slate-300"
+                                    class="mb-8 rounded-xl border border-red-500/25 bg-red-500/5 p-4 backdrop-blur-xs dark:border-red-500/20 dark:bg-red-950/20"
                                     role="note"
-                                    aria-label="Honest fuckup teaser"
+                                    aria-label="Honest failure reflection"
                                 >
-                                    <span class="font-bold text-slate-600 dark:text-slate-400">
-                                        FUCKUP LOG //&nbsp;
-                                    </span>
-                                    {fuckup_teaser}
+                                    <div class="mb-2 flex items-center gap-2">
+                                        <span class="h-2 w-2 animate-pulse rounded-full bg-red-500" />
+                                        <span class="font-mono text-xs font-bold tracking-widest text-red-500 uppercase dark:text-red-400">
+                                            // FAULT_ANALYSIS // LESSONS_LEARNED
+                                        </span>
+                                    </div>
+                                    <p class="font-mono text-xs leading-relaxed text-red-800 dark:text-red-200">
+                                        "{fuckup_teaser}"
+                                    </p>
                                 </div>
                             )
                         }
@@ -342,6 +462,7 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                                         href={githubUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        aria-label={`Inspect ${title} repository on GitHub (opens in a new tab)`}
                                         class="magnetic-target inline-flex w-full items-center justify-center gap-2 rounded-lg bg-(--accent-button-bg) px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                                     >
                                         Inspect Repository

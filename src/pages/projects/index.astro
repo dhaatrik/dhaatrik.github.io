@@ -14,6 +14,24 @@ const projects = (await getCollection('projects')).sort(
     (a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => a.data.order - b.data.order
 );
 
+const getProjectCategory = (project: CollectionEntry<'projects'>): string => {
+    const id = project.id.toLowerCase();
+    if (
+        id.includes('deltav') ||
+        id.includes('the-infinite-intelligence') ||
+        id.includes('glassbox')
+    ) {
+        return 'ai-sim';
+    }
+    if (id.includes('vellor') || id.includes('fueldrop')) {
+        return 'offline-pwa';
+    }
+    if (id.includes('free-markdown') || id.includes('instant-app') || id.includes('readaloud')) {
+        return 'tools';
+    }
+    return 'apps';
+};
+
 // Generate WebPage & ItemList JSON-LD Schema
 const webpageSchema = {
     '@context': 'https://schema.org',
@@ -270,10 +288,13 @@ const breadcrumbSchema = JSON.stringify({
 
             <section class="layout-container">
                 <div
-                    class="reveal-on-scroll mb-12 border-b border-slate-200/60 pb-8 dark:border-white/5"
+                    class="reveal-on-scroll mb-8 border-b border-slate-200/60 pb-8 dark:border-white/5"
                 >
-                    <div class="mb-2 font-mono text-xs tracking-widest text-(--accent)">
-                        // projects_archive.db
+                    <div
+                        class="mb-2 flex items-center gap-2 font-mono text-xs tracking-widest text-(--accent)"
+                    >
+                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)"></span>
+                        <span>// projects_archive.db [12 REPOSITORIES]</span>
                     </div>
                     <h1 class="type-page-title mb-4 text-slate-900 dark:text-white">
                         Project Workbench <span class="text-slate-400 dark:text-slate-600"
@@ -281,13 +302,64 @@ const breadcrumbSchema = JSON.stringify({
                         >
                     </h1>
                     <p class="type-body-lg max-w text-slate-600 dark:text-(--text-secondary)">
-                        Well... these are things I've shipped, abandoned, or am still patching at 2
-                        AM. If your repo looks like this too, you're in good company. Each one ships
-                        with an honest mission log: what broke, what I learned.
+                        These are systems I have built, shipped, abandoned, or am still patching at
+                        2 AM. Each application is presented in its operational environment with an
+                        honest mission report on what broke and what was learned.
                     </p>
                 </div>
 
-                <div class="bento-grid reveal-stagger">
+                <!-- Category Filter Tabs -->
+                <div
+                    role="tablist"
+                    aria-label="Project category filter"
+                    class="reveal-on-scroll mb-8 flex flex-wrap items-center gap-2 font-mono text-xs"
+                >
+                    <button
+                        role="tab"
+                        aria-selected="true"
+                        data-filter="all"
+                        class="project-filter-btn active cursor-pointer rounded-full border border-(--accent)/40 bg-(--accent)/15 px-3.5 py-1.5 font-bold text-(--accent) shadow-[0_0_12px_var(--accent-glow)] transition-all focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none"
+                    >
+                        ALL [12]
+                    </button>
+                    <button
+                        role="tab"
+                        aria-selected="false"
+                        data-filter="ai-sim"
+                        class="project-filter-btn cursor-pointer rounded-full border border-slate-200/80 bg-white/60 px-3.5 py-1.5 font-medium text-slate-600 transition-all hover:border-(--accent)/30 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
+                    >
+                        AI & SIMULATION [3]
+                    </button>
+                    <button
+                        role="tab"
+                        aria-selected="false"
+                        data-filter="offline-pwa"
+                        class="project-filter-btn cursor-pointer rounded-full border border-slate-200/80 bg-white/60 px-3.5 py-1.5 font-medium text-slate-600 transition-all hover:border-(--accent)/30 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
+                    >
+                        OFFLINE & PWA [2]
+                    </button>
+                    <button
+                        role="tab"
+                        aria-selected="false"
+                        data-filter="tools"
+                        class="project-filter-btn cursor-pointer rounded-full border border-slate-200/80 bg-white/60 px-3.5 py-1.5 font-medium text-slate-600 transition-all hover:border-(--accent)/30 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
+                    >
+                        DEV TOOLS & UTILITIES [3]
+                    </button>
+                    <button
+                        role="tab"
+                        aria-selected="false"
+                        data-filter="apps"
+                        class="project-filter-btn cursor-pointer rounded-full border border-slate-200/80 bg-white/60 px-3.5 py-1.5 font-medium text-slate-600 transition-all hover:border-(--accent)/30 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
+                    >
+                        APPLICATIONS & POS [4]
+                    </button>
+                </div>
+
+                <div
+                    id="projects-grid"
+                    class="bento-grid reveal-stagger grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+                >
                     {
                         projects.map((project: ProjectEntry) => {
                             const telemetryStr = project.data.telemetry;
@@ -296,30 +368,65 @@ const breadcrumbSchema = JSON.stringify({
                             const telemetryRest = telemetryRestParts.join(' // ');
                             const projectIdClean = project.id.replace(/\.md$/, '');
                             const parsed = parseTelemetry(telemetryStr);
+                            const category = getProjectCategory(project);
                             return (
-                                <article class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]">
+                                <article
+                                    data-category={category}
+                                    class="bento-card mission-report-card group relative flex flex-col justify-between overflow-hidden transition-all duration-300 focus-within:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-1 hover:shadow-[0_0_20px_var(--accent-glow)]"
+                                >
                                     <div
                                         class="relative z-10 flex h-full flex-col justify-between"
                                         data-tilt-z
                                     >
                                         <div class="mission-report-body">
-                                            <div class="mission-report-telemetry type-telemetry flex min-w-0 items-center justify-between gap-4 text-slate-500 dark:text-slate-400">
-                                                <div class="flex min-w-0 items-center gap-1.5">
-                                                    <span
-                                                        class={`h-1.5 w-1.5 shrink-0 rounded-full ${parsed.colorClass}`}
-                                                    />
-                                                    <span class="truncate">
-                                                        <span class="telemetry-keyword">
-                                                            {telemetryFirst.trim()}
-                                                        </span>
-                                                        {telemetryRest &&
-                                                            ` // ${telemetryRest.trim()}`}
+                                            {/* Stageshow Window Chrome Bar */}
+                                            <div class="mb-4 flex items-center justify-between border-b border-slate-200/60 pb-3 font-mono text-[10px] dark:border-white/10">
+                                                <div class="flex items-center gap-2">
+                                                    <div class="flex items-center gap-1.5">
+                                                        <span class="h-2 w-2 rounded-full border border-red-500/40 bg-red-500/20" />
+                                                        <span class="h-2 w-2 rounded-full border border-amber-500/40 bg-amber-500/20" />
+                                                        <span class="h-2 w-2 rounded-full border border-emerald-500/40 bg-emerald-500/20" />
+                                                    </div>
+                                                    <span class="font-bold tracking-wider text-slate-600 dark:text-slate-300">
+                                                        SYS.PRJ // {projectIdClean.toUpperCase()}
                                                     </span>
+                                                </div>
+                                                <div class="flex items-center gap-2">
+                                                    <span
+                                                        class={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[9px] font-bold ${parsed.textClass} border-current/25 bg-current/10`}
+                                                    >
+                                                        <span
+                                                            class={`h-1.5 w-1.5 rounded-full ${parsed.colorClass}`}
+                                                        />
+                                                        {parsed.badgeText}
+                                                    </span>
+                                                    {project.data.githubUrl && (
+                                                        <a
+                                                            href={project.data.githubUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            aria-label={`View ${project.data.title} on GitHub (opens in a new tab)`}
+                                                            title={`View ${project.data.title} on GitHub`}
+                                                            class="github-link relative z-20 text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-(--text-secondary) dark:hover:text-white dark:focus-visible:text-white"
+                                                        >
+                                                            <svg
+                                                                viewBox="0 0 16 16"
+                                                                aria-hidden="true"
+                                                                width="18"
+                                                                height="18"
+                                                            >
+                                                                <path
+                                                                    fill="currentColor"
+                                                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                                                                />
+                                                            </svg>
+                                                        </a>
+                                                    )}
                                                 </div>
                                             </div>
 
-                                            <div class="mb-4 flex items-start justify-between gap-4">
-                                                <h2 class="text-2xl leading-tight font-bold text-slate-900 transition-colors dark:text-white">
+                                            <div class="mb-4">
+                                                <h2 class="text-2xl leading-tight font-bold text-slate-900 transition-colors group-hover:text-(--accent) dark:text-white">
                                                     <a
                                                         href={`/projects/${projectIdClean}`}
                                                         data-astro-prefetch="hover"
@@ -328,29 +435,8 @@ const breadcrumbSchema = JSON.stringify({
                                                         {project.data.title}
                                                     </a>
                                                 </h2>
-                                                {project.data.githubUrl && (
-                                                    <a
-                                                        href={project.data.githubUrl}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        aria-label={`View ${project.data.title} on GitHub (opens in a new tab)`}
-                                                        title={`View ${project.data.title} on GitHub`}
-                                                        class="github-link relative z-20 text-slate-500 transition-colors hover:text-slate-900 focus-visible:text-slate-900 dark:text-(--text-secondary) dark:hover:text-white dark:focus-visible:text-white"
-                                                    >
-                                                        <svg
-                                                            viewBox="0 0 16 16"
-                                                            aria-hidden="true"
-                                                            width="22"
-                                                            height="22"
-                                                        >
-                                                            <path
-                                                                fill="currentColor"
-                                                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                                                            />
-                                                        </svg>
-                                                    </a>
-                                                )}
                                             </div>
+
                                             <p class="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-(--text-secondary)">
                                                 {project.data.description}
                                             </p>
@@ -358,7 +444,7 @@ const breadcrumbSchema = JSON.stringify({
                                             {/* Pain Level Indicator */}
                                             {project.data.pain_level && (
                                                 <div class="mb-3 space-y-1.5">
-                                                    <span class="block font-mono text-[9px] text-slate-400 dark:text-slate-600">
+                                                    <span class="block font-mono text-[9px] text-slate-500 dark:text-slate-400">
                                                         // IMPACT.LOG
                                                     </span>
                                                     <div
@@ -376,11 +462,11 @@ const breadcrumbSchema = JSON.stringify({
                                                             const colors: {
                                                                 [key: number]: string;
                                                             } = {
-                                                                1: 'bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.5)]', // Violet
-                                                                2: 'bg-[#10b981] shadow-[0_0_6px_rgba(16,185,129,0.5)]', // Green
-                                                                3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]', // Yellow
-                                                                4: 'bg-[#f97316] shadow-[0_0_6px_rgba(249,115,22,0.5)]', // Orange
-                                                                5: 'bg-[#ef4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]', // Red
+                                                                1: 'bg-[#8b5cf6] shadow-[0_0_6px_rgba(139,92,246,0.5)]',
+                                                                2: 'bg-[#10b981] shadow-[0_0_6px_rgba(16,185,129,0.5)]',
+                                                                3: 'bg-[#eab308] shadow-[0_0_6px_rgba(234,179,8,0.5)]',
+                                                                4: 'bg-[#f97316] shadow-[0_0_6px_rgba(249,115,22,0.5)]',
+                                                                5: 'bg-[#ef4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]',
                                                             };
                                                             const activeColor =
                                                                 colors[
@@ -389,7 +475,7 @@ const breadcrumbSchema = JSON.stringify({
                                                             return (
                                                                 <span
                                                                     aria-hidden="true"
-                                                                    class={`h-1 w-5 rounded-sm transition-all duration-300 ${
+                                                                    class={`h-1 w-5 rounded-xs transition-all duration-300 ${
                                                                         i <=
                                                                         (project.data.pain_level ??
                                                                             0)
@@ -399,7 +485,7 @@ const breadcrumbSchema = JSON.stringify({
                                                                 />
                                                             );
                                                         })}
-                                                        <span class="ml-1 font-mono text-[9px] text-slate-400 dark:text-slate-600">
+                                                        <span class="ml-1 font-mono text-[9px] text-slate-500 dark:text-slate-400">
                                                             {project.data.pain_level}/5
                                                         </span>
                                                     </div>
@@ -409,16 +495,16 @@ const breadcrumbSchema = JSON.stringify({
                                             {/* Fuckup Teaser */}
                                             {project.data.fuckup_teaser && (
                                                 <div class="mb-4">
-                                                    <div class="mb-1.5 flex items-center gap-1.5">
-                                                        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
-                                                        <span class="block font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
-                                                            // FUCKUP.LOG
-                                                        </span>
-                                                    </div>
-                                                    <div class="mission-fuckup-teaser">
-                                                        <div class="mission-fuckup-teaser-inner">
-                                                            {project.data.fuckup_teaser}
+                                                    <div class="rounded-lg border border-red-500/20 bg-red-500/5 p-2.5 dark:border-red-500/20 dark:bg-red-950/20">
+                                                        <div class="mb-1 flex items-center gap-1.5">
+                                                            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 dark:bg-red-400" />
+                                                            <span class="font-mono text-[9px] font-bold tracking-widest text-red-500 uppercase dark:text-red-400/90">
+                                                                // FAULT_ANALYSIS
+                                                            </span>
                                                         </div>
+                                                        <p class="line-clamp-2 font-mono text-[10.5px] leading-relaxed text-red-700/90 dark:text-red-300/90">
+                                                            "{project.data.fuckup_teaser}"
+                                                        </p>
                                                     </div>
                                                 </div>
                                             )}
@@ -434,17 +520,19 @@ const breadcrumbSchema = JSON.stringify({
                                                     ))}
                                                 </div>
                                             )}
-                                            <div class="mission-report-footer type-telemetry flex items-center justify-between gap-3 text-slate-500 dark:text-slate-400">
-                                                <span class="min-w-0 flex-1 truncate">
-                                                    PROGRESS: {project.data.progress}
+                                            <div class="mission-report-footer type-telemetry flex items-center justify-between gap-3 border-t border-slate-200/50 pt-3.5 text-slate-500 dark:border-white/5 dark:text-slate-400">
+                                                <span class="min-w-0 flex-1 truncate text-[9.5px]">
+                                                    PROGRESS:{' '}
+                                                    <span class="text-slate-700 dark:text-slate-300">
+                                                        {project.data.progress}
+                                                    </span>
                                                 </span>
-                                                <a
-                                                    href={`/projects/${projectIdClean}`}
-                                                    class="relative z-20 shrink-0 font-mono text-[10px] font-semibold tracking-wider text-(--accent) transition-all group-hover:translate-x-1 hover:opacity-80"
+                                                <span
+                                                    class="relative z-20 shrink-0 font-mono text-[10px] font-bold tracking-wider text-(--accent) transition-all group-hover:translate-x-1"
                                                     aria-label={`Read the full ${project.data.title} mission log`}
                                                 >
-                                                    Read mission log&nbsp;→
-                                                </a>
+                                                    Read mission log&nbsp;&rarr;
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -457,5 +545,54 @@ const breadcrumbSchema = JSON.stringify({
         </main>
 
         <Footer />
+
+        <script is:inline>
+            function initProjectFilters() {
+                const buttons = document.querySelectorAll('.project-filter-btn');
+                const cards = document.querySelectorAll('#projects-grid article[data-category]');
+
+                buttons.forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        const filter = btn.getAttribute('data-filter');
+
+                        buttons.forEach((b) => {
+                            b.setAttribute('aria-selected', 'false');
+                            b.classList.remove(
+                                'active',
+                                'border-(--accent)/40',
+                                'bg-(--accent)/15',
+                                'text-(--accent)',
+                                'font-bold',
+                                'shadow-[0_0_12px_var(--accent-glow)]'
+                            );
+                            b.classList.add('font-medium');
+                        });
+
+                        btn.setAttribute('aria-selected', 'true');
+                        btn.classList.add(
+                            'active',
+                            'border-(--accent)/40',
+                            'bg-(--accent)/15',
+                            'text-(--accent)',
+                            'font-bold',
+                            'shadow-[0_0_12px_var(--accent-glow)]'
+                        );
+                        btn.classList.remove('font-medium');
+
+                        cards.forEach((card) => {
+                            const cat = card.getAttribute('data-category');
+                            if (filter === 'all' || cat === filter) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        });
+                    });
+                });
+            }
+
+            document.addEventListener('astro:page-load', initProjectFilters);
+            initProjectFilters();
+        </script>
     </body>
 </html>
