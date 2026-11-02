@@ -1633,137 +1633,57 @@ const breadcrumbSchema = JSON.stringify({
                         </div>
                     </div>
 
-                    {/* Console Split Grid */}
-                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-[1.1fr_1.4fr]">
-                        {/* Left Column: Orbital Station Telemetry & Signal Topics */}
-                        <div
-                            class="flex flex-col justify-between border-b border-slate-200/80 bg-slate-100/40 p-6 md:p-8 lg:border-r lg:border-b-0 dark:border-white/10 dark:bg-black/30"
-                        >
-                            <div>
-                                <div
-                                    class="mb-4 font-mono text-[9px] font-bold tracking-widest text-slate-500 uppercase dark:text-slate-400"
-                                >
-                                    // STATION_TELEMETRY
-                                </div>
-                                <div class="space-y-2.5 font-mono text-xs">
-                                    <div
-                                        class="flex items-center justify-between text-slate-700 dark:text-slate-300"
-                                    >
-                                        <span class="text-slate-500 dark:text-slate-400"
-                                            >GROUND_NODE:</span
-                                        >
-                                        <span class="font-bold">CHENNAI [13.08°N, 80.27°E]</span>
-                                    </div>
-                                    <div
-                                        class="flex items-center justify-between text-slate-700 dark:text-slate-300"
-                                    >
-                                        <span class="text-slate-500 dark:text-slate-400"
-                                            >TIMEZONE:</span
-                                        >
-                                        <span class="font-bold">IST [UTC+05:30]</span>
-                                    </div>
-                                    <div
-                                        class="flex items-center justify-between text-slate-700 dark:text-slate-300"
-                                    >
-                                        <span class="text-slate-500 dark:text-slate-400"
-                                            >BANDWIDTH:</span
-                                        >
-                                        <span
-                                            class="font-bold text-emerald-600 dark:text-emerald-400"
-                                            >&lt; 24H LATENCY</span
-                                        >
-                                    </div>
-                                </div>
-
-                                <div
-                                    class="mt-5 inline-flex items-center gap-2 rounded-full border border-(--accent)/20 bg-(--accent)/10 px-3 py-1 font-mono text-[9px] font-bold tracking-widest text-(--accent) uppercase shadow-xs"
-                                >
-                                    <span
-                                        class="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent)"
-                                    ></span>
-                                    OPEN_FOR_COLLABORATION
-                                </div>
-                            </div>
-
+                    {/* Transceiver Content */}
+                    <div class="relative z-10 flex flex-col items-center p-8 text-center md:p-12">
+                        <div class="w-full max-w-2xl">
                             <div
-                                class="mt-8 border-t border-slate-200/60 pt-6 dark:border-white/10"
+                                class="mb-3 inline-flex items-center justify-center gap-2 font-mono text-xs font-bold tracking-widest text-(--accent) uppercase"
                             >
-                                <div
-                                    class="mb-3 font-mono text-[9px] font-bold tracking-widest text-slate-500 uppercase dark:text-slate-400"
-                                >
-                                    // SIGNAL_FREQUENCIES_OF_INTEREST
-                                </div>
-                                <div
-                                    class="space-y-2 font-mono text-[11px] text-slate-700 dark:text-slate-300"
-                                >
-                                    <div class="flex items-center gap-2">
-                                        <span class="font-bold text-(--accent)">[01]</span>
-                                        <span>Multi-Agent Orchestration &amp; BYOK Loops</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <span class="font-bold text-(--accent)">[02]</span>
-                                        <span>Browser Physics Sims &amp; RK4 Kinematics</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <span class="font-bold text-(--accent)">[03]</span>
-                                        <span>Agri-Tech, Soil Science &amp; Biotech</span>
-                                    </div>
-                                </div>
+                                <span class="inline-block h-2 w-2 rounded-full bg-(--accent)"
+                                ></span>
+                                <span>&gt; INITIATE_COMMUNICATION</span>
                             </div>
-                        </div>
+                            <h2
+                                class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-white"
+                            >
+                                Let's Connect
+                            </h2>
+                            <p
+                                class="mt-4 font-mono text-xs leading-relaxed text-slate-600 md:text-sm dark:text-slate-300"
+                            >
+                                Whether you want to challenge an architectural assumption, build
+                                autonomous agent loops, talk rocket kinematics, or collaborate on
+                                open engineering tools, the channel is open.
+                            </p>
 
-                        {/* Right Column: Command Action Transceiver */}
-                        <div class="flex flex-col justify-between p-6 md:p-10">
-                            <div>
-                                <div
-                                    class="mb-3 inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-(--accent) uppercase"
+                            <div class="mt-8 flex justify-center">
+                                <a
+                                    href={SOCIAL_LINKS.twitter}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Connect on X (opens in a new tab)"
+                                    class="magnetic-target group/btn relative inline-flex items-center justify-center gap-2 rounded-lg bg-(--accent-button-bg) px-8 py-3.5 font-mono text-sm font-bold text-white shadow-md transition-all hover:bg-blue-600 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                                 >
-                                    <span class="inline-block h-2 w-2 rounded-full bg-(--accent)"
-                                    ></span>
-                                    <span>&gt; INITIATE_COMMUNICATION</span>
-                                </div>
-                                <h2
-                                    class="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl dark:text-white"
-                                >
-                                    Let's Connect
-                                </h2>
-                                <p
-                                    class="mt-4 font-mono text-xs leading-relaxed text-slate-600 md:text-sm dark:text-slate-300"
-                                >
-                                    Whether you want to challenge an architectural assumption, build
-                                    autonomous agent loops, talk rocket kinematics, or collaborate
-                                    on open engineering tools, the channel is open.
-                                </p>
-
-                                <div class="mt-8 flex flex-wrap items-center gap-4">
-                                    <a
-                                        href={SOCIAL_LINKS.twitter}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        aria-label="Connect on X (opens in a new tab)"
-                                        class="magnetic-target group/btn relative inline-flex items-center justify-center gap-2 rounded-lg bg-(--accent-button-bg) px-6 py-3 font-mono text-sm font-bold text-white shadow-md transition-all hover:bg-blue-600 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
+                                    <span aria-hidden="true">~ $ connect --x</span>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="transition-transform group-hover/btn:translate-x-1"
+                                        ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
+                                        ></path></svg
                                     >
-                                        <span aria-hidden="true">~ $ connect --x</span>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="transition-transform group-hover/btn:translate-x-1"
-                                            ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
-                                            ></path></svg
-                                        >
-                                    </a>
-                                </div>
+                                </a>
                             </div>
 
                             <div
-                                class="mt-8 flex flex-wrap items-center gap-4 border-t border-slate-200/60 pt-6 font-mono text-xs text-slate-500 dark:border-white/10 dark:text-slate-400"
+                                class="mt-8 flex flex-wrap items-center justify-center gap-4 border-t border-slate-200/60 pt-6 font-mono text-xs text-slate-500 dark:border-white/10 dark:text-slate-400"
                             >
                                 <span class="text-[9px] font-bold tracking-widest uppercase">
                                     // NODES:
