@@ -1482,7 +1482,7 @@ const webSiteSchema = JSON.stringify({
                     </div>
             </section>
 
-            <section class="layout-container content-visibility-auto-blog mb-0 pb-0">
+            <section class="layout-container content-visibility-auto-blog mb-0 pb-16">
                 <div class="reveal-on-scroll mb-10 flex items-end justify-between">
                     <div>
                         <div
@@ -1526,7 +1526,7 @@ const webSiteSchema = JSON.stringify({
                     </a>
                 </div>
 
-                <div class="reveal-stagger flex flex-col gap-6">
+                <div class="perspective-1000 reveal-stagger flex flex-col gap-6">
                     {
                         posts.map((post: BlogEntry, index: number) => {
                             const doiNum = `10.1012/DH.${post.id.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'POST'}`;
@@ -1535,9 +1535,12 @@ const webSiteSchema = JSON.stringify({
                                 <a
                                     href={`/transmissions/${post.id}/`}
                                     data-astro-prefetch="hover"
-                                    class="bento-card group block p-5 transition-all hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none sm:p-6 dark:focus-visible:ring-offset-(--bg-main)"
+                                    class="bento-card group relative block overflow-hidden p-5 transition-all hover:z-20 hover:shadow-[0_0_20px_var(--accent-glow)] focus-visible:shadow-[0_0_20px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none sm:p-6 dark:focus-visible:ring-offset-(--bg-main)"
                                 >
-                                    <article class="flex flex-col justify-between gap-4">
+                                    <article
+                                        class="relative z-10 flex flex-col justify-between gap-4"
+                                        data-tilt-z
+                                    >
                                         {/* Top Signal Ribbon */}
                                         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/60 pb-3 font-mono text-[10px] text-slate-400 dark:border-white/5 dark:text-slate-500">
                                             <div class="flex items-center gap-2">
