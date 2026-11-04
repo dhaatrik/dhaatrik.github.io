@@ -175,3 +175,19 @@ test('Security: all GitHub Actions workflows must pin external actions to 40-cha
         );
     }
 });
+
+test('Security: BaseHead meta CSP must not include browser-ignored directives', () => {
+    const baseHeadFile = path.join(ROOT_DIR, 'src', 'components', 'BaseHead.astro');
+    const content = fs.readFileSync(baseHeadFile, 'utf8');
+
+    // Extract meta CSP content
+    const cspMatch = /http-equiv="Content-Security-Policy"[\s\S]*?content="([^"]+)"/.exec(content);
+    assert.ok(cspMatch, 'BaseHead.astro must contain a Content-Security-Policy meta tag');
+
+    const csp = cspMatch[1];
+    assert.ok(!csp.includes('form-action'), 'form-action is ignored by browsers in <meta> tags');
+    assert.ok(
+        !csp.includes('frame-ancestors'),
+        'frame-ancestors is ignored by browsers in <meta> tags'
+    );
+});

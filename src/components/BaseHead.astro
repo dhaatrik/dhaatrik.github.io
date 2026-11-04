@@ -73,11 +73,11 @@ const personSchema = JSON.stringify({
 <meta name="google-site-verification" content="NPuW-RXuLzjTXSLXeUxcKVpFFvvOxJ3xzwuK-Vhbn3c" />
 
 <!-- Security Meta Tags -->
-<!-- Note: X-Frame-Options and X-Content-Type-Options are omitted as browsers ignore them in <meta> tags. -->
-<!-- CSP tightened: added connect-src 'self' to limit exfiltration and form-action 'none' since site has no forms -->
+<!-- Note: X-Frame-Options, X-Content-Type-Options, and form-action are omitted as browsers ignore them in <meta> tags. -->
+<!-- CSP tightened: added connect-src 'self' to limit exfiltration -->
 <meta
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; form-action 'none'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests;"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; upgrade-insecure-requests;"
 />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
