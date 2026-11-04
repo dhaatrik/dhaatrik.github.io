@@ -129,3 +129,11 @@ test('Security: offline HTML export archive must enforce an air-gapped Content-S
         "exportActions.ts CSP must set default-src 'none'"
     );
 });
+
+test('Security: .gitignore must ignore all .env variants while allowing .env.example', () => {
+    const gitignoreFile = path.join(ROOT_DIR, '.gitignore');
+    const content = fs.readFileSync(gitignoreFile, 'utf8');
+
+    assert.ok(content.includes('.env.*'), '.gitignore must ignore .env.*');
+    assert.ok(content.includes('!.env.example'), '.gitignore must allow !.env.example');
+});
