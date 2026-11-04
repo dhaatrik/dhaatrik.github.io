@@ -1,5 +1,59 @@
 # Changelog
 
+## [4.15.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.14.0...v4.15.0) (2026-11-04)
+
+
+### Features
+
+* **home:** convert featured engineering to 2x3 matrix and standardize deltav card ([f79a441](https://github.com/dhaatrik/dhaatrik.github.io/commit/f79a441592041d57838ce688fc3667f80b8b707e))
+* **personnel:** update workstation telemetry with authentic laptop specs ([3bf336a](https://github.com/dhaatrik/dhaatrik.github.io/commit/3bf336a2791e1517acbcb4e9bab24a92202f644b))
+* **projects:** dynamic project architecture topologies and responsive metadata grid ([f55c3df](https://github.com/dhaatrik/dhaatrik.github.io/commit/f55c3dfa5d4293c8445845c4b9c8300304843d50))
+* **reading:** add collapsible table of contents and section scroll markers ([26c1ee2](https://github.com/dhaatrik/dhaatrik.github.io/commit/26c1ee2c9f4cf6591048f491d6ac93e7795dff77))
+* **ui:** complete Stageshow UI polish, responsive topology schematics, and mobile alignment ([45c10f8](https://github.com/dhaatrik/dhaatrik.github.io/commit/45c10f8c4adc3cb022931e688b1f1eaf2a2aa39e))
+
+
+### Bug Fixes
+
+* **footer:** remove geographic coordinates and sanitize telemetry readouts ([8163d1d](https://github.com/dhaatrik/dhaatrik.github.io/commit/8163d1d4d2210e3aacdd6a438c377e07ebbacf61))
+* **header:** eliminate legacy anchor follower bleeding past capsule on hover ([4b2c099](https://github.com/dhaatrik/dhaatrik.github.io/commit/4b2c099531b03a2f69751cb8c34804ebb5f63dd1))
+* **header:** resolve brand overlap, remove flat underline, and optimize navbar responsiveness ([e88725c](https://github.com/dhaatrik/dhaatrik.github.io/commit/e88725ccb2de41a186f380207f0d08228de1463c))
+* **home:** prevent bottom clipping and corner artifacts on latest thinking cards ([edfcae4](https://github.com/dhaatrik/dhaatrik.github.io/commit/edfcae47aee198952a04c17b1dbd50fe19699c75))
+
+
+### Performance Improvements
+
+* **ui:** calibrate tilt sensitivity by card width and eliminate section paint containment ([6960827](https://github.com/dhaatrik/dhaatrik.github.io/commit/6960827106e7964114febf3b735120f406809244))
+
+
+### Styles & UI Polish
+
+* format codebase with prettier to satisfy ci checks ([9adc2ac](https://github.com/dhaatrik/dhaatrik.github.io/commit/9adc2ac3542c85d0f8f68886168b3e5b27988ab9))
+* **header:** migrate dark opacity classes to canonical tailwind syntax ([5082a4e](https://github.com/dhaatrik/dhaatrik.github.io/commit/5082a4e1ccca9dd2a68196c7a6ff1a67e7b16c5c))
+* **header:** remove central orbital telemetry capsule ([72b9857](https://github.com/dhaatrik/dhaatrik.github.io/commit/72b985799a5c63592de158383e5cbca7545efa6f))
+* **personnel:** abstract workstation telemetry to architectural specifications ([ebcc5e7](https://github.com/dhaatrik/dhaatrik.github.io/commit/ebcc5e7e792da8c64e46c26dd3c11bb615b0851f))
+* **personnel:** elevate tech stack avionics modules and terminal transceiver ([61d8d71](https://github.com/dhaatrik/dhaatrik.github.io/commit/61d8d71b0ca00a8db05b5014c9233b62279673a3))
+* **personnel:** elevate transceiver titlebar with cockpit polish ([aba5cdb](https://github.com/dhaatrik/dhaatrik.github.io/commit/aba5cdb5de2c63e14fc98cbe00066f1a675a6055))
+* **personnel:** match transceiver terminal header with workstation telemetry style ([16d1ee0](https://github.com/dhaatrik/dhaatrik.github.io/commit/16d1ee06875aa1a61eb7951f203238b5358e0d53))
+* **personnel:** streamline let's connect transceiver by removing left telemetry pane ([cf1ea2b](https://github.com/dhaatrik/dhaatrik.github.io/commit/cf1ea2bf05accc9c916bef5039e661d92ad2aad2))
+* **projects:** standardize card chrome headers with telemetry call-signs ([f2609a8](https://github.com/dhaatrik/dhaatrik.github.io/commit/f2609a879777480a4b65037b2294eed276fe85e2))
+* **ui:** adopt canonical tailwind v4 class suggestions ([d8446a1](https://github.com/dhaatrik/dhaatrik.github.io/commit/d8446a16aa586548d6a019a80ecb46b0507b6def))
+* **ui:** migrate window chrome opacity classes to canonical tailwind syntax ([83904d5](https://github.com/dhaatrik/dhaatrik.github.io/commit/83904d5df1c000d7f961c34993d0dc4287b97c0c))
+
+
+### Code Refactoring
+
+* **math:** align formula inspector with native popover api ([106d860](https://github.com/dhaatrik/dhaatrik.github.io/commit/106d860b48fe652a152559fb2903023ee420fbe1))
+
+
+### Documentation & Skills
+
+* remove completed stageshow redesign plan ([79503b3](https://github.com/dhaatrik/dhaatrik.github.io/commit/79503b3e7c9a068974f624fbade0deca3e6d60e0))
+
+
+### Tests & Verification
+
+* **e2e:** add verification specs for collapsible toc and section markers ([f0ccd0d](https://github.com/dhaatrik/dhaatrik.github.io/commit/f0ccd0dce2bb25634ea32c4b948bee218b5844cc))
+
 ## [4.14.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.13.0...v4.14.0) (2026-11-01)
 
 
