@@ -149,4 +149,15 @@ describe('Repository & Site Version Alignment', () => {
             );
         }
     });
+
+    test('syncVersions() validates SemVer regex and rejects malicious or invalid versions', () => {
+        const semVerRegex = /^\d+\.\d+\.\d+(-[a-zA-Z0-9.]+)?$/;
+        assert.ok(semVerRegex.test('4.10.0'));
+        assert.ok(semVerRegex.test('4.10.0-rc.1'));
+        assert.ok(semVerRegex.test('0.1.0-alpha.2'));
+        assert.ok(!semVerRegex.test('4.10'));
+        assert.ok(!semVerRegex.test('v4.10.0'));
+        assert.ok(!semVerRegex.test('4.10.0\nmalicious'));
+        assert.ok(!semVerRegex.test('4.10.0; rm -rf /'));
+    });
 });
