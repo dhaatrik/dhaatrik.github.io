@@ -1,5 +1,26 @@
 # Changelog
 
+## [4.15.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.15.0...v4.15.1) (2026-11-04)
+
+
+### Bug Fixes
+
+* **blog:** add air-gapped sandboxing csp to offline html archive export ([9aa51cb](https://github.com/dhaatrik/dhaatrik.github.io/commit/9aa51cbb670f571a574230c420f5572cd63481a0))
+* **scripts:** add semver regex guard to version synchronization ([2e318d1](https://github.com/dhaatrik/dhaatrik.github.io/commit/2e318d1290a7160cfba68d6a288826be23025948))
+* **security:** implement security audit remediations across templates, exports, and dependencies ([5c884e8](https://github.com/dhaatrik/dhaatrik.github.io/commit/5c884e8406807569eb4c107c38b115986f63a93d))
+* **seo:** escape unicode brackets in project json-ld schemas ([e2c2ace](https://github.com/dhaatrik/dhaatrik.github.io/commit/e2c2ace8fc82fe3bf616522e6fe11df023567c86))
+
+
+### Styles & UI Polish
+
+* **test:** format security test file with prettier ([d75c025](https://github.com/dhaatrik/dhaatrik.github.io/commit/d75c025c9de6e1938ef57575f740a8dce7310df3))
+
+
+### Chores & Maintenance
+
+* **deps:** update @astrojs/rss to 4.0.19 to patch xml injection advisory ([facb088](https://github.com/dhaatrik/dhaatrik.github.io/commit/facb088212a5e6cbffd1b7168c665d4972342033))
+* **git:** broaden env file ignore pattern in gitignore ([0058322](https://github.com/dhaatrik/dhaatrik.github.io/commit/005832218dbec234f2a12f8c8ae33c85fb36c225))
+
 ## [4.15.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.14.0...v4.15.0) (2026-11-04)
 
 
