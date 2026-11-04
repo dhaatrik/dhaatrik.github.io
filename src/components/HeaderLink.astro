@@ -19,8 +19,8 @@ const isActive = href === pathname || href === '/' + firstSegment;
         className,
         'group relative rounded-full focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-(--bg-main)',
         isActive
-            ? 'active font-bold text-slate-900 bg-white shadow-xs border border-slate-200/80 dark:bg-white/10 dark:text-white dark:border-white/15 dark:shadow-[0_0_12px_rgba(255,255,255,0.06)]'
-            : 'text-slate-600 hover:text-slate-900 hover:bg-white/50 dark:text-(--text-secondary) dark:hover:text-white dark:hover:bg-white/5',
+            ? 'active border border-slate-200/80 bg-white font-bold text-slate-900 shadow-xs dark:border-white/15 dark:bg-white/10 dark:text-white dark:shadow-[0_0_12px_rgba(255,255,255,0.06)]'
+            : 'text-slate-600 hover:bg-white/50 hover:text-slate-900 dark:text-(--text-secondary) dark:hover:bg-white/5 dark:hover:text-white',
     ]}
     aria-current={isActive ? 'page' : undefined}
     {...props}

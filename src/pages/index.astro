@@ -1329,157 +1329,148 @@ const webSiteSchema = JSON.stringify({
                 </div>
 
                 {/* Currently Exploring Popover Details Popup */}
+                <div
+                    popover
+                    id="project-popover-currently-exploring"
+                    aria-labelledby="project-popover-title-currently-exploring"
+                    class="premium-glass m-auto max-h-[85vh] w-[calc(100%-2rem)] max-w-xl rounded-2xl p-0 md:w-full"
+                >
                     <div
-                        popover
-                        id="project-popover-currently-exploring"
-                        aria-labelledby="project-popover-title-currently-exploring"
-                        class="premium-glass m-auto max-h-[85vh] w-[calc(100%-2rem)] max-w-xl rounded-2xl p-0 md:w-full"
+                        class="relative z-10 flex items-start justify-between border-b border-slate-100 p-5 sm:p-6 dark:border-white/5"
                     >
-                        <div
-                            class="relative z-10 flex items-start justify-between border-b border-slate-100 p-5 sm:p-6 dark:border-white/5"
-                        >
-                            <div class="flex min-w-0 flex-col gap-1 pr-4">
-                                <div class="flex flex-wrap items-center gap-2">
-                                    <h3
-                                        id="project-popover-title-currently-exploring"
-                                        class="text-lg font-bold text-slate-900 sm:text-xl dark:text-white"
-                                    >
-                                        Active Exploration Dossier
-                                    </h3>
-                                    <span
-                                        class="inline-flex shrink-0 items-center rounded-full border border-(--accent)/35 bg-(--accent)/5 px-2 py-0.5 font-mono text-[9px] font-bold tracking-wider whitespace-nowrap text-(--accent) uppercase sm:text-[10px]"
-                                    >
-                                        EXPLORATION
-                                    </span>
-                                </div>
-                                <p
-                                    class="font-mono text-[9px] tracking-wider text-slate-500 uppercase sm:text-xs dark:text-slate-400"
+                        <div class="flex min-w-0 flex-col gap-1 pr-4">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <h3
+                                    id="project-popover-title-currently-exploring"
+                                    class="text-lg font-bold text-slate-900 sm:text-xl dark:text-white"
                                 >
-                                    STATUS: RESEARCH_ACTIVE // CORE: AGRI_BIO_TECH
-                                </p>
+                                    Active Exploration Dossier
+                                </h3>
+                                <span
+                                    class="inline-flex shrink-0 items-center rounded-full border border-(--accent)/35 bg-(--accent)/5 px-2 py-0.5 font-mono text-[9px] font-bold tracking-wider whitespace-nowrap text-(--accent) uppercase sm:text-[10px]"
+                                >
+                                    EXPLORATION
+                                </span>
                             </div>
+                            <p
+                                class="font-mono text-[9px] tracking-wider text-slate-500 uppercase sm:text-xs dark:text-slate-400"
+                            >
+                                STATUS: RESEARCH_ACTIVE // CORE: AGRI_BIO_TECH
+                            </p>
+                        </div>
+                        <button
+                            aria-label="Close project description"
+                            popovertarget="project-popover-currently-exploring"
+                            popovertargetaction="hide"
+                            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-slate-200/80 bg-slate-50/80 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="space-y-6 p-5 sm:p-6">
+                        <div class="space-y-2">
+                            <span
+                                class="font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase sm:text-xs dark:text-slate-500"
+                            >
+                                // MISSION LOG DETAILS
+                            </span>
+                            <p
+                                class="text-xs leading-relaxed text-slate-600 sm:text-sm dark:text-slate-300"
+                            >
+                                I am breaking down agricultural workflows to fundamental principles.
+                                Most commercial tools optimize for corporate dashboards rather than
+                                actual ground truth. I am studying soil microbiology, chemical
+                                balance, and local weather patterns to engineer tools that solve
+                                real operational friction for farmers.
+                            </p>
+                        </div>
+
+                        <div class="space-y-3">
+                            <span
+                                class="font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase sm:text-xs dark:text-slate-500"
+                            >
+                                // ACTIVE RESEARCH TRACKS
+                            </span>
+                            <div class="space-y-2">
+                                <div
+                                    class="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 dark:border-white/5 dark:bg-white/5"
+                                >
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="font-bold text-slate-800 dark:text-white"
+                                            >Agritech & Soil Biology</span
+                                        >
+                                        <span
+                                            class="font-mono text-[10px] text-emerald-600 dark:text-emerald-400"
+                                            >[ 90% ]</span
+                                        >
+                                    </div>
+                                    <p class="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+                                        Investigating crop health telemetry, sensor networks, and
+                                        offline sync.
+                                    </p>
+                                </div>
+                                <div
+                                    class="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 dark:border-white/5 dark:bg-white/5"
+                                >
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="font-bold text-slate-800 dark:text-white"
+                                            >Rocket Physics & Simulation</span
+                                        >
+                                        <span
+                                            class="font-mono text-[10px] text-blue-600 dark:text-blue-400"
+                                            >[ 75% ]</span
+                                        >
+                                    </div>
+                                    <p class="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+                                        DeltaV Lab mathematical modeling, multi-stage trajectories,
+                                        and Web Workers.
+                                    </p>
+                                </div>
+                                <div
+                                    class="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 dark:border-white/5 dark:bg-white/5"
+                                >
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="font-bold text-slate-800 dark:text-white"
+                                            >Behçet's Syndrome Research</span
+                                        >
+                                        <span
+                                            class="font-mono text-[10px] text-purple-600 dark:text-purple-400"
+                                            >[ 40% ]</span
+                                        >
+                                    </div>
+                                    <p class="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+                                        Reviewing open clinical literature and immunology pathways.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 border-t border-slate-100 pt-6 dark:border-white/5">
                             <button
-                                aria-label="Close project description"
                                 popovertarget="project-popover-currently-exploring"
                                 popovertargetaction="hide"
-                                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-slate-200/80 bg-slate-50/80 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white"
+                                class="flex-1 cursor-pointer rounded bg-(--accent-button-bg) px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    aria-hidden="true"
-                                >
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
+                                Close Log Reader
                             </button>
                         </div>
-
-                        <div class="space-y-6 p-5 sm:p-6">
-                            <div class="space-y-2">
-                                <span
-                                    class="font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase sm:text-xs dark:text-slate-500"
-                                >
-                                    // MISSION LOG DETAILS
-                                </span>
-                                <p
-                                    class="text-xs leading-relaxed text-slate-600 sm:text-sm dark:text-slate-300"
-                                >
-                                    I am breaking down agricultural workflows to fundamental
-                                    principles. Most commercial tools optimize for corporate
-                                    dashboards rather than actual ground truth. I am studying soil
-                                    microbiology, chemical balance, and local weather patterns to
-                                    engineer tools that solve real operational friction for farmers.
-                                </p>
-                            </div>
-
-                            <div class="space-y-3">
-                                <span
-                                    class="font-mono text-[10px] font-bold tracking-widest text-slate-400 uppercase sm:text-xs dark:text-slate-500"
-                                >
-                                    // ACTIVE RESEARCH TRACKS
-                                </span>
-                                <div class="space-y-2">
-                                    <div
-                                        class="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 dark:border-white/5 dark:bg-white/5"
-                                    >
-                                        <div class="flex items-center justify-between text-xs">
-                                            <span class="font-bold text-slate-800 dark:text-white"
-                                                >Agritech & Soil Biology</span
-                                            >
-                                            <span
-                                                class="font-mono text-[10px] text-emerald-600 dark:text-emerald-400"
-                                                >[ 90% ]</span
-                                            >
-                                        </div>
-                                        <p
-                                            class="mt-1 text-[11px] text-slate-500 dark:text-slate-400"
-                                        >
-                                            Investigating crop health telemetry, sensor networks,
-                                            and offline sync.
-                                        </p>
-                                    </div>
-                                    <div
-                                        class="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 dark:border-white/5 dark:bg-white/5"
-                                    >
-                                        <div class="flex items-center justify-between text-xs">
-                                            <span class="font-bold text-slate-800 dark:text-white"
-                                                >Rocket Physics & Simulation</span
-                                            >
-                                            <span
-                                                class="font-mono text-[10px] text-blue-600 dark:text-blue-400"
-                                                >[ 75% ]</span
-                                            >
-                                        </div>
-                                        <p
-                                            class="mt-1 text-[11px] text-slate-500 dark:text-slate-400"
-                                        >
-                                            DeltaV Lab mathematical modeling, multi-stage
-                                            trajectories, and Web Workers.
-                                        </p>
-                                    </div>
-                                    <div
-                                        class="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 dark:border-white/5 dark:bg-white/5"
-                                    >
-                                        <div class="flex items-center justify-between text-xs">
-                                            <span class="font-bold text-slate-800 dark:text-white"
-                                                >Behçet's Syndrome Research</span
-                                            >
-                                            <span
-                                                class="font-mono text-[10px] text-purple-600 dark:text-purple-400"
-                                                >[ 40% ]</span
-                                            >
-                                        </div>
-                                        <p
-                                            class="mt-1 text-[11px] text-slate-500 dark:text-slate-400"
-                                        >
-                                            Reviewing open clinical literature and immunology
-                                            pathways.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div
-                                class="flex gap-4 border-t border-slate-100 pt-6 dark:border-white/5"
-                            >
-                                <button
-                                    popovertarget="project-popover-currently-exploring"
-                                    popovertargetaction="hide"
-                                    class="flex-1 cursor-pointer rounded bg-(--accent-button-bg) px-4 py-2.5 text-center font-mono text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-all hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
-                                >
-                                    Close Log Reader
-                                </button>
-                            </div>
-                        </div>
                     </div>
+                </div>
             </section>
 
             <section class="layout-container mb-0 pb-16">

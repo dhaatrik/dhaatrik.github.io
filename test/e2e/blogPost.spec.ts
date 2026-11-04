@@ -195,7 +195,9 @@ test.describe('BlogPost Interactive Features', () => {
         await page.waitForTimeout(300);
 
         // At least one marker should now have the active accent styling
-        const activeMarker = markersContainer.locator('.section-scroll-marker.active-section-marker');
+        const activeMarker = markersContainer.locator(
+            '.section-scroll-marker.active-section-marker'
+        );
         await expect(activeMarker.first()).toBeVisible();
     });
 });

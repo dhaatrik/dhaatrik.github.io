@@ -187,19 +187,23 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                     <div
                         class="pointer-events-none absolute top-0 left-0 h-2 w-2 border-t-2 border-l-2 border-(--accent)/60"
                         aria-hidden="true"
-                    ></div>
+                    >
+                    </div>
                     <div
                         class="pointer-events-none absolute top-0 right-0 h-2 w-2 border-t-2 border-r-2 border-(--accent)/60"
                         aria-hidden="true"
-                    ></div>
+                    >
+                    </div>
                     <div
                         class="pointer-events-none absolute bottom-0 left-0 h-2 w-2 border-b-2 border-l-2 border-(--accent)/60"
                         aria-hidden="true"
-                    ></div>
+                    >
+                    </div>
                     <div
-                        class="pointer-events-none absolute right-0 bottom-0 h-2 w-2 border-b-2 border-r-2 border-(--accent)/60"
+                        class="pointer-events-none absolute right-0 bottom-0 h-2 w-2 border-r-2 border-b-2 border-(--accent)/60"
                         aria-hidden="true"
-                    ></div>
+                    >
+                    </div>
 
                     <div
                         class="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
@@ -294,7 +298,9 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                             )
                         }
 
-                        {/* STACK: Spans 2 cols on mobile/tablet and 3 cols on large displays for zero truncation */}
+                        {
+                            /* STACK: Spans 2 cols on mobile/tablet and 3 cols on large displays for zero truncation */
+                        }
                         <div class="col-span-2 space-y-1.5 sm:col-span-3 lg:col-span-3">
                             <div
                                 class="text-[9px] font-bold tracking-widest text-slate-500 uppercase dark:text-slate-400"
@@ -302,19 +308,27 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                                 // STACK
                             </div>
                             <div class="flex flex-wrap items-center gap-1.5">
-                                {tags && tags.length > 0 ? (
-                                    tags.slice(0, 4).map((tag: string) => (
-                                        <span class="rounded border border-slate-200/80 bg-white/70 px-2 py-0.5 font-mono text-[10px] font-medium text-slate-700 shadow-2xs dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
-                                            {tag}
+                                {
+                                    tags && tags.length > 0 ? (
+                                        tags
+                                            .slice(0, 4)
+                                            .map((tag: string) => (
+                                                <span class="rounded border border-slate-200/80 bg-white/70 px-2 py-0.5 font-mono text-[10px] font-medium text-slate-700 shadow-2xs dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+                                                    {tag}
+                                                </span>
+                                            ))
+                                    ) : (
+                                        <span class="font-bold text-slate-900 dark:text-slate-200">
+                                            TypeScript
                                         </span>
-                                    ))
-                                ) : (
-                                    <span class="font-bold text-slate-900 dark:text-slate-200">TypeScript</span>
-                                )}
+                                    )
+                                }
                             </div>
                         </div>
 
-                        {/* TELEMETRY: Spans 2 cols on mobile/tablet and 3 cols on large displays for zero truncation */}
+                        {
+                            /* TELEMETRY: Spans 2 cols on mobile/tablet and 3 cols on large displays for zero truncation */
+                        }
                         <div class="col-span-2 space-y-1.5 sm:col-span-3 lg:col-span-3">
                             <div
                                 class="text-[9px] font-bold tracking-widest text-slate-500 uppercase dark:text-slate-400"
@@ -330,7 +344,14 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                                     ></span>
                                     <span class="truncate">
                                         <span>{telemetryFirst.trim()}</span>
-                                        {telemetryRest && <span class="opacity-80"> // {telemetryRest.trim()}</span>}
+                                        {
+                                            telemetryRest && (
+                                                <span class="opacity-80">
+                                                    {' '}
+                                                    // {telemetryRest.trim()}
+                                                </span>
+                                            )
+                                        }
                                     </span>
                                 </span>
                             </div>
@@ -346,7 +367,9 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                         class="mb-4 flex flex-wrap items-center justify-between gap-2 font-mono text-[10px]"
                     >
                         <div class="flex items-center gap-2">
-                            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(6,182,212,0.8)]"></span>
+                            <span
+                                class="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(6,182,212,0.8)]"
+                            ></span>
                             <span class="font-bold tracking-widest text-slate-300 uppercase">
                                 SYSTEM_TOPOLOGY // {topology.systemType}
                             </span>
@@ -358,16 +381,22 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                         </span>
                     </div>
 
-                    <div class="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-between">
+                    <div
+                        class="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-between"
+                    >
                         {/* Node 1: Surface / UI Layer */}
                         <div
                             class="relative flex-1 rounded-lg border border-sky-500/30 bg-sky-500/5 p-4 transition-colors hover:border-sky-500/50 hover:bg-sky-500/10 dark:border-sky-400/25 dark:bg-sky-400/5"
                         >
                             <div class="mb-1.5 flex items-center justify-between">
-                                <span class="font-mono text-[9px] font-bold tracking-widest text-sky-400 uppercase">
+                                <span
+                                    class="font-mono text-[9px] font-bold tracking-widest text-sky-400 uppercase"
+                                >
                                     // 01 // {topology.nodes[0].layer}
                                 </span>
-                                <span class="rounded bg-sky-500/20 px-1.5 py-0.5 font-mono text-[8px] font-bold text-sky-300 uppercase">
+                                <span
+                                    class="rounded bg-sky-500/20 px-1.5 py-0.5 font-mono text-[8px] font-bold text-sky-300 uppercase"
+                                >
                                     {topology.nodes[0].badge}
                                 </span>
                             </div>
@@ -380,15 +409,24 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                         </div>
 
                         {/* Connector 1 */}
-                        <div class="flex shrink-0 items-center justify-center py-1 text-slate-500 md:py-0">
+                        <div
+                            class="flex shrink-0 items-center justify-center py-1 text-slate-500 md:py-0"
+                        >
                             <svg
                                 class="hidden h-5 w-8 text-sky-400/70 md:block"
                                 viewBox="0 0 32 20"
                                 fill="none"
                                 aria-hidden="true"
                             >
-                                <line x1="0" y1="10" x2="24" y2="10" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" />
-                                <polygon points="24,6 30,10 24,14" fill="currentColor" />
+                                <line
+                                    x1="0"
+                                    y1="10"
+                                    x2="24"
+                                    y2="10"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-dasharray="3 3"></line>
+                                <polygon points="24,6 30,10 24,14" fill="currentColor"></polygon>
                             </svg>
                             <svg
                                 class="h-5 w-5 text-sky-400/70 md:hidden"
@@ -396,8 +434,15 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                                 fill="none"
                                 aria-hidden="true"
                             >
-                                <line x1="10" y1="0" x2="10" y2="14" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" />
-                                <polygon points="6,14 10,20 14,14" fill="currentColor" />
+                                <line
+                                    x1="10"
+                                    y1="0"
+                                    x2="10"
+                                    y2="14"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-dasharray="3 3"></line>
+                                <polygon points="6,14 10,20 14,14" fill="currentColor"></polygon>
                             </svg>
                         </div>
 
@@ -406,10 +451,14 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                             class="relative flex-1 rounded-lg border border-indigo-500/30 bg-indigo-500/5 p-4 transition-colors hover:border-indigo-500/50 hover:bg-indigo-500/10 dark:border-indigo-400/25 dark:bg-indigo-400/5"
                         >
                             <div class="mb-1.5 flex items-center justify-between">
-                                <span class="font-mono text-[9px] font-bold tracking-widest text-indigo-400 uppercase">
+                                <span
+                                    class="font-mono text-[9px] font-bold tracking-widest text-indigo-400 uppercase"
+                                >
                                     // 02 // {topology.nodes[1].layer}
                                 </span>
-                                <span class="rounded bg-indigo-500/20 px-1.5 py-0.5 font-mono text-[8px] font-bold text-indigo-300 uppercase">
+                                <span
+                                    class="rounded bg-indigo-500/20 px-1.5 py-0.5 font-mono text-[8px] font-bold text-indigo-300 uppercase"
+                                >
                                     {topology.nodes[1].badge}
                                 </span>
                             </div>
@@ -422,15 +471,24 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                         </div>
 
                         {/* Connector 2 */}
-                        <div class="flex shrink-0 items-center justify-center py-1 text-slate-500 md:py-0">
+                        <div
+                            class="flex shrink-0 items-center justify-center py-1 text-slate-500 md:py-0"
+                        >
                             <svg
                                 class="hidden h-5 w-8 text-indigo-400/70 md:block"
                                 viewBox="0 0 32 20"
                                 fill="none"
                                 aria-hidden="true"
                             >
-                                <line x1="0" y1="10" x2="24" y2="10" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" />
-                                <polygon points="24,6 30,10 24,14" fill="currentColor" />
+                                <line
+                                    x1="0"
+                                    y1="10"
+                                    x2="24"
+                                    y2="10"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-dasharray="3 3"></line>
+                                <polygon points="24,6 30,10 24,14" fill="currentColor"></polygon>
                             </svg>
                             <svg
                                 class="h-5 w-5 text-indigo-400/70 md:hidden"
@@ -438,8 +496,15 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                                 fill="none"
                                 aria-hidden="true"
                             >
-                                <line x1="10" y1="0" x2="10" y2="14" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" />
-                                <polygon points="6,14 10,20 14,14" fill="currentColor" />
+                                <line
+                                    x1="10"
+                                    y1="0"
+                                    x2="10"
+                                    y2="14"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-dasharray="3 3"></line>
+                                <polygon points="6,14 10,20 14,14" fill="currentColor"></polygon>
                             </svg>
                         </div>
 
@@ -448,10 +513,14 @@ const pageTitle = shortTagline ? `${title} — ${shortTagline}` : title;
                             class="relative flex-1 rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4 transition-colors hover:border-emerald-500/50 hover:bg-emerald-500/10 dark:border-emerald-400/25 dark:bg-emerald-400/5"
                         >
                             <div class="mb-1.5 flex items-center justify-between">
-                                <span class="font-mono text-[9px] font-bold tracking-widest text-emerald-400 uppercase">
+                                <span
+                                    class="font-mono text-[9px] font-bold tracking-widest text-emerald-400 uppercase"
+                                >
                                     // 03 // {topology.nodes[2].layer}
                                 </span>
-                                <span class="rounded bg-emerald-500/20 px-1.5 py-0.5 font-mono text-[8px] font-bold text-emerald-300 uppercase">
+                                <span
+                                    class="rounded bg-emerald-500/20 px-1.5 py-0.5 font-mono text-[8px] font-bold text-emerald-300 uppercase"
+                                >
                                     {topology.nodes[2].badge}
                                 </span>
                             </div>

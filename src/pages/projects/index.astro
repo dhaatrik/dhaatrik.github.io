@@ -33,22 +33,25 @@ const getProjectCategory = (project: CollectionEntry<'projects'>): string => {
 };
 
 const PROJECT_CALLSIGNS: Record<string, string> = {
-    'vellor': 'VELLOR',
+    vellor: 'VELLOR',
     'deltav-lab': 'DELTAV',
-    'fueldrop': 'FUELDROP',
+    fueldrop: 'FUELDROP',
     'the-infinite-intelligence': 'INFINITE',
     'instant-app-opener': 'APPOPEN',
-    'glassbox': 'GLASSBOX',
+    glassbox: 'GLASSBOX',
     'expense-vs-investment-tracker': 'FINTRACK',
     'seamless-qr-dining': 'QRDINING',
     'vireo-wellness': 'VIREO',
     'bill-express': 'BILLEXP',
     'free-markdown-to-pdf-converter': 'MARKPDF',
-    'readaloud_chromeextension': 'READALOUD',
+    readaloud_chromeextension: 'READALOUD',
 };
 
 const getProjectCallsign = (idClean: string): string => {
-    return PROJECT_CALLSIGNS[idClean.toLowerCase()] ?? idClean.toUpperCase().replace(/[-_]/g, '').slice(0, 10);
+    return (
+        PROJECT_CALLSIGNS[idClean.toLowerCase()] ??
+        idClean.toUpperCase().replace(/[-_]/g, '').slice(0, 10)
+    );
 };
 
 // Generate WebPage & ItemList JSON-LD Schema
@@ -405,7 +408,8 @@ const breadcrumbSchema = JSON.stringify({
                                                         <span class="h-2 w-2 rounded-full border border-emerald-500/40 bg-emerald-500/20" />
                                                     </div>
                                                     <span class="truncate font-bold tracking-wider text-slate-600 dark:text-slate-300">
-                                                        SYS.PRJ // {getProjectCallsign(projectIdClean)}
+                                                        SYS.PRJ //{' '}
+                                                        {getProjectCallsign(projectIdClean)}
                                                     </span>
                                                 </div>
                                                 <div class="flex shrink-0 items-center gap-2">
