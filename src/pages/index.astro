@@ -87,6 +87,30 @@ const faqSchema = JSON.stringify({
                 text: 'Dhaatrik has built several notable projects: DeltaV Lab (real-time orbital mechanics simulation), Vellor (free MIT-licensed offline tutoring-management PWA with client-side encrypted storage), FuelDrop (frontend-only fuel delivery UX demo v3.0.0 — not production WebSocket logistics), and The Infinite Intelligence (BYOK multi-agent council v4.0.0 with HITL steering and client-side PDF export). He works with React, TypeScript, Python, and TensorFlow.',
             },
         },
+        {
+            '@type': 'Question',
+            name: 'What is DeltaV Lab?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'DeltaV Lab is a browser-based rocket and orbital mechanics simulation workbench built with vanilla TypeScript and HTML5 Canvas. It runs an isolated 50Hz Runge-Kutta 4th Order (RK4) physics core inside a dedicated Web Worker, features a WHEN/THEN flight computer rule engine, interactive Hohmann transfer planning, and real-time visual telemetry.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'What is Vellor?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Vellor is a free, MIT-licensed offline tutoring management Progressive Web App (PWA) designed for private tutors. Built with React 19, TypeScript, and Zustand, it stores student attendance, test marks, and fee tracking directly in local browser storage using AES-GCM encryption with zero servers, zero subscriptions, and complete offline capability.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'Why does Dhaatrik release software under MIT with Zero Terms?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Dhaatrik releases software with zero terms and conditions to champion data sovereignty, local-first computing, and educational access. By eliminating cloud dependencies, user tracking, and paywalled tiers, tools like Vellor and DeltaV Lab remain perpetually free, private, and functional for users without recurring server rent.',
+            },
+        },
     ],
 }).replace(/</g, '\\u003c');
 
@@ -95,11 +119,13 @@ const webSiteSchema = JSON.stringify({
     '@type': 'WebSite',
     name: 'Dhaatrik Chowdhury',
     url: 'https://dhaatrik.github.io',
+    inLanguage: 'en-US',
     description:
         'Honest engineering transmissions from Dhaatrik Chowdhury — mission logs of what was built, what broke, and what was learned.',
     author: {
         '@type': 'Person',
         name: 'Dhaatrik Chowdhury',
+        url: 'https://dhaatrik.github.io/personnel/',
     },
     potentialAction: {
         '@type': 'SearchAction',

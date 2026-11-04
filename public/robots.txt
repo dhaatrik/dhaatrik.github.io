@@ -13,21 +13,32 @@ Disallow: /404
 User-agent: Google-Extended
 Allow: /
 
-# OpenAI (ChatGPT with browsing, GPT crawlers)
+# OpenAI (ChatGPT with browsing, GPT crawlers, SearchGPT)
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 # Perplexity AI
 User-agent: PerplexityBot
 Allow: /
 
-# Anthropic (Claude)
+# Anthropic (Claude & Claude-Web agent)
 User-agent: ClaudeBot
 Allow: /
 User-agent: anthropic-ai
+Allow: /
+User-agent: Claude-Web
+Allow: /
+
+# Amazon & DuckDuckGo AI
+User-agent: Amazonbot
+Allow: /
+User-agent: DuckAssistBot
 Allow: /
 
 # Meta AI
@@ -58,5 +69,6 @@ Allow: /
 Sitemap: https://dhaatrik.github.io/sitemap-index.xml
 Sitemap: https://dhaatrik.github.io/sitemap.xml
 # LLM Context: https://dhaatrik.github.io/llms.txt
+# LLM Full Context: https://dhaatrik.github.io/llms-full.txt
 # AI Permissions & Context: https://dhaatrik.github.io/ai.txt
 

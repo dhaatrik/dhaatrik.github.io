@@ -45,6 +45,12 @@ const videoItemListSchema = JSON.stringify({
                 uploadDate: isoDate,
                 embedUrl: `https://www.youtube-nocookie.com/embed/${video.youtubeId}`,
                 contentUrl: video.url,
+                inLanguage: 'en-US',
+                author: {
+                    '@type': 'Person',
+                    name: 'Dhaatrik Chowdhury',
+                    url: 'https://dhaatrik.github.io/personnel/',
+                },
             },
         };
     }),
