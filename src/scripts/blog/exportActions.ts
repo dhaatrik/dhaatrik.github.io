@@ -124,6 +124,7 @@ export function setupExportActions(signal: AbortSignal) {
     \x3chead\x3e
         \x3cmeta charset="utf-8"\x3e
         \x3cmeta name="viewport" content="width=device-width, initial-scale=1.0"\x3e
+        \x3cmeta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; font-src data:;"\x3e
         \x3ctitle\x3e${escapeHtml(postTitle)} - Offline Transmission\x3c/title\x3e
         \x3cstyle\x3e
             :root {

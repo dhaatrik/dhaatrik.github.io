@@ -115,3 +115,17 @@ test('Security: all JSON-LD schemas serialized in .astro files must escape < bra
         );
     }
 });
+
+test('Security: offline HTML export archive must enforce an air-gapped Content-Security-Policy', () => {
+    const exportActionsFile = path.join(ROOT_DIR, 'src', 'scripts', 'blog', 'exportActions.ts');
+    const content = fs.readFileSync(exportActionsFile, 'utf8');
+
+    assert.ok(
+        content.includes('http-equiv="Content-Security-Policy"'),
+        'exportActions.ts must contain http-equiv="Content-Security-Policy"'
+    );
+    assert.ok(
+        content.includes("default-src 'none'"),
+        "exportActions.ts CSP must set default-src 'none'"
+    );
+});
