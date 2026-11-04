@@ -1613,20 +1613,24 @@ const breadcrumbSchema = JSON.stringify({
                             <span class="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]/90 shadow-xs"></span>
                             <span class="h-2.5 w-2.5 rounded-full bg-[#27c93f]/90 shadow-xs"></span>
                             <span
-                                class="ml-2 font-mono text-[10px] font-bold tracking-wider text-slate-600 dark:text-slate-300"
+                                class="ml-2 flex flex-wrap items-center gap-1.5 font-mono text-[11px] font-semibold tracking-wider text-slate-800 sm:text-xs dark:text-slate-200"
                             >
-                                // COMM_TRANSCEIVER // FREQ: 1420.405 MHz
+                                <span class="text-slate-400 dark:text-slate-500">//</span>
+                                <span>COMM_TRANSCEIVER</span>
+                                <span class="text-slate-400 dark:text-slate-500">//</span>
+                                <span class="text-slate-500 dark:text-slate-400">FREQ:</span>
+                                <span class="font-bold text-cyan-600 dark:text-cyan-400">1420.405 MHz</span>
                             </span>
                         </div>
                         <div
-                            class="flex items-center gap-2 font-mono text-[9px] font-bold tracking-widest text-emerald-600 uppercase dark:text-emerald-400"
+                            class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-[10px] font-bold tracking-wider text-emerald-600 uppercase shadow-[0_0_12px_rgba(16,185,129,0.15)] sm:text-xs dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-300"
                         >
                             <span class="relative flex h-2 w-2">
                                 <span
                                     class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"
                                 ></span>
                                 <span
-                                    class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"
+                                    class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"
                                 ></span>
                             </span>
                             <span>CHANNEL_ACTIVE // READY_FOR_HANDSHAKE</span>
