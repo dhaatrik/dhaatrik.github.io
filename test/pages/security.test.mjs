@@ -206,7 +206,7 @@ test('Security: verify-dhaatrik driver script must validate PIDs and feature all
     );
 });
 
-test('Security: dependabot configuration must track github-actions and npm dependencies', () => {
+test('Security: dependabot configuration must track github-actions and npm dependencies with groups', () => {
     const dependabotFile = path.join(ROOT_DIR, '.github', 'dependabot.yml');
     assert.ok(fs.existsSync(dependabotFile), '.github/dependabot.yml must exist');
 
@@ -216,4 +216,8 @@ test('Security: dependabot configuration must track github-actions and npm depen
         'dependabot must track github-actions ecosystem'
     );
     assert.ok(content.includes("package-ecosystem: 'npm'"), 'dependabot must track npm ecosystem');
+    assert.ok(
+        content.includes('groups:'),
+        'dependabot must configure groups to prevent uncoordinated pull request floods'
+    );
 });
