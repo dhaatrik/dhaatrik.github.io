@@ -1,5 +1,22 @@
 # Changelog
 
+## [4.15.2](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.15.1...v4.15.2) (2026-11-04)
+
+
+### Bug Fixes
+
+* **ci:** pin github actions shas, clean meta csp, and harden local scripts ([56d4555](https://github.com/dhaatrik/dhaatrik.github.io/commit/56d455582f4762f6b791e0566857f006754e5360))
+* **scripts:** add pid and feature allowlist validation to verify driver ([61efc91](https://github.com/dhaatrik/dhaatrik.github.io/commit/61efc91c9addaf05e72c9eaf9ae03623c6862a47))
+* **seo:** remove browser-ignored form-action directive from meta csp ([e772203](https://github.com/dhaatrik/dhaatrik.github.io/commit/e77220356b1420228e2856a88c901972588e259e))
+
+
+### Chores & Maintenance
+
+* **ci:** configure dependabot for github actions and npm dependencies ([6cd54ab](https://github.com/dhaatrik/dhaatrik.github.io/commit/6cd54ab36c66e084cbe0daf245835f6a54d7c01e))
+* **ci:** configure dependabot grouped updates to prevent pull request floods ([73c7173](https://github.com/dhaatrik/dhaatrik.github.io/commit/73c7173bae0423867914c66febeda5f2c062bdef))
+* **ci:** configure grouped updates and pr limits in dependabot ([7537cd4](https://github.com/dhaatrik/dhaatrik.github.io/commit/7537cd4cb2b83ec19fb81bc5e4816c5c9bf625bf))
+* **ci:** pin github actions to immutable commit shas ([3ccc63a](https://github.com/dhaatrik/dhaatrik.github.io/commit/3ccc63a9f894cd0559fa38c228dd118af3da8f54))
+
 ## [4.15.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.15.0...v4.15.1) (2026-11-04)
 
 
