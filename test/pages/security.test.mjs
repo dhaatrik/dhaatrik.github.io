@@ -141,3 +141,37 @@ test('Security: .gitignore must ignore all .env variants while allowing .env.exa
     assert.ok(content.includes('.env.*'), '.gitignore must ignore .env.*');
     assert.ok(content.includes('!.env.example'), '.gitignore must allow !.env.example');
 });
+
+test('Security: all GitHub Actions workflows must pin external actions to 40-character commit SHAs', () => {
+    const workflowsDir = path.join(ROOT_DIR, '.github', 'workflows');
+    const workflowFiles = fs.readdirSync(workflowsDir).filter((file) => file.endsWith('.yml'));
+
+    let unpinned = [];
+
+    workflowFiles.forEach((file) => {
+        const fullPath = path.join(workflowsDir, file);
+        const content = fs.readFileSync(fullPath, 'utf8');
+        const usesRegex = /uses:\s*([\w\-./]+)@(\S+)/g;
+        let match;
+
+        while ((match = usesRegex.exec(content)) !== null) {
+            const actionName = match[1];
+            const ref = match[2];
+
+            // 40-character hex commit SHA
+            if (!/^[a-f0-9]{40}$/i.test(ref)) {
+                unpinned.push({
+                    file,
+                    action: `${actionName}@${ref}`,
+                });
+            }
+        }
+    });
+
+    if (unpinned.length > 0) {
+        const failureMessage = unpinned.map((u) => `  - ${u.file}: ${u.action}`).join('\n');
+        assert.fail(
+            `Found unpinned external GitHub Actions (must use 40-character commit SHAs):\n${failureMessage}`
+        );
+    }
+});
