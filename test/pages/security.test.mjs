@@ -191,3 +191,17 @@ test('Security: BaseHead meta CSP must not include browser-ignored directives', 
         'frame-ancestors is ignored by browsers in <meta> tags'
     );
 });
+
+test('Security: verify-dhaatrik driver script must validate PIDs and feature allowlists', () => {
+    const verifyScript = path.join(ROOT_DIR, 'scripts', 'verify-dhaatrik.mjs');
+    const content = fs.readFileSync(verifyScript, 'utf8');
+
+    assert.ok(
+        content.includes('Number.isInteger(pid)'),
+        'verify-dhaatrik.mjs must validate that pid is an integer before process termination'
+    );
+    assert.ok(
+        content.includes('SUPPORTED_FEATURES.includes(feature)'),
+        'verify-dhaatrik.mjs must validate feature against allowlist before creating directories'
+    );
+});

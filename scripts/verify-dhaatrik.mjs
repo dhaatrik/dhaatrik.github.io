@@ -115,7 +115,15 @@ async function launch() {
 async function cleanup() {
     console.log('[cleanup] Cleaning up verification server...');
     if (fs.existsSync(PID_FILE)) {
-        const pid = parseInt(fs.readFileSync(PID_FILE, 'utf8').trim(), 10);
+        const rawPid = fs.readFileSync(PID_FILE, 'utf8').trim();
+        const pid = parseInt(rawPid, 10);
+        if (!Number.isInteger(pid) || pid <= 0) {
+            console.warn(`[cleanup] Warning: Invalid PID found in ${PID_FILE}: "${rawPid}"`);
+            try {
+                fs.unlinkSync(PID_FILE);
+            } catch {}
+            return;
+        }
         try {
             if (process.platform === 'win32') {
                 execSync(`taskkill /pid ${pid} /T /F`, { stdio: 'ignore' });
@@ -135,7 +143,15 @@ async function cleanup() {
     console.log('[cleanup] Complete. Evidence artifacts preserved in .verify/evidence/');
 }
 
+const SUPPORTED_FEATURES = ['theme-toggle', 'books-popover', 'transmission-search'];
+
 async function drive(feature = 'theme-toggle') {
+    if (!SUPPORTED_FEATURES.includes(feature)) {
+        throw new Error(
+            `Unknown feature: ${feature}. Supported features: ${SUPPORTED_FEATURES.join(', ')}`
+        );
+    }
+
     const alive = await pingUrl(BASE_URL);
     if (!alive) {
         console.log('[drive] Server not running. Launching first...');
