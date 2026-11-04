@@ -205,3 +205,15 @@ test('Security: verify-dhaatrik driver script must validate PIDs and feature all
         'verify-dhaatrik.mjs must validate feature against allowlist before creating directories'
     );
 });
+
+test('Security: dependabot configuration must track github-actions and npm dependencies', () => {
+    const dependabotFile = path.join(ROOT_DIR, '.github', 'dependabot.yml');
+    assert.ok(fs.existsSync(dependabotFile), '.github/dependabot.yml must exist');
+
+    const content = fs.readFileSync(dependabotFile, 'utf8');
+    assert.ok(
+        content.includes("package-ecosystem: 'github-actions'"),
+        'dependabot must track github-actions ecosystem'
+    );
+    assert.ok(content.includes("package-ecosystem: 'npm'"), 'dependabot must track npm ecosystem');
+});
