@@ -141,3 +141,79 @@ test('Security: .gitignore must ignore all .env variants while allowing .env.exa
     assert.ok(content.includes('.env.*'), '.gitignore must ignore .env.*');
     assert.ok(content.includes('!.env.example'), '.gitignore must allow !.env.example');
 });
+
+test('Security: all GitHub Actions workflows must pin external actions to 40-character commit SHAs', () => {
+    const workflowsDir = path.join(ROOT_DIR, '.github', 'workflows');
+    const workflowFiles = fs.readdirSync(workflowsDir).filter((file) => file.endsWith('.yml'));
+
+    let unpinned = [];
+
+    workflowFiles.forEach((file) => {
+        const fullPath = path.join(workflowsDir, file);
+        const content = fs.readFileSync(fullPath, 'utf8');
+        const usesRegex = /uses:\s*([\w\-./]+)@(\S+)/g;
+        let match;
+
+        while ((match = usesRegex.exec(content)) !== null) {
+            const actionName = match[1];
+            const ref = match[2];
+
+            // 40-character hex commit SHA
+            if (!/^[a-f0-9]{40}$/i.test(ref)) {
+                unpinned.push({
+                    file,
+                    action: `${actionName}@${ref}`,
+                });
+            }
+        }
+    });
+
+    if (unpinned.length > 0) {
+        const failureMessage = unpinned.map((u) => `  - ${u.file}: ${u.action}`).join('\n');
+        assert.fail(
+            `Found unpinned external GitHub Actions (must use 40-character commit SHAs):\n${failureMessage}`
+        );
+    }
+});
+
+test('Security: BaseHead meta CSP must not include browser-ignored directives', () => {
+    const baseHeadFile = path.join(ROOT_DIR, 'src', 'components', 'BaseHead.astro');
+    const content = fs.readFileSync(baseHeadFile, 'utf8');
+
+    // Extract meta CSP content
+    const cspMatch = /http-equiv="Content-Security-Policy"[\s\S]*?content="([^"]+)"/.exec(content);
+    assert.ok(cspMatch, 'BaseHead.astro must contain a Content-Security-Policy meta tag');
+
+    const csp = cspMatch[1];
+    assert.ok(!csp.includes('form-action'), 'form-action is ignored by browsers in <meta> tags');
+    assert.ok(
+        !csp.includes('frame-ancestors'),
+        'frame-ancestors is ignored by browsers in <meta> tags'
+    );
+});
+
+test('Security: verify-dhaatrik driver script must validate PIDs and feature allowlists', () => {
+    const verifyScript = path.join(ROOT_DIR, 'scripts', 'verify-dhaatrik.mjs');
+    const content = fs.readFileSync(verifyScript, 'utf8');
+
+    assert.ok(
+        content.includes('Number.isInteger(pid)'),
+        'verify-dhaatrik.mjs must validate that pid is an integer before process termination'
+    );
+    assert.ok(
+        content.includes('SUPPORTED_FEATURES.includes(feature)'),
+        'verify-dhaatrik.mjs must validate feature against allowlist before creating directories'
+    );
+});
+
+test('Security: dependabot configuration must track github-actions and npm dependencies', () => {
+    const dependabotFile = path.join(ROOT_DIR, '.github', 'dependabot.yml');
+    assert.ok(fs.existsSync(dependabotFile), '.github/dependabot.yml must exist');
+
+    const content = fs.readFileSync(dependabotFile, 'utf8');
+    assert.ok(
+        content.includes("package-ecosystem: 'github-actions'"),
+        'dependabot must track github-actions ecosystem'
+    );
+    assert.ok(content.includes("package-ecosystem: 'npm'"), 'dependabot must track npm ecosystem');
+});
