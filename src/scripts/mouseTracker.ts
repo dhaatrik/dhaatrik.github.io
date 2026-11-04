@@ -150,11 +150,14 @@ const initMouseTracker = () => {
             const xc = cachedRect.width / 2;
             const yc = cachedRect.height / 2;
 
-            const maxTilt = 4.5; // Maximum tilt angle in degrees
+            // Wide cards (>600px) have much larger lever arms where a high angle causes severe Z-depth
+            // and perspective distortion. Calibrate tilt and scale by card width for a subtle, premium feel.
+            const maxTilt = cachedRect.width > 600 ? 1.5 : 3.5;
+            const scale = cachedRect.width > 600 ? 1.003 : 1.01;
             const tiltX = ((yc - y) / yc) * maxTilt;
             const tiltY = ((x - xc) / xc) * maxTilt;
 
-            card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.01, 1.01, 1.01)`;
+            card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(${scale}, ${scale}, ${scale})`;
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
 

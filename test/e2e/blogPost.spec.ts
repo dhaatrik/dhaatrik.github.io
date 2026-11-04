@@ -159,4 +159,45 @@ test.describe('BlogPost Interactive Features', () => {
         const diagramSvg = diagram.locator('svg');
         await expect(diagramSvg).toBeVisible();
     });
+    test('Table of Contents collapse button should toggle TOC visibility', async ({ page }) => {
+        await page.setViewportSize({ width: 1280, height: 800 });
+        const toggleBtn = page.locator('#toc-toggle-btn');
+        const container = page.locator('#toc-collapsible-container');
+
+        await expect(toggleBtn).toBeVisible();
+        await expect(container).toBeVisible();
+        await expect(toggleBtn).toHaveAttribute('aria-expanded', 'true');
+
+        // Collapse TOC
+        await toggleBtn.click();
+        await expect(container).toBeHidden();
+        await expect(toggleBtn).toHaveAttribute('aria-expanded', 'false');
+
+        // Expand TOC
+        await toggleBtn.click();
+        await expect(container).toBeVisible();
+        await expect(toggleBtn).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    test('Reading progress bar should render and update section scroll markers', async ({
+        page,
+    }) => {
+        await page.setViewportSize({ width: 1280, height: 800 });
+        const markersContainer = page.locator('#section-markers-container');
+        await expect(markersContainer).toBeVisible();
+
+        const markers = markersContainer.locator('.section-scroll-marker');
+        const count = await markers.count();
+        expect(count).toBeGreaterThan(0);
+
+        // Scroll to the bottom of the article
+        await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight / 2));
+        await page.waitForTimeout(300);
+
+        // At least one marker should now have the active accent styling
+        const activeMarker = markersContainer.locator(
+            '.section-scroll-marker.active-section-marker'
+        );
+        await expect(activeMarker.first()).toBeVisible();
+    });
 });

@@ -32,6 +32,28 @@ const getProjectCategory = (project: CollectionEntry<'projects'>): string => {
     return 'apps';
 };
 
+const PROJECT_CALLSIGNS: Record<string, string> = {
+    vellor: 'VELLOR',
+    'deltav-lab': 'DELTAV',
+    fueldrop: 'FUELDROP',
+    'the-infinite-intelligence': 'INFINITE',
+    'instant-app-opener': 'APPOPEN',
+    glassbox: 'GLASSBOX',
+    'expense-vs-investment-tracker': 'FINTRACK',
+    'seamless-qr-dining': 'QRDINING',
+    'vireo-wellness': 'VIREO',
+    'bill-express': 'BILLEXP',
+    'free-markdown-to-pdf-converter': 'MARKPDF',
+    readaloud_chromeextension: 'READALOUD',
+};
+
+const getProjectCallsign = (idClean: string): string => {
+    return (
+        PROJECT_CALLSIGNS[idClean.toLowerCase()] ??
+        idClean.toUpperCase().replace(/[-_]/g, '').slice(0, 10)
+    );
+};
+
 // Generate WebPage & ItemList JSON-LD Schema
 const webpageSchema = {
     '@context': 'https://schema.org',
@@ -378,18 +400,19 @@ const breadcrumbSchema = JSON.stringify({
                                     >
                                         <div class="mission-report-body">
                                             {/* Stageshow Window Chrome Bar */}
-                                            <div class="mb-4 flex items-center justify-between border-b border-slate-200/60 pb-3 font-mono text-[10px] dark:border-white/10">
-                                                <div class="flex items-center gap-2">
-                                                    <div class="flex items-center gap-1.5">
+                                            <div class="mb-4 flex min-h-8 items-center justify-between gap-2 border-b border-slate-200/60 pb-3 font-mono text-[10px] dark:border-white/10">
+                                                <div class="flex min-w-0 items-center gap-2">
+                                                    <div class="flex shrink-0 items-center gap-1.5">
                                                         <span class="h-2 w-2 rounded-full border border-red-500/40 bg-red-500/20" />
                                                         <span class="h-2 w-2 rounded-full border border-amber-500/40 bg-amber-500/20" />
                                                         <span class="h-2 w-2 rounded-full border border-emerald-500/40 bg-emerald-500/20" />
                                                     </div>
-                                                    <span class="font-bold tracking-wider text-slate-600 dark:text-slate-300">
-                                                        SYS.PRJ // {projectIdClean.toUpperCase()}
+                                                    <span class="truncate font-bold tracking-wider text-slate-600 dark:text-slate-300">
+                                                        SYS.PRJ //{' '}
+                                                        {getProjectCallsign(projectIdClean)}
                                                     </span>
                                                 </div>
-                                                <div class="flex items-center gap-2">
+                                                <div class="flex shrink-0 items-center gap-2">
                                                     <span
                                                         class={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[9px] font-bold ${parsed.textClass} border-current/25 bg-current/10`}
                                                     >

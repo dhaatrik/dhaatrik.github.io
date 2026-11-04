@@ -1129,7 +1129,7 @@ const breadcrumbSchema = JSON.stringify({
                                     >
                                 </div>
                                 <span class="text-[10px] text-slate-400 dark:text-slate-500"
-                                    >KERNEL: 6.12.11-zen // ARCH: x86_64</span
+                                    >HOST: DH_FIELD_NODE // ARCH: x86_64</span
                                 >
                             </div>
 
@@ -1141,12 +1141,12 @@ const breadcrumbSchema = JSON.stringify({
                                         // COMPUTE_HOST
                                     </div>
                                     <div class="mt-1 font-bold text-slate-800 dark:text-slate-200">
-                                        Custom Engineering Rig
+                                        Mobile Workstation Rig
                                     </div>
                                     <div
                                         class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
                                     >
-                                        Dual-OS High Velocity Node
+                                        Dual-GPU Engineering Field Node
                                     </div>
                                 </div>
 
@@ -1157,12 +1157,12 @@ const breadcrumbSchema = JSON.stringify({
                                         // PROCESSOR
                                     </div>
                                     <div class="mt-1 font-bold text-slate-800 dark:text-slate-200">
-                                        AMD Ryzen Multi-Core
+                                        AMD Zen 2 Octa-Core
                                     </div>
                                     <div
                                         class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
                                     >
-                                        16 Cores / 32 Threads @ 4.8 GHz
+                                        8 Cores / 16 Threads @ 4.2 GHz Boost
                                     </div>
                                 </div>
 
@@ -1173,12 +1173,12 @@ const breadcrumbSchema = JSON.stringify({
                                         // MEMORY_ARRAY
                                     </div>
                                     <div class="mt-1 font-bold text-(--accent)">
-                                        64 GB DDR5 5600 MT/s
+                                        16 GB DDR4-3200
                                     </div>
                                     <div
                                         class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
                                     >
-                                        Low-Latency Fast Page Cache
+                                        Dual-Channel High-Throughput Bus
                                     </div>
                                 </div>
 
@@ -1189,12 +1189,12 @@ const breadcrumbSchema = JSON.stringify({
                                         // ACCELERATOR
                                     </div>
                                     <div class="mt-1 font-bold text-slate-800 dark:text-slate-200">
-                                        RTX Studio + Tensor Cores
+                                        Turing GPU (6 GB VRAM)
                                     </div>
                                     <div
                                         class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
                                     >
-                                        Local LLM & GGUF Inference
+                                        CUDA Core Accelerated + iGPU
                                     </div>
                                 </div>
                             </div>
@@ -1207,12 +1207,12 @@ const breadcrumbSchema = JSON.stringify({
                                         // STORAGE_POOL
                                     </div>
                                     <div class="mt-1 font-bold text-slate-800 dark:text-slate-200">
-                                        2TB NVMe PCIe 4.0 M.2
+                                        High-Speed NVMe M.2
                                     </div>
                                     <div
                                         class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
                                     >
-                                        ZFS Scrub Verified // 7000 MB/s
+                                        PCIe Bus // Local Fast Cache
                                     </div>
                                 </div>
 
@@ -1262,7 +1262,10 @@ const breadcrumbSchema = JSON.stringify({
             </section>
 
             {/* 8. My Tech Stack */}
-            <section class="layout-container content-visibility-auto-tech-stack reveal-on-scroll">
+            <section
+                id="tech-stack"
+                class="layout-container content-visibility-auto-tech-stack reveal-on-scroll"
+            >
                 <h2
                     class="mb-2 text-3xl font-bold tracking-tight text-balance text-slate-900 dark:text-white"
                 >
@@ -1277,41 +1280,63 @@ const breadcrumbSchema = JSON.stringify({
                 </p>
 
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    {/* Module 01: Frontend Subsystem (Cyan) */}
                     <div
-                        class="glass-surface bento-card relative flex min-h-50 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/50 p-0 shadow-sm transition-all before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent dark:border-white/10 dark:bg-black/20"
+                        class="glass-surface bento-card group relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/60 p-0 shadow-sm transition-all duration-300 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent hover:border-cyan-500/40 hover:shadow-[0_0_24px_rgba(6,182,212,0.14)] dark:border-white/10 dark:bg-black/25"
                     >
                         <div
-                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3 py-2 dark:border-white/10 dark:bg-slate-900/80"
+                            class="pointer-events-none absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40"
+                            style="background-image: radial-gradient(circle at 100% 0%, rgba(6, 182, 212, 0.22) 0%, transparent 60%);"
+                        >
+                        </div>
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3.5 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
                         >
                             <div class="flex items-center gap-1.5" aria-hidden="true">
                                 <span class="h-2 w-2 rounded-full bg-[#ff5f56]/90 shadow-xs"></span>
                                 <span class="h-2 w-2 rounded-full bg-[#ffbd2e]/90 shadow-xs"></span>
                                 <span class="h-2 w-2 rounded-full bg-[#27c93f]/90 shadow-xs"></span>
                                 <span
-                                    class="ml-1.5 font-mono text-[9px] font-bold text-slate-600 dark:text-slate-400"
+                                    class="ml-1.5 font-mono text-[9px] font-bold tracking-wider text-slate-600 dark:text-slate-300"
                                     >// MODULE_01 // FE_SYS</span
                                 >
                             </div>
-                            <span
-                                class="font-mono text-[8px] font-bold tracking-widest text-(--accent) uppercase"
-                                >ONLINE</span
+                            <div
+                                class="flex items-center gap-1.5 font-mono text-[8px] font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400"
                             >
+                                <span class="relative flex h-1.5 w-1.5">
+                                    <span
+                                        class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75"
+                                    ></span>
+                                    <span
+                                        class="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-500"
+                                    ></span>
+                                </span>
+                                <span>ONLINE</span>
+                            </div>
                         </div>
 
-                        <div class="p-5">
-                            <h3
-                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
-                                data-original="Frontend Subsystem"
-                            >
-                                Frontend Subsystem
-                            </h3>
-                            <div class="flex flex-wrap gap-2">
+                        <div class="relative z-10 p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <h3
+                                    class="cypher-text font-mono text-xs font-bold tracking-wider text-slate-900 uppercase dark:text-white"
+                                    data-original="Frontend Subsystem"
+                                >
+                                    Frontend Subsystem
+                                </h3>
+                                <span
+                                    class="font-mono text-[8px] font-bold tracking-wider text-cyan-600 uppercase dark:text-cyan-400/90"
+                                >
+                                    CLIENT_EDGE
+                                </span>
+                            </div>
+                            <div class="flex flex-col gap-2">
                                 {
                                     techGroups.Frontend.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/40 dark:text-slate-200">
-                                            <span>{tech.name}</span>
+                                        <div class="group/tech relative flex items-center justify-between rounded-lg border border-slate-200/80 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-900 transition-all duration-200 hover:border-cyan-500/50 hover:bg-white hover:shadow-[0_0_12px_rgba(6,182,212,0.12)] dark:border-white/10 dark:bg-white/4 dark:text-white dark:hover:border-cyan-500/40 dark:hover:bg-white/7">
+                                            <span class="tracking-tight">{tech.name}</span>
                                             {tech.deployment && (
-                                                <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
+                                                <span class="rounded border border-cyan-500/20 bg-cyan-500/10 px-1.5 py-0.5 font-mono text-[8px] font-bold tracking-wider text-cyan-600 uppercase dark:text-cyan-400">
                                                     {tech.deployment}
                                                 </span>
                                             )}
@@ -1322,48 +1347,72 @@ const breadcrumbSchema = JSON.stringify({
                         </div>
 
                         <div
-                            class="flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3 py-1.5 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/20 dark:text-slate-400"
+                            class="relative z-10 flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3.5 py-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/30 dark:text-slate-400"
                         >
                             <span>REF_ID: FE-01</span>
-                            <span>CAP: 100%</span>
+                            <span>LATENCY: &lt;16MS</span>
+                            <span class="font-bold text-cyan-600 dark:text-cyan-400">CAP: 100%</span
+                            >
                         </div>
                     </div>
 
+                    {/* Module 02: Backend Engine (Emerald) */}
                     <div
-                        class="glass-surface bento-card relative flex min-h-50 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/50 p-0 shadow-sm transition-all before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent dark:border-white/10 dark:bg-black/20"
+                        class="glass-surface bento-card group relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/60 p-0 shadow-sm transition-all duration-300 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent hover:border-emerald-500/40 hover:shadow-[0_0_24px_rgba(16,185,129,0.14)] dark:border-white/10 dark:bg-black/25"
                     >
                         <div
-                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3 py-2 dark:border-white/10 dark:bg-slate-900/80"
+                            class="pointer-events-none absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40"
+                            style="background-image: radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.22) 0%, transparent 60%);"
+                        >
+                        </div>
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3.5 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
                         >
                             <div class="flex items-center gap-1.5" aria-hidden="true">
                                 <span class="h-2 w-2 rounded-full bg-[#ff5f56]/90 shadow-xs"></span>
                                 <span class="h-2 w-2 rounded-full bg-[#ffbd2e]/90 shadow-xs"></span>
                                 <span class="h-2 w-2 rounded-full bg-[#27c93f]/90 shadow-xs"></span>
                                 <span
-                                    class="ml-1.5 font-mono text-[9px] font-bold text-slate-600 dark:text-slate-400"
+                                    class="ml-1.5 font-mono text-[9px] font-bold tracking-wider text-slate-600 dark:text-slate-300"
                                     >// MODULE_02 // BE_SYS</span
                                 >
                             </div>
-                            <span
-                                class="font-mono text-[8px] font-bold tracking-widest text-(--accent) uppercase"
-                                >ONLINE</span
+                            <div
+                                class="flex items-center gap-1.5 font-mono text-[8px] font-bold tracking-widest text-emerald-600 uppercase dark:text-emerald-400"
                             >
+                                <span class="relative flex h-1.5 w-1.5">
+                                    <span
+                                        class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"
+                                    ></span>
+                                    <span
+                                        class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"
+                                    ></span>
+                                </span>
+                                <span>ONLINE</span>
+                            </div>
                         </div>
 
-                        <div class="p-5">
-                            <h3
-                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
-                                data-original="Backend Engine"
-                            >
-                                Backend Engine
-                            </h3>
-                            <div class="flex flex-wrap gap-2">
+                        <div class="relative z-10 p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <h3
+                                    class="cypher-text font-mono text-xs font-bold tracking-wider text-slate-900 uppercase dark:text-white"
+                                    data-original="Backend Engine"
+                                >
+                                    Backend Engine
+                                </h3>
+                                <span
+                                    class="font-mono text-[8px] font-bold tracking-wider text-emerald-600 uppercase dark:text-emerald-400/90"
+                                >
+                                    RUNTIME_I/O
+                                </span>
+                            </div>
+                            <div class="flex flex-col gap-2">
                                 {
                                     techGroups.Backend.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/40 dark:text-slate-200">
-                                            <span>{tech.name}</span>
+                                        <div class="group/tech relative flex items-center justify-between rounded-lg border border-slate-200/80 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-900 transition-all duration-200 hover:border-emerald-500/50 hover:bg-white hover:shadow-[0_0_12px_rgba(16,185,129,0.12)] dark:border-white/10 dark:bg-white/4 dark:text-white dark:hover:border-emerald-500/40 dark:hover:bg-white/7">
+                                            <span class="tracking-tight">{tech.name}</span>
                                             {tech.deployment && (
-                                                <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
+                                                <span class="rounded border border-emerald-500/20 bg-emerald-500/10 px-1.5 py-0.5 font-mono text-[8px] font-bold tracking-wider text-emerald-600 uppercase dark:text-emerald-400">
                                                     {tech.deployment}
                                                 </span>
                                             )}
@@ -1374,48 +1423,73 @@ const breadcrumbSchema = JSON.stringify({
                         </div>
 
                         <div
-                            class="flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3 py-1.5 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/20 dark:text-slate-400"
+                            class="relative z-10 flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3.5 py-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/30 dark:text-slate-400"
                         >
                             <span>REF_ID: BE-02</span>
-                            <span>CAP: 100%</span>
+                            <span>THREADS: ASYNC</span>
+                            <span class="font-bold text-emerald-600 dark:text-emerald-400"
+                                >CAP: 100%</span
+                            >
                         </div>
                     </div>
 
+                    {/* Module 03: Data & Cloud (Amber) */}
                     <div
-                        class="glass-surface bento-card relative flex min-h-50 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/50 p-0 shadow-sm transition-all before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent dark:border-white/10 dark:bg-black/20"
+                        class="glass-surface bento-card group relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/60 p-0 shadow-sm transition-all duration-300 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent hover:border-amber-500/40 hover:shadow-[0_0_24px_rgba(245,158,11,0.14)] dark:border-white/10 dark:bg-black/25"
                     >
                         <div
-                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3 py-2 dark:border-white/10 dark:bg-slate-900/80"
+                            class="pointer-events-none absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40"
+                            style="background-image: radial-gradient(circle at 100% 0%, rgba(245, 158, 11, 0.22) 0%, transparent 60%);"
+                        >
+                        </div>
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3.5 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
                         >
                             <div class="flex items-center gap-1.5" aria-hidden="true">
                                 <span class="h-2 w-2 rounded-full bg-[#ff5f56]/90 shadow-xs"></span>
                                 <span class="h-2 w-2 rounded-full bg-[#ffbd2e]/90 shadow-xs"></span>
                                 <span class="h-2 w-2 rounded-full bg-[#27c93f]/90 shadow-xs"></span>
                                 <span
-                                    class="ml-1.5 font-mono text-[9px] font-bold text-slate-600 dark:text-slate-400"
+                                    class="ml-1.5 font-mono text-[9px] font-bold tracking-wider text-slate-600 dark:text-slate-300"
                                     >// MODULE_03 // DB_SYS</span
                                 >
                             </div>
-                            <span
-                                class="font-mono text-[8px] font-bold tracking-widest text-(--accent) uppercase"
-                                >ONLINE</span
+                            <div
+                                class="flex items-center gap-1.5 font-mono text-[8px] font-bold tracking-widest text-amber-600 uppercase dark:text-amber-400"
                             >
+                                <span class="relative flex h-1.5 w-1.5">
+                                    <span
+                                        class="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"
+                                    ></span>
+                                    <span
+                                        class="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500"
+                                    ></span>
+                                </span>
+                                <span>ONLINE</span>
+                            </div>
                         </div>
 
-                        <div class="p-5">
-                            <h3
-                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
-                                data-original="Data & Cloud"
-                            >
-                                Data & Cloud
-                            </h3>
-                            <div class="flex flex-wrap gap-2">
+                        <div class="relative z-10 p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <h3
+                                    class="cypher-text font-mono text-xs font-bold tracking-wider text-slate-900 uppercase dark:text-white"
+                                    data-original="Data & Cloud"
+                                >
+                                    Data & Cloud
+                                </h3>
+                                <span
+                                    class="font-mono text-[8px] font-bold tracking-wider text-amber-600 uppercase dark:text-amber-400/90"
+                                >
+                                    PERSIST_MESH
+                                </span>
+                            </div>
+                            <div class="flex flex-col gap-2">
                                 {
                                     techGroups.Cloud_Db.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/40 dark:text-slate-200">
-                                            <span>{tech.name}</span>
+                                        <div class="group/tech relative flex items-center justify-between rounded-lg border border-slate-200/80 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-900 transition-all duration-200 hover:border-amber-500/50 hover:bg-white hover:shadow-[0_0_12px_rgba(245,158,11,0.12)] dark:border-white/10 dark:bg-white/4 dark:text-white dark:hover:border-amber-500/40 dark:hover:bg-white/7">
+                                            <span class="tracking-tight">{tech.name}</span>
                                             {tech.deployment && (
-                                                <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
+                                                <span class="rounded border border-amber-500/20 bg-amber-500/10 px-1.5 py-0.5 font-mono text-[8px] font-bold tracking-wider text-amber-600 uppercase dark:text-amber-400">
                                                     {tech.deployment}
                                                 </span>
                                             )}
@@ -1426,48 +1500,73 @@ const breadcrumbSchema = JSON.stringify({
                         </div>
 
                         <div
-                            class="flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3 py-1.5 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/20 dark:text-slate-400"
+                            class="relative z-10 flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3.5 py-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/30 dark:text-slate-400"
                         >
                             <span>REF_ID: DB-03</span>
-                            <span>CAP: 100%</span>
+                            <span>PERSIST: ACID</span>
+                            <span class="font-bold text-amber-600 dark:text-amber-400"
+                                >CAP: 100%</span
+                            >
                         </div>
                     </div>
 
+                    {/* Module 04: AI & Learning (Purple) */}
                     <div
-                        class="glass-surface bento-card relative flex min-h-50 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/50 p-0 shadow-sm transition-all before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent dark:border-white/10 dark:bg-black/20"
+                        class="glass-surface bento-card group relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-slate-50/60 p-0 shadow-sm transition-all duration-300 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent hover:border-purple-500/40 hover:shadow-[0_0_24px_rgba(168,85,247,0.14)] dark:border-white/10 dark:bg-black/25"
                     >
                         <div
-                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3 py-2 dark:border-white/10 dark:bg-slate-900/80"
+                            class="pointer-events-none absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40"
+                            style="background-image: radial-gradient(circle at 100% 0%, rgba(168, 85, 247, 0.22) 0%, transparent 60%);"
+                        >
+                        </div>
+                        <div
+                            class="flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-3.5 py-2.5 dark:border-white/10 dark:bg-slate-900/80"
                         >
                             <div class="flex items-center gap-1.5" aria-hidden="true">
                                 <span class="h-2 w-2 rounded-full bg-[#ff5f56]/90 shadow-xs"></span>
                                 <span class="h-2 w-2 rounded-full bg-[#ffbd2e]/90 shadow-xs"></span>
                                 <span class="h-2 w-2 rounded-full bg-[#27c93f]/90 shadow-xs"></span>
                                 <span
-                                    class="ml-1.5 font-mono text-[9px] font-bold text-slate-600 dark:text-slate-400"
+                                    class="ml-1.5 font-mono text-[9px] font-bold tracking-wider text-slate-600 dark:text-slate-300"
                                     >// MODULE_04 // AI_SYS</span
                                 >
                             </div>
-                            <span
-                                class="font-mono text-[8px] font-bold tracking-widest text-(--accent) uppercase"
-                                >ONLINE</span
+                            <div
+                                class="flex items-center gap-1.5 font-mono text-[8px] font-bold tracking-widest text-purple-600 uppercase dark:text-purple-400"
                             >
+                                <span class="relative flex h-1.5 w-1.5">
+                                    <span
+                                        class="absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-400 opacity-75"
+                                    ></span>
+                                    <span
+                                        class="relative inline-flex h-1.5 w-1.5 rounded-full bg-purple-500"
+                                    ></span>
+                                </span>
+                                <span>ONLINE</span>
+                            </div>
                         </div>
 
-                        <div class="p-5">
-                            <h3
-                                class="cypher-text mb-4 font-mono text-xs font-bold tracking-wide text-slate-800 uppercase dark:text-slate-200"
-                                data-original="AI & Learning"
-                            >
-                                AI & Learning
-                            </h3>
-                            <div class="flex flex-wrap gap-2">
+                        <div class="relative z-10 p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <h3
+                                    class="cypher-text font-mono text-xs font-bold tracking-wider text-slate-900 uppercase dark:text-white"
+                                    data-original="AI & Learning"
+                                >
+                                    AI & Learning
+                                </h3>
+                                <span
+                                    class="font-mono text-[8px] font-bold tracking-wider text-purple-600 uppercase dark:text-purple-400/90"
+                                >
+                                    TENSOR_NEURON
+                                </span>
+                            </div>
+                            <div class="flex flex-col gap-2">
                                 {
                                     techGroups.AI_Math.map((tech) => (
-                                        <div class="group/tech relative flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-[11px] font-medium text-slate-800 transition-all duration-300 hover:border-(--accent) hover:shadow-[0_0_10px_var(--accent-glow)] dark:border-white/10 dark:bg-black/40 dark:text-slate-200">
-                                            <span>{tech.name}</span>
+                                        <div class="group/tech relative flex items-center justify-between rounded-lg border border-slate-200/80 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-900 transition-all duration-200 hover:border-purple-500/50 hover:bg-white hover:shadow-[0_0_12px_rgba(168,85,247,0.12)] dark:border-white/10 dark:bg-white/4 dark:text-white dark:hover:border-purple-500/40 dark:hover:bg-white/7">
+                                            <span class="tracking-tight">{tech.name}</span>
                                             {tech.deployment && (
-                                                <span class="font-mono text-[8px] tracking-widest text-slate-500 uppercase dark:text-slate-400">
+                                                <span class="rounded border border-purple-500/20 bg-purple-500/10 px-1.5 py-0.5 font-mono text-[8px] font-bold tracking-wider text-purple-600 uppercase dark:text-purple-400">
                                                     {tech.deployment}
                                                 </span>
                                             )}
@@ -1478,57 +1577,160 @@ const breadcrumbSchema = JSON.stringify({
                         </div>
 
                         <div
-                            class="flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3 py-1.5 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/20 dark:text-slate-400"
+                            class="relative z-10 flex items-center justify-between border-t border-slate-200/60 bg-slate-100/40 px-3.5 py-2 font-mono text-[7px] tracking-widest text-slate-500 uppercase dark:border-white/5 dark:bg-black/30 dark:text-slate-400"
                         >
                             <span>REF_ID: AI-04</span>
-                            <span>CAP: 100%</span>
+                            <span>INFERENCE: JIT</span>
+                            <span class="font-bold text-purple-600 dark:text-purple-400"
+                                >CAP: 100%</span
+                            >
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="layout-container reveal-on-scroll">
+            {/* 9. Let's Connect */}
+            <section id="lets-connect" class="layout-container reveal-on-scroll">
                 <div
-                    class="glass-surface bento-card group relative flex flex-col items-center overflow-hidden p-8 text-center md:p-12"
+                    class="glass-surface bento-card group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-50/50 p-0 shadow-lg transition-all duration-300 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-white/30 before:to-transparent dark:border-white/10 dark:bg-black/25"
                 >
-                    <div class="bg-grid-motif pointer-events-none absolute inset-0 opacity-10">
+                    <div
+                        class="pointer-events-none absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-35"
+                        style="background-image: radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 65%);"
+                    >
                     </div>
-                    <div class="relative z-10 w-full max-w-2xl">
-                        <h2
-                            class="mb-4 font-mono text-3xl font-bold tracking-tight text-balance text-slate-900 md:text-4xl dark:text-white"
-                        >
-                            &gt; Let's Connect
-                        </h2>
-                        <p
-                            class="mb-8 font-mono text-sm leading-relaxed text-slate-600 md:text-base dark:text-slate-400"
-                        >
-                            Want to discuss multi-agent orchestration, rocket kinematics, or the
-                            future of ag-tech?
-                        </p>
+                    <div
+                        class="bg-grid-motif pointer-events-none absolute inset-0 opacity-[0.06] dark:opacity-[0.12]"
+                    >
+                    </div>
 
-                        <div class="mt-4 flex justify-center">
-                            <a
-                                href={SOCIAL_LINKS.twitter}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Connect on X (opens in a new tab)"
-                                class="magnetic-target group relative inline-flex items-center justify-center gap-2 rounded-lg bg-(--accent-button-bg) px-8 py-3 font-mono font-bold text-white transition-all hover:bg-blue-600 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
+                    {/* Terminal Chrome Header */}
+                    <div
+                        class="relative z-10 flex items-center justify-between border-b border-slate-200/80 bg-slate-100/90 px-4 py-2.5 sm:px-6 dark:border-white/10 dark:bg-slate-900/80"
+                    >
+                        <div class="flex items-center gap-2">
+                            <div class="flex gap-1.5" aria-hidden="true">
+                                <div class="h-3 w-3 rounded-full bg-[#ff5f56]/90 shadow-xs"></div>
+                                <div class="h-3 w-3 rounded-full bg-[#ffbd2e]/90 shadow-xs"></div>
+                                <div class="h-3 w-3 rounded-full bg-[#27c93f]/90 shadow-xs"></div>
+                            </div>
+                            <span
+                                class="ml-2 font-mono text-xs font-semibold text-slate-600 dark:text-slate-400"
                             >
-                                <span aria-hidden="true">~ $ connect --x</span>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="transition-transform group-hover:translate-x-1"
-                                    ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
+                                bash — comm_transceiver.sh
+                            </span>
+                        </div>
+                        <span
+                            class="flex items-center gap-1.5 rounded border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[9px] font-bold tracking-widest text-emerald-600 uppercase dark:text-emerald-400"
+                        >
+                            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500"
+                            ></span>
+                            CHANNEL_ACTIVE // READY_FOR_HANDSHAKE
+                        </span>
+                    </div>
+
+                    {/* Transceiver Content */}
+                    <div class="relative z-10 flex flex-col items-center p-8 text-center md:p-12">
+                        <div class="w-full max-w-2xl">
+                            <div
+                                class="mb-3 inline-flex items-center justify-center gap-2 font-mono text-xs font-bold tracking-widest text-(--accent) uppercase"
+                            >
+                                <span class="inline-block h-2 w-2 rounded-full bg-(--accent)"
+                                ></span>
+                                <span>&gt; INITIATE_COMMUNICATION</span>
+                            </div>
+                            <h2
+                                class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-white"
+                            >
+                                Let's Connect
+                            </h2>
+                            <p
+                                class="mt-4 font-mono text-xs leading-relaxed text-slate-600 md:text-sm dark:text-slate-300"
+                            >
+                                Whether you want to challenge an architectural assumption, build
+                                autonomous agent loops, talk rocket kinematics, or collaborate on
+                                open engineering tools, the channel is open.
+                            </p>
+
+                            <div class="mt-8 flex justify-center">
+                                <a
+                                    href={SOCIAL_LINKS.twitter}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Connect on X (opens in a new tab)"
+                                    class="magnetic-target group/btn relative inline-flex items-center justify-center gap-2 rounded-lg bg-(--accent-button-bg) px-8 py-3.5 font-mono text-sm font-bold text-white shadow-md transition-all hover:bg-blue-600 hover:shadow-[0_8px_30px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95 dark:focus-visible:ring-offset-(--bg-main)"
                                 >
-                            </a>
+                                    <span aria-hidden="true">~ $ connect --x</span>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="transition-transform group-hover/btn:translate-x-1"
+                                        ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
+                                        ></path></svg
+                                    >
+                                </a>
+                            </div>
+
+                            <div
+                                class="mt-8 flex flex-wrap items-center justify-center gap-4 border-t border-slate-200/60 pt-6 font-mono text-xs text-slate-500 dark:border-white/10 dark:text-slate-400"
+                            >
+                                <span class="text-[9px] font-bold tracking-widest uppercase">
+                                    // NODES:
+                                </span>
+                                <a
+                                    href={SOCIAL_LINKS.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="flex items-center gap-1.5 transition-colors hover:text-(--accent) dark:hover:text-white"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="14"
+                                        height="14"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        ><path
+                                            d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                                        ></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg
+                                    >
+                                    <span>github/@dhaatrik</span>
+                                </a>
+                                <span class="text-slate-300 dark:text-white/20">•</span>
+                                <a
+                                    href={SOCIAL_LINKS.linkedin}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="flex items-center gap-1.5 transition-colors hover:text-(--accent) dark:hover:text-white"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="14"
+                                        height="14"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        ><path
+                                            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                                        ></path><rect width="4" height="12" x="2" y="9"
+                                        ></rect><circle cx="4" cy="4" r="2"></circle></svg
+                                    >
+                                    <span>linkedin/@dhaatrik</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
