@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.15.3](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.15.2...v4.15.3) (2026-11-04)
+
+
+### Bug Fixes
+
+* **deps:** patch transitive dependencies via safe npm audit fix ([d3d62c0](https://github.com/dhaatrik/dhaatrik.github.io/commit/d3d62c0301e8acc82487caae5bd8c9923dd7dc40))
+* **deps:** patch transitive dependencies via safe npm audit fix ([21eb2b1](https://github.com/dhaatrik/dhaatrik.github.io/commit/21eb2b17004207e1cdafab461273d16fec59a5ed))
+
 ## [4.15.2](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.15.1...v4.15.2) (2026-11-04)
 
 
