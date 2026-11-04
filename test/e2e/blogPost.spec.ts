@@ -144,6 +144,8 @@ test.describe('BlogPost Interactive Features', () => {
             const content = await fs.readFile(path, 'utf8');
             expect(content).toContain('<!doctype html>');
             expect(content).toContain('VELLOR TRANSMISSION LOG');
+            expect(content).toContain('Content-Security-Policy');
+            expect(content).toContain("default-src 'none'");
             expect(content).not.toContain('<script>alert');
         }
     });

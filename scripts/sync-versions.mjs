@@ -14,6 +14,11 @@ export function syncVersions(dryRun = false) {
     const pkgPath = resolve(rootDir, 'package.json');
     const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
     const version = pkg.version;
+
+    if (typeof version !== 'string' || !/^\d+\.\d+\.\d+(-[a-zA-Z0-9.]+)?$/.test(version)) {
+        throw new Error(`[sync-versions] Invalid SemVer format in package.json: ${version}`);
+    }
+
     const versionTag = `v${version}`;
 
     let modifiedCount = 0;

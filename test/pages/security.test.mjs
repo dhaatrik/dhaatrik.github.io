@@ -67,3 +67,77 @@ test('Security: all target="_blank" links must have rel="noopener noreferrer"', 
         );
     }
 });
+
+test('Security: all JSON-LD schemas serialized in .astro files must escape < brackets', () => {
+    const srcDir = path.join(ROOT_DIR, 'src');
+    const files = getAllFiles(srcDir).filter((file) => file.endsWith('.astro'));
+
+    let failures = [];
+
+    files.forEach((file) => {
+        const content = fs.readFileSync(file, 'utf8');
+        // Match <script ... type="application/ld+json" ... set:html={varName} ... />
+        const scriptRegex =
+            /<script\b[^>]*type=["']application\/ld\+json["'][^>]*set:html=\{([^}]+)\}[^>]*>/g;
+        let scriptMatch;
+
+        while ((scriptMatch = scriptRegex.exec(content)) !== null) {
+            const varName = scriptMatch[1].trim();
+
+            // Locate declaration of varName in frontmatter
+            const varRegex = new RegExp(
+                `(?:const|let|var)\\s+${varName}\\s*=\\s*([\\s\\S]*?)(?:\\n---|(?:\\n(?:const|let|var|import)\\s+)|$)`
+            );
+            const declMatch = varRegex.exec(content);
+
+            if (!declMatch) {
+                failures.push({
+                    file: path.relative(ROOT_DIR, file),
+                    detail: `Could not find declaration for ${varName}`,
+                });
+                continue;
+            }
+
+            const declBody = declMatch[1];
+            const hasEscape =
+                declBody.includes('.replace(/</g,') &&
+                (declBody.includes('\\u003c') || declBody.includes('u003c'));
+
+            if (!hasEscape) {
+                failures.push({
+                    file: path.relative(ROOT_DIR, file),
+                    detail: `Variable ${varName} does not escape '<' via .replace(/</g, '\\\\u003c')`,
+                });
+            }
+        }
+    });
+
+    if (failures.length > 0) {
+        const failureMessage = failures.map((f) => `  - ${f.file}: ${f.detail}`).join('\n');
+        assert.fail(
+            `Found JSON-LD schema serialization missing Unicode bracket escaping (.replace(/</g, '\\u003c')):\n${failureMessage}`
+        );
+    }
+});
+
+test('Security: offline HTML export archive must enforce an air-gapped Content-Security-Policy', () => {
+    const exportActionsFile = path.join(ROOT_DIR, 'src', 'scripts', 'blog', 'exportActions.ts');
+    const content = fs.readFileSync(exportActionsFile, 'utf8');
+
+    assert.ok(
+        content.includes('http-equiv="Content-Security-Policy"'),
+        'exportActions.ts must contain http-equiv="Content-Security-Policy"'
+    );
+    assert.ok(
+        content.includes("default-src 'none'"),
+        "exportActions.ts CSP must set default-src 'none'"
+    );
+});
+
+test('Security: .gitignore must ignore all .env variants while allowing .env.example', () => {
+    const gitignoreFile = path.join(ROOT_DIR, '.gitignore');
+    const content = fs.readFileSync(gitignoreFile, 'utf8');
+
+    assert.ok(content.includes('.env.*'), '.gitignore must ignore .env.*');
+    assert.ok(content.includes('!.env.example'), '.gitignore must allow !.env.example');
+});

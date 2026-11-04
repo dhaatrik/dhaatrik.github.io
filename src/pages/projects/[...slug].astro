@@ -65,7 +65,7 @@ const projectSchema = {
     runtimePlatform: 'Web Browser',
     license: 'https://opensource.org/licenses/MIT',
 };
-const jsonLd = JSON.stringify(projectSchema);
+const jsonLd = JSON.stringify(projectSchema).replace(/</g, '\\u003c');
 
 const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -91,7 +91,7 @@ const breadcrumbSchema = {
         },
     ],
 };
-const breadcrumbLd = JSON.stringify(breadcrumbSchema);
+const breadcrumbLd = JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c');
 
 // Enrich page title with descriptive pitch for SERP snippets
 const shortTagline = description.includes('—') ? description.split('—')[0].trim() : '';
