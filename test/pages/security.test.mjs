@@ -77,14 +77,17 @@ test('Security: all JSON-LD schemas serialized in .astro files must escape < bra
     files.forEach((file) => {
         const content = fs.readFileSync(file, 'utf8');
         // Match <script ... type="application/ld+json" ... set:html={varName} ... />
-        const scriptRegex = /<script\b[^>]*type=["']application\/ld\+json["'][^>]*set:html=\{([^}]+)\}[^>]*>/g;
+        const scriptRegex =
+            /<script\b[^>]*type=["']application\/ld\+json["'][^>]*set:html=\{([^}]+)\}[^>]*>/g;
         let scriptMatch;
 
         while ((scriptMatch = scriptRegex.exec(content)) !== null) {
             const varName = scriptMatch[1].trim();
 
             // Locate declaration of varName in frontmatter
-            const varRegex = new RegExp(`(?:const|let|var)\\s+${varName}\\s*=\\s*([\\s\\S]*?)(?:\\n---|(?:\\n(?:const|let|var|import)\\s+)|$)`);
+            const varRegex = new RegExp(
+                `(?:const|let|var)\\s+${varName}\\s*=\\s*([\\s\\S]*?)(?:\\n---|(?:\\n(?:const|let|var|import)\\s+)|$)`
+            );
             const declMatch = varRegex.exec(content);
 
             if (!declMatch) {
@@ -96,7 +99,8 @@ test('Security: all JSON-LD schemas serialized in .astro files must escape < bra
             }
 
             const declBody = declMatch[1];
-            const hasEscape = declBody.includes(".replace(/</g,") &&
+            const hasEscape =
+                declBody.includes('.replace(/</g,') &&
                 (declBody.includes('\\u003c') || declBody.includes('u003c'));
 
             if (!hasEscape) {
