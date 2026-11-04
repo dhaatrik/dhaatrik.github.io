@@ -73,7 +73,7 @@ const webpageSchema = {
         })),
     },
 };
-const jsonLd = JSON.stringify(webpageSchema);
+const jsonLd = JSON.stringify(webpageSchema).replace(/</g, '\\u003c');
 
 // BreadcrumbList JSON-LD for clean SERP navigation trails
 const breadcrumbSchema = JSON.stringify({

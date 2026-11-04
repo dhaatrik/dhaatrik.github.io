@@ -67,3 +67,51 @@ test('Security: all target="_blank" links must have rel="noopener noreferrer"', 
         );
     }
 });
+
+test('Security: all JSON-LD schemas serialized in .astro files must escape < brackets', () => {
+    const srcDir = path.join(ROOT_DIR, 'src');
+    const files = getAllFiles(srcDir).filter((file) => file.endsWith('.astro'));
+
+    let failures = [];
+
+    files.forEach((file) => {
+        const content = fs.readFileSync(file, 'utf8');
+        // Match <script ... type="application/ld+json" ... set:html={varName} ... />
+        const scriptRegex = /<script\b[^>]*type=["']application\/ld\+json["'][^>]*set:html=\{([^}]+)\}[^>]*>/g;
+        let scriptMatch;
+
+        while ((scriptMatch = scriptRegex.exec(content)) !== null) {
+            const varName = scriptMatch[1].trim();
+
+            // Locate declaration of varName in frontmatter
+            const varRegex = new RegExp(`(?:const|let|var)\\s+${varName}\\s*=\\s*([\\s\\S]*?)(?:\\n---|(?:\\n(?:const|let|var|import)\\s+)|$)`);
+            const declMatch = varRegex.exec(content);
+
+            if (!declMatch) {
+                failures.push({
+                    file: path.relative(ROOT_DIR, file),
+                    detail: `Could not find declaration for ${varName}`,
+                });
+                continue;
+            }
+
+            const declBody = declMatch[1];
+            const hasEscape = declBody.includes(".replace(/</g,") &&
+                (declBody.includes('\\u003c') || declBody.includes('u003c'));
+
+            if (!hasEscape) {
+                failures.push({
+                    file: path.relative(ROOT_DIR, file),
+                    detail: `Variable ${varName} does not escape '<' via .replace(/</g, '\\\\u003c')`,
+                });
+            }
+        }
+    });
+
+    if (failures.length > 0) {
+        const failureMessage = failures.map((f) => `  - ${f.file}: ${f.detail}`).join('\n');
+        assert.fail(
+            `Found JSON-LD schema serialization missing Unicode bracket escaping (.replace(/</g, '\\u003c')):\n${failureMessage}`
+        );
+    }
+});
