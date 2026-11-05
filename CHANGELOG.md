@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.16.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.16.0...v4.16.1) (2026-11-05)
+
+
+### Performance Improvements
+
+* **cwv:** optimize lcp reveals, preload hero images, and reduce cls ([bbc5b35](https://github.com/dhaatrik/dhaatrik.github.io/commit/bbc5b353766c2f266776b033a43149aec40d70ba))
+* **cwv:** optimize lcp reveals, preload hero images, and reduce cls ([aef01ac](https://github.com/dhaatrik/dhaatrik.github.io/commit/aef01ac9fc38d6e7c59b6501cde4439239ce2fa6))
+
 ## [4.16.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.15.3...v4.16.0) (2026-11-05)
 
 
