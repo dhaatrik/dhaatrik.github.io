@@ -184,7 +184,7 @@ const webSiteSchema = JSON.stringify({
                             alt=""
                             class="h-[75%] w-[75%] max-w-187.5 object-contain dark:hidden"
                             loading="eager"
-                            fetchpriority="high"
+                            fetchpriority="low"
                             width="750"
                             height="750"
                         />
@@ -193,7 +193,7 @@ const webSiteSchema = JSON.stringify({
                             alt=""
                             class="hidden h-[75%] w-[75%] max-w-187.5 object-contain dark:block"
                             loading="eager"
-                            fetchpriority="high"
+                            fetchpriority="low"
                             width="750"
                             height="750"
                         />
@@ -221,7 +221,7 @@ const webSiteSchema = JSON.stringify({
                 <div class="relative z-10 flex w-full max-w-3xl flex-col justify-center">
                     <!-- Segmented Cockpit HUD Capsule -->
                     <div
-                        class="reveal-on-scroll mb-6 inline-flex w-fit max-w-full flex-col gap-2 rounded-xl border border-slate-200/80 bg-white/70 p-1.5 font-mono text-[11px] shadow-xs backdrop-blur-md sm:mb-8 sm:flex-row sm:items-center sm:gap-2.5 sm:rounded-full sm:p-1 sm:pr-3.5 dark:border-white/10 dark:bg-slate-900/60"
+                        class="hero-reveal mb-6 inline-flex w-fit max-w-full flex-col gap-2 rounded-xl border border-slate-200/80 bg-white/70 p-1.5 font-mono text-[11px] shadow-xs backdrop-blur-md sm:mb-8 sm:flex-row sm:items-center sm:gap-2.5 sm:rounded-full sm:p-1 sm:pr-3.5 dark:border-white/10 dark:bg-slate-900/60"
                         data-last-updated="2026-06-18"
                     >
                         <!-- Status Beacon Chip -->
@@ -283,8 +283,7 @@ const webSiteSchema = JSON.stringify({
                     </div>
 
                     <h1
-                        class="type-display reveal-on-scroll mb-6 text-slate-900 dark:text-white"
-                        data-reveal-delay="100"
+                        class="type-display hero-reveal hero-reveal-1 mb-6 text-slate-900 dark:text-white"
                     >
                         <span id="dynamic-greeting">Hey!</span> Buddy. <br />
                         <span
@@ -306,8 +305,7 @@ const webSiteSchema = JSON.stringify({
                         if (el) el.innerText = greeting;
                     </script>
                     <p
-                        class="type-body-lg reveal-on-scroll mb-8 text-slate-600 dark:text-(--text-secondary)"
-                        data-reveal-delay="200"
+                        class="type-body-lg hero-reveal hero-reveal-2 mb-8 text-slate-600 dark:text-(--text-secondary)"
                     >
                         I'm Dhaatrik Chowdhury, an engineer from India building practical software
                         from first principles. This site is my honest engineering diary, not a
@@ -316,10 +314,7 @@ const webSiteSchema = JSON.stringify({
                         because they always come back to charge interest.
                     </p>
 
-                    <div
-                        class="reveal-on-scroll flex flex-wrap items-center gap-6"
-                        data-reveal-delay="300"
-                    >
+                    <div class="hero-reveal hero-reveal-3 flex flex-wrap items-center gap-6">
                         <a
                             href="/personnel"
                             data-astro-prefetch="hover"
@@ -425,9 +420,10 @@ const webSiteSchema = JSON.stringify({
                                         src={tech.src}
                                         alt={tech.name}
                                         title={tech.name}
-                                        class="h-6 rounded-sm opacity-80 transition-opacity hover:opacity-100 dark:opacity-70 dark:hover:opacity-100"
-                                        loading="eager"
-                                        fetchpriority="high"
+                                        height="24"
+                                        class="h-6 w-auto rounded-sm opacity-80 transition-opacity hover:opacity-100 dark:opacity-70 dark:hover:opacity-100"
+                                        loading="lazy"
+                                        decoding="async"
                                     />
                                 ))
                             }
