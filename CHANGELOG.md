@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.16.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.15.3...v4.16.0) (2026-11-05)
+
+
+### Features
+
+* **seo:** enrich aeo schemas, llm discovery headers, and ai crawler rules ([b431b5f](https://github.com/dhaatrik/dhaatrik.github.io/commit/b431b5f3f3a38d93ad1fc3348b3587d693da2a5a))
+* **seo:** enrich aeo schemas, llm discovery headers, and ai crawler rules ([77074e5](https://github.com/dhaatrik/dhaatrik.github.io/commit/77074e56acdf8af7a49af92e1c18cab92d25dbd9))
+
 ## [4.15.3](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.15.2...v4.15.3) (2026-11-04)
 
 
