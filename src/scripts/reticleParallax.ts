@@ -41,6 +41,7 @@ export const initReticleParallax = () => {
     parallaxAbortController = new AbortController();
     window.addEventListener('mousemove', handleReticleParallax, {
         signal: parallaxAbortController.signal,
+        passive: true,
     });
 };
 

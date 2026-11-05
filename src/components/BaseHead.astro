@@ -28,6 +28,7 @@ interface Props {
     pubDate?: Date;
     updatedDate?: Date;
     noindex?: boolean;
+    preloadHeroImage?: boolean;
 }
 
 const {
@@ -39,6 +40,7 @@ const {
     pubDate,
     updatedDate,
     noindex = false,
+    preloadHeroImage = false,
 } = Astro.props;
 
 const is404 =
@@ -120,8 +122,22 @@ const personSchema = JSON.stringify({
 <link rel="alternate" type="text/plain" href="/ai.txt" title="AI Permissions & Context" />
 
 <!-- Font Preloading -->
-<link rel="preload" href={nunitoUrl} as="font" type="font/woff2" crossorigin />
-<link rel="preload" href={poppinsUrl} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={nunitoUrl} as="font" type="font/woff2" crossorigin fetchpriority="high" />
+<link
+    rel="preload"
+    href={poppinsUrl}
+    as="font"
+    type="font/woff2"
+    crossorigin
+    fetchpriority="high"
+/>
+
+<!-- LCP Hero Image Preload -->
+{
+    preloadHeroImage && image && (
+        <link rel="preload" as="image" href={imageUrl.href} fetchpriority="high" />
+    )
+}
 
 <link
     rel="alternate"
@@ -226,8 +242,12 @@ const personSchema = JSON.stringify({
 
     // Resize event listener for responsive changes to scrollability
     let resizeTimeout: number;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = window.setTimeout(checkScrollableCodeBlocks, 150);
-    });
+    window.addEventListener(
+        'resize',
+        () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = window.setTimeout(checkScrollableCodeBlocks, 150);
+        },
+        { passive: true }
+    );
 </script>

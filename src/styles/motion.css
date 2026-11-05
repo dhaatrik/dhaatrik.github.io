@@ -42,6 +42,34 @@
     opacity: 1;
 }
 
+/* Hero section immediate CSS entrance — unblocks LCP by avoiding JS IntersectionObserver */
+.hero-reveal {
+    animation: hero-fade-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-reveal-1 {
+    animation-delay: 40ms;
+}
+
+.hero-reveal-2 {
+    animation-delay: 80ms;
+}
+
+.hero-reveal-3 {
+    animation-delay: 120ms;
+}
+
+@keyframes hero-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Stageshow motion and telemetry micro-animations */
 @keyframes beacon-ping {
     0% {
@@ -74,10 +102,15 @@
 @media (prefers-reduced-motion: reduce) {
     .reveal-on-scroll,
     .reveal-stagger > *,
-    .blueprint-reveal {
+    .blueprint-reveal,
+    .hero-reveal,
+    .hero-reveal-1,
+    .hero-reveal-2,
+    .hero-reveal-3 {
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
+        animation: none !important;
     }
     .telemetry-beacon {
         animation: none !important;

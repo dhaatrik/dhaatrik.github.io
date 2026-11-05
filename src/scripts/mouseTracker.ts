@@ -208,9 +208,9 @@ const initMouseTracker = () => {
             cachedRect = null;
         };
 
-        card.addEventListener('mouseenter', handleCardEnter);
-        card.addEventListener('mousemove', handleCardMove);
-        card.addEventListener('mouseleave', handleCardLeave);
+        card.addEventListener('mouseenter', handleCardEnter, { passive: true });
+        card.addEventListener('mousemove', handleCardMove, { passive: true });
+        card.addEventListener('mouseleave', handleCardLeave, { passive: true });
     });
 };
 
