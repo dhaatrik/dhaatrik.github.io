@@ -7,23 +7,19 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.resolve(__dirname, '../../');
 
-test('CWV / LCP: BaseHead supports preloadHeroImage and high-priority font preloads', () => {
+test('CWV / LCP: BaseHead supports preloadHeroImage URL and high-priority font preloads', () => {
     const baseHeadPath = path.join(ROOT_DIR, 'src/components/BaseHead.astro');
     const content = fs.readFileSync(baseHeadPath, 'utf8');
 
     assert.ok(
-        content.includes('preloadHeroImage?: boolean'),
-        'BaseHead Props must declare optional preloadHeroImage prop'
-    );
-    assert.ok(
-        content.includes('preloadHeroImage = false'),
-        'BaseHead destructuring must default preloadHeroImage to false'
+        content.includes('preloadHeroImage?: string'),
+        'BaseHead Props must declare optional preloadHeroImage string prop'
     );
     assert.ok(
         content.includes('rel="preload"') &&
             content.includes('as="image"') &&
             content.includes('fetchpriority="high"'),
-        'BaseHead must render link rel="preload" as="image" with fetchpriority="high" when preloadHeroImage is true'
+        'BaseHead must render link rel="preload" as="image" with fetchpriority="high" when preloadHeroImage is set'
     );
     assert.ok(
         content.includes('nunitoUrl') && content.includes('fetchpriority="high"'),
@@ -56,18 +52,14 @@ test('CWV / LCP: index.astro unblocks hero LCP by using immediate CSS reveal cla
         'Hero CTA container must use .hero-reveal-3 for immediate CSS entrance'
     );
 
-    // Decorative background SVGs must not contend for high network priority
+    // Single active-theme hero logo must use fetchpriority="high" without dual SVG eager loads
     assert.ok(
-        !content.includes(
-            'logo_dark.svg" alt="" class="h-[75%] w-[75%] max-w-187.5 object-contain dark:hidden" loading="eager" fetchpriority="high"'
-        ),
-        'Decorative background dark logo must not use fetchpriority="high"'
+        content.includes('id="hero-logo"') && content.includes('fetchpriority="high"'),
+        'Homepage hero logo must render a single active-theme img with fetchpriority="high"'
     );
     assert.ok(
-        !content.includes(
-            'logo_light.svg" alt="" class="hidden h-[75%] w-[75%] max-w-187.5 object-contain dark:block" loading="eager" fetchpriority="high"'
-        ),
-        'Decorative background light logo must not use fetchpriority="high"'
+        !content.includes('fetchpriority="low"'),
+        'Homepage hero logo must not use fetchpriority="low"'
     );
 
     // Tech badge icons must have dimensions and not contend with LCP
@@ -103,23 +95,46 @@ test('CWV / LCP: motion.css defines hero-reveal keyframes with reduced motion gu
     );
 });
 
-test('CWV / LCP: BlogPost enables hero image preloading in BaseHead', () => {
+test('CWV / LCP: BlogPost preloads the exact optimized hero image rendered in dist', (t) => {
     const blogPath = path.join(ROOT_DIR, 'src/layouts/BlogPost.astro');
     const content = fs.readFileSync(blogPath, 'utf8');
 
     assert.ok(
-        content.includes('preloadHeroImage={Boolean(heroImage)}'),
-        'BlogPost layout must pass preloadHeroImage to BaseHead for instant LCP discovery'
+        content.includes('getImage(') && content.includes('preloadHeroImage={preloadedHero?.src}'),
+        'BlogPost layout must resolve optimized hero image URL via getImage() for BaseHead preload'
     );
+
+    const distTxDir = path.join(ROOT_DIR, 'dist/transmissions');
+    if (!fs.existsSync(distTxDir)) {
+        t.skip('Skipping dist preload verification because dist/transmissions does not exist.');
+        return;
+    }
+
+    const entries = fs
+        .readdirSync(distTxDir, { withFileTypes: true })
+        .filter((d) => d.isDirectory());
+    assert.ok(entries.length > 0, 'Built transmissions must exist in dist/transmissions');
+
+    for (const entry of entries) {
+        const html = fs.readFileSync(path.join(distTxDir, entry.name, 'index.html'), 'utf8');
+        const preloadMatch = html.match(/<link rel="preload" as="image" href="([^"]+)"/);
+        if (preloadMatch) {
+            const preloadedPath = preloadMatch[1].replace('https://dhaatrik.github.io', '');
+            assert.ok(
+                html.includes(`src="${preloadedPath}"`),
+                `${entry.name} preloaded ${preloadedPath} which is unused by any <img>`
+            );
+        }
+    }
 });
 
-test('CWV / LCP: projects [...slug] preloads logo and assigns explicit eager dimensions', () => {
+test('CWV / LCP: projects [...slug] does not preload 80px logo and sets eager dimensions', () => {
     const projectPath = path.join(ROOT_DIR, 'src/pages/projects/[...slug].astro');
     const content = fs.readFileSync(projectPath, 'utf8');
 
     assert.ok(
-        content.includes('preloadHeroImage={Boolean(logo)}'),
-        'projects/[...slug].astro must pass preloadHeroImage to BaseHead'
+        !content.includes('preloadHeroImage'),
+        'projects/[...slug].astro must not preload the 80px project logo icon'
     );
     assert.ok(
         content.includes('width={80}') && content.includes('height={80}'),

@@ -28,7 +28,7 @@ interface Props {
     pubDate?: Date;
     updatedDate?: Date;
     noindex?: boolean;
-    preloadHeroImage?: boolean;
+    preloadHeroImage?: string;
 }
 
 const {
@@ -40,7 +40,7 @@ const {
     pubDate,
     updatedDate,
     noindex = false,
-    preloadHeroImage = false,
+    preloadHeroImage,
 } = Astro.props;
 
 const is404 =
@@ -96,9 +96,14 @@ const personSchema = JSON.stringify({
             var stored = localStorage.getItem('theme');
             var isDark = stored ? stored === 'dark' : true;
             document.documentElement.classList.toggle('dark', isDark);
-            // Sync favicon
+            // Sync favicon and theme logos
+            var logoSrc = isDark ? '/logo_light.svg' : '/logo_dark.svg';
             var link = document.getElementById('favicon');
-            if (link) link.href = isDark ? '/logo_light.svg' : '/logo_dark.svg';
+            if (link) link.href = logoSrc;
+            var headerLogo = document.getElementById('header-logo');
+            if (headerLogo) headerLogo.setAttribute('src', logoSrc);
+            var heroLogo = document.getElementById('hero-logo');
+            if (heroLogo) heroLogo.setAttribute('src', logoSrc);
             // Sync theme-color meta tags if user has an explicit preference
             if (stored) {
                 var color = isDark ? '#08090a' : '#f8fafc';
@@ -133,11 +138,7 @@ const personSchema = JSON.stringify({
 />
 
 <!-- LCP Hero Image Preload -->
-{
-    preloadHeroImage && image && (
-        <link rel="preload" as="image" href={imageUrl.href} fetchpriority="high" />
-    )
-}
+{preloadHeroImage && <link rel="preload" as="image" href={preloadHeroImage} fetchpriority="high" />}
 
 <link
     rel="alternate"
