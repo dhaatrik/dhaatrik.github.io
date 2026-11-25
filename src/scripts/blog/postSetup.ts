@@ -263,13 +263,19 @@ export async function setupPost() {
                     rawContainer.classList.remove('hidden');
                     renderedContainer.classList.add('hidden');
                     toggleModeBtn.innerText = 'RAW MARKDOWN';
-                    toggleModeBtn.setAttribute('aria-label', 'Switch to rendered mode');
+                    toggleModeBtn.setAttribute(
+                        'aria-label',
+                        'RAW MARKDOWN — Switch to rendered mode'
+                    );
                     toggleModeBtn.setAttribute('title', 'Switch to rendered mode');
                 } else {
                     rawContainer.classList.add('hidden');
                     renderedContainer.classList.remove('hidden');
                     toggleModeBtn.innerText = 'RENDERED';
-                    toggleModeBtn.setAttribute('aria-label', 'Switch to raw markdown mode');
+                    toggleModeBtn.setAttribute(
+                        'aria-label',
+                        'RENDERED — Switch to raw markdown mode'
+                    );
                     toggleModeBtn.setAttribute('title', 'Switch to raw markdown mode');
                 }
             },

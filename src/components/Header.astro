@@ -280,7 +280,6 @@ const displayPathShort = formatHeaderPath(displayPath);
             href="/"
             data-astro-prefetch="hover"
             class="sonar-trigger group flex shrink-0 items-center transition-opacity hover:opacity-80 focus-visible:opacity-80"
-            aria-label="Dhaatrik — Home"
         >
             <div class="sonar-icon shrink-0 rounded-full">
                 <img
@@ -308,7 +307,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     <span
                         class="flex shrink-0 items-center gap-1.5 leading-none font-bold tracking-tight whitespace-nowrap text-slate-900 dark:text-white"
                     >
-                        DHAATRIK
+                        DHAATRIK<span class="sr-only"> — Home</span>
                         <span class="relative flex h-1.5 w-1.5">
                             <span
                                 class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
@@ -320,6 +319,7 @@ const displayPathShort = formatHeaderPath(displayPath);
                     </span>
                     <span
                         id="header-brand-path"
+                        aria-hidden="true"
                         class="mt-1 hidden font-mono text-[10px] leading-none tracking-widest text-(--accent) opacity-80 sm:block"
                         title={displayPath}>{displayPathShort}</span
                     >
