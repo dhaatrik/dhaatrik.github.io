@@ -284,19 +284,19 @@ const displayPathShort = formatHeaderPath(displayPath);
         >
             <div class="sonar-icon shrink-0 rounded-full">
                 <img
-                    src="/logo_dark.svg"
-                    alt="Dhaatrik Logo"
-                    class="relative z-10 h-10 w-10 sm:h-12 sm:w-12 dark:hidden"
-                    width="48"
-                    height="48"
-                />
-                <img
+                    id="header-logo"
                     src="/logo_light.svg"
                     alt="Dhaatrik Logo"
-                    class="relative z-10 hidden h-10 w-10 sm:h-12 sm:w-12 dark:block"
+                    class="relative z-10 h-10 w-10 sm:h-12 sm:w-12"
                     width="48"
                     height="48"
                 />
+                <script is:inline>
+                    if (!document.documentElement.classList.contains('dark')) {
+                        var headerLogo = document.getElementById('header-logo');
+                        if (headerLogo) headerLogo.setAttribute('src', '/logo_dark.svg');
+                    }
+                </script>
             </div>
 
             <div id="header-brand-copy" class="flex shrink-0 items-center">

@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { Code } from 'astro:components';
 import BaseHead from '../components/BaseHead.astro';
@@ -41,6 +41,9 @@ const {
 } = Astro.props;
 
 const readingTime = Astro.props.readingTime ?? getReadingTime(rawContent);
+const preloadedHero = heroImage
+    ? await getImage({ src: heroImage, width: 1020, height: 510 })
+    : null;
 
 const articleSchema = JSON.stringify({
     '@context': 'https://schema.org',
@@ -112,7 +115,7 @@ const breadcrumbSchema = JSON.stringify({
             pubDate={pubDate}
             updatedDate={updatedDate}
             keywords={tags}
-            preloadHeroImage={Boolean(heroImage)}
+            preloadHeroImage={preloadedHero?.src}
         />
         <script is:inline type="application/ld+json" set:html={articleSchema} />
         <script is:inline type="application/ld+json" set:html={breadcrumbSchema} />

@@ -180,23 +180,21 @@ const webSiteSchema = JSON.stringify({
                         class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-25 select-none dark:opacity-20"
                     >
                         <img
-                            src="/logo_dark.svg"
-                            alt=""
-                            class="h-[75%] w-[75%] max-w-187.5 object-contain dark:hidden"
-                            loading="eager"
-                            fetchpriority="low"
-                            width="750"
-                            height="750"
-                        />
-                        <img
+                            id="hero-logo"
                             src="/logo_light.svg"
                             alt=""
-                            class="hidden h-[75%] w-[75%] max-w-187.5 object-contain dark:block"
+                            class="h-[75%] w-[75%] max-w-187.5 object-contain"
                             loading="eager"
-                            fetchpriority="low"
+                            fetchpriority="high"
                             width="750"
                             height="750"
                         />
+                        <script is:inline>
+                            if (!document.documentElement.classList.contains('dark')) {
+                                var heroLogo = document.getElementById('hero-logo');
+                                if (heroLogo) heroLogo.setAttribute('src', '/logo_dark.svg');
+                            }
+                        </script>
                     </div>
                     <svg
                         viewBox="0 0 1000 1000"
