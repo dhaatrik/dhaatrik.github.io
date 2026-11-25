@@ -1,5 +1,47 @@
 # Changelog
 
+## [4.17.0](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.16.1...v4.17.0) (2026-11-25)
+
+
+### Features
+
+* **seo:** polish titles, descriptions, person schema, and sitemap ([936d29f](https://github.com/dhaatrik/dhaatrik.github.io/commit/936d29f87bcddb51db1aca1aadcfe85b8c926af9))
+* **seo:** polish titles, descriptions, person schema, and sitemap ([5181cb5](https://github.com/dhaatrik/dhaatrik.github.io/commit/5181cb52bceeb7d5b6f439fcfa0bf7562623e048))
+
+
+### Bug Fixes
+
+* **a11y:** drop false books-popover modal role and projects tab role ([4a03805](https://github.com/dhaatrik/dhaatrik.github.io/commit/4a03805a9e49ba178e088fa04d97440f45fdcf09))
+* **a11y:** drop false books-popover modal role and projects tab role ([4742724](https://github.com/dhaatrik/dhaatrik.github.io/commit/4742724d3c578150d32410acc1d7ca29950e9581))
+* **a11y:** resolve label-content-name-mismatch and prettier formatting ([6fc17fc](https://github.com/dhaatrik/dhaatrik.github.io/commit/6fc17fc895539a4d0f386df3334a42ed4d448090))
+* **deps:** add @astrojs/markdown-remark for astro 7 ([b7912ae](https://github.com/dhaatrik/dhaatrik.github.io/commit/b7912aea042009952f27857eebf94584d00fbfd3))
+* **nav:** enforce canonical trailing slashes and update book link ([f371c80](https://github.com/dhaatrik/dhaatrik.github.io/commit/f371c808fe1150e7fcfcd2f0fa91a9b1b60b6bbf))
+* **nav:** enforce canonical trailing slashes and update book link ([b5b245d](https://github.com/dhaatrik/dhaatrik.github.io/commit/b5b245d3a21b813a0cfbdf75be72afabe7d3c82d))
+
+
+### Performance Improvements
+
+* **cwv:** align hero preload urls and single-theme logo priority ([842a850](https://github.com/dhaatrik/dhaatrik.github.io/commit/842a850ed2435bc2ef69e0ec65c2d892426eea1d))
+* **cwv:** align hero preload urls and single-theme logo priority ([74bc3d3](https://github.com/dhaatrik/dhaatrik.github.io/commit/74bc3d36d24989c30acdd2517a9ac2aa72b2da4c))
+* **ui:** deduplicate barcode and footer svgs and sync versions ([82d1bed](https://github.com/dhaatrik/dhaatrik.github.io/commit/82d1bed28f2e7bdedcee94e507c48a9cd9f36084))
+* **ui:** deduplicate barcode and footer svgs and sync versions ([fee2323](https://github.com/dhaatrik/dhaatrik.github.io/commit/fee2323dc0d4b89516bb4d004de428aedbeed5ce))
+
+
+### Documentation & Skills
+
+* **seo:** sync updated post titles in llms.txt and llms-full.txt ([e1c77f5](https://github.com/dhaatrik/dhaatrik.github.io/commit/e1c77f5e6a02767aba905bfc63b49f988f6650e5))
+* **seo:** sync updated post titles in llms.txt and llms-full.txt ([17f461a](https://github.com/dhaatrik/dhaatrik.github.io/commit/17f461a4ef5236b36835457f0233930079808925))
+
+
+### Chores & Maintenance
+
+* **deps-dev:** bump @types/node from 25.9.1 to 26.6.6 ([8726a7f](https://github.com/dhaatrik/dhaatrik.github.io/commit/8726a7f21c2b28fe2e5efd210455f69b488e79f6))
+* **deps-dev:** bump @types/node from 25.9.1 to 26.6.6 ([af30f81](https://github.com/dhaatrik/dhaatrik.github.io/commit/af30f812f847564c9e7f183d497b78b5e3f74fc0))
+* **deps:** bump astro from 6.4.8 to 7.4.13 ([c4594c1](https://github.com/dhaatrik/dhaatrik.github.io/commit/c4594c1675838e2f0a4a151aabc0afa727aba30d))
+* **deps:** bump astro from 6.4.8 to 7.4.13 ([d61084a](https://github.com/dhaatrik/dhaatrik.github.io/commit/d61084aa193e72eec62228d4e78184ae2bbad552))
+* **deps:** bump the dependencies group across 1 directory with 13 updates ([b81cf70](https://github.com/dhaatrik/dhaatrik.github.io/commit/b81cf70f8a108d63ac7643ae4372c3253f6dcd1c))
+* **deps:** bump the dependencies group across 1 directory with 13 updates ([a0e2e4b](https://github.com/dhaatrik/dhaatrik.github.io/commit/a0e2e4bf3b575881a721b84b2b29361f2aed5d54))
+
 ## [4.16.1](https://github.com/dhaatrik/dhaatrik.github.io/compare/v4.16.0...v4.16.1) (2026-11-05)
 
 
