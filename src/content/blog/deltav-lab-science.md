@@ -1,6 +1,6 @@
 ---
 title: 'DeltaV Lab Science — Forces, Integration, Flight Software'
-description: 'What physics DeltaV Lab actually implements: 50Hz RK4, gravity, thrust, drag, atmosphere, Tsiolkovsky, DSL guidance, and Web Worker separation — sourced from the sim repo.'
+description: 'The physics DeltaV Lab actually runs: 50Hz RK4, gravity, thrust, drag, atmosphere, Tsiolkovsky, DSL guidance, and Web Worker isolation from the repo.'
 pubDate: 2026-06-29
 updatedDate: 2026-06-30
 heroImage: '../../assets/og/delta-v-lab-transmissions.jpg'

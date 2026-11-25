@@ -73,7 +73,25 @@ test('AEO: Homepage index.astro FAQPage schema covers core technical entities', 
     }
 });
 
-test('AEO: BlogPost layout Article schema includes inLanguage and author credentials', () => {
+test('AEO: Shared PERSON_SCHEMA in consts.ts defines unified @id, /personnel/ url, and jobTitle', () => {
+    const constsPath = path.join(ROOT_DIR, 'src/consts.ts');
+    const content = fs.readFileSync(constsPath, 'utf8');
+
+    assert.ok(
+        content.includes("PERSON_ID = 'https://dhaatrik.github.io/#person'"),
+        'consts.ts must define canonical PERSON_ID'
+    );
+    assert.ok(
+        content.includes("url: 'https://dhaatrik.github.io/personnel/'"),
+        'consts.ts PERSON_REF must point to /personnel/'
+    );
+    assert.ok(
+        content.includes("jobTitle: 'Entrepreneur & AI Engineer'"),
+        'consts.ts PERSON_SCHEMA must specify jobTitle'
+    );
+});
+
+test('AEO: BlogPost layout Article schema includes inLanguage and unified author schema', () => {
     const blogPostPath = path.join(ROOT_DIR, 'src/layouts/BlogPost.astro');
     const content = fs.readFileSync(blogPostPath, 'utf8');
 
@@ -82,16 +100,16 @@ test('AEO: BlogPost layout Article schema includes inLanguage and author credent
         'BlogPost.astro must set inLanguage: en-US in articleSchema'
     );
     assert.ok(
-        content.includes("url: 'https://dhaatrik.github.io/personnel/'"),
-        'BlogPost.astro author schema must point to /personnel/'
+        content.includes('author: PERSON_SCHEMA'),
+        'BlogPost.astro author schema must use shared PERSON_SCHEMA'
     );
     assert.ok(
-        content.includes("jobTitle: 'Entrepreneur & AI Engineer'"),
-        'BlogPost.astro author schema must specify jobTitle'
+        content.includes('publisher: PERSON_REF'),
+        'BlogPost.astro publisher schema must use shared PERSON_REF'
     );
 });
 
-test('AEO: Project slug page SoftwareSourceCode schema includes inLanguage and author details', () => {
+test('AEO: Project slug page SoftwareSourceCode schema includes inLanguage and unified author schema', () => {
     const projectPath = path.join(ROOT_DIR, 'src/pages/projects/[...slug].astro');
     const content = fs.readFileSync(projectPath, 'utf8');
 
@@ -100,12 +118,12 @@ test('AEO: Project slug page SoftwareSourceCode schema includes inLanguage and a
         'projects/[...slug].astro must set inLanguage: en-US in projectSchema'
     );
     assert.ok(
-        content.includes("url: 'https://dhaatrik.github.io/personnel/'"),
-        'projects/[...slug].astro author schema must point to /personnel/'
+        content.includes('author: PERSON_SCHEMA'),
+        'projects/[...slug].astro author schema must use shared PERSON_SCHEMA'
     );
 });
 
-test('AEO: Pedagogy VideoObject schema includes author attribution and inLanguage', () => {
+test('AEO: Pedagogy VideoObject schema includes unified author attribution and inLanguage', () => {
     const pedagogyPath = path.join(ROOT_DIR, 'src/pages/pedagogy.astro');
     const content = fs.readFileSync(pedagogyPath, 'utf8');
 
@@ -114,8 +132,8 @@ test('AEO: Pedagogy VideoObject schema includes author attribution and inLanguag
         'pedagogy.astro VideoObject must set inLanguage: en-US'
     );
     assert.ok(
-        content.includes("url: 'https://dhaatrik.github.io/personnel/'"),
-        'pedagogy.astro VideoObject author must point to /personnel/'
+        content.includes('author: PERSON_REF'),
+        'pedagogy.astro VideoObject author must use shared PERSON_REF'
     );
 });
 

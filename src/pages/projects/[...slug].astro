@@ -5,6 +5,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import TypographyStyles from '../../components/TypographyStyles.astro';
+import { PERSON_REF, PERSON_SCHEMA } from '../../consts';
 import { getPainLevelLabel, parseTelemetry } from '../../data/status';
 import { getProjectTopology } from '../../data/projectTopology';
 
@@ -49,22 +50,8 @@ const projectSchema = {
     name: title,
     description: description,
     inLanguage: 'en-US',
-    author: {
-        '@type': 'Person',
-        name: 'Dhaatrik Chowdhury',
-        url: 'https://dhaatrik.github.io/personnel/',
-        jobTitle: 'Entrepreneur & AI Engineer',
-        sameAs: [
-            'https://github.com/dhaatrik',
-            'https://linkedin.com/in/dhaatrik',
-            'https://x.com/dhaatrik',
-            'https://medium.com/@dhaatrik',
-        ],
-    },
-    publisher: {
-        '@type': 'Person',
-        name: 'Dhaatrik Chowdhury',
-    },
+    author: PERSON_SCHEMA,
+    publisher: PERSON_REF,
     url: new URL(Astro.url.pathname, Astro.site).href,
     image: logo ? new URL(logo.src, Astro.site).href : undefined,
     ...(tags && tags.length > 0 && { keywords: tags.join(', ') }),

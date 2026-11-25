@@ -17,23 +17,32 @@ test.describe('SEO and Metadata Verification', () => {
         // Check OpenGraph
         const ogType = page.locator('meta[property="og:type"]');
         await expect(ogType).toHaveAttribute('content', 'website');
+        const ogSiteName = page.locator('meta[property="og:site_name"]');
+        await expect(ogSiteName).toHaveAttribute('content', 'Dhaatrik Chowdhury');
+        const ogImageAlt = page.locator('meta[property="og:image:alt"]');
+        await expect(ogImageAlt).toHaveAttribute('content', /.+/);
 
         // Check schema.org JSON-LD
         const schemas = await page.locator('script[type="application/ld+json"]').all();
         expect(schemas.length).toBeGreaterThan(0);
 
         let foundPerson = false;
+        let foundPersonId = false;
         let foundWebSiteSearchAction = false;
         for (const schema of schemas) {
             const content = await schema.innerText();
             if (content.includes('"@type":"Person"') || content.includes('"@type": "Person"')) {
                 foundPerson = true;
+                if (content.includes('https://dhaatrik.github.io/#person')) {
+                    foundPersonId = true;
+                }
             }
             if (content.includes('"SearchAction"') && content.includes('/transmissions/?q=')) {
                 foundWebSiteSearchAction = true;
             }
         }
         expect(foundPerson).toBe(true);
+        expect(foundPersonId).toBe(true);
         expect(foundWebSiteSearchAction).toBe(true);
 
         const ogImage = page.locator('meta[property="og:image"]');
@@ -160,7 +169,11 @@ test.describe('SEO and Metadata Verification', () => {
         if (subSitemapResponse?.status() === 200) {
             const subSitemapText = await subSitemapResponse?.text();
             expect(subSitemapText).toContain('<urlset');
+            expect(subSitemapText).toContain('<lastmod>');
         }
+
+        const faviconResponse = await page.goto('/favicon.ico');
+        expect(faviconResponse?.status()).toBe(200);
     });
 
     test('project detail page should contain project logo as OpenGraph and Twitter images', async ({

@@ -87,6 +87,17 @@ const validateDirectory = (dirPath, schema, collectionName) => {
                 if (hasMathMarkers && !hasMath) {
                     assert.fail(`${file}: contains math but hasMath is false`);
                 }
+
+                if (collectionName === 'Blog') {
+                    assert.ok(
+                        result.data.title.length <= 65,
+                        `${file}: title length (${result.data.title.length}) exceeds 65 chars`
+                    );
+                    assert.ok(
+                        result.data.description.length <= 160,
+                        `${file}: description length (${result.data.description.length}) exceeds 160 chars`
+                    );
+                }
             });
         });
     });

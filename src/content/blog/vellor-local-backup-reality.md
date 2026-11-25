@@ -1,5 +1,5 @@
 ---
-title: 'Local-Only Backup Reality — No Server Means You Own Disaster Recovery'
+title: 'Local-Only Backup Reality — Owning Your Own Recovery'
 description: 'AES-GCM localStorage, 14-day backup nudges, and JSON export — the unglamorous truth about privacy without a safety net.'
 pubDate: 2026-07-01
 heroImage: '../../assets/og/vellor-transmissions.jpg'

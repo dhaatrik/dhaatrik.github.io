@@ -8,6 +8,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import KatexStyles from '../components/KatexStyles.astro';
 import TypographyStyles from '../components/TypographyStyles.astro';
+import { PERSON_REF, PERSON_SCHEMA } from '../consts';
 import { getReadingTime } from '../utils/readingTime';
 
 // KaTeX CSS loaded conditionally via KatexStyles (self-hosted; CSP blocks CDN)
@@ -55,22 +56,8 @@ const articleSchema = JSON.stringify({
     datePublished: pubDate.toISOString(),
     dateModified: (updatedDate || pubDate).toISOString(),
     timeRequired: `PT${readingTime}M`,
-    author: {
-        '@type': 'Person',
-        name: 'Dhaatrik Chowdhury',
-        url: 'https://dhaatrik.github.io/personnel/',
-        jobTitle: 'Entrepreneur & AI Engineer',
-        sameAs: [
-            'https://github.com/dhaatrik',
-            'https://linkedin.com/in/dhaatrik',
-            'https://x.com/dhaatrik',
-            'https://medium.com/@dhaatrik',
-        ],
-    },
-    publisher: {
-        '@type': 'Person',
-        name: 'Dhaatrik Chowdhury',
-    },
+    author: PERSON_SCHEMA,
+    publisher: PERSON_REF,
     mainEntityOfPage: {
         '@type': 'WebPage',
         '@id': new URL(Astro.url.pathname, Astro.site).href,
