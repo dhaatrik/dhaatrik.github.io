@@ -1,5 +1,5 @@
 ---
-title: 'Why a Council of Models — Multi-Agent Process vs Single-Shot Certainty'
+title: 'Why a Council of Models — Multi-Agent vs Single-Shot AI'
 description: 'Honest origin story for The Infinite Intelligence v4.0.0: BYOK multi-agent orchestration with HITL, branching, and synthesis — not three generic Gemini roles.'
 pubDate: 2026-07-13
 heroImage: '../../assets/og/infinite-intelligence-transmissions.jpg'

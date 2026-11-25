@@ -1,6 +1,6 @@
 ---
 title: 'DeltaV Lab Native Physics Core — Escaping TypeScript Limits'
-description: 'Engineering plan to extract RK4, atmosphere, and guidance from the browser worker into Rust/C++/Python — WASM for the UI, native binaries for Monte Carlo, and why that split matters for commercial adoption.'
+description: 'My plan to extract RK4, atmosphere, and guidance from the browser worker into Rust/C++/Python — WASM for the UI and native binaries for Monte Carlo runs.'
 pubDate: 2026-07-01
 updatedDate: 2026-07-01
 heroImage: '../../assets/og/delta-v-lab-transmissions.jpg'

@@ -17,12 +17,13 @@ import type { ImageMetadata } from 'astro';
 import { ClientRouter } from 'astro:transitions';
 import FallbackImage from '../assets/og/home-og.jpg';
 import meImage from '../assets/me.jpeg';
-import { SITE_TITLE } from '../consts';
+import { PERSON_SCHEMA, SITE_TITLE } from '../consts';
 
 interface Props {
     title: string;
     description: string;
     image?: ImageMetadata;
+    imageAlt?: string;
     type?: 'website' | 'article';
     keywords?: string[];
     pubDate?: Date;
@@ -35,6 +36,7 @@ const {
     title,
     description,
     image = FallbackImage,
+    imageAlt = `${title} — Dhaatrik Chowdhury`,
     type = 'website',
     keywords,
     pubDate,
@@ -53,17 +55,8 @@ const imageUrl = new URL(image.src, Astro.site);
 
 const personSchema = JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: 'Dhaatrik Chowdhury',
-    url: Astro.site,
+    ...PERSON_SCHEMA,
     image: new URL(meImage.src, Astro.site).href,
-    sameAs: [
-        'https://github.com/dhaatrik',
-        'https://linkedin.com/in/dhaatrik',
-        'https://x.com/dhaatrik',
-        'https://medium.com/@dhaatrik',
-    ],
-    jobTitle: 'Entrepreneur & AI Engineer',
 }).replace(/</g, '\\u003c');
 ---
 
@@ -159,11 +152,13 @@ const personSchema = JSON.stringify({
 {keywords && keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
 
 <!-- Open Graph / Facebook -->
+<meta property="og:site_name" content="Dhaatrik Chowdhury" />
 <meta property="og:type" content={type} />
 {!is404 && <meta property="og:url" content={Astro.url} />}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
+<meta property="og:image:alt" content={imageAlt} />
 <meta property="og:locale" content="en_US" />
 {
     type === 'article' && pubDate && (

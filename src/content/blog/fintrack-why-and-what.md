@@ -1,5 +1,5 @@
 ---
-title: 'Why FinTrack — Expenses vs Growth Spending, Not Guilt-Based Budgeting'
+title: 'Why FinTrack — Growth Spending vs Guilt-Based Budgeting'
 description: 'Honest origin story for FinTrack v1.0.0: dual-ledger personal finance with Recharts dashboards, Zustand state, JSON backup — not Chart.js, not bank sync.'
 pubDate: 2026-07-11
 heroImage: '../../assets/og/fintrack-transmissions.jpg'

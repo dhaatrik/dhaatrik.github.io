@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,12 +13,41 @@ import rehypeAccessibleTable from './src/plugins/rehype-accessible-table.mjs';
 
 const markdownRehypePlugins = [rehypeKatex, rehypeAccessibleTable];
 
+function loadBlogLastmodMap() {
+    const blogDir = resolve(process.cwd(), 'src/content/blog');
+    const map = new Map();
+    if (!existsSync(blogDir)) return map;
+    for (const file of readdirSync(blogDir)) {
+        if (!file.endsWith('.md')) continue;
+        const raw = readFileSync(resolve(blogDir, file), 'utf8');
+        const fmMatch = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        if (!fmMatch) continue;
+        const fm = fmMatch[1];
+        const updated = fm.match(/^updatedDate:\s*['"]?([^\r\n'"]+)['"]?/m)?.[1];
+        const pub = fm.match(/^pubDate:\s*['"]?([^\r\n'"]+)['"]?/m)?.[1];
+        const dateStr = updated || pub;
+        if (!dateStr) continue;
+        const parsed = new Date(dateStr.trim());
+        if (!Number.isNaN(parsed.getTime())) {
+            const slug = file.replace(/\.md$/, '');
+            map.set(`https://dhaatrik.github.io/transmissions/${slug}/`, parsed.toISOString());
+        }
+    }
+    return map;
+}
+
+const blogLastmodMap = loadBlogLastmodMap();
+
 // https://astro.build/config
 export default defineConfig({
     site: 'https://dhaatrik.github.io',
     integrations: [
         sitemap({
             entryLimit: 10000,
+            serialize(item) {
+                const lastmod = blogLastmodMap.get(item.url);
+                return lastmod ? { ...item, lastmod } : item;
+            },
         }),
         {
             name: 'sitemap-fallback',

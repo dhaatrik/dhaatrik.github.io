@@ -1,6 +1,6 @@
 ---
 title: 'Why I Started DBS Classes: The Physics of Curiosity'
-description: 'An honest mission log on why I launched a YouTube channel for maths and physics — nine years of tutoring, a war on rote learning, and the mission to spark first-principles thinking.'
+description: 'Why I launched a free YouTube channel for maths and physics — nine years of tutoring, pushing back on rote learning, and sparking first-principles curiosity.'
 pubDate: 2026-06-16
 heroImage: '../../assets/og/dbs-classes-transmissions.jpg'
 tags: ['pedagogy', 'youtube']

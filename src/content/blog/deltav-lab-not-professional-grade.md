@@ -1,6 +1,6 @@
 ---
 title: 'Why DeltaV Lab Is Not Professional-Grade'
-description: 'An honest audit: no published flight V&V, simplified 2D physics, browser 50Hz limits, and the gaps in path_to_perfection.md — implemented rigor is not industry trust.'
+description: 'An honest gap audit: no published flight V&V, simplified 2D physics, and browser 50Hz limits. Implemented rigor alone does not earn industry trust.'
 pubDate: 2026-06-30
 updatedDate: 2026-06-30
 heroImage: '../../assets/og/delta-v-lab-transmissions.jpg'

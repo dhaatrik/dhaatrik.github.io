@@ -11,3 +11,18 @@ export const SOCIAL_LINKS = {
     twitter: 'https://x.com/dhaatrik',
     medium: 'https://medium.com/@dhaatrik',
 };
+
+export const PERSON_ID = 'https://dhaatrik.github.io/#person';
+
+export const PERSON_REF = {
+    '@type': 'Person',
+    '@id': PERSON_ID,
+    name: 'Dhaatrik Chowdhury',
+    url: 'https://dhaatrik.github.io/personnel/',
+};
+
+export const PERSON_SCHEMA = {
+    ...PERSON_REF,
+    jobTitle: 'Entrepreneur & AI Engineer',
+    sameAs: Object.values(SOCIAL_LINKS),
+};

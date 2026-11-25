@@ -1,6 +1,6 @@
 ---
 title: "What's Next for DeltaV Lab — Professional-Grade Roadmap"
-description: 'Honest phased plan from browser teaching sandbox to something a flight-dynamics team could pilot: V&V, 6DOF, Monte Carlo, native physics core, HIL, and the trust ladder SpaceX-adjacent engineers actually use.'
+description: 'My phased plan from browser sandbox to a flight-dynamics tool: V&V, 6DOF, Monte Carlo, native physics core, HIL, and the trust ladder engineers actually use.'
 pubDate: 2026-07-01
 updatedDate: 2026-07-01
 heroImage: '../../assets/og/delta-v-lab-transmissions.jpg'
