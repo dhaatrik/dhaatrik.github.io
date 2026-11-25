@@ -1,8 +1,12 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
+import pkg from '../../package.json';
 import { SOCIAL_LINKS } from '../consts';
 import { recommendedBooks } from '../data/readingList';
 import { currentLearning } from '../data/status';
+
+const astroVersion = pkg.dependencies.astro.replace(/^[\^~]/, '');
+const tailwindVersion = pkg.dependencies.tailwindcss.replace(/^[\^~]/, '');
 
 const bookTelemetry: Record<string, { status: string; focus: string }> = {
     'As a Man Thinketh': { status: 'COMPLETED', focus: 'MINDSET' },
@@ -237,7 +241,7 @@ const formatMarqueeDate = (date: Date) => {
                     <span
                         class="inline-flex items-center gap-1.5 font-semibold text-slate-800 dark:text-slate-200"
                     >
-                        ASTRO v6.1.7
+                        ASTRO v{astroVersion}
                         <span class="relative flex h-1.5 w-1.5 shrink-0">
                             <span
                                 class="animate-pulse-emerald absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
@@ -251,7 +255,7 @@ const formatMarqueeDate = (date: Date) => {
                 <div class="flex items-center justify-between">
                     <span class="text-slate-500 dark:text-slate-400">STYLE.SYS //</span>
                     <span class="font-semibold text-slate-800 dark:text-slate-200"
-                        >TAILWIND v4.0</span
+                        >TAILWIND v{tailwindVersion}</span
                     >
                 </div>
                 <div class="flex items-center justify-between">
@@ -477,6 +481,32 @@ const formatMarqueeDate = (date: Date) => {
         <div
             class="content-visibility-auto-books relative z-10 max-h-[65vh] overflow-y-auto p-5 sm:p-6"
         >
+            <svg class="hidden" aria-hidden="true">
+                <defs>
+                    <symbol
+                        id="footer-arrow-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M7 17l9.2-9.2M17 17V7H7"></path>
+                    </symbol>
+                    <symbol
+                        id="footer-star-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                    >
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                    </symbol>
+                </defs>
+            </svg>
             <div class="books-grid-container">
                 {
                     recommendedBooks.map((book, index) => {
@@ -518,19 +548,12 @@ const formatMarqueeDate = (date: Date) => {
                                             <span>FOCUS: {telemetry.focus}</span>
                                         </div>
                                         <svg
-                                            xmlns="http://www.w3.org/2000/svg"
                                             width="14"
                                             height="14"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
                                             class="text-slate-400 transition-all duration-300 group-hover/book:translate-x-0.5 group-hover/book:text-(--accent) dark:text-slate-500"
                                             aria-hidden="true"
                                         >
-                                            <path d="M7 17l9.2-9.2M17 17V7H7" />
+                                            <use href="#footer-arrow-icon" />
                                         </svg>
                                     </div>
                                 </div>
@@ -541,15 +564,8 @@ const formatMarqueeDate = (date: Date) => {
                                         <div class="book-hint-inner">
                                             <div class="rounded-lg border-l-2 border-(--accent) bg-(--accent)/5 p-3 text-xs leading-relaxed text-slate-700 dark:bg-white/4 dark:text-slate-300">
                                                 <div class="mb-1 flex items-center gap-1.5 font-mono text-[9px] font-bold tracking-wider text-(--accent) uppercase">
-                                                    <svg
-                                                        width="11"
-                                                        height="11"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        stroke-width="2.5"
-                                                    >
-                                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                                    <svg width="11" height="11" aria-hidden="true">
+                                                        <use href="#footer-star-icon" />
                                                     </svg>
                                                     <span>WHY IT SHAPED MY THINKING</span>
                                                 </div>
