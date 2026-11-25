@@ -114,4 +114,61 @@ test.describe('Automated Accessibility (A11y) Audits', () => {
             expect(thumb.src).toContain('img.youtube.com');
         }
     });
+
+    test('should keep accessible names aligned with visible labels on key interactive controls', async ({
+        page,
+    }) => {
+        await page.goto('/transmissions/deltav-lab-mission-log/', {
+            waitUntil: 'domcontentloaded',
+        });
+
+        const headerBrandName = await page
+            .locator('#header-brand')
+            .evaluate((el) => el.textContent?.trim() || '');
+        expect(headerBrandName.toUpperCase()).toContain('DHAATRIK');
+        await expect(page.locator('#header-brand')).not.toHaveAttribute('aria-label');
+
+        await expect(page.locator('#return-to-orbit-btn')).not.toHaveAttribute('aria-label');
+        const orbitText = await page.locator('#return-to-orbit-btn').innerText();
+        expect(orbitText.toUpperCase()).toContain('RETURN TO ORBIT');
+
+        const toggleBtn = page.locator('#toggle-mode-btn');
+        await expect(toggleBtn).toHaveAttribute('aria-label', /^RENDERED/i);
+        await toggleBtn.click();
+        await expect(toggleBtn).toHaveAttribute('aria-label', /^RAW MARKDOWN/i);
+
+        await page.goto('/projects/deltav-lab/', { waitUntil: 'domcontentloaded' });
+        const repoLink = page.getByRole('link', { name: /^Inspect Repository/i });
+        await expect(repoLink).toBeVisible();
+    });
+
+    test('should render #books-popover without false aria-modal and support Escape dismissal', async ({
+        page,
+    }) => {
+        await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+        const popover = page.locator('#books-popover');
+        await expect(popover).not.toHaveAttribute('aria-modal', 'true');
+        await expect(popover).not.toHaveAttribute('role', 'dialog');
+
+        await page.locator('footer button[popovertarget="books-popover"]').first().click();
+        await expect(popover).toBeVisible();
+
+        await page.keyboard.press('Escape');
+        await expect(popover).toBeHidden();
+    });
+
+    test('should use aria-pressed filter buttons without orphaned role=tab on /projects/', async ({
+        page,
+    }) => {
+        await page.goto('/projects/', { waitUntil: 'domcontentloaded' });
+
+        await expect(page.locator('[role="tab"]')).toHaveCount(0);
+        const aiSimBtn = page.locator('.project-filter-btn[data-filter="ai-sim"]');
+        await expect(aiSimBtn).toHaveAttribute('aria-pressed', 'false');
+
+        await aiSimBtn.click();
+        await expect(aiSimBtn).toHaveAttribute('aria-pressed', 'true');
+        await expect(page.locator('#projects-grid article:not(.hidden)')).toHaveCount(3);
+    });
 });
