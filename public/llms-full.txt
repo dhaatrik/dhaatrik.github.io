@@ -147,7 +147,7 @@ MIT license (Copyright 2026 Dhaatrik Chowdhury), no subscriptions, no data harve
 
 Honest fuckup log: points, ranks, 25+ achievements, confetti (canvas-confetti) nearly buried invoicing/quick-log paths. Lesson: gamification is seasoning on Achievements page, not the payment critical path.
 
-### Local-Only Backup Reality — No Server Means You Own Disaster Recovery
+### Local-Only Backup Reality — Owning Your Own Recovery
 **URL:** https://dhaatrik.github.io/transmissions/vellor-local-backup-reality/
 **Published:** 2026-07-01
 **Tags:** vellor, privacy, offline-first, pwa
@@ -163,7 +163,7 @@ AES-GCM localStorage, Recovery Key, JSON export/import, 14-day BackupPromptModal
 
 Operational engineering diary for Power-Tutor era (v4.2.0). Corrects prior IndexedDB claim — repo uses AES-GCM encrypted localStorage. Covers roster virtualization, O(N) filters, PWA cache versioning, feature scope discipline, DBS Classes philosophy link. Supporting log — origin/stack/licensing in dedicated series posts.
 
-### Teaching From First Principles: A Mission Log on How I Actually Teach
+### Teaching From First Principles — How I Actually Teach
 **URL:** https://dhaatrik.github.io/transmissions/teaching-from-first-principles/
 **Published:** 2026-06-17
 **Tags:** pedagogy
@@ -198,7 +198,7 @@ First-person post-mortem. Final upload "Point Mass is a Myth" on September 15, 2
 
 Honest origin story for Bill Express v1.0.0 (github.com/dhaatrik/bill-express). Full-stack India-GST Point of Sale: product inventory with HSN codes and GST rates, customer directory with GSTIN, B2B/B2C invoice generation with SGST/CGST/IGST splits, and REST API. Corrects stale portfolio copy that claimed a browser-only jsPDF invoice generator with zero server. Notes inventory rollback on canceled invoices and security hazard of the dev auth bypass file (testingcredentials).
 
-### Why FinTrack — Mindful Expense vs Personal Investment Tracking
+### Why FinTrack — Growth Spending vs Guilt-Based Budgeting
 **URL:** https://dhaatrik.github.io/transmissions/fintrack-why-and-what/
 **Published:** 2026-07-05
 **Tags:** fintrack, finance, privacy, recharts
@@ -236,7 +236,7 @@ Licensing and limitation details for FuelDrop v3.0.0. Explains MIT terms for the
 
 Honest identity correction for Glassbox v4.2.1 (github.com/dhaatrik/glassbox). Cyberpunk internal organizational feedback terminal: employee signal submission with AI sentiment classification, drag-and-drop Kanban neural grid (@hello-pangea/dnd), month-over-month Recharts metrics, and Gemini-powered insight reports. Unwinds portfolio fiction describing a VM2-isolated Node code sandbox.
 
-### Why The Infinite Intelligence — Multi-Agent Debate with First-Principles and HITL
+### Why a Council of Models — Multi-Agent vs Single-Shot AI
 **URL:** https://dhaatrik.github.io/transmissions/infinite-intelligence-why-and-what/
 **Published:** 2026-07-13
 **Tags:** infinite-intelligence, ai, agents, gemini
