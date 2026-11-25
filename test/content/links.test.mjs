@@ -201,4 +201,41 @@ describe('Content Link Integrity Audits', () => {
             });
         });
     });
+
+    describe('Built HTML Canonical Trailing-Slash Audit', () => {
+        test('built HTML contains zero internal page hrefs missing a trailing slash', (t) => {
+            const distDir = path.resolve('dist');
+            if (!fs.existsSync(distDir)) {
+                t.skip('Skipping dist link check because dist/ does not exist.');
+                return;
+            }
+
+            const htmlFiles = [];
+            const walk = (dir) => {
+                for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+                    const full = path.join(dir, entry.name);
+                    if (entry.isDirectory()) walk(full);
+                    else if (entry.name.endsWith('.html')) htmlFiles.push(full);
+                }
+            };
+            walk(distDir);
+
+            const violations = [];
+            for (const file of htmlFiles) {
+                const html = fs.readFileSync(file, 'utf8');
+                for (const match of html.matchAll(/href="(\/[^"#?]*)(?:\?[^"#]*)?(?:#[^"]*)?"/g)) {
+                    const route = match[1];
+                    if (route !== '/' && !route.endsWith('/') && !/\.[a-z0-9]+$/i.test(route)) {
+                        violations.push(`${path.relative(distDir, file)}: ${match[0]}`);
+                    }
+                }
+            }
+
+            assert.deepStrictEqual(
+                violations,
+                [],
+                `Found internal hrefs without trailing slash:\n${violations.slice(0, 20).join('\n')}`
+            );
+        });
+    });
 });

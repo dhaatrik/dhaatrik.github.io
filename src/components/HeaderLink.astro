@@ -9,7 +9,13 @@ const pathname = Astro.url.pathname.replace((import.meta.env as any).BASE_URL, '
 const str = pathname.startsWith('/') ? pathname.substring(1) : pathname;
 const slashIdx = str.indexOf('/');
 const firstSegment = slashIdx !== -1 ? str.substring(0, slashIdx) : str;
-const isActive = href === pathname || href === '/' + firstSegment;
+const normalizeRoute = (route: string | URL | null | undefined) => {
+    const val = String(route ?? '');
+    return val === '/' ? '/' : val.replace(/\/+$/, '');
+};
+const isActive =
+    normalizeRoute(href) === normalizeRoute(pathname) ||
+    normalizeRoute(href) === '/' + firstSegment;
 ---
 
 <a
