@@ -330,47 +330,47 @@ const breadcrumbSchema = JSON.stringify({
                     </p>
                 </div>
 
-                <!-- Category Filter Tabs -->
+                <!-- Category Filter Buttons -->
                 <div
-                    role="tablist"
+                    role="group"
                     aria-label="Project category filter"
                     class="reveal-on-scroll mb-8 flex flex-wrap items-center gap-2 font-mono text-xs"
                 >
                     <button
-                        role="tab"
-                        aria-selected="true"
+                        type="button"
+                        aria-pressed="true"
                         data-filter="all"
                         class="project-filter-btn active cursor-pointer rounded-full border border-(--accent)/40 bg-(--accent)/15 px-3.5 py-1.5 font-bold text-(--accent) shadow-[0_0_12px_var(--accent-glow)] transition-all focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none"
                     >
                         ALL [12]
                     </button>
                     <button
-                        role="tab"
-                        aria-selected="false"
+                        type="button"
+                        aria-pressed="false"
                         data-filter="ai-sim"
                         class="project-filter-btn cursor-pointer rounded-full border border-slate-200/80 bg-white/60 px-3.5 py-1.5 font-medium text-slate-600 transition-all hover:border-(--accent)/30 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
                     >
                         AI & SIMULATION [3]
                     </button>
                     <button
-                        role="tab"
-                        aria-selected="false"
+                        type="button"
+                        aria-pressed="false"
                         data-filter="offline-pwa"
                         class="project-filter-btn cursor-pointer rounded-full border border-slate-200/80 bg-white/60 px-3.5 py-1.5 font-medium text-slate-600 transition-all hover:border-(--accent)/30 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
                     >
                         OFFLINE & PWA [2]
                     </button>
                     <button
-                        role="tab"
-                        aria-selected="false"
+                        type="button"
+                        aria-pressed="false"
                         data-filter="tools"
                         class="project-filter-btn cursor-pointer rounded-full border border-slate-200/80 bg-white/60 px-3.5 py-1.5 font-medium text-slate-600 transition-all hover:border-(--accent)/30 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
                     >
                         DEV TOOLS & UTILITIES [3]
                     </button>
                     <button
-                        role="tab"
-                        aria-selected="false"
+                        type="button"
+                        aria-pressed="false"
                         data-filter="apps"
                         class="project-filter-btn cursor-pointer rounded-full border border-slate-200/80 bg-white/60 px-3.5 py-1.5 font-medium text-slate-600 transition-all hover:border-(--accent)/30 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-none dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
                     >
@@ -577,7 +577,7 @@ const breadcrumbSchema = JSON.stringify({
                         const filter = btn.getAttribute('data-filter');
 
                         buttons.forEach((b) => {
-                            b.setAttribute('aria-selected', 'false');
+                            b.setAttribute('aria-pressed', 'false');
                             b.classList.remove(
                                 'active',
                                 'border-(--accent)/40',
@@ -589,7 +589,7 @@ const breadcrumbSchema = JSON.stringify({
                             b.classList.add('font-medium');
                         });
 
-                        btn.setAttribute('aria-selected', 'true');
+                        btn.setAttribute('aria-pressed', 'true');
                         btn.classList.add(
                             'active',
                             'border-(--accent)/40',
