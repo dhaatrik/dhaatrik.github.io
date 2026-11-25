@@ -27,7 +27,7 @@ test.describe('Portfolio UI Interactivity', () => {
 
     test('Vellor Protocol easter egg should trigger when offline', async ({ page }) => {
         // Navigating to personnel page where the logic resides
-        await page.goto('/personnel');
+        await page.goto('/personnel/');
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(500);
 
@@ -88,7 +88,7 @@ test.describe('Portfolio UI Interactivity', () => {
         page,
     }) => {
         // 1. Check URL query param filtering
-        await page.goto('/transmissions?q=vellor');
+        await page.goto('/transmissions/?q=vellor');
 
         // The post card should be visible
         const postCard = page.locator('.blog-post-card[href*="/vellor-why-and-what/"]');
@@ -337,7 +337,7 @@ test.describe('Portfolio UI Interactivity', () => {
         expect(transformPersonnel).toContain('translate3d');
 
         // 2. Client-side navigate to /projects/
-        const projectsLink = page.locator('header a[href="/projects"]').first();
+        const projectsLink = page.locator('header a[href="/projects/"]').first();
         await projectsLink.click();
         await expect(page).toHaveURL(/\/projects/);
 
@@ -356,7 +356,7 @@ test.describe('Portfolio UI Interactivity', () => {
         expect(transformProjects).toBe('');
 
         // 3. Client-side navigate to /transmissions/
-        const transLink = page.locator('header a[href="/transmissions"]').first();
+        const transLink = page.locator('header a[href="/transmissions/"]').first();
         await transLink.click();
         await expect(page).toHaveURL(/\/transmissions/);
 

@@ -278,10 +278,10 @@ export const setupHeader = () => {
 // Global Direct Hotkeys (1 -> Home, 2 -> Personnel, 3 -> Projects, 4 -> Pedagogy, 5 -> Transmissions)
 const navKeyRoutes: Record<string, string> = {
     '1': '/',
-    '2': '/personnel',
-    '3': '/projects',
-    '4': '/pedagogy',
-    '5': '/transmissions',
+    '2': '/personnel/',
+    '3': '/projects/',
+    '4': '/pedagogy/',
+    '5': '/transmissions/',
 };
 
 if (!(window as any).__hasGlobalNavHotkeys) {

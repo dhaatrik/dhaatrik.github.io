@@ -27,7 +27,7 @@ export const recommendedBooks: Book[] = [
     {
         title: 'Zero to One',
         author: 'Peter Thiel',
-        link: 'https://www.amazon.in/Zero-One-Notes-Startups-Future/dp/0804139296',
+        link: 'https://www.amazon.in/Zero-One-Notes-Startups-Future/dp/0753555190',
         hint: 'The chapter on secrets hit me harder than most: every project I actually care about started with something I believed that the people around me thought was wrong.',
     },
     {
